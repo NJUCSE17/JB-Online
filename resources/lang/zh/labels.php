@@ -128,13 +128,14 @@ return [
                 'active'              => '有效课程',
 
                 'table' => [
-                    'confirmed'      => '确认',
-                    'created'        => '创建',
-                    'id'             => 'ID',
-                    'last_updated'   => '最后更新',
-                    'name'           => '名称',
-                    'no_deleted'     => '没有删除的课程',
-                    'total'          => '课程总计',
+                    'name'            => '名称',
+                    'semester'        => '学期',
+                    'start_time'      => '开始于',
+                    'end_time'        => '结束于',
+                    'notice'          => '公告',
+                    'difficulty'      => '难度',
+                    'restrict_level'  => '限制',
+                    'total'           => '课程总计',
                 ],
 
                 'tabs' => [
@@ -238,8 +239,9 @@ return [
 
                 'table' => [
                     'user_id'         => '用户',
+                    'editor_id'       => '编辑者',
                     'content'         => '内容',
-                    'last_updated'    => '最后更新于',
+                    'updated_at'      => '最后更新于',
                 ],
 
                 'tabs' => [

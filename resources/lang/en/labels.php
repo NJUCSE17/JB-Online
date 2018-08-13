@@ -240,9 +240,10 @@ return [
                 'active'              => 'Active Notices',
 
                 'table' => [
-                    'user_id'         => 'User ID',
+                    'user_id'         => 'Creator',
+                    'editor_id'       => 'Editor',
                     'content'         => 'Content',
-                    'last_updated'    => 'Last Updated',
+                    'updated_at'      => 'Updated At',
                 ],
 
                 'tabs' => [
