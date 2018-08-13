@@ -151,9 +151,6 @@ class UserRepository extends BaseRepository
      */
     public function update(User $user, array $data) : User
     {
-        $this->checkUserByEmail($user, $data['email']);
-        $this->checkUserByStudentID($user, $data['student_id']);
-
         // See if adding any additional permissions
         if (! isset($data['permissions']) || ! count($data['permissions'])) {
             $data['permissions'] = [];
@@ -341,39 +338,5 @@ class UserRepository extends BaseRepository
         }
 
         throw new GeneralException(__('exceptions.backend.access.users.restore_error'));
-    }
-
-    /**
-     * @param User $user
-     * @param      $email
-     *
-     * @throws GeneralException
-     */
-    protected function checkUserByEmail(User $user, $email)
-    {
-        //Figure out if email is not the same
-        if ($user->email != $email) {
-            //Check to see if email exists
-            if ($this->model->where('email', '=', $email)->first()) {
-                throw new GeneralException(trans('exceptions.backend.access.users.email_error'));
-            }
-        }
-    }
-
-    /**
-     * @param User $user
-     * @param      $id
-     *
-     * @throws GeneralException
-     */
-    protected function checkUserByStudentID(User $user, $id)
-    {
-        //Figure out if student_id is not the same
-        if ($user->student_id != $id) {
-            //Check to see if email exists
-            if ($this->model->where('student_id', '=', $id)->first()) {
-                throw new GeneralException(trans('exceptions.backend.access.users.student_id_error'));
-            }
-        }
     }
 }

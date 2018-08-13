@@ -62,7 +62,7 @@ return [
             ],
 
             'users' => [
-                'active'              => '激活用户',
+                'active'              => '有效用户',
                 'all_permissions'     => '所有权限',
                 'change_password'     => '更改密码',
                 'change_password_for' => '为 :user 更改密码',
@@ -86,7 +86,8 @@ return [
                     'no_deactivated' => '没有停用的用户',
                     'no_deleted'     => '没有删除的用户',
                     'roles'          => '角色',
-                    'social' => 'Social',
+                    'other_permissions' => '其他权限',
+                    'social'         => '社交账户',
                     'total'          => '用户总计',
                 ],
 
@@ -164,13 +165,11 @@ return [
                 'active'              => '有效作业',
 
                 'table' => [
-                    'confirmed'      => '确认',
-                    'created'        => '创建',
-                    'id'             => 'ID',
-                    'last_updated'   => '最后更新',
-                    'name'           => '名称',
-                    'no_deleted'     => '没有删除的作业',
-                    'total'          => '作业总计',
+                    'course_id'       => '课程',
+                    'name'            => '名称',
+                    'content'         => '内容',
+                    'due_time'        => '截止日期',
+                    'total'           => '作业总计'
                 ],
 
                 'tabs' => [
@@ -201,13 +200,13 @@ return [
                 'active'              => '有效帖子',
 
                 'table' => [
-                    'confirmed'      => '确认',
-                    'created'        => '创建',
-                    'id'             => 'ID',
-                    'last_updated'   => '最后更新',
-                    'name'           => '名称',
-                    'no_deleted'     => '没有删除的帖子',
-                    'total'          => '帖子总计',
+                    'course_id'       => '课程',
+                    'assignment_id'   => '作业',
+                    'parent_id'       => '回复给',
+                    'user_id'         => '用户',
+                    'rating'          => '评分',
+                    'content'         => '内容',
+                    'total'           => '帖子总计',
                 ],
 
                 'tabs' => [
@@ -238,13 +237,9 @@ return [
                 'active'              => '有效公告',
 
                 'table' => [
-                    'confirmed'      => '确认',
-                    'created'        => '创建',
-                    'id'             => 'ID',
-                    'last_updated'   => '最后更新',
-                    'name'           => '名称',
-                    'no_deleted'     => '没有删除的公告',
-                    'total'          => '公告总计',
+                    'user_id'         => '用户',
+                    'content'         => '内容',
+                    'last_updated'    => '最后更新于',
                 ],
 
                 'tabs' => [

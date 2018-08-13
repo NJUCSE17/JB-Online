@@ -38,7 +38,7 @@
                         @include('frontend.forum.post.list',['group'=>$posts[0]])
                     @else
                         <div class="text-center">
-                            {{ __('strings.frontend.no_post') }}
+                            {{ __('strings.frontend.home.no_post') }}
                         </div>
                     @endif
                 </div>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Backend\Auth\User;
 
+use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 
 /**
@@ -28,7 +29,7 @@ class UpdateUserRequest extends FormRequest
     {
         return [
             'student_id' => ['required', 'int', 'min:100000000', 'max:300000000', Rule::unique('users')],
-            'email' => 'required|email|max:191',
+            'email'    => ['required', 'email', 'max:191', Rule::unique('users')],
             'first_name'  => 'required|max:191',
             'last_name'  => 'max:191',
             'roles' => 'required|array',

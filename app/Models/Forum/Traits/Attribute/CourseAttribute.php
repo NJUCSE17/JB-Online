@@ -27,7 +27,7 @@ trait CourseAttribute
         }
 
         if ($today > $this->end_time) {
-            return "<span class='badge badge-danger'>".
+            return "<span class='badge badge-dark'>".
                 __('labels.frontend.forum.courses.status.ended') .'</span>';
         }
 

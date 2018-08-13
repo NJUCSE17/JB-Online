@@ -38,7 +38,7 @@ class RegisterController extends Controller
      */
     public function redirectPath()
     {
-        return route('frontend.auth.login');
+        return route(home_route());
     }
 
     /**
