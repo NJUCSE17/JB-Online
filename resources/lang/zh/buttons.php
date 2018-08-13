@@ -42,6 +42,7 @@ return [
         'edit' => '修改',
         'cancel' => '取消',
         'continue' => '继续',
+        'submit' => '提交',
         'new_post' => '发新帖',
         'new_reply' => '回复',
         'reverse' => '切换顺序',

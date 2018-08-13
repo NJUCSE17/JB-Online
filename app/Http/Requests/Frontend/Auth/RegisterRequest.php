@@ -29,7 +29,7 @@ class RegisterRequest extends FormRequest
     public function rules()
     {
         return [
-            'student_id'           => 'required|int|min:100000000|max:300000000',
+            'student_id'           => ['required', 'int', 'min:100000000', 'max:300000000', Rule::unique('users')],
             'first_name'           => 'required|string|max:191',
             'last_name'            => 'max:191',
             'email'                => ['required', 'string', 'email', 'max:191', Rule::unique('users')],

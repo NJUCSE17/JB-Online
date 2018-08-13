@@ -145,6 +145,7 @@ return [
             'email_changed_notice' => '在登录之前，你必须确认你的新邮件地址。',
             'profile_updated'  => '个人资料更新成功。',
             'password_updated' => '密码修改成功。',
+            'avatar_restriction' => '头像尺寸不超过200x200像素，文件大小最大100KB。',
         ],
 
         'jumbo_title' => 'I\'m Chinese！',
@@ -160,6 +161,7 @@ return [
             'no_notice'     => '老板和狗管理摸鱼了。',
             'no_ongoing'    => '没有正在进行的课程。',
             'no_assignment' => '搞毛啊！怎么没有作业',
+            'no_post'       => '没人发帖，怎么当杠精？',
             'total' => [
                 'left'  => '共找到',
                 'right' => '门让你心跳加速的课程。'

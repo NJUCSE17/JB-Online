@@ -91,10 +91,6 @@ class UserRepository extends BaseRepository
      */
     public function create(array $data)
     {
-        if ($this->getByColumn($data['student_id'], 'student_id')) {
-            throw new GeneralException(__('exceptions.frontend.auth.student_id_taken'));
-        }
-
         return DB::transaction(function () use ($data) {
             $user = parent::create([
                 'student_id'        => $data['student_id'],

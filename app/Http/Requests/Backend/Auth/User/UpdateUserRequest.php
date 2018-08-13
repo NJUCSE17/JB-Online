@@ -27,7 +27,7 @@ class UpdateUserRequest extends FormRequest
     public function rules()
     {
         return [
-            'student_id' => 'required|int|min:100000000|max:300000000',
+            'student_id' => ['required', 'int', 'min:100000000', 'max:300000000', Rule::unique('users')],
             'email' => 'required|email|max:191',
             'first_name'  => 'required|max:191',
             'last_name'  => 'max:191',

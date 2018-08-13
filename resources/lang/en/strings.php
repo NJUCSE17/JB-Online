@@ -167,6 +167,7 @@ return [
             'no_notice'     => 'Nothing here.',
             'no_ongoing'    => 'No course now.',
             'no_assignment' => 'Oops! No assignments to do now.',
+            'no_post'       => 'No one posts yet, try to be first!',
             'total' => [
                 'left'  => 'Found',
                 'right' => 'course(s) in total.'

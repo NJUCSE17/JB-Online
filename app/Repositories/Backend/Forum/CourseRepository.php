@@ -70,6 +70,7 @@ class CourseRepository extends BaseRepository
     public function getCoursePlucked()
     {
         return $this->model
+            ->orderBy('id', 'dec')
             ->get()
             ->pluck('name', 'id');
     }

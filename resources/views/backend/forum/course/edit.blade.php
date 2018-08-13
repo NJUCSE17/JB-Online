@@ -39,7 +39,8 @@
                         {{ html()->label(__('validation.attributes.backend.forum.courses.semester'))->class('col-md-2 form-control-label')->for('semester') }}
 
                         <div class="col-md-10">
-                            {{ html()->select('semester', [1, 2, 3, 4, 5, 6, 7, 8])
+                            {{ html()->select('semester',
+                                        [1=>'1', 2=>'2', 3=>'3', 4=>'4', 5=>'5', 6=>'6', 7=>'7', 8=>'8'])
                                 ->class('form-control')
                                 ->attribute('maxlength', 191)
                                 ->required() }}
