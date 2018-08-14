@@ -369,7 +369,11 @@ return [
             'assignments' => [
                 'assignment_content' => '作业内容',
                 'post_list'       => '讨论列表',
-            ]
+            ],
+
+            'posts' => [
+                'edit' => '编辑帖子',
+            ],
         ]
     ],
 ];

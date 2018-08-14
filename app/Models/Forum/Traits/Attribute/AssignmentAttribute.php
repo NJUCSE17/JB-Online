@@ -31,7 +31,7 @@ trait AssignmentAttribute
      */
     public function getAssignmentLinkAttribute()
     {
-        return route('frontend.forum.assignment.view', [$this->source, $this]);
+        return route('frontend.forum.assignment.view', [$this->source, $this, 'asc']);
     }
 
     /**

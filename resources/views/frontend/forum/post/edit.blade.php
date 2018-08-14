@@ -36,7 +36,7 @@
         <div class="card-footer">
             <div class="row">
                 <div class="col">
-                    {{ form_cancel(route('frontend.forum.assignment.view', [$course, $assignment]), __('buttons.general.cancel')) }}
+                    {{ form_cancel(route('frontend.forum.assignment.view', [$course, $assignment, 'dec']), __('buttons.general.cancel')) }}
                 </div><!--col-->
 
                 <div class="col text-right">

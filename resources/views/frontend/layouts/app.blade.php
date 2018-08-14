@@ -30,7 +30,6 @@
         <script src="{{ URL::asset('js/tinymce/tinymce.min.js') }}"></script>
         <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css">
         <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
-
         <script>
             hljs.initHighlightingOnLoad();
             tinymce.init({
@@ -56,7 +55,7 @@
             });
             function elFinderBrowser (field_name, url, type, win) {
                 tinymce.activeEditor.windowManager.open({
-                    file: '<?= route('elfinder.tinymce4') ?>',// use an absolute path!
+                    file: '<?= route('elfinder.tinymce4') ?>',
                     title: 'elFinder 2.0',
                     width: 900,
                     height: 450,

@@ -13,13 +13,13 @@
                 <span class="float-right">
                     @if($sorted=='asc')
                         <a class="btn btn-outline-dark"
-                           href="{{ route('frontend.forum.assignment.reverse', [$course, $assignment]) }}">
-                            <i class="fas fa-arrow-down"></i> {{ __('buttons.general.reverse') }}
+                           href="{{ route('frontend.forum.assignment.view', [$course, $assignment, 'dec']) }}">
+                            <i class="fas fa-arrow-up"></i> {{ __('buttons.general.reverse') }}
                         </a>
                     @else
                         <a class="btn btn-outline-dark"
-                           href="{{ route('frontend.forum.assignment.view', [$course, $assignment]) }}">
-                            <i class="fas fa-arrow-up"></i> {{ __('buttons.general.reverse') }}
+                           href="{{ route('frontend.forum.assignment.view', [$course, $assignment, 'asc']) }}">
+                            <i class="fas fa-arrow-down"></i> {{ __('buttons.general.reverse') }}
                         </a>
                     @endif
                     <a class="btn btn-outline-success" onclick="triggerCreateModal(0)">

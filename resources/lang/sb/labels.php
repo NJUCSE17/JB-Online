@@ -369,7 +369,11 @@ return [
             'assignments' => [
                 'assignment_content' => '作业内容',
                 'post_list'       => '西方莓体',
-            ]
+            ],
+
+            'posts' => [
+                'edit' => '掉包答题卡',
+            ],
         ]
     ],
 ];

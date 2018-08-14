@@ -55,7 +55,7 @@ class PostController extends Controller
             Mail::send(new SendReply($request, $data));
         }
 
-        return redirect()->route('frontend.forum.assignment.view', [$course, $assignment])
+        return redirect()->route('frontend.forum.assignment.view', [$course, $assignment, 'dec'])
             ->withFlashSuccess(__('alerts.frontend.posts.created'));
     }
 
@@ -91,7 +91,7 @@ class PostController extends Controller
         $data['editor_id'] = Auth::id();
         $this->postRepository->update($post, $data);
 
-        return redirect()->route('frontend.forum.assignment.view', [$course, $assignment])
+        return redirect()->route('frontend.forum.assignment.view', [$course, $assignment, 'dec  '])
             ->withFlashSuccess(__('alerts.backend.posts.updated'));
     }
 }

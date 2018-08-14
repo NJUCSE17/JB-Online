@@ -346,7 +346,11 @@ return [
             'assignments' => [
                 'assignment_content' => 'Assignment Content',
                 'post_list'          => 'Post List',
-            ]
+            ],
+
+            'posts' => [
+                'edit' => 'Post Edit',
+            ],
         ]
     ],
 ];

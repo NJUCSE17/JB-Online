@@ -31,28 +31,26 @@ class AssignmentController extends Controller
     /**
      * @param Course $course
      * @param Assignment $assignment
+     * @param string $sort
+     *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function index(Course $course, Assignment $assignment)
+    public function index(Course $course, Assignment $assignment, string $sort)
     {
-        return view('frontend.forum.assignment')
-            ->withCourse($assignment->source)
-            ->withAssignment($assignment)
-            ->withSorted('asc')
-            ->withUserid(Auth::id())
-            ->withPosts($assignment->getGroupedPosts('asc'));
-    }
-
-    /**
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-     */
-    public function indexRev(Course $course, Assignment $assignment)
-    {
-        return view('frontend.forum.assignment')
-            ->withCourse($assignment->source)
-            ->withAssignment($assignment)
-            ->withSorted('dec')
-            ->withUserid(Auth::id())
-            ->withPosts($assignment->getGroupedPosts('dec'));
+        if ($sort == 'dec') {
+            return view('frontend.forum.assignment')
+                ->withCourse($assignment->source)
+                ->withAssignment($assignment)
+                ->withSorted('dec')
+                ->withUserid(Auth::id())
+                ->withPosts($assignment->getGroupedPosts('dec'));
+        } else {
+            return view('frontend.forum.assignment')
+                ->withCourse($assignment->source)
+                ->withAssignment($assignment)
+                ->withSorted('asc')
+                ->withUserid(Auth::id())
+                ->withPosts($assignment->getGroupedPosts('asc'));
+        }
     }
 }
