@@ -43,6 +43,7 @@ return [
         'hour'              => 'Hour',
         'minute'            => 'Min',
         'remain'            => 'Remaining',
+        'deleted_data'      => '(deleted)',
     ],
 
     'backend' => [
@@ -311,6 +312,8 @@ return [
             'ongoing'       => 'Ongoing Courses',
             'others'        => 'Other Courses',
             'assignment'    => 'Assignments',
+            'login'         => 'User Login',
+            'login_button'  => 'Login',
         ],
 
         'forum' => [
@@ -338,6 +341,11 @@ return [
 
                 'assignment_list' => 'Assignments List',
                 'course_notice'   => 'Course Notice',
+            ],
+
+            'assignments' => [
+                'assignment_content' => 'Assignment Content',
+                'post_list'          => 'Post List',
             ]
         ]
     ],

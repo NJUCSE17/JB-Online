@@ -105,6 +105,11 @@ return [
 
             'click_to_confirm' => '点击此处确认您的帐户:',
         ],
+
+        'reply' => [
+            'email_body_title' => '你收到了新的回复，内容如下',
+            'subject' => '来自 :app_name 的回复通知',
+        ],
     ],
 
     'frontend' => [
@@ -161,16 +166,20 @@ return [
             'no_notice'     => '什么也没有……',
             'no_ongoing'    => '没有正在进行的课程。',
             'no_assignment' => '天哪，现在竟然没有作业！',
-            'no_post'       => '还没有人发帖……',
             'total' => [
                 'left'  => '共找到',
-                'right' => '门课程。'
-            ]
+                'right' => '门让你充实又快乐的课程。',
+            ],
+            'not_logged_in' => '登陆后查看更多内容。',
         ],
 
         'courses' => [
             'no_notice' => '没有公告。',
             'no_assignment' => '还没有发布作业。',
+        ],
+
+        'assignments' => [
+            'no_post'       => '还没有人发帖……',
         ],
 
         'breadcrumb' => [

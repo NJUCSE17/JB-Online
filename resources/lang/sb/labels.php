@@ -43,6 +43,7 @@ return [
         'hour'              => '小时',
         'minute'            => '分钟',
         'remain'            => '剩余',
+        'deleted_data'      => '（数据删除）',
     ],
 
     'backend' => [
@@ -271,7 +272,7 @@ return [
 
         'auth' => [
             'login_box_title'    => '网上冲浪',
-            'login_button'       => 'Link start',
+            'login_button'       => 'Into the VRAINS',
             'login_with'         => '使用 :social_media 登录',
             'register_box_title' => '注册',
             'register_button'    => '注册',
@@ -332,8 +333,10 @@ return [
         'home' => [
             'notice'        => '狗管理公告',
             'ongoing'       => '即将扑街',
-            'others'        => '已经完蛋',
+            'others'        => '强碧名单',
             'assignment'    => '末日列表',
+            'login'         => '网上冲浪',
+            'login_button'  => 'Link Start',
         ],
 
         'forum' => [
@@ -341,9 +344,9 @@ return [
 
             'courses' => [
                 'status' => [
-                    'pending' => '快要玩',
-                    'ongoing' => '药丸了',
-                    'ended'   => '完蛋了',
+                    'pending' => '真香预订',
+                    'ongoing' => '火爆开催',
+                    'ended'   => '授课终了',
                 ],
 
                 'difficulty' => [
@@ -359,8 +362,13 @@ return [
                     'forbidden' => '不搞大新闻',
                 ],
 
-                'assignment_list' => '都有些啥',
-                'course_notice'   => '课程公告',
+                'assignment_list' => '见多识广',
+                'course_notice'   => '官方硬点',
+            ],
+
+            'assignments' => [
+                'assignment_content' => '作业内容',
+                'post_list'       => '西方莓体',
             ]
         ]
     ],

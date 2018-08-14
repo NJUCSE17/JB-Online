@@ -32,15 +32,42 @@
 
     <div class="row my-4">
         <div class="col">
-            <div class="card">
+            <div class="card mb-3">
+                <h4 class="card-header text-center">
+                    <i class="fas fa-pencil-ruler mr-2"></i>
+                    {{ __('labels.frontend.forum.assignments.assignment_content') }}
+                </h4>
                 <div class="card-body">
-                    @if(isset($posts[0]))
-                        @include('frontend.forum.post.list',['group'=>$posts[0]])
-                    @else
-                        <div class="text-center">
-                            {{ __('strings.frontend.home.no_post') }}
+                    <div class="row">
+                        <div class="col mx-3">
+                            <h5>{!! $assignment->content !!}</h5>
+                            <div class="text-right">
+                                <small class="mb-0 text-muted">
+                                    {{ __('labels.general.ddl') }}
+                                    {{ $assignment->due_time }}
+                                    {{ $assignment->due_time->diffForHumans() }}
+                                </small>
+                            </div>
                         </div>
-                    @endif
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <h4 class="card-header text-center">
+                    <i class="fas fa-comments mr-2"></i>
+                    {{ __('labels.frontend.forum.assignments.post_list') }}
+                </h4>
+                @if(isset($posts[0]))
+                    <div class="card-body px-3 pb-0">
+                        @include('frontend.forum.post.list',['group'=>$posts[0]])
+                    </div>
+                @else
+                    <div class="card-body px-3 py-3">
+                        <div class="text-center">
+                            {{ __('strings.frontend.assignments.no_post') }}
+                        </div>
+                    </div>
+                @endif
                 </div>
             </div>
         </div>
@@ -53,7 +80,7 @@
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">{{ __('labels.frontend.forum.new_reply') }}</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
+                        <span aria-hidden="true"><i class="fas fa-times"></i></span>
                     </button>
                 </div>
                 <div class="modal-body">

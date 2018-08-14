@@ -16,7 +16,7 @@ trait PostAttribute
     {
 
         $assignment = $this->source;
-        $courseNameLabel = ($assignment == null) ? '(deleted)' : $assignment->course_name_label;
+        $courseNameLabel = ($assignment == null) ? __('labels.general.deleted_data') : $assignment->course_name_label;
         return $courseNameLabel;
     }
 
@@ -26,7 +26,7 @@ trait PostAttribute
     public function getAssignmentNameLabelAttribute()
     {
         $assignment = $this->source;
-        $assignmentNameLabel = ($assignment == null) ? '(deleted)' : $assignment->name_label;
+        $assignmentNameLabel = ($assignment == null) ? __('labels.general.deleted_data') : $assignment->name_label;
         return $assignmentNameLabel;
     }
 
@@ -36,7 +36,7 @@ trait PostAttribute
     public function getAuthorNameLabelAttribute()
     {
         $author = $this->author;
-        $authorNameLabel = ($author == null) ? '(deleted)' : $author->name_label;
+        $authorNameLabel = ($author == null) ? __('labels.general.deleted_data') : $author->name_label;
         return $authorNameLabel;
     }
 
@@ -46,7 +46,7 @@ trait PostAttribute
     public function getEditorNameLabelAttribute()
     {
         $editor = $this->editor;
-        $editorNameLabel = ($editor == null) ? ($this->editor_id . ' (deleted)') : $editor->name_label;
+        $editorNameLabel = ($editor == null) ? ($this->editor_id . __('labels.general.deleted_data')) : $editor->name_label;
         return $editorNameLabel;
     }
 
@@ -56,7 +56,7 @@ trait PostAttribute
     public function getEditorNameAttribute()
     {
         $editor = $this->editor;
-        $editorName = ($editor == null) ? '(deleted)' : $editor->name;
+        $editorName = ($editor == null) ? __('labels.general.deleted_data') : $editor->name;
         return $editorName;
     }
 

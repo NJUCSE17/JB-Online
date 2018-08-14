@@ -43,6 +43,7 @@ return [
         'hour'              => '小时',
         'minute'            => '分钟',
         'remain'            => '剩余',
+        'deleted_data'      => '（已删除）',
     ],
 
     'backend' => [
@@ -334,6 +335,8 @@ return [
             'ongoing'       => '正在进行',
             'others'        => '其他课程',
             'assignment'    => '当前作业',
+            'login'         => '用户登陆',
+            'login_button'  => '登陆',
         ],
 
         'forum' => [
@@ -361,6 +364,11 @@ return [
 
                 'assignment_list' => '作业列表',
                 'course_notice'   => '课程公告',
+            ],
+
+            'assignments' => [
+                'assignment_content' => '作业内容',
+                'post_list'       => '讨论列表',
             ]
         ]
     ],

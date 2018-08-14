@@ -1,4 +1,4 @@
-<div class="card my-3">
+<div class="card mx-0 mb-3">
     <h5 class="card-header align-middle">
         <img class="img-avatar mr-2" src="{{ $post->author->picture }}"
              alt="{{ $post->author->name }}" style="height: 38px !important;">
@@ -14,14 +14,14 @@
             </a>
         </span>
     </h5>
-    <div class="card-body">
-        <div class="row">
+    <div class="card-body px-0 py-0">
+        <div class="row mx-3 my-3">
             <div class="col">
                 <h5>{!! $post->content !!}</h5>
                 <small class="float-right text-muted">{{ $post->time_label }}</small>
             </div>
         </div>
-        <div class="row ml-3">
+        <div class="row ml-3 mr-0">
             <div class="col">
                 @if(isset($posts[$post->id]))
                     @include('frontend.forum.post.list', ['group'=>$posts[$post->id]])

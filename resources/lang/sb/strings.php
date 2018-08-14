@@ -105,6 +105,11 @@ return [
 
             'click_to_confirm' => '点击此处确认您的帐户:',
         ],
+
+        'reply' => [
+            'email_body_title' => '你收到了新的抬杠，快来看看吧！',
+            'subject' => '来自 :app_name 的回复通知',
+        ],
     ],
 
     'frontend' => [
@@ -148,8 +153,8 @@ return [
             'avatar_restriction' => '头像尺寸不超过200x200像素，文件大小最大100KB。',
         ],
 
-        'jumbo_title' => 'I\'m Chinese！',
-        'welcome_to' => '吔屎了， :place',
+        'jumbo_title' => 'I\'m Chinese!',
+        'welcome_to' => '吔屎了， :place 这么屑的网站有存在的必要吗？',
 
         'home' => [
             'home'  => '主页',
@@ -161,16 +166,20 @@ return [
             'no_notice'     => '老板和狗管理摸鱼了。',
             'no_ongoing'    => '没有正在进行的课程。',
             'no_assignment' => '搞毛啊！怎么没有作业',
-            'no_post'       => '没人发帖，怎么当杠精？',
             'total' => [
                 'left'  => '共找到',
-                'right' => '门让你心跳加速的课程。'
-            ]
+                'right' => '门让你分分钟爽到的课程。',
+            ],
+            'not_logged_in' => '我倒，你是GG还是MM？',
         ],
 
         'courses' => [
             'no_notice' => '没有公告。',
             'no_assignment' => '还没有发布作业。',
+        ],
+
+        'assignments' => [
+            'no_post'       => '没人发帖，怎么当杠精？',
         ],
 
         'breadcrumb' => [

@@ -167,16 +167,20 @@ return [
             'no_notice'     => 'Nothing here.',
             'no_ongoing'    => 'No course now.',
             'no_assignment' => 'Oops! No assignments to do now.',
-            'no_post'       => 'No one posts yet, try to be first!',
             'total' => [
                 'left'  => 'Found',
-                'right' => 'course(s) in total.'
-            ]
+                'right' => 'interesting course(s) in total.',
+            ],
+            'not_logged_in' => 'Login to view more content.',
         ],
 
         'courses' => [
             'no_notice' => 'No notice for course.',
             'no_assignment' => 'No assignment yet.',
+        ],
+
+        'assignments' => [
+            'no_post'       => 'No one posts yet, try to be first!',
         ],
 
         'breadcrumb' => [
@@ -225,6 +229,10 @@ int main() {
             <h1>Contact</h1>
             <p>If you have any issue about safety or functionality, please get in touch with the webmaster. 
             You can submit issues on the&nbsp;<a href="https://github.com/doowzs/Physics-Homework-Forum" 
-            target="_blank" rel="noopener">GitHub page</a> of the project which helps a lot.</p>',
+            target="_blank" rel="noopener">GitHub page</a> of the project which helps a lot.</p>
+            <h1>Properties</h1>
+            <div>This site uses a icon made by <a href="http://www.freepik.com" title="Freepik">Freepik</a> 
+            from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> is licensed by 
+            <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>',
     ],
 ];

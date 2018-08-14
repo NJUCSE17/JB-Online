@@ -22,7 +22,7 @@ trait AssignmentAttribute
     public function getCourseNameLabelAttribute()
     {
         $course = $this->source;
-        $courseNameLabel = ($course == null) ? '(deleted)' : $course->name_label;
+        $courseNameLabel = ($course == null) ? __('labels.general.deleted_data') : $course->name_label;
         return $courseNameLabel;
     }
 

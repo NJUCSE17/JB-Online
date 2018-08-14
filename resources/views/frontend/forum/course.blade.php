@@ -15,10 +15,29 @@
         </div>
     </div>
     <div class="row my-4">
+        <div class="col col-md-4">
+            <div class="card my-3">
+                <h4 class="card-header">
+                    <i class="fas fa-bullhorn mr-2"></i> {{ __('labels.frontend.forum.courses.course_notice') }}
+                </h4>
+                <div class="card-body text-justify">
+                    @if($course->notice != null)
+                        {!! $course->notice !!}
+                        <small class="float-right text-muted">{{ $course->time_label }}</small>
+                    @else
+                        <div class="row">
+                            <div class="col text-center">
+                                {{ __('strings.frontend.courses.no_notice') }}
+                            </div>
+                        </div>
+                    @endif
+                </div>
+            </div>
+        </div>
         <div class="col col-md-8">
             <div class="card my-3">
                 <h4 class="card-header">
-                    <i class="fas fa-folder-open"></i> {{ __('labels.frontend.forum.courses.assignment_list') }}
+                    <i class="fas fa-folder-open mr-2"></i> {{ __('labels.frontend.forum.courses.assignment_list') }}
                 </h4>
                 <div class="card-body">
                     @if($assignments->count())
@@ -35,25 +54,6 @@
                         <div class="row">
                             <div class="col text-center">
                                 {{ __('strings.frontend.courses.no_assignment') }}
-                            </div>
-                        </div>
-                    @endif
-                </div>
-            </div>
-        </div>
-        <div class="col col-md-4">
-            <div class="card my-3">
-                <h4 class="card-header">
-                    <i class="fas fa-bullhorn"></i> {{ __('labels.frontend.forum.courses.course_notice') }}
-                </h4>
-                <div class="card-body text-justify">
-                    @if($course->notice != null)
-                        {!! $course->notice !!}
-                        <small class="float-right text-muted">{{ $course->time_label }}</small>
-                    @else
-                        <div class="row">
-                            <div class="col text-center">
-                                {{ __('strings.frontend.courses.no_notice') }}
                             </div>
                         </div>
                     @endif

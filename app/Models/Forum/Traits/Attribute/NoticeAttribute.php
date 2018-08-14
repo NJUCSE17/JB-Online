@@ -13,7 +13,7 @@ trait NoticeAttribute
     public function getAuthorNameAttribute()
     {
         $author = $this->author;
-        $authorName = ($author == null) ? '(deleted)' : $author->name;
+        $authorName = ($author == null) ? __('labels.general.deleted_data') : $author->name;
         return $authorName;
     }
 
@@ -24,7 +24,7 @@ trait NoticeAttribute
     {
         return __('labels.general.published') . ' '
             . $this->updated_at->diffForHumans()
-            . ' ' . __('by') . ' ' .$this->author_name;
+            . ' ' . __('labels.general.by') . ' ' .$this->author_name;
     }
 
     /**
