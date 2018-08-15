@@ -205,9 +205,11 @@ return [
                     'course_id'       => '课程',
                     'assignment_id'   => '作业',
                     'parent_id'       => '回复给',
-                    'user_id'         => '用户',
+                    'user_id'         => '作者',
+                    'editor_id'       => '编辑者',
                     'rating'          => '评分',
                     'content'         => '内容',
+                    'updated_at'      => '修改于',
                     'total'           => '帖子总计',
                 ],
 

@@ -209,8 +209,10 @@ return [
                     'assignment_id'   => 'Assignment ID',
                     'parent_id'       => 'Reply to',
                     'user_id'         => 'User ID',
+                    'editor_id'       => 'Editor ID',
                     'rating'          => 'Rating',
                     'content'         => 'Content',
+                    'updated_at'      => 'Updated At',
                     'total'           => 'in total',
                 ],
 
