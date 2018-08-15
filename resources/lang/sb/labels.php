@@ -245,6 +245,7 @@ return [
                     'editor_id'       => '编辑者',
                     'content'         => '内容',
                     'updated_at'      => '最后更新于',
+                    'last_updated'    => '最后更新于',
                 ],
 
                 'tabs' => [

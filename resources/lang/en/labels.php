@@ -247,6 +247,7 @@ return [
                     'editor_id'       => 'Editor',
                     'content'         => 'Content',
                     'updated_at'      => 'Updated At',
+                    'last_updated'    => 'Last Updated',
                 ],
 
                 'tabs' => [
@@ -316,7 +317,7 @@ return [
             'assignment'    => 'Assignments',
             'login'         => 'User Login',
             'login_button'  => 'Login',
-            'class_notice'  => 'Class Notice',
+            'class_notice'  => 'Class Blog',
         ],
 
         'forum' => [

@@ -12,7 +12,7 @@
         </h4>
     </div>
     <div class="row my-4">
-        <div class="col col-md-4">
+        <div class="col col-md-4 col-12">
             <div class="card my-3">
                 <h4 class="card-header">
                     <i class="fas fa-calendar-alt mr-2"></i>
@@ -50,21 +50,42 @@
                 @endif
             </div>
 
-            <div class="card my-3">
-                <h4 class="card-header">
-                    <i class="fas fa-rss mr-2"></i>
-                    {{ __('labels.frontend.home.class_notice') }}
-                </h4>
-                <div class="card-body px-1 py-1">
-                    <iframe class="embed-responsive-item"
-                            src="https://njucse17.github.io/"
-                            style="width: 100%; height: 350px; overflow: hidden">
-                    </iframe>
+            @auth
+                <div class="card my-3">
+                    <h4 class="card-header">
+                        <i class="fas fa-rss mr-2"></i>
+                        {{ __('labels.frontend.home.class_notice') }}
+                    </h4>
+                    <div class="card-body px-1 py-1">
+                        <iframe class="embed-responsive-item"
+                                src="https://njucse17.github.io/"
+                                style="width: 100%; height: 350px; overflow: hidden">
+                        </iframe>
+                    </div>
                 </div>
-            </div>
+            @endauth
+            @guest
+                <div class="card my-3">
+                    <h4 class="card-header">
+                        <i class="fas fa-user mr-2"></i>
+                        {{ __('labels.frontend.home.login') }}
+                    </h4>
+                    <div class="card-body text-center">
+                        <div class="mb-3">
+                            <a class="btn btn-secondary" href="{{ route('frontend.auth.login') }}">
+                                <i class="fas fa-sign-in-alt mr-2"></i>
+                                {{ __('labels.frontend.home.login_button') }}
+                            </a>
+                        </div>
+                        <div>
+                            {{ __('strings.frontend.home.not_logged_in') }}
+                        </div>
+                    </div>
+                </div>
+            @endguest
         </div>
 
-        <div class="col col-md-8">
+        <div class="col col-md-8 col-12">
             <div class="card my-3">
                 <h4 class="card-header">
                     <i class="fas fa-broadcast-tower mr-2"></i>
@@ -129,8 +150,8 @@
                                     {{ __('strings.frontend.home.semester.right') }} &nbsp;
                                     {{ $course->name }}
                                     <span class="float-right">
-                                    {!! $course->labels !!}
-                                </span>
+                                        {!! $course->labels !!}
+                                    </span>
                                 </a>
                             @endforeach
                             <div class="row mt-3">
@@ -155,19 +176,14 @@
             @guest
                 <div class="card my-3">
                     <h4 class="card-header">
-                        <i class="fas fa-user mr-2"></i>
-                        {{ __('labels.frontend.home.login') }}
+                        <i class="fas fa-rss mr-2"></i>
+                        {{ __('labels.frontend.home.class_notice') }}
                     </h4>
-                    <div class="card-body text-center">
-                        <div class="mb-3">
-                            <a class="btn btn-secondary" href="{{ route('frontend.auth.login') }}">
-                                <i class="fas fa-sign-in-alt mr-2"></i>
-                                {{ __('labels.frontend.home.login_button') }}
-                            </a>
-                        </div>
-                        <div>
-                            {{ __('strings.frontend.home.not_logged_in') }}
-                        </div>
+                    <div class="card-body px-1 py-1">
+                        <iframe class="embed-responsive-item"
+                                src="https://njucse17.github.io/"
+                                style="width: 100%; height: 500px; overflow: hidden">
+                        </iframe>
                     </div>
                 </div>
             @endguest
