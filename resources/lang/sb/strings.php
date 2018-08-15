@@ -163,9 +163,9 @@ return [
                 'left'  => '第',
                 'right' => '学期',
             ],
-            'no_notice'     => '老板和狗管理摸鱼了。',
-            'no_ongoing'    => '没有正在进行的课程。',
-            'no_assignment' => '搞毛啊！怎么没有作业',
+            'no_notice'     => '老板和狗管理摸鱼了，没有写公告。',
+            'no_ongoing'    => '没有现在正在进行的课程。',
+            'no_assignment' => '搞毛啊！怎么没有作业！',
             'total' => [
                 'left'  => '共找到',
                 'right' => '门让你分分钟爽到的课程。',
@@ -174,8 +174,8 @@ return [
         ],
 
         'courses' => [
-            'no_notice' => '没有公告。',
-            'no_assignment' => '还没有发布作业。',
+            'no_notice' => '没有课程公告。',
+            'no_assignment' => '这门课还没有发布作业……',
         ],
 
         'assignments' => [

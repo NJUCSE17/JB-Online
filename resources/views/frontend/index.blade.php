@@ -4,7 +4,7 @@
 
 @section('content')
     <div class="page-header">
-        <h1 class="display-2">
+        <h1 class="display-3">
             {{ __('strings.frontend.jumbo_title') }}
         </h1>
         <h4>
@@ -48,6 +48,19 @@
                         </div>
                     </div>
                 @endif
+            </div>
+
+            <div class="card my-3">
+                <h4 class="card-header">
+                    <i class="fas fa-rss mr-2"></i>
+                    {{ __('labels.frontend.home.class_notice') }}
+                </h4>
+                <div class="card-body px-1 py-1">
+                    <iframe class="embed-responsive-item"
+                            src="https://njucse17.github.io/"
+                            style="width: 100%; height: 350px; overflow: hidden">
+                    </iframe>
+                </div>
             </div>
         </div>
 

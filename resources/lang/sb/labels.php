@@ -339,6 +339,7 @@ return [
             'assignment'    => '末日列表',
             'login'         => '网上冲浪',
             'login_button'  => 'Link Start',
+            'class_notice'  => '官方硬点',
         ],
 
         'forum' => [
@@ -365,7 +366,7 @@ return [
                 ],
 
                 'assignment_list' => '见多识广',
-                'course_notice'   => '官方硬点',
+                'course_notice'   => '谈笑风生',
             ],
 
             'assignments' => [

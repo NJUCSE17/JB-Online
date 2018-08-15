@@ -163,8 +163,8 @@ return [
                 'left'  => '第',
                 'right' => '学期',
             ],
-            'no_notice'     => '什么也没有……',
-            'no_ongoing'    => '没有正在进行的课程。',
+            'no_notice'     => '管理员还没有发布公告……',
+            'no_ongoing'    => '没有现在正在进行的课程。',
             'no_assignment' => '天哪，现在竟然没有作业！',
             'total' => [
                 'left'  => '共找到',
@@ -174,12 +174,12 @@ return [
         ],
 
         'courses' => [
-            'no_notice' => '没有公告。',
-            'no_assignment' => '还没有发布作业。',
+            'no_notice' => '这门课程没有公告。',
+            'no_assignment' => '这门课程还没有发布作业。',
         ],
 
         'assignments' => [
-            'no_post'       => '还没有人发帖……',
+            'no_post'       => '现在还没有人发帖……',
         ],
 
         'breadcrumb' => [

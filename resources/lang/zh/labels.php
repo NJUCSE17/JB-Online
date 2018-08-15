@@ -339,6 +339,7 @@ return [
             'assignment'    => '当前作业',
             'login'         => '用户登陆',
             'login_button'  => '登陆',
+            'class_notice'  => '班级博客',
         ],
 
         'forum' => [

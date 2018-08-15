@@ -7,9 +7,9 @@
     <div class="page-header text-justify">
         <div class="row">
             <div class="col">
-                <h2 class="display-3 d-inline">
+                <h1 class="display-3 d-inline">
                     {{ $assignment->name }}
-                </h2>
+                </h1>
                 <span class="float-right">
                     @if($sorted=='asc')
                         <a class="btn btn-outline-dark"

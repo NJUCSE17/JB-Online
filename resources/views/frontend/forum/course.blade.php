@@ -7,9 +7,9 @@
     <div class="page-header text-justify">
         <div class="row">
             <div class="col">
-                <h2 class="display-3 d-inline">
+                <h1 class="display-3 d-inline">
                     {{ $course->name }}
-                </h2>
+                </h1>
                 <h4 class="float-right d-inline align-middle">{!! $course->labels !!}</h4>
             </div>
         </div>

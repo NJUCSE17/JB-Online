@@ -316,6 +316,7 @@ return [
             'assignment'    => 'Assignments',
             'login'         => 'User Login',
             'login_button'  => 'Login',
+            'class_notice'  => 'Class Notice',
         ],
 
         'forum' => [

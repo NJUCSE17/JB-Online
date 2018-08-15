@@ -164,7 +164,7 @@ return [
                 'left'  => 'Semester',
                 'right' => '',
             ],
-            'no_notice'     => 'Nothing here.',
+            'no_notice'     => 'There is no notice published yet.',
             'no_ongoing'    => 'No course now.',
             'no_assignment' => 'Oops! No assignments to do now.',
             'total' => [
@@ -175,12 +175,12 @@ return [
         ],
 
         'courses' => [
-            'no_notice' => 'No notice for course.',
-            'no_assignment' => 'No assignment yet.',
+            'no_notice' => 'No notice for course published.',
+            'no_assignment' => 'No assignment has been issued yet!',
         ],
 
         'assignments' => [
-            'no_post'       => 'No one posts yet, try to be first!',
+            'no_post'       => 'No one posted yet, try to be first!',
         ],
 
         'breadcrumb' => [
