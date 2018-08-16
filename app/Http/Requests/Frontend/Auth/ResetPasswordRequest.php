@@ -29,6 +29,7 @@ class ResetPasswordRequest extends FormRequest
      */
     public function rules()
     {
+        clean($_POST['email']);
         return [
             'token' => 'required',
             'email' => 'required|email',

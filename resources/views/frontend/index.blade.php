@@ -19,7 +19,7 @@
                     {{ __('labels.frontend.home.assignment') }}
                 </h4>
                 @if ($assignments->count())
-                    <div class="card-body px-0 py-0">
+                    <div class="card-body px-0 py-0" id="assignments">
                         @foreach($assignments as $assignment)
                             <div class="card mx-3 my-3">
                                 <a class="card-header btn-outline-dark"

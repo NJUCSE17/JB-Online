@@ -28,6 +28,10 @@ class UpdateProfileRequest extends FormRequest
      */
     public function rules()
     {
+        clean($_POST['first_name']);
+        clean($_POST['last_name']);
+        clean($_POST['email']);
+        clean($_POST['avatar_location']);
         return [
             'first_name'  => 'required|max:191',
             'last_name'  => 'max:191',

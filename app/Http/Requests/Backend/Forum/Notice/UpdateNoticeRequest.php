@@ -26,6 +26,7 @@ class UpdateNoticeRequest extends FormRequest
      */
     public function rules()
     {
+        clean($_POST['content']);
         return [
             'notice' => 'max:10000',
         ];

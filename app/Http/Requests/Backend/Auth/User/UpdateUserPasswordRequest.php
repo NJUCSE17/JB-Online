@@ -29,6 +29,7 @@ class UpdateUserPasswordRequest extends FormRequest
      */
     public function rules()
     {
+        clean($_POST['password']);
         return [
             'password'     => [
                 'required',

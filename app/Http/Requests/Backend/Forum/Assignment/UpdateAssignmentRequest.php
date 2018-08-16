@@ -26,6 +26,8 @@ class UpdateAssignmentRequest extends FormRequest
      */
     public function rules()
     {
+        clean($_POST['name']);
+        clean($_POST['content']);
         return [
             'course_id'  => ['required', 'int'],
             'name' => 'required|max:200',

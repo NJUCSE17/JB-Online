@@ -26,6 +26,7 @@ class UpdatePostRequest extends FormRequest
      */
     public function rules()
     {
+        clean($_POST['content']);
         return [
             'content' => 'required|max:10000',
         ];

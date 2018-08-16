@@ -27,6 +27,7 @@ class StorePostRequest extends FormRequest
      */
     public function rules()
     {
+        clean($_POST['content']);
         return [
             'parent_id' => ['required', 'int'],
             'content' => 'required|max:10000'

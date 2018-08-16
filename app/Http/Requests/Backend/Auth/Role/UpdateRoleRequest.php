@@ -26,6 +26,7 @@ class UpdateRoleRequest extends FormRequest
      */
     public function rules()
     {
+        clean($_POST['name']);
         return [
             'name' => 'required|max:191',
         ];

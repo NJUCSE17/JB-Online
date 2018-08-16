@@ -26,6 +26,8 @@ class UpdateCourseRequest extends FormRequest
      */
     public function rules()
     {
+        clean($_POST['name']);
+        clean($_POST['notice']);
         return [
             'name' => 'required|max:200',
             'semester'  => ['required', 'int', 'max:20'],

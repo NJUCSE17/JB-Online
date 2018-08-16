@@ -27,6 +27,7 @@ class StoreNoticeRequest extends FormRequest
      */
     public function rules()
     {
+        clean($_POST['content']);
         return [
             'content' => 'max:10000',
         ];

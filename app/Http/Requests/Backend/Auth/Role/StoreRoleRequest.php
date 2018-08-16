@@ -26,6 +26,7 @@ class StoreRoleRequest extends FormRequest
      */
     public function rules()
     {
+        clean($_POST['name']);
         return [
             'name' => 'required|unique:roles|max:191',
         ];
