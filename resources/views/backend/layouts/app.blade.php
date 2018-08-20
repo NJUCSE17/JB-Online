@@ -20,8 +20,9 @@
                         processEscapes: true
                     },
                 TeX: {
-                    equationNumbers: {autoNumber: "AMS",
-                    useLabelIds: true}
+                    extensions: ["AMSmath.js", "AMSsymbols.js", "mhchem.js"],
+                        equationNumbers: {autoNumber: "AMS",
+                                          useLabelIds: true}
                 }
             });
         </script>
