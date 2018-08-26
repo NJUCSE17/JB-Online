@@ -14,16 +14,16 @@
                     @if($sorted=='asc')
                         <a class="btn btn-outline-dark"
                            href="{{ route('frontend.forum.assignment.view', [$course, $assignment, 'dec']) }}">
-                            <i class="fas fa-arrow-up"></i> {{ __('buttons.general.reverse') }}
+                            <i class="fas fa-arrow-up mr-2"></i> {{ __('buttons.general.reverse') }}
                         </a>
                     @else
                         <a class="btn btn-outline-dark"
                            href="{{ route('frontend.forum.assignment.view', [$course, $assignment, 'asc']) }}">
-                            <i class="fas fa-arrow-down"></i> {{ __('buttons.general.reverse') }}
+                            <i class="fas fa-arrow-down mr-2"></i> {{ __('buttons.general.reverse') }}
                         </a>
                     @endif
                     <a class="btn btn-outline-success" onclick="triggerCreateModal(0)">
-                        <i class="fas fa-plus"></i> {{ __('buttons.general.new_post') }}
+                        <i class="fas fa-plus mr-2"></i> {{ __('buttons.general.new_post') }}
                     </a>
                 </span>
             </div>
@@ -33,9 +33,16 @@
     <div class="row my-4">
         <div class="col">
             <div class="card mb-3">
-                <h4 class="card-header text-center">
+                <h4 class="card-header">
                     <i class="fas fa-pencil-ruler mr-2"></i>
                     {{ __('labels.frontend.forum.assignments.assignment_content') }}
+                    @if(Auth::user()->isExecutive())
+                        <span class="float-right d-flex">
+                            <a class="text-sm-center text-dark" href="{{ route('admin.forum.assignment.edit', $assignment) }}">
+                                <i class="fas fa-cog"></i>
+                            </a>
+                        </span>
+                    @endif
                 </h4>
                 <div class="card-body">
                     <div class="row">
@@ -53,9 +60,16 @@
                 </div>
             </div>
             <div class="card">
-                <h4 class="card-header text-center">
+                <h4 class="card-header">
                     <i class="fas fa-comments mr-2"></i>
                     {{ __('labels.frontend.forum.assignments.post_list') }}
+                    @if(Auth::user()->isExecutive())
+                        <span class="float-right d-flex">
+                            <a class="text-sm-center text-dark" href="{{ route('admin.forum.post.specific', $assignment) }}">
+                                <i class="fas fa-cog"></i>
+                            </a>
+                        </span>
+                    @endif
                 </h4>
                 @if(isset($posts[0]))
                     <div class="card-body px-3 pb-0">

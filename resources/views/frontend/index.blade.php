@@ -17,6 +17,15 @@
                 <h4 class="card-header">
                     <i class="fas fa-calendar-alt mr-2"></i>
                     {{ __('labels.frontend.home.assignment') }}
+                    @auth
+                        @if(Auth::user()->isExecutive())
+                            <span class="float-right d-flex">
+                                <a class="text-sm-center text-dark" href="{{ route('admin.forum.assignment.index') }}">
+                                    <i class="fas fa-cog"></i>
+                                </a>
+                            </span>
+                        @endif
+                    @endauth
                 </h4>
                 @if ($assignments->count())
                     <div class="card-body px-0 py-0" id="assignments">
@@ -90,6 +99,15 @@
                 <h4 class="card-header">
                     <i class="fas fa-broadcast-tower mr-2"></i>
                     {{ __('labels.frontend.home.notice') }}
+                    @auth
+                        @if(Auth::user()->isExecutive())
+                            <span class="float-right d-flex">
+                                <a class="text-sm-center text-dark" href="{{ route('admin.forum.notice.index') }}">
+                                    <i class="fas fa-cog"></i>
+                                </a>
+                            </span>
+                        @endif
+                    @endauth
                 </h4>
                 <div class="card-body text-justify">
                     @if($notice != null && $notice->content != null)
@@ -110,6 +128,15 @@
                     <h4 class="card-header">
                         <i class="fas fa-book-open mr-2"></i>
                         {{ __('labels.frontend.home.ongoing') }}
+                        @auth
+                            @if(Auth::user()->isExecutive())
+                                <span class="float-right d-flex">
+                                    <a class="text-sm-center text-dark" href="{{ route('admin.forum.course.index') }}">
+                                        <i class="fas fa-cog"></i>
+                                    </a>
+                                </span>
+                            @endif
+                        @endauth
                     </h4>
                     <div class="card-body">
                         @if ($ongoingCourses->count())
@@ -140,6 +167,15 @@
                         <h4 class="card-header">
                             <i class="fas fa-book mr-2"></i>
                             {{ __('labels.frontend.home.others') }}
+                            @auth
+                                @if(Auth::user()->isExecutive())
+                                    <span class="float-right d-flex">
+                                        <a class="text-sm-center text-dark" href="{{ route('admin.forum.course.index') }}">
+                                            <i class="fas fa-cog"></i>
+                                        </a>
+                                    </span>
+                                @endif
+                            @endauth
                         </h4>
                         <div class="card-body">
                             @foreach($allCourses as $course)

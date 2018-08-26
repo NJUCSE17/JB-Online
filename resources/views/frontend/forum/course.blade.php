@@ -19,6 +19,13 @@
             <div class="card my-3">
                 <h4 class="card-header">
                     <i class="fas fa-bullhorn mr-2"></i> {{ __('labels.frontend.forum.courses.course_notice') }}
+                    @if(Auth::user()->isExecutive())
+                        <span class="float-right d-flex">
+                            <a class="text-sm-center text-dark" href="{{ route('admin.forum.course.edit', $course) }}">
+                                <i class="fas fa-cog"></i>
+                            </a>
+                        </span>
+                    @endif
                 </h4>
                 <div class="card-body text-justify">
                     @if($course->notice != null)
@@ -38,6 +45,13 @@
             <div class="card my-3">
                 <h4 class="card-header">
                     <i class="fas fa-folder-open mr-2"></i> {{ __('labels.frontend.forum.courses.assignment_list') }}
+                    @if(Auth::user()->isExecutive())
+                        <span class="float-right d-flex">
+                            <a class="text-sm-center text-dark" href="{{ route('admin.forum.assignment.specific', $course) }}">
+                                <i class="fas fa-cog"></i>
+                            </a>
+                        </span>
+                    @endif
                 </h4>
                 <div class="card-body">
                     @if($assignments->count())

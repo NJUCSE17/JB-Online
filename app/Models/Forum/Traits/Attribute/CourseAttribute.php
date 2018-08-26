@@ -83,9 +83,12 @@ trait CourseAttribute
      */
     public function getLabelsAttribute()
     {
+        return $this->getStatusLabelAttribute();
+        /*
         return $this->getStatusLabelAttribute() . " "
             . $this->getDifficultyLabelAttribute() . " "
             . $this->getRestrictLabelAttribute();
+        */
     }
 
     /**
