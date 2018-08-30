@@ -71,6 +71,17 @@
                     </div><!--form-group-->
 
                     <div class="form-group row">
+                        {{ html()->label(__('validation.attributes.backend.access.users.blog'))->class('col-md-2 form-control-label')->for('blog') }}
+
+                        <div class="col-md-10">
+                            {{ html()->text('blog')
+                                ->class('form-control')
+                                ->placeholder(__('validation.attributes.backend.access.users.blog'))
+                                ->attribute('maxlength', 191) }}
+                        </div><!--col-->
+                    </div><!--form-group-->
+
+                    <div class="form-group row">
                         {{ html()->label('Abilities')->class('col-md-2 form-control-label') }}
 
                         <div class="table-responsive col-md-10">

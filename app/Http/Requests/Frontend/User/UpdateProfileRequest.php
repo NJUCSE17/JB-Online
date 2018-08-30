@@ -30,12 +30,18 @@ class UpdateProfileRequest extends FormRequest
     {
         clean($_POST['first_name']);
         clean($_POST['last_name']);
-        clean($_POST['email']);
-        clean($_POST['avatar_location']);
+        if(isset($_POST['email'])){
+            clean($_POST['email']);
+        }
+        clean($_POST['blog']);
+        if(isset($_POST['avatar_location'])){
+            clean($_POST['avatar_location']);
+        }
         return [
             'first_name'  => 'required|max:191',
             'last_name'  => 'max:191',
             'email' => 'sometimes|required|email|max:191',
+            'blog' => 'max:191',
             'avatar_type' => ['required', 'max:191', Rule::in(array_merge(['gravatar', 'storage'], (new Socialite)->getAcceptedProviders()))],
             'avatar_location' => 'sometimes|image|max:100|dimensions:max_width=200,max_height=200',
         ];

@@ -1,6 +1,6 @@
 @extends('frontend.layouts.app')
 
-@section('title', app_name() . ' | '.__('navs.general.home'))
+@section('title', app_name() . ' | '. $course->name)
 
 @section('content')
     {!! Breadcrumbs::render() !!}
@@ -14,7 +14,7 @@
             </div>
         </div>
     </div>
-    <div class="row my-4">
+    <div class="row">
         <div class="col col-md-4 col-12">
             <div class="card my-3">
                 <h4 class="card-header">

@@ -70,6 +70,7 @@ class UserController extends Controller
             'first_name',
             'last_name',
             'email',
+            'blog',
             'password',
             'active',
             'confirmed',
@@ -126,6 +127,7 @@ class UserController extends Controller
             'first_name',
             'last_name',
             'email',
+            'blog',
             'roles',
             'permissions'
         ));

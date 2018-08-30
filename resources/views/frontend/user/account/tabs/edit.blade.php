@@ -36,9 +36,7 @@
                     ->autofocus() }}
             </div><!--form-group-->
         </div><!--col-->
-    </div><!--row-->
 
-    <div class="row">
         <div class="col">
             <div class="form-group">
                 {{ html()->label(__('validation.attributes.frontend.last_name'))->for('last_name') }}
@@ -47,6 +45,20 @@
                     ->class('form-control')
                     ->placeholder(__('validation.attributes.frontend.last_name'))
                     ->attribute('maxlength', 191) }}
+            </div><!--form-group-->
+        </div><!--col-->
+    </div><!--row-->
+
+    <div class="row">
+        <div class="col">
+            <div class="form-group">
+                {{ html()->label(__('validation.attributes.frontend.blog'))->for('blog') }}
+
+                {{ html()->text('blog')
+                    ->class('form-control')
+                    ->placeholder(__('validation.attributes.frontend.blog'))
+                    ->attribute('maxlength', 191)
+                    ->required() }}
             </div><!--form-group-->
         </div><!--col-->
     </div><!--row-->

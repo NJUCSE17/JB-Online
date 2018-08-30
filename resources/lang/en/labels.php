@@ -81,6 +81,7 @@ return [
                     'created'        => 'Created',
                     'student_id'     => 'Student ID',
                     'email'          => 'E-mail',
+                    'blog'           => 'Blog',
                     'id'             => 'ID',
                     'last_updated'   => 'Last Updated',
                     'name'           => 'Name',
@@ -302,6 +303,7 @@ return [
                 'edit_information'   => 'Edit Information',
                 'student_id'         => 'Student ID',
                 'email'              => 'E-mail',
+                'blog'               => 'Blog',
                 'last_updated'       => 'Last Updated',
                 'name'               => 'Name',
                 'first_name'         => 'First Name',
@@ -317,7 +319,7 @@ return [
             'assignment'    => 'Assignments',
             'login'         => 'User Login',
             'login_button'  => 'Login',
-            'class_notice'  => 'Class Blog',
+            'class_blog'    => 'Class Blog',
         ],
 
         'forum' => [

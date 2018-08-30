@@ -81,6 +81,7 @@ return [
                     'created'        => '创建',
                     'student_id'     => '学号',
                     'email'          => '电子邮件',
+                    'blog'           => '部落格',
                     'id'             => 'ID',
                     'last_updated'   => '最后更新',
                     'name'           => '名称',
@@ -326,6 +327,7 @@ return [
                 'edit_information'   => '编辑信息',
                 'student_id'         => '死库艾迪',
                 'email'              => '电子yooooo件',
+                'blog'               => '部落格',
                 'last_updated'       => '最后更新',
                 'name'               => '名称',
                 'update_information' => '更新信息',
@@ -340,7 +342,7 @@ return [
             'assignment'    => '末日列表',
             'login'         => '网上冲浪',
             'login_button'  => 'Link Start',
-            'class_notice'  => '官方硬点',
+            'class_blog'    => '辣鸡维博',
         ],
 
         'forum' => [

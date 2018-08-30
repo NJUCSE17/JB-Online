@@ -1,6 +1,6 @@
 @extends('frontend.layouts.app')
 
-@section('title', app_name() . ' | '.__('navs.general.home'))
+@section('title', app_name() . ' | '. $assignment->name)
 
 @section('content')
     {!! Breadcrumbs::render() !!}
@@ -30,9 +30,9 @@
         </div>
     </div>
 
-    <div class="row my-4">
+    <div class="row">
         <div class="col">
-            <div class="card mb-3">
+            <div class="card my-3">
                 <h4 class="card-header">
                     <i class="fas fa-pencil-ruler mr-2"></i>
                     {{ __('labels.frontend.forum.assignments.assignment_content') }}

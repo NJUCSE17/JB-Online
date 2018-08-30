@@ -11,7 +11,7 @@
             {{ __('strings.frontend.welcome_to', ['place' => app_name()]) }}
         </h4>
     </div>
-    <div class="row my-4">
+    <div class="row">
         <div class="col col-md-4 col-12">
             <div class="card my-3">
                 <h4 class="card-header">
@@ -58,40 +58,6 @@
                     </div>
                 @endif
             </div>
-
-            @auth
-                <div class="card my-3">
-                    <h4 class="card-header">
-                        <i class="fas fa-rss mr-2"></i>
-                        {{ __('labels.frontend.home.class_notice') }}
-                    </h4>
-                    <div class="card-body px-1 py-1">
-                        <iframe class="embed-responsive-item"
-                                src="https://njucse17.github.io/"
-                                style="width: 100%; height: 350px; overflow: hidden">
-                        </iframe>
-                    </div>
-                </div>
-            @endauth
-            @guest
-                <div class="card my-3">
-                    <h4 class="card-header">
-                        <i class="fas fa-user mr-2"></i>
-                        {{ __('labels.frontend.home.login') }}
-                    </h4>
-                    <div class="card-body text-center">
-                        <div class="mb-3">
-                            <a class="btn btn-secondary" href="{{ route('frontend.auth.login') }}">
-                                <i class="fas fa-sign-in-alt mr-2"></i>
-                                {{ __('labels.frontend.home.login_button') }}
-                            </a>
-                        </div>
-                        <div>
-                            {{ __('strings.frontend.home.not_logged_in') }}
-                        </div>
-                    </div>
-                </div>
-            @endguest
         </div>
 
         <div class="col col-md-8 col-12">
@@ -170,7 +136,8 @@
                             @auth
                                 @if(Auth::user()->isExecutive())
                                     <span class="float-right d-flex">
-                                        <a class="text-sm-center text-dark" href="{{ route('admin.forum.course.index') }}">
+                                        <a class="text-sm-center text-dark"
+                                           href="{{ route('admin.forum.course.index') }}">
                                             <i class="fas fa-cog"></i>
                                         </a>
                                     </span>
@@ -208,21 +175,25 @@
                         </div>
                     </div>
                 @endif
-            @endauth
-            @guest
+            @else
                 <div class="card my-3">
                     <h4 class="card-header">
-                        <i class="fas fa-rss mr-2"></i>
-                        {{ __('labels.frontend.home.class_notice') }}
+                        <i class="fas fa-user mr-2"></i>
+                        {{ __('labels.frontend.home.login') }}
                     </h4>
-                    <div class="card-body px-1 py-1">
-                        <iframe class="embed-responsive-item"
-                                src="https://njucse17.github.io/"
-                                style="width: 100%; height: 500px; overflow: hidden">
-                        </iframe>
+                    <div class="card-body text-center">
+                        <div class="mb-3">
+                            <a class="btn btn-secondary" href="{{ route('frontend.auth.login') }}">
+                                <i class="fas fa-sign-in-alt mr-2"></i>
+                                {{ __('labels.frontend.home.login_button') }}
+                            </a>
+                        </div>
+                        <div>
+                            {{ __('strings.frontend.home.not_logged_in') }}
+                        </div>
                     </div>
                 </div>
-            @endguest
+            @endauth
         </div>
     </div>
 @endsection

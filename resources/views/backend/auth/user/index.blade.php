@@ -30,6 +30,7 @@
                             <th>{{ __('labels.backend.access.users.table.student_id') }}</th>
                             <th>{{ __('labels.backend.access.users.table.name') }}</th>
                             <th>{{ __('labels.backend.access.users.table.email') }}</th>
+                            <th>{{ __('labels.backend.access.users.table.blog') }}</th>
                             <th>{{ __('labels.backend.access.users.table.confirmed') }}</th>
                             <th>{{ __('labels.backend.access.users.table.roles') }}</th>
                             <th>{{ __('labels.backend.access.users.table.other_permissions') }}</th>
@@ -44,6 +45,7 @@
                                 <td>{{ $user->student_id }}</td>
                                 <td>{{ $user->name }}</td>
                                 <td>{{ $user->email }}</td>
+                                <td>{{ $user->blog }}</td>
                                 <td>{!! $user->confirmed_label !!}</td>
                                 <td>{!! $user->roles_label !!}</td>
                                 <td>{!! $user->permissions_label !!}</td>

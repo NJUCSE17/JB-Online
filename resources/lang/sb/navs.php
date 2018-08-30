@@ -20,6 +20,7 @@ return [
 
     'frontend' => [
         'about'     => '关于',
+        'blog'      => '维博',
         'dashboard' => '指示板',
         'login'     => '登录',
         'macros'    => '宏',

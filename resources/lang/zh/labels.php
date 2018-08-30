@@ -81,6 +81,7 @@ return [
                     'created'        => '创建',
                     'student_id'     => '学号',
                     'email'          => '电子邮件',
+                    'blog'           => '博客',
                     'id'             => 'ID',
                     'last_updated'   => '最后更新',
                     'name'           => '名称',
@@ -326,6 +327,7 @@ return [
                 'edit_information'   => '编辑信息',
                 'student_id'         => '学号',
                 'email'              => '电子邮件',
+                'blog'               => '博客',
                 'last_updated'       => '最后更新',
                 'name'               => '名称',
                 'update_information' => '更新信息',
@@ -340,7 +342,7 @@ return [
             'assignment'    => '当前作业',
             'login'         => '用户登陆',
             'login_button'  => '登陆',
-            'class_notice'  => '班级博客',
+            'class_blog'    => '班级博客',
         ],
 
         'forum' => [

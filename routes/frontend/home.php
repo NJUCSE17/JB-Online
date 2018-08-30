@@ -13,6 +13,8 @@ Route::get('about', 'HomeController@about')->name('about');
  * These routes can not be hit if the password is expired
  */
 Route::group(['middleware' => ['auth', 'password_expires']], function () {
+    Route::get('blog', 'HomeController@blog')->name('blog');
+
     Route::group(['namespace' => 'User', 'as' => 'user.'], function () {
         Route::get('account', 'AccountController@index')->name('account');
         Route::patch('profile/update', 'ProfileController@update')->name('profile.update');

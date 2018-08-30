@@ -18,6 +18,10 @@
             <td>{{ $logged_in_user->email }}</td>
         </tr>
         <tr>
+            <th>{{ __('labels.frontend.user.profile.blog') }}</th>
+            <td>{{ $logged_in_user->blog }}</td>
+        </tr>
+        <tr>
             <th>{{ __('labels.frontend.user.profile.created_at') }}</th>
             <td>{{ timezone()->convertToLocal($logged_in_user->created_at) }} ({{ $logged_in_user->created_at->diffForHumans() }})</td>
         </tr>

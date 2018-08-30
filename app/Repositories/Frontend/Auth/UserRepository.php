@@ -29,6 +29,14 @@ class UserRepository extends BaseRepository
     }
 
     /**
+     * @return mixed
+     */
+    public function getAllUsers()
+    {
+        return $this->get();
+    }
+
+    /**
      * @param $token
      *
      * @return bool|\Illuminate\Database\Eloquent\Model
@@ -97,6 +105,7 @@ class UserRepository extends BaseRepository
                 'first_name'        => $data['first_name'],
                 'last_name'         => $data['last_name'],
                 'email'             => $data['email'],
+                'blog'              => $data['blog'],
                 'confirmation_code' => md5(uniqid(mt_rand(), true)),
                 'active'            => 1,
                 'password'          => $data['password'],
@@ -144,6 +153,7 @@ class UserRepository extends BaseRepository
         $user->first_name = $input['first_name'];
         $user->last_name = $input['last_name'];
         $user->avatar_type = $input['avatar_type'];
+        $user->blog = $input['blog'];
 
         // Upload profile image if necessary
         if ($image) {
