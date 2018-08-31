@@ -59,7 +59,7 @@
                     </div>
                 </div>
             </div>
-            <div class="card">
+            <div class="card my-3">
                 <h4 class="card-header">
                     <i class="fas fa-comments mr-2"></i>
                     {{ __('labels.frontend.forum.assignments.post_list') }}

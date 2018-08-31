@@ -57,8 +57,7 @@
                 {{ html()->text('blog')
                     ->class('form-control')
                     ->placeholder(__('validation.attributes.frontend.blog'))
-                    ->attribute('maxlength', 191)
-                    ->required() }}
+                    ->attribute('maxlength', 191) }}
             </div><!--form-group-->
         </div><!--col-->
     </div><!--row-->

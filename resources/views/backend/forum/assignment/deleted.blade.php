@@ -53,7 +53,7 @@
                 </div>
             </div><!--col-->
         </div><!--row-->
-        <div class="row">
+        <div class="row mt-3">
             <div class="col-7">
                 <div class="float-left">
                     {!! $assignments->total() !!} {{ trans_choice('labels.backend.forum.assignments.table.total', $assignments->total()) }}

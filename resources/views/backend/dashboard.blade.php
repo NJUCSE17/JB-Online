@@ -9,7 +9,7 @@
                 <div class="card-header">
                     <strong>{{ __('strings.backend.dashboard.welcome') }} {{ $logged_in_user->name }}!</strong>
                 </div><!--card-header-->
-                <div class="card-block">
+                <div class="card-block px-3 py-3">
                     {!! __('strings.backend.welcome') !!}
                 </div><!--card-block-->
             </div><!--card-->

@@ -3,13 +3,8 @@
 @section('title', app_name() . ' | '.__('navs.general.home'))
 
 @section('content')
-    <div class="page-header">
-        <h1 class="display-3">
-            {{ __('strings.frontend.jumbo_title') }}
-        </h1>
-        <h4>
-            {{ __('strings.frontend.welcome_to', ['place' => app_name()]) }}
-        </h4>
+    <div class="page-header text-center">
+        <img src="{{ app_coverart() }}" id="coverart" style="width: 100%">
     </div>
     <div class="row">
         <div class="col col-md-4 col-12">
@@ -28,25 +23,29 @@
                     @endauth
                 </h4>
                 @if ($assignments->count())
-                    <div class="card-body px-0 py-0" id="assignments">
-                        @foreach($assignments as $assignment)
-                            <div class="card mx-3 my-3">
-                                <a class="card-header btn-outline-dark"
-                                   href="{{ $assignment->assignment_link }}" style="font-size: 120%">
-                                    {{ $assignment->name }}
-                                </a>
-                                <div class="card-body">
-                                    {!! $assignment->content !!}
-                                    <div class="text-right">
-                                        <small class="mb-0 text-muted">
-                                            {{ __('labels.general.ddl') }}
-                                            {{ $assignment->due_time }}
-                                            {{ $assignment->due_time->diffForHumans() }}
-                                        </small>
+                    <div class="card-body px-0 py-0">
+                        <div class="list-group list-group-flush" id="assignments">
+                            @foreach($assignments as $assignment)
+                                <a href="{{ $assignment->assignment_link }}"
+                                   class="list-group-item list-group-item-action"
+                                   id="assignment">
+                                    <div class="d-flex w-100 justify-content-between">
+                                        <h5 class="mb-1" id="assignment_title">
+                                            {{ $assignment->name }}
+                                        </h5>
                                     </div>
-                                </div>
-                            </div>
-                        @endforeach
+                                    <object id="assignment_content">
+                                        <p class="mb-1">
+                                            {!! $assignment->content !!}
+                                        </p>
+                                    </object>
+                                    <small class="float-right" id="assignment_ddl">
+                                        {{ __('labels.general.ddl') }}
+                                        {{ $assignment->due_time }}
+                                        {{ $assignment->due_time->diffForHumans() }}</small>
+                                </a>
+                            @endforeach
+                        </div>
                     </div>
                 @else
                     <div class="card-body">
@@ -75,7 +74,7 @@
                         @endif
                     @endauth
                 </h4>
-                <div class="card-body text-justify">
+                <div class="card-body text-justify" id="notice_content">
                     @if($notice != null && $notice->content != null)
                         {!! $notice->content !!}
                         <small class="float-right text-muted">{{ $notice->time_label }}</small>
@@ -197,3 +196,11 @@
         </div>
     </div>
 @endsection
+
+@push('after-scripts')
+    <script type="text/javascript">
+        $('#coverart').on('mousedown', function (e) {
+            e.preventDefault()
+        })
+    </script>
+@endpush

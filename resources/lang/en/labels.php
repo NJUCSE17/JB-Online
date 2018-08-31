@@ -249,6 +249,7 @@ return [
                     'content'         => 'Content',
                     'updated_at'      => 'Updated At',
                     'last_updated'    => 'Last Updated',
+                    'total'           => 'in total',
                 ],
 
                 'tabs' => [

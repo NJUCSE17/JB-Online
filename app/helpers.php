@@ -18,6 +18,30 @@ if (! function_exists('app_name')) {
     }
 }
 
+if (! function_exists('app_version')) {
+    /**
+     * Helper to grab the application name.
+     *
+     * @return mixed
+     */
+    function app_version()
+    {
+        return config('app.version');
+    }
+}
+
+if (! function_exists('app_coverart')) {
+    /**
+     * Helper to grab the application name.
+     *
+     * @return mixed
+     */
+    function app_coverart()
+    {
+        return config('app.coverart');
+    }
+}
+
 if (! function_exists('gravatar')) {
     /**
      * Access the gravatar helper.

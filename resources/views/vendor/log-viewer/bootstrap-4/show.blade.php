@@ -11,10 +11,10 @@
 
 @section('content')
     <div class="row">
-        <div class="col-md-2">
+        <div class="col-md-3">
             @include('log-viewer::_partials.menu')
         </div>
-        <div class="col-md-10">
+        <div class="col-md-9">
             {{-- Log Details --}}
             <div class="card">
                 <div class="card-header">
@@ -24,7 +24,7 @@
                             <i class="fa fa-download"></i> DOWNLOAD
                         </a>
                         <a href="#delete-log-modal" class="btn btn-sm btn-danger" data-toggle="modal" data-backdrop="false">
-                            <i class="fa fa-trash-o"></i> DELETE
+                            <i class="fa fa-trash"></i> DELETE
                         </a>
                     </div>
                 </div>
@@ -76,7 +76,7 @@
                 @endif
 
                 <div class="card-body">
-                    <div class="table-responsive">
+                    <div class="table-responsive" style="width: 100%; overflow: auto;">
                         <table id="entries" class="table" style="word-break: break-word;">
                             <thead>
                             <tr>

@@ -110,6 +110,11 @@ return [
             'email_body_title' => '你收到了新的抬杠，快来看看吧！',
             'subject' => '来自 :app_name 的回复通知',
         ],
+
+        'notice' => [
+            'email_body_title' => '狗管理发布了新公告，快来围观！',
+            'subject' => '来自 :app_name 的新公告',
+        ],
     ],
 
     'frontend' => [

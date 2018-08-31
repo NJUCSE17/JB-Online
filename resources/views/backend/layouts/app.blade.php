@@ -82,34 +82,29 @@
     @stack('after-styles')
 </head>
 
-<body class="{{ config('backend.body_classes') }}">
-    @include('backend.includes.header')
+<body id="backend">
+    <div id="app">
+        @include('includes.partials.logged-in-as')
+        @include('backend.includes.nav')
 
-    <div class="app-body">
-        @include('backend.includes.sidebar')
-
-        <main class="main">
-            @include('includes.partials.logged-in-as')
-            {!! Breadcrumbs::render() !!}
-
-            <div class="container-fluid">
-                <div class="animated fadeIn">
-                    <div class="content-header">
-                        @yield('page-header')
-                    </div><!--content-header-->
-
-                    @include('includes.partials.messages')
+        <div class="container">
+            @include('includes.partials.messages')
+            <div class="row pb-3">
+                <div class="col col-12 col-md-3">
+                    @include('backend.includes.sidebar')
+                </div>
+                <div class="col col-12 col-md-9">
                     @yield('content')
-                </div><!--animated-->
-            </div><!--container-fluid-->
-        </main><!--main-->
-    </div><!--app-body-->
-
-    @include('backend.includes.footer')
+                </div>
+            </div>
+        </div><!-- container -->
+    </div><!-- #app -->
 
     <!-- Scripts -->
     @stack('before-scripts')
-    {!! script(mix('js/backend.js')) !!}
+    {!! script(mix('js/frontend.js')) !!}
     @stack('after-scripts')
+
+    @include('includes.partials.ga')
 </body>
 </html>

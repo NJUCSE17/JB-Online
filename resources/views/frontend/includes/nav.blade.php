@@ -2,7 +2,7 @@
     <div class="container">
         <a href="{{ route('frontend.index') }}" class="navbar-brand">{{ app_name() }}</a>
         <a class="badge badge-pill float-right badge-dark text-white">
-            V1.14
+            {{ app_version() }}
         </a>
 
         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"

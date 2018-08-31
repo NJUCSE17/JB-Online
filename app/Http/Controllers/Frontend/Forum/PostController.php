@@ -53,6 +53,7 @@ class PostController extends Controller
 
         if ($data['parent_id'] != 0 && config('mail.password') != null) {
             Mail::send(new SendReply($request, $data));
+            \Log::info('Sent mail for reply to post #' . $data['parent_id']);
         }
 
         return redirect()->route('frontend.forum.assignment.view', [$course, $assignment, 'dec'])

@@ -114,7 +114,8 @@ trait UserAttribute
      */
     public function getNameAttribute()
     {
-        return $this->roles_label . ' ' . $this->full_name;
+        return $this->full_name;
+        // return $this->roles_label . ' ' . $this->full_name;
     }
 
     /**
@@ -192,7 +193,7 @@ trait UserAttribute
      */
     public function getEditButtonAttribute()
     {
-        return '<a href="'.route('admin.auth.user.edit', $this).'" data-toggle="tooltip" data-placement="top" title="'.__('buttons.general.crud.edit').'" class="btn btn-primary"><i class="fas fa-edit text-dark"></i></a>';
+        return '<a href="'.route('admin.auth.user.edit', $this).'" data-toggle="tooltip" data-placement="top" title="'.__('buttons.general.crud.edit').'" class="btn btn-primary"><i class="fas fa-edit"></i></a>';
     }
 
     /**

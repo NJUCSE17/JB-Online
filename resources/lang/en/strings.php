@@ -110,6 +110,11 @@ return [
             'email_body_title' => 'You got a new reply and below is the content.',
             'subject' => 'Reply Notification from :app_name',
         ],
+
+        'notice' => [
+            'email_body_title' => 'An executive published a new notice. Please check it out.',
+            'subject' => 'New Notice from :app_name',
+        ],
     ],
 
     'frontend' => [

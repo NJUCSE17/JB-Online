@@ -88,6 +88,8 @@ return [
             'general'   => '常规',
             'history'   => '历史',
             'system'    => '系统',
+            'forum'     => '论坛',
+            'log'       => '记录',
         ],
     ],
 

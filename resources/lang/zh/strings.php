@@ -110,6 +110,11 @@ return [
             'email_body_title' => '你收到了新的回复，内容如下',
             'subject' => '来自 :app_name 的回复通知',
         ],
+
+        'notice' => [
+            'email_body_title' => '管理员发布了新公告，烦请阅读。',
+            'subject' => '来自 :app_name 的新公告',
+        ],
     ],
 
     'frontend' => [

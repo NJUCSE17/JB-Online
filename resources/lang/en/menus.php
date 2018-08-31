@@ -79,6 +79,8 @@ return [
             'general'   => 'General',
             'history'   => 'History',
             'system'    => 'System',
+            'forum'     => 'Forum',
+            'log'       => 'Log',
         ],
     ],
 

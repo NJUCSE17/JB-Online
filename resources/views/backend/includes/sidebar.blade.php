@@ -1,96 +1,126 @@
-<div class="sidebar">
-    <nav class="sidebar-nav">
-        <ul class="nav">
-            <li class="nav-title">
-                {{ __('menus.backend.sidebar.general') }}
-            </li>
+<div class="list-group">
+    <div class="list-group-item list-group-item-action">
+        {{ __('menus.backend.sidebar.general') }}
+    </div>
+    <a class="list-group-item list-group-item-action {{ active_class(Active::checkUriPattern('admin/dashboard')) }}"
+       href="{{ route('admin.dashboard') }}">
+        <div class="row">
+            <div class="col-2 text-center">
+                <i class="fas fa-table"></i>
+            </div>
+            <div class="col-10">
+                {{ __('menus.backend.sidebar.dashboard') }}
+            </div>
+        </div>
+    </a>
 
-            <li class="nav-item">
-                <a class="nav-link {{ active_class(Active::checkUriPattern('admin/dashboard')) }}" href="{{ route('admin.dashboard') }}"><i class="fas fa-table mx-3"></i> {{ __('menus.backend.sidebar.dashboard') }}</a>
-            </li>
+    <div class="list-group-item list-group-item-action">
+        {{ __('menus.backend.sidebar.system') }}
+    </div>
 
-            <li class="nav-title">
-                {{ __('menus.backend.sidebar.system') }}
-            </li>
+    @if ($logged_in_user->isAdmin())
+        <a class="list-group-item list-group-item-action {{ active_class(Active::checkUriPattern('admin/auth/user*')) }}"
+           href="{{ route('admin.auth.user.index') }}">
+            <div class="row">
+                <div class="col-2 text-center">
+                    <i class="fas fa-user"></i>
+                </div>
+                <div class="col-10">
+                    {{ __('labels.backend.access.users.management') }}
+                    @if ($pending_approval > 0)
+                        <span class="badge badge-danger float-right">{{ $pending_approval }}</span>
+                    @endif
+                </div>
+            </div>
+        </a>
+        <a class="list-group-item list-group-item-action {{ active_class(Active::checkUriPattern('admin/auth/role*')) }}"
+           href="{{ route('admin.auth.role.index') }}">
+            <div class="row">
+                <div class="col-2 text-center">
+                    <i class="fas fa-users"></i>
+                </div>
+                <div class="col-10">
+                    {{ __('labels.backend.access.roles.management') }}
+                </div>
+            </div>
+        </a>
+    @endif
 
-            @if ($logged_in_user->isAdmin())
-                <li class="nav-item nav-dropdown {{ active_class(Active::checkUriPattern('admin/auth*'), 'open') }}">
-                    <a class="nav-link nav-dropdown-toggle {{ active_class(Active::checkUriPattern('admin/auth*')) }}" href="#">
-                        <i class="fas fa-user mx-3"></i> {{ __('menus.backend.access.title') }}
+    @if ($logged_in_user->isExecutive())
+        <div class="list-group-item list-group-item-action">
+            {{ __('menus.backend.sidebar.forum') }}
+        </div>
 
-                        @if ($pending_approval > 0)
-                            <span class="badge badge-danger">{{ $pending_approval }}</span>
-                        @endif
-                    </a>
+        <a class="list-group-item list-group-item-action {{ active_class(Active::checkUriPattern('admin/forum/notice*')) }}"
+           href="{{ route('admin.forum.notice.index') }}">
+            <div class="row">
+                <div class="col-2 text-center">
+                    <i class="fas fa-broadcast-tower"></i>
+                </div>
+                <div class="col-10">
+                    {{ __('labels.backend.forum.notices.management') }}
+                </div>
+            </div>
+        </a>
+        <a class="list-group-item list-group-item-action {{ active_class(Active::checkUriPattern('admin/forum/course*')) }}"
+           href="{{ route('admin.forum.course.index') }}">
+            <div class="row">
+                <div class="col-2 text-center">
+                    <i class="fas fa-book"></i>
+                </div>
+                <div class="col-10">
+                    {{ __('labels.backend.forum.courses.management') }}
+                </div>
+            </div>
+        </a>
+        <a class="list-group-item list-group-item-action {{ active_class(Active::checkUriPattern('admin/forum/assignment*')) }}"
+           href="{{ route('admin.forum.assignment.index') }}">
+            <div class="row">
+                <div class="col-2 text-center">
+                    <i class="fas fa-pencil-ruler"></i>
+                </div>
+                <div class="col-10">
+                    {{ __('labels.backend.forum.assignments.management') }}
+                </div>
+            </div>
+        </a>
+        <a class="list-group-item list-group-item-action {{ active_class(Active::checkUriPattern('admin/forum/post*')) }}"
+           href="{{ route('admin.forum.post.index') }}">
+            <div class="row">
+                <div class="col-2 text-center">
+                    <i class="fas fa-comments"></i>
+                </div>
+                <div class="col-10">
+                    {{ __('labels.backend.forum.posts.management') }}
+                </div>
+            </div>
+        </a>
+    @endif
 
-                    <ul class="nav-dropdown-items">
-                        <li class="nav-item">
-                            <a class="nav-link {{ active_class(Active::checkUriPattern('admin/auth/user*')) }}" href="{{ route('admin.auth.user.index') }}">
-                                {{ __('labels.backend.access.users.management') }}
+    <div class="list-group-item list-group-item-action">
+        {{ __('menus.backend.sidebar.log') }}
+    </div>
 
-                                @if ($pending_approval > 0)
-                                    <span class="badge badge-danger">{{ $pending_approval }}</span>
-                                @endif
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link {{ active_class(Active::checkUriPattern('admin/auth/role*')) }}" href="{{ route('admin.auth.role.index') }}">
-                                {{ __('labels.backend.access.roles.management') }}
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-            @endif
-
-            @if ($logged_in_user->isExecutive())
-                <li class="nav-item nav-dropdown {{ active_class(Active::checkUriPattern('admin/forum*'), 'open') }}">
-                    <a class="nav-link nav-dropdown-toggle {{ active_class(Active::checkUriPattern('admin/forum*')) }}" href="#">
-                        <i class="fas fa-cog mx-3"></i> {{ __('menus.backend.forum.title') }}
-                    </a>
-
-                    <ul class="nav-dropdown-items">
-                        <li class="nav-item">
-                            <a class="nav-link {{ active_class(Active::checkUriPattern('admin/forum/notice*')) }}" href="{{ route('admin.forum.notice.index') }}">
-                                {{ __('labels.backend.forum.notices.management') }}
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link {{ active_class(Active::checkUriPattern('admin/forum/course*')) }}" href="{{ route('admin.forum.course.index') }}">
-                                {{ __('labels.backend.forum.courses.management') }}
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link {{ active_class(Active::checkUriPattern('admin/forum/assignment*')) }}" href="{{ route('admin.forum.assignment.index') }}">
-                                {{ __('labels.backend.forum.assignments.management') }}
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link {{ active_class(Active::checkUriPattern('admin/forum/post*')) }}" href="{{ route('admin.forum.post.index') }}">
-                                {{ __('labels.backend.forum.posts.management') }}
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-            @endif
-
-            <li class="nav-item nav-dropdown {{ active_class(Active::checkUriPattern('admin/log-viewer*'), 'open') }}">
-                <a class="nav-link nav-dropdown-toggle {{ active_class(Active::checkUriPattern('admin/log-viewer*')) }}" href="#">
-                    <i class="fas fa-cookie mx-3"></i> {{ __('menus.backend.log-viewer.main') }}
-                </a>
-
-                <ul class="nav-dropdown-items">
-                    <li class="nav-item">
-                        <a class="nav-link {{ active_class(Active::checkUriPattern('admin/log-viewer')) }}" href="{{ route('log-viewer::dashboard') }}">
-                            {{ __('menus.backend.log-viewer.dashboard') }}
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link {{ active_class(Active::checkUriPattern('admin/log-viewer/logs*')) }}" href="{{ route('log-viewer::logs.list') }}">
-                            {{ __('menus.backend.log-viewer.logs') }}
-                        </a>
-                    </li>
-                </ul>
-            </li>
-        </ul>
-    </nav>
+    <a class="list-group-item list-group-item-action {{ active_class(Active::checkUriPattern('admin/log-viewer')) }}"
+       href="{{ route('log-viewer::dashboard') }}">
+        <div class="row">
+            <div class="col-2 text-center">
+                <i class="fas fa-table"></i>
+            </div>
+            <div class="col-10">
+                {{ __('menus.backend.log-viewer.dashboard') }}
+            </div>
+        </div>
+    </a>
+    <a class="list-group-item list-group-item-action {{ active_class(Active::checkUriPattern('admin/log-viewer/logs*')) }}"
+       href="{{ route('log-viewer::logs.list') }}">
+        <div class="row">
+            <div class="col-2 text-center">
+                <i class="fas fa-cookie"></i>
+            </div>
+            <div class="col-10">
+                {{ __('menus.backend.log-viewer.logs') }}
+            </div>
+        </div>
+    </a>
 </div><!--sidebar-->

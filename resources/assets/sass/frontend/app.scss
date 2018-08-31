@@ -5,10 +5,7 @@
 @import '../../../../node_modules/bootstrap/scss/bootstrap';
 
 // Global
-@import 'global';
-
-// Pages
-@import 'pages/dashboard';
+@import '../backend/global';
 
 // Bootstrap Overrides
 @import 'custom';

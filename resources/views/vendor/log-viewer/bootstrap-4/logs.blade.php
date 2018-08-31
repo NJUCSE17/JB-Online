@@ -57,7 +57,7 @@
                                     </td>
                                 @endforeach
                                 <td class="text-right">
-                                    <div class="btn-group btn-group-sm" role="group" aria-label="Log Viewer Actions">
+                                    <div class="btn-group" role="group" aria-label="Log Viewer Actions">
                                         <a href="{{ route('log-viewer::logs.show', [$date]) }}" class="btn btn-sm btn-info">
                                             <i class="fa fa-search"></i>
                                         </a>

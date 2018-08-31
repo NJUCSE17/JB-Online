@@ -247,6 +247,7 @@ return [
                     'content'         => '内容',
                     'updated_at'      => '最后更新于',
                     'last_updated'    => '最后更新于',
+                    'total'           => '公告总计',
                 ],
 
                 'tabs' => [
