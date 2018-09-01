@@ -6,7 +6,7 @@
     <div class="row justify-content-center align-items-center">
         <div class="col col-sm-8 align-self-center">
             <div class="card">
-                <div class="card-header">
+                <div class="card-header py-3">
                     <strong>
                         {{ __('labels.frontend.auth.login_box_title') }}
                     </strong>
@@ -44,8 +44,9 @@
                         <div class="row">
                             <div class="col">
                                 <div class="form-group">
-                                    <div class="checkbox">
-                                        {{ html()->label(html()->checkbox('remember', true, 1) . ' ' . __('labels.frontend.auth.remember_me'))->for('remember') }}
+                                    <div class="custom-control custom-checkbox mb-3">
+                                        <input type="checkbox" class="custom-control-input" name="remember" id="remember" value="1">
+                                        <label class="custom-control-label" for="remember">{{ __('labels.frontend.auth.remember_me') }}</label>
                                     </div>
                                 </div><!--form-group-->
                             </div><!--col-->

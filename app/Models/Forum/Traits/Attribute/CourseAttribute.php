@@ -18,6 +18,23 @@ trait CourseAttribute
     /**
      * @return string
      */
+    public function getColorLabelAttribute()
+    {
+        $today = date("Y-m-d H:i:s");
+        if ($today < $this->start_time) {
+            return "warning";
+        }
+
+        if ($today > $this->end_time) {
+            return "secondary";
+        }
+
+        return "success";
+    }
+
+    /**
+     * @return string
+     */
     public function getStatusLabelAttribute()
     {
         $today = date("Y-m-d H:i:s");

@@ -10,7 +10,7 @@
  */
 function addDeleteForms() {
     $('[data-method]').append(function () {
-        if (! $(this).find('form').length > 0)
+        if (!$(this).find('form').length > 0)
             return "\n" +
                 "<form action='" + $(this).attr('href') + "' method='POST' name='delete_item' style='display:none'>\n" +
                 "<input type='hidden' name='_method' value='" + $(this).attr('data-method') + "'>\n" +
@@ -27,7 +27,7 @@ function addDeleteForms() {
 /**
  * Place any jQuery/helper plugins in here.
  */
-$(function(){
+$(function () {
     /**
      * Add the data-method="delete" forms to all delete links
      */
@@ -36,7 +36,7 @@ $(function(){
     /**
      * Disable all submit buttons once clicked
      */
-    $('form').submit(function() {
+    $('form').submit(function () {
         $(this).find('input[type="submit"]').attr("disabled", true);
         $(this).find('button[type="submit"]').attr("disabled", true);
         return true;
@@ -50,7 +50,7 @@ $(function(){
     /**
      * Generic confirm form delete using Sweet Alert
      */
-    $('body').on('submit', 'form[name=delete_item]', function(e){
+    $('body').on('submit', 'form[name=delete_item]', function (e) {
         e.preventDefault();
 
         let form = this,
@@ -68,7 +68,7 @@ $(function(){
         }).then((result) => {
             result.value && form.submit();
         });
-    }).on('click', 'a[name=confirm_item]', function(e){
+    }).on('click', 'a[name=confirm_item]', function (e) {
         /**
          * Generic 'are you sure' confirm box
          */

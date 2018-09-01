@@ -1,5 +1,5 @@
 <div class="card mx-0 mb-3">
-    <h5 class="card-header align-middle">
+    <h5 class="card-header py-3 align-middle">
         <img class="img-avatar mr-2" src="{{ $post->author->picture }}"
              style="height: 38px !important;">
         <span> {{$post->author->name}} </span>

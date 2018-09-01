@@ -13,7 +13,7 @@
             @if ($feeds)
                 @foreach ($feeds as $feed)
                     <div class="card my-3" id="feedItem" style="max-height: 60vh; width: 100%; overflow:auto;">
-                        <a class="card-header btn-outline-dark" style="font-size: 120%; line-height: 36px"
+                        <a class="card-header py-3 btn-outline-dark" style="font-size: 120%; line-height: 36px"
                            href="{{ $feed['permalink'] }}">
                             {{ $feed['title'] }}
                             <span class="float-right">

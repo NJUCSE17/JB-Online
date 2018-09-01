@@ -87,7 +87,7 @@
         @include('includes.partials.logged-in-as')
         @include('backend.includes.nav')
 
-        <div class="mx-5 my-3">
+        <div class="mx-5 my-4">
             @include('includes.partials.messages')
             <div class="row pb-3">
                 <div class="col col-12 col-lg-2">

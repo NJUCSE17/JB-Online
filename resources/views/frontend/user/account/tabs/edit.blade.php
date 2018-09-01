@@ -4,13 +4,22 @@
             <div class="form-group">
                 {{ html()->label(__('validation.attributes.frontend.avatar'))->for('avatar') }}
 
-                <div>
-                    <input type="radio" name="avatar_type" value="gravatar" {{ $logged_in_user->avatar_type == 'gravatar' ? 'checked' : '' }} /> Gravatar
-                    <input type="radio" name="avatar_type" value="storage" {{ $logged_in_user->avatar_type == 'storage' ? 'checked' : '' }} /> Upload
+                <div class="row mx-3">
+                    <div class="custom-control custom-radio col">
+                        <input type="radio" id="avatar_type_1" name="avatar_type" value="gravatar" class="custom-control-input" {{ $logged_in_user->avatar_type == 'gravatar' ? 'checked' : '' }}>
+                        <label class="custom-control-label" for="avatar_type_1">Gravatar</label>
+                    </div>
+                    <div class="custom-control custom-radio col">
+                        <input type="radio" id="avatar_type_2" name="avatar_type" value="storage" class="custom-control-input" {{ $logged_in_user->avatar_type == 'storage' ? 'checked' : '' }}>
+                        <label class="custom-control-label" for="avatar_type_2">Upload</label>
+                    </div>
 
                     @foreach ($logged_in_user->providers as $provider)
                         @if (strlen($provider->avatar))
-                            <input type="radio" name="avatar_type" value="{{ $provider->provider }}" {{ $logged_in_user->avatar_type == $provider->provider ? 'checked' : '' }} /> {{ ucfirst($provider->provider) }}
+                            <div class="custom-control custom-radio col">
+                                <input type="radio" id="avatar_type_3" name="avatar_type" value="{{ $provider->provider }}" class="custom-control-input"  {{ $logged_in_user->avatar_type == $provider->provider ? 'checked' : '' }}>
+                                <label class="custom-control-label" for="avatar_type_3">{{ ucfirst($provider->provider) }}</label>
+                            </div>
                         @endif
                     @endforeach
                 </div>
