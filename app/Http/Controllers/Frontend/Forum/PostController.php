@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Frontend\Forum;
 
+use App\Jobs\SendReplyMail;
+use App\Models\Auth\User;
 use App\Models\Forum\Post;
 use App\Models\Forum\Course;
 use App\Models\Forum\Assignment;
@@ -11,8 +13,6 @@ use App\Repositories\Frontend\Forum\PostRepository;
 use App\Http\Requests\Frontend\Forum\Post\StorePostRequest;
 use App\Http\Requests\Frontend\Forum\Post\ManagePostRequest;
 use App\Http\Requests\Frontend\Forum\Post\UpdatePostRequest;
-use Illuminate\Support\Facades\Mail;
-use App\Mail\Frontend\Post\SendReply;
 
 /**
  * Class PostController.
@@ -51,9 +51,16 @@ class PostController extends Controller
 
         $this->postRepository->create($data);
 
-        if ($data['parent_id'] != 0 && config('mail.password') != null) {
-            Mail::send(new SendReply($request, $data));
-            \Log::info('Sent mail for reply to post #' . $data['parent_id']);
+        if ($data['parent_id'] != 0) {
+            $parent = Post::findOrFail($data['parent_id']);
+            $user = User::findOrFail($parent['user_id']);
+            if ($user->isConfirmed()) {
+                SendReplyMail::dispatch(array(
+                    'reply' => $data,
+                    'user'  => $user,
+                    'from'  => User::findOrFail($data['user_id']),
+                ));
+            }
         }
 
         return redirect()->route('frontend.forum.assignment.view', [$course, $assignment, 'dec'])

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Backend\Forum\Notice;
 
+use App\Jobs\SendNoticeMail;
 use App\Models\Forum\Notice;
 use App\Http\Controllers\Controller;
 use App\Events\Backend\Forum\Notice\NoticeDeleted;
@@ -11,8 +12,6 @@ use App\Http\Requests\Backend\Forum\Notice\StoreNoticeRequest;
 use App\Http\Requests\Backend\Forum\Notice\ManageNoticeRequest;
 use App\Http\Requests\Backend\Forum\Notice\UpdateNoticeRequest;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Mail;
-use App\Mail\Backend\Notice\NewNotice;
 
 /**
  * Class NoticeController.
@@ -73,8 +72,12 @@ class NoticeController extends Controller
 
         $users = $this->userRepository->get();
         foreach ($users as $user) {
-            Mail::send(new NewNotice($request, $user));
-            \Log::info('Sent notice mail to ' . $user->full_name);
+            if ($user->isConfirmed()) {
+                SendNoticeMail::dispatch(array(
+                    'notice' => $data,
+                    'user'   => $user,
+                ));
+            }
         }
 
         return redirect()->route('admin.forum.notice.index')->withFlashSuccess(__('alerts.backend.notices.created'));
