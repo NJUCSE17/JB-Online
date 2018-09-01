@@ -92,6 +92,6 @@ class UserStatusController extends Controller
     {
         $this->userRepository->restore($deletedUser);
 
-        return redirect()->route('admin.auth.user.index')->withFlashSuccess(__('alerts.backend.users.restored'));
+        return redirect()->route('admin.auth.user.deleted')->withFlashSuccess(__('alerts.backend.users.restored'));
     }
 }

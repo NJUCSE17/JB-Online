@@ -222,6 +222,7 @@ return [
 
                 'notices' => [
                     'content'           => 'Content',
+                    'sendmail'          => 'Send Mail',
                 ],
             ],
         ],

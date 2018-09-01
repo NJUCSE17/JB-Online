@@ -110,6 +110,6 @@ class PostController extends Controller
 
         event(new PostDeleted($post));
 
-        return redirect()->route('admin.forum.post.deleted')->withFlashSuccess(__('alerts.backend.posts.deleted'));
+        return redirect()->route('admin.forum.post.index')->withFlashSuccess(__('alerts.backend.posts.deleted'));
     }
 }

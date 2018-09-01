@@ -218,6 +218,7 @@ return [
 
                 'notices' => [
                     'content'           => '内容',
+                    'sendmail'          => '邮件通知',
                 ],
             ],
         ],

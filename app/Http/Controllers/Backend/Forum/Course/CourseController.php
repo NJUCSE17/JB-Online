@@ -135,6 +135,6 @@ class CourseController extends Controller
 
         event(new CourseDeleted($course));
 
-        return redirect()->route('admin.forum.course.deleted')->withFlashSuccess(__('alerts.backend.courses.deleted'));
+        return redirect()->route('admin.forum.course.index')->withFlashSuccess(__('alerts.backend.courses.deleted'));
     }
 }

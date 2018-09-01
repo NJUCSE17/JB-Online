@@ -29,7 +29,8 @@ class StoreNoticeRequest extends FormRequest
     {
         clean($_POST['content']);
         return [
-            'content' => 'max:10000',
+            'content'  => 'max:10000',
+            'sendmail' => 'required',
         ];
     }
 }
