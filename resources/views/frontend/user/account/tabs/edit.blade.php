@@ -25,7 +25,7 @@
                 </div>
             </div><!--form-group-->
 
-            <div class="form-group hidden" id="avatar_location">
+            <div class="form-group" id="avatar_location">
                 {{ __('strings.frontend.user.avatar_restriction') }}
                 {{ html()->file('avatar_location')->class('form-control') }}
             </div><!--form-group-->

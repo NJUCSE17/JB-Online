@@ -18,7 +18,7 @@
                             {{ $feed['title'] }}
                             <span class="float-right">
                                 <img class="img-avatar mr-2" src="{{ $feed['avatar'] }}"
-                                     style="height: 38px !important;">
+                                     style="height: 45px !important;">
                                 {{ $feed['author'] }}
                             </span>
                         </a>

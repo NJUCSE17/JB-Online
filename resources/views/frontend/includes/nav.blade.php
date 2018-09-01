@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-white sticky-top">
+<nav class="navbar navbar-expand-lg navbar-light bg-white sticky-top with-shadows">
     <div class="container">
         <a href="{{ route('frontend.index') }}" class="navbar-brand">{{ app_name() }}</a>
         <a class="badge badge-pill float-right badge-dark text-white">

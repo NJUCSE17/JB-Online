@@ -4,7 +4,7 @@
 
 @section('content')
     <div class="page-header text-center">
-        <div class="card" style="border-radius: 10px">
+        <div class="card">
             <img class="card-img" src="{{ app_coverart() }}" id="coverart" style="width: 100%">
             <div class="card-img-overlay text-right">
                 <h4 class="card-title display-4 slide-in">
@@ -32,10 +32,10 @@
                 @if ($assignments->count())
                     <div class="card-body px-0 py-0">
                         <div class="list-group list-group-flush" id="assignments">
+                            <?php $lastAssignment = $assignments->pop(); ?>
                             @foreach($assignments as $assignment)
                                 <a href="{{ $assignment->assignment_link }}"
-                                   class="list-group-item list-group-item-action"
-                                   id="assignment">
+                                   class="list-group-item list-group-item-action" id="assignment">
                                     <div class="d-flex w-100 justify-content-between">
                                         <h5 class="mb-1" id="assignment_title">
                                             {{ $assignment->name }}
@@ -53,6 +53,26 @@
                                     </small>
                                 </a>
                             @endforeach
+                            <!-- Last Assignment with Border Radius !-->
+                            <a href="{{ $lastAssignment->assignment_link }}"
+                               class="list-group-item list-group-item-action" id="assignment"
+                               style="border-bottom-left-radius: 0.625rem; border-bottom-right-radius: 0.625rem">
+                                <div class="d-flex w-100 justify-content-between">
+                                    <h5 class="mb-1" id="assignment_title">
+                                        {{ $lastAssignment->name }}
+                                    </h5>
+                                </div>
+                                <object id="assignment_content">
+                                    <p class="mb-1">
+                                        {!! $lastAssignment->content !!}
+                                    </p>
+                                </object>
+                                <small class="float-right" id="assignment_ddl">
+                                    {{ __('labels.general.ddl') }}
+                                    {{ $assignment->due_time }}
+                                    {{ $assignment->due_time->diffForHumans() }}
+                                </small>
+                            </a>
                         </div>
                     </div>
                 @else
