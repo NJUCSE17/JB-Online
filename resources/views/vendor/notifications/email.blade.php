@@ -53,10 +53,13 @@
 @component('mail::subcopy')
 @lang(
     "如果您无法点击 \":actionText\" 按钮，可复制以下链接".
-    '并用浏览器打开： [:actionURL](:actionURL)',
+    '并用浏览器打开： [:actionURL](:actionURL) ；<br> 如果您'.
+    '不想收到邮件，可前往 [:centerText](:centerURL) 关闭邮件通知。',
     [
         'actionText' => $actionText,
-        'actionURL' => $actionUrl
+        'actionURL'  => $actionUrl,
+        'centerText' => "个人中心",
+        'centerURL'  => route("frontend.user.account"),
     ]
 )
 @endcomponent
