@@ -4,12 +4,19 @@
 
 @section('content')
     <div class="page-header text-center">
-        <img src="{{ app_coverart() }}" id="coverart" style="width: 100%">
+        <div class="card" style="border-radius: 10px">
+            <img class="card-img" src="{{ app_coverart() }}" id="coverart" style="width: 100%">
+            <div class="card-img-overlay text-right">
+                <h4 class="card-title display-4 slide-in">
+                    {{ app_name() }}
+                </h4>
+            </div>
+        </div>
     </div>
     <div class="row">
         <div class="col col-md-4 col-12">
             <div class="card my-3">
-                <h4 class="card-header">
+                <h4 class="card-header py-3">
                     <i class="fas fa-calendar-alt mr-2"></i>
                     {{ __('labels.frontend.home.assignment') }}
                     @auth
@@ -42,7 +49,8 @@
                                     <small class="float-right" id="assignment_ddl">
                                         {{ __('labels.general.ddl') }}
                                         {{ $assignment->due_time }}
-                                        {{ $assignment->due_time->diffForHumans() }}</small>
+                                        {{ $assignment->due_time->diffForHumans() }}
+                                    </small>
                                 </a>
                             @endforeach
                         </div>
@@ -61,7 +69,7 @@
 
         <div class="col col-md-8 col-12">
             <div class="card my-3">
-                <h4 class="card-header">
+                <h4 class="card-header py-3">
                     <i class="fas fa-broadcast-tower mr-2"></i>
                     {{ __('labels.frontend.home.notice') }}
                     @auth
@@ -90,7 +98,7 @@
 
             @auth
                 <div class="card my-3">
-                    <h4 class="card-header">
+                    <h4 class="card-header py-3">
                         <i class="fas fa-book-open mr-2"></i>
                         {{ __('labels.frontend.home.ongoing') }}
                         @auth
@@ -106,15 +114,12 @@
                     <div class="card-body">
                         @if ($ongoingCourses->count())
                             @foreach($ongoingCourses as $course)
-                                <a class="btn btn-outline-success text-justify my-2"
+                                <a class="btn btn-outline-{{ $course->color_label }} text-justify my-2"
                                    href="{{ $course->course_link }}" style="width: 100%;">
                                     {{ __('strings.frontend.home.semester.left') }}
                                     {{ $course->semester }}
                                     {{ __('strings.frontend.home.semester.right') }} &nbsp;
                                     {{ $course->name }}
-                                    <span class="float-right">
-                                        {!! $course->labels !!}
-                                    </span>
                                 </a>
                             @endforeach
                         @else
@@ -129,7 +134,7 @@
 
                 @if ($allCourses->count())
                     <div class="card my-3">
-                        <h4 class="card-header">
+                        <h4 class="card-header py-3">
                             <i class="fas fa-book mr-2"></i>
                             {{ __('labels.frontend.home.others') }}
                             @auth
@@ -145,15 +150,12 @@
                         </h4>
                         <div class="card-body">
                             @foreach($allCourses as $course)
-                                <a class="btn btn-outline-primary text-justify my-2"
+                                <a class="btn btn-outline-{{ $course->color_label }} text-justify my-2"
                                    href="{{ $course->course_link }}" style="width: 100%;">
                                     {{ __('strings.frontend.home.semester.left') }}
                                     {{ $course->semester }}
                                     {{ __('strings.frontend.home.semester.right') }} &nbsp;
                                     {{ $course->name }}
-                                    <span class="float-right">
-                                        {!! $course->labels !!}
-                                    </span>
                                 </a>
                             @endforeach
                             <div class="row mt-3">
@@ -176,7 +178,7 @@
                 @endif
             @else
                 <div class="card my-3">
-                    <h4 class="card-header">
+                    <h4 class="card-header py-3">
                         <i class="fas fa-user mr-2"></i>
                         {{ __('labels.frontend.home.login') }}
                     </h4>

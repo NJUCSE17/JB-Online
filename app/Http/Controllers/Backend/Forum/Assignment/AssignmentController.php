@@ -146,6 +146,6 @@ class AssignmentController extends Controller
 
         event(new AssignmentDeleted($assignment));
 
-        return redirect()->route('admin.forum.assignment.deleted')->withFlashSuccess(__('alerts.backend.assignments.deleted'));
+        return redirect()->route('admin.forum.assignment.index')->withFlashSuccess(__('alerts.backend.assignments.deleted'));
     }
 }

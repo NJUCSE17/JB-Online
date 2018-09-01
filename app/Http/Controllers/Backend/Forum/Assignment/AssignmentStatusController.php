@@ -62,6 +62,6 @@ class AssignmentStatusController extends Controller
     {
         $this->assignmentRepository->restore($deletedAssignment);
 
-        return redirect()->route('admin.forum.assignment.index')->withFlashSuccess(__('alerts.backend.assignments.restored'));
+        return redirect()->route('admin.forum.assignment.deleted')->withFlashSuccess(__('alerts.backend.assignments.restored'));
     }
 }

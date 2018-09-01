@@ -173,6 +173,7 @@ return [
                     'student_id'              => '学号',
                     'last_name'               => '姓',
                     'first_name'              => '名',
+                    'want_mail'               => '接收邮件',
                     'email'                   => '电子邮件地址',
                     'blog'                    => '博客Feed地址',
                     'name'                    => '名称',
@@ -218,6 +219,7 @@ return [
 
                 'notices' => [
                     'content'           => '内容',
+                    'sendmail'          => '邮件通知',
                 ],
             ],
         ],
@@ -227,6 +229,7 @@ return [
             'student_id'                => '学号',
             'first_name'                => '姓名',
             'last_name'                 => '姓（英语专用）',
+            'want_mail'                 => '接收邮件',
             'email'                     => '电子邮件',
             'blog'                      => '博客Feed地址（没有请留空）',
             'name'                      => '用户名',

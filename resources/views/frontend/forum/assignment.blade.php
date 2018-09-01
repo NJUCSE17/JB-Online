@@ -33,7 +33,7 @@
     <div class="row">
         <div class="col">
             <div class="card my-3">
-                <h4 class="card-header">
+                <h4 class="card-header py-3">
                     <i class="fas fa-pencil-ruler mr-2"></i>
                     {{ __('labels.frontend.forum.assignments.assignment_content') }}
                     @if(Auth::user()->isExecutive())
@@ -60,7 +60,7 @@
                 </div>
             </div>
             <div class="card my-3">
-                <h4 class="card-header">
+                <h4 class="card-header py-3">
                     <i class="fas fa-comments mr-2"></i>
                     {{ __('labels.frontend.forum.assignments.post_list') }}
                     @if(Auth::user()->isExecutive())

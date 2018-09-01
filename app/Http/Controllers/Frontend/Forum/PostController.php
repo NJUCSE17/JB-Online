@@ -54,7 +54,7 @@ class PostController extends Controller
         if ($data['parent_id'] != 0) {
             $parent = Post::findOrFail($data['parent_id']);
             $user = User::findOrFail($parent['user_id']);
-            if ($user->isConfirmed()) {
+            if ($user->isConfirmed() && $user->wantMail()) {
                 SendReplyMail::dispatch(array(
                     'reply' => $data,
                     'user'  => $user,

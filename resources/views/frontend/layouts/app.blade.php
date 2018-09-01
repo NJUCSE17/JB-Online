@@ -86,7 +86,7 @@
             @include('includes.partials.logged-in-as')
             @include('frontend.includes.nav')
 
-            <div class="container">
+            <div class="container my-4">
                 @include('includes.partials.messages')
                 @yield('content')
             </div><!-- container -->

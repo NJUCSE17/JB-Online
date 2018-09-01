@@ -66,17 +66,19 @@ class NoticeController extends Controller
     public function store(StoreNoticeRequest $request)
     {
 
-        $data = $request->only('content');
+        $data = $request->only('content', 'sendmail');
         $data['user_id'] = Auth::id();
         $this->noticeRepository->create($data);
 
-        $users = $this->userRepository->get();
-        foreach ($users as $user) {
-            if ($user->isConfirmed()) {
-                SendNoticeMail::dispatch(array(
-                    'notice' => $data,
-                    'user'   => $user,
-                ));
+        if ($data['sendmail']) {
+            $users = $this->userRepository->get();
+            foreach ($users as $user) {
+                if ($user->isConfirmed() && $user->wantMail()) {
+                    SendNoticeMail::dispatch(array(
+                        'notice' => $data,
+                        'user'   => $user,
+                    ));
+                }
             }
         }
 
@@ -138,6 +140,6 @@ class NoticeController extends Controller
 
         event(new NoticeDeleted($notice));
 
-        return redirect()->route('admin.forum.notice.deleted')->withFlashSuccess(__('alerts.backend.notices.deleted'));
+        return redirect()->route('admin.forum.notice.index')->withFlashSuccess(__('alerts.backend.notices.deleted'));
     }
 }

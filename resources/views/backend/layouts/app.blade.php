@@ -87,13 +87,13 @@
         @include('includes.partials.logged-in-as')
         @include('backend.includes.nav')
 
-        <div class="container">
+        <div class="mx-5 my-4">
             @include('includes.partials.messages')
             <div class="row pb-3">
-                <div class="col col-12 col-md-3">
+                <div class="col col-12 col-lg-2">
                     @include('backend.includes.sidebar')
                 </div>
-                <div class="col col-12 col-md-9">
+                <div class="col col-12 col-lg-10">
                     @yield('content')
                 </div>
             </div>

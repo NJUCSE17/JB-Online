@@ -42,6 +42,7 @@ class UpdateProfileRequest extends FormRequest
             'last_name'  => 'max:191',
             'email' => 'sometimes|required|email|max:191',
             'blog' => 'max:191',
+            'want_mail' => 'required|min:0|max:1',
             'avatar_type' => ['required', 'max:191', Rule::in(array_merge(['gravatar', 'storage'], (new Socialite)->getAcceptedProviders()))],
             'avatar_location' => 'sometimes|image|max:100|dimensions:max_width=200,max_height=200',
         ];

@@ -62,6 +62,6 @@ class PostStatusController extends Controller
     {
         $this->postRepository->restore($deletedPost);
 
-        return redirect()->route('admin.forum.post.index')->withFlashSuccess(__('alerts.backend.posts.restored'));
+        return redirect()->route('admin.forum.post.deleted')->withFlashSuccess(__('alerts.backend.posts.restored'));
     }
 }

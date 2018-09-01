@@ -59,6 +59,18 @@
                     </div><!--form-group-->
 
                     <div class="form-group row">
+                        {{ html()->label(__('validation.attributes.backend.access.users.want_mail'))->class('col-md-2 form-control-label')->for('want_mail') }}
+
+                        <div class="col-md-10">
+                            {{ html()->select('want_mail', [
+                                    0=>__('labels.general.no'),
+                                    1=>__('labels.general.yes')])
+                                ->class('form-control')
+                                ->required() }}
+                        </div><!--col-->
+                    </div><!--form-group-->
+
+                    <div class="form-group row">
                         {{ html()->label(__('validation.attributes.backend.access.users.email'))->class('col-md-2 form-control-label')->for('email') }}
 
                         <div class="col-md-10">

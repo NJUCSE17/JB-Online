@@ -33,9 +33,23 @@
                                     ->attribute('maxlength', 1900) }}
                             </div><!--col-->
                         </div><!--form-group-->
+
+                        <div class="form-group row">
+                            {{ html()->label(__('validation.attributes.backend.forum.notices.sendmail'))->class('col-md-2 form-control-label')->for('sendmail') }}
+
+                            <div class="col-md-10">
+                                {{ html()->select('sendmail', [
+                                        false => __('labels.general.no'),
+                                        true  => __('labels.general.yes')], 0)
+                                    ->class('form-control')
+                                    ->required() }}
+                            </div><!--col-->
+                        </div><!--form-group-->
+
                     </div><!--col-->
                 </div><!--row-->
             </div><!--card-body-->
+        </div><!--card-body-->
 
             <div class="card-footer clearfix">
                 <div class="row">

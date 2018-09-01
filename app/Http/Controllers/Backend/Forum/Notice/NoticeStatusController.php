@@ -62,6 +62,6 @@ class NoticeStatusController extends Controller
     {
         $this->noticeRepository->restore($deletedNotice);
 
-        return redirect()->route('admin.forum.notice.index')->withFlashSuccess(__('alerts.backend.notices.restored'));
+        return redirect()->route('admin.forum.notice.deleted')->withFlashSuccess(__('alerts.backend.notices.restored'));
     }
 }

@@ -102,6 +102,14 @@ trait UserMethod
     /**
      * @return bool
      */
+    public function wantMail()
+    {
+        return $this->want_mail;
+    }
+
+    /**
+     * @return bool
+     */
     public function isPending()
     {
         return config('access.users.requires_approval') && ! $this->confirmed;

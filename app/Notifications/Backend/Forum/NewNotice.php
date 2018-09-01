@@ -24,6 +24,7 @@ class NewNotice extends Notification
      * NewNotice constructor.
      *
      * @param $user
+     * @param $notice
      */
     public function __construct($user, $notice)
     {

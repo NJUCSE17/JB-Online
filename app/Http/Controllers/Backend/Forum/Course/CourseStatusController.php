@@ -62,6 +62,6 @@ class CourseStatusController extends Controller
     {
         $this->courseRepository->restore($deletedCourse);
 
-        return redirect()->route('admin.forum.course.index')->withFlashSuccess(__('alerts.backend.courses.restored'));
+        return redirect()->route('admin.forum.course.deleted')->withFlashSuccess(__('alerts.backend.courses.restored'));
     }
 }
