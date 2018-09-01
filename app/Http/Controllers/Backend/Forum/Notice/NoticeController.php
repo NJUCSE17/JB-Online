@@ -73,7 +73,7 @@ class NoticeController extends Controller
         if ($data['sendmail']) {
             $users = $this->userRepository->get();
             foreach ($users as $user) {
-                if ($user->isConfirmed()) {
+                if ($user->isConfirmed() && $user->wantMail()) {
                     SendNoticeMail::dispatch(array(
                         'notice' => $data,
                         'user'   => $user,

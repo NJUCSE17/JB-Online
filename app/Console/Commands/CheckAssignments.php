@@ -73,7 +73,7 @@ class CheckAssignments extends Command
 
             $users = $this->userRepository->get();
             foreach ($users as $user) {
-                if ($user->isConfirmed()) {
+                if ($user->isConfirmed() && $user->wantMail()) {
                     SendAssignmentMail::dispatch(array(
                         'content' => $content,
                         'user'    => $user,

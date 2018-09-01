@@ -47,6 +47,18 @@
                     ->attribute('maxlength', 191) }}
             </div><!--form-group-->
         </div><!--col-->
+
+        <div class="col">
+            <div class="form-group">
+                {{ html()->label(__('validation.attributes.frontend.want_mail'))->for('want_mail') }}
+
+                {{ html()->select('want_mail', [
+                        0=>__('labels.general.no'),
+                        1=>__('labels.general.yes')])
+                    ->class('form-control')
+                    ->required() }}
+            </div><!--form-group-->
+        </div><!--col-->
     </div><!--row-->
 
     <div class="row">

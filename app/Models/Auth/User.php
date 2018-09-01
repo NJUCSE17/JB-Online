@@ -44,6 +44,7 @@ class User extends Authenticatable
         'password',
         'password_changed_at',
         'active',
+        'want_mail',
         'confirmation_code',
         'confirmed',
         'timezone',
@@ -76,6 +77,7 @@ class User extends Authenticatable
      */
     protected $casts = [
         'active' => 'boolean',
+        'want_mail' => 'boolean',
         'confirmed' => 'boolean',
     ];
 }

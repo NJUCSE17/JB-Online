@@ -108,6 +108,7 @@ class UserRepository extends BaseRepository
                 'blog'              => $data['blog'],
                 'confirmation_code' => md5(uniqid(mt_rand(), true)),
                 'active'            => 1,
+                'want_mail'         => 1,
                 'password'          => $data['password'],
                                     // If users require approval or needs to confirm email
                 'confirmed'         => config('access.users.requires_approval') || config('access.users.confirm_email') ? 0 : 1,
@@ -154,6 +155,7 @@ class UserRepository extends BaseRepository
         $user->last_name = $input['last_name'];
         $user->avatar_type = $input['avatar_type'];
         $user->blog = $input['blog'];
+        $user->want_mail = $input['want_mail'];
 
         // Upload profile image if necessary
         if ($image) {
@@ -285,6 +287,7 @@ class UserRepository extends BaseRepository
                 'last_name'  => $nameParts['last_name'],
                 'email' => $user_email,
                 'active' => 1,
+                'want_mail' => 1,
                 'confirmed' => 1,
                 'password' => null,
                 'avatar_type' => $provider,

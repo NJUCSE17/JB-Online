@@ -128,6 +128,7 @@ class UserController extends Controller
             'last_name',
             'email',
             'blog',
+            'want_mail',
             'roles',
             'permissions'
         ));
