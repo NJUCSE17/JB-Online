@@ -17,6 +17,7 @@ class Kernel extends ConsoleKernel
      */
     protected $commands = [
         'app\Console\Commands\CheckAssignments',
+        'app\Console\Commands\UpdateFeeds',
     ];
 
     /**
@@ -29,6 +30,7 @@ class Kernel extends ConsoleKernel
     {
         // Check all assignments and
         $schedule->command('forum:checkassignments')->dailyAt('22:30');
+        $schedule->command('forum:updatefeeds')->everyTenMinutes();
     }
 
     /**

@@ -69,7 +69,7 @@ class HomeController extends Controller
         $users = $this->userRepository->getAllUsers();
         foreach ($users as $user) {
             if ($user->blog != null) {
-                $originFeed = \Feeds::make([$user->blog], 5, true);
+                $originFeed = \Feeds::make([$user->blog], 5, false);
                 $items = $originFeed->get_items();
                 foreach ($items as $item) {
                     //$description = $item->get_description();

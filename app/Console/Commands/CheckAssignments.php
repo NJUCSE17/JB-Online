@@ -78,10 +78,12 @@ class CheckAssignments extends Command
                         'content' => $content,
                         'user'    => $user,
                     ));
+                    echo "Required sending assignment mail for " . $user->full_name . "\n";
                 }
             }
         }
 
+        echo "Done handling assignment mails.";
         return $this;
     }
 }
