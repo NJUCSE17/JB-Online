@@ -46,13 +46,22 @@ You can refer to the start guide and documentation of Laravel-boilerplate. But t
 
    You could check the commands inside the package.json file.
 
-4. Last, create a link for storage folder (/public/storage) using command 
+4. Last but not least, create a link for storage folder (/public/storage) using command 
 
    ```
    php artisan storage:link
    ```
 
-   and enjoy the forum.
+   and don't forget to create scheduled tasks
+
+   ```
+   crontab -e
+   
+   ... (your tasks)
+   * * * * * php /path/to/artisan schedule:run > /path/to/log_file
+   ```
+
+   Now you can enjoy the forum!
 
 #### Contact
 

@@ -210,6 +210,11 @@ return [
          * SimplePie Feed Parser Provider
          */
         willvincent\Feeds\FeedsServiceProvider::class,
+
+        /*
+         * Laravel Backup Service Provider
+         */
+        Spatie\Backup\BackupServiceProvider::class,
     ],
 
     /*
