@@ -34,12 +34,14 @@
                         <div class="list-group list-group-flush" id="assignments">
                             <?php $lastAssignment = $assignments->pop(); ?>
                             @foreach($assignments as $assignment)
-                                <a href="{{ $assignment->assignment_link }}"
-                                   class="list-group-item list-group-item-action" id="assignment">
+                                <a class="list-group-item list-group-item-action" id="assignment">
                                     <div class="d-flex w-100 justify-content-between">
-                                        <h5 class="mb-1" id="assignment_title">
-                                            {{ $assignment->name }}
-                                        </h5>
+                                        <object>
+                                            <a href="{{ $assignment->assignment_link }}"
+                                               class="mb-1" id="assignment_title" style="font-size:120%;">
+                                                {{ $assignment->name }}
+                                            </a>
+                                        </object>
                                     </div>
                                     <object id="assignment_content">
                                         <p class="mb-1">
@@ -54,13 +56,15 @@
                                 </a>
                             @endforeach
                             <!-- Last Assignment with Border Radius !-->
-                            <a href="{{ $lastAssignment->assignment_link }}"
-                               class="list-group-item list-group-item-action" id="assignment"
+                            <a class="list-group-item list-group-item-action" id="assignment"
                                style="border-bottom-left-radius: 0.625rem; border-bottom-right-radius: 0.625rem">
                                 <div class="d-flex w-100 justify-content-between">
-                                    <h5 class="mb-1" id="assignment_title">
-                                        {{ $lastAssignment->name }}
-                                    </h5>
+                                    <object>
+                                        <a href="{{ $lastAssignment->assignment_link }}"
+                                           class="mb-1" id="assignment_title" style="font-size:120%;">
+                                            {{ $lastAssignment->name }}
+                                        </a>
+                                    </object>
                                 </div>
                                 <object id="assignment_content">
                                     <p class="mb-1">
