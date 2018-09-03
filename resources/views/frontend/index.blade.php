@@ -49,7 +49,7 @@
                                     <small class="float-right" id="assignment_ddl">
                                         {{ __('labels.general.ddl') }}
                                         {{ $assignment->due_time }}
-                                        {{ $assignment->due_time->diffForHumans() }}
+                                        {{ $assignment->due_time->diffForHumans(null, null, false, 2) }}
                                     </small>
                                 </a>
                             @endforeach
@@ -69,8 +69,8 @@
                                 </object>
                                 <small class="float-right" id="assignment_ddl">
                                     {{ __('labels.general.ddl') }}
-                                    {{ $assignment->due_time }}
-                                    {{ $assignment->due_time->diffForHumans() }}
+                                    {{ $lastAssignment->due_time }}
+                                    {{ $lastAssignment->due_time->diffForHumans(null, null, false, 2) }}
                                 </small>
                             </a>
                         </div>
