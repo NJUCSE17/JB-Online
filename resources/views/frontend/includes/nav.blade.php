@@ -1,5 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-white sticky-top with-shadows">
-    <div class="container">
+<nav class="navbar navbar-expand-lg navbar-light bg-white sticky-top with-shadows" id="navbar">
         <a href="{{ route('frontend.index') }}" class="navbar-brand">{{ app_name() }}</a>
         <a class="badge badge-pill float-right badge-dark text-white">
             {{ app_version() }}
@@ -11,6 +10,7 @@
             <span class="navbar-toggler-icon"></span>
         </button>
 
+    <div class="container">
         <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
             <ul class="navbar-nav">
                 @if (config('locale.status') && count(config('locale.languages')) > 1)
