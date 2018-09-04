@@ -7,6 +7,8 @@ use App\Repositories\Frontend\Auth\UserRepository;
 use App\Repositories\Frontend\Forum\CourseRepository;
 use App\Repositories\Frontend\Forum\NoticeRepository;
 use App\Repositories\Frontend\Forum\AssignmentRepository;
+use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Pagination\Paginator;
 
 /**
  * Class HomeController.
@@ -69,7 +71,7 @@ class HomeController extends Controller
         $users = $this->userRepository->getAllUsers();
         foreach ($users as $user) {
             if ($user->blog != null) {
-                $originFeed = \Feeds::make([$user->blog], 5, false);
+                $originFeed = \Feeds::make([$user->blog], 0, false);
                 $items = $originFeed->get_items();
                 foreach ($items as $item) {
                     //$description = $item->get_description();
@@ -92,8 +94,16 @@ class HomeController extends Controller
         usort($feeds, function ($a, $b) {
             return ($a['date'] < $b['date']) ? 1 : -1;
         });
+        // slice feeds
+        $currentPage  = isset($_GET['page']) ? (int) $_GET['page'] : 1;
+        $currentPath  = Paginator::resolveCurrentPath();
+        $perPage      = 5;
+        $slicedFeeds  = array_slice($feeds, $perPage * ($currentPage - 1), $perPage);
+        $paginatedFeeds = new LengthAwarePaginator($slicedFeeds, count($feeds), $perPage, $currentPage, [
+            'path' => $currentPath,
+        ]);
 
         return view('frontend.blog')
-            ->withFeeds($feeds);
+            ->withFeeds($paginatedFeeds);
     }
 }

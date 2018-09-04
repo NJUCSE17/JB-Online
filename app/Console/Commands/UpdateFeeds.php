@@ -50,7 +50,7 @@ class UpdateFeeds extends Command
         $users = $this->userRepository->getAllUsers();
         foreach ($users as $user) {
             if ($user->blog != null) {
-                $originFeed = \Feeds::make([$user->blog], 5, false);
+                $originFeed = \Feeds::make([$user->blog], 0, false);
             }
             echo "Updated blog feed for " . $user->full_name . "\n";
         }
