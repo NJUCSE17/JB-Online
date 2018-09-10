@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use App\Repositories\Frontend\Auth\UserRepository;
+use Carbon\Carbon;
 use Illuminate\Console\Command;
 
 class UpdateFeeds extends Command
@@ -47,15 +48,24 @@ class UpdateFeeds extends Command
      */
     public function handle()
     {
+        echo "Caching blog feeds at " . Carbon::now() . "\n";
+        echo "Start caching blog feeds. \n";
         $users = $this->userRepository->getAllUsers();
         foreach ($users as $user) {
             if ($user->blog != null) {
                 $originFeed = \Feeds::make([$user->blog], 0, false);
+                echo "Updated blog feed for " . $user->full_name . "... ";
+                if (count($originFeed->get_items())) {
+                    echo "success.\n";
+                } else {
+                    echo "failed.\n";
+                }
+            } else {
+                echo "Skipping for " . $user->full_name . "\n";
             }
-            echo "Updated blog feed for " . $user->full_name . "\n";
         }
 
-        echo "Done caching blog feeds.";
+        echo "Done caching blog feeds.\n";
         return $this;
     }
 }

@@ -51,7 +51,7 @@
                             <div class="text-right">
                                 <small class="mb-0 text-muted">
                                     {{ __('labels.general.ddl') }}
-                                    {{ $assignment->due_time }}
+                                    {{ $assignment->due_time->isoFormat("Y-MM-DD (ddd) H:mm:ss") }}
                                     {{ $assignment->due_time->diffForHumans(null, null, false, 2) }}
                                 </small>
                             </div>

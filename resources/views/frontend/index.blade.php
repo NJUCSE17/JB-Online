@@ -50,7 +50,7 @@
                                     </object>
                                     <small class="float-right" id="assignment_ddl">
                                         {{ __('labels.general.ddl') }}
-                                        {{ $assignment->due_time }}
+                                        {{ $assignment->due_time->isoFormat("Y-MM-DD (ddd) H:mm:ss") }}
                                         {{ $assignment->due_time->diffForHumans(null, null, false, 2) }}
                                     </small>
                                 </a>
@@ -73,7 +73,7 @@
                                 </object>
                                 <small class="float-right" id="assignment_ddl">
                                     {{ __('labels.general.ddl') }}
-                                    {{ $lastAssignment->due_time }}
+                                    {{ $lastAssignment->due_time->isoFormat("Y-MM-DD (ddd) H:mm:ss") }}
                                     {{ $lastAssignment->due_time->diffForHumans(null, null, false, 2) }}
                                 </small>
                             </a>

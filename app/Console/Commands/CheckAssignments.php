@@ -5,6 +5,7 @@ namespace App\Console\Commands;
 use App\Jobs\SendAssignmentMail;
 use App\Repositories\Backend\Auth\UserRepository;
 use App\Repositories\Backend\Forum\AssignmentRepository;
+use Carbon\Carbon;
 use Illuminate\Console\Command;
 
 class CheckAssignments extends Command
@@ -60,6 +61,8 @@ class CheckAssignments extends Command
                 $warningAssignments[] = $assignment;
             }
         }
+        echo "Checking assignments at " . Carbon::now() . "\n";
+        echo "There are " . count($warningAssignments) . " assignments due within 2 days.\n";
 
         if (count($warningAssignments)) {
             $content = "<ul style='list-style-type: none;'>";
@@ -67,7 +70,8 @@ class CheckAssignments extends Command
                 $content = $content . "<li><h1>"
                     . $assignment->name . "</h1><p>" . $assignment->content
                     . "</p><p style='text-align: right !important'>" . __('labels.general.ddl')
-                    . " " . $assignment->due_time . "</p></li>";
+                    . " " . $assignment->due_time->isoFormat("Y-MM-DD (ddd) H:mm:ss")
+                    . $assignment->due_time->diffForHumans(null, null, false, 2) . "</p></li>";
             }
             $content = $content . "</ul>";
 
@@ -78,7 +82,9 @@ class CheckAssignments extends Command
                         'content' => $content,
                         'user'    => $user,
                     ));
-                    echo "Required sending assignment mail for " . $user->full_name . "\n";
+                    echo "Queued sending assignment mail for " . $user->full_name . "\n";
+                } else {
+                    echo "Skipping for " . $user->full_name . "\n";
                 }
             }
         }
