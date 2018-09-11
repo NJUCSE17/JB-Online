@@ -93,9 +93,9 @@ return [
          * Be sure to add the new language in alphabetical order.
          */
         'langs' => [
-            'zh'    => 'Chinese Simplified(中文)',
+            'zh_CN' => 'Chinese Simplified(中文)',
             'en'    => 'English',
-            'sb'    => 'Amazing Language(嘤语)',
+            'zh_TW' => 'Amazing Language(嘤语)',
         ],
     ],
 ];

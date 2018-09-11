@@ -29,8 +29,8 @@ return [
          * Index 1 of sub-array is the PHP locale code for setlocale()
          * Index 2 of sub-array is whether or not to use RTL (right-to-left) html direction for this language
          */
-        'zh'    => ['zh', 'zh-CN', false],
-        'en'    => ['en', 'en_US', false],
-        'sb'    => ['zh', 'zh-CN', false],
+        'zh_CN'    => ['zh_CN', 'zh-CN', false],
+        'en'       => ['en', 'en_US', false],
+        'zh_TW'    => ['zh_TW', 'zh-TW', false],
     ],
 ];

@@ -26,7 +26,13 @@ return array(
     |    ]
     */
     'disks' => [
-
+        'public' => [
+            'driver' => 'local',
+            'root' => public_path().'/storage',
+            'url' => env('APP_URL').'/storage',
+            'visibility' => 'public',
+            'glideURL' => '/glide',
+        ],
     ],
 
     /*
@@ -39,7 +45,7 @@ return array(
     */
 
     'route' => [
-        'prefix' => 'elfinder',
+        'prefix' => 'filehub',
         'middleware' => array('web', 'auth'), //Set to null to disable middleware filter
     ],
 
@@ -88,7 +94,9 @@ return array(
     |
     */
     'root_options' => array(
-        'uploadMaxSize' => '2M',
+        //'locale' => env('APP_LOCALE_PHP', 'en_US') . '.utf8',
+        //'defaults' => array('read' => true, 'write' => true, 'locked' => true),
+        'uploadMaxSize' => '2G',
     ),
 
 );

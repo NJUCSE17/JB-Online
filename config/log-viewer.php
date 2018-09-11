@@ -27,7 +27,7 @@ return [
      | -----------------------------------------------------------------
      |  Supported locales :
      |    'auto', 'ar', 'bg', 'de', 'en', 'es', 'et', 'fa', 'fr', 'hu', 'hy', 'id', 'it', 'ja', 'ko', 'nl',
-     |    'pl', 'pt-BR', 'ro', 'ru', 'sv', 'th', 'tr', 'zh-TW', 'zh'
+     |    'pl', 'pt-BR', 'ro', 'ru', 'sv', 'th', 'tr', 'zh_CN-TW', 'zh_CN'
      */
 
     'locale'        => 'auto',

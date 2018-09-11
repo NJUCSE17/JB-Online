@@ -53,6 +53,12 @@
                             {{ __('navs.frontend.blog') }}
                         </a>
                     </li>
+                    <li class="nav-item">
+                        <a href="{{route('elfinder.index')}}"
+                           class="nav-link text-success {{ active_class(Active::checkRoute('elfinder.index')) }}">
+                            {{ __('navs.frontend.filehub') }}
+                        </a>
+                    </li>
                 @endguest
                 <li class="nav-item"><a href="{{route('frontend.about')}}"
                                         class="nav-link text-primary {{ active_class(Active::checkRoute('frontend.about')) }}">
