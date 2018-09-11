@@ -1,4 +1,12 @@
 // Override the Bootstrap defaults without modifying key, versioned files.
-@import "../../shards/css/shards.css";
-@import "../../shards/css/shards-demo.css";
-@import "../../shards/css/shards-extras.css";
+
+html {
+  height: 100%;
+}
+
+body {
+  height: 100%;
+  background: no-repeat;
+  background-color: #fed5df;
+  background-image: linear-gradient(19deg, #fed5df 10%, #c3fce7 100%);
+}
