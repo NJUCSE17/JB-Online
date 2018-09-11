@@ -15563,13 +15563,22 @@ a.text-dark:focus {
 }
 
 html {
-  height: 100%;
+  min-height: 100%;
 }
 
 body {
   height: 100%;
   background: no-repeat;
+  background-size: cover;
   background-color: #fed5df;
   background-image: linear-gradient(19deg, #fed5df 10%, #c3fce7 100%);
+}
+
+.app {
+  height: 100%;
+}
+
+.container {
+  height: 100%;
 }
 
