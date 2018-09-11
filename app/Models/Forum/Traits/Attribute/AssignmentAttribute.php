@@ -13,7 +13,7 @@ trait AssignmentAttribute
      */
     public function getNameLabelAttribute()
     {
-        return $this->id .' (' .$this->name . ')';
+        return $this->id . ' (' . $this->name . ')';
     }
 
     /**
@@ -47,6 +47,31 @@ trait AssignmentAttribute
     }
 
     /**
+     * @return string
+     */
+    public function getDDLColorAttribute()
+    {
+        $delta = $this->due_time->diffInHours(\Carbon\Carbon::now());
+        if ($delta <= 48) {
+            return "danger";
+        } elseif ($delta <= 120) {
+            return "warning";
+        } else {
+            return "info";
+        }
+    }
+
+    /**
+     * @return string
+     */
+    public function getDDLBadgeAttribute()
+    {
+        return "<small class=\"badge badge-outline-" . $this->ddl_color . "\" id=\"assignment_ddl\">"
+            . $this->due_time->isoFormat("Y-MM-DD (ddd) H:mm:ss") . "<br />"
+            . $this->due_time->diffForHumans(null, null, false, 2) . "</small>";
+    }
+
+    /**
      * @return bool
      */
     public function getOngoingAttribute()
@@ -60,10 +85,10 @@ trait AssignmentAttribute
      */
     public function getEditButtonAttribute()
     {
-        return '<a href="'.route('admin.forum.assignment.edit', $this)
-            .'" data-toggle="tooltip" data-placement="top" title="'
-            .__('buttons.general.crud.edit').' '.__('labels.general.assignment')
-            .'" class="btn btn-primary"><i class="far fa-edit"></i></a>';
+        return '<a href="' . route('admin.forum.assignment.edit', $this)
+            . '" data-toggle="tooltip" data-placement="top" title="'
+            . __('buttons.general.crud.edit') . ' ' . __('labels.general.assignment')
+            . '" class="btn btn-primary"><i class="far fa-edit"></i></a>';
     }
 
     /**
@@ -71,10 +96,10 @@ trait AssignmentAttribute
      */
     public function getPostButtonAttribute()
     {
-        return '<a href="'.route('admin.forum.post.specific', $this)
-            .'" data-toggle="tooltip" data-placement="top" title="'
-            .__('buttons.general.crud.edit').' '.__('labels.general.post')
-            .'" class="btn btn-warning"><i class="far fa-edit"></i></a>';
+        return '<a href="' . route('admin.forum.post.specific', $this)
+            . '" data-toggle="tooltip" data-placement="top" title="'
+            . __('buttons.general.crud.edit') . ' ' . __('labels.general.post')
+            . '" class="btn btn-warning"><i class="far fa-edit"></i></a>';
     }
 
     /**
@@ -82,12 +107,12 @@ trait AssignmentAttribute
      */
     public function getDeleteButtonAttribute()
     {
-        return '<a href="'.route('admin.forum.assignment.destroy', $this).'"
+        return '<a href="' . route('admin.forum.assignment.destroy', $this) . '"
                  data-method="delete"
-                 data-trans-button-cancel="'.__('buttons.general.cancel').'"
-                 data-trans-button-confirm="'.__('buttons.general.crud.delete').'"
-                 data-trans-title="'.__('strings.backend.general.are_you_sure').'"
-                 class="dropdown-item">'.__('buttons.general.crud.delete').'</a> ';
+                 data-trans-button-cancel="' . __('buttons.general.cancel') . '"
+                 data-trans-button-confirm="' . __('buttons.general.crud.delete') . '"
+                 data-trans-title="' . __('strings.backend.general.are_you_sure') . '"
+                 class="dropdown-item">' . __('buttons.general.crud.delete') . '</a> ';
     }
 
     /**
@@ -95,7 +120,7 @@ trait AssignmentAttribute
      */
     public function getDeletePermanentlyButtonAttribute()
     {
-        return '<a href="'.route('admin.forum.assignment.delete-permanently', $this).'" name="confirm_item" class="btn btn-danger"><i class="fas fa-trash" data-toggle="tooltip" data-placement="top" title="'.__('buttons.backend.access.Assignments.delete_permanently').'"></i></a> ';
+        return '<a href="' . route('admin.forum.assignment.delete-permanently', $this) . '" name="confirm_item" class="btn btn-danger"><i class="fas fa-trash" data-toggle="tooltip" data-placement="top" title="' . __('buttons.backend.access.Assignments.delete_permanently') . '"></i></a> ';
     }
 
     /**
@@ -103,7 +128,7 @@ trait AssignmentAttribute
      */
     public function getRestoreButtonAttribute()
     {
-        return '<a href="'.route('admin.forum.assignment.restore', $this).'" name="confirm_item" class="btn btn-info"><i class="fas fa-redo" data-toggle="tooltip" data-placement="top" title="'.__('buttons.backend.access.Assignments.restore_Assignment').'"></i></a> ';
+        return '<a href="' . route('admin.forum.assignment.restore', $this) . '" name="confirm_item" class="btn btn-info"><i class="fas fa-redo" data-toggle="tooltip" data-placement="top" title="' . __('buttons.backend.access.Assignments.restore_Assignment') . '"></i></a> ';
     }
 
     /**
@@ -114,22 +139,22 @@ trait AssignmentAttribute
         if ($this->trashed()) {
             return '
 				<div class="btn-group" role="group" aria-label="Assignment Actions">
-				  '.$this->restore_button.'
-				  '.$this->delete_permanently_button.'
+				  ' . $this->restore_button . '
+				  ' . $this->delete_permanently_button . '
 				</div>';
         }
 
         return '
     	<div class="btn-group" role="group" aria-label="Assignment Actions">
-		  '.$this->edit_button.'
-		  '.$this->post_button.'
+		  ' . $this->edit_button . '
+		  ' . $this->post_button . '
 		
 		  <div class="btn-group btn-group-sm" role="group">
 			<button id="AssignmentActions" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 			  More
 			</button>
 			<div class="dropdown-menu" aria-labelledby="AssignmentActions">
-			  '.$this->delete_button.'
+			  ' . $this->delete_button . '
 			</div>
 		  </div>
 		</div>';

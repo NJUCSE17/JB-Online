@@ -35,47 +35,61 @@
                             <?php $lastAssignment = $assignments->pop(); ?>
                             @foreach($assignments as $assignment)
                                 <a class="list-group-item list-group-item-action" id="assignment">
-                                    <div class="d-flex w-100 justify-content-between">
+                                    <div class="d-inline w-100 justify-content-between">
                                         <object>
+                                            @if($assignment->postsCount())
+                                                <span class="float-right" style="font-size:120%;">
+                                                    <a class="badge badge-primary"
+                                                       href="{{ $assignment->assignment_link }}">
+                                                        {{  $assignment->postsCount() }}
+                                                    </a>
+                                                </span>
+                                            @endif
                                             <a href="{{ $assignment->assignment_link }}"
                                                class="mb-1" id="assignment_title" style="font-size:120%;">
                                                 {{ $assignment->name }}
                                             </a>
                                         </object>
                                     </div>
-                                    <object id="assignment_content">
-                                        <p class="mb-1">
+                                    <hr />
+                                    <div id="assignment_content">
+                                        <object>
                                             {!! $assignment->content !!}
-                                        </p>
-                                    </object>
-                                    <small class="float-right" id="assignment_ddl">
-                                        {{ __('labels.general.ddl') }}
-                                        {{ $assignment->due_time->isoFormat("Y-MM-DD (ddd) H:mm:ss") }}
-                                        {{ $assignment->due_time->diffForHumans(null, null, false, 2) }}
-                                    </small>
+                                        </object>
+                                    </div>
+                                    <div class="text-center">
+                                        {!! $assignment->ddl_badge !!}
+                                    </div>
                                 </a>
                             @endforeach
                             <!-- Last Assignment with Border Radius !-->
                             <a class="list-group-item list-group-item-action" id="assignment"
                                style="border-bottom-left-radius: 0.625rem; border-bottom-right-radius: 0.625rem">
-                                <div class="d-flex w-100 justify-content-between">
+                                <div class="d-inline w-100 justify-content-between">
                                     <object>
+                                        @if($lastAssignment->postsCount())
+                                            <span class="float-right" style="font-size:120%;">
+                                                <a class="badge badge-primary"
+                                                   href="{{ $lastAssignment->assignment_link }}">
+                                                    {{  $lastAssignment->postsCount() }}
+                                                </a>
+                                            </span>
+                                        @endif
                                         <a href="{{ $lastAssignment->assignment_link }}"
-                                           class="mb-1" id="assignment_title" style="font-size:120%;">
+                                           id="assignment_title" style="font-size:120%;">
                                             {{ $lastAssignment->name }}
                                         </a>
                                     </object>
                                 </div>
-                                <object id="assignment_content">
-                                    <p class="mb-1">
+                                <hr />
+                                <div id="assignment_content">
+                                    <object>
                                         {!! $lastAssignment->content !!}
-                                    </p>
-                                </object>
-                                <small class="float-right" id="assignment_ddl">
-                                    {{ __('labels.general.ddl') }}
-                                    {{ $lastAssignment->due_time->isoFormat("Y-MM-DD (ddd) H:mm:ss") }}
-                                    {{ $lastAssignment->due_time->diffForHumans(null, null, false, 2) }}
-                                </small>
+                                    </object>
+                                </div>
+                                <div class="text-center">
+                                    {!! $lastAssignment->ddl_badge !!}
+                                </div>
                             </a>
                         </div>
                     </div>

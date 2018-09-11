@@ -29,6 +29,14 @@ trait AssignmentRelationship
     /**
      * @return mixed
      */
+    public function postsCount()
+    {
+        return $this->posts()->count();
+    }
+
+    /**
+     * @return mixed
+     */
     public function getGroupedPosts($sort = 'asc')
     {
         return $this->posts()
