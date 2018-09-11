@@ -65,8 +65,8 @@
                     commands : [
                         'custom', 'open', 'reload', 'home', 'up', 'back', 'forward', 'getfile', 'download',
                         'mkdir', 'mkfile', 'upload', 'archive', 'search', 'info', 'view', 'help', 'sort', 'netmount',
-                        <?php if (Auth::user()->isExecutive()) echo "'copy', 'cut', 'paste', 'edit',
-                    'extract', 'rm', 'duplicate', 'rename', 'resize'" ?>
+                        <?php if (Auth::hasUser() && Auth::user()->isExecutive()) echo "'copy', 'cut', 'paste',
+                        'edit', 'extract', 'rm', 'duplicate', 'rename', 'resize'" ?>
                     ],
                     uiOptions : {
                         // toolbar configuration
@@ -74,7 +74,7 @@
                             ['back', 'forward', 'up', 'reload'],
                             ['mkdir', 'mkfile', 'upload'],
                             ['open', 'download', 'getfile', 'info'],
-                                <?php if (Auth::user()->isExecutive())
+                                <?php if (Auth::hasUser() && Auth::user()->isExecutive())
                                 echo "['copy', 'cut', 'paste', 'rm'],
                             ['duplicate', 'rename', 'edit', 'resize'],
                             ['extract', 'archive'],"
@@ -103,14 +103,16 @@
                     contextmenu : {
                         // navbarfolder menu
                         navbar : ['open', '|',
-                            <?php if (Auth::user()->isExecutive()) echo "'copy', 'cut', 'paste', 'duplicate', '|', 'rm', '|',"?>
+                            <?php if (Auth::hasUser() && Auth::user()->isExecutive())
+                                echo "'copy', 'cut', 'paste', 'duplicate', '|', 'rm', '|',"?>
                                 'info'],
                         // current directory menu
                         cwd    : ['reload', 'back', '|', 'upload', 'mkdir', 'mkfile', 'paste', '|', 'info'],
                         // current directory file menu
                         files  : [
                             'getfile', '|','open', 'download', '|', 'copy', 'cut', 'paste', 'duplicate', '|',
-                            <?php if (Auth::user()->isExecutive()) echo "'rm',"; ?> '|', 'edit', 'rename', 'resize', '|', 'archive', 'extract', '|', 'info'
+                            <?php if (Auth::hasUser() && Auth::user()->isExecutive()) echo "'rm',"; ?> '|',
+                            'edit', 'rename', 'resize', '|', 'archive', 'extract', '|', 'info'
                         ]
                     },
                 }, {
