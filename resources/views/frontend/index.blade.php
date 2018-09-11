@@ -14,7 +14,7 @@
         </div>
     </div>
     <div class="row">
-        <div class="col col-md-4 col-12">
+        <div class="col col-md-4 col-12" id="leftCol">
             <div class="card my-3">
                 <h4 class="card-header py-3">
                     <i class="fas fa-calendar-alt mr-2"></i>
@@ -30,11 +30,11 @@
                     @endauth
                 </h4>
                 @if ($assignments->count())
-                    <div class="card-body px-0 py-0">
+                    <div class="card-body px-0 py-0" style="max-height: 180vh; overflow-y: auto;">
                         <div class="list-group list-group-flush" id="assignments">
-                            <?php $lastAssignment = $assignments->pop(); ?>
                             @foreach($assignments as $assignment)
-                                <a class="list-group-item list-group-item-action" id="assignment">
+                                <a class="list-group-item list-group-item-action border-0" id="assignment"
+                                   style="border-radius: 0.625rem">
                                     <div class="d-inline w-100 justify-content-between">
                                         <object>
                                             @if($assignment->postsCount())
@@ -51,7 +51,6 @@
                                             </a>
                                         </object>
                                     </div>
-                                    <hr />
                                     <div id="assignment_content">
                                         <object>
                                             {!! $assignment->content !!}
@@ -60,37 +59,9 @@
                                     <div class="text-center">
                                         {!! $assignment->ddl_badge !!}
                                     </div>
+                                    <hr class="mb-0"/>
                                 </a>
                             @endforeach
-                            <!-- Last Assignment with Border Radius !-->
-                            <a class="list-group-item list-group-item-action" id="assignment"
-                               style="border-bottom-left-radius: 0.625rem; border-bottom-right-radius: 0.625rem">
-                                <div class="d-inline w-100 justify-content-between">
-                                    <object>
-                                        @if($lastAssignment->postsCount())
-                                            <span class="float-right" style="font-size:120%;">
-                                                <a class="badge badge-primary"
-                                                   href="{{ $lastAssignment->assignment_link }}">
-                                                    {{  $lastAssignment->postsCount() }}
-                                                </a>
-                                            </span>
-                                        @endif
-                                        <a href="{{ $lastAssignment->assignment_link }}"
-                                           id="assignment_title" style="font-size:120%;">
-                                            {{ $lastAssignment->name }}
-                                        </a>
-                                    </object>
-                                </div>
-                                <hr />
-                                <div id="assignment_content">
-                                    <object>
-                                        {!! $lastAssignment->content !!}
-                                    </object>
-                                </div>
-                                <div class="text-center">
-                                    {!! $lastAssignment->ddl_badge !!}
-                                </div>
-                            </a>
                         </div>
                     </div>
                 @else
@@ -105,7 +76,7 @@
             </div>
         </div>
 
-        <div class="col col-md-8 col-12">
+        <div class="col col-md-8 col-12" id="rightCol">
             <div class="card my-3">
                 <h4 class="card-header py-3">
                     <i class="fas fa-broadcast-tower mr-2"></i>
@@ -241,6 +212,6 @@
     <script type="text/javascript">
         $('#coverart').on('mousedown', function (e) {
             e.preventDefault()
-        })
+        });
     </script>
 @endpush
