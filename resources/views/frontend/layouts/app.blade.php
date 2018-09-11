@@ -71,7 +71,7 @@
                     uiOptions : {
                         // toolbar configuration
                         toolbar : [
-                            ['back', 'forward', 'up', 'reload'],
+                            ['back', 'forward', 'up'],
                             ['mkdir', 'mkfile', 'upload'],
                             ['open', 'download', 'getfile', 'info'],
                                 <?php if (Auth::hasUser() && Auth::user()->isExecutive())

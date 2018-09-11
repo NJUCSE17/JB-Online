@@ -9,9 +9,6 @@
 
 @push('after-scripts')
     <!-- jQuery and jQuery UI (REQUIRED) -->
-    <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/themes/smoothness/jquery-ui.css" />
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-    <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
 
     <!-- elFinder CSS (REQUIRED) -->
     <link rel="stylesheet" type="text/css" href="{{ asset($dir.'/css/elfinder.min.css') }}">
@@ -49,7 +46,7 @@
                 uiOptions : {
                     // toolbar configuration
                     toolbar : [
-                        ['back', 'forward', 'up', 'reload'],
+                        ['back', 'forward', 'up'],
                         ['mkdir', 'mkfile', 'upload'],
                         ['open', 'download', 'getfile', 'info'],
                         <?php if (Auth::user()->isExecutive())
