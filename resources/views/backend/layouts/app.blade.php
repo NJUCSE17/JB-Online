@@ -42,25 +42,74 @@
             toolbar: 'styleselect | undo redo | forecolor backcolor | numlist bullist' +
                 ' | outdent indent | pastetext link image codesample table | code preview',
             codesample_languages: [
-                {text: 'C++', value: 'cpp'},
                 {text: 'C', value: 'c'},
+                {text: 'C++', value: 'cpp'},
                 {text: 'C#', value: 'csharp'},
-                {text: 'Python', value: 'python'},
-                {text: 'Java', value: 'java'},
-                {text: 'HTML/XML', value: 'markup'},
-                {text: 'JavaScript', value: 'javascript'},
                 {text: 'CSS', value: 'css'},
+                {text: 'HTML/XML', value: 'markup'},
+                {text: 'Java', value: 'java'},
+                {text: 'JavaScript', value: 'javascript'},
                 {text: 'PHP', value: 'php'},
-                {text: 'Ruby', value: 'ruby'}
+                {text: 'Python', value: 'python'},
+                {text: 'Ruby', value: 'ruby'},
+                {text: 'Shell', value: 'shell'},
+                {text: 'SQL', value: 'sql'}
             ],
         });
         function elFinderBrowser (field_name, url, type, win) {
             tinymce.activeEditor.windowManager.open({
                 file: '<?= route('elfinder.tinymce4') ?>',
                 title: 'elFinder 2.0',
+                lang: '{{ App::getLocale() }}',
                 width: 900,
                 height: 450,
-                resizable: 'yes'
+                resizable: 'yes',
+                commands : [
+                    'custom', 'open', 'reload', 'home', 'up', 'back', 'forward', 'getfile', 'download',
+                    'mkdir', 'mkfile', 'upload', 'archive', 'search', 'info', 'view', 'help', 'sort', 'netmount',
+                    'copy', 'cut', 'paste', 'edit', 'extract', 'rm', 'duplicate', 'rename', 'resize'
+                ],
+                uiOptions : {
+                    // toolbar configuration
+                    toolbar : [
+                        ['back', 'forward', 'up'],
+                        ['mkdir', 'mkfile', 'upload'],
+                        ['open', 'download', 'getfile', 'info'],
+                        ['copy', 'cut', 'paste', 'rm'],
+                        ['duplicate', 'rename', 'edit', 'resize'],
+                        ['extract', 'archive'],
+                        ['view', 'sort', 'help'],
+                        ['search'],
+                    ],
+                    // directories tree options
+                    tree : {
+                        // expand current root on init
+                        openRootOnLoad : true,
+                        // auto load current dir parents
+                        syncTree : true
+                    },
+                    // navbar options
+                    navbar : {
+                        minWidth : 150,
+                        maxWidth : 500
+                    },
+                    // current working directory options
+                    cwd : {
+                        // display parent directory in listing as ".."
+                        oldSchool : true,
+                    }
+                },
+                contextmenu : {
+                    // navbarfolder menu
+                    navbar: ['open', '|', 'copy', 'cut', 'paste', 'duplicate', '|', 'rm', '|', 'info'],
+                    // current directory menu
+                    cwd: ['reload', 'back', '|', 'upload', 'mkdir', 'mkfile', 'paste', '|', 'info'],
+                    // current directory file menu
+                    files: [
+                        'getfile', '|', 'open', 'download', '|', 'copy', 'cut', 'paste', 'duplicate', '|',
+                        'rm', '|', 'edit', 'rename', 'resize', '|', 'archive', 'extract', '|', 'info'
+                    ]
+                },
             }, {
                 setUrl: function (url) {
                     win.document.getElementById(field_name).value = url;

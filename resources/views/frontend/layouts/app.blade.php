@@ -42,16 +42,18 @@
                 toolbar: 'styleselect | undo redo | forecolor backcolor | numlist bullist' +
                     ' | outdent indent | pastetext link image codesample table | code preview',
                 codesample_languages: [
-                    {text: 'C++', value: 'cpp'},
                     {text: 'C', value: 'c'},
+                    {text: 'C++', value: 'cpp'},
                     {text: 'C#', value: 'csharp'},
-                    {text: 'Python', value: 'python'},
-                    {text: 'Java', value: 'java'},
-                    {text: 'HTML/XML', value: 'markup'},
-                    {text: 'JavaScript', value: 'javascript'},
                     {text: 'CSS', value: 'css'},
+                    {text: 'HTML/XML', value: 'markup'},
+                    {text: 'Java', value: 'java'},
+                    {text: 'JavaScript', value: 'javascript'},
                     {text: 'PHP', value: 'php'},
-                    {text: 'Ruby', value: 'ruby'}
+                    {text: 'Python', value: 'python'},
+                    {text: 'Ruby', value: 'ruby'},
+                    {text: 'Shell', value: 'shell'},
+                    {text: 'SQL', value: 'sql'}
                 ],
             });
             function elFinderBrowser (field_name, url, type, win) {
