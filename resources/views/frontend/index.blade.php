@@ -57,7 +57,7 @@
                                         </object>
                                     </div>
                                     <div class="text-center">
-                                        {!! $assignment->ddl_badge !!}
+                                        <object>{!! $assignment->ddl_badge !!}</object>
                                     </div>
                                     <hr class="mb-0"/>
                                 </a>

@@ -52,12 +52,14 @@ trait AssignmentAttribute
     public function getDDLColorAttribute()
     {
         $delta = $this->due_time->diffInHours(\Carbon\Carbon::now());
-        if ($delta <= 48) {
+        if ($delta <= 24) {
             return "danger";
-        } elseif ($delta <= 120) {
+        } elseif ($delta <= 72) {
             return "warning";
-        } else {
+        } else if ($delta <= 168) {
             return "info";
+        } else {
+            return "secondary";
         }
     }
 
@@ -66,9 +68,10 @@ trait AssignmentAttribute
      */
     public function getDDLBadgeAttribute()
     {
-        return "<small class=\"badge badge-outline-" . $this->ddl_color . "\" id=\"assignment_ddl\">"
+        return "<a class=\"badge badge-outline-" . $this->ddl_color . "\" id=\"assignment_ddl\""
+            . "href='" . $this->assignment_link . "'>"
             . $this->due_time->isoFormat("Y-MM-DD (ddd) H:mm:ss") . "<br />"
-            . $this->due_time->diffForHumans(null, null, false, 2) . "</small>";
+            . $this->due_time->diffForHumans(null, null, false, 2) . "</a>";
     }
 
     /**
