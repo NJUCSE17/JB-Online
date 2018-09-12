@@ -10,7 +10,7 @@ return array(
     | The dir where to store the images (relative from public)
     |
     */
-    'dir' => ['storage'],
+    //'dir' => ['storage'],
 
     /*
     |--------------------------------------------------------------------------
@@ -26,13 +26,8 @@ return array(
     |    ]
     */
     'disks' => [
-        'public' => [
-            'driver' => 'local',
-            'root' => public_path().'/storage',
-            'url' => env('APP_URL').'/storage',
-            'visibility' => 'public',
-            'glideURL' => '/glide',
-        ],
+        'private',
+        'public'
     ],
 
     /*

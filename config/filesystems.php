@@ -43,9 +43,12 @@ return [
 
     'disks' => [
 
-        'local' => [
+        'private' => [
             'driver' => 'local',
-            'root' => storage_path('app'),
+            'root' => storage_path('app').'/private',
+            'url' => env('APP_URL').'/private',
+            'visibility' => 'private',
+            'glideURL' => '/glide',
         ],
 
         'public' => [

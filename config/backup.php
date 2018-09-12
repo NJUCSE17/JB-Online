@@ -8,7 +8,7 @@ return [
          * The name of this application. You can use this name to monitor
          * the backups.
          */
-        'name' => config('app.name'),
+        'name' => config('app.name') . "-backupb",
 
         'source' => [
 
@@ -29,6 +29,8 @@ return [
                 'exclude' => [
                     base_path('vendor'),
                     base_path('node_modules'),
+                    storage_path('app') . '/private',
+                    public_path() . '/storage',
                 ],
 
                 /*
@@ -97,12 +99,12 @@ return [
     'notifications' => [
 
         'notifications' => [
-            \Spatie\Backup\Notifications\Notifications\BackupHasFailed::class         => ['mail'],
+            \Spatie\Backup\Notifications\Notifications\BackupHasFailed::class => ['mail'],
             \Spatie\Backup\Notifications\Notifications\UnhealthyBackupWasFound::class => ['mail'],
-            \Spatie\Backup\Notifications\Notifications\CleanupHasFailed::class        => ['mail'],
-            \Spatie\Backup\Notifications\Notifications\BackupWasSuccessful::class     => ['mail'],
-            \Spatie\Backup\Notifications\Notifications\HealthyBackupWasFound::class   => ['mail'],
-            \Spatie\Backup\Notifications\Notifications\CleanupWasSuccessful::class    => ['mail'],
+            \Spatie\Backup\Notifications\Notifications\CleanupHasFailed::class => ['mail'],
+            \Spatie\Backup\Notifications\Notifications\BackupWasSuccessful::class => ['mail'],
+            \Spatie\Backup\Notifications\Notifications\HealthyBackupWasFound::class => ['mail'],
+            \Spatie\Backup\Notifications\Notifications\CleanupWasSuccessful::class => ['mail'],
         ],
 
         /*
