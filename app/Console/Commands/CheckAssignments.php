@@ -67,11 +67,10 @@ class CheckAssignments extends Command
         if (count($warningAssignments)) {
             $content = "<ul style='list-style-type: none;'>";
             foreach ($warningAssignments as $assignment) {
-                $content = $content . "<li><h1>"
-                    . $assignment->name . "</h1><p>" . $assignment->content
-                    . "</p><p style='text-align: right !important'>" . __('labels.general.ddl')
-                    . " " . $assignment->due_time->isoFormat("Y-MM-DD (ddd) H:mm:ss")
-                    . $assignment->due_time->diffForHumans(null, null, false, 2) . "</p></li>";
+                $content = $content . "<li><h1><a href='" . $assignment->assignment_link . "'>"
+                    . $assignment->name . "</a></h1><p>" . $assignment->content
+                    . "</p><div style='text-align: right;'><object>"
+                    . $assignment->ddl_badge . "</object></div></li>";
             }
             $content = $content . "</ul>";
 
