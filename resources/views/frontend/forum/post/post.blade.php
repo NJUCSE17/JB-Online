@@ -1,8 +1,8 @@
-<div class="card mx-0 mb-3">
-    <h5 class="card-header py-3 align-middle">
+<div class="mx-0 my-0">
+    <h5 class="py-0 align-middle" style="background-color: #fafafa">
         <img class="img-avatar mr-2" src="{{ $post->author->picture }}"
              style="height: 45px !important;">
-        <span> {{$post->author->name}} </span>
+        <span> {{$post->author->name}} (#{{ $post->id }}) </span>
         <span class="float-right">
             @if($post->user_id == $userid)
                 <a class="btn btn-outline-primary text-dark" href="{{ route('frontend.forum.post.edit', [$course, $assignment, $post]) }}">
@@ -20,15 +20,18 @@
             </a>
         </span>
     </h5>
-    <div class="card-body px-0 py-0">
-        <div class="row mx-3 my-3">
-            <div class="col">
+    <div class="px-0 py-0 border-left">
+        <div class="row mx-0 my-0">
+            <div class="col pl-3 pr-0 pt-3 pb-0">
                 <h5>{!! $post->content !!}</h5>
-                <small class="float-right text-muted">{{ $post->time_label }}</small>
+                <small class="float-right text-muted
+                              <?php if(isset($posts[$post->id])) echo "pb-3"; ?>">
+                    {{ $post->time_label }}
+                </small>
             </div>
         </div>
-        <div class="row ml-3 mr-0">
-            <div class="col">
+        <div class="row ml-0 mr-0">
+            <div class="col pl-3 pr-0">
                 @if(isset($posts[$post->id]))
                     @include('frontend.forum.post.list', ['group'=>$posts[$post->id]])
                 @endif
@@ -36,3 +39,6 @@
         </div>
     </div>
 </div>
+@if($post->parent_id == 0)
+    <hr />
+@endif
