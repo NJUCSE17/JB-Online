@@ -285,10 +285,12 @@ return [
         ],
 
         'passwords' => [
+            'expired_password_box_title' => '由于管理员瞎几把操作你的密码不能使用了。',
             'forgot_password'                 => '密码忘特了',
             'reset_password_box_title'        => '重置密码',
             'reset_password_button'           => '重置密码',
-            'send_password_reset_link_button' => '发送好康的邮件',
+            'update_password_button'          => '更新密码',
+            'send_password_reset_link_button' => '发送密码重置链接',
         ],
 
         'macros' => [

@@ -285,9 +285,11 @@ return [
         ],
 
         'passwords' => [
+            'expired_password_box_title' => '由于一些原因你的密码过期了。',
             'forgot_password'                 => '忘记密码了？',
             'reset_password_box_title'        => '重置密码',
             'reset_password_button'           => '重置密码',
+            'update_password_button'          => '更新密码',
             'send_password_reset_link_button' => '发送密码重置链接',
         ],
 
