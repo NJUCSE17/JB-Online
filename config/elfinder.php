@@ -91,7 +91,11 @@ return array(
     'root_options' => array(
         //'locale' => env('APP_LOCALE_PHP', 'en_US') . '.utf8',
         //'defaults' => array('read' => true, 'write' => true, 'locked' => true),
-        'uploadMaxSize' => '2G',
+        'uploadMaxSize' => '200M',
+        'uploadAllow' => array('image', 'audio', 'video',
+            'application/pdf', 'application/zip',
+            'application/x-rar', 'text/plain'),
+        'uploadDeny' => array('all'),
     ),
 
 );
