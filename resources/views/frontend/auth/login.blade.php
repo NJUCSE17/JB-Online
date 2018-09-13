@@ -54,7 +54,7 @@
 
                         <div class="row">
                             <div class="col">
-                                <div class="form-group clearfix">
+                                <div class="form-group clearfix text-right">
                                     {{ form_submit(__('labels.frontend.auth.login_button')) }}
                                 </div><!--form-group-->
                             </div><!--col-->

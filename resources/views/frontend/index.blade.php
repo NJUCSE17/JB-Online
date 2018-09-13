@@ -30,7 +30,7 @@
                     @endauth
                 </h4>
                 @if ($assignments->count())
-                    <div class="card-body px-0 py-0" style="max-height: 180vh; overflow-y: auto;">
+                    <div class="card-body px-0 py-0">
                         <div class="list-group list-group-flush" id="assignments">
                             @foreach($assignments as $assignment)
                                 <a class="list-group-item list-group-item-action border-0" id="assignment"
@@ -203,24 +203,6 @@
                         </div>
                     </div>
                 @endif
-            @else
-                <div class="card my-3">
-                    <h4 class="card-header py-3">
-                        <i class="fas fa-user mr-2"></i>
-                        {{ __('labels.frontend.home.login') }}
-                    </h4>
-                    <div class="card-body text-center">
-                        <div class="mb-3">
-                            <a class="btn btn-secondary" href="{{ route('frontend.auth.login') }}">
-                                <i class="fas fa-sign-in-alt mr-2"></i>
-                                {{ __('labels.frontend.home.login_button') }}
-                            </a>
-                        </div>
-                        <div>
-                            {{ __('strings.frontend.home.not_logged_in') }}
-                        </div>
-                    </div>
-                </div>
             @endauth
         </div>
     </div>
