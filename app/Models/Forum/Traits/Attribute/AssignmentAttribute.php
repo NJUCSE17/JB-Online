@@ -77,7 +77,7 @@ trait AssignmentAttribute
      */
     public function getDDLBadgeAttribute()
     {
-        return "<a class=\"btn btn-outline-" . $this->ddl_color . "\" id=\"assignment_ddl\""
+        return "<a class=\"btn btn-sm  btn-outline-" . $this->ddl_color . "\" id=\"assignment_ddl\""
             . "href='" . $this->assignment_link . "'>" . $this->ddl_badge_content . "</a>";
     }
 
