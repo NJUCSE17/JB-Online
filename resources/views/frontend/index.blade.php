@@ -95,7 +95,7 @@
                 <div class="card-body text-justify" id="notice_content">
                     @if($notice != null && $notice->content != null)
                         {!! $notice->content !!}
-                        <small class="float-right text-muted">{{ $notice->time_label }}</small>
+                        <p class="float-right text-muted">{{ $notice->time_label }}</p>
                     @else
                         <div class="row">
                             <div class="col text-center">
@@ -125,20 +125,20 @@
                         @if ($ongoingCourses->count())
                             @foreach($ongoingCourses as $course)
                                 <a class="btn btn-outline-{{ $course->color_label }} text-justify my-2"
-                                   href="{{ $course->course_link }}" style="width: 100%; line-height: 23px;">
+                                   style="width: 100%; display: flex; align-items: baseline;"
+                                   href="{{ $course->course_link }}">
                                     {{ __('strings.frontend.home.semester.left') }}
                                     {{ $course->semester }}
                                     {{ __('strings.frontend.home.semester.right') }} &nbsp;
                                     {{ $course->name }}
-                                    <span class="float-right">
+                                    <div style="margin-left: auto;">
                                         <span class="badge badge-{{ $course->color_label }}">
                                             <i class="fas fa-folder"></i>
                                             {{ $course->assignmentsCount() }}
                                             <i class="fas fa-comments"></i>
                                             {{ $course->postsCount() }}
                                         </span>
-                                    </span>
-
+                                    </div>
                                 </a>
                             @endforeach
                         @else
@@ -170,19 +170,20 @@
                         <div class="card-body">
                             @foreach($allCourses as $course)
                                 <a class="btn btn-outline-{{ $course->color_label }} text-justify my-2"
-                                   href="{{ $course->course_link }}" style="width: 100%; line-height: 23px;">
+                                   style="width: 100%; display: flex; align-items: baseline;"
+                                   href="{{ $course->course_link }}">
                                     {{ __('strings.frontend.home.semester.left') }}
                                     {{ $course->semester }}
                                     {{ __('strings.frontend.home.semester.right') }} &nbsp;
                                     {{ $course->name }}
-                                    <span class="float-right">
+                                    <div style="margin-left: auto;">
                                         <span class="badge badge-{{ $course->color_label }}">
                                             <i class="fas fa-folder"></i>
                                             {{ $course->assignmentsCount() }}
                                             <i class="fas fa-comments"></i>
                                             {{ $course->postsCount() }}
                                         </span>
-                                    </span>
+                                    </div>
                                 </a>
                             @endforeach
                             <div class="row mt-3">

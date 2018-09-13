@@ -12,17 +12,19 @@
         <div class="col">
             <div id="feedContents">
             @if($feeds->lastPage() > 1)
-                <div class="sm-hidden">
-                    <span class="d-inline-flex" style="line-height: 35px">
+                <div class="row mt-3 sm-hidden">
+                    <div class="col-4 d-inline-flex" style="line-height: 35px">
                         Goto:
                         <input type="number" class="form-control text-center mx-1 px-0" value="{{ $feeds->currentPage() }}"
                                id="customPage1" data-total-page="{{ $feeds->lastPage() }}" style="width: 50px; height: 35px;"
                                min="1" max="{{ $feeds->lastPage() }}">
                         / {{ $feeds->lastPage() }}
-                    </span>
-                    <span class="float-right">
-                        {!! $feeds->render() !!}
-                    </span>
+                    </div>
+                    <div class="col-8">
+                        <div class="float-right">
+                            {!! $feeds->render() !!}
+                        </div>
+                    </div>
                 </div>
             @endif
             @if ($feeds->count())

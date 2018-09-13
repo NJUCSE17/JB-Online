@@ -30,7 +30,7 @@
                 <div class="card-body text-justify">
                     @if($course->notice != null)
                         {!! $course->notice !!}
-                        <small class="float-right text-muted">{{ $course->time_label }}</small>
+                        <p class="float-right text-muted">{{ $course->time_label }}</p>
                     @else
                         <div class="row">
                             <div class="col text-center">
@@ -57,15 +57,16 @@
                     @if($assignments->count())
                         @foreach($assignments as $assignment)
                             <a class="btn btn-outline-{{ $assignment->label_color }} text-justify my-2"
-                               href="{{ $assignment->assignment_link }}" style="width: 100%; line-height: 23px;">
+                               style="width: 100%; display: flex; align-items: baseline;"
+                               href="{{ $assignment->assignment_link }}">
                                 {{ $assignment->name }}
-                                <span class="float-right">
+                                <div style="margin-left: auto;">
                                     <i class="far fa-clock"></i> {{ $assignment->due_time }}
                                     <span class="badge badge-{{ $assignment->label_color }} ml-2">
                                         <i class="fas fa-comments"></i>
                                         {{ $assignment->postsCount() }}
                                     </span>
-                                </span>
+                                </div>
                             </a>
                         @endforeach
                     @else
