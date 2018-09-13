@@ -26,8 +26,12 @@ return array(
     |    ]
     */
     'disks' => [
-        'private',
-        'public'
+        'private' => [
+            'glideURL' => '/img/private',
+        ],
+        'public' => [
+            'glideURL' => '/img/public',
+        ],
     ],
 
     /*

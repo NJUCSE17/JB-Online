@@ -4,12 +4,21 @@
  * Global Routes
  * Routes that are used between both frontend and backend.
  */
-Route::get('glide/{path}', function($path){
+Route::get('img/private/{path}', function($path){
     $server = \League\Glide\ServerFactory::create([
+        'response' => new \League\Glide\Responses\LaravelResponseFactory(app('request')),
+        'source' => app('filesystem')->disk('private')->getDriver(),
+        'cache' => storage_path('glide'),
+    ]);
+    return $server->getImageResponse($path, \Illuminate\Support\Facades\Input::query());
+})->where('path', '.+');
+Route::get('img/public/{path}', function($path){
+    $server = \League\Glide\ServerFactory::create([
+        'response' => new \League\Glide\Responses\LaravelResponseFactory(app('request')),
         'source' => app('filesystem')->disk('public')->getDriver(),
         'cache' => storage_path('glide'),
     ]);
-    return $server->getImageResponse($path, Input::query());
+    return $server->getImageResponse($path, \Illuminate\Support\Facades\Input::query());
 })->where('path', '.+');
 
 // Switch between the included languages
