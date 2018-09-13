@@ -16089,7 +16089,7 @@ body {
   height: 100%;
 }
 
-#app {
+.app-center {
   /* 10% left for nav bar. */
   min-height: 90vh;
   display: -webkit-box;

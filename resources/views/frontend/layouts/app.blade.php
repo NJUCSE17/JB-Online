@@ -141,7 +141,7 @@
         @include('includes.partials.logged-in-as')
         @include('frontend.includes.nav')
 
-        <div id="app">
+        <div id="app" class="@yield('appClass', '')">
             <div class="container my-4">
                     @include('includes.partials.messages')
                     @yield('content')

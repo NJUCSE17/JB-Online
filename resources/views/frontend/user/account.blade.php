@@ -1,5 +1,7 @@
 @extends('frontend.layouts.app')
 
+@section('appClass', 'app-center')
+
 @section('content')
     <div class="row justify-content-center align-items-center mb-3">
         <div class="col col-sm-10 align-self-center">
