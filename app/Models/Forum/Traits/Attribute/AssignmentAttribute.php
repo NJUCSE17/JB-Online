@@ -68,7 +68,7 @@ trait AssignmentAttribute
      */
     public function getDDLBadgeAttribute()
     {
-        return "<a class=\"badge badge-outline-" . $this->ddl_color . "\" id=\"assignment_ddl\""
+        return "<a class=\"btn btn-outline-" . $this->ddl_color . "\" id=\"assignment_ddl\""
             . "href='" . $this->assignment_link . "'>"
             . $this->due_time->isoFormat("Y-MM-DD (ddd) H:mm:ss") . "<br />"
             . $this->due_time->diffForHumans(null, null, false, 2) . "</a>";
