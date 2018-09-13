@@ -51,12 +51,12 @@ trait AssignmentAttribute
      */
     public function getDDLColorAttribute()
     {
-        $delta = $this->due_time->diffInHours(\Carbon\Carbon::now());
-        if ($delta <= 24) {
+        $delta = $this->due_time->diffInDays();
+        if ($delta < 1) {
             return "danger";
-        } elseif ($delta <= 72) {
+        } elseif ($delta < 2) {
             return "warning";
-        } else if ($delta <= 168) {
+        } else if ($delta < 5) {
             return "info";
         } else {
             return "secondary";
