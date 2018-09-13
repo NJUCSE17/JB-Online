@@ -5,6 +5,7 @@
  * All route names are prefixed with 'frontend.'.
  */
 Route::get('about', 'HomeController@about')->name('about');
+Route::get('/', 'HomeController@index')->name('index');
 
 /*
  * These frontend controllers require the user to be logged in
@@ -12,7 +13,6 @@ Route::get('about', 'HomeController@about')->name('about');
  * These routes can not be hit if the password is expired
  */
 Route::group(['middleware' => ['auth', 'password_expires']], function () {
-    Route::get('/', 'HomeController@index')->name('index');
     Route::get('blog', 'HomeController@blog')->name('blog');
 
     Route::group(['namespace' => 'User', 'as' => 'user.'], function () {
