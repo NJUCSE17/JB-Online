@@ -138,13 +138,13 @@
         @stack('after-styles')
     </head>
     <body>
-        <div id="app">
-            @include('includes.partials.logged-in-as')
-            @include('frontend.includes.nav')
+        @include('includes.partials.logged-in-as')
+        @include('frontend.includes.nav')
 
+        <div id="app">
             <div class="container my-4">
-                @include('includes.partials.messages')
-                @yield('content')
+                    @include('includes.partials.messages')
+                    @yield('content')
             </div><!-- container -->
         </div><!-- #app -->
 
