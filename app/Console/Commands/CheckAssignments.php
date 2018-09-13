@@ -69,8 +69,8 @@ class CheckAssignments extends Command
             foreach ($warningAssignments as $assignment) {
                 $content = $content . "<li><h1><a href='" . $assignment->assignment_link . "'>"
                     . $assignment->name . "</a></h1><p>" . $assignment->content
-                    . "</p><div style='text-align: right;'><object>"
-                    . $assignment->ddl_badge . "</object></div></li>";
+                    . "</p><div style='text-align: right;'>"
+                    . $assignment->ddl_badge_content . "</div></li>";
             }
             $content = $content . "</ul>";
 
