@@ -41,6 +41,7 @@
                                                 <span class="float-right" style="font-size:120%;">
                                                     <a class="badge badge-primary"
                                                        href="{{ $assignment->assignment_link }}">
+                                                        <i class="fas fa-comments"></i>
                                                         {{  $assignment->postsCount() }}
                                                     </a>
                                                 </span>
@@ -124,11 +125,20 @@
                         @if ($ongoingCourses->count())
                             @foreach($ongoingCourses as $course)
                                 <a class="btn btn-outline-{{ $course->color_label }} text-justify my-2"
-                                   href="{{ $course->course_link }}" style="width: 100%;">
+                                   href="{{ $course->course_link }}" style="width: 100%; line-height: 23px;">
                                     {{ __('strings.frontend.home.semester.left') }}
                                     {{ $course->semester }}
                                     {{ __('strings.frontend.home.semester.right') }} &nbsp;
                                     {{ $course->name }}
+                                    <span class="float-right">
+                                        <span class="badge badge-{{ $course->color_label }}">
+                                            <i class="fas fa-folder"></i>
+                                            {{ $course->assignmentsCount() }}
+                                            <i class="fas fa-comments"></i>
+                                            {{ $course->postsCount() }}
+                                        </span>
+                                    </span>
+
                                 </a>
                             @endforeach
                         @else
@@ -160,11 +170,19 @@
                         <div class="card-body">
                             @foreach($allCourses as $course)
                                 <a class="btn btn-outline-{{ $course->color_label }} text-justify my-2"
-                                   href="{{ $course->course_link }}" style="width: 100%;">
+                                   href="{{ $course->course_link }}" style="width: 100%; line-height: 23px;">
                                     {{ __('strings.frontend.home.semester.left') }}
                                     {{ $course->semester }}
                                     {{ __('strings.frontend.home.semester.right') }} &nbsp;
                                     {{ $course->name }}
+                                    <span class="float-right">
+                                        <span class="badge badge-{{ $course->color_label }}">
+                                            <i class="fas fa-folder"></i>
+                                            {{ $course->assignmentsCount() }}
+                                            <i class="fas fa-comments"></i>
+                                            {{ $course->postsCount() }}
+                                        </span>
+                                    </span>
                                 </a>
                             @endforeach
                             <div class="row mt-3">

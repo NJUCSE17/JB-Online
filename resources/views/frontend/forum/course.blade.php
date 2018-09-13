@@ -57,11 +57,15 @@
                     @if($assignments->count())
                         @foreach($assignments as $assignment)
                             <a class="btn btn-outline-{{ $assignment->label_color }} text-justify my-2"
-                               href="{{ $assignment->assignment_link }}" style="width: 100%;">
+                               href="{{ $assignment->assignment_link }}" style="width: 100%; line-height: 23px;">
                                 {{ $assignment->name }}
                                 <span class="float-right">
-                                {{ __('labels.general.ddl') }} {{ $assignment->due_time }}
-                            </span>
+                                    <i class="far fa-clock"></i> {{ $assignment->due_time }}
+                                    <span class="badge badge-{{ $assignment->label_color }} ml-2">
+                                        <i class="fas fa-comments"></i>
+                                        {{ $assignment->postsCount() }}
+                                    </span>
+                                </span>
                             </a>
                         @endforeach
                     @else

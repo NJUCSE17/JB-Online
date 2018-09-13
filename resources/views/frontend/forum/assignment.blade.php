@@ -12,17 +12,17 @@
                 </h1>
                 <span class="float-right">
                     @if($sorted=='asc')
-                        <a class="btn btn-outline-dark"
+                        <a class="btn btn-secondary with-shadows"
                            href="{{ route('frontend.forum.assignment.view', [$course, $assignment, 'dec']) }}">
-                            <i class="fas fa-arrow-up mr-2"></i> {{ __('buttons.general.reverse') }}
+                            <i class="fas fa-sort-amount-up mr-2"></i> {{ __('buttons.general.reverse') }}
                         </a>
                     @else
-                        <a class="btn btn-outline-dark"
+                        <a class="btn btn-secondary with-shadows"
                            href="{{ route('frontend.forum.assignment.view', [$course, $assignment, 'asc']) }}">
-                            <i class="fas fa-arrow-down mr-2"></i> {{ __('buttons.general.reverse') }}
+                            <i class="fas fa-sort-amount-down mr-2"></i> {{ __('buttons.general.reverse') }}
                         </a>
                     @endif
-                    <a class="btn btn-outline-success" onclick="triggerCreateModal(0)">
+                    <a class="btn btn-success with-shadows text-white" onclick="triggerCreateModal(0)">
                         <i class="fas fa-plus mr-2"></i> {{ __('buttons.general.new_post') }}
                     </a>
                 </span>
@@ -49,11 +49,11 @@
                         <div class="col mx-3">
                             <h5>{!! $assignment->content !!}</h5>
                             <div class="text-right">
-                                <small class="mb-0 text-muted">
+                                <p class="mb-0 text-muted">
                                     {{ __('labels.general.ddl') }}
-                                    {{ $assignment->due_time->isoFormat("Y-MM-DD (ddd) H:mm:ss") }}
+                                    {{ $assignment->due_time->isoFormat("Y-MM-DD (ddd) H:mm:ss") }}<br />
                                     {{ $assignment->due_time->diffForHumans(null, null, false, 2) }}
-                                </small>
+                                </p>
                             </div>
                         </div>
                     </div>
@@ -72,7 +72,7 @@
                     @endif
                 </h4>
                 @if(isset($posts[0]))
-                    <div class="card-body px-3 pb-0">
+                    <div class="card-body px-3 py-0">
                         @include('frontend.forum.post.list',['group'=>$posts[0]])
                     </div>
                 @else

@@ -1,8 +1,8 @@
-<div class="mx-0 my-0">
+<div class="mx-0 my-3">
     <h5 class="py-0 align-middle" style="background-color: #fafafa; height: 100%; overflow-x: auto;">
         <img class="img-avatar mr-2" src="{{ $post->author->picture }}"
              style="height: 45px !important;">
-        <span> {{$post->author->name}} (#{{ $post->id }}) </span>
+        <span> {{$post->author->name}} <small class="text-muted">#{{ $post->id }}</small> </span>
         <span class="float-right">
             @if($post->user_id == $userid)
                 <a class="btn btn-outline-primary text-dark" href="{{ route('frontend.forum.post.edit', [$course, $assignment, $post]) }}">
@@ -20,14 +20,13 @@
             </a>
         </span>
     </h5>
-    <div class="px-0 py-0 border-left">
+    <div class="px-0 py-0 my-0 border-left">
         <div class="row mx-0 my-0">
-            <div class="col pl-3 pr-0 pt-3 pb-0">
+            <div class="col pl-3 pr-0 py-0">
                 <h5>{!! $post->content !!}</h5>
-                <small class="float-right text-muted
-                              <?php if(isset($posts[$post->id])) echo "pb-3"; ?>">
+                <p class="float-right text-muted my-0">
                     {{ $post->time_label }}
-                </small>
+                </p>
             </div>
         </div>
         <div class="row ml-0 mr-0">
@@ -39,6 +38,3 @@
         </div>
     </div>
 </div>
-@if($post->parent_id == 0)
-    <hr />
-@endif
