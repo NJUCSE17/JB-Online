@@ -207,7 +207,7 @@ return [
                 ],
 
                 'assignments' => [
-                    'course_id'         => '作业ID',
+                    'course_id'         => '课程',
                     'name'              => '名称',
                     'content'           => '内容',
                     'due_time'          => '截止时间',
