@@ -1,0 +1,9 @@
+\newcommand{\eps}{\varepsilon}
+\newcommand{\CC}{\mathbb{C}}
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\QQ}{\mathbb{Q}}
+\newcommand{\FF}{\mathbb{F}}
+\newcommand{\ZZ}{\mathbb{Z}}
+\newcommand{\NN}{\mathbb{N}}
+\newcommand{\rd}{\operatorname{d}}
+\newcommand{\set}[1]{\left\{#1\right\}}
