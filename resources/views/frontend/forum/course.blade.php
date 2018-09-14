@@ -56,11 +56,10 @@
                 <div class="card-body">
                     @if($assignments->count())
                         @foreach($assignments as $assignment)
-                            <a class="btn btn-outline-{{ $assignment->label_color }} text-justify my-2"
-                               style="width: 100%; display: flex; align-items: baseline;"
-                               href="{{ $assignment->assignment_link }}">
+                            <a class="btn btn-sm btn-outline-{{ $assignment->label_color }} text-justify my-1"
+                               style="width: 100%;" href="{{ $assignment->assignment_link }}">
                                 {{ $assignment->name }}
-                                <div style="margin-left: auto;">
+                                <div class="float-right">
                                     <i class="far fa-clock"></i> {{ $assignment->due_time }}
                                     <span class="badge badge-{{ $assignment->label_color }} ml-2">
                                         <i class="fas fa-comments"></i>
