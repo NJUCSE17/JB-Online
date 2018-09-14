@@ -135,18 +135,13 @@
     <div id="app">
         @include('includes.partials.logged-in-as')
         @include('backend.includes.nav')
-
-        <div class="mx-lg-5 my-4">
-            @include('includes.partials.messages')
-            <div class="row pb-3">
-                <div class="col col-12 col-lg-2">
-                    @include('backend.includes.sidebar')
-                </div>
-                <div class="col col-12 col-lg-10">
-                    @yield('content')
-                </div>
-            </div>
-        </div><!-- container -->
+        @include('backend.includes.sidebar')
+        <div id="app" class="@yield('appClass', '')">
+            <div class="container-fluid my-4">
+                @include('includes.partials.messages')
+                @yield('content')
+            </div><!-- container -->
+        </div><!-- #app -->
     </div><!-- #app -->
 
     <!-- Scripts -->

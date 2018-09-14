@@ -24,6 +24,15 @@
                     </li>
                 @endif
 
+                <li class="nav-item dropdown">
+                    <a href="#" class="nav-link dropdown-toggle" id="navbarDropdownLanguageLink"
+                       data-toggle="dropdown"
+                       aria-haspopup="true" aria-expanded="false">
+                        {{ __('navs.frontend.user.administration') }}
+                    </a>
+                    @include('backend.includes.sidebar')
+                </li>
+
                 <li class="nav-item">
                     <a href="{{ route('frontend.user.account') }}"
                        class="nav-link text-info">

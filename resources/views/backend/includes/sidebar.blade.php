@@ -1,8 +1,8 @@
-<div class="list-group">
-    <div class="list-group-item list-group-item-action">
+<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownLanguageLink">
+    <a class="dropdown-header">
         {{ __('menus.backend.sidebar.general') }}
-    </div>
-    <a class="list-group-item list-group-item-action {{ active_class(Active::checkUriPattern('admin/dashboard')) }}"
+    </a>
+    <a class="dropdown-item {{ active_class(Active::checkUriPattern('admin/dashboard')) }}"
        href="{{ route('admin.dashboard') }}">
         <div class="row">
             <div class="col-3 text-center">
@@ -14,12 +14,12 @@
         </div>
     </a>
 
-    <div class="list-group-item list-group-item-action">
+    <div class="dropdown-header">
         {{ __('menus.backend.sidebar.system') }}
     </div>
 
     @if ($logged_in_user->isAdmin())
-        <a class="list-group-item list-group-item-action {{ active_class(Active::checkUriPattern('admin/auth/user*')) }}"
+        <a class="dropdown-item {{ active_class(Active::checkUriPattern('admin/auth/user*')) }}"
            href="{{ route('admin.auth.user.index') }}">
             <div class="row">
                 <div class="col-3 text-center">
@@ -33,7 +33,7 @@
                 </div>
             </div>
         </a>
-        <a class="list-group-item list-group-item-action {{ active_class(Active::checkUriPattern('admin/auth/role*')) }}"
+        <a class="dropdown-item {{ active_class(Active::checkUriPattern('admin/auth/role*')) }}"
            href="{{ route('admin.auth.role.index') }}">
             <div class="row">
                 <div class="col-3 text-center">
@@ -47,11 +47,11 @@
     @endif
 
     @if ($logged_in_user->isExecutive())
-        <div class="list-group-item list-group-item-action">
+        <div class="dropdown-header">
             {{ __('menus.backend.sidebar.forum') }}
         </div>
 
-        <a class="list-group-item list-group-item-action {{ active_class(Active::checkUriPattern('admin/forum/notice*')) }}"
+        <a class="dropdown-item {{ active_class(Active::checkUriPattern('admin/forum/notice*')) }}"
            href="{{ route('admin.forum.notice.index') }}">
             <div class="row">
                 <div class="col-3 text-center">
@@ -62,7 +62,7 @@
                 </div>
             </div>
         </a>
-        <a class="list-group-item list-group-item-action {{ active_class(Active::checkUriPattern('admin/forum/course*')) }}"
+        <a class="dropdown-item {{ active_class(Active::checkUriPattern('admin/forum/course*')) }}"
            href="{{ route('admin.forum.course.index') }}">
             <div class="row">
                 <div class="col-3 text-center">
@@ -73,7 +73,7 @@
                 </div>
             </div>
         </a>
-        <a class="list-group-item list-group-item-action {{ active_class(Active::checkUriPattern('admin/forum/assignment*')) }}"
+        <a class="dropdown-item {{ active_class(Active::checkUriPattern('admin/forum/assignment*')) }}"
            href="{{ route('admin.forum.assignment.index') }}">
             <div class="row">
                 <div class="col-3 text-center">
@@ -84,7 +84,7 @@
                 </div>
             </div>
         </a>
-        <a class="list-group-item list-group-item-action {{ active_class(Active::checkUriPattern('admin/forum/post*')) }}"
+        <a class="dropdown-item {{ active_class(Active::checkUriPattern('admin/forum/post*')) }}"
            href="{{ route('admin.forum.post.index') }}">
             <div class="row">
                 <div class="col-3 text-center">
@@ -97,11 +97,11 @@
         </a>
     @endif
 
-    <div class="list-group-item list-group-item-action">
+    <div class="dropdown-header">
         {{ __('menus.backend.sidebar.log') }}
     </div>
 
-    <a class="list-group-item list-group-item-action {{ active_class(Active::checkUriPattern('admin/log-viewer')) }}"
+    <a class="dropdown-item {{ active_class(Active::checkUriPattern('admin/log-viewer')) }}"
        href="{{ route('log-viewer::dashboard') }}">
         <div class="row">
             <div class="col-3 text-center">
@@ -112,7 +112,7 @@
             </div>
         </div>
     </a>
-    <a class="list-group-item list-group-item-action {{ active_class(Active::checkUriPattern('admin/log-viewer/logs*')) }}"
+    <a class="dropdown-item {{ active_class(Active::checkUriPattern('admin/log-viewer/logs*')) }}"
        href="{{ route('log-viewer::logs.list') }}">
         <div class="row">
             <div class="col-3 text-center">
