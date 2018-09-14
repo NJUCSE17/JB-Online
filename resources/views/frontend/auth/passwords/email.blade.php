@@ -39,7 +39,7 @@
 
                         <div class="row">
                             <div class="col">
-                                <div class="form-group mb-0 clearfix">
+                                <div class="form-group mb-0 clearfix text-right">
                                     {{ form_submit(__('labels.frontend.passwords.send_password_reset_link_button')) }}
                                 </div><!--form-group-->
                             </div><!--col-->
