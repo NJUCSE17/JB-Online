@@ -40,21 +40,21 @@
                     {{ __('labels.frontend.forum.assignments.post_list') }}
                     <span class="float-right d-flex">
                         @if($sorted=='asc')
-                            <a class="btn btn-sm btn-secondary with-shadows mr-2"
+                            <a class="btn btn-sm btn-secondary with-shadows"
                                href="{{ route('frontend.forum.assignment.view', [$course, $assignment, 'dec']) }}">
                                 <i class="fas fa-sort-amount-up mr-2"></i> {{ __('buttons.general.reverse') }}
                             </a>
                         @else
-                            <a class="btn btn-sm btn-secondary with-shadows mr-2"
+                            <a class="btn btn-sm btn-secondary with-shadows"
                                href="{{ route('frontend.forum.assignment.view', [$course, $assignment, 'asc']) }}">
                                 <i class="fas fa-sort-amount-down mr-2"></i> {{ __('buttons.general.reverse') }}
                             </a>
                         @endif
-                        <a class="btn btn-sm btn-success with-shadows text-white mr-2" onclick="triggerCreateModal(0)">
+                        <a class="btn btn-sm btn-success with-shadows text-white ml-2" onclick="triggerCreateModal(0)">
                             <i class="fas fa-plus mr-2"></i> {{ __('buttons.general.new_post') }}
                         </a>
                         @if(Auth::user()->isExecutive())
-                            <a class="text-sm-center text-dark" href="{{ route('admin.forum.post.specific', $assignment) }}">
+                            <a class="text-sm-center text-dark ml-2" href="{{ route('admin.forum.post.specific', $assignment) }}">
                                 <i class="fas fa-cog"></i>
                             </a>
                         @endif
