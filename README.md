@@ -1,6 +1,6 @@
 # Class-Forum
 
-*A hidden place for we students.*
+*A hidden(?) place for we students.*
 
 ## Introduction
 
@@ -12,9 +12,8 @@ This project (originally called *Physics-Homework-Forum*) was
 
 The project is based on Laravel-5-boilerplate. 
  Hence it is issued under MIT license. Besides, the 
- project employs many open source plugins: Bootstrap, 
- font-awesome 5, MathJax, TinyMCE, HighlightJS, 
- ElFinder, Glide, et cetera.
+ project employs many open source plugins, which you can learn
+ more about in the 'credit' part.
 
 ## Requirement
 
@@ -99,4 +98,16 @@ There four major models, assignment, course, notice
 
 ## Contact
 
-If you have any issues about safety or functions, you are welcome to submit an issue to this repository.
+If you have any issues about safety or functions, you are welcome to open an issue to this repository.
+
+## Credit
+
+*   [Laravel 5.6](https://laravel.com/) as framework.
+*   [Elfinder](https://github.com/Studio-42/elFinder) and [laravel-elfinder](https://github.com/barryvdh/laravel-elfinder) for file storage.
+*   [Glide](http://glide.thephpleague.com/) for image processing.
+*   [MathJax](https://www.mathjax.org/) for TeX and LaTeX display.
+*   [Highlight.JS](https://highlightjs.org/) for code formatting.
+*   All icons from [FlatIcon](https://www.flaticon.com/).
+*   [TinyMCE 4](https://www.tiny.cloud/) as WYSIWYG editor.
+*   [Bootstrap 4](http://getbootstrap.com/) as layout framework.
+*   [Carbon 2](https://carbon.nesbot.com/) and [laravel-carbon-2](https://github.com/kylekatarnls/laravel-carbon-2) for time localization and display.
