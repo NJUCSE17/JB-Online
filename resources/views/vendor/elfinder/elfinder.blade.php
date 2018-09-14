@@ -1,6 +1,7 @@
 @extends('frontend.layouts.app')
 
-@section('title', app_name() . ' | '.__('navs.frontend.filehub'))
+@section('title', app_name() . ' | ' . __('navs.frontend.filehub'))
+@section('navBrand', app_name() . ' | ' . __('navs.frontend.filehub'))
 
 @section('content')
     <!-- Element where elFinder will be created (REQUIRED) -->
