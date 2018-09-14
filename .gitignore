@@ -2,7 +2,9 @@
 /public/hot
 /public/files
 /public/storage
-public/images
+/public/images/vendor
+/public/images/frontend/user
+/public/images/frontend/logo.jpg
 /storage/*.key
 /vendor
 /.idea

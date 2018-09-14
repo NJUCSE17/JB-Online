@@ -137,7 +137,7 @@
 
         @stack('after-styles')
     </head>
-    <body style="background-image: url('{{ asset('images/frontend/background/bg_f_'.random_int(1, 14).'.svg')}}');
+    <body style="background-image: url('{{ asset('images/frontend/background/bg_'.random_int(1, 20).'.svg')}}');
             background-size: auto; background-position: center center;">
         @include('includes.partials.logged-in-as')
         @include('frontend.includes.nav')
