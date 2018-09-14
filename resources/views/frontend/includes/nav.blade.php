@@ -1,6 +1,8 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-white with-shadows" id="navbar">
     <div class="container">
-        <a href="{{ route('frontend.index') }}" class="navbar-brand">{{ app_name() }}</a>
+        <a href="{{ route('frontend.index') }}" class="navbar-brand">
+            @yield('navBrand', app_name())
+        </a>
         <a class="badge badge-pill float-right badge-dark text-white">
             {{ app_version() }}
         </a>

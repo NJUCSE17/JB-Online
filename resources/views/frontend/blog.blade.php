@@ -1,33 +1,43 @@
 @extends('frontend.layouts.app')
 
-@section('title', app_name() . ' | '.__('navs.frontend.blog'))
+@section('title', app_name() . ' | ' . __('navs.frontend.blog'))
+@section('navBrand', app_name() . ' | ' . __('labels.frontend.home.class_blog'))
 
 @section('content')
-    <div class="page-header" id="header">
-        <h1 class="display-3">
-            {{ __('labels.frontend.home.class_blog') }}
-        </h1>
-    </div>
     <div class="row">
         <div class="col">
             <div id="feedContents">
             @if($feeds->lastPage() > 1)
-                <div class="row mt-3 sm-hidden">
-                    <div class="col-4 d-inline-flex" style="line-height: 35px">
-                        Goto:
-                        <input type="number" class="form-control text-center mx-1 px-0" value="{{ $feeds->currentPage() }}"
-                               id="customPage1" data-total-page="{{ $feeds->lastPage() }}" style="width: 50px; height: 35px;"
-                               min="1" max="{{ $feeds->lastPage() }}">
-                        / {{ $feeds->lastPage() }}
-                    </div>
-                    <div class="col-8">
-                        <div class="float-right">
-                            {!! $feeds->render() !!}
-                        </div>
+                <div class="row mt-3">
+                    <div class="col d-inline-flex" style="width: 100%; overflow-x: auto;">
+                        <input type="number" class="form-control text-center mx-1 px-0" value=""
+                               id="customPage1" data-total-page="{{ $feeds->lastPage() }}" style="width: 80px; height: 35px;"
+                               min="1" max="{{ $feeds->lastPage() }}" placeholder="goto">
+                        {!! $feeds->render() !!}
                     </div>
                 </div>
             @endif
             @if ($feeds->count())
+                <nav class="navbar navbar-expand-lg navbar-light bg-white sticky-top with-shadows" id="scrollspy">
+                    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
+                            data-target="#scrollspyContent" aria-controls="scrollspyContent" aria-expanded="false"
+                            aria-label="{{ __('labels.general.toggle_navigation') }}">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse justify-content-center" id="scrollspyContent">
+                        <ul class="nav nav-pills">
+                            <li><a class="nav-link" href="{{ $feeds->previousPageUrl() }}"><i class="fas fa-arrow-left"></i></a></li>
+                            @foreach($feeds as $feed)
+                                <li>
+                                    <a class="nav-link" href="#{{ $feed['title'] }}">
+                                            {{ $feed['author'] }} : {{ $feed['title'] }}
+                                    </a>
+                                </li>
+                            @endforeach
+                            <li><a class="nav-link" href="{{ $feeds->nextPageUrl() }}"><i class="fas fa-arrow-right"></i></a></li>
+                        </ul>
+                    </div>
+                </nav>
                 @foreach ($feeds as $feed)
                     <div class="card my-3" id="{{ $feed['title'] }}" >
                         <a class="card-header py-3 btn-outline-dark" style="font-size: 150%; line-height: 36px"
@@ -51,26 +61,6 @@
                         </div>
                     </div>
                 @endforeach
-                <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-bottom with-shadows" id="scrollspy">
-                    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
-                            data-target="#scrollspyContent" aria-controls="scrollspyContent" aria-expanded="false"
-                            aria-label="{{ __('labels.general.toggle_navigation') }}">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <div class="collapse navbar-collapse justify-content-center" id="scrollspyContent">
-                        <ul class="nav nav-pills">
-                            <li><a class="nav-link" href="{{ $feeds->previousPageUrl() }}"><i class="fas fa-arrow-left"></i></a></li>
-                            @foreach($feeds as $feed)
-                                <li>
-                                    <a class="nav-link" href="#{{ $feed['title'] }}">
-                                        {{ $feed['author'] }} : {{ $feed['title'] }}
-                                    </a>
-                                </li>
-                            @endforeach
-                            <li><a class="nav-link" href="{{ $feeds->nextPageUrl() }}"><i class="fas fa-arrow-right"></i></a></li>
-                        </ul>
-                    </div>
-                </nav>
             @else
                 <h3 class="display-4 my-3">
                     {{ __('strings.frontend.home.no_blog') }}

@@ -1,19 +1,10 @@
 @extends('frontend.layouts.app')
 
 @section('title', app_name() . ' | '. $course->name)
+@section('navBrand', app_name() . ' | ' . __('strings.frontend.breadcrumb.course'))
 
 @section('content')
     {!! Breadcrumbs::render() !!}
-    <div class="page-header text-justify">
-        <div class="row">
-            <div class="col">
-                <h1 class="display-3 d-inline">
-                    {{ $course->name }}
-                </h1>
-                <h4 class="float-right d-inline align-middle">{!! $course->labels !!}</h4>
-            </div>
-        </div>
-    </div>
     <div class="row">
         <div class="col col-md-4 col-12">
             <div class="card my-3">
@@ -45,13 +36,14 @@
             <div class="card my-3">
                 <h4 class="card-header py-3">
                     <i class="fas fa-folder-open mr-2"></i> {{ __('labels.frontend.forum.courses.assignment_list') }}
-                    @if(Auth::user()->isExecutive())
-                        <span class="float-right d-flex">
+                    <span class="float-right d-flex">
+                        {!! $course->labels !!}
+                        @if(Auth::user()->isExecutive())
                             <a class="text-sm-center text-dark" href="{{ route('admin.forum.assignment.specific', $course) }}">
-                                <i class="fas fa-cog"></i>
+                                <i class="fas fa-cog ml-2"></i>
                             </a>
-                        </span>
-                    @endif
+                        @endif
+                    </span>
                 </h4>
                 <div class="card-body">
                     @if($assignments->count())

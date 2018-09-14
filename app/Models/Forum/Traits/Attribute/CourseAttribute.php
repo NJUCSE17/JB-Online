@@ -39,16 +39,16 @@ trait CourseAttribute
     {
         $today = date("Y-m-d H:i:s");
         if ($today < $this->start_time) {
-            return "<span class='badge badge-warning with-shadows'>" .
+            return "<span class='badge badge-warning'>" .
                 __('labels.frontend.forum.courses.status.pending') . '</span>';
         }
 
         if ($today > $this->end_time) {
-            return "<span class='badge badge-dark with-shadows'>".
+            return "<span class='badge badge-dark'>".
                 __('labels.frontend.forum.courses.status.ended') .'</span>';
         }
 
-        return "<span class='badge badge-success with-shadows'>" .
+        return "<span class='badge badge-success'>" .
             __('labels.frontend.forum.courses.status.ongoing') . '</span>';
     }
 
@@ -58,21 +58,21 @@ trait CourseAttribute
     public function getDifficultyLabelAttribute()
     {
         if ($this->difficulty == 0) {
-            return "<span class='badge badge-success with-shadows'>" .
+            return "<span class='badge badge-success'>" .
                 __('labels.frontend.forum.courses.difficulty.easy') . '</span>';
         }
 
         if ($this->difficulty == 1) {
-            return "<span class='badge badge-warning with-shadows'>" .
+            return "<span class='badge badge-warning'>" .
                 __('labels.frontend.forum.courses.difficulty.medium') . '</span>';
         }
 
         if ($this->difficulty == 2) {
-            return "<span class='badge badge-danger with-shadows'>" .
+            return "<span class='badge badge-danger'>" .
                 __('labels.frontend.forum.courses.difficulty.hard') . '</span>';
         }
 
-        return "<span class='badge badge-dark with-shadows'>" .
+        return "<span class='badge badge-dark'>" .
             __('labels.frontend.forum.courses.difficulty.insane') .'</span>';
     }
 
@@ -82,16 +82,16 @@ trait CourseAttribute
     public function getRestrictLabelAttribute()
     {
         if ($this->restrict_level == 0) {
-            return "<span class='badge badge-success with-shadows'>" .
+            return "<span class='badge badge-success'>" .
                 __('labels.frontend.forum.courses.restriction.free') . '</span>';
         }
 
         if ($this->restrict_level == 1) {
-            return "<span class='badge badge-warning with-shadows'>" .
+            return "<span class='badge badge-warning'>" .
                 __('labels.frontend.forum.courses.restriction.restricted') .'</span>';
         }
 
-        return "<span class='badge badge-danger with-shadows'>" .
+        return "<span class='badge badge-danger'>" .
             __('labels.frontend.forum.courses.restriction.forbidden') . '</span>';
     }
 

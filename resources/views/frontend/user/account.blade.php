@@ -1,5 +1,7 @@
 @extends('frontend.layouts.app')
 
+@section('title', app_name() . ' | ' . __('navs.frontend.user.account'))
+@section('navBrand', app_name() . ' | ' . __('navs.frontend.user.account'))
 @section('appClass', 'app-center')
 
 @section('content')

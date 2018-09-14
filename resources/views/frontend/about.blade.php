@@ -1,6 +1,7 @@
 @extends('frontend.layouts.app')
 
-@section('title', app_name() . ' | '.__('labels.frontend.contact.box_title'))
+@section('title', app_name() . ' | ' . __('navs.frontend.about'))
+@section('navBrand', app_name() . ' | ' . __('navs.frontend.about'))
 
 @section('content')
     <div class="row my-4 justify-content-center">

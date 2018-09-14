@@ -1,35 +1,10 @@
 @extends('frontend.layouts.app')
 
 @section('title', app_name() . ' | '. $assignment->name)
+@section('navBrand', app_name() . ' | ' . __('strings.frontend.breadcrumb.assignment'))
 
 @section('content')
     {!! Breadcrumbs::render() !!}
-    <div class="page-header text-justify">
-        <div class="row">
-            <div class="col">
-                <h1 class="display-3 d-inline">
-                    {{ $assignment->name }}
-                </h1>
-                <span class="float-right">
-                    @if($sorted=='asc')
-                        <a class="btn btn-secondary with-shadows"
-                           href="{{ route('frontend.forum.assignment.view', [$course, $assignment, 'dec']) }}">
-                            <i class="fas fa-sort-amount-up mr-2"></i> {{ __('buttons.general.reverse') }}
-                        </a>
-                    @else
-                        <a class="btn btn-secondary with-shadows"
-                           href="{{ route('frontend.forum.assignment.view', [$course, $assignment, 'asc']) }}">
-                            <i class="fas fa-sort-amount-down mr-2"></i> {{ __('buttons.general.reverse') }}
-                        </a>
-                    @endif
-                    <a class="btn btn-success with-shadows text-white" onclick="triggerCreateModal(0)">
-                        <i class="fas fa-plus mr-2"></i> {{ __('buttons.general.new_post') }}
-                    </a>
-                </span>
-            </div>
-        </div>
-    </div>
-
     <div class="row">
         <div class="col">
             <div class="card my-3">
@@ -63,13 +38,27 @@
                 <h4 class="card-header py-3">
                     <i class="fas fa-comments mr-2"></i>
                     {{ __('labels.frontend.forum.assignments.post_list') }}
-                    @if(Auth::user()->isExecutive())
-                        <span class="float-right d-flex">
+                    <span class="float-right d-flex">
+                        @if($sorted=='asc')
+                            <a class="btn btn-sm btn-secondary with-shadows mr-2"
+                               href="{{ route('frontend.forum.assignment.view', [$course, $assignment, 'dec']) }}">
+                                <i class="fas fa-sort-amount-up mr-2"></i> {{ __('buttons.general.reverse') }}
+                            </a>
+                        @else
+                            <a class="btn btn-sm btn-secondary with-shadows mr-2"
+                               href="{{ route('frontend.forum.assignment.view', [$course, $assignment, 'asc']) }}">
+                                <i class="fas fa-sort-amount-down mr-2"></i> {{ __('buttons.general.reverse') }}
+                            </a>
+                        @endif
+                        <a class="btn btn-sm btn-success with-shadows text-white mr-2" onclick="triggerCreateModal(0)">
+                            <i class="fas fa-plus mr-2"></i> {{ __('buttons.general.new_post') }}
+                        </a>
+                        @if(Auth::user()->isExecutive())
                             <a class="text-sm-center text-dark" href="{{ route('admin.forum.post.specific', $assignment) }}">
                                 <i class="fas fa-cog"></i>
                             </a>
-                        </span>
-                    @endif
+                        @endif
+                    </span>
                 </h4>
                 @if(isset($posts[0]))
                     <div class="card-body px-3 py-0">
