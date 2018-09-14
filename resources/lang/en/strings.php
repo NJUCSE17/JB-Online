@@ -187,48 +187,5 @@ return [
                 'edit' => 'Edit',
             ]
         ],
-
-        'about' => '<h1>About</h1>
-            <p>The JB Stack Exchange is a site originally intended for we elite class students the joy and 
-            sorrow about University Physics&nbsp;<span style="text-decoration: line-through;">as well as 
-            other insane subjects.</span> Forum members are supposed to follow the following rules or they 
-            shall be kicked out.</p>
-            <ol>
-            <li>No copying answers from others.</li>
-            <li>No sharing answers if the course is marked w/&nbsp;
-            <span class="badge badge-red">No answer</span>.</li>
-            <li>Neither upload files violating the law nor delete others files w/o permission.</li>
-            </ol>
-            <h1>How to use</h1>
-            <p>The JB Stack Exchange is equipped with tons of open source tools and is issued under MIT 
-            license. Here are the major tips for you.</p>
-            <ol>
-            <li>JBEX is equipped with the latest version of MathJax. You can use LaTeX as you do problem 
-            -solving assignments (note that we do not support macros and some custom functions). As an 
-            example, \$...\$ would transform into an inline equation like $y = x^2$, while \$\$ ... \$\$ 
-            would transform into a block equation such as $$ S = \sum\limits_{i=1}^{n} i$$ But if you want 
-            to insert a dollar sign, just type \'\\\$\'.</li>
-            <li>Highlight.JS helps we to display codes in a well-formatted way.
-            <pre class="language-cpp"><code>#include 
-using namespace std;
-int main() {
-  cout &lt;&lt; "Hello, World!";
-  return 0;
-}​</code></pre>
-            To insert a part of code, click \'Insert/Edit code sample\' in your editor, select your target 
-            language and paste your code. It\'s simple and handy.</li>
-            <li>JBEX employs ElFinder for image and file drive. If you want to insert a photo in your post, 
-            just click \'Insert/edit image\', the EF2 window would pop up and you can upload your image 
-            (which should be no bigger than 2 megabytes). However, everyone has the same privilege&nbsp;in 
-            modifying the files, so remember to keep the folder neat and avoid deleting others\' files!&nbsp;</li>
-            </ol>
-            <h1>Contact</h1>
-            <p>If you have any issue about safety or functionality, please get in touch with the webmaster. 
-            You can submit issues on the&nbsp;<a href="https://github.com/doowzs/Physics-Homework-Forum" 
-            target="_blank" rel="noopener">GitHub page</a> of the project which helps a lot.</p>
-            <h1>Properties</h1>
-            <div>This site uses a icon made by <a href="http://www.freepik.com" title="Freepik">Freepik</a> 
-            from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> is licensed by 
-            <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>',
     ],
 ];

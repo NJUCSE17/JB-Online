@@ -186,37 +186,5 @@ return [
                 'edit' => '编辑',
             ]
         ],
-
-        'about' => '<h1>关于</h1>
-            <p>JBEX (JB Stack Exchange) 本是为了交流灾难般的大学物理&nbsp;
-            <span style="text-decoration: line-through;">和其他课程</span>从而减轻学习的痛苦而设计的。
-            论坛成员应遵守以下规则：</p>
-            <ol>
-            <li>不抄袭别人的答案；</li>
-            <li>标有&nbsp;<span class="badge badge-red">无答案</span>的课程中不贴答案。</li>
-            <li>不上传违法内容，不随意删除他人上传的内容。</li>
-            </ol>
-            <h1>帮助</h1>
-            <p>JBEX使用了很多开源的脚本来让你享受无与伦比的交流体验。下面是对主要内容的介绍。</p>
-            <ol>
-            <li>我们使用了最新版本的MathJax。 你可以像做问求作业一样使用LaTeX （注意我们并没有引入宏，
-            所以一些作业中的高级指令并不能使用）， 也就是说 \$...\$ 会变成像 $y = x^2$ 的行内等式，
-            而 \$\$ ... \$\$ 会变成 $$ S = \sum\limits_{i=1}^{n} i$$ 一样的行间等式。
-            如果你想要插入美元符号，使用 \'\\\$\'。</li>
-            <li>Highlight.JS 让代码看起来不辣眼睛。
-            <pre class="language-cpp"><code>#include 
-using namespace std;
-int main() {
-  cout &lt;&lt; "Hello, World!";
-  return 0;
-}​</code></pre>
-            要插入一段代码，直接在编辑器中点击插入代码，选择语言，粘贴确认即可。</li>
-            <li>对于文件上传，我们使用ElFinder2。你可以上传不超过2MB的图片。问题是文件权限是公开的，所以其他人也可以查看、修改，
-            千万不要把别人的文件随便删了。
-            </ol>
-            <h1>联系</h1>
-            <p>如果你有什么好想法或者关于安全方面的建议，请联系管理员或在本网站的&nbsp;
-            <a href="https://github.com/doowzs/Physics-Homework-Forum" 
-            target="_blank" rel="noopener">GitHub</a>页面上提交issue。</p>',
     ],
 ];
