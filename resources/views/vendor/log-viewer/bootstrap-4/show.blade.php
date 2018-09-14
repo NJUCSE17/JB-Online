@@ -99,7 +99,7 @@
                                     </span>
                                     </td>
                                     <td>
-                                    <span class="badge badge-default">
+                                    <span class="badge badge-dark">
                                         {{ $entry->datetime->format('H:i:s') }}
                                     </span>
                                     </td>
