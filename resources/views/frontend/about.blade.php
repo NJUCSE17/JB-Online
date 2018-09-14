@@ -67,7 +67,7 @@ int main() {
         <h2>Contact <s>Us</s> Me</h2>
         <p style="font-size: 140%">If you find a vulnerability, or have any ideas about how to improve this site,
             please open an issue at
-            <a href="https://github.com/doowzs/Physics-Homework-Forum" target="_blank" rel="noopener">
+            <a href="https://github.com/doowzs/Class-Forum" target="_blank" rel="noopener">
                 the GitHub page
             </a>
             of this project.

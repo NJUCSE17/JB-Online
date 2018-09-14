@@ -1,20 +1,20 @@
-# Physics-Homework-Forum
+# Class-Forum
 
 *A hidden place for we students.*
 
 ## Introduction
 
-This project was originally designed for students to 
-share sorrow as well as joy when learning University 
-Physics. It was implemented as a universal forum for 
-students to check homework, talk about key points 
-and share knowledge.
+This project (originally called *Physics-Homework-Forum*) was 
+ originally designed for students to  share sorrow as well as
+ joy when learning University Physics. It was implemented as 
+ a universal forum for students to check homework, talk about
+ key points and share knowledge.
 
 The project is based on Laravel-5-boilerplate. 
-Hence it is issued under MIT license. Besides, the 
-project employs many open source plugins: Bootstrap, 
-font-awesome 5, MathJax, TinyMCE, HighlightJS, 
-ElFinder, Glide, et cetera.
+ Hence it is issued under MIT license. Besides, the 
+ project employs many open source plugins: Bootstrap, 
+ font-awesome 5, MathJax, TinyMCE, HighlightJS, 
+ ElFinder, Glide, et cetera.
 
 ## Requirement
 
@@ -99,4 +99,4 @@ There four major models, assignment, course, notice
 
 ## Contact
 
-If you have any issues about safety or functions, you are welcomed to submit an issue to this repository.
+If you have any issues about safety or functions, you are welcome to submit an issue to this repository.
