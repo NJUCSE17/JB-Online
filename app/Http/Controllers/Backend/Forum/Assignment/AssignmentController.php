@@ -43,7 +43,8 @@ class AssignmentController extends Controller
     public function index(ManageAssignmentRequest $request)
     {
         return view('backend.forum.assignment.index')
-            ->withAssignments($this->assignmentRepository->getPaginated(25));
+            ->withAssignments($this->assignmentRepository
+                ->getPaginated(25, 'due_time', 'dec'));
     }
 
 
@@ -58,7 +59,7 @@ class AssignmentController extends Controller
         return view('backend.forum.assignment.index')
             ->withSpecificCourse($course)
             ->withAssignments($this->assignmentRepository
-                ->getPaginatedByCourse($course, 25));
+                ->getPaginatedByCourse($course, 25, 'due_time', 'dec'));
     }
 
     /**
