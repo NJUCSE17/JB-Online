@@ -2,6 +2,7 @@
 
 namespace App\Models\Forum\Traits\Attribute;
 
+use Illuminate\Support\Facades\DB;
 
 /**
  * Trait AssignmentAttribute.
@@ -77,8 +78,18 @@ trait AssignmentAttribute
      */
     public function getDDLBadgeAttribute()
     {
-        return "<a class=\"btn btn-sm  btn-outline-" . $this->ddl_color . "\" id=\"assignment_ddl\""
-            . "href='" . $this->assignment_link . "'>" . $this->ddl_badge_content . "</a>";
+        $finishStatus = $this->finish_status;
+        if ($finishStatus == null) {
+            $content = $this->ddl_badge_content;
+            return "<a class=\"btn btn-sm  btn-outline-" . $this->ddl_color . "\" id=\"assignment_ddl\""
+                . "href='" . route('frontend.forum.assignment.finish', [$this->source, $this])
+                . "'>" . $content . "</a>";
+        } else {
+            $content = "<i class='fas fa-check mr-2'></i>" . $finishStatus->finished_at;
+            return "<a class=\"btn btn-sm  btn-outline-success" . "\" id=\"assignment_ddl\""
+                . "href='" . route('frontend.forum.assignment.reset', [$this->source, $this])
+                . "'>" . $content . "</a>";
+        }
     }
 
     /**
@@ -88,6 +99,16 @@ trait AssignmentAttribute
     {
         $today = date("Y-m-d H:i:s");
         return $today < $this->due_time;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getFinishStatusAttribute() {
+        return DB::table('assignment_finish_records')
+            ->where('assignment_id', '=', $this->id)
+            ->where('user_id','=', \Auth::id())
+            ->first();
     }
 
     /**

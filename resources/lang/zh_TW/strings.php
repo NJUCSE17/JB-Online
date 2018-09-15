@@ -176,6 +176,10 @@ return [
 
         'assignments' => [
             'no_post'       => '没人发帖，怎么当杠精？',
+            'finish'        => '成功标记作业 :name 。',
+            'finish_fail'   => '你已经做过了 :name ！',
+            'reset'         => '成功重置作业 :name 。',
+            'reset_fail'    => '你都没有完成 :name ！',
         ],
 
         'breadcrumb' => [

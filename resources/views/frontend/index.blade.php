@@ -19,15 +19,20 @@
                 <h4 class="card-header py-3">
                     <i class="fas fa-calendar-alt mr-2"></i>
                     {{ __('labels.frontend.home.assignment') }}
-                    @auth
-                        @if(Auth::user()->isExecutive())
-                            <span class="float-right d-flex">
-                                <a class="text-sm-center text-dark" href="{{ route('admin.forum.assignment.index') }}">
+                    <span class="float-right d-flex">
+                        @auth
+                            @if(Auth::user()->isExecutive())
+                                <a class="text-sm-center text-dark ml-2"
+                                   href="{{ route('admin.forum.assignment.index') }}">
                                     <i class="fas fa-cog"></i>
                                 </a>
-                            </span>
-                        @endif
-                    @endauth
+                            @endif
+                        @else
+                            <a class="badge badge-sm badge-secondary" href="{{ route('frontend.auth.login') }}">
+                                <i class="fas fa-user-secret"></i>
+                            </a>
+                        @endauth
+                    </span>
                 </h4>
                 @if ($assignments->count())
                     <div class="card-body px-0 py-0">

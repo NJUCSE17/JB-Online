@@ -176,7 +176,11 @@ return [
         ],
 
         'assignments' => [
-            'no_post'       => 'No one posted yet, try to be first!',
+            'no_post'     => 'No one posted yet, try to be first!',
+            'finish'      => 'Successfully marked assignment :name as finished.',
+            'finish_fail' => 'You have already finished assignment :name !',
+            'reset'       => 'Successfully marked assignment :name as unfinished.',
+            'reset_fail'  => 'You have not finished assignment :name yet!',
         ],
 
         'breadcrumb' => [

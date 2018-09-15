@@ -176,6 +176,10 @@ return [
 
         'assignments' => [
             'no_post'       => '现在还没有人发帖……',
+            'finish'        => '成功标记作业 :name 。',
+            'finish_fail'   => '你已经完成了 :name ！',
+            'reset'         => '成功重置作业 :name 。',
+            'reset_fail'    => '你还没有完成 :name ！',
         ],
 
         'breadcrumb' => [
