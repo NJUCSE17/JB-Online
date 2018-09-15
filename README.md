@@ -18,7 +18,7 @@ The project is based on Laravel-5-boilerplate.
 ## Requirement
 
 - PHP 7.1+
-  - with path_info, mbstring, exif modules installed.
+  - with ``gd2``, ``path_info``, ``mbstring``, ``exif`` modules installed.
   - enabled ``proc_open`` and other functions in 
     ``php.ini`` config file.
 - SQL 5.6+
