@@ -178,10 +178,10 @@ return [
             'no_post'       => '现在还没有人发帖……',
             'finish'        => '成功标记作业 :name 。',
             'finish_fail'   => '你已经完成了 :name ！',
-            'finish_prompt' => '你确定要标记 :name 为已完成吗？',
+            'finish_prompt' => '你确定要标记已完成这份作业吗？',
             'reset'         => '成功重置作业 :name 。',
             'reset_fail'    => '你还没有完成 :name ！',
-            'reset_prompt'  => '你确定要重置 :name 的状态吗？',
+            'reset_prompt'  => '你确定要重置这份作业的状态吗？',
         ],
 
         'breadcrumb' => [

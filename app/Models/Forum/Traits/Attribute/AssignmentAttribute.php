@@ -81,18 +81,16 @@ trait AssignmentAttribute
         $finishStatus = $this->finish_status;
         if ($finishStatus == null) {
             $content = $this->ddl_badge_content;
-            $confirm = "onclick='return confirm(\""
-                . __('strings.frontend.assignments.finish_prompt', ['name' => $this->name]) . "\");'";
-            return "<a class=\"btn btn-sm btn-outline-" . $this->ddl_color . "\" id=\"assignment_ddl\""
-                . "href='" . route('frontend.forum.assignment.finish', [$this->source, $this])
-                . "' " . $confirm . ">" . $content . "</a>";
+            return "<a class=\"btn btn-sm btn-outline-" . $this->ddl_color . " finishBtn"
+                . "\" id=\"assignment_ddl\" data-name=\"" . $this->name . "\" data-content=\"" . $this->content
+                . "\"" . "href='" . route('frontend.forum.assignment.finish', [$this->source, $this])
+                . "'>" . $content . "</a>";
         } else {
             $content = "<i class='fas fa-check mr-2'></i>" . $finishStatus->finished_at;
-            $confirm = "onclick='return confirm(\""
-                . __('strings.frontend.assignments.reset_prompt', ['name' => $this->name]) . "\");'";
-            return "<a class=\"btn btn-sm btn-outline-success" . "\" id=\"assignment_ddl\""
-                . "href='" . route('frontend.forum.assignment.reset', [$this->source, $this])
-                . "' " . $confirm . ">" . $content . "</a>";
+            return "<a class=\"btn btn-sm btn-outline-success resetBtn" . "\" id=\"assignment_ddl\" data-name=\""
+                . $this->name . "\" data-content=\"" . $this->content . "\" data-ddl=\"" . $this->ddl_badge_content
+                . "\"" . "href='" . route('frontend.forum.assignment.reset', [$this->source, $this])
+                . "'>" . $content . "</a>";
         }
     }
 

@@ -214,7 +214,80 @@
 @push('after-scripts')
     <script type="text/javascript">
         $('#coverart').on('mousedown', function (e) {
-            e.preventDefault()
+            e.preventDefault();
+        });
+        $('.finishBtn').on('click', function (e) {
+            e.preventDefault();
+            if ('<?php echo \Auth::hasUser(); ?>') {
+                let link = this.href;
+                let name = this.dataset.name;
+                let content = this.dataset.content;
+                let ddl = this.innerHTML;
+                $.confirm({
+                    icon: 'far fa-calendar-check',
+                    title: name,
+                    content: content + ddl
+                        + '<hr /><b>{{ __('strings.frontend.assignments.finish_prompt') }}</b>',
+                    type: 'green',
+                    theme: 'modern',
+                    columnClass: 'medium',
+                    escapeKey: 'cancel',
+                    autoClose: 'cancel|20000',
+                    backgroundDismiss: 'cancel',
+                    buttons: {
+                        confirm: {
+                            text: '{{ __('labels.general.yes') }}',
+                            btnClass: 'btn-success',
+                            action: function () {
+                                document.location.href = link;
+                            }
+                        },
+                        cancel: {
+                            text: '{{ __('labels.general.no') }}',
+                            btnClass: 'btn-danger',
+                            action: function () {
+                            }
+                        },
+                    },
+                });
+            } else {
+                document.location.href = '{{ route("frontend.auth.login") }}';
+            }
+        });
+        $('.resetBtn').on('click', function (e) {
+            e.preventDefault();
+            let link = this.href;
+            let name = this.dataset.name;
+            let content = this.dataset.content;
+            let finished = this.innerHTML;
+            let ddl = this.dataset.ddl;
+            $.confirm({
+                icon: 'far fa-calendar-times',
+                title: name,
+                content: content + ddl + "<br /><div class='pt-2'>" + finished + "</div>"
+                    + '<hr /><b>{{ __('strings.frontend.assignments.reset_prompt') }}</b>',
+                type: 'red',
+                theme: 'modern',
+                columnClass: 'medium',
+                escapeKey: 'cancel',
+                autoClose: 'cancel|10000',
+                backgroundDismiss: 'cancel',
+                buttons: {
+                    confirm: {
+                        text: '{{ __('labels.general.yes') }}',
+                        btnClass: 'btn-success',
+                        action: function () {
+                            document.location.href = link;
+                        }
+                    },
+                    cancel: {
+                        text: '{{ __('labels.general.no') }}',
+                        btnClass: 'btn-danger',
+                        action: function () {
+                        }
+                    },
+                },
+            });
         });
     </script>
 @endpush

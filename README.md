@@ -100,14 +100,16 @@ There four major models, assignment, course, notice
 
 If you have any issues about safety or functions, you are welcome to open an issue to this repository.
 
-## Credit
+## License and Credit
 
-*   [Laravel 5.6](https://laravel.com/) as framework.
-*   [Elfinder](https://github.com/Studio-42/elFinder) and [laravel-elfinder](https://github.com/barryvdh/laravel-elfinder) for file storage.
-*   [Glide](http://glide.thephpleague.com/) for image processing.
-*   [MathJax](https://www.mathjax.org/) for TeX and LaTeX display.
-*   [Highlight.JS](https://highlightjs.org/) for code formatting.
-*   All icons from [FlatIcon](https://www.flaticon.com/).
-*   [TinyMCE 4](https://www.tiny.cloud/) as WYSIWYG editor.
 *   [Bootstrap 4](http://getbootstrap.com/) as layout framework.
 *   [Carbon 2](https://carbon.nesbot.com/) and [laravel-carbon-2](https://github.com/kylekatarnls/laravel-carbon-2) for time localization and display.
+*   [Elfinder](https://github.com/Studio-42/elFinder) and [laravel-elfinder](https://github.com/barryvdh/laravel-elfinder) for file storage.
+*   [Glide](http://glide.thephpleague.com/) for image processing.
+*   [Highlight.JS](https://highlightjs.org/) for code formatting.
+*   [jQuery](http://jquery.com/), [jQuery UI](https://jqueryui.com/) and [jQuery-Confirm v3](https://github.com/craftpip/jquery-confirm) for JS based utils.
+*   [Laravel 5.6](https://laravel.com/) as PHP framework.
+*   [Laravel Boilerplate](http://laravel-boilerplate.com/) as code basement.
+*   [MathJax](https://www.mathjax.org/) for TeX and LaTeX display.
+*   [TinyMCE 4](https://www.tiny.cloud/) as WYSIWYG editor.
+*   All icons from [FlatIcon](https://www.flaticon.com/).

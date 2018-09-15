@@ -11,18 +11,20 @@
                                           useLabelIds: true}
                 }
             });
-        </script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_SVG.js"></script>
+</script>
+<script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_SVG.js"></script>
 
-<script src="{{ URL::asset('js/tinymce/tinymce.min.js') }}"></script>
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css">
 <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+
+<script src="{{ URL::asset('js/tinymce/tinymce.min.js') }}"></script>
 <script>
     hljs.initHighlightingOnLoad();
     tinymce.init({
         skin: 'light',
-        selector:'textarea',
-        file_browser_callback : elFinderBrowser,
+        selector: 'textarea',
+        file_browser_callback: elFinderBrowser,
         plugins: 'paste, textcolor, link, wordcount, codesample, code, image, lists, table, preview, autoresize',
         menubar: '',
         toolbar: 'styleselect | undo redo | forecolor backcolor | numlist bullist' +
@@ -42,7 +44,8 @@
             {text: 'SQL', value: 'sql'}
         ],
     });
-    function elFinderBrowser (field_name, url, type, win) {
+
+    function elFinderBrowser(field_name, url, type, win) {
         tinymce.activeEditor.windowManager.open({
             file: '<?= route('elfinder.tinymce4') ?>',
             title: 'elFinder 2.0',
@@ -50,15 +53,15 @@
             width: 900,
             height: 450,
             resizable: 'yes',
-            commands : [
+            commands: [
                 'custom', 'open', 'reload', 'home', 'up', 'back', 'forward', 'getfile', 'download',
                 'mkdir', 'mkfile', 'upload', 'archive', 'search', 'info', 'view', 'help', 'sort', 'netmount',
                 <?php if (Auth::hasUser() && Auth::user()->isExecutive()) echo "'copy', 'cut', 'paste',
                         'edit', 'extract', 'rm', 'duplicate', 'rename', 'resize'" ?>
             ],
-            uiOptions : {
+            uiOptions: {
                 // toolbar configuration
-                toolbar : [
+                toolbar: [
                     ['back', 'forward', 'up'],
                     ['mkdir', 'mkfile', 'upload'],
                     ['open', 'download', 'getfile', 'info'],
@@ -71,34 +74,34 @@
                     ['search'],
                 ],
                 // directories tree options
-                tree : {
+                tree: {
                     // expand current root on init
-                    openRootOnLoad : true,
+                    openRootOnLoad: true,
                     // auto load current dir parents
-                    syncTree : true
+                    syncTree: true
                 },
                 // navbar options
-                navbar : {
-                    minWidth : 150,
-                    maxWidth : 500
+                navbar: {
+                    minWidth: 150,
+                    maxWidth: 500
                 },
                 // current working directory options
-                cwd : {
+                cwd: {
                     // display parent directory in listing as ".."
-                    oldSchool : true,
+                    oldSchool: true,
                 }
             },
-            contextmenu : {
+            contextmenu: {
                 // navbarfolder menu
-                navbar : ['open', '|',
+                navbar: ['open', '|',
                     <?php if (Auth::hasUser() && Auth::user()->isExecutive())
                         echo "'copy', 'cut', 'paste', 'duplicate', '|', 'rm', '|',"?>
                         'info'],
                 // current directory menu
-                cwd    : ['reload', 'back', '|', 'upload', 'mkdir', 'mkfile', 'paste', '|', 'info'],
+                cwd: ['reload', 'back', '|', 'upload', 'mkdir', 'mkfile', 'paste', '|', 'info'],
                 // current directory file menu
-                files  : [
-                    'getfile', '|','open', 'download', '|', 'copy', 'cut', 'paste', 'duplicate', '|',
+                files: [
+                    'getfile', '|', 'open', 'download', '|', 'copy', 'cut', 'paste', 'duplicate', '|',
                     <?php if (Auth::hasUser() && Auth::user()->isExecutive()) echo "'rm',"; ?> '|',
                     'edit', 'rename', 'resize', '|', 'archive', 'extract', '|', 'info'
                 ]
