@@ -80,6 +80,7 @@ trait AssignmentAttribute
     {
         $finishStatus = $this->finish_status;
         $assignmentContent = preg_replace("/<a.*>.*<\/a>/", "--", $this->content);
+        $assignmentContent = preg_replace("/style=\".*\"/", "", $assignmentContent);
         if ($finishStatus == null) {
             $content = $this->ddl_badge_content;
             return "<a class=\"btn btn-sm btn-outline-" . $this->ddl_color . " finishBtn"
