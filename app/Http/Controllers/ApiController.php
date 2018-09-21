@@ -45,6 +45,6 @@ class ApiController extends BaseController
             'source' => app('filesystem')->disk('public')->getDriver(),
             'cache' => storage_path('glide'),
         ]);
-        return "XXXX";
+        return $server->getImageResponse($path, \Illuminate\Support\Facades\Input::query());
     }
 }
