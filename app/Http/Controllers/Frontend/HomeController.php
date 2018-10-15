@@ -47,11 +47,31 @@ class HomeController extends Controller
      */
     public function index()
     {
+
+        $feeds = array();
+        if(app_blogonhome()) {
+            $originFeed = \Feeds::make(app_blogrss(), 0, false);
+            $items = $originFeed->get_items();
+            foreach ($items as $item) {
+                //$description = $item->get_description();
+                //$regex = '/(<[^>]+>)/is';
+                //$content = preg_replace($regex, '', $description);
+
+                $date = \Carbon\Carbon::parse($item->get_date());
+                $feeds[] = array(
+                    'permalink'   => $item->get_permalink(),
+                    'title'       => $item->get_title(),
+                    'date'        => $date,
+                );
+            }
+        }
+
         return view('frontend.index')
             ->withNotice($this->noticeRepository->getNotice())
             ->withOngoingCourses($this->courseRepository->getOngoingCourses())
             ->withAllCourses($this->courseRepository->getAllCourses())
-            ->withAssignments($this->assignmentRepository->getOngoingAssignments());
+            ->withAssignments($this->assignmentRepository->getOngoingAssignments())
+            ->withFeeds(collect($feeds));
     }
 
     /**

@@ -20,7 +20,7 @@ if (! function_exists('app_name')) {
 
 if (! function_exists('app_version')) {
     /**
-     * Helper to grab the application name.
+     * Helper to grab the application version.
      *
      * @return mixed
      */
@@ -32,13 +32,37 @@ if (! function_exists('app_version')) {
 
 if (! function_exists('app_coverart')) {
     /**
-     * Helper to grab the application name.
+     * Helper to grab the application cover art.
      *
      * @return mixed
      */
     function app_coverart()
     {
         return config('app.coverart');
+    }
+}
+
+if (! function_exists('app_blogonhome')) {
+    /**
+     * Helper to grab the option of home page blog.
+     *
+     * @return mixed
+     */
+    function app_blogonhome()
+    {
+        return config('app.blogonhome');
+    }
+}
+
+if (! function_exists('app_blogrss')) {
+    /**
+     * Helper to grab the RSS of home page blog.
+     *
+     * @return mixed
+     */
+    function app_blogrss()
+    {
+        return config('app.blogrss');
     }
 }
 

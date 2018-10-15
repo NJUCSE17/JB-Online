@@ -14,7 +14,7 @@
         </div>
     </div>
     <div class="row">
-        <div class="col col-lg-4 col-12" id="leftCol">
+        <div class="col col-lg-7 col-12" id="leftCol">
             <div class="card my-3">
                 <h4 class="card-header py-3">
                     <i class="fas fa-calendar-alt mr-2"></i>
@@ -82,7 +82,7 @@
             </div>
         </div>
 
-        <div class="col col-lg-8 col-12" id="rightCol">
+        <div class="col col-lg-5 col-12" id="rightCol">
             <div class="card my-3">
                 <h4 class="card-header py-3">
                     <i class="fas fa-broadcast-tower mr-2"></i>
@@ -205,6 +205,38 @@
                             </div><!--col-->
                         </div><!--row-->
                     </div>
+                </div>
+            @endif
+            @if(app_blogonhome())
+                <div class="card my-3">
+                    <h4 class="card-header py-3">
+                        <i class="fas fa-rss-square mr-2"></i>
+                        {{ __('labels.frontend.home.class_blog') }}
+                    </h4>
+                    @if ($feeds->count())
+                        <div class="card-body px-0 py-0">
+                            <div class="list-group list-group-flush" id="assignments" style="height: auto; overflow: auto;">
+                                @foreach($feeds as $feed)
+                                    <a class="list-group-item list-group-item-action border-0" id="class-blog-posts"
+                                       style="border-radius: 0.625rem" href="{{ $feed['permalink'] }}">
+                                        {{ $feed['title'] }}
+                                        <small class="text-right">
+                                            <object>{{ $feed['date'] }}</object>
+                                        </small>
+                                        <hr class="mb-0"/>
+                                    </a>
+                                @endforeach
+                            </div>
+                        </div>
+                    @else
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col text-center">
+                                    {{ __('strings.frontend.home.no_blog') }}
+                                </div>
+                            </div>
+                        </div>
+                    @endif
                 </div>
             @endif
         </div>
