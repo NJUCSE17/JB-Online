@@ -7,7 +7,7 @@
         <div class="card">
             <img class="card-img" src="{{ app_coverart() }}" id="coverart" style="width: 100%">
             <div class="card-img-overlay text-right">
-                <h4 class="card-title slide-in">
+                <h4 class="card-title flipInX animated">
                     {{ app_name() }}
                 </h4>
             </div>
