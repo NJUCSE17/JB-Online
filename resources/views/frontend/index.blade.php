@@ -52,12 +52,12 @@
                                                 </span>
                                             @endif
                                             <a href="{{ $assignment->assignment_link }}"
-                                               class="mb-1" id="assignment_title" style="font-size:120%;">
+                                               class="mb-1" id="assignment_title_{{ $assignment->id }}" style="font-size:120%;">
                                                 {{ $assignment->name }}
                                             </a>
                                         </object>
                                     </div>
-                                    <div id="assignment_content">
+                                    <div id="assignment_content_{{ $assignment->id }}" class="pt-3">
                                         <object>
                                             {!! $assignment->content !!}
                                         </object>
@@ -252,8 +252,9 @@
             e.preventDefault();
             if ('<?php echo \Auth::hasUser(); ?>') {
                 let link = this.href;
-                let name = this.dataset.name;
-                let content = this.dataset.content;
+                let aid = this.dataset.aid;
+                let name = $("#assignment_title_" + aid.toString())[0].innerHTML;
+                let content = $("#assignment_content_" + aid.toString())[0].innerHTML;
                 let ddl = this.innerHTML;
                 $.confirm({
                     icon: 'far fa-calendar-check',
@@ -289,8 +290,9 @@
         $('.resetBtn').on('click', function (e) {
             e.preventDefault();
             let link = this.href;
-            let name = this.dataset.name;
-            let content = this.dataset.content;
+            let aid = this.dataset.aid;
+            let name = $("#assignment_title_" + aid.toString())[0].innerHTML;
+            let content = $("#assignment_content_" + aid.toString())[0].innerHTML;
             let finished = this.innerHTML;
             let ddl = this.dataset.ddl;
             $.confirm({

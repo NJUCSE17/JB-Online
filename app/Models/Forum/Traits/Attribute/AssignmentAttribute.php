@@ -79,18 +79,17 @@ trait AssignmentAttribute
     public function getDDLBadgeAttribute()
     {
         $finishStatus = $this->finish_status;
-        $assignmentContent = preg_replace("/<a.*>.*<\/a>/", "--", $this->content);
-        $assignmentContent = preg_replace("/style=\".*\"/", "", $assignmentContent);
         if ($finishStatus == null) {
             $content = $this->ddl_badge_content;
             return "<a class=\"btn btn-sm btn-outline-" . $this->ddl_color . " finishBtn"
-                . "\" id=\"assignment_ddl\" data-name=\"" . $this->name . "\" data-content=\"" . $assignmentContent
+                . "\" id=\"assignment_ddl_" . $this->id . "\" data-aid=\"" . $this->id
                 . "\"" . "href='" . route('frontend.forum.assignment.finish', [$this->source, $this])
                 . "'>" . $content . "</a>";
         } else {
-            $content = "<i class='fas fa-check mr-2'></i>" . $finishStatus->finished_at;
-            return "<a class=\"btn btn-sm btn-outline-success resetBtn" . "\" id=\"assignment_ddl\" data-name=\""
-                . $this->name . "\" data-content=\"" . $assignmentContent . "\" data-ddl=\"" . $this->ddl_badge_content
+            $content = "<i class='fas fa-check mr-2'></i>" . __('strings.frontend.home.finished_at')
+                . $finishStatus->finished_at;
+            return "<a class=\"btn btn-sm btn-outline-success resetBtn" . "\" id=\"assignment_ddl_" . $this->id
+                . "\" data-aid=\"" . $this->id . "\" data-ddl=\"" . $this->ddl_badge_content
                 . "\"" . "href='" . route('frontend.forum.assignment.reset', [$this->source, $this])
                 . "'>" . $content . "</a>";
         }

@@ -162,6 +162,7 @@ return [
             'no_ongoing'    => '没有现在正在进行的课程。',
             'no_assignment' => '天哪，现在竟然没有作业！',
             'no_blog'       => '没有找到已发布的内容。',
+            'finished_at'   => '完成于',
             'total' => [
                 'left'  => '共找到',
                 'right' => '门让你充实又快乐的课程。',
