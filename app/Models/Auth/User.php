@@ -4,6 +4,7 @@ namespace App\Models\Auth;
 
 use App\Models\Traits\Uuid;
 use Cog\Laravel\Love\Liker\Models\Traits\Liker;
+use Cog\Contracts\Love\Liker\Models\Liker as LikerContract;
 use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Notifications\Notifiable;
 use App\Models\Auth\Traits\Scope\UserScope;
@@ -17,7 +18,7 @@ use App\Models\Auth\Traits\Relationship\UserRelationship;
 /**
  * Class User.
  */
-class User extends Authenticatable
+class User extends Authenticatable implements LikerContract
 {
     use Liker,
         HasRoles,

@@ -29,6 +29,10 @@ Route::group(['middleware' => ['auth', 'password_expires']], function () {
             Route::get('/{sort}', 'AssignmentController@index')->name('assignment.view');
             Route::resource('post', 'PostController');
 
+            Route::group(['prefix' => 'post/{post}'], function() {
+                Route::get('voteup', 'PostController@voteUp')->name('post.voteup');
+                Route::get('votedown', 'PostController@voteDown')->name('post.votedown');
+            });
         });
     });
 });
