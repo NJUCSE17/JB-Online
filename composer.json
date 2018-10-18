@@ -13,6 +13,7 @@
         "barryvdh/laravel-elfinder": "^0.4.0",
         "beyondcode/laravel-self-diagnosis": "^0.4.1",
         "creativeorange/gravatar": "~1.0",
+        "cybercog/laravel-love": "^5.2",
         "davejamesmiller/laravel-breadcrumbs": "^5.0",
         "divineomega/laravel-password-exposed-validation-rule": "^1.2",
         "fideloper/proxy": "^4.0",
