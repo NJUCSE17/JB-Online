@@ -163,6 +163,7 @@ return [
             'no_ongoing'    => 'No course now.',
             'no_assignment' => 'Oops! No assignments to do now.',
             'no_blog'       => 'No blogs to show.',
+            'finished_at'   => 'Finished at ',
             'total' => [
                 'left'  => 'Found',
                 'right' => 'interesting course(s) in total.',
@@ -177,6 +178,12 @@ return [
 
         'assignments' => [
             'no_post'       => 'No one posted yet, try to be first!',
+            'finish'        => 'Successfully marked assignment :name as finished.',
+            'finish_fail'   => 'You have already finished assignment :name !',
+            'finish_prompt' => 'Are you sure to mark this assignment as finished?',
+            'reset'         => 'Successfully marked assignment :name as unfinished.',
+            'reset_fail'    => 'You have not finished assignment :name yet!',
+            'reset_prompt'  => 'Are you sure to reset this assignment as unfinished?',
         ],
 
         'breadcrumb' => [

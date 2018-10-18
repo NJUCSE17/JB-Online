@@ -162,6 +162,7 @@ return [
             'no_ongoing'    => '没有现在正在进行的课程。',
             'no_assignment' => '搞毛啊！怎么没有作业！',
             'no_blog'       => '毛也没有，可能倒闭了！',
+            'finished_at'   => '完成于',
             'total' => [
                 'left'  => '共找到',
                 'right' => '门让你分分钟爽到的课程。',
@@ -176,6 +177,12 @@ return [
 
         'assignments' => [
             'no_post'       => '没人发帖，怎么当杠精？',
+            'finish'        => '成功标记作业 :name 。',
+            'finish_fail'   => '你已经做过了 :name ！',
+            'finish_prompt' => '你确定要标记已完成这份作业吗？',
+            'reset'         => '成功重置作业 :name 。',
+            'reset_fail'    => '你都没有完成 :name ！',
+            'reset_prompt'  => '你确定要重置这份作业的状态吗？',
         ],
 
         'breadcrumb' => [

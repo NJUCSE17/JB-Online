@@ -24,8 +24,11 @@ Route::group(['middleware' => ['auth', 'password_expires']], function () {
         Route::get('/', 'CourseController@index')->name('course.view');
 
         Route::group(['prefix' => 'assignment/{assignment}'], function () {
+            Route::get('finish', 'AssignmentController@finish')->name('assignment.finish');
+            Route::get('reset', 'AssignmentController@reset')->name('assignment.reset');
             Route::get('/{sort}', 'AssignmentController@index')->name('assignment.view');
             Route::resource('post', 'PostController');
+
         });
     });
 });

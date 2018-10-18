@@ -6,6 +6,7 @@
 /public/images/frontend/user
 /public/images/frontend/logo.jpg
 /storage/*.key
+/storage/glide
 /vendor
 /.idea
 /.vagrant
