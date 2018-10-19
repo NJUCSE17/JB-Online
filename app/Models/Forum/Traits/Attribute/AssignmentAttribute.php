@@ -74,7 +74,9 @@ trait AssignmentAttribute
             return $this->due_time->isoFormat("Y-MM-DD (ddd) H:mm:ss") . "<br />"
                 . $this->due_time->diffForHumans(null, null, false, 2);
         } else {
-            return "<i class='fas fa-check mr-2'></i>" . __('strings.frontend.home.finished_at')
+            return $this->due_time->isoFormat("Y-MM-DD (ddd) H:mm:ss")
+                . "<hr class='my-0'/><i class='fas fa-check mr-2'></i>"
+                . __('strings.frontend.home.finished_at')
                 . $finishStatus->finished_at;
         }
     }
