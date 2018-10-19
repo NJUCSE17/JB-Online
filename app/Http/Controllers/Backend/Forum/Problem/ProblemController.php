@@ -130,7 +130,7 @@ class ProblemController extends Controller
         $data = $request->only('permalink', 'content', 'difficulty');
         $this->problemRepository->update($problem, $data);
 
-        return redirect()->route('admin.forum.problem.index')->withFlashSuccess(__('alerts.backend.problems.updated'));
+        return redirect()->route('admin.forum.problem.specific', [$request['assignment_id']])->withFlashSuccess(__('alerts.backend.problems.updated'));
     }
 
     /**
@@ -146,6 +146,6 @@ class ProblemController extends Controller
 
         event(new ProblemDeleted($problem));
 
-        return redirect()->route('admin.forum.problem.index')->withFlashSuccess(__('alerts.backend.problems.deleted'));
+        return redirect()->back()->withFlashSuccess(__('alerts.backend.problems.deleted'));
     }
 }
