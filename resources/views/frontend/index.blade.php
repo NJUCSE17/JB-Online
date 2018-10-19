@@ -255,37 +255,63 @@
         $('#coverart').on('mousedown', function (e) {
             e.preventDefault();
         });
-        $('.finishBtn').on('click', function (e) {
+    </script>
+    <script type="text/javascript" id="btnScripts">
+        $('.assignmentBtn').on('click', function (e) {
             e.preventDefault();
             if ('<?php echo \Auth::hasUser(); ?>') {
-                let link = this.href;
+                let ddl_badge = this;
                 let aid = this.dataset.aid;
+                let api = this.dataset.api;
+                let isFinished = this.dataset.finished === '1';
                 let name = $("#assignment_title_" + aid.toString())[0].innerHTML;
                 let content = $("#assignment_content_" + aid.toString())[0].innerHTML;
-                let ddl = this.innerHTML;
+                let ddl_date = this.innerHTML;
                 $.confirm({
-                    icon: 'far fa-calendar-check',
+                    icon: isFinished ? 'far fa-calendar-times' : 'far fa-calendar-check',
                     title: name,
-                    content: content + ddl
-                        + '<hr /><b>{{ __('strings.frontend.assignments.finish_prompt') }}</b>',
-                    type: 'green',
-                    theme: 'modern',
+                    content: content + ddl_date
+                        + '<hr /><b>'
+                        + (isFinished ? "{{ __('strings.frontend.assignments.reset_prompt') }}" : "{{ __('strings.frontend.assignments.finish_prompt') }}")
+                        + '</b>',
+                    type: isFinished ? 'red' : 'green',
+                    theme: 'supervan',
                     columnClass: 'medium',
                     escapeKey: 'cancel',
-                    autoClose: 'cancel|20000',
                     backgroundDismiss: 'cancel',
                     buttons: {
                         confirm: {
                             text: '{{ __('labels.general.yes') }}',
                             btnClass: 'btn-success',
                             action: function () {
-                                document.location.href = link;
+                                $.getJSON(api, function(result) {
+                                    if (result.status === 1) {
+                                        console.log(result);
+                                        ddl_badge.dataset.api = result.ddl_badge_api;
+                                        ddl_badge.dataset.finished = result.ddl_badge_finished;
+                                        ddl_badge.innerHTML = result.ddl_badge_content;
+                                        ddl_badge.setAttribute('class', result.ddl_badge_class);
+                                    }
+                                    $.dialog({
+                                        title: (result.status === 1) ? 'Success' : 'Fail',
+                                        content: result.prompt,
+                                        type: (result.status === 1) ? 'green' : 'red',
+                                        theme: 'supervan',
+                                        typeAnimated: true,
+                                        backgroundDismiss: 'close',
+                                        buttons:{
+                                            close: function(){
+                                            }
+                                        }
+                                    });
+                                });
                             }
                         },
                         cancel: {
                             text: '{{ __('labels.general.no') }}',
                             btnClass: 'btn-danger',
                             action: function () {
+                                //
                             }
                         },
                     },
@@ -293,42 +319,6 @@
             } else {
                 document.location.href = '{{ route("frontend.auth.login") }}';
             }
-        });
-        $('.resetBtn').on('click', function (e) {
-            e.preventDefault();
-            let link = this.href;
-            let aid = this.dataset.aid;
-            let name = $("#assignment_title_" + aid.toString())[0].innerHTML;
-            let content = $("#assignment_content_" + aid.toString())[0].innerHTML;
-            let finished = this.innerHTML;
-            let ddl = this.dataset.ddl;
-            $.confirm({
-                icon: 'far fa-calendar-times',
-                title: name,
-                content: content + ddl + "<br /><div class='pt-2'>" + finished + "</div>"
-                    + '<hr /><b>{{ __('strings.frontend.assignments.reset_prompt') }}</b>',
-                type: 'red',
-                theme: 'modern',
-                columnClass: 'medium',
-                escapeKey: 'cancel',
-                autoClose: 'cancel|10000',
-                backgroundDismiss: 'cancel',
-                buttons: {
-                    confirm: {
-                        text: '{{ __('labels.general.yes') }}',
-                        btnClass: 'btn-success',
-                        action: function () {
-                            document.location.href = link;
-                        }
-                    },
-                    cancel: {
-                        text: '{{ __('labels.general.no') }}',
-                        btnClass: 'btn-danger',
-                        action: function () {
-                        }
-                    },
-                },
-            });
         });
     </script>
 @endpush
