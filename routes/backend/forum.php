@@ -62,6 +62,34 @@ Route::group([
     });
 
     /*
+    * Problem Management
+    */
+    Route::group(['namespace' => 'Problem'], function () {
+
+        /*
+        * Problem Status
+        */
+        Route::get('problem/deleted', 'ProblemStatusController@getDeleted')->name('problem.deleted');
+
+        /*
+        * Problem CRUD
+        */
+        Route::resource('problem', 'ProblemController');
+        Route::get('problem/specific/{assignment}', 'ProblemController@specific')->name('problem.specific');
+        Route::get('problem/specific/{assignment}/create', 'ProblemController@createSpecific')
+            ->name('problem.specific.create');
+
+        /*
+        * Specific problem
+        */
+        Route::group(['prefix' => 'problem/{problem}'], function () {
+            // Deleted
+            Route::get('delete', 'ProblemStatusController@delete')->name('problem.delete-permanently');
+            Route::get('restore', 'ProblemStatusController@restore')->name('problem.restore');
+        });
+    });
+
+    /*
     * Post Management
     */
     Route::group(['namespace' => 'Post'], function () {

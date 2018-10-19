@@ -32,6 +32,7 @@ return [
         'toggle_navigation' => 'Toggle Navigation',
         'course'            => 'Course',
         'assignment'        => 'Assignment',
+        'problem'           => 'Problem',
         'post'              => 'Post',
         'notice'            => 'Notice',
         'published'         => 'Posted',
@@ -198,6 +199,42 @@ return [
                 'view' => 'View Assignment',
             ],
 
+            'problems' => [
+                'create'              => 'Create Problem',
+                'deleted'             => 'Deleted Problems',
+                'edit'                => 'Edit Problem',
+                'management'          => 'Problem Management',
+                'active'              => 'Active Problems',
+
+                'table' => [
+                    'course_id'       => 'Course ID',
+                    'assignment_id'   => 'Assignment ID',
+                    'permalink'       => 'Permalink',
+                    'content'         => 'Content',
+                    'difficulty'      => 'Difficulty',
+                    'updated_at'      => 'Updated At',
+                    'total'           => 'in total',
+                ],
+
+                'tabs' => [
+                    'titles' => [
+                        'overview' => 'Overview',
+                        'history'  => 'History',
+                    ],
+
+                    'content' => [
+                        'overview' => [
+                            'created_at'   => 'Created At',
+                            'deleted_at'   => 'Deleted At',
+                            'last_updated' => 'Last Updated',
+                            'name'         => 'Name',
+                        ],
+                    ],
+                ],
+
+                'view' => 'View Problem',
+            ],
+
             'posts' => [
                 'create'              => 'Create Post',
                 'deleted'             => 'Deleted Posts',
@@ -233,7 +270,7 @@ return [
                     ],
                 ],
 
-                'view' => 'View User',
+                'view' => 'View Post',
             ],
 
             'notices' => [

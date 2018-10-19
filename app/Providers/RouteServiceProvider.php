@@ -7,6 +7,7 @@ use App\Models\Forum\Notice;
 use App\Models\Forum\Post;
 use App\Models\Forum\Course;
 use App\Models\Forum\Assignment;
+use App\Models\Forum\Problem;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 
@@ -60,6 +61,16 @@ class RouteServiceProvider extends ServiceProvider
             $assignment = new Assignment;
 
             return Assignment::withTrashed()->where($assignment->getRouteKeyName(), $value)->first();
+        });
+
+
+        /*
+         * Allow this to select all posts regardless of status
+         */
+        $this->bind('problem', function ($value) {
+            $problem = new Problem();
+
+            return Problem::withTrashed()->where($problem->getRouteKeyName(), $value)->first();
         });
 
 

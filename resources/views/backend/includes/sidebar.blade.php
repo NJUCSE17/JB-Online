@@ -84,6 +84,17 @@
                 </div>
             </div>
         </a>
+        <a class="dropdown-item {{ active_class(Active::checkUriPattern('admin/forum/problem*')) }}"
+           href="{{ route('admin.forum.problem.index') }}">
+            <div class="row">
+                <div class="col-3 text-center">
+                    <i class="fas fa-lightbulb"></i>
+                </div>
+                <div class="col-9">
+                    {{ __('labels.backend.forum.problems.management') }}
+                </div>
+            </div>
+        </a>
         <a class="dropdown-item {{ active_class(Active::checkUriPattern('admin/forum/post*')) }}"
            href="{{ route('admin.forum.post.index') }}">
             <div class="row">

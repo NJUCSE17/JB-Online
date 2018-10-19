@@ -51,6 +51,14 @@ return [
             'updated'             => 'The assignment was successfully updated.',
         ],
 
+        'problems' => [
+            'created'             => 'The problem was successfully created.',
+            'deleted'             => 'The problem was successfully deleted.',
+            'deleted_permanently' => 'The problem was deleted permanently.',
+            'restored'            => 'The problem was successfully restored.',
+            'updated'             => 'The problem was successfully updated.',
+        ],
+
         'posts' => [
             'deleted'             => 'The post was successfully deleted.',
             'deleted_permanently' => 'The post was deleted permanently.',

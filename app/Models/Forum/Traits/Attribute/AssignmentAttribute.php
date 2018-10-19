@@ -128,12 +128,23 @@ trait AssignmentAttribute
     /**
      * @return string
      */
+    public function getProblemButtonAttribute()
+    {
+        return '<a href="' . route('admin.forum.problem.specific', $this)
+            . '" data-toggle="tooltip" data-placement="top" title="'
+            . __('buttons.general.crud.edit') . ' ' . __('labels.general.problem')
+            . '" class="btn btn-success"><i class="far fa-lightbulb"></i></a>';
+    }
+
+    /**
+     * @return string
+     */
     public function getPostButtonAttribute()
     {
         return '<a href="' . route('admin.forum.post.specific', $this)
             . '" data-toggle="tooltip" data-placement="top" title="'
             . __('buttons.general.crud.edit') . ' ' . __('labels.general.post')
-            . '" class="btn btn-warning"><i class="far fa-edit"></i></a>';
+            . '" class="btn btn-warning text-white"><i class="far fa-comments"></i></a>';
     }
 
     /**
@@ -181,6 +192,7 @@ trait AssignmentAttribute
         return '
     	<div class="btn-group" role="group" aria-label="Assignment Actions">
 		  ' . $this->edit_button . '
+		  ' . $this->problem_button . '
 		  ' . $this->post_button . '
 		
 		  <div class="btn-group btn-group-sm" role="group">

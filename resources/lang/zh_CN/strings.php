@@ -33,6 +33,11 @@ return [
                 'no_deleted' => '没有已经删除的作业。',
             ],
 
+            'problems' => [
+                'delete_assignment_confirm'  => '你确定要删除吗？此操作不可撤销。',
+                'no_deleted' => '没有已经删除的题目。',
+            ],
+
             'posts' => [
                 'delete_assignment_confirm'  => '你确定要删除吗？此操作不可撤销。',
                 'no_deleted' => '没有已经删除的帖子。',

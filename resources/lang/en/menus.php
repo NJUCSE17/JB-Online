@@ -58,6 +58,15 @@ return [
                 'view'            => 'View Assignment',
             ],
 
+            'problems' => [
+                'all'             => 'All Problems',
+                'create'          => 'Create Problem',
+                'deleted'         => 'Deleted Problems',
+                'edit'            => 'Edit Problem',
+                'main'            => 'Problems',
+                'view'            => 'View Problem',
+            ],
+
             'posts' => [
                 'all'             => 'All Posts',
                 'create'          => 'Create Post',

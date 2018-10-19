@@ -58,6 +58,15 @@ return [
                 'view'            => '查看作业',
             ],
 
+            'problems' => [
+                'all'             => '所有题目',
+                'create'          => '新建题目',
+                'deleted'         => '已删除的题目',
+                'edit'            => '编辑题目',
+                'main'            => '题目',
+                'view'            => '查看题目',
+            ],
+
             'posts' => [
                 'all'             => '所有帖子',
                 'create'          => '新建帖子',

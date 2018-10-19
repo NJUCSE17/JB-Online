@@ -217,6 +217,14 @@ return [
                     'due_time'          => 'Due',
                 ],
 
+                'problems' => [
+                    'course_id'         => 'Course ID',
+                    'assignment_id'     => 'Assignment ID',
+                    'permalink'         => 'Permalink',
+                    'content'           => 'Content',
+                    'difficulty'        => 'Difficulty',
+                ],
+
                 'posts' => [
                     'content'           => 'Content',
                 ],

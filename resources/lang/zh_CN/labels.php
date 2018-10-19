@@ -32,6 +32,7 @@ return [
         'toggle_navigation' => '切换导航',
         'course'            => '课程',
         'assignment'        => '作业',
+        'problem'           => '题目',
         'post'              => '帖子',
         'notice'            => '公告',
         'published'         => '发表于',
@@ -193,6 +194,44 @@ return [
                 ],
 
                 'view' => '查看作业',
+            ],
+
+            'problems' => [
+                'create'              => '新建题目',
+                'deleted'             => '已删除的题目',
+                'edit'                => '编辑题目',
+                'management'          => '题目管理',
+                'active'              => '有效题目',
+
+                'table' => [
+                    'assignment_id'   => '作业',
+                    'course_id'       => '课程',
+                    'name'            => '名称',
+                    'permalink'       => '网址',
+                    'content'         => '内容',
+                    'difficulty'      => '难度',
+                    'updated_at'      => '更新于',
+                    'total'           => '题目总计'
+                ],
+
+                'tabs' => [
+                    'titles' => [
+                        'overview' => '概述',
+                        'history'  => '历史',
+                    ],
+
+                    'content' => [
+                        'overview' => [
+                            'created_at'   => '创建于',
+                            'deleted_at'   => '删除于',
+                            'last_updated' => '最后更新',
+                            'name'         => '名称',
+                            'status'       => '状态',
+                        ],
+                    ],
+                ],
+
+                'view' => '查看题目',
             ],
 
             'posts' => [

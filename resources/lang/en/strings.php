@@ -35,6 +35,11 @@ return [
                 'no_deleted' => 'There are no deleted assignments.',
             ],
 
+            'problems' => [
+                'delete_assignment_confirm'  => 'Are you sure you want to delete this problem permanently? Anywhere in the application that references this user\'s id will most likely error. Proceed at your own risk. This can not be un-done.',
+                'no_deleted' => 'There are no deleted problems.',
+            ],
+
             'posts' => [
                 'delete_assignment_confirm'  => 'Are you sure you want to delete this post permanently? Anywhere in the application that references this user\'s id will most likely error. Proceed at your own risk. This can not be un-done.',
                 'no_deleted' => 'There are no deleted posts.',

@@ -36,6 +36,9 @@
         <div id="app" class="@yield('appClass', '')">
             <div class="container-fluid my-4">
                 @include('includes.partials.messages')
+                <div style="vertical-align: center; line-height: 50px">
+                    {!! Breadcrumbs::render() !!}
+                </div>
                 @yield('content')
             </div><!-- container -->
         </div><!-- #app -->
