@@ -4,17 +4,7 @@
              style="height: 45px !important;">
         <span> {{$post->author->name}} </span>
         |
-        <span>
-            <a class="{{ $post->isLikedby() ? "text-success" : "text-dark" }}"
-               href="{{ route('frontend.forum.post.voteup', [$course, $assignment, $post]) }}">
-                <i class="fas fa-arrow-circle-up"></i>
-            </a>
-            {{ $post->likesDiffDislikesCount > 0 ? "+" : "" }}{{ $post->likesDiffDislikesCount }}
-            <a class="{{ $post->isDislikedby() ? "text-danger" : "text-dark" }}"
-               href="{{ route('frontend.forum.post.votedown', [$course, $assignment, $post]) }}">
-                <i class="fas fa-arrow-circle-down"></i>
-            </a>
-        </span>
+        <span> {!!  $post->vote_buttons !!} </span>
         |
         <small class="text-muted">#{{ $post->id }}</small>
         <span class="float-right" style="line-height: 45px">

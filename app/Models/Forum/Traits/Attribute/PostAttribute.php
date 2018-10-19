@@ -82,6 +82,31 @@ trait PostAttribute
     }
 
     /**
+     * @return String
+     */
+    public function getVoteCountLabelAttribute() {
+        $voteStatus = $this->isLikedBy() ? 1 : ($this->isDislikedBy() ? -1 : 0);
+        return ($this->likesDiffDislikesCount > 0 ? "+" : "") . $this->likesDiffDislikesCount
+            . " (" . ($this->likesCount + $this->dislikesCount) . ")";
+    }
+
+    /**
+     * @return string
+     */
+    public function getVoteButtonsAttribute()
+    {
+        return "<a id=\"vote_down_post_" . $this->id . "\" class=\"voteBtn text-" . ($this->isDislikedBy() ? 'danger' : 'dark')
+            . "\" href=\"#\" data-pid=\"post_" . $this->id . "\" data-api=\"" . route('frontend.forum.post.votedown', [$this->source->source, $this->source, $this])
+            . "\"><i class='far fa-thumbs-down mr-1'></i></a>"
+
+            . "<span id=\"vote_count_label_post_" . $this->id . "\">" . $this->voteCountLabel . "</span>"
+
+            . "<a id=\"vote_up_post_" . $this->id . "\" class=\"voteBtn text-" . ($this->isLikedBy() ? 'success' : 'dark')
+            . "\" href=\"#\" data-pid=\"post_" . $this->id . "\" data-api=\"" . route('frontend.forum.post.voteup', [$this->source->source, $this->source, $this])
+            . "\"><i class='far fa-thumbs-up ml-1'></i></a>";
+    }
+
+    /**
      * @return string
      */
     public function getEditButtonAttribute()

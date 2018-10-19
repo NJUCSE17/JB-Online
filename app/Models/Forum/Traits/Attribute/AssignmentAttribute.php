@@ -128,8 +128,8 @@ trait AssignmentAttribute
                         style=\"text-align: center; width: 90%; margin-left: auto; margin-right: auto;\" 
                         width=\"90%\"> <tbody>";
             foreach ($this->problems as $problem) {
-                $table = $table . "<tr><td>" . $problem->content . "</td><td>" . $problem->difficultyLabel
-                    . "</td><td>" . $problem->vote_button . "</td></tr>";
+                $table = $table . "<tr><td>" . $problem->content . "</td><td>" . $problem->difficulty
+                    . "</td><td>" . $problem->vote_buttons . "</td></tr>";
             }
             $table = $table . "</tbody> </table>";
             return $table;

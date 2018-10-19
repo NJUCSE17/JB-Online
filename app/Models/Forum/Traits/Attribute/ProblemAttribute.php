@@ -44,25 +44,6 @@ trait ProblemAttribute
     }
 
     /**
-     * @return string
-     */
-    public function getDifficultyLabelAttribute()
-    {
-        if ($this->difficulty == 0) {
-            return "/";
-        } else {
-            $label = "";
-            for ($i = 0; $i < $this->difficulty; $i += 2) {
-                $label = $label . "★";
-            }
-            if ($this->difficulty % 2) {
-                $label = $label . "☆";
-            }
-            return $label;
-        }
-    }
-
-    /**
      * @return String
      */
     public function getVoteCountLabelAttribute() {
@@ -74,8 +55,8 @@ trait ProblemAttribute
     /**
      * @return String
      */
-    public function getVoteButtonAttribute() {
-        $voteStatus = $this->isLikedBy() ? 1 : ($this->isDislikedBy() ? -1 : 0);
+    public function getVoteButtonsAttribute()
+    {
         return "<a id=\"vote_down_" . $this->id . "\" class=\"voteBtn text-" . ($this->isDislikedBy() ? 'danger' : 'dark')
             . "\" href=\"#\" data-pid=\"" . $this->id . "\" data-api=\"" . route('frontend.forum.problem.votedown', [$this->source->source, $this->source, $this])
             . "\"><i class='far fa-thumbs-down mr-1'></i></a>"

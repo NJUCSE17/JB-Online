@@ -44,6 +44,7 @@
     @stack('before-scripts')
     {!! script(mix('js/frontend.js')) !!}
     @stack('after-scripts')
+    @include('includes.commonjs')
 
     @include('includes.partials.ga')
 </body>

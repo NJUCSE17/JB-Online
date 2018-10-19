@@ -102,7 +102,6 @@ class PostController extends Controller
         return redirect()->route('frontend.forum.assignment.view', [$course, $assignment, 'dec  '])
             ->withFlashSuccess(__('alerts.backend.posts.updated'));
     }
-
     /**
      * @var Course
      * @var Assignment
@@ -114,12 +113,20 @@ class PostController extends Controller
         if ($post->isDislikedBy()) {
             $post->undislikeBy();
         }
+        $downClass = "voteBtn text-dark";
         if ($post->isLikedBy()) {
             $post->unlikeBy();
+            $upClass = "voteBtn text-dark";
         } else {
             $post->likeBy();
+            $upClass = "voteBtn text-success";
         }
-        return redirect()->back();
+        return json_encode([
+            'status' => 1,
+            'vote_up_class' => $upClass,
+            'vote_down_class' => $downClass,
+            'vote_count_label' => $post->voteCountLabel,
+        ]);
     }
 
     /**
@@ -133,11 +140,19 @@ class PostController extends Controller
         if ($post->isLikedBy()) {
             $post->unlikeBy();
         }
+        $upClass = "voteBtn text-dark";
         if ($post->isDislikedBy()) {
             $post->undislikeBy();
+            $downClass = "voteBtn text-dark";
         } else {
             $post->dislikeBy();
+            $downClass = "voteBtn text-danger";
         }
-        return redirect()->back();
+        return json_encode([
+            'status' => 1,
+            'vote_up_class' => $upClass,
+            'vote_down_class' => $downClass,
+            'vote_count_label' => $post->voteCountLabel,
+        ]);
     }
 }
