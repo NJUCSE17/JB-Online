@@ -63,6 +63,20 @@ trait ProblemAttribute
     }
 
     /**
+     * @return String
+     */
+    public function getRatingLabelAttribute() {
+        return "<a class=\"" . ($this->isDislikedby() ? "text-danger" : "text-dark") . "\" href=\""
+            . route('frontend.forum.problem.votedown', [$this->source->source, $this->source, $this])
+            . "\"><i class='far fa-thumbs-down mr-2'></i></a><label class='label label-danger'>"
+            . ($this->likesDiffDislikesCount > 0 ? "+" : "") . $this->likesDiffDislikesCount
+            . " (" . ($this->likesCount + $this->dislikesCount) . ")"
+            . "</label><a class=\"" . ($this->isLikedby() ? "text-success" : "text-dark") . "\" href=\""
+            . route('frontend.forum.problem.voteup', [$this->source->source, $this->source, $this])
+            . "\"><i class='far fa-thumbs-up ml-2'></i></a>";
+    }
+
+    /**
      * @return string
      */
     public function getEditButtonAttribute()

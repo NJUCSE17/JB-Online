@@ -119,20 +119,12 @@ trait AssignmentAttribute
      */
     public function getProblemsTableAttribute() {
         if ($this->problems->count()) {
-            $table = "<table id=\"problemset\" class=\"table table-hover\" 
+            $table = "<table id=\"problemset\" class=\"table table-hover table-sm mb-0\" 
                         style=\"text-align: center; width: 90%; margin-left: auto; margin-right: auto;\" 
                         width=\"90%\"> <tbody>";
-            $id = 0;
             foreach ($this->problems as $problem) {
-                $id++;
-                $table = $table . "<tr><td>$id</td> <td>$problem->content</td> <td>$problem->difficulty_label</td> <td>"
-                    . "<a class=\"" . ($problem->isDislikedby() ? "text-danger" : "text-dark") . "\" href=\""
-                    . route('frontend.forum.problem.votedown', [$this->source, $this, $problem])
-                    . "\"><i class='far fa-thumbs-down mr-2'></i></a><label class='label label-danger'>"
-                    . ($problem->likesDiffDislikesCount > 0 ? "+" : "") . $problem->likesDiffDislikesCount
-                    . "</label><a class=\"" . ($problem->isLikedby() ? "text-success" : "text-dark") . "\" href=\""
-                    . route('frontend.forum.problem.voteup', [$this->source, $this, $problem])
-                    . "\"><i class='far fa-thumbs-up ml-2'></i></a>" . "</td> </tr>";
+                $table = $table . "<tr><td>" . $problem->content
+                    . "</td><td>" . $problem->rating_label . "</td></tr>";
             }
             $table = $table . "</tbody> </table>";
             return $table;
