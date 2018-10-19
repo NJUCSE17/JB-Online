@@ -44,6 +44,25 @@ trait ProblemAttribute
     }
 
     /**
+     * @return string
+     */
+    public function getDifficultyLabelAttribute()
+    {
+        if ($this->difficulty == 0) {
+            return "/";
+        } else {
+            $label = "";
+            for ($i = 0; $i < ($this->difficulty - 1) / 2; $i += 1) {
+                $label = $label . "★";
+            }
+            if ($this->difficulty % 2) {
+                $label = $label . "☆";
+            }
+            return $label;
+        }
+    }
+
+    /**
      * @return String
      */
     public function getVoteCountLabelAttribute() {

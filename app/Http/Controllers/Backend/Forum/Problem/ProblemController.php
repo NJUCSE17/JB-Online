@@ -61,7 +61,7 @@ class ProblemController extends Controller
      */
     public function createSpecific(ManageProblemRequest $request, Assignment $assignment)
     {
-        return view('backend.forum.problem.specific', [$assignment])
+        return view('backend.forum.problem.create')
             ->withSpecificAssignment($assignment);
     }
 
@@ -102,7 +102,7 @@ class ProblemController extends Controller
         $data = $request->only('course_id', 'assignment_id', 'permalink', 'content', 'difficulty');
         $this->problemRepository->create($data);
 
-        return redirect()->route('admin.forum.problem.index')->withFlashSuccess(__('alerts.backend.problems.created'));
+        return redirect()->route('admin.forum.problem.specific', [$request['assignment_id']])->withFlashSuccess(__('alerts.backend.problems.created'));
     }
 
     /**
