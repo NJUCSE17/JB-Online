@@ -62,6 +62,13 @@
                                             {!! $assignment->content !!}
                                         </object>
                                     </div>
+                                    @if ($assignment->problems_table)
+                                        <div id="assignment_problems_{{ $assignment->id }}">
+                                            <object>
+                                                {!! $assignment->problems_table !!}
+                                            </object>
+                                        </div>
+                                    @endif
                                     <div class="text-center">
                                         <object>{!! $assignment->ddl_badge !!}</object>
                                     </div>

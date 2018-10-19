@@ -58,6 +58,19 @@
                         </div><!--col-->
                     </div><!--form-group-->
 
+                    @if ($assignment->problems_table)
+                        <div class="row">
+                            <div class="col-md-2"></div>
+                            <div class="col-md-10">
+                                <div id="assignment_problems_{{ $assignment->id }}">
+                                    <object>
+                                        {!! $assignment->problems_table !!}
+                                    </object>
+                                </div>
+                            </div>
+                        </div>
+                    @endif
+
                     <div class="form-group row">
                         {{ html()->label(__('validation.attributes.backend.forum.assignments.due_time'))->class('col-md-2 form-control-label')->for('due_time') }}
 

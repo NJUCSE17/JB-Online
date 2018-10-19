@@ -23,6 +23,13 @@
                     <div class="row">
                         <div class="col mx-3">
                             <h5>{!! $assignment->content !!}</h5>
+                            @if ($assignment->problems_table)
+                                <div id="assignment_problems_{{ $assignment->id }}">
+                                    <object>
+                                        {!! $assignment->problems_table !!}
+                                    </object>
+                                </div>
+                            @endif
                             <div class="text-right">
                                 <p class="mb-0 text-muted">
                                     {{ __('labels.general.ddl') }}
