@@ -75,7 +75,7 @@ trait AssignmentAttribute
                 . $this->due_time->diffForHumans(null, null, false, 2);
         } else {
             return $this->due_time->isoFormat("Y-MM-DD (ddd) H:mm:ss")
-                . "<hr class='my-0'/><i class='fas fa-check mr-2'></i>"
+                . "<br /><i class='fas fa-check mr-1'></i>"
                 . __('strings.frontend.home.finished_at')
                 . $finishStatus->finished_at;
         }
@@ -124,12 +124,12 @@ trait AssignmentAttribute
      */
     public function getProblemsTableAttribute() {
         if ($this->problems->count()) {
-            $table = "<table id=\"problemset\" class=\"table table-hover table-sm mb-0\" 
+            $table = "<table id=\"problemset\" class=\"table table-bordered table-hover table-sm mb-2\" 
                         style=\"text-align: center; width: 90%; margin-left: auto; margin-right: auto;\" 
                         width=\"90%\"> <tbody>";
             foreach ($this->problems as $problem) {
-                $table = $table . "<tr><td>" . $problem->content
-                    . "</td><td>" . $problem->rating_label . "</td></tr>";
+                $table = $table . "<tr><td>" . $problem->content . "</td><td>" . $problem->difficultyLabel
+                    . "</td><td>" . $problem->vote_button . "</td></tr>";
             }
             $table = $table . "</tbody> </table>";
             return $table;

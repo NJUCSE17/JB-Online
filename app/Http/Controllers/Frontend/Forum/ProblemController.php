@@ -26,12 +26,20 @@ class ProblemController extends Controller
         if ($problem->isDislikedBy()) {
             $problem->undislikeBy();
         }
+        $downClass = "voteBtn text-dark";
         if ($problem->isLikedBy()) {
             $problem->unlikeBy();
+            $upClass = "voteBtn text-dark";
         } else {
             $problem->likeBy();
+            $upClass = "voteBtn text-success";
         }
-        return redirect()->back();
+        return json_encode([
+            'status' => 1,
+            'vote_up_class' => $upClass,
+            'vote_down_class' => $downClass,
+            'vote_count_label' => $problem->voteCountLabel,
+        ]);
     }
 
     /**
@@ -45,11 +53,19 @@ class ProblemController extends Controller
         if ($problem->isLikedBy()) {
             $problem->unlikeBy();
         }
+        $upClass = "voteBtn text-dark";
         if ($problem->isDislikedBy()) {
             $problem->undislikeBy();
+            $downClass = "voteBtn text-dark";
         } else {
             $problem->dislikeBy();
+            $downClass = "voteBtn text-danger";
         }
-        return redirect()->back();
+        return json_encode([
+            'status' => 1,
+            'vote_up_class' => $upClass,
+            'vote_down_class' => $downClass,
+            'vote_count_label' => $problem->voteCountLabel,
+        ]);
     }
 }

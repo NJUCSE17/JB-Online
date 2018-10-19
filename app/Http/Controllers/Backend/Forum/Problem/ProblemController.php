@@ -61,7 +61,7 @@ class ProblemController extends Controller
      */
     public function createSpecific(ManageProblemRequest $request, Assignment $assignment)
     {
-        return view('backend.forum.problem.create')
+        return view('backend.forum.problem.specific', [$assignment])
             ->withSpecificAssignment($assignment);
     }
 

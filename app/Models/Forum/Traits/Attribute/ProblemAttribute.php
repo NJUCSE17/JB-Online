@@ -65,15 +65,26 @@ trait ProblemAttribute
     /**
      * @return String
      */
-    public function getRatingLabelAttribute() {
-        return "<a class=\"" . ($this->isDislikedby() ? "text-danger" : "text-dark") . "\" href=\""
-            . route('frontend.forum.problem.votedown', [$this->source->source, $this->source, $this])
-            . "\"><i class='far fa-thumbs-down mr-2'></i></a><label class='label label-danger'>"
-            . ($this->likesDiffDislikesCount > 0 ? "+" : "") . $this->likesDiffDislikesCount
-            . " (" . ($this->likesCount + $this->dislikesCount) . ")"
-            . "</label><a class=\"" . ($this->isLikedby() ? "text-success" : "text-dark") . "\" href=\""
-            . route('frontend.forum.problem.voteup', [$this->source->source, $this->source, $this])
-            . "\"><i class='far fa-thumbs-up ml-2'></i></a>";
+    public function getVoteCountLabelAttribute() {
+        $voteStatus = $this->isLikedBy() ? 1 : ($this->isDislikedBy() ? -1 : 0);
+        return ($this->likesDiffDislikesCount > 0 ? "+" : "") . $this->likesDiffDislikesCount
+            . " (" . ($this->likesCount + $this->dislikesCount) . ")";
+    }
+
+    /**
+     * @return String
+     */
+    public function getVoteButtonAttribute() {
+        $voteStatus = $this->isLikedBy() ? 1 : ($this->isDislikedBy() ? -1 : 0);
+        return "<a id=\"vote_down_" . $this->id . "\" class=\"voteBtn text-" . ($this->isDislikedBy() ? 'danger' : 'dark')
+            . "\" href=\"#\" data-pid=\"" . $this->id . "\" data-api=\"" . route('frontend.forum.problem.votedown', [$this->source->source, $this->source, $this])
+            . "\"><i class='far fa-thumbs-down mr-1'></i></a>"
+
+            . "<span id=\"vote_count_label_" . $this->id . "\">" . $this->voteCountLabel . "</span>"
+
+            . "<a id=\"vote_up_" . $this->id . "\" class=\"voteBtn text-" . ($this->isLikedBy() ? 'success' : 'dark')
+            . "\" href=\"#\" data-pid=\"" . $this->id . "\" data-api=\"" . route('frontend.forum.problem.voteup', [$this->source->source, $this->source, $this])
+            . "\"><i class='far fa-thumbs-up ml-1'></i></a>";
     }
 
     /**

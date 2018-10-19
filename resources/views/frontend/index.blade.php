@@ -256,7 +256,7 @@
             e.preventDefault();
         });
     </script>
-    <script type="text/javascript" id="btnScripts">
+    <script type="text/javascript" id="assignmentBtnScript">
         $('.assignmentBtn').on('click', function (e) {
             e.preventDefault();
             if ('<?php echo \Auth::hasUser(); ?>') {
@@ -284,18 +284,18 @@
                             text: '{{ __('labels.general.yes') }}',
                             btnClass: 'btn-success',
                             action: function () {
-                                $.getJSON(api, function(result) {
-                                    if (result.status === 1) {
-                                        console.log(result);
-                                        ddl_badge.dataset.api = result.ddl_badge_api;
-                                        ddl_badge.dataset.finished = result.ddl_badge_finished;
-                                        ddl_badge.innerHTML = result.ddl_badge_content;
-                                        ddl_badge.setAttribute('class', result.ddl_badge_class);
+                                $.getJSON(api, function(res) {
+                                    if (res.status === 1) {
+                                        console.log(res);
+                                        ddl_badge.dataset.api = res.ddl_badge_api;
+                                        ddl_badge.dataset.finished = res.ddl_badge_finished;
+                                        ddl_badge.innerHTML = res.ddl_badge_content;
+                                        ddl_badge.setAttribute('class', res.ddl_badge_class);
                                     }
                                     $.dialog({
-                                        title: (result.status === 1) ? 'Success' : 'Fail',
-                                        content: result.prompt,
-                                        type: (result.status === 1) ? 'green' : 'red',
+                                        title: (res.status === 1) ? 'Success' : 'Fail',
+                                        content: res.prompt,
+                                        type: (res.status === 1) ? 'green' : 'red',
                                         theme: 'supervan',
                                         typeAnimated: true,
                                         backgroundDismiss: 'close',
@@ -315,6 +315,41 @@
                             }
                         },
                     },
+                });
+            } else {
+                document.location.href = '{{ route("frontend.auth.login") }}';
+            }
+        });
+    </script>
+    <script type="text/javascript" id="voteBtnScript">
+        $('.voteBtn').on('click', function (e) {
+            e.preventDefault();
+            if ('<?php echo \Auth::hasUser(); ?>') {
+                let isVoteUp = this.dataset.vtp === 'up';
+                let pid = this.dataset.pid;
+                let api = this.dataset.api;
+                let voteUpBtn = document.getElementById('vote_up_' + pid);
+                let voteDownBtn = document.getElementById('vote_down_' + pid);
+                let voteCountLabel = document.getElementById('vote_count_label_' + pid);
+                $.getJSON(api, function(res){
+                    if (res.status === 1) {
+                        voteUpBtn.setAttribute('class', res.vote_up_class);
+                        voteDownBtn.setAttribute('class', res.vote_down_class);
+                        voteCountLabel.innerHTML = res.vote_count_label;
+                    } else {
+                        $.alert({
+                            title: 'Fail',
+                            content: "Failed to proceed.",
+                            type: 'red',
+                            theme: 'supervan',
+                            typeAnimated: true,
+                            backgroundDismiss: 'close',
+                            buttons:{
+                                close: function(){
+                                }
+                            }
+                        });
+                    }
                 });
             } else {
                 document.location.href = '{{ route("frontend.auth.login") }}';
