@@ -28,8 +28,9 @@
         skin: 'light',
         selector: 'textarea',
         file_browser_callback: elFinderBrowser,
-        plugins: 'paste, textcolor, link, wordcount, codesample, code, image, lists, table, preview, autoresize',
+        plugins: 'paste, textcolor, link, wordcount, codesample, code, image, lists, table, preview, autoresize, textpattern',
         menubar: '',
+        branding: false,
         toolbar: 'styleselect | undo redo | forecolor backcolor | numlist bullist' +
             ' | outdent indent | pastetext link image codesample table | code preview',
         codesample_languages: [
@@ -46,6 +47,19 @@
             {text: 'Shell', value: 'shell'},
             {text: 'SQL', value: 'sql'}
         ],
+        textpattern_patterns: [
+            {start: '*', end: '*', format: 'italic'},
+            {start: '**', end: '**', format: 'bold'},
+            {start: '#', format: 'h1'},
+            {start: '##', format: 'h2'},
+            {start: '###', format: 'h3'},
+            {start: '####', format: 'h4'},
+            {start: '#####', format: 'h5'},
+            {start: '######', format: 'h6'},
+            {start: '1. ', cmd: 'InsertOrderedList'},
+            {start: '* ', cmd: 'InsertUnorderedList'},
+            {start: '- ', cmd: 'InsertUnorderedList'}
+        ]
     });
 
     function elFinderBrowser(field_name, url, type, win) {
