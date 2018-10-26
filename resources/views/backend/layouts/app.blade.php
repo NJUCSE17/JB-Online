@@ -12,8 +12,6 @@
     <meta name="description" content="@yield('meta_description', 'Homework Forum Backend')">
     <meta name="author" content="@yield('meta_author', 'Anthony Rappa + doowzs')">
 
-    @include('includes.utilities')
-
     @yield('meta')
 
     {{-- See https://laravel.com/docs/5.5/blade#stacks for usage --}}
@@ -46,8 +44,9 @@
 
     <!-- Scripts -->
     @stack('before-scripts')
-    {!! script(mix('js/frontend.js')) !!}
+    {!! script(mix('js/backend.js')) !!}
     @stack('after-scripts')
+    @include('includes.utilities')
 
     @include('includes.partials.ga')
 </body>
