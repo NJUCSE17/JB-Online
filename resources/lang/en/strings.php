@@ -144,6 +144,8 @@ return [
 
         'general' => [
             'joined'        => 'Joined',
+            'textarea_placeholder' => 'This is a modified version of TinyMCE 4. \nYou can use Markdown style to write! Bold(**), italian(*), headers(#),'
+                                    . 'inline-code(``), lists(1./*/-) are supported. \nHowever, block-code must be added using the button above.',
         ],
 
         'user' => [

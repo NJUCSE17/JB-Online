@@ -17,22 +17,26 @@
 
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css">
 <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+<script type="text/javascript">
+    hljs.initHighlightingOnLoad();
+</script>
 
 <link rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
 
 <script src="{{ URL::asset('js/tinymce/tinymce.min.js') }}"></script>
-<script>
-    hljs.initHighlightingOnLoad();
+<script type="text/javascript">
+    $("textarea").attr('placeholder', '{{ __('strings.frontend.general.textarea_placeholder') }}');
     tinymce.init({
-        skin: 'light',
+        //skin: 'light',
+        language: 'zh_CN',
         selector: 'textarea',
         file_browser_callback: elFinderBrowser,
-        plugins: 'paste, textcolor, link, wordcount, codesample, code, image, lists, table, preview, autoresize, textpattern',
+        plugins: 'placeholder hr advlist paste textcolor link wordcount codesample code codesample image imagetools tinymceEmoji lists table preview autoresize textpattern',
         menubar: '',
         branding: false,
-        toolbar: 'styleselect | undo redo | forecolor backcolor | numlist bullist' +
-            ' | outdent indent | pastetext link image codesample table | code preview',
+        toolbar1:"styleselect fontselect fontsizeselect forecolor backcolor | bold italic blockquote | alignleft aligncenter alignright",
+        toolbar2:"bullist numlist outdent indent | subscript superscript underline strikethrough hr | pastetext removeformat link unlink | image table codesample tinymceEmoji",
         codesample_languages: [
             {text: 'C', value: 'c'},
             {text: 'C++', value: 'cpp'},
@@ -50,6 +54,7 @@
         textpattern_patterns: [
             {start: '*', end: '*', format: 'italic'},
             {start: '**', end: '**', format: 'bold'},
+            {start: '``', end: '``', format: 'code'},
             {start: '#', format: 'h1'},
             {start: '##', format: 'h2'},
             {start: '###', format: 'h3'},
@@ -59,7 +64,11 @@
             {start: '1. ', cmd: 'InsertOrderedList'},
             {start: '* ', cmd: 'InsertUnorderedList'},
             {start: '- ', cmd: 'InsertUnorderedList'}
-        ]
+        ],
+        emoji_add_space: true,
+        emoji_show_groups: true,
+        emoji_show_subgroups: true,
+        emoji_show_tab_icons: true
     });
 
     function elFinderBrowser(field_name, url, type, win) {
