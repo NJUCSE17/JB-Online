@@ -21,7 +21,7 @@ class CreateProblemsTable extends Migration
             $table->uuid('uuid');
             $table->integer('course_id');
             $table->integer('assignment_id');
-            $table->text('permalink');
+            $table->text('permalink')->nullable();
             $table->text('content');
             $table->integer('difficulty');
             $table->timestamps();

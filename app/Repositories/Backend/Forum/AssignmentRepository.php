@@ -138,7 +138,7 @@ class AssignmentRepository extends BaseRepository
     {
         return DB::transaction(function () use ($assignment, $data) {
             if ($assignment->update([
-                'name' => strtolower($data['name']),
+                'name' => $data['name'],
                 'content' => $data['content'],
                 'due_time' => $data['due_time'],
             ])) {
