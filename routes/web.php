@@ -15,7 +15,7 @@ Route::get('img/public/{path}', 'ApiController@publicGlide')->where('path', '.+'
  * Frontend Routes
  * Namespaces indicate folder structure
  */
-Route::group(['namespace' => 'Frontend', 'predix' => 'frontend', 'as' => 'frontend.'], function () {
+Route::group(['namespace' => 'Frontend', 'prefix' => '', 'as' => 'frontend.'], function () {
     include_route_files(__DIR__.'/frontend/');
 });
 

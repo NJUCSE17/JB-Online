@@ -47,9 +47,11 @@
                 </li>
                 <li class="nav-item">
                     <a href="{{ route('frontend.auth.logout') }}"
-                       class="nav-link text-danger">
+                       class="nav-link text-danger"
+                       onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                         {{ __('navs.general.logout') }}
                     </a>
+                    <form id="logout-form" action="{{ route('frontend.auth.logout') }}" method="POST" style="display: none;">{{ csrf_field() }}</form>
                 </li>
             </ul>
         </div>

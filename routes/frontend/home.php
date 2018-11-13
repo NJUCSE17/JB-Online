@@ -4,8 +4,8 @@
  * Frontend Controllers
  * All route names are prefixed with 'frontend.'.
  */
-Route::get('about', 'HomeController@about')->name('about');
 Route::get('/', 'HomeController@index')->name('index');
+Route::get('about', 'HomeController@about')->name('about');
 
 /*
  * These frontend controllers require the user to be logged in
