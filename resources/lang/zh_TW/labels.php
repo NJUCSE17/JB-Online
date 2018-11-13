@@ -167,6 +167,7 @@ return [
                 'edit'                => '编辑作业',
                 'management'          => '作业管理',
                 'active'              => '有效作业',
+                'finished'            => '已完成作业',
 
                 'table' => [
                     'course_id'       => '课程',

@@ -171,6 +171,7 @@ return [
                 'edit'                => 'Edit Assignment',
                 'management'          => 'Assignment Management',
                 'active'              => 'Active Assignments',
+                'finished'            => 'Finished Assignments',
 
                 'table' => [
                     'course_id'       => 'Course ID',

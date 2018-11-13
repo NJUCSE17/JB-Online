@@ -43,6 +43,7 @@ Route::group([
         /*
         * Assignment Status
         */
+        Route::get('assignment/finished', 'AssignmentController@finished')->name('assignment.finished');
         Route::get('assignment/deleted', 'AssignmentStatusController@getDeleted')->name('assignment.deleted');
 
         /*

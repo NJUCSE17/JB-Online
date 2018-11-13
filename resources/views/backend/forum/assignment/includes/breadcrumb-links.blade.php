@@ -5,8 +5,9 @@
 
             <div class="dropdown-menu" aria-labelledby="breadcrumb-dropdown-1">
                 <a class="dropdown-item" href="{{ route('admin.forum.assignment.index') }}">{{ __('menus.backend.forum.assignments.all') }}</a>
-                <a class="dropdown-item" href="{{ route('admin.forum.assignment.create') }}">{{ __('menus.backend.forum.assignments.create') }}</a>
+                <a class="dropdown-item" href="{{ route('admin.forum.assignment.finished') }}">{{ __('menus.backend.forum.assignments.finished') }}</a>
                 <a class="dropdown-item" href="{{ route('admin.forum.assignment.deleted') }}">{{ __('menus.backend.forum.assignments.deleted') }}</a>
+                <a class="dropdown-item" href="{{ route('admin.forum.assignment.create') }}">{{ __('menus.backend.forum.assignments.create') }}</a>
             </div>
         </div><!--dropdown-->
 

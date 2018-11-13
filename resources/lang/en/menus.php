@@ -53,6 +53,7 @@ return [
                 'all'             => 'All Assignments',
                 'create'          => 'Create Assignment',
                 'deleted'         => 'Deleted Assignments',
+                'finished'        => 'Finished Assignments',
                 'edit'            => 'Edit Assignment',
                 'main'            => 'Assignments',
                 'view'            => 'View Assignment',

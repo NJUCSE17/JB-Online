@@ -53,6 +53,7 @@ return [
                 'all'             => '所有作业',
                 'create'          => '新建作业',
                 'deleted'         => '已删除的作业',
+                'finished'        => '已完成的作业',
                 'edit'            => '编辑作业',
                 'main'            => '作业',
                 'view'            => '查看作业',

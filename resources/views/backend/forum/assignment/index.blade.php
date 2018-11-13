@@ -14,8 +14,11 @@
                 <h4 class="card-title mb-0">
                     {{ __('labels.backend.forum.assignments.management') }}
                     <small class="text-muted">
-                        {{ __('labels.backend.forum.assignments.active') }}
-                        @if (isset($specificCourse))
+                        @if ($assignmentType == 0)
+                            {{ __('labels.backend.forum.assignments.active') }}
+                        @elseif($assignmentType == 1)
+                            {{ __('labels.backend.forum.assignments.finished') }}
+                        @else
                             ({{ $specificCourse->name }})
                         @endif
                     </small>
