@@ -58,9 +58,9 @@ class CheckAssignments extends Command
         $users = $this->userRepository->get();
         foreach ($users as $user) {
             if ($user->isConfirmed() && $user->wantMail()) {
-                echo "Checking " . $user->id . "-" . $user->full_name . "... ";
+                echo $user->id . "-" . $user->full_name . " ";
                 $assignments = $this->assignmentRepository->getMailAssignments($user->id);
-                echo "has " . count($assignments) . " assignments. ";
+                echo "has " . count($assignments) . " assignment(s). ";
                 if (count($assignments)) {
                     $content = "<ul style='list-style-type: none;'>";
                     foreach ($assignments as $assignment) {
@@ -75,6 +75,8 @@ class CheckAssignments extends Command
                         'user'    => $user,
                     ));
                     echo "Queued sending assignment mail.\n";
+                } else {
+                    echo "Skipped.\n";
                 }
             } else {
                 echo "Skipping for " . $user->full_name . "\n";
