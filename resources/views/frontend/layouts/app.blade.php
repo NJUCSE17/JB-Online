@@ -31,7 +31,7 @@
     @include('frontend.includes.nav')
 
     <div id="app" class="@yield('appClass', '')">
-        <div class="container my-4">
+        <div class="container my-3">
             @include('includes.partials.messages')
 
             @yield('content')
