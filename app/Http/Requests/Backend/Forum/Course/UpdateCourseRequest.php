@@ -31,8 +31,8 @@ class UpdateCourseRequest extends FormRequest
         return [
             'name' => 'required|max:200',
             'semester'  => ['required', 'int', 'max:20'],
-            'start_time' => ['required', 'date', 'max:200'],
-            'end_time' => ['required', 'date', 'max:200'],
+            'start_time' => ['required', 'date', 'max:200', 'date_format:Y-m-d'],
+            'end_time' => ['required', 'date', 'max:200', 'date_format:Y-m-d'],
             'notice' => 'max:10000',
             'difficulty' => ['required', 'int', 'max:1000'],
             'restrict_level' => ['required', 'int', 'max:20'],

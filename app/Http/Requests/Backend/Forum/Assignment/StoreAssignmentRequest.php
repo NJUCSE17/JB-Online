@@ -33,7 +33,7 @@ class StoreAssignmentRequest extends FormRequest
             'course_id'  => ['required', 'int'],
             'name' => 'required|max:200',
             'content' => 'required|max:10000',
-            'due_time' => ['required', 'date', 'max:200'],
+            'due_time' => ['required', 'date', 'max:200', 'date_format:Y-m-d G:i:s'],
         ];
     }
 }
