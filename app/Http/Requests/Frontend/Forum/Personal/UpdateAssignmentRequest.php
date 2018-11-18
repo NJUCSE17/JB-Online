@@ -17,9 +17,8 @@ class UpdateAssignmentRequest extends FormRequest
      */
     public function authorize()
     {
-        $assignment = Assignment::find($this->route('assignment'));
-        return $assignment &&
-            ($this->user()->isExecutive() || $this->user()->id == $assignment->issuer);
+        $assignment = Assignment::find($this->route('assignment')->id);
+        return $assignment && $this->user()->id == $assignment->issuer;
     }
 
     /**
