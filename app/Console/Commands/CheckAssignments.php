@@ -53,41 +53,33 @@ class CheckAssignments extends Command
      */
     public function handle()
     {
-        $targetDatetime = \Carbon\Carbon::now()->addDay(2)->startOfDay();
-        $onGoingAssignments = $this->assignmentRepository->getOngoingAssignments();
-        $warningAssignments = array();
-        foreach ($onGoingAssignments as $assignment) {
-            if ($targetDatetime->gte($assignment->due_time)) {
-                $warningAssignments[] = $assignment;
-            }
-        }
         echo "Checking assignments at " . Carbon::now() . "\n";
-        echo "There are " . count($warningAssignments) . " assignments due within 2 days.\n";
 
-        if (count($warningAssignments)) {
-            $content = "<ul style='list-style-type: none;'>";
-            foreach ($warningAssignments as $assignment) {
-                $content = $content . "<li><h1><a href='" . $assignment->assignment_link . "'>"
-                    . $assignment->name . "</a></h1><p>" . $assignment->content
-                    . "</p><div style='text-align: right;'>"
-                    . $assignment->ddl_badge_content . "</div></li>";
-            }
-            $content = $content . "</ul>";
-
-            $users = $this->userRepository->get();
-            foreach ($users as $user) {
-                if ($user->isConfirmed() && $user->wantMail()) {
+        $users = $this->userRepository->get();
+        foreach ($users as $user) {
+            if ($user->isConfirmed() && $user->wantMail()) {
+                echo "Checking " . $user->id . "-" . $user->full_name . "... ";
+                $assignments = $this->assignmentRepository->getMailAssignments($user->id);
+                echo "has " . count($assignments) . " assignments. ";
+                if (count($assignments)) {
+                    $content = "<ul style='list-style-type: none;'>";
+                    foreach ($assignments as $assignment) {
+                        $content = $content . "<li><h1><a href='" . $assignment->assignment_link . "'>"
+                            . $assignment->name . "</a></h1><p>" . $assignment->content
+                            . "</p><div style='text-align: right;'>"
+                            . $assignment->ddl_badge_content . "</div></li>";
+                    }
+                    $content = $content . "</ul>";
                     SendAssignmentMail::dispatch(array(
                         'content' => $content,
                         'user'    => $user,
                     ));
-                    echo "Queued sending assignment mail for " . $user->full_name . "\n";
-                } else {
-                    echo "Skipping for " . $user->full_name . "\n";
+                    echo "Queued sending assignment mail.\n";
                 }
+            } else {
+                echo "Skipping for " . $user->full_name . "\n";
             }
         }
-
         echo "Done handling assignment mails.";
         return $this;
     }

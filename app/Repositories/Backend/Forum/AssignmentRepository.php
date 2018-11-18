@@ -57,6 +57,24 @@ class AssignmentRepository extends BaseRepository
     }
 
     /**
+     * @param $userID
+     * @return mixed
+     */
+    public function getMailAssignments($userID)
+    {
+        $targetDatetime = \Carbon\Carbon::now()->addDay(2)->startOfDay()->format("Y-m-d H:i:s");
+        return $this->model
+            ->where('due_time', '>', date("Y-m-d H:i:s"))
+            ->where('due_time', '<=', $targetDatetime)
+            ->where(function ($query) use ($userID) {
+                $query->where('issuer', 0)
+                    ->orWhere('issuer', $userID);
+            })
+            ->orderBy('due_time')
+            ->get();
+    }
+
+    /**
      * @param int    $paged
      * @param string $orderBy
      * @param string $sort
