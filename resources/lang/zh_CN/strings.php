@@ -33,6 +33,11 @@ return [
                 'no_deleted' => '没有已经删除的作业。',
             ],
 
+            'problems' => [
+                'delete_assignment_confirm'  => '你确定要删除吗？此操作不可撤销。',
+                'no_deleted' => '没有已经删除的题目。',
+            ],
+
             'posts' => [
                 'delete_assignment_confirm'  => '你确定要删除吗？此操作不可撤销。',
                 'no_deleted' => '没有已经删除的帖子。',
@@ -138,6 +143,8 @@ return [
 
         'general' => [
             'joined'        => '加入',
+            'textarea_placeholder' => '这是魔改的TinyMCE4编辑器。\n你可以像写Markdown一样使用，包括加粗(**)、斜体(*)、标题(#)、'
+                . '代码块(``)和列表(1./*/-)。\n但是，文本对齐、文本颜色、插入图片、插入行间代码等只能用上面的按钮来操作。',
         ],
 
         'user' => [
@@ -160,8 +167,10 @@ return [
             ],
             'no_notice'     => '管理员还没有发布公告……',
             'no_ongoing'    => '没有现在正在进行的课程。',
+            'no_course'     => '没有课程。',
             'no_assignment' => '天哪，现在竟然没有作业！',
             'no_blog'       => '没有找到已发布的内容。',
+            'finished_at'   => '完成于',
             'total' => [
                 'left'  => '共找到',
                 'right' => '门让你充实又快乐的课程。',
@@ -176,6 +185,19 @@ return [
 
         'assignments' => [
             'no_post'       => '现在还没有人发帖……',
+            'finish'        => '成功标记作业 :name 。',
+            'finish_fail'   => '你已经完成了 :name ！',
+            'finish_prompt' => '你确定要标记已完成这份作业吗？',
+            'reset'         => '成功重置作业 :name 。',
+            'reset_fail'    => '你还没有完成 :name ！',
+            'reset_prompt'  => '你确定要重置这份作业的状态吗？',
+        ],
+
+        'forum' => [
+            'personal' => [
+                'delete_assignment_confirm'  => '你确定要删除吗？此操作不可撤销。',
+                'no_deleted' => '没有已删除的个人作业。',
+            ],
         ],
 
         'breadcrumb' => [
@@ -184,6 +206,13 @@ return [
             'assignment' => '作业',
             'post' => [
                 'edit' => '编辑',
+            ],
+            'personal' => [
+                'index'    => '个人课程',
+                'finished' => '已完成的个人作业',
+                'deleted'  => '已删除的个人作业',
+                'create'   => '新建个人作业',
+                'edit'     => '修改个人作业',
             ]
         ],
     ],

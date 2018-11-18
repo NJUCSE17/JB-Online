@@ -4,31 +4,18 @@
  * Global Routes
  * Routes that are used between both frontend and backend.
  */
-Route::get('img/private/{path}', function($path){
-    $server = \League\Glide\ServerFactory::create([
-        'response' => new \League\Glide\Responses\LaravelResponseFactory(app('request')),
-        'source' => app('filesystem')->disk('private')->getDriver(),
-        'cache' => storage_path('glide'),
-    ]);
-    return $server->getImageResponse($path, \Illuminate\Support\Facades\Input::query());
-})->where('path', '.+');
-Route::get('img/public/{path}', function($path){
-    $server = \League\Glide\ServerFactory::create([
-        'response' => new \League\Glide\Responses\LaravelResponseFactory(app('request')),
-        'source' => app('filesystem')->disk('public')->getDriver(),
-        'cache' => storage_path('glide'),
-    ]);
-    return $server->getImageResponse($path, \Illuminate\Support\Facades\Input::query());
-})->where('path', '.+');
 
 // Switch between the included languages
 Route::get('lang/{lang}', 'LanguageController');
+
+Route::get('img/private/{path}', 'ApiController@privateGlide')->where('path', '.+');
+Route::get('img/public/{path}', 'ApiController@publicGlide')->where('path', '.+');
 
 /*
  * Frontend Routes
  * Namespaces indicate folder structure
  */
-Route::group(['namespace' => 'Frontend', 'predix' => 'frontend', 'as' => 'frontend.'], function () {
+Route::group(['namespace' => 'Frontend', 'prefix' => '', 'as' => 'frontend.'], function () {
     include_route_files(__DIR__.'/frontend/');
 });
 

@@ -32,6 +32,7 @@ return [
         'toggle_navigation' => '切换导航',
         'course'            => '课程',
         'assignment'        => '作业',
+        'problem'           => '作业',
         'post'              => '帖子',
         'notice'            => '公告',
         'published'         => '发表于',
@@ -43,6 +44,7 @@ return [
         'hour'              => '小时',
         'minute'            => '分钟',
         'remain'            => '剩余',
+        'personal_data'     => '（非诚勿扰）',
         'deleted_data'      => '（数据删除）',
     ],
 
@@ -166,6 +168,7 @@ return [
                 'edit'                => '编辑作业',
                 'management'          => '作业管理',
                 'active'              => '有效作业',
+                'finished'            => '已完成作业',
 
                 'table' => [
                     'course_id'       => '课程',
@@ -193,6 +196,44 @@ return [
                 ],
 
                 'view' => '查看作业',
+            ],
+
+            'problems' => [
+                'create'              => '新建题目',
+                'deleted'             => '已删除的题目',
+                'edit'                => '编辑题目',
+                'management'          => '题目管理',
+                'active'              => '有效题目',
+
+                'table' => [
+                    'assignment_id'   => '作业',
+                    'course_id'       => '课程',
+                    'name'            => '名称',
+                    'permalink'       => '网址',
+                    'content'         => '内容',
+                    'difficulty'      => '难度',
+                    'updated_at'      => '更新于',
+                    'total'           => '题目总计'
+                ],
+
+                'tabs' => [
+                    'titles' => [
+                        'overview' => '概述',
+                        'history'  => '历史',
+                    ],
+
+                    'content' => [
+                        'overview' => [
+                            'created_at'   => '创建于',
+                            'deleted_at'   => '删除于',
+                            'last_updated' => '最后更新',
+                            'name'         => '名称',
+                            'status'       => '状态',
+                        ],
+                    ],
+                ],
+
+                'view' => '查看题目',
             ],
 
             'posts' => [
@@ -342,6 +383,8 @@ return [
             'notice'        => '狗管理公告',
             'ongoing'       => '即将扑街',
             'others'        => '强碧名单',
+            'personal'      => '劳资最爱',
+            'course'        => '课程列表',
             'assignment'    => '末日列表',
             'login'         => '网上冲浪',
             'login_button'  => 'Link Start',
@@ -373,16 +416,30 @@ return [
 
                 'assignment_list' => '见多识广',
                 'course_notice'   => '谈笑风生',
+                'personal_panel'  => '无可奉告',
             ],
 
             'assignments' => [
                 'assignment_content' => '作业内容',
-                'post_list'       => '西方莓体',
+                'post_list'          => '西方莓体',
             ],
 
             'posts' => [
                 'edit' => '掉包答题卡',
             ],
+
+            'personal' => [
+                'management' => 'PA管理',
+                'create'     => '新建PA',
+                'edit'       => '编辑PA',
+                'deleted'    => '已删除的PA',
+                'table' => [
+                    'name'     => '名称',
+                    'content'  => '内容',
+                    'due_time' => 'DDL',
+                    'total'    => 'PA总计',
+                ]
+            ]
         ]
     ],
 ];

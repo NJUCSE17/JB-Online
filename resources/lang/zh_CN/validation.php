@@ -213,6 +213,14 @@ return [
                     'due_time'          => '截止时间',
                 ],
 
+                'problems' => [
+                    'course_id'         => '课程',
+                    'assignment_id'     => '作业',
+                    'permalink'         => '网址',
+                    'content'           => '内容',
+                    'difficulty'        => '难度',
+                ],
+
                 'posts' => [
                     'content'           => '内容',
                 ],
@@ -243,6 +251,14 @@ return [
             'timezone'                  => '时区',
             'language'                  => '语言',
             'content'                   => '内容',
+
+            'forum' => [
+                'personal' => [
+                    'name'      => '名称',
+                    'content'   => '内容',
+                    'due_time'  => 'DDL',
+                ],
+            ],
         ],
     ],
 ];

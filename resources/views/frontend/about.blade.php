@@ -76,18 +76,6 @@ int main() {
         <hr />
         <h2>License and Credit</h2>
         <ul>
-            <li><a href="https://laravel.com/" target="_blank" rel="noopener">Laravel 5.6</a> as framework.</li>
-            <li>
-                <a href="https://github.com/Studio-42/elFinder" target="_blank" rel="noopener">Elfinder</a>
-                and
-                <a href="https://github.com/barryvdh/laravel-elfinder" target="_blank" rel="noopener">laravel-elfinder</a>
-                for file storage.
-            </li>
-            <li><a href="http://glide.thephpleague.com/" target="_blank" rel="noopener">Glide</a> for image processing.</li>
-            <li><a href="https://www.mathjax.org/" target="_blank" rel="noopener">MathJax</a> for TeX and LaTeX display.</li>
-            <li><a href="https://highlightjs.org/" target="_blank" rel="noopener">Highlight.JS</a> for code formatting.</li>
-            <li>All icons from <a href="https://www.flaticon.com/" target="_blank" rel="noopener">FlatIcon</a>.</li>
-            <li><a href="https://www.tiny.cloud/" target="_blank" rel="noopener">TinyMCE 4</a> as WYSIWYG editor.</li>
             <li><a href="http://getbootstrap.com/" target="_blank" rel="noopener">Bootstrap 4</a> as layout framework.</li>
             <li>
                 <a href="https://carbon.nesbot.com/" target="_blank" rel="noopener">Carbon 2</a>
@@ -95,6 +83,25 @@ int main() {
                 <a href="https://github.com/kylekatarnls/laravel-carbon-2" target="_blank" rel="noopener">laravel-carbon-2</a>
                 for time localization and display.
             </li>
+            <li>
+                <a href="https://github.com/Studio-42/elFinder" target="_blank" rel="noopener">Elfinder</a>
+                and
+                <a href="https://github.com/barryvdh/laravel-elfinder" target="_blank" rel="noopener">laravel-elfinder</a>
+                for file storage.
+            </li>
+            <li><a href="http://glide.thephpleague.com/" target="_blank" rel="noopener">Glide</a> for image processing.</li>
+            <li><a href="https://highlightjs.org/" target="_blank" rel="noopener">Highlight.JS</a> for code formatting.</li>
+            <li>
+                <a href="http://jquery.com/" target="_blank" rel="noopener">jQuery</a>,
+                <a href="https://jqueryui.com/" target="_blank" rel="noopener">jQuery UI</a> and
+                <a href="https://github.com/craftpip/jquery-confirm" target="_blank" rel="noopener">jQuery-Confirm v3</a>
+                for JS based utils.
+            </li>
+            <li><a href="https://laravel.com/" target="_blank" rel="noopener">Laravel 5.6</a> as PHP framework.</li>
+            <li><a href="http://laravel-boilerplate.com/" target="_blank" rel="noopener">Laravel Boilerplate</a> as code basement.</li>
+            <li><a href="https://www.mathjax.org/" target="_blank" rel="noopener">MathJax</a> for TeX and LaTeX display.</li>
+            <li><a href="https://www.tiny.cloud/" target="_blank" rel="noopener">TinyMCE 4</a> as WYSIWYG editor.</li>
+            <li>All icons from <a href="https://www.flaticon.com/" target="_blank" rel="noopener">FlatIcon</a>.</li>
         </ul>
     </div>
 @endsection

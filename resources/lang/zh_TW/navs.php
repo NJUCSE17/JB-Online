@@ -21,11 +21,13 @@ return [
     'frontend' => [
         'about'     => '关于',
         'blog'      => '维博',
+        'course'    => '课程',
         'dashboard' => '指示板',
         'login'     => '登录',
         'macros'    => '宏',
         'register'  => '注册',
         'filehub'   => '紫荆',
+        'personal'  => 'PA',
 
         'user' => [
             'account'         => '我的账户',

@@ -49,15 +49,13 @@ class CourseRepository extends BaseRepository
     }
 
     /**
-     * @return Course paginate (5 per page)
+     * @return Course paginate (25 per page)
      */
     public function getAllCourses()
     {
         return $this->model
-            ->where('start_time', '>', date("Y-m-d H:i:s"))
-            ->orWhere('end_time', '<', date("Y-m-d H:i:s"))
             ->orderBy('semester', 'DEC')
-            ->paginate(5);
+            ->paginate(25);
     }
 
     /**

@@ -43,8 +43,22 @@ class AssignmentController extends Controller
     public function index(ManageAssignmentRequest $request)
     {
         return view('backend.forum.assignment.index')
+            ->withAssignmentType(0)
             ->withAssignments($this->assignmentRepository
-                ->getPaginated(25, 'due_time', 'dec'));
+                ->getOngoingPaginated(25, 'due_time', 'asc'));
+    }
+
+    /**
+     * @param ManageAssignmentRequest $request
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function finished(ManageAssignmentRequest $request)
+    {
+        return view('backend.forum.assignment.index')
+            ->withAssignmentType(1)
+            ->withAssignments($this->assignmentRepository
+                ->getFinishedPaginated(25, 'due_time', 'dec'));
     }
 
 
@@ -57,6 +71,7 @@ class AssignmentController extends Controller
     public function specific(ManageAssignmentRequest $request, Course $course)
     {
         return view('backend.forum.assignment.index')
+            ->withAssignmentType(2)
             ->withSpecificCourse($course)
             ->withAssignments($this->assignmentRepository
                 ->getPaginatedByCourse($course, 25, 'due_time', 'dec'));
@@ -88,7 +103,8 @@ class AssignmentController extends Controller
             'due_time'
         ));
 
-        return redirect()->route('admin.forum.assignment.index')->withFlashSuccess(__('alerts.backend.assignments.created'));
+        return redirect()->route('admin.forum.assignment.index')
+            ->withFlashSuccess(__('alerts.backend.assignments.created'));
     }
 
     /**
@@ -131,7 +147,8 @@ class AssignmentController extends Controller
             'due_time'
         ));
 
-        return redirect()->route('admin.forum.assignment.index')->withFlashSuccess(__('alerts.backend.assignments.updated'));
+        return redirect()->route('admin.forum.assignment.index')
+            ->withFlashSuccess(__('alerts.backend.assignments.updated'));
     }
 
     /**
@@ -147,6 +164,7 @@ class AssignmentController extends Controller
 
         event(new AssignmentDeleted($assignment));
 
-        return redirect()->route('admin.forum.assignment.index')->withFlashSuccess(__('alerts.backend.assignments.deleted'));
+        return redirect()->route('admin.forum.assignment.index')
+            ->withFlashSuccess(__('alerts.backend.assignments.deleted'));
     }
 }

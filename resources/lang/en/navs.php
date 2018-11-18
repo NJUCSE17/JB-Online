@@ -21,11 +21,13 @@ return [
     'frontend' => [
         'about'     => 'About',
         'blog'      => 'Blog',
+        'course'    => 'Course',
         'dashboard' => 'Dashboard',
         'login'     => 'Login',
         'macros'    => 'Macros',
         'register'  => 'Register',
         'filehub'   => 'FileHub',
+        'personal'  => 'PA',
 
         'user' => [
             'account'         => 'My Account',

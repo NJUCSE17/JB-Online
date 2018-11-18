@@ -14,8 +14,11 @@
                 <h4 class="card-title mb-0">
                     {{ __('labels.backend.forum.assignments.management') }}
                     <small class="text-muted">
-                        {{ __('labels.backend.forum.assignments.active') }}
-                        @if (isset($specificCourse))
+                        @if ($assignmentType == 0)
+                            {{ __('labels.backend.forum.assignments.active') }}
+                        @elseif($assignmentType == 1)
+                            {{ __('labels.backend.forum.assignments.finished') }}
+                        @else
                             ({{ $specificCourse->name }})
                         @endif
                     </small>
@@ -47,7 +50,14 @@
                                 <td class="font-weight-bold">{{ $assignment->id }}</td>
                                 <td>{{ $assignment->course_name_label }}</td>
                                 <td>{{ $assignment->name }}</td>
-                                <td>{!! $assignment->content !!}</td>
+                                <td>{!! $assignment->content !!}
+                                    @if ($assignment->problems_table)
+                                        <div id="assignment_problems_{{ $assignment->id }}">
+                                            <object>
+                                                {!! $assignment->problems_table !!}
+                                            </object>
+                                        </div>
+                                    @endif</td>
                                 <td>{{ $assignment->due_time }}</td>
                                 <td>{!! $assignment->action_buttons !!}</td>
                             </tr>

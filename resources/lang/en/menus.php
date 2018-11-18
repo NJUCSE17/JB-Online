@@ -53,9 +53,19 @@ return [
                 'all'             => 'All Assignments',
                 'create'          => 'Create Assignment',
                 'deleted'         => 'Deleted Assignments',
+                'finished'        => 'Finished Assignments',
                 'edit'            => 'Edit Assignment',
                 'main'            => 'Assignments',
                 'view'            => 'View Assignment',
+            ],
+
+            'problems' => [
+                'all'             => 'All Problems',
+                'create'          => 'Create Problem',
+                'deleted'         => 'Deleted Problems',
+                'edit'            => 'Edit Problem',
+                'main'            => 'Problems',
+                'view'            => 'View Problem',
             ],
 
             'posts' => [

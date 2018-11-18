@@ -21,11 +21,13 @@ return [
     'frontend' => [
         'about'     => '关于',
         'blog'      => '博客',
+        'course'    => '课程',
         'dashboard' => '指示板',
         'login'     => '登录',
         'macros'    => '宏',
         'register'  => '注册',
         'filehub'   => '资源',
+        'personal'  => '个人作业',
 
         'user' => [
             'account'         => '我的账户',

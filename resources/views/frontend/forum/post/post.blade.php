@@ -2,7 +2,11 @@
     <h5 class="py-0 align-middle" style="background-color: #fafafa; height: 100%; overflow-x: auto;">
         <img class="img-avatar mr-2" src="{{ $post->author->picture }}"
              style="height: 45px !important;">
-        <span> {{$post->author->name}} <small class="text-muted">#{{ $post->id }}</small> </span>
+        <span> {{$post->author->name}} </span>
+        |
+        <span> {!!  $post->vote_buttons !!} </span>
+        |
+        <small class="text-muted">#{{ $post->id }}</small>
         <span class="float-right" style="line-height: 45px">
             @if($post->user_id == $userid)
                 <a class="btn btn-sm btn-outline-primary text-dark" href="{{ route('frontend.forum.post.edit', [$course, $assignment, $post]) }}">

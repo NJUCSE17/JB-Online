@@ -5,6 +5,11 @@ Breadcrumbs::for('admin.forum.assignment.index', function ($trail) {
     $trail->push(__('labels.backend.forum.assignments.management'), route('admin.forum.assignment.index'));
 });
 
+Breadcrumbs::for('admin.forum.assignment.finished', function ($trail) {
+    $trail->parent('admin.dashboard');
+    $trail->push(__('labels.backend.forum.assignments.management'), route('admin.forum.assignment.index'));
+});
+
 Breadcrumbs::for('admin.forum.assignment.specific', function ($trail, $id) {
     $trail->parent('admin.dashboard');
     $trail->push(__('labels.backend.forum.assignments.management'), route('admin.forum.assignment.specific', $id));

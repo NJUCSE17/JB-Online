@@ -6,13 +6,11 @@
 @endlangrtl
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0, shrink-to-fit=no">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>@yield('title', app_name())</title>
     <meta name="description" content="@yield('meta_description', 'Homework Forum Backend')">
     <meta name="author" content="@yield('meta_author', 'Anthony Rappa + doowzs')">
-
-    @include('includes.utilities')
 
     @yield('meta')
 
@@ -34,8 +32,11 @@
         @include('backend.includes.sidebar')
 
         <div id="app" class="@yield('appClass', '')">
-            <div class="container-fluid my-4">
+            <div class="container-fluid my-3">
                 @include('includes.partials.messages')
+                <div style="vertical-align: center; line-height: 50px">
+                    {!! Breadcrumbs::render() !!}
+                </div>
                 @yield('content')
             </div><!-- container -->
         </div><!-- #app -->
@@ -43,8 +44,9 @@
 
     <!-- Scripts -->
     @stack('before-scripts')
-    {!! script(mix('js/frontend.js')) !!}
+    {!! script(mix('js/backend.js')) !!}
     @stack('after-scripts')
+    @include('includes.utilities')
 
     @include('includes.partials.ga')
 </body>

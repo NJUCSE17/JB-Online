@@ -43,6 +43,7 @@ Route::group([
         /*
         * Assignment Status
         */
+        Route::get('assignment/finished', 'AssignmentController@finished')->name('assignment.finished');
         Route::get('assignment/deleted', 'AssignmentStatusController@getDeleted')->name('assignment.deleted');
 
         /*
@@ -58,6 +59,34 @@ Route::group([
             // Deleted
             Route::get('delete', 'AssignmentStatusController@delete')->name('assignment.delete-permanently');
             Route::get('restore', 'AssignmentStatusController@restore')->name('assignment.restore');
+        });
+    });
+
+    /*
+    * Problem Management
+    */
+    Route::group(['namespace' => 'Problem'], function () {
+
+        /*
+        * Problem Status
+        */
+        Route::get('problem/deleted', 'ProblemStatusController@getDeleted')->name('problem.deleted');
+
+        /*
+        * Problem CRUD
+        */
+        Route::resource('problem', 'ProblemController');
+        Route::get('problem/specific/{assignment}', 'ProblemController@specific')->name('problem.specific');
+        Route::get('problem/specific/{assignment}/create', 'ProblemController@createSpecific')
+            ->name('problem.specific.create');
+
+        /*
+        * Specific problem
+        */
+        Route::group(['prefix' => 'problem/{problem}'], function () {
+            // Deleted
+            Route::get('delete', 'ProblemStatusController@delete')->name('problem.delete-permanently');
+            Route::get('restore', 'ProblemStatusController@restore')->name('problem.restore');
         });
     });
 

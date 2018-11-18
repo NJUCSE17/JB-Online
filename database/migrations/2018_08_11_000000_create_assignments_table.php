@@ -23,8 +23,15 @@ class CreateAssignmentsTable extends Migration
             $table->string('name');
             $table->text('content');
             $table->dateTime('due_time');
+            $table->integer('issuer')->default(0);
             $table->timestamps();
             $table->softDeletes();
+        });
+        Schema::create('assignment_finish_records', function (Blueprint $table) {
+            $table->increments('id');
+            $table->integer('user_id');
+            $table->integer('assignment_id');
+            $table->dateTime('finished_at');
         });
     }
 
@@ -35,6 +42,7 @@ class CreateAssignmentsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('courses');
+        Schema::dropIfExists('assignments');
+        Schema::dropIfExists('assignments_finish_records');
     }
 }

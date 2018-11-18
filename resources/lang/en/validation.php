@@ -213,8 +213,16 @@ return [
                 'assignments' => [
                     'course_id'         => 'Course ID',
                     'name'              => 'Name',
-                    'content'           => 'content',
+                    'content'           => 'Content',
                     'due_time'          => 'Due',
+                ],
+
+                'problems' => [
+                    'course_id'         => 'Course ID',
+                    'assignment_id'     => 'Assignment ID',
+                    'permalink'         => 'Permalink',
+                    'content'           => 'Content',
+                    'difficulty'        => 'Difficulty',
                 ],
 
                 'posts' => [
@@ -247,6 +255,14 @@ return [
             'timezone'                  => 'Timezone',
             'language'                  => 'Language',
             'content'                   => 'Content',
+
+            'forum' => [
+                'personal' => [
+                    'name'      => 'Name',
+                    'content'   => 'Content',
+                    'due_time'  => 'Due',
+                ],
+            ],
         ],
     ],
 ];

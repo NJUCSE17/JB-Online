@@ -4,6 +4,7 @@ namespace App\Models\Forum\Traits\Relationship;
 
 use App\Models\Forum\Post;
 use App\Models\Forum\Course;
+use App\Models\Forum\Problem;
 
 /**
  * Class AssignmentRelationship.
@@ -16,6 +17,14 @@ trait AssignmentRelationship
     public function source()
     {
         return $this->belongsTo(Course::class, 'course_id');
+    }
+
+    /**
+     * @return mixed
+     */
+    public function problems()
+    {
+        return $this->hasMany(Problem::class);
     }
 
     /**

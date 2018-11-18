@@ -35,6 +35,11 @@ return [
                 'no_deleted' => 'There are no deleted assignments.',
             ],
 
+            'problems' => [
+                'delete_assignment_confirm'  => 'Are you sure you want to delete this problem permanently? Anywhere in the application that references this user\'s id will most likely error. Proceed at your own risk. This can not be un-done.',
+                'no_deleted' => 'There are no deleted problems.',
+            ],
+
             'posts' => [
                 'delete_assignment_confirm'  => 'Are you sure you want to delete this post permanently? Anywhere in the application that references this user\'s id will most likely error. Proceed at your own risk. This can not be un-done.',
                 'no_deleted' => 'There are no deleted posts.',
@@ -139,6 +144,8 @@ return [
 
         'general' => [
             'joined'        => 'Joined',
+            'textarea_placeholder' => 'This is a modified version of TinyMCE 4. \nYou can use Markdown style to write! Bold(**), italian(*), headers(#),'
+                                    . 'inline-code(``), lists(1./*/-) are supported. \nHowever, block-code must be added using the button above.',
         ],
 
         'user' => [
@@ -161,8 +168,10 @@ return [
             ],
             'no_notice'     => 'There is no notice published yet.',
             'no_ongoing'    => 'No course now.',
+            'no_course'     => 'No course to show.',
             'no_assignment' => 'Oops! No assignments to do now.',
             'no_blog'       => 'No blogs to show.',
+            'finished_at'   => 'Finished at ',
             'total' => [
                 'left'  => 'Found',
                 'right' => 'interesting course(s) in total.',
@@ -177,6 +186,19 @@ return [
 
         'assignments' => [
             'no_post'       => 'No one posted yet, try to be first!',
+            'finish'        => 'Successfully marked assignment :name as finished.',
+            'finish_fail'   => 'You have already finished assignment :name !',
+            'finish_prompt' => 'Are you sure to mark this assignment as finished?',
+            'reset'         => 'Successfully marked assignment :name as unfinished.',
+            'reset_fail'    => 'You have not finished assignment :name yet!',
+            'reset_prompt'  => 'Are you sure to reset this assignment as unfinished?',
+        ],
+
+        'forum' => [
+            'personal' => [
+                'delete_assignment_confirm'  => 'Are you sure you want to delete this PA permanently? Anywhere in the application that references this user\'s id will most likely error. Proceed at your own risk. This can not be un-done.',
+                'no_deleted' => 'There are no deleted PAs.',
+            ],
         ],
 
         'breadcrumb' => [
@@ -185,6 +207,13 @@ return [
             'assignment' => 'Assignment',
             'post' => [
                 'edit' => 'Edit',
+            ],
+            'personal' => [
+                'index'    => 'Personal Assignments',
+                'finished' => 'Finished PAs',
+                'deleted'  => 'Deleted PAs',
+                'create'   => 'Create PA',
+                'edit'     => 'Edit PA',
             ]
         ],
     ],

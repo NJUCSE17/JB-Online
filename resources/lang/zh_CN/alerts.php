@@ -51,6 +51,14 @@ return [
             'updated'             => '修改作业成功。',
         ],
 
+        'problems' => [
+            'created'             => '创建题目成功。',
+            'deleted'             => '删除题目成功。',
+            'deleted_permanently' => '题目已永久删除。',
+            'restored'            => '恢复题目成功。',
+            'updated'             => '修改题目成功。',
+        ],
+
         'posts' => [
             'deleted'             => '删除帖子成功。',
             'deleted_permanently' => '帖子已永久删除。',
@@ -71,6 +79,14 @@ return [
         'posts' => [
             'created'             => '发表成功。',
             'updated'             => '修改成功。',
+        ],
+
+        'personal' => [
+            'created'             => '创建个人作业成功。',
+            'deleted'             => '删除个人作业成功。',
+            'deleted_permanently' => '个人作业已永久删除。',
+            'restored'            => '恢复个人作业成功。',
+            'updated'             => '修改个人作业成功。',
         ],
     ],
 ];

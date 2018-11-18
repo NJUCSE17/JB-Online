@@ -10,10 +10,10 @@ Route::group(['namespace' => 'Auth', 'as' => 'auth.'], function () {
     * These routes require the user to be logged in
     */
     Route::group(['middleware' => 'auth'], function () {
-        Route::get('logout', 'LoginController@logout')->name('logout');
+        Route::post('logout', 'LoginController@logout')->name('logout');
 
         //For when admin is logged in as user from backend
-        Route::get('logout-as', 'LoginController@logoutAs')->name('logout-as');
+        Route::post('logout-as', 'LoginController@logoutAs')->name('logout-as');
 
         // These routes can not be hit if the password is expired
         Route::group(['middleware' => 'password_expires'], function () {

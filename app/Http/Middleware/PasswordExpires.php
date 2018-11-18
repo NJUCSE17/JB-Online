@@ -20,7 +20,9 @@ class PasswordExpires
     {
         $user = $request->user();
 
-        if (is_numeric(config('access.users.password_expires_days')) && $user->canChangePassword()) {
+        if (is_numeric(config('access.users.password_expires_days'))
+                && config('access.users.password_expires_days') > 0
+                && $user->canChangePassword()) {
             $password_changed_at = new Carbon($user->password_changed_at ?: $user->created_at);
 
             if (Carbon::now()->diffInDays($password_changed_at) >= config('access.users.password_expires_days')) {

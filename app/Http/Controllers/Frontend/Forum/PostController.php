@@ -57,8 +57,8 @@ class PostController extends Controller
             if ($user->isConfirmed() && $user->wantMail()) {
                 SendReplyMail::dispatch(array(
                     'reply' => $data,
-                    'user'  => $user,
-                    'from'  => User::findOrFail($data['user_id']),
+                    'user' => $user,
+                    'from' => User::findOrFail($data['user_id']),
                 ));
             }
         }
@@ -68,10 +68,10 @@ class PostController extends Controller
     }
 
     /**
-     * @param ManagePostRequest    $request
-     * @param Course               $course
-     * @param Assignment           $assignment
-     * @param Post                 $post
+     * @param ManagePostRequest $request
+     * @param Course $course
+     * @param Assignment $assignment
+     * @param Post $post
      *
      * @return mixed
      */
@@ -84,10 +84,10 @@ class PostController extends Controller
     }
 
     /**
-     * @param UpdatePostRequest    $request
-     * @param Course               $course
-     * @param Assignment           $assignment
-     * @param Post                 $post
+     * @param UpdatePostRequest $request
+     * @param Course $course
+     * @param Assignment $assignment
+     * @param Post $post
      *
      * @return mixed
      * @throws \App\Exceptions\GeneralException
@@ -101,5 +101,58 @@ class PostController extends Controller
 
         return redirect()->route('frontend.forum.assignment.view', [$course, $assignment, 'dec  '])
             ->withFlashSuccess(__('alerts.backend.posts.updated'));
+    }
+    /**
+     * @var Course
+     * @var Assignment
+     * @var Post
+     * @return mixed
+     */
+    public function voteUp(Course $course, Assignment $assignment, Post $post)
+    {
+        if ($post->isDislikedBy()) {
+            $post->undislikeBy();
+        }
+        $downClass = "voteBtn text-dark";
+        if ($post->isLikedBy()) {
+            $post->unlikeBy();
+            $upClass = "voteBtn text-dark";
+        } else {
+            $post->likeBy();
+            $upClass = "voteBtn text-success";
+        }
+        return json_encode([
+            'status' => 1,
+            'vote_up_class' => $upClass,
+            'vote_down_class' => $downClass,
+            'vote_count_label' => $post->voteCountLabel,
+        ]);
+    }
+
+    /**
+     * @var Course
+     * @var Assignment
+     * @var Post
+     * @return mixed
+     */
+    public function voteDown(Course $course, Assignment $assignment, Post $post)
+    {
+        if ($post->isLikedBy()) {
+            $post->unlikeBy();
+        }
+        $upClass = "voteBtn text-dark";
+        if ($post->isDislikedBy()) {
+            $post->undislikeBy();
+            $downClass = "voteBtn text-dark";
+        } else {
+            $post->dislikeBy();
+            $downClass = "voteBtn text-danger";
+        }
+        return json_encode([
+            'status' => 1,
+            'vote_up_class' => $upClass,
+            'vote_down_class' => $downClass,
+            'vote_count_label' => $post->voteCountLabel,
+        ]);
     }
 }

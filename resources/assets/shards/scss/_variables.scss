@@ -185,7 +185,7 @@ $transition-collapse:     height 350ms ease-in-out !default;
 
 // Fonts
 
-$google-fonts-import: 'https://fonts.googleapis.com/css?family=Poppins:300,400,500,600|Roboto+Mono'; // Includes: Poppins: Light, Regular, Medium, Semi-bold; Roboto Mono: Regular
+$google-fonts-import: 'https://fonts.googleapis.com/css?family=Poppins:300,400,500,600|Roboto+Mono' !default; // Includes: Poppins: Light, Regular, Medium, Semi-bold; Roboto Mono: Regular
 
 $font-family-poppins-first: "Poppins", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif !default;
 $font-family-system-first: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif !default;
@@ -756,7 +756,7 @@ $popover-arrow-width:                 10px !default;
 $popover-arrow-height:                5px !default;
 $popover-arrow-color:                 $popover-bg !default;
 
-$popover-arrow-outer-width:           calc($popover-arrow-width + 1px) !default;
+$popover-arrow-outer-width:           $popover-arrow-width + 1px !default;
 $popover-arrow-outer-color:           fade-in($popover-border-color, .05) !default;
 
 

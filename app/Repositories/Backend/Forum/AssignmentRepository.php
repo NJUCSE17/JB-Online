@@ -57,6 +57,54 @@ class AssignmentRepository extends BaseRepository
     }
 
     /**
+     * @param $userID
+     * @return mixed
+     */
+    public function getMailAssignments($userID)
+    {
+        $targetDatetime = \Carbon\Carbon::now()->addDay(2)->startOfDay()->format("Y-m-d H:i:s");
+        return $this->model
+            ->where('due_time', '>', date("Y-m-d H:i:s"))
+            ->where('due_time', '<=', $targetDatetime)
+            ->where(function ($query) use ($userID) {
+                $query->where('issuer', 0)
+                    ->orWhere('issuer', $userID);
+            })
+            ->orderBy('due_time')
+            ->get();
+    }
+
+    /**
+     * @param int    $paged
+     * @param string $orderBy
+     * @param string $sort
+     *
+     * @return mixed
+     */
+    public function getOngoingPaginated($paged = 25, $orderBy = 'created_at', $sort = 'desc') : LengthAwarePaginator
+    {
+        return $this->model
+            ->where('due_time', '>', date("Y-m-d H:i:s"))
+            ->orderBy($orderBy, $sort)
+            ->paginate($paged);
+    }
+
+    /**
+     * @param int    $paged
+     * @param string $orderBy
+     * @param string $sort
+     *
+     * @return mixed
+     */
+    public function getFinishedPaginated($paged = 25, $orderBy = 'created_at', $sort = 'desc') : LengthAwarePaginator
+    {
+        return $this->model
+            ->where('due_time', '<=', date("Y-m-d H:i:s"))
+            ->orderBy($orderBy, $sort)
+            ->paginate($paged);
+    }
+
+    /**
      * @param int    $paged
      * @param string $orderBy
      * @param string $sort
@@ -138,7 +186,7 @@ class AssignmentRepository extends BaseRepository
     {
         return DB::transaction(function () use ($assignment, $data) {
             if ($assignment->update([
-                'name' => strtolower($data['name']),
+                'name' => $data['name'],
                 'content' => $data['content'],
                 'due_time' => $data['due_time'],
             ])) {

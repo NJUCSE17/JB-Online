@@ -32,6 +32,7 @@ return [
         'toggle_navigation' => 'Toggle Navigation',
         'course'            => 'Course',
         'assignment'        => 'Assignment',
+        'problem'           => 'Problem',
         'post'              => 'Post',
         'notice'            => 'Notice',
         'published'         => 'Posted',
@@ -43,6 +44,7 @@ return [
         'hour'              => 'Hour',
         'minute'            => 'Min',
         'remain'            => 'Remaining',
+        'personal_data'     => '(personal)',
         'deleted_data'      => '(deleted)',
     ],
 
@@ -170,6 +172,7 @@ return [
                 'edit'                => 'Edit Assignment',
                 'management'          => 'Assignment Management',
                 'active'              => 'Active Assignments',
+                'finished'            => 'Finished Assignments',
 
                 'table' => [
                     'course_id'       => 'Course ID',
@@ -196,6 +199,42 @@ return [
                 ],
 
                 'view' => 'View Assignment',
+            ],
+
+            'problems' => [
+                'create'              => 'Create Problem',
+                'deleted'             => 'Deleted Problems',
+                'edit'                => 'Edit Problem',
+                'management'          => 'Problem Management',
+                'active'              => 'Active Problems',
+
+                'table' => [
+                    'course_id'       => 'Course ID',
+                    'assignment_id'   => 'Assignment ID',
+                    'permalink'       => 'Permalink',
+                    'content'         => 'Content',
+                    'difficulty'      => 'Difficulty',
+                    'updated_at'      => 'Updated At',
+                    'total'           => 'in total',
+                ],
+
+                'tabs' => [
+                    'titles' => [
+                        'overview' => 'Overview',
+                        'history'  => 'History',
+                    ],
+
+                    'content' => [
+                        'overview' => [
+                            'created_at'   => 'Created At',
+                            'deleted_at'   => 'Deleted At',
+                            'last_updated' => 'Last Updated',
+                            'name'         => 'Name',
+                        ],
+                    ],
+                ],
+
+                'view' => 'View Problem',
             ],
 
             'posts' => [
@@ -233,7 +272,7 @@ return [
                     ],
                 ],
 
-                'view' => 'View User',
+                'view' => 'View Post',
             ],
 
             'notices' => [
@@ -315,8 +354,10 @@ return [
 
         'home' => [
             'notice'        => 'Bulletin',
-            'ongoing'       => 'Ongoing Courses',
+            'ongoing'       => 'My Courses',
             'others'        => 'Other Courses',
+            'personal'      => 'Personal',
+            'course'        => 'All',
             'assignment'    => 'Assignments',
             'login'         => 'User Login',
             'login_button'  => 'Login',
@@ -348,6 +389,7 @@ return [
 
                 'assignment_list' => 'Assignments List',
                 'course_notice'   => 'Course Notice',
+                'personal_panel'  => 'Control Panel',
             ],
 
             'assignments' => [
@@ -358,6 +400,19 @@ return [
             'posts' => [
                 'edit' => 'Post Edit',
             ],
+
+            'personal' => [
+                'management' => 'PA Management',
+                'create'     => 'Create PA',
+                'edit'       => 'Edit PA',
+                'deleted'    => 'Deleted PAs',
+                'table' => [
+                    'name'     => 'Name',
+                    'content'  => 'Content',
+                    'due_time' => 'DDL',
+                    'total'    => 'PAs in total',
+                ]
+            ]
         ]
     ],
 ];

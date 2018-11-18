@@ -30,6 +30,7 @@ class Assignment extends Model
         'name',
         'content',
         'due_time',
+        'issuer',
     ];
 
     /**
