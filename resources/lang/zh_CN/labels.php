@@ -383,7 +383,7 @@ return [
             'notice'        => '首页公告',
             'ongoing'       => '我的课程',
             'others'        => '其他课程',
-            'personal'      => '个人课程',
+            'personal'      => '个人作业',
             'course'        => '课程列表',
             'assignment'    => '当前作业',
             'login'         => '用户登陆',

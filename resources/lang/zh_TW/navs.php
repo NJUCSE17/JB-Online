@@ -27,6 +27,7 @@ return [
         'macros'    => '宏',
         'register'  => '注册',
         'filehub'   => '紫荆',
+        'personal'  => 'PA',
 
         'user' => [
             'account'         => '我的账户',

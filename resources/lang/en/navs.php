@@ -27,6 +27,7 @@ return [
         'macros'    => 'Macros',
         'register'  => 'Register',
         'filehub'   => 'FileHub',
+        'personal'  => 'PA',
 
         'user' => [
             'account'         => 'My Account',
