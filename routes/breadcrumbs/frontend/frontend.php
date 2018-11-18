@@ -1,3 +1,4 @@
 <?php
 
-require __DIR__.'/forum.php';
+require __DIR__ . '/forum/forum.php';
+require __DIR__ . '/forum/personal.php';

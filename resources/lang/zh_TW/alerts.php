@@ -80,5 +80,13 @@ return [
             'created'             => '发表成功。',
             'updated'             => '修改成功。',
         ],
+
+        'personal' => [
+            'created'             => '创建PA成功。',
+            'deleted'             => '删除PA成功。',
+            'deleted_permanently' => 'PA已永久删除。',
+            'restored'            => '恢复PA成功。',
+            'updated'             => '修改PA成功。',
+        ],
     ],
 ];

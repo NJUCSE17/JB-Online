@@ -53,6 +53,8 @@ return [
             'edit'   => 'Edit',
             'update' => 'Update',
             'view'   => 'View',
+            'restore' => 'Restore',
+            'delete_permanently' => 'Delete permanently',
         ],
 
         'save' => 'Save',

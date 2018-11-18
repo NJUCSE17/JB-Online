@@ -53,6 +53,8 @@ return [
             'edit'   => '编辑',
             'update' => '更新',
             'view'   => '查看',
+            'restore' => '恢复',
+            'delete_permanently' => '彻底删除',
         ],
 
         'save' => '保存',

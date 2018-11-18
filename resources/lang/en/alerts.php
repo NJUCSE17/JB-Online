@@ -80,5 +80,13 @@ return [
             'created'             => 'The post was successfully created.',
             'updated'             => 'The post was successfully updated.',
         ],
+
+        'personal' => [
+            'created'             => 'The PA was successfully created.',
+            'deleted'             => 'The PA was successfully deleted.',
+            'deleted_permanently' => 'The PA was deleted permanently.',
+            'restored'            => 'The PA was successfully restored.',
+            'updated'             => 'The PA was successfully updated.',
+        ],
     ],
 ];

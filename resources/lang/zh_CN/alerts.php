@@ -80,5 +80,13 @@ return [
             'created'             => '发表成功。',
             'updated'             => '修改成功。',
         ],
+
+        'personal' => [
+            'created'             => '创建个人作业成功。',
+            'deleted'             => '删除个人作业成功。',
+            'deleted_permanently' => '个人作业已永久删除。',
+            'restored'            => '恢复个人作业成功。',
+            'updated'             => '修改个人作业成功。',
+        ],
     ],
 ];

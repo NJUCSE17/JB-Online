@@ -10,6 +10,14 @@ use Illuminate\Support\Facades\DB;
 trait AssignmentAttribute
 {
     /**
+     * @return bool
+     */
+    public function isPersonal()
+    {
+        return $this->course_id == 0;
+    }
+
+    /**
      * @return string
      */
     public function getNameLabelAttribute()
@@ -23,7 +31,7 @@ trait AssignmentAttribute
     public function getCourseNameLabelAttribute()
     {
         $course = $this->source;
-        $courseNameLabel = ($course == null) ? __('labels.general.deleted_data') : $course->name_label;
+        $courseNameLabel = ($course == null) ? __('labels.general.personal_data') : $course->name_label;
         return $courseNameLabel;
     }
 
@@ -32,7 +40,11 @@ trait AssignmentAttribute
      */
     public function getAssignmentLinkAttribute()
     {
-        return route('frontend.forum.assignment.view', [$this->source, $this, 'asc']);
+        if ($this->isPersonal()) {
+            return route('frontend.forum.personal.edit', [$this->id]);
+        } else {
+            return route('frontend.forum.assignment.view', [$this->source, $this, 'asc']);
+        }
     }
 
     /**
@@ -112,17 +124,19 @@ trait AssignmentAttribute
     /**
      * @return mixed
      */
-    public function getFinishStatusAttribute() {
+    public function getFinishStatusAttribute()
+    {
         return DB::table('assignment_finish_records')
             ->where('assignment_id', '=', $this->id)
-            ->where('user_id','=', \Auth::id())
+            ->where('user_id', '=', \Auth::id())
             ->first();
     }
 
     /**
      * @return mixed
      */
-    public function getProblemsTableAttribute() {
+    public function getProblemsTableAttribute()
+    {
         if ($this->problems->count()) {
             $table = "<table id=\"problemset\" class=\"table table-bordered table-hover table-sm mb-2\" 
                         style=\"text-align: center; width: 90%; margin-left: auto; margin-right: auto;\" 
@@ -142,10 +156,17 @@ trait AssignmentAttribute
      */
     public function getEditButtonAttribute()
     {
-        return '<a href="' . route('admin.forum.assignment.edit', $this)
-            . '" data-toggle="tooltip" data-placement="top" title="'
-            . __('buttons.general.crud.edit') . ' ' . __('labels.general.assignment')
-            . '" class="btn btn-primary"><i class="far fa-edit"></i></a>';
+        if ($this->isPersonal()) {
+            return '<a href="' . route('frontend.forum.personal.edit', $this)
+                . '" data-toggle="tooltip" data-placement="top" title="'
+                . __('buttons.general.crud.edit') . ' ' . __('labels.general.assignment')
+                . '" class="btn btn-primary"><i class="far fa-edit"></i></a>';
+        } else {
+            return '<a href="' . route('admin.forum.assignment.edit', $this)
+                . '" data-toggle="tooltip" data-placement="top" title="'
+                . __('buttons.general.crud.edit') . ' ' . __('labels.general.assignment')
+                . '" class="btn btn-primary"><i class="far fa-edit"></i></a>';
+        }
     }
 
     /**
@@ -175,12 +196,21 @@ trait AssignmentAttribute
      */
     public function getDeleteButtonAttribute()
     {
-        return '<a href="' . route('admin.forum.assignment.destroy', $this) . '"
+        if ($this->isPersonal()) {
+            return '<a href="' . route('frontend.forum.personal.destroy', $this) . '"
                  data-method="delete"
                  data-trans-button-cancel="' . __('buttons.general.cancel') . '"
                  data-trans-button-confirm="' . __('buttons.general.crud.delete') . '"
                  data-trans-title="' . __('strings.backend.general.are_you_sure') . '"
                  class="dropdown-item">' . __('buttons.general.crud.delete') . '</a> ';
+        } else {
+            return '<a href="' . route('admin.forum.assignment.destroy', $this) . '"
+                 data-method="delete"
+                 data-trans-button-cancel="' . __('buttons.general.cancel') . '"
+                 data-trans-button-confirm="' . __('buttons.general.crud.delete') . '"
+                 data-trans-title="' . __('strings.backend.general.are_you_sure') . '"
+                 class="dropdown-item">' . __('buttons.general.crud.delete') . '</a> ';
+        }
     }
 
     /**
@@ -188,7 +218,17 @@ trait AssignmentAttribute
      */
     public function getDeletePermanentlyButtonAttribute()
     {
-        return '<a href="' . route('admin.forum.assignment.delete-permanently', $this) . '" name="confirm_item" class="btn btn-danger"><i class="fas fa-trash" data-toggle="tooltip" data-placement="top" title="' . __('buttons.backend.access.Assignments.delete_permanently') . '"></i></a> ';
+        if ($this->isPersonal()) {
+            return '<a href="' . route('frontend.forum.personal.delete-permanently', $this)
+                . '" name="confirm_item" class="btn btn-danger">'
+                . '<i class="fas fa-trash" data-toggle="tooltip" data-placement="top" title="'
+                . __('buttons.general.crud.delete_permanently') . '"></i></a> ';
+        } else {
+            return '<a href="' . route('admin.forum.assignment.delete-permanently', $this)
+                . '" name="confirm_item" class="btn btn-danger">'
+                . '<i class="fas fa-trash" data-toggle="tooltip" data-placement="top" title="'
+                . __('buttons.general.crud.delete_permanently') . '"></i></a> ';
+        }
     }
 
     /**
@@ -196,7 +236,17 @@ trait AssignmentAttribute
      */
     public function getRestoreButtonAttribute()
     {
-        return '<a href="' . route('admin.forum.assignment.restore', $this) . '" name="confirm_item" class="btn btn-info"><i class="fas fa-redo" data-toggle="tooltip" data-placement="top" title="' . __('buttons.backend.access.Assignments.restore_Assignment') . '"></i></a> ';
+        if ($this->isPersonal()) {
+            return '<a href="' . route('frontend.forum.personal.restore', $this)
+                . '" name="confirm_item" class="btn btn-info">'
+                . '<i class="fas fa-redo" data-toggle="tooltip" data-placement="top" title="'
+                . __('buttons.general.crud.restore') . '"></i></a> ';
+        } else {
+            return '<a href="' . route('admin.forum.assignment.restore', $this)
+                . '" name="confirm_item" class="btn btn-info">'
+                . '<i class="fas fa-redo" data-toggle="tooltip" data-placement="top" title="'
+                . __('buttons.general.crud.restore') . '"></i></a> ';
+        }
     }
 
     /**
@@ -214,10 +264,7 @@ trait AssignmentAttribute
 
         return '
     	<div class="btn-group" role="group" aria-label="Assignment Actions">
-		  ' . $this->edit_button . '
-		  ' . $this->problem_button . '
-		  ' . $this->post_button . '
-		
+		  ' . $this->edit_button . ($this->isPersonal() ? '' : ($this->problem_button . $this->post_button)) . '
 		  <div class="btn-group btn-group-sm" role="group">
 			<button id="AssignmentActions" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 			  More

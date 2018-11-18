@@ -48,11 +48,13 @@ return [
         'reverse' => '颠三倒四',
 
         'crud' => [
-            'create' => '创建',
-            'delete' => '消灭',
-            'edit'   => '编辑',
-            'update' => '更新',
-            'view'   => '康康',
+            'create'  => '创建',
+            'delete'  => '消灭',
+            'edit'    => '编辑',
+            'update'  => '更新',
+            'view'    => '康康',
+            'restore' => '复活',
+            'delete_permanently' => '彻底消灭',
         ],
 
         'save' => '保存',

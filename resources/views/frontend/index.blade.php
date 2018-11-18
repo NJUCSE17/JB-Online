@@ -160,9 +160,14 @@
                         </div>
                     @endif
                     <hr />
-                    <a class="btn btn-sm btn-outline-dark text-justify text-right float-right"
-                        href="{{ route('frontend.course') }}">
-                        全部课程 <i class="fas fa-angle-right"></i>
+                    <a class="btn btn-sm btn-outline-dark text-justify float-left"
+                           href="{{ route('frontend.forum.personal.index') }}">
+                        <i class="fas fa-user mr-1"></i>{{ __('labels.frontend.home.personal') }}
+
+                    </a>
+                    <a class="btn btn-sm btn-outline-dark text-justify float-right"
+                        href="{{ route('frontend.forum.course') }}">
+                        {{ __('labels.frontend.home.course') }} <i class="fas fa-angle-right"></i>
                     </a>
                 </div>
             </div>

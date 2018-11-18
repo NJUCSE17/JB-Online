@@ -76,15 +76,6 @@ class HomeController extends Controller
     /**
      * @return \Illuminate\View\View
      */
-    public function course()
-    {
-        return view('frontend.course')
-            ->withCourses($this->courseRepository->getAllCourses());
-    }
-
-    /**
-     * @return \Illuminate\View\View
-     */
     public function about()
     {
         return view('frontend.about');

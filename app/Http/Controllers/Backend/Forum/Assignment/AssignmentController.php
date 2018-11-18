@@ -103,7 +103,8 @@ class AssignmentController extends Controller
             'due_time'
         ));
 
-        return redirect()->route('admin.forum.assignment.index')->withFlashSuccess(__('alerts.backend.assignments.created'));
+        return redirect()->route('admin.forum.assignment.index')
+            ->withFlashSuccess(__('alerts.backend.assignments.created'));
     }
 
     /**
@@ -146,7 +147,8 @@ class AssignmentController extends Controller
             'due_time'
         ));
 
-        return redirect()->route('admin.forum.assignment.index')->withFlashSuccess(__('alerts.backend.assignments.updated'));
+        return redirect()->route('admin.forum.assignment.index')
+            ->withFlashSuccess(__('alerts.backend.assignments.updated'));
     }
 
     /**
@@ -162,6 +164,7 @@ class AssignmentController extends Controller
 
         event(new AssignmentDeleted($assignment));
 
-        return redirect()->route('admin.forum.assignment.index')->withFlashSuccess(__('alerts.backend.assignments.deleted'));
+        return redirect()->route('admin.forum.assignment.index')
+            ->withFlashSuccess(__('alerts.backend.assignments.deleted'));
     }
 }

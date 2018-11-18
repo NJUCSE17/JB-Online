@@ -193,12 +193,26 @@ return [
             'reset_prompt'  => '你确定要重置这份作业的状态吗？',
         ],
 
+        'forum' => [
+            'personal' => [
+                'delete_assignment_confirm'  => '你确定要删除吗？此操作不可撤销。',
+                'no_deleted' => '没有已删除的个人作业。',
+            ],
+        ],
+
         'breadcrumb' => [
             'home'       => '主页',
             'course'     => '课程',
             'assignment' => '作业',
             'post' => [
                 'edit' => '编辑',
+            ],
+            'personal' => [
+                'index'    => '个人课程',
+                'finished' => '已完成的个人作业',
+                'deleted'  => '已删除的个人作业',
+                'create'   => '新建个人作业',
+                'edit'     => '修改个人作业',
             ]
         ],
     ],

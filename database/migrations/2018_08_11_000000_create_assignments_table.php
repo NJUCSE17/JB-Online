@@ -23,6 +23,7 @@ class CreateAssignmentsTable extends Migration
             $table->string('name');
             $table->text('content');
             $table->dateTime('due_time');
+            $table->integer('issuer')->default(0);
             $table->timestamps();
             $table->softDeletes();
         });

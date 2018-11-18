@@ -44,6 +44,7 @@ return [
         'hour'              => 'Hour',
         'minute'            => 'Min',
         'remain'            => 'Remaining',
+        'personal_data'     => '(personal)',
         'deleted_data'      => '(deleted)',
     ],
 
@@ -355,7 +356,8 @@ return [
             'notice'        => 'Bulletin',
             'ongoing'       => 'My Courses',
             'others'        => 'Other Courses',
-            'course'        => 'All Courses',
+            'personal'      => 'Personal',
+            'course'        => 'All',
             'assignment'    => 'Assignments',
             'login'         => 'User Login',
             'login_button'  => 'Login',
@@ -387,6 +389,7 @@ return [
 
                 'assignment_list' => 'Assignments List',
                 'course_notice'   => 'Course Notice',
+                'personal_panel'  => 'Control Panel',
             ],
 
             'assignments' => [
@@ -397,6 +400,19 @@ return [
             'posts' => [
                 'edit' => 'Post Edit',
             ],
+
+            'personal' => [
+                'management' => 'PA Management',
+                'create'     => 'Create PA',
+                'edit'       => 'Edit PA',
+                'deleted'    => 'Deleted PAs',
+                'table' => [
+                    'name'     => 'Name',
+                    'content'  => 'Content',
+                    'due_time' => 'DDL',
+                    'total'    => 'PAs in total',
+                ]
+            ]
         ]
     ],
 ];

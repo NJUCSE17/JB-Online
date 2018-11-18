@@ -194,12 +194,26 @@ return [
             'reset_prompt'  => 'Are you sure to reset this assignment as unfinished?',
         ],
 
+        'forum' => [
+            'personal' => [
+                'delete_assignment_confirm'  => 'Are you sure you want to delete this PA permanently? Anywhere in the application that references this user\'s id will most likely error. Proceed at your own risk. This can not be un-done.',
+                'no_deleted' => 'There are no deleted PAs.',
+            ],
+        ],
+
         'breadcrumb' => [
             'home'       => 'Home',
             'course'     => 'Course',
             'assignment' => 'Assignment',
             'post' => [
                 'edit' => 'Edit',
+            ],
+            'personal' => [
+                'index'    => 'Personal Assignments',
+                'finished' => 'Finished PAs',
+                'deleted'  => 'Deleted PAs',
+                'create'   => 'Create PA',
+                'edit'     => 'Edit PA',
             ]
         ],
     ],

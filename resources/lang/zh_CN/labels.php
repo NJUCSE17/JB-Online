@@ -44,6 +44,7 @@ return [
         'hour'              => '小时',
         'minute'            => '分钟',
         'remain'            => '剩余',
+        'personal_data'     => '（个人）',
         'deleted_data'      => '（已删除）',
     ],
 
@@ -382,6 +383,7 @@ return [
             'notice'        => '首页公告',
             'ongoing'       => '我的课程',
             'others'        => '其他课程',
+            'personal'      => '个人课程',
             'course'        => '课程列表',
             'assignment'    => '当前作业',
             'login'         => '用户登陆',
@@ -414,6 +416,7 @@ return [
 
                 'assignment_list' => '作业列表',
                 'course_notice'   => '课程公告',
+                'personal_panel'  => '管理DDL',
             ],
 
             'assignments' => [
@@ -424,6 +427,19 @@ return [
             'posts' => [
                 'edit' => '编辑帖子',
             ],
+
+            'personal' => [
+                'management' => '个人作业管理',
+                'create'     => '新建个人作业',
+                'edit'       => '编辑个人作业',
+                'deleted'    => '已删除的个人作业',
+                'table' => [
+                    'name'     => '名称',
+                    'content'  => '内容',
+                    'due_time' => 'DDL',
+                    'total'    => '个人作业总计',
+                ]
+            ]
         ]
     ],
 ];

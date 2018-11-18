@@ -251,6 +251,14 @@ return [
             'timezone'                  => '时区',
             'language'                  => '语言',
             'content'                   => '内容',
+
+            'forum' => [
+                'personal' => [
+                    'name'      => '名称',
+                    'content'   => '内容',
+                    'due_time'  => 'DDL',
+                ],
+            ],
         ],
     ],
 ];
