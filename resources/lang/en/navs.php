@@ -21,6 +21,7 @@ return [
     'frontend' => [
         'about'     => 'About',
         'blog'      => 'Blog',
+        'course'    => 'Course',
         'dashboard' => 'Dashboard',
         'login'     => 'Login',
         'macros'    => 'Macros',

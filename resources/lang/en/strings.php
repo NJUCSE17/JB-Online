@@ -168,6 +168,7 @@ return [
             ],
             'no_notice'     => 'There is no notice published yet.',
             'no_ongoing'    => 'No course now.',
+            'no_course'     => 'No course to show.',
             'no_assignment' => 'Oops! No assignments to do now.',
             'no_blog'       => 'No blogs to show.',
             'finished_at'   => 'Finished at ',

@@ -382,6 +382,7 @@ return [
             'notice'        => '狗管理公告',
             'ongoing'       => '即将扑街',
             'others'        => '强碧名单',
+            'course'        => '课程列表',
             'assignment'    => '末日列表',
             'login'         => '网上冲浪',
             'login_button'  => 'Link Start',

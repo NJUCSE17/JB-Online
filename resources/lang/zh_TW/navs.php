@@ -21,6 +21,7 @@ return [
     'frontend' => [
         'about'     => '关于',
         'blog'      => '维博',
+        'course'    => '课程',
         'dashboard' => '指示板',
         'login'     => '登录',
         'macros'    => '宏',

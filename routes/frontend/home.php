@@ -20,6 +20,7 @@ Route::group(['middleware' => ['auth', 'password_expires']], function () {
         Route::patch('profile/update', 'ProfileController@update')->name('profile.update');
     });
 
+    Route::get('course', 'HomeController@course')->name('course');
     Route::group(['namespace' => 'Forum', 'prefix'=>'course/{course}', 'as' => 'forum.'], function () {
         Route::get('/', 'CourseController@index')->name('course.view');
 

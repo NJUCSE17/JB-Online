@@ -167,6 +167,7 @@ return [
             ],
             'no_notice'     => '管理员还没有发布公告……',
             'no_ongoing'    => '没有现在正在进行的课程。',
+            'no_course'     => '没有课程。',
             'no_assignment' => '天哪，现在竟然没有作业！',
             'no_blog'       => '没有找到已发布的内容。',
             'finished_at'   => '完成于',

@@ -167,6 +167,7 @@ return [
             ],
             'no_notice'     => '老板和狗管理摸鱼了，没有写公告。',
             'no_ongoing'    => '没有现在正在进行的课程。',
+            'no_course'     => '这里什么课程也没有！',
             'no_assignment' => '搞毛啊！怎么没有作业！',
             'no_blog'       => '毛也没有，可能倒闭了！',
             'finished_at'   => '完成于',

@@ -4,8 +4,13 @@ Breadcrumbs::for('frontend.index', function ($trail) {
     $trail->push(__('strings.frontend.breadcrumb.home'), route('frontend.index'));
 });
 
-Breadcrumbs::for('frontend.forum.course.view', function ($trail, $course) {
+Breadcrumbs::for('frontend.course', function ($trail) {
     $trail->parent('frontend.index');
+    $trail->push(__('strings.frontend.breadcrumb.course'), route('frontend.course'));
+});
+
+Breadcrumbs::for('frontend.forum.course.view', function ($trail, $course) {
+    $trail->parent('frontend.course');
     $trail->push(__('strings.frontend.breadcrumb.course').' : '.$course->name,
         route('frontend.forum.course.view', $course));
 });

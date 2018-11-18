@@ -38,7 +38,7 @@
                     <div class="card-body px-0 py-0">
                         <div class="list-group list-group-flush" id="assignments">
                             @foreach($assignments as $assignment)
-                                <a class="list-group-item list-group-item-action border-0" id="assignment"
+                                <a class="list-group-item border-0" id="assignment"
                                    style="border-radius: 0.625rem">
                                     <div class="d-inline w-100 justify-content-between">
                                         <object>
@@ -159,61 +159,14 @@
                             </div>
                         </div>
                     @endif
+                    <hr />
+                    <a class="btn btn-sm btn-outline-dark text-justify text-right float-right"
+                        href="{{ route('frontend.course') }}">
+                        全部课程 <i class="fas fa-angle-right"></i>
+                    </a>
                 </div>
             </div>
 
-            @if ($allCourses->count())
-                <div class="card my-3">
-                    <h4 class="card-header py-3">
-                        <i class="fas fa-book mr-2"></i>
-                        {{ __('labels.frontend.home.others') }}
-                        @auth
-                            @if(Auth::user()->isExecutive())
-                                <span class="float-right d-flex">
-                                        <a class="text-sm-center text-dark"
-                                           href="{{ route('admin.forum.course.index') }}">
-                                            <i class="fas fa-cog"></i>
-                                        </a>
-                                    </span>
-                            @endif
-                        @endauth
-                    </h4>
-                    <div class="card-body">
-                        @foreach($allCourses as $course)
-                            <a class="btn btn-sm btn-outline-{{ $course->color_label }} text-justify my-1"
-                               style="width: 100%;" href="{{ $course->course_link }}">
-                                {{ __('strings.frontend.home.semester.left') }}
-                                {{ $course->semester }}
-                                {{ __('strings.frontend.home.semester.right') }} &nbsp;
-                                {{ $course->name }}
-                                <div class="float-right">
-                                        <span class="badge badge-{{ $course->color_label }}">
-                                            <i class="fas fa-folder"></i>
-                                            {{ $course->assignmentsCount() }}
-                                            <i class="fas fa-comments"></i>
-                                            {{ $course->postsCount() }}
-                                        </span>
-                                </div>
-                            </a>
-                        @endforeach
-                        <div class="row mt-3">
-                            <div class="col-7">
-                                <div class="float-left">
-                                    {{ __('strings.frontend.home.total.left') }}
-                                    {!! $allCourses->total() !!}
-                                    {{ __('strings.frontend.home.total.right') }}
-                                </div>
-                            </div><!--col-->
-
-                            <div class="col-5">
-                                <div class="float-right">
-                                    {!! $allCourses->render() !!}
-                                </div>
-                            </div><!--col-->
-                        </div><!--row-->
-                    </div>
-                </div>
-            @endif
             @if(app_blogonhome())
                 <div class="card my-3">
                     <h4 class="card-header py-3">

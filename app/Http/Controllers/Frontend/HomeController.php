@@ -69,9 +69,17 @@ class HomeController extends Controller
         return view('frontend.index')
             ->withNotice($this->noticeRepository->getNotice())
             ->withOngoingCourses($this->courseRepository->getOngoingCourses())
-            ->withAllCourses($this->courseRepository->getAllCourses())
             ->withAssignments($this->assignmentRepository->getOngoingAssignments())
             ->withFeeds(collect($feeds));
+    }
+
+    /**
+     * @return \Illuminate\View\View
+     */
+    public function course()
+    {
+        return view('frontend.course')
+            ->withCourses($this->courseRepository->getAllCourses());
     }
 
     /**

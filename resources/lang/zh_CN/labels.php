@@ -380,8 +380,9 @@ return [
 
         'home' => [
             'notice'        => '首页公告',
-            'ongoing'       => '正在进行',
+            'ongoing'       => '我的课程',
             'others'        => '其他课程',
+            'course'        => '课程列表',
             'assignment'    => '当前作业',
             'login'         => '用户登陆',
             'login_button'  => '登陆',

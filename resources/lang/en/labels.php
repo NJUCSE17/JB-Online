@@ -353,8 +353,9 @@ return [
 
         'home' => [
             'notice'        => 'Bulletin',
-            'ongoing'       => 'Ongoing Courses',
+            'ongoing'       => 'My Courses',
             'others'        => 'Other Courses',
+            'course'        => 'All Courses',
             'assignment'    => 'Assignments',
             'login'         => 'User Login',
             'login_button'  => 'Login',
