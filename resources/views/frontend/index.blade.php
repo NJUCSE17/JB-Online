@@ -42,19 +42,30 @@
                                    style="border-radius: 0.625rem">
                                     <div class="d-inline w-100 justify-content-between">
                                         <object>
-                                            @if($assignment->postsCount())
+                                            @if($assignment->isPersonal())
                                                 <span class="float-right" style="font-size:120%;">
-                                                    <a class="badge badge-primary"
-                                                       href="{{ $assignment->assignment_link }}">
-                                                        <i class="fas fa-comments"></i>
-                                                        {{  $assignment->postsCount() }}
-                                                    </a>
+                                                    <i class="fas fa-user"></i>
                                                 </span>
+                                                <a href="{{ $assignment->assignment_link }}"
+                                                   class="mb-1 text-success"
+                                                   id="assignment_title_{{ $assignment->id }}" style="font-size:120%;">
+                                                    {{ $assignment->name }}
+                                                </a>
+                                            @else
+                                                @if($assignment->postsCount())
+                                                    <span class="float-right" style="font-size:120%;">
+                                                        <a class="badge badge-primary"
+                                                            href="{{ $assignment->assignment_link }}">
+                                                            <i class="fas fa-comments"></i>
+                                                            {{  $assignment->postsCount() }}
+                                                        </a>
+                                                    </span>
+                                                @endif
+                                                <a href="{{ $assignment->assignment_link }}"
+                                                   class="mb-1" id="assignment_title_{{ $assignment->id }}" style="font-size:120%;">
+                                                    {{ $assignment->name }}
+                                                </a>
                                             @endif
-                                            <a href="{{ $assignment->assignment_link }}"
-                                               class="mb-1" id="assignment_title_{{ $assignment->id }}" style="font-size:120%;">
-                                                {{ $assignment->name }}
-                                            </a>
                                         </object>
                                     </div>
                                     <div id="assignment_content_{{ $assignment->id }}" class="pt-3">
