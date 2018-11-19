@@ -18,7 +18,7 @@
                 <code class="mb-3">
                     {{ $exception->getMessage() }}
                 </code>
-                <h5 style="font-size: 120%;">Please contact admin and provide detialed information to him,
+                <h5 style="font-size: 120%;">Please contact admin and provide detailed information to him,
                     or you are welcomed to RTFSC and find out what is going wrong.</h5>
             </div>
         </div>
