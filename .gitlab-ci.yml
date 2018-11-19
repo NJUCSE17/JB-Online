@@ -1,0 +1,13 @@
+before_script:
+  - bash .gitlab-ci.sh
+
+variables:
+  MYSQL_DATABASE: database_name
+  MYSQL_ROOT_PASSWORD: secret
+
+phpunit:php7.2:mysql5.7:
+  image: php:7.2
+  services:
+    - mysql:5.7
+  script:
+    - php vendor/bin/phpunit --colors
