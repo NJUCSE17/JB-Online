@@ -32,7 +32,7 @@ class RegisterRequest extends FormRequest
         return [
             'student_id'           => ['required', 'int', 'min:100000000', 'max:300000000', new Sanitize(), Rule::unique('users')],
             'first_name'           => ['required', 'string', new Sanitize(), 'max:191'],
-            'last_name'            => ['string', new Sanitize(), 'max:191'],
+            'last_name'            => [new Sanitize(), 'max:191'],
             'email'                => ['required', 'string', 'email', new Sanitize(), 'max:191', Rule::unique('users')],
             'blog'                 => [new Sanitize(), 'max:191'],
             'password'             => ['required', 'string', new Sanitize(), 'min:6', 'confirmed'],
