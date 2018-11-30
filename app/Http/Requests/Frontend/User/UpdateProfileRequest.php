@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Frontend\User;
 
+use App\Rules\Sanitize;
 use Illuminate\Validation\Rule;
 use App\Helpers\Frontend\Auth\Socialite;
 use Illuminate\Foundation\Http\FormRequest;
@@ -28,23 +29,14 @@ class UpdateProfileRequest extends FormRequest
      */
     public function rules()
     {
-        clean($_POST['first_name']);
-        clean($_POST['last_name']);
-        if(isset($_POST['email'])){
-            clean($_POST['email']);
-        }
-        clean($_POST['blog']);
-        if(isset($_POST['avatar_location'])){
-            clean($_POST['avatar_location']);
-        }
         return [
-            'first_name'  => 'required|max:191',
-            'last_name'  => 'max:191',
-            'email' => 'sometimes|required|email|max:191',
-            'blog' => 'max:191',
+            'first_name' => ['required', new Sanitize(), 'max:191'],
+            'last_name' => [new Sanitize(), 'max:191'],
+            'email' => ['sometimes', 'required', new Sanitize(), 'email', 'max:191'],
+            'blog' => [new Sanitize(), 'max:191'],
             'want_mail' => 'required|min:0|max:1',
-            'avatar_type' => ['required', 'max:191', Rule::in(array_merge(['gravatar', 'storage'], (new Socialite)->getAcceptedProviders()))],
-            'avatar_location' => 'sometimes|image|max:100|dimensions:max_width=200,max_height=200',
+            'avatar_type' => ['required', new Sanitize(), 'max:191', Rule::in(array_merge(['gravatar', 'storage'], (new Socialite)->getAcceptedProviders()))],
+            'avatar_location' => ['sometimes', new Sanitize(), 'image', 'max:100', 'dimensions:max_width=200,max_height=200',]
         ];
     }
 }

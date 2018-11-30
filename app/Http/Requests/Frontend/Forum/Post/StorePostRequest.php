@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Frontend\Forum\Post;
 
+use App\Rules\Sanitize;
 use Illuminate\Foundation\Http\FormRequest;
 
 /**
@@ -27,10 +28,9 @@ class StorePostRequest extends FormRequest
      */
     public function rules()
     {
-        clean($_POST['content']);
         return [
             'parent_id' => ['required', 'int'],
-            'content' => 'required|max:10000'
+            'content' => ['required', new Sanitize(), 'max:10000']
         ];
     }
 }

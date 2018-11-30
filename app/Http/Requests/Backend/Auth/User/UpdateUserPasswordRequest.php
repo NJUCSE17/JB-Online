@@ -4,6 +4,7 @@ namespace App\Http\Requests\Backend\Auth\User;
 
 use App\Rules\Auth\ChangePassword;
 use App\Rules\Auth\UnusedPassword;
+use App\Rules\Sanitize;
 use Illuminate\Foundation\Http\FormRequest;
 use DivineOmega\LaravelPasswordExposedValidationRule\PasswordExposed;
 
@@ -29,10 +30,10 @@ class UpdateUserPasswordRequest extends FormRequest
      */
     public function rules()
     {
-        clean($_POST['password']);
         return [
             'password'     => [
                 'required',
+                new Sanitize(),
                 'confirmed',
                 new ChangePassword(),
                 new PasswordExposed(),

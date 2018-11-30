@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Backend\Auth\Role;
 
+use App\Rules\Sanitize;
 use Illuminate\Foundation\Http\FormRequest;
 
 /**
@@ -26,9 +27,13 @@ class StoreRoleRequest extends FormRequest
      */
     public function rules()
     {
-        clean($_POST['name']);
         return [
-            'name' => 'required|unique:roles|max:191',
+            'name' => [
+                'required',
+                new Sanitize(),
+                'unique:roles',
+                'max:191',
+            ],
         ];
     }
 }

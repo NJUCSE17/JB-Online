@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Backend\Forum\Notice;
 
+use App\Rules\Sanitize;
 use Illuminate\Foundation\Http\FormRequest;
 
 /**
@@ -26,9 +27,8 @@ class UpdateNoticeRequest extends FormRequest
      */
     public function rules()
     {
-        clean($_POST['content']);
         return [
-            'notice' => 'max:10000',
+            'notice' => [new Sanitize(), 'max:10000'],
         ];
     }
 }

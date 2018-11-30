@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Frontend\Forum\Personal;
 
 use App\Models\Forum\Assignment;
+use App\Rules\Sanitize;
 use Illuminate\Foundation\Http\FormRequest;
 
 /**
@@ -28,11 +29,9 @@ class UpdateAssignmentRequest extends FormRequest
      */
     public function rules()
     {
-        clean($_POST['name']);
-        clean($_POST['content']);
         return [
-            'name' => 'required|max:200',
-            'content' => 'required|max:10000',
+            'name' => ['required', new Sanitize(), 'max:200'],
+            'content' => ['required', new Sanitize(), 'max:10000'],
             'due_time' => ['required', 'date', 'max:200', 'date_format:Y-m-d G:i:s'],
         ];
     }

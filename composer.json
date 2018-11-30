@@ -1,7 +1,7 @@
 {
-    "name": "rappasoft/laravel-5-boilerplate",
-    "description": "The Laravel Boilerplate Project.",
-    "keywords": ["framework", "laravel", "boilerplate"],
+    "name": "doowzs/Class-Forum",
+    "description": "Class forum project (JB Online).",
+    "keywords": ["framework", "laravel", "forum"],
     "license": "MIT",
     "type": "project",
     "require": {

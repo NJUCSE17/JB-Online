@@ -2,7 +2,9 @@
 
 namespace App\Http\Requests\Backend\Auth\User;
 
+use App\Rules\Sanitize;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 /**
  * Class UpdateUserRequest.
@@ -26,18 +28,35 @@ class UpdateUserRequest extends FormRequest
      */
     public function rules()
     {
-        clean($_POST['student_id']);
-        clean($_POST['first_name']);
-        clean($_POST['last_name']);
-        clean($_POST['email']);
-        clean($_POST['blog']);
         return [
-            'student_id' => 'required|int|min:100000000|max:300000000',
-            'email' => 'required|email|max:191',
-            'blog' => 'max:191',
-            'want_mail' => 'required|min:0|max:1',
-            'first_name'  => 'required|max:191',
-            'last_name'  => 'max:191',
+            'student_id' => [
+                'required',
+                'int',
+                new Sanitize(),
+                'min:100000000',
+                'max:300000000',
+                Rule::unique('users'),
+            ],
+            'first_name' => [
+                'required',
+                new Sanitize(),
+                'max:191',
+            ],
+            'last_name'  => [
+                new Sanitize(),
+                'max:191',
+            ],
+            'email' => [
+                'required',
+                'email',
+                new Sanitize(),
+                'max:191',
+                Rule::unique('users'),
+            ],
+            'blog'     => [
+                new Sanitize(),
+                'max:191',
+            ],
             'roles' => 'required|array',
         ];
     }

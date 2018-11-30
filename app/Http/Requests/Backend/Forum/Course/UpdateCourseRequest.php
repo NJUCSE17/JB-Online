@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Backend\Forum\Course;
 
+use App\Rules\Sanitize;
 use Illuminate\Foundation\Http\FormRequest;
 
 /**
@@ -26,14 +27,12 @@ class UpdateCourseRequest extends FormRequest
      */
     public function rules()
     {
-        clean($_POST['name']);
-        clean($_POST['notice']);
         return [
-            'name' => 'required|max:200',
+            'name' => ['required', new Sanitize(), 'max:200'],
             'semester'  => ['required', 'int', 'max:20'],
             'start_time' => ['required', 'date', 'max:200', 'date_format:Y-m-d'],
             'end_time' => ['required', 'date', 'max:200', 'date_format:Y-m-d'],
-            'notice' => 'max:10000',
+            'notice' => [ new Sanitize(), 'max:10000'],
             'difficulty' => ['required', 'int', 'max:1000'],
             'restrict_level' => ['required', 'int', 'max:20'],
         ];
