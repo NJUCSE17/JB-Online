@@ -33,17 +33,6 @@ class UpdateRoleTest extends TestCase
     }
 
     /** @test */
-    public function at_least_one_permission_is_required()
-    {
-        $role = factory(Role::class)->create();
-        $this->loginAsAdmin();
-
-        $response = $this->patch("/admin/auth/role/{$role->id}", ['name' => 'new role']);
-
-        $response->assertSessionHas(['flash_danger' => __('exceptions.backend.access.roles.needs_permission')]);
-    }
-
-    /** @test */
     public function a_role_name_can_be_updated()
     {
         $role = factory(Role::class)->create();

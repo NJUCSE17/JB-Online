@@ -33,9 +33,12 @@ class UserRepositoryTest extends TestCase
     protected function getValidUserData($userData = [])
     {
         return array_merge([
-            'first_name' => 'John',
-            'last_name' => 'Doe',
-            'email' => 'john@example.com',
+            'student_id' => '170000000',
+            'first_name' => 'Van',
+            'last_name' => 'Darkholme',
+            'email' => 'boy@nextdoor.com',
+            'want_mail' => false,
+            'blog' => 'http://twoblocksdown.com',
             'timezone' => 'UTC',
             'password' => 'secret',
             'roles' => ['test-role'],

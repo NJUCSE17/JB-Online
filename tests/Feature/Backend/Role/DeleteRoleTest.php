@@ -26,16 +26,6 @@ class DeleteRoleTest extends TestCase
     }
 
     /** @test */
-    public function a_role_with_assigned_users_cant_be_deleted()
-    {
-        $this->loginAsAdmin();
-
-        $response = $this->delete('/admin/auth/role/1');
-
-        $response->assertSessionHas(['flash_danger' =>__('exceptions.backend.access.roles.cant_delete_admin')]);
-    }
-
-    /** @test */
     public function an_event_gets_dispatched()
     {
         $role = factory(Role::class)->create();

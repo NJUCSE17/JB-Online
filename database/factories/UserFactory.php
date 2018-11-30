@@ -18,7 +18,7 @@ use App\Models\Auth\User;
 $factory->define(User::class, function (Generator $faker) {
     return [
         'uuid' 			    => Uuid::generate(4)->string,
-        'student_id'        => $faker->studentID,
+        'student_id'        => rand(170000000, 180000000),
         'first_name'        => $faker->firstName,
         'last_name'         => $faker->lastName,
         'email'             => $faker->safeEmail,

@@ -12,6 +12,6 @@ class UserDashboardTest extends TestCase
     /** @test */
     public function unauthenticated_users_cant_access_the_dashboard()
     {
-        $this->get('/dashboard')->assertRedirect('/login');
+        $this->get('/account')->assertRedirect('/login');
     }
 }
