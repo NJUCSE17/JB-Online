@@ -100,12 +100,12 @@ trait AssignmentAttribute
     {
         $finishStatus = $this->finish_status;
         if ($finishStatus == null) {
-            return "<a class=\"btn btn-sm btn-outline-" . $this->ddl_color . " assignmentBtn"
+            return "<a class=\"btn btn-outline-" . $this->ddl_color . " assignmentBtn"
                 . "\" id=\"assignment_ddl_" . $this->id . "\" data-aid=\"" . $this->id
                 . "\"" . "data-api=\"" . route('frontend.forum.assignment.finish', [$this->source, $this])
                 . "\" data-finished='0' href='#'>" . $this->ddl_badge_content . "</a>";
         } else {
-            return "<a class=\"btn btn-sm btn-outline-success assignmentBtn" . "\" id=\"assignment_ddl_" . $this->id
+            return "<a class=\"btn btn-outline-success assignmentBtn" . "\" id=\"assignment_ddl_" . $this->id
                 . "\" data-aid=\"" . $this->id . "\" data-ddl=\"" . $this->ddl_badge_content
                 . "\"" . " data-api=\"" . route('frontend.forum.assignment.reset', [$this->source, $this])
                 . "\" data-finished='1' href='#'>" . $this->ddl_badge_content . "</a>";

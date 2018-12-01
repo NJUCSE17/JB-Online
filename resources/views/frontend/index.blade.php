@@ -147,20 +147,16 @@
                 <div class="card-body">
                     @if ($ongoingCourses->count())
                         @foreach($ongoingCourses as $course)
-                            <a class="btn btn-sm btn-outline-{{ $course->color_label }} text-justify my-1"
+                            <a class="btn btn-outline-{{ $course->color_label }} text-justify my-1"
                                style="width: 100%;"  href="{{ $course->course_link }}">
                                 {{ __('strings.frontend.home.semester.left') }}
                                 {{ $course->semester }}
                                 {{ __('strings.frontend.home.semester.right') }} &nbsp;
                                 {{ $course->name }}
-                                <div class="float-right">
-                                        <span class="badge badge-{{ $course->color_label }}">
-                                            <i class="fas fa-folder"></i>
-                                            {{ $course->assignmentsCount() }}
-                                            <i class="fas fa-comments"></i>
-                                            {{ $course->postsCount() }}
-                                        </span>
-                                </div>
+                                <span class="float-right">
+                                    <i class="fas fa-folder"></i>
+                                    {{ $course->assignmentsCount() }}
+                                </span>
                             </a>
                         @endforeach
                     @else
@@ -171,12 +167,12 @@
                         </div>
                     @endif
                     <hr />
-                    <a class="btn btn-sm btn-outline-dark text-justify float-left"
+                    <a class="btn btn-outline-dark text-justify float-left"
                            href="{{ route('frontend.forum.personal.index') }}">
                         <i class="fas fa-user mr-1"></i>{{ __('labels.frontend.home.personal') }}
 
                     </a>
-                    <a class="btn btn-sm btn-outline-dark text-justify float-right"
+                    <a class="btn btn-outline-dark text-justify float-right"
                         href="{{ route('frontend.forum.course') }}">
                         {{ __('labels.frontend.home.course') }} <i class="fas fa-angle-right"></i>
                     </a>
