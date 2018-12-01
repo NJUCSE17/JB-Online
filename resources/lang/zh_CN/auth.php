@@ -13,6 +13,7 @@ return [
     |
     */
 
+    'use_credential' => '使用账户密码登陆',
     'failed'        => '用户名或密码错误。',
     'general_error' => '你没有权限执行此操作。',
     'password_rules' => '密码长度需大于8位，包含至少各1个大写字母、小写字母、数字。',

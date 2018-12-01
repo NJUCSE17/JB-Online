@@ -13,6 +13,7 @@ return [
     |
     */
 
+    'use_credential' => '帮不想用OAuth2的你准备了密码登陆',
     'failed'        => '你碰撞了黑色高级车。',
     'general_error' => '你遇到了未知的野兽先辈。',
     'password_rules' => '密码长度需大于8位，包含至少各1个大写字母、小写字母、数字。',
