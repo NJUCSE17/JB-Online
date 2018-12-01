@@ -2,10 +2,10 @@
     <nav class="navbar navbar-expand-lg navbar-light bg-white with-shadows">
         <div class="container">
             <a href="{{ route('frontend.index') }}" class="navbar-brand">
-                @yield('navBrand', app_name())
-            </a>
-            <a class="badge badge-pill float-right badge-dark text-white">
-                {{ app_version() }}
+                <img src="{{ asset('favicon.ico') }}" style="height: 30px;" class="mr-2">
+                <span class="d-none d-md-inline">
+                    @yield('navBrand', app_name())
+                </span>
             </a>
 
             <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"

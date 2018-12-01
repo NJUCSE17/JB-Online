@@ -8,7 +8,7 @@
         <h1 class="text-center">
             <img src="{{ asset('favicon.ico') }}" style="height: 50px;">
             {{ app_name() }}
-            <small>{{ app_version() }}</small>
+            <small>Ver. {{ app_version() }}</small>
         </h1>
         <i class="text-center">A hidden(?) place for we students.</i>
         <hr />
