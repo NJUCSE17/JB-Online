@@ -37,7 +37,8 @@
         language: 'zh_CN',
         selector: 'textarea',
         file_browser_callback: elFinderBrowser,
-        plugins: 'placeholder hr advlist paste textcolor link wordcount codesample code codesample image imagetools tinymceEmoji lists table preview autoresize textpattern',
+        height: 200,
+        plugins: 'placeholder hr advlist paste textcolor link wordcount codesample code codesample image imagetools tinymceEmoji lists table preview textpattern',
         menubar: '',
         branding: false,
         content_css: '/css/frontend.css',
@@ -85,7 +86,7 @@
             lang: '{{ App::getLocale() }}',
             width: 900,
             height: 450,
-            resizable: 'yes',
+            resizable: true,
             commands: [
                 'custom', 'open', 'reload', 'home', 'up', 'back', 'forward', 'getfile', 'download',
                 'mkdir', 'mkfile', 'upload', 'archive', 'search', 'info', 'view', 'help', 'sort', 'netmount',
