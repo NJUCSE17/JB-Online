@@ -80,28 +80,22 @@
                         <table id="entries" class="table" style="word-break: break-word;">
                             <thead>
                             <tr>
-                                <th>ENV</th>
-                                <th>Level</th>
-                                <th>Time</th>
-                                <th>Header</th>
-                                <th class="text-right">Actions</th>
+                                <th class="text-center">Info</th>
+                                <th class="text-center">Header</th>
+                                <th class="text-center">Actions</th>
                             </tr>
                             </thead>
                             <tbody>
                             @forelse($entries as $key => $entry)
                                 <tr>
-                                    <td>
+                                    <td class="text-center">
                                         <span class="badge badge-env">{{ $entry->env }}</span>
-                                    </td>
-                                    <td>
-                                    <span class="badge level level-{{ $entry->level }}">
-                                        {!! $entry->level() !!}
-                                    </span>
-                                    </td>
-                                    <td>
-                                    <span class="badge badge-dark">
-                                        {{ $entry->datetime->format('H:i:s') }}
-                                    </span>
+                                        <span class="badge level level-{{ $entry->level }} my-2">
+                                            {!! $entry->level() !!}
+                                        </span>
+                                        <span class="badge badge-dark">
+                                            {{ $entry->datetime->format('H:i:s') }}
+                                        </span>
                                     </td>
                                     <td>
                                         {{ $entry->header }}

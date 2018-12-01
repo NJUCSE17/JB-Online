@@ -1,59 +1,25 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light with-shadows">
-    <div class="container-fluid">
-        <a href="{{ route('frontend.index') }}" class="navbar-brand">{{ app_name() }}</a>
-        <a class="badge badge-pill float-right badge-dark text-white">
-            {{ app_version() }}
+<nav class="navbar align-items-stretch navbar-light flex-md-nowrap p-0">
+    <ul class="navbar-nav border-left flex-row">
+        <a href="#" class="nav-link nav-link-icon toggle-sidebar d-md-inline d-lg-none text-center border-right"
+           data-toggle="collapse" data-target=".header-navbar" aria-expanded="false" aria-controls="header-navbar">
+            <i class="fas fa-bars"></i>
         </a>
-
-        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
-                data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-                aria-label="{{ __('labels.general.toggle_navigation') }}">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
-            <ul class="navbar-nav">
-                @if (config('locale.status') && count(config('locale.languages')) > 1)
-                    <li class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" id="navbarDropdownLanguageLink"
-                           data-toggle="dropdown"
-                           aria-haspopup="true" aria-expanded="false">{{ __('menus.language-picker.language') }}
-                            ({{ strtoupper(app()->getLocale()) }})</a>
-
-                        @include('includes.partials.lang')
-                    </li>
-                @endif
-
-                <li class="nav-item dropdown">
-                    <a href="#" class="nav-link dropdown-toggle" id="navbarDropdownLanguageLink"
-                       data-toggle="dropdown"
-                       aria-haspopup="true" aria-expanded="false">
-                        {{ __('navs.frontend.user.administration') }}
-                    </a>
-                    @include('backend.includes.sidebar')
-                </li>
-
-                <li class="nav-item">
-                    <a href="{{ route('frontend.user.account') }}"
-                       class="nav-link text-info">
-                        {{ $logged_in_user->name }}
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="{{ route('frontend.index') }}"
-                       class="nav-link text-success">
-                        {{ __('navs.general.home') }}
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="{{ route('frontend.auth.logout') }}"
-                       class="nav-link text-danger"
-                       onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                        {{ __('navs.general.logout') }}
-                    </a>
-                    <form id="logout-form" action="{{ route('frontend.auth.logout') }}" method="POST" style="display: none;">{{ csrf_field() }}</form>
-                </li>
-            </ul>
-        </div>
-    </div>
+    </ul>
+    <nav class="nav">
+        <a href="{{ route('frontend.user.account') }}"
+           class="nav-link text-info py-3 px-3">
+            {{ $logged_in_user->name }}
+        </a>
+        <a href="{{ route('frontend.index') }}"
+           class="nav-link text-success py-3 px-3">
+            {{ __('navs.general.home') }}
+        </a>
+        <a href="{{ route('frontend.auth.logout') }}"
+           class="nav-link text-danger py-3 px-3"
+           onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+            {{ __('navs.general.logout') }}
+        </a>
+        <form id="logout-form" action="{{ route('frontend.auth.logout') }}" method="POST"
+              style="display: none;">{{ csrf_field() }}</form>
+    </nav>
 </nav>

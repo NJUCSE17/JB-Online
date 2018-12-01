@@ -11,7 +11,7 @@
                     </span>
                 </a>
             @else
-                <a href="{{ $item['url'] }}" class="list-group-item {{ $level }}">
+                <a href="{{ $item['url'] }}" class="list-group-item">
                     <span class="badge level level-{{ $level }} float-left">
                         {!! $item['icon'] !!} {{ $item['name'] }}
                     </span>

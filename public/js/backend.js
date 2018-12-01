@@ -1857,6 +1857,8 @@ process.umask = function() { return 0; };
 
 __webpack_require__("./resources/assets/js/bootstrap.js");
 __webpack_require__("./resources/assets/js/plugins.js");
+__webpack_require__("./resources/assets/shards-dashboard/scripts/extras.1.1.0.min.js");
+__webpack_require__("./resources/assets/shards-dashboard/scripts/shards-dashboards.1.1.0.min.js");
 
 /***/ }),
 
@@ -1995,6 +1997,110 @@ $(function () {
             result.value && window.location.assign(link.attr('href'));
         });
     });
+});
+
+/***/ }),
+
+/***/ "./resources/assets/shards-dashboard/scripts/extras.1.1.0.min.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+!function (e) {
+  jQuery(document).ready(function () {
+    var t = { getItem: function getItem(e) {
+        return e && decodeURIComponent(document.cookie.replace(new RegExp("(?:(?:^|.*;)\\s*" + encodeURIComponent(e).replace(/[\-\.\+\*]/g, "\\$&") + "\\s*\\=\\s*([^;]*).*$)|^.*$"), "$1")) || null;
+      }, setItem: function setItem(e, t, o, s, a, n) {
+        if (!e || /^(?:expires|max\-age|path|domain|secure)$/i.test(e)) return !1;var i = "";if (o) switch (o.constructor) {case Number:
+            i = o === 1 / 0 ? "; expires=Fri, 31 Dec 9999 23:59:59 GMT" : "; max-age=" + o;break;case String:
+            i = "; expires=" + o;break;case Date:
+            i = "; expires=" + o.toUTCString();}return document.cookie = encodeURIComponent(e) + "=" + encodeURIComponent(t) + i + (a ? "; domain=" + a : "") + (s ? "; path=" + s : "") + (n ? "; secure" : ""), !0;
+      }, removeItem: function removeItem(e, t, o) {
+        return !!this.hasItem(e) && (document.cookie = encodeURIComponent(e) + "=; expires=Thu, 01 Jan 1970 00:00:00 GMT" + (o ? "; domain=" + o : "") + (t ? "; path=" + t : ""), !0);
+      }, hasItem: function hasItem(e) {
+        return !(!e || /^(?:expires|max\-age|path|domain|secure)$/i.test(e)) && new RegExp("(?:^|;\\s*)" + encodeURIComponent(e).replace(/[\-\.\+\*]/g, "\\$&") + "\\s*\\=").test(document.cookie);
+      }, keys: function keys() {
+        for (var e = document.cookie.replace(/((?:^|\s*;)[^\=]+)(?=;|$)|^\s*|\s*(?:\=[^;]*)?(?:\1|$)/g, "").split(/\s*(?:\=[^;]*)?;\s*/), t = e.length, o = 0; o < t; o++) {
+          e[o] = decodeURIComponent(e[o]);
+        }return e;
+      } },
+        o = "_sd_demo_page_promo",
+        s = t.getItem(o),
+        a = e(".promo-popup");s ? setTimeout(function () {
+      a.addClass("hidden slideInUp");
+    }, 3e3) : setTimeout(function () {
+      a.addClass("bounceIn");
+    }, 3e3), a.find(".close").click(function () {
+      a.addClass("hidden");var e = new Date();e.setDate(e.getDate() + 1), t.setItem(o, !0, e);
+    }), a.find(".pp-intro-bar").click(function (s) {
+      s.target === this && e(this).parent().hasClass("hidden") && (t.removeItem(o), a.removeClass("hidden"));
+    }), a.find(".pp-intro-bar .up").click(function () {
+      a.removeClass("hidden"), t.removeItem(o);
+    }), a.find(".pp-cta").click(function (e) {
+      e.preventDefault(), "undefined" !== dataLayer && dataLayer.push({ event: "sdp-demo-cta-upsell", data: { category: "product-demo", action: "cta-upsell", label: "shards-dashboard-pro" } }), window.location = e.target.href;
+    });var n,
+        i = e(".color-switcher .accent-colors"),
+        r = e("#main-stylesheet"),
+        c = r.attr("href"),
+        d = r.attr("data-version");i.on("click", "li", function () {
+      var t = e(this).attr("data-color"),
+          o = "styles/accents/" + t + "." + d + ".css";"primary" == t && (o = c), i.find("li.active").removeClass("active"), e(this).addClass("active"), r.attr("href", o), function (t) {
+        var o = e("#main-logo");n || (n = o.attr("src"));if ("primary" === t) return void o.attr("src", n);o.attr("src", "images/shards-dashboards-logo-" + t + ".svg");
+      }(t), void 0 !== window.ubdChart && void 0 !== window.BlogOverviewUsers && function (t) {
+        t = l[t], ubdChart.data.datasets[0].backgroundColor = [u(t, .9), u(t, .5), u(t, .3)], ubdChart.update(), e(".ubd-stats__legend .ubd-stats__item:nth-child(1) i").attr("style", "color:" + u(t, .9) + ";"), e(".ubd-stats__legend .ubd-stats__item:nth-child(2) i").attr("style", "color:" + u(t, .5) + ";"), e(".ubd-stats__legend .ubd-stats__item:nth-child(3) i").attr("style", "color:" + u(t, .3) + ";");
+      }(t);
+    });var l = { primary: "#007bff", secondary: "#5A6169", success: "#17c671", info: "#00b8d8", warning: "#ffb400", danger: "#c4183c" };function u(e, t) {
+      t = t || 1;var o = void 0;if (/^#([A-Fa-f0-9]{3}){1,2}$/.test(e)) return 3 == (o = e.substring(1).split("")).length && (o = [o[0], o[0], o[1], o[1], o[2], o[2]]), "rgba(" + [(o = "0x" + o.join("")) >> 16 & 255, o >> 8 & 255, 255 & o].join(",") + "," + t + ")";
+    }e("#social-share").sharrre({ share: { facebook: !0, twitter: !0 }, buttons: { facebook: { layout: "button_count", action: "like" }, twitter: { count: "horizontal", via: "DesignRevision", hashtags: "bootstrap,uikit" } }, enableTracking: !0, enableHover: !1, enableCounter: !1 }), e(".color-switcher-toggle").click(p), e(".color-switcher .close").click(p);var m = new Date();function p() {
+      e(".color-switcher").toggleClass("visible"), e(".color-switcher").hasClass("visible") ? t.setItem("_sd_cs_visible", !0, m) : t.setItem("_sd_cs_visible", !1, m);
+    }m.setDate(m.getDate() + 1), t.setItem(o, !0, m), null === t.getItem("_sd_cs_visible") && t.setItem("_sd_cs_visible", !0, m), "false" !== t.getItem("_sd_cs_visible") && e(".color-switcher").addClass("visible"), setTimeout(function () {
+      e(".loading-overlay").fadeOut(250);
+    }, 2e3), e(document).on("click", "a.extra-action", function (t) {
+      t.preventDefault(), t.stopPropagation();var o = e(this).attr("href");!function () {
+        try {
+          return window.self !== window.top;
+        } catch (e) {
+          return !0;
+        }
+      }() ? window.location = o : window.parent.location = o;
+    });
+  });
+}(jQuery);
+
+/***/ }),
+
+/***/ "./resources/assets/shards-dashboard/scripts/shards-dashboards.1.1.0.min.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+!function (t, o) {
+  "object" == ( false ? "undefined" : _typeof(exports)) && "undefined" != typeof module ? o() :  true ? !(__WEBPACK_AMD_DEFINE_FACTORY__ = (o),
+				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
+				(__WEBPACK_AMD_DEFINE_FACTORY__.call(exports, __webpack_require__, exports, module)) :
+				__WEBPACK_AMD_DEFINE_FACTORY__),
+				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__)) : o();
+}(0, function () {
+  "use strict";
+  if ("undefined" == typeof Chart) throw new Error("Shards Dashboard requires the Chart.js library in order to function properly.");window.ShardsDashboards = window.ShardsDashboards ? window.ShardsDashboards : {}, $.extend($.easing, { easeOutSine: function easeOutSine(t, o, e, i, n) {
+      return i * Math.sin(o / n * (Math.PI / 2)) + e;
+    } }), Chart.defaults.LineWithLine = Chart.defaults.line, Chart.controllers.LineWithLine = Chart.controllers.line.extend({ draw: function draw(t) {
+      if (Chart.controllers.line.prototype.draw.call(this, t), this.chart.tooltip._active && this.chart.tooltip._active.length) {
+        var o = this.chart.tooltip._active[0],
+            e = this.chart.ctx,
+            i = o.tooltipPosition().x,
+            n = this.chart.scales["y-axis-0"].top,
+            r = this.chart.scales["y-axis-0"].bottom;e.save(), e.beginPath(), e.moveTo(i, n), e.lineTo(i, r), e.lineWidth = .5, e.strokeStyle = "#ddd", e.stroke(), e.restore();
+      }
+    } }), $(document).ready(function () {
+    var t = { duration: 270, easing: "easeOutSine" };$(":not(.main-sidebar--icons-only) .dropdown").on("show.bs.dropdown", function () {
+      $(this).find(".dropdown-menu").first().stop(!0, !0).slideDown(t);
+    }), $(":not(.main-sidebar--icons-only) .dropdown").on("hide.bs.dropdown", function () {
+      $(this).find(".dropdown-menu").first().stop(!0, !0).slideUp(t);
+    }), $(".toggle-sidebar").click(function (t) {
+      $(".main-sidebar").toggleClass("open");
+    });
+  });
 });
 
 /***/ }),

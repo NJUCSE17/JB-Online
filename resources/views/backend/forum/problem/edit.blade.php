@@ -82,9 +82,7 @@
                     </div><!--form-group-->
                 </div><!--col-->
             </div><!--row-->
-        </div><!--card-body-->
 
-        <div class="card-footer">
             <div class="row">
                 <div class="col">
                     {{ form_cancel(route('admin.forum.problem.index'), __('buttons.general.cancel')) }}
@@ -94,7 +92,7 @@
                     {{ form_submit(__('buttons.general.crud.update')) }}
                 </div><!--row-->
             </div><!--row-->
-        </div><!--card-footer-->
+        </div><!--card-body-->
     </div><!--card-->
     {{ html()->closeModelForm() }}
 @endsection

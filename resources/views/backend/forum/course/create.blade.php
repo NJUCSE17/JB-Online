@@ -110,9 +110,7 @@
                         </div><!--form-group-->
                     </div><!--col-->
                 </div><!--row-->
-            </div><!--card-body-->
 
-            <div class="card-footer clearfix">
                 <div class="row">
                     <div class="col">
                         {{ form_cancel(route('admin.forum.course.index'), __('buttons.general.cancel')) }}
@@ -122,7 +120,7 @@
                         {{ form_submit(__('buttons.general.crud.create')) }}
                     </div><!--col-->
                 </div><!--row-->
-            </div><!--card-footer-->
+            </div><!--card-body-->
         </div><!--card-->
     {{ html()->form()->close() }}
 @endsection
