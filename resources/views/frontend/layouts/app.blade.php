@@ -19,6 +19,7 @@
 
     <!-- Check if the language is set to RTL, so apply the RTL layouts -->
     <!-- Otherwise apply the normal LTR layouts -->
+    @include('includes.stylesheets')
     {{ style(mix('css/frontend.css')) }}
 
     @stack('after-styles')
@@ -38,12 +39,23 @@
         </div><!-- container -->
     </div><!-- #app -->
 
+    <footer class="site-footer clearfix">
+        <div class="container">
+            <div class="row">
+                <div class="footer-logo col-3">
+                    <h4> JB Online </h4>
+                </div>
+                UIX
+            </div>
+        </div>
+    </footer>
+
     <!-- Scripts -->
     @stack('before-scripts')
+    @include('includes.scripts')
+    @include('includes.votejs')
     {!! script(mix('js/frontend.js')) !!}
     @stack('after-scripts')
-    @include('includes.commonjs')
-    @include('includes.utilities')
 
     @include('includes.partials.ga')
 </body>

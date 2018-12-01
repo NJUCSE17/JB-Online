@@ -45,7 +45,7 @@
                         <div class="row">
                             <div class="col">
                                 <div class="form-group">
-                                    <div class="custom-control custom-checkbox mb-3">
+                                    <div class="custom-control custom-checkbox d-block">
                                         <input type="checkbox" class="custom-control-input" name="remember" id="remember" value="1">
                                         <label class="custom-control-label" for="remember">{{ __('labels.frontend.auth.remember_me') }}</label>
                                     </div>
