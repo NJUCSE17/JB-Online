@@ -40,8 +40,7 @@
 
     <footer class="footer border-top">
         <i class="fas fa-copyright mr-2"></i> JB Online ({{ date('Y') }}). All rights reserved.
-        <div class="sm-hidden">
-
+        <span class="sm-hidden">
             <span class="mx-2">|</span>
             <a href="https://github.com/doowzs/Class-Forum" class="text-dark">
                 <i class="fab fa-github-square mr-2"></i>
@@ -56,7 +55,7 @@
                 <i class="fab fa-gitlab mr-2"></i>
                 JB GitLab
             </a>
-        </div>
+        </span>
     </footer>
 
     <!-- Scripts -->
