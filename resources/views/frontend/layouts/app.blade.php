@@ -32,21 +32,28 @@
     @include('frontend.includes.nav')
 
     <div id="app" class="@yield('appClass', '')">
-        <div class="container my-3">
+        <div class="container mt-3">
             @include('includes.partials.messages')
             @yield('content')
         </div><!-- container -->
     </div><!-- #app -->
 
-    <footer class="site-footer clearfix">
-        <div class="container">
-            <div class="row">
-                <div class="footer-logo col-3">
-                    <h4> JB Online </h4>
-                </div>
-                UIX
-            </div>
-        </div>
+    <footer class="footer border-top">
+        <i class="fas fa-copyright mr-2"></i> JB Online ({{ date('Y') }}). All rights reserved.
+        <span class="mx-2">|</span>
+        <a href="https://github.com/doowzs/Class-Forum" class="text-dark">
+            <i class="fab fa-github-square mr-2"></i>
+            Source Code
+        </a>
+        <span class="mx-2">|</span>
+        <a href="https://voice.njujb.com" class="text-dark mr-2">
+            <i class="far fa-comment-alt mr-2"></i>
+            JB Voice
+        </a>
+        <a href="https://git.njujb.com" class="text-dark">
+            <i class="fab fa-gitlab mr-2"></i>
+            JB GitLab
+        </a>
     </footer>
 
     <!-- Scripts -->

@@ -55,7 +55,7 @@
             @else
                 <div class="row">
                     <div class="col text-center">
-                        {{ __('strings.frontend.home.no_courses') }}
+                        {{ __('strings.frontend.home.no_course') }}
                     </div>
                 </div>
             @endif

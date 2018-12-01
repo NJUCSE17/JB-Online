@@ -6011,11 +6011,17 @@ a.text-black:hover, a.text-black:focus {
 }
 
 html {
+  height: 100%;
   min-height: 100%;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
 }
 
 body {
-  height: 100%;
+  position: relative;
+  margin: 0;
+  padding-bottom: 4rem;
+  min-height: 100%;
 }
 
 .app-center {
@@ -6027,6 +6033,16 @@ body {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+}
+
+.footer {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  padding: 1rem;
+  background-color: rgba(255, 255, 255, 0.6);
+  text-align: center;
 }
 
 .headroom {
