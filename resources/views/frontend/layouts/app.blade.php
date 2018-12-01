@@ -34,7 +34,6 @@
     <div id="app" class="@yield('appClass', '')">
         <div class="container my-3">
             @include('includes.partials.messages')
-
             @yield('content')
         </div><!-- container -->
     </div><!-- #app -->

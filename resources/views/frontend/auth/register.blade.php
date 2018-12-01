@@ -9,18 +9,27 @@
             <div class="card">
                 <div class="card-header py-3">
                     <strong>
+                        <i class="fas fa-user-plus mr-2"></i>
                         {{ __('labels.frontend.auth.register_box_title') }}
                     </strong>
                 </div><!--card-header-->
 
                 <div class="card-body">
-                    {{ html()->form('POST', route('frontend.auth.register.post'))->open() }}
-
                     <div class="row">
                         <div class="col">
-                            <div class="form-group">
-                                {{ html()->label(__('validation.attributes.frontend.student_id'))->for('student_id') }}
+                            <div class="text-center">
+                                {!! $socialiteLinks !!}
+                            </div>
+                        </div><!--/ .col -->
+                    </div><!-- / .row -->
 
+                    {{ html()->form('POST', route('frontend.auth.register.post'))->open() }}
+                    <div class="row mb-2">
+                        <div class="col">
+                            <div class="input-group input-group-seamless">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text"><i class="fas fa-id-card"></i></div>
+                                </div>
                                 {{ html()->text('student_id')
                                     ->class('form-control')
                                     ->placeholder(__('validation.attributes.frontend.student_id'))
@@ -30,11 +39,12 @@
                         </div><!--col-->
                     </div><!--row-->
 
-                    <div class="row">
+                    <div class="row mb-2">
                         <div class="col-12 col-md-6">
-                            <div class="form-group">
-                                {{ html()->label(__('validation.attributes.frontend.first_name'))->for('first_name') }}
-
+                            <div class="input-group input-group-seamless">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text"><i class="fas fa-user"></i></div>
+                                </div>
                                 {{ html()->text('first_name')
                                     ->class('form-control')
                                     ->placeholder(__('validation.attributes.frontend.first_name'))
@@ -44,9 +54,10 @@
                         </div><!--row-->
 
                         <div class="col-12 col-md-6">
-                            <div class="form-group">
-                                {{ html()->label(__('validation.attributes.frontend.last_name'))->for('last_name') }}
-
+                            <div class="input-group input-group-seamless">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text"><i class="fas fa-users"></i></div>
+                                </div>
                                 {{ html()->text('last_name')
                                     ->class('form-control')
                                     ->placeholder(__('validation.attributes.frontend.last_name'))
@@ -55,11 +66,12 @@
                         </div><!--col-->
                     </div><!--row-->
 
-                    <div class="row">
+                    <div class="row mb-2">
                         <div class="col">
-                            <div class="form-group">
-                                {{ html()->label(__('validation.attributes.frontend.email'))->for('email') }}
-
+                            <div class="input-group input-group-seamless">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text"><i class="fas fa-envelope"></i></div>
+                                </div>
                                 {{ html()->email('email')
                                     ->class('form-control')
                                     ->placeholder(__('validation.attributes.frontend.email'))
@@ -69,11 +81,12 @@
                         </div><!--col-->
                     </div><!--row-->
 
-                    <div class="row">
+                    <div class="row mb-2">
                         <div class="col">
-                            <div class="form-group">
-                                {{ html()->label(__('validation.attributes.frontend.blog'))->for('blog') }}
-
+                            <div class="input-group input-group-seamless">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text"><i class="fas fa-rss"></i></div>
+                                </div>
                                 {{ html()->text('blog')
                                     ->class('form-control')
                                     ->placeholder(__('validation.attributes.frontend.blog'))
@@ -82,11 +95,12 @@
                         </div><!--col-->
                     </div><!--row-->
 
-                    <div class="row">
+                    <div class="row mb-2">
                         <div class="col">
-                            <div class="form-group">
-                                {{ html()->label(__('validation.attributes.frontend.password'))->for('password') }}
-
+                            <div class="input-group input-group-seamless">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text"><i class="fas fa-key"></i></div>
+                                </div>
                                 {{ html()->password('password')
                                     ->class('form-control')
                                     ->placeholder(__('validation.attributes.frontend.password'))
@@ -95,11 +109,12 @@
                         </div><!--col-->
                     </div><!--row-->
 
-                    <div class="row">
+                    <div class="row mb-2">
                         <div class="col">
-                            <div class="form-group">
-                                {{ html()->label(__('validation.attributes.frontend.password_confirmation'))->for('password_confirmation') }}
-
+                            <div class="input-group input-group-seamless">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text"><i class="fas fa-redo"></i></div>
+                                </div>
                                 {{ html()->password('password_confirmation')
                                     ->class('form-control')
                                     ->placeholder(__('validation.attributes.frontend.password_confirmation'))
@@ -109,7 +124,7 @@
                     </div><!--row-->
 
                     @if (config('access.captcha.registration'))
-                        <div class="row">
+                        <div class="row mb-2">
                             <div class="col">
                                 {!! Captcha::display() !!}
                                 {{ html()->hidden('captcha_status', 'true') }}
@@ -120,20 +135,12 @@
                     <div class="row">
                         <div class="col">
                             <div class="form-group mb-0 clearfix text-right">
-                                {{ form_submit(__('labels.frontend.auth.register_button')) }}
+                                {{ form_submit("<i class='fas fa-user-plus mr-2'></i>"
+                                    . __('labels.frontend.auth.register_button')) }}
                             </div><!--form-group-->
                         </div><!--col-->
                     </div><!--row-->
                     {{ html()->form()->close() }}
-
-                    <div class="row">
-                        <div class="col">
-                            <div class="text-center">
-                                {!! $socialiteLinks !!}
-                            </div>
-                        </div><!--/ .col -->
-                    </div><!-- / .row -->
-
                 </div><!-- card-body -->
             </div><!-- card -->
         </div><!-- col-md-8 -->
