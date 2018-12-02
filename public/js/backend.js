@@ -1963,18 +1963,28 @@ $(function () {
 
         var form = this,
             link = $('a[data-method="delete"]'),
-            cancel = link.attr('data-trans-button-cancel') ? link.attr('data-trans-button-cancel') : "Cancel",
-            confirm = link.attr('data-trans-button-confirm') ? link.attr('data-trans-button-confirm') : "Yes, delete",
-            title = link.attr('data-trans-title') ? link.attr('data-trans-title') : "Are you sure you want to delete this item?";
+            cancel = link.attr('data-trans-button-cancel') ? link.attr('data-trans-button-cancel') : "取消 Cancel",
+            confirm = link.attr('data-trans-button-confirm') ? link.attr('data-trans-button-confirm') : "确认 Yes",
+            content = link.attr('data-trans-title') ? link.attr('data-trans-title') : "Are you sure you want to delete this item?";
 
-        swal({
-            title: title,
-            showCancelButton: true,
-            confirmButtonText: confirm,
-            cancelButtonText: cancel,
-            type: 'warning'
-        }).then(function (result) {
-            result.value && form.submit();
+        $.confirm({
+            title: 'Are you sure?',
+            content: content,
+            icon: 'fas fa-exclamation-triangle',
+            typeAnimated: true,
+            buttons: {
+                confirm: {
+                    text: confirm,
+                    btnClass: 'btn-green',
+                    action: function action() {
+                        form.submit();
+                    }
+                },
+                cancel: {
+                    text: cancel,
+                    btnClass: 'btn-red'
+                }
+            }
         });
     }).on('click', 'a[name=confirm_item]', function (e) {
         /**
@@ -1983,18 +1993,28 @@ $(function () {
         e.preventDefault();
 
         var link = $(this),
-            title = link.attr('data-trans-title') ? link.attr('data-trans-title') : "Are you sure you want to do this?",
-            cancel = link.attr('data-trans-button-cancel') ? link.attr('data-trans-button-cancel') : "Cancel",
-            confirm = link.attr('data-trans-button-confirm') ? link.attr('data-trans-button-confirm') : "Continue";
+            content = link.attr('data-trans-title') ? link.attr('data-trans-title') : "你确定你要这么做吗？<br />Are you sure you want to do this?",
+            cancel = link.attr('data-trans-button-cancel') ? link.attr('data-trans-button-cancel') : "取消 Cancel",
+            confirm = link.attr('data-trans-button-confirm') ? link.attr('data-trans-button-confirm') : "确认 Yes";
 
-        swal({
-            title: title,
-            showCancelButton: true,
-            confirmButtonText: confirm,
-            cancelButtonText: cancel,
-            type: 'info'
-        }).then(function (result) {
-            result.value && window.location.assign(link.attr('href'));
+        $.confirm({
+            title: 'Are you sure?',
+            content: content,
+            icon: 'fas fa-question-circle',
+            typeAnimated: true,
+            buttons: {
+                confirm: {
+                    text: confirm,
+                    btnClass: 'btn-green',
+                    action: function action() {
+                        window.location.assign(link.attr('href'));
+                    }
+                },
+                cancel: {
+                    text: cancel,
+                    btnClass: 'btn-red'
+                }
+            }
         });
     });
 });
