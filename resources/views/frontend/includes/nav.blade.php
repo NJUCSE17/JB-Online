@@ -2,10 +2,8 @@
     <nav class="navbar navbar-expand-lg navbar-light bg-white with-shadows">
         <div class="container">
             <a href="{{ route('frontend.index') }}" class="navbar-brand">
-                <img src="{{ asset('favicon.ico') }}" style="height: 30px;" class="mr-2">
-                <span class="d-none d-md-inline">
-                    @yield('navBrand', app_name())
-                </span>
+                <img src="{{ asset('favicon.ico') }}" style="height: 25px;" class="mr-2">
+                <span>@yield('navBrand', app_name())</span>
             </a>
 
             <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
@@ -16,22 +14,12 @@
 
             <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
                 <ul class="navbar-nav">
-                    @if (config('locale.status') && count(config('locale.languages')) > 1)
-                        <li class="nav-item dropdown">
-                            <a href="#" class="nav-link dropdown-toggle" id="navbarDropdownLanguageLink"
-                               data-toggle="dropdown"
-                               aria-haspopup="true" aria-expanded="false">{{ __('menus.language-picker.language') }}
-                                ({{ strtoupper(app()->getLocale()) }})</a>
-
-                            @include('includes.partials.lang')
-                        </li>
-                    @endif
-
                     @guest
                         <li class="nav-item">
                             <a href="{{route('frontend.auth.login')}}"
                                class="nav-link text-success {{ active_class(Active::checkRoute('frontend.auth.login')) }}">
-                                {{ __('navs.frontend.login') }}
+                                <i class="fas fa-sign-in-alt mr-2"></i>
+                                <span>{{ __('navs.frontend.login') }}</span>
                             </a>
                         </li>
 
@@ -39,52 +27,60 @@
                             <li class="nav-item">
                                 <a href="{{route('frontend.auth.register')}}"
                                    class="nav-link text-danger {{ active_class(Active::checkRoute('frontend.auth.register')) }}">
-                                    {{ __('navs.frontend.register') }}
+                                    <i class="fas fa-user-plus mr-2"></i>
+                                    <span>{{ __('navs.frontend.register') }}</span>
                                 </a>
                             </li>
                         @endif
                     @else
                         <li class="nav-item">
-                            <a href="{{ route('frontend.user.account') }}"
-                               class="nav-link text-info {{ active_class(Active::checkRoute('frontend.user.account')) }}">
-                                {{ $logged_in_user->name }}
-                            </a>
-                        </li>
-                        <li class="nav-item">
                             <a href="{{route('frontend.blog')}}"
-                               class="nav-link text-success {{ active_class(Active::checkRoute('frontend.blog')) }}">
-                                {{ __('navs.frontend.blog') }}
+                               class="nav-link {{ active_class(Active::checkRoute('frontend.blog')) }}">
+                                <i class="fas fa-rss mr-2"></i>
+                                <span>{{ __('navs.frontend.blog') }}</span>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="{{route('elfinder.index')}}"
-                               class="nav-link text-success {{ active_class(Active::checkRoute('elfinder.index')) }}">
-                                {{ __('navs.frontend.filehub') }}
+                               class="nav-link {{ active_class(Active::checkRoute('elfinder.index')) }}">
+                                <i class="fas fa-share-alt mr-2"></i>
+                                <span>{{ __('navs.frontend.filehub') }}</span>
                             </a>
+                        </li>
+                        <li class="nav-item">
+                            <div class="dropdown">
+                                <a href="#" class="nav-link dropdown-toggle text-nowrap px-3" role="button"
+                                   id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
+                                   aria-expanded="false">
+                                    <img class="user-avatar rounded-circle mr-2" src="{{ $logged_in_user->picture }}"
+                                         style="height: 25px !important;">
+                                    {{ $logged_in_user->name }}
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                    <a href="{{ route('frontend.user.account') }}"
+                                       class="dropdown-item text-info {{ active_class(Active::checkRoute('frontend.user.account')) }}">
+                                        <i class="fas fa-user-cog mr-2"></i>
+                                        <span>{{ __('navs.general.account') }}</span>
+                                    </a>
+                                    @can('view backend')
+                                        <a href="{{ route('admin.dashboard') }}"
+                                           class="dropdown-item text-warning">
+                                            <i class="fas fa-landmark mr-2"></i>
+                                            <span>{{ __('navs.frontend.user.administration') }}</span>
+                                        </a>
+                                    @endcan
+                                    <a href="{{ route('frontend.auth.logout') }}"
+                                       class="dropdown-item text-danger"
+                                       onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                        <i class="fas fa-sign-out-alt mr-2"></i>
+                                        <span>{{ __('navs.general.logout') }}</span>
+                                    </a>
+                                    <form id="logout-form" action="{{ route('frontend.auth.logout') }}" method="POST"
+                                          style="display: none;">{{ csrf_field() }}</form>
+                                </div>
+                            </div>
                         </li>
                     @endguest
-                    <li class="nav-item"><a href="{{route('frontend.about')}}"
-                                            class="nav-link text-primary {{ active_class(Active::checkRoute('frontend.about')) }}">
-                            {{ __('navs.frontend.about') }}
-                        </a>
-                    </li>
-                    @auth
-                        @can('view backend')
-                            <li class="nav-item"><a href="{{ route('admin.dashboard') }}"
-                                                    class="nav-link text-warning">
-                                    {{ __('navs.frontend.user.administration') }}
-                                </a>
-                            </li>
-                        @endcan
-                        <li class="nav-item">
-                            <a href="{{ route('frontend.auth.logout') }}"
-                               class="nav-link text-danger"
-                               onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                                {{ __('navs.general.logout') }}
-                            </a>
-                            <form id="logout-form" action="{{ route('frontend.auth.logout') }}" method="POST" style="display: none;">{{ csrf_field() }}</form>
-                        </li>
-                    @endauth
                 </ul>
             </div>
         </div>

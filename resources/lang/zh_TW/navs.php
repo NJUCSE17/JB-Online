@@ -16,6 +16,7 @@ return [
     'general' => [
         'home'   => '首页',
         'logout' => '退出',
+        'account' => '账户设置',
     ],
 
     'frontend' => [

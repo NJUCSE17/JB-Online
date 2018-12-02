@@ -38,25 +38,7 @@
         </div><!-- container -->
     </div><!-- #app -->
 
-    <footer class="footer border-top">
-        <i class="fas fa-copyright mr-2"></i> JB Online ({{ date('Y') }}). All rights reserved.
-        <span class="sm-hidden">
-            <span class="mx-2">|</span>
-            <a href="https://github.com/doowzs/Class-Forum" class="text-dark">
-                <i class="fab fa-github-square mr-2"></i>
-                Source Code
-            </a>
-            <span class="mx-2">|</span>
-            <a href="https://voice.njujb.com" class="text-dark mr-2">
-                <i class="far fa-comment-alt mr-2"></i>
-                JB Voice
-            </a>
-            <a href="https://git.njujb.com" class="text-dark">
-                <i class="fab fa-gitlab mr-2"></i>
-                JB GitLab
-            </a>
-        </span>
-    </footer>
+    @include('frontend.includes.footer')
 
     <!-- Scripts -->
     @stack('before-scripts')
