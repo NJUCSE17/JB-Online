@@ -21,7 +21,7 @@
                     </p>
                     <p>
                         具体的错误信息如下：<br/>
-                        Detailed error message are given below:
+                        Detailed error message is given below:
                     </p>
                     <p>
                         <code class="my-3">
