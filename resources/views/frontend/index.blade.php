@@ -16,7 +16,7 @@
     <div class="row">
         <div class="col col-lg-7 col-12" id="leftCol">
             <div class="card my-3">
-                <h4 class="card-header py-3">
+                <h4 class="card-header">
                     <i class="fas fa-calendar-alt mr-2"></i>
                     {{ __('labels.frontend.home.assignment') }}
                     <span class="float-right d-flex">
@@ -100,7 +100,7 @@
 
         <div class="col col-lg-5 col-12" id="rightCol">
             <div class="card my-3">
-                <h4 class="card-header py-3">
+                <h4 class="card-header">
                     <i class="fas fa-broadcast-tower mr-2"></i>
                     {{ __('labels.frontend.home.notice') }}
                     @auth
@@ -129,7 +129,7 @@
 
 
             <div class="card my-3">
-                <h4 class="card-header py-3">
+                <h4 class="card-header">
                     <i class="fas fa-book-open mr-2"></i>
                     {{ __('labels.frontend.home.ongoing') }}
                     @auth
@@ -179,7 +179,7 @@
 
             @if(app_blogonhome())
                 <div class="card my-3">
-                    <h4 class="card-header py-3">
+                    <h4 class="card-header">
                         <i class="fas fa-rss-square mr-2"></i>
                         {{ __('labels.frontend.home.class_blog') }}
                     </h4>

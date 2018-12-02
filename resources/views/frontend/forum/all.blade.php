@@ -6,7 +6,7 @@
 @section('content')
     {!! Breadcrumbs::render() !!}
     <div class="card">
-        <h4 class="card-header py-3">
+        <h4 class="card-header">
             <i class="fas fa-book-open mr-2"></i>
             {{ __('labels.frontend.home.course') }}
             @auth

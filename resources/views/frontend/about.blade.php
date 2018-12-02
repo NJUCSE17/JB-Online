@@ -4,7 +4,7 @@
 @section('navBrand', app_name() . ' | ' . __('navs.frontend.about'))
 
 @section('content')
-    <div class="card px-3 py-3">
+    <div class="card px-3">
         <h1 class="text-center">
             <img src="{{ asset('favicon.ico') }}" style="height: 50px;">
             {{ app_name() }}
