@@ -8,12 +8,12 @@
         <div class="col">
             <div class="card">
                 <h4 class="card-header">
-                    😶‍ 401 Unauthorized
+                    😒‍ 419 Authentication Timeout
                 </h4>
                 <div class="card-body">
                     <p>
-                        您没有访问当前页面的权限，请登录后重试。<br/>
-                        You are not authorized to visit this page. Please login and retry.
+                        验证超时（主要是CSRF令牌过期），请刷新页面重试。<br/>
+                        Token (mainly CSRF) is invalid. Please refresh and try again.
                     </p>
                     <p>
                         具体的错误信息如下：<br/>
