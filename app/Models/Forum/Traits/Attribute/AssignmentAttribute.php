@@ -138,7 +138,7 @@ trait AssignmentAttribute
     public function getProblemsTableAttribute()
     {
         if ($this->problems->count()) {
-            $table = "<table id=\"problemset\" class=\"table table-bordered table-hover table-sm mb-2\" 
+            $table = "<table id=\"problemset\" class=\"table table-bordered table-hover table-sm\" 
                         style=\"text-align: center; width: 90%; margin-left: auto; margin-right: auto;\" 
                         width=\"90%\"> <tbody>";
             foreach ($this->problems as $problem) {

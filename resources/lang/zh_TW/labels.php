@@ -317,6 +317,7 @@ return [
     'frontend' => [
 
         'auth' => [
+            'not_logged_in'      => '你谁啊',
             'login_box_title'    => '网上冲浪',
             'login_button'       => 'Into the VRAINS',
             'login_with'         => '使用 :social_media 登录',

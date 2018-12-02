@@ -29,47 +29,46 @@
                             @endif
                         @else
                             <a class="badge badge-sm badge-secondary" href="{{ route('frontend.auth.login') }}">
-                                <i class="fas fa-user-secret"></i>
+                                <i class="fas fa-user-secret mr-2"></i>
+                                {{ __('labels.frontend.auth.not_logged_in') }}
                             </a>
                         @endauth
                     </span>
                 </h4>
                 @if ($assignments->count())
                     <div class="card-body px-0 py-0">
-                        <div class="list-group list-group-flush" id="assignments">
+                        <ul class="list-group list-group-flush" id="assignments">
                             @foreach($assignments as $assignment)
-                                <a class="list-group-item border-0" id="assignment"
-                                   style="border-radius: 0.625rem">
+                                <li class="list-group-item" id="assignment">
                                     <div class="d-inline w-100 justify-content-between">
-                                        <object>
-                                            @if($assignment->isPersonal())
-                                                <span class="float-right" style="font-size:120%;">
+                                        @if($assignment->isPersonal())
+                                            <span class="float-right" style="font-size:120%;">
                                                     <i class="fas fa-user"></i>
                                                 </span>
-                                                <a href="{{ $assignment->assignment_link }}"
-                                                   class="mb-1 text-success"
-                                                   id="assignment_title_{{ $assignment->id }}" style="font-size:120%;">
-                                                    {{ $assignment->name }}
-                                                </a>
-                                            @else
-                                                @if($assignment->postsCount())
-                                                    <span class="float-right" style="font-size:120%;">
+                                            <a href="{{ $assignment->assignment_link }}"
+                                               class="mb-1 text-success"
+                                               id="assignment_title_{{ $assignment->id }}" style="font-size:120%;">
+                                                {{ $assignment->name }}
+                                            </a>
+                                        @else
+                                            @if($assignment->postsCount())
+                                                <span class="float-right" style="font-size:120%;">
                                                         <a class="badge badge-primary"
-                                                            href="{{ $assignment->assignment_link }}">
+                                                           href="{{ $assignment->assignment_link }}">
                                                             <i class="fas fa-comments"></i>
                                                             {{  $assignment->postsCount() }}
                                                         </a>
                                                     </span>
-                                                @endif
-                                                <a href="{{ $assignment->assignment_link }}"
-                                                   class="mb-1" id="assignment_title_{{ $assignment->id }}" style="font-size:120%;">
-                                                    {{ $assignment->name }}
-                                                </a>
                                             @endif
-                                        </object>
+                                            <a href="{{ $assignment->assignment_link }}"
+                                               class="mb-1" id="assignment_title_{{ $assignment->id }}"
+                                               style="font-size:120%;">
+                                                {{ $assignment->name }}
+                                            </a>
+                                        @endif
                                     </div>
                                     <div id="assignment_content_{{ $assignment->id }}" class="pt-3">
-                                        <object>
+                                        <object class="my-0">
                                             {!! $assignment->content !!}
                                         </object>
                                     </div>
@@ -80,13 +79,12 @@
                                             </object>
                                         </div>
                                     @endif
-                                    <div class="text-center">
+                                    <div class="text-center mt-3">
                                         <object>{!! $assignment->ddl_badge !!}</object>
                                     </div>
-                                    <hr class="mb-0"/>
-                                </a>
+                                </li>
                             @endforeach
-                        </div>
+                        </ul>
                     </div>
                 @else
                     <div class="card-body">
@@ -148,7 +146,7 @@
                     @if ($ongoingCourses->count())
                         @foreach($ongoingCourses as $course)
                             <a class="btn btn-outline-{{ $course->color_label }} text-justify my-1"
-                               style="width: 100%;"  href="{{ $course->course_link }}">
+                               style="width: 100%;" href="{{ $course->course_link }}">
                                 {{ __('strings.frontend.home.semester.left') }}
                                 {{ $course->semester }}
                                 {{ __('strings.frontend.home.semester.right') }} &nbsp;
@@ -166,14 +164,14 @@
                             </div>
                         </div>
                     @endif
-                    <hr />
+                    <hr/>
                     <a class="btn btn-outline-dark text-justify float-left"
-                           href="{{ route('frontend.forum.personal.index') }}">
+                       href="{{ route('frontend.forum.personal.index') }}">
                         <i class="fas fa-user mr-1"></i>{{ __('labels.frontend.home.personal') }}
 
                     </a>
                     <a class="btn btn-outline-dark text-justify float-right"
-                        href="{{ route('frontend.forum.course') }}">
+                       href="{{ route('frontend.forum.course') }}">
                         {{ __('labels.frontend.home.course') }} <i class="fas fa-angle-right"></i>
                     </a>
                 </div>
@@ -187,15 +185,15 @@
                     </h4>
                     @if ($feeds->count())
                         <div class="card-body px-0 py-0">
-                            <div class="list-group list-group-flush" id="assignments" style="height: auto; overflow: auto;">
+                            <div class="list-group list-group-flush" id="assignments"
+                                 style="height: auto; overflow: auto;">
                                 @foreach($feeds as $feed)
-                                    <a class="list-group-item list-group-item-action border-0" id="class-blog-posts"
-                                       style="border-radius: 0.625rem" href="{{ $feed['permalink'] }}">
-                                        {{ $feed['title'] }}
-                                        <small class="text-right">
-                                            <object>{{ $feed['date'] }}</object>
-                                        </small>
-                                        <hr class="mb-0"/>
+                                    <a class="list-group-item list-group-item-action flex-column align-items-start"
+                                       id="class-blog-posts" href="{{ $feed['permalink'] }}">
+                                        <div class="d-flex w-100 justify-content-between">
+                                            {{ $feed['title'] }}
+                                            <small class="text-muted">{{ date_format($feed['date'], 'y-m-d')  }}</small>
+                                        </div>
                                     </a>
                                 @endforeach
                             </div>
@@ -249,7 +247,7 @@
                             text: '{{ __('labels.general.yes') }}',
                             btnClass: 'btn-success',
                             action: function () {
-                                $.getJSON(api, function(res) {
+                                $.getJSON(api, function (res) {
                                     if (res.status === 1) {
                                         console.log(res);
                                         ddl_badge.dataset.api = res.ddl_badge_api;
@@ -264,8 +262,8 @@
                                         theme: 'supervan',
                                         typeAnimated: true,
                                         backgroundDismiss: 'close',
-                                        buttons:{
-                                            close: function(){
+                                        buttons: {
+                                            close: function () {
                                             }
                                         }
                                     });

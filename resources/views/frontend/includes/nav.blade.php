@@ -26,7 +26,7 @@
                         @if (config('access.registration'))
                             <li class="nav-item">
                                 <a href="{{route('frontend.auth.register')}}"
-                                   class="nav-link text-danger {{ active_class(Active::checkRoute('frontend.auth.register')) }}">
+                                   class="nav-link {{ active_class(Active::checkRoute('frontend.auth.register')) }}">
                                     <i class="fas fa-user-plus mr-2"></i>
                                     <span>{{ __('navs.frontend.register') }}</span>
                                 </a>

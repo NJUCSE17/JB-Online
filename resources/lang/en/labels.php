@@ -315,6 +315,7 @@ return [
     'frontend' => [
 
         'auth' => [
+            'not_logged_in'      => 'Not logged in',
             'login_box_title'    => 'Login',
             'login_button'       => 'Login',
             'login_with'         => 'Login with :social_media',
