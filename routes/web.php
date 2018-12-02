@@ -8,8 +8,8 @@
 // Switch between the included languages
 Route::get('lang/{lang}', 'LanguageController');
 
-Route::get('img/private/{path}', 'ApiController@privateGlide')->where('path', '.+');
-Route::get('img/public/{path}', 'ApiController@publicGlide')->where('path', '.+');
+Route::get('img/private/{path}', 'GlideController@privateGlide')->where('path', '.+');
+Route::get('img/public/{path}', 'GlideController@publicGlide')->where('path', '.+');
 
 /*
  * Frontend Routes

@@ -5,6 +5,7 @@ namespace App\Models\Auth;
 use App\Models\Traits\Uuid;
 use Cog\Laravel\Love\Liker\Models\Traits\Liker;
 use Cog\Contracts\Love\Liker\Models\Liker as LikerContract;
+use Laravel\Passport\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Notifications\Notifiable;
 use App\Models\Auth\Traits\Scope\UserScope;
@@ -22,6 +23,7 @@ class User extends Authenticatable implements LikerContract
 {
     use Liker,
         HasRoles,
+        HasApiTokens,
         Notifiable,
         SendUserPasswordReset,
         SoftDeletes,
