@@ -22,7 +22,6 @@
                                 <span>{{ __('navs.frontend.login') }}</span>
                             </a>
                         </li>
-
                         @if (config('access.registration'))
                             <li class="nav-item">
                                 <a href="{{route('frontend.auth.register')}}"
@@ -32,6 +31,13 @@
                                 </a>
                             </li>
                         @endif
+                        <li class="nav-item">
+                            <a href="{{route('frontend.about')}}"
+                               class="nav-link {{ active_class(Active::checkRoute('frontend.about')) }}">
+                                <i class="fas fa-info-circle mr-2"></i>
+                                <span>{{ __('navs.frontend.about') }}</span>
+                            </a>
+                        </li>
                     @else
                         <li class="nav-item">
                             <a href="{{route('frontend.blog')}}"
