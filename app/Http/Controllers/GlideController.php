@@ -10,17 +10,9 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 /**
  * Class Controller.
  */
-class ApiController extends BaseController
+class GlideController extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
-
-    /**
-     * @return mixed
-     */
-    public function user(\Request $request)
-    {
-        return $request->user();
-    }
 
     /**
      * @return mixed

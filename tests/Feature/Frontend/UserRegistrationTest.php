@@ -28,13 +28,17 @@ class UserRegistrationTest extends TestCase
     {
         factory(Role::class)->create(['name' => 'user']);
 
-        return $this->post('/register', array_merge([
+        $res = $this->post('/register', array_merge([
+            'student_id' => '17001',
             'first_name' => 'John',
             'last_name' => 'Doe',
             'email' => 'john@example.com',
+            'blog' => 'http://twoblocksdown.com',
             'password' => 'password',
             'password_confirmation' => 'password',
         ], $userData));
+        $res->assertStatus(200);
+        return $res;
     }
 
     /** @test */
@@ -54,6 +58,7 @@ class UserRegistrationTest extends TestCase
     public function a_user_can_register_an_account()
     {
         $this->registerUser([
+            'student_id' => '170000001',
             'first_name' => 'John',
             'last_name' => 'Doe',
             'email' => 'john@example.com',
@@ -132,9 +137,24 @@ class UserRegistrationTest extends TestCase
     }
 
     /** @test */
+    public function student_id_is_required()
+    {
+        $response = $this->post('/register', [
+            'last_name' => 'Doe',
+            'first_name' => 'John',
+            'email' => 'john@example.com',
+            'password' => 'password',
+            'password_confirmation' => 'password',
+        ]);
+
+        $response->assertSessionHasErrors('first_name');
+    }
+
+    /** @test */
     public function first_name_is_required()
     {
         $response = $this->post('/register', [
+            'student_id' => '170000000',
             'last_name' => 'Doe',
             'email' => 'john@example.com',
             'password' => 'password',
@@ -145,22 +165,10 @@ class UserRegistrationTest extends TestCase
     }
 
     /** @test */
-    public function last_name_is_required()
-    {
-        $response = $this->post('/register', [
-            'first_name' => 'John',
-            'email' => 'john@example.com',
-            'password' => 'password',
-            'password_confirmation' => 'password',
-        ]);
-
-        $response->assertSessionHasErrors('last_name');
-    }
-
-    /** @test */
     public function email_is_required()
     {
         $response = $this->post('/register', [
+            'student_id' => '170000000',
             'first_name' => 'John',
             'last_name' => 'Doe',
             'password' => 'password',
@@ -176,6 +184,7 @@ class UserRegistrationTest extends TestCase
         factory(User::class)->create(['email' => 'john@example.com']);
 
         $response = $this->post('/register', [
+            'student_id' => '170000000',
             'first_name' => 'John',
             'last_name' => 'Doe',
             'email' => 'john@example.com',
@@ -190,6 +199,7 @@ class UserRegistrationTest extends TestCase
     public function password_must_be_confirmed()
     {
         $response = $this->post('/register', [
+            'student_id' => '170000000',
             'first_name' => 'John',
             'last_name' => 'Doe',
             'email' => 'john@example.com',
@@ -203,6 +213,7 @@ class UserRegistrationTest extends TestCase
     public function passwords_must_be_equivalent()
     {
         $response = $this->post('/register', [
+            'student_id' => '170000000',
             'first_name' => 'John',
             'last_name' => 'Doe',
             'email' => 'john@example.com',
@@ -214,12 +225,12 @@ class UserRegistrationTest extends TestCase
     }
 
     /** @test */
-    public function it_redirects_to_dashboard_after_successful_registration()
+    public function it_redirects_to_homepage_after_successful_registration()
     {
         config(['access.users.confirm_email' => false]);
 
         $response = $this->registerUser();
 
-        $response->assertRedirect('/dashboard');
+        $response->assertRedirect('/');
     }
 }

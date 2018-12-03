@@ -6,7 +6,7 @@
 @section('content')
     {!! Breadcrumbs::render() !!}
     <div class="card">
-        <h4 class="card-header py-3">
+        <h4 class="card-header">
             <i class="fas fa-book-open mr-2"></i>
             {{ __('labels.frontend.home.course') }}
             @auth
@@ -29,7 +29,7 @@
                         {{ __('strings.frontend.home.semester.right') }} &nbsp;
                         {{ $course->name }}
                         <div class="float-right">
-                            <span class="badge badge-{{ $course->color_label }}">
+                            <span>
                                 <i class="fas fa-folder"></i>
                                 {{ $course->assignmentsCount() }}
                                 <i class="fas fa-comments"></i>
@@ -55,7 +55,7 @@
             @else
                 <div class="row">
                     <div class="col text-center">
-                        {{ __('strings.frontend.home.no_courses') }}
+                        {{ __('strings.frontend.home.no_course') }}
                     </div>
                 </div>
             @endif

@@ -19,6 +19,7 @@
 
     <!-- Check if the language is set to RTL, so apply the RTL layouts -->
     <!-- Otherwise apply the normal LTR layouts -->
+    @include('includes.stylesheets')
     {{ style(mix('css/frontend.css')) }}
 
     @stack('after-styles')
@@ -31,19 +32,20 @@
     @include('frontend.includes.nav')
 
     <div id="app" class="@yield('appClass', '')">
-        <div class="container my-3">
+        <div class="container mt-3">
             @include('includes.partials.messages')
-
             @yield('content')
         </div><!-- container -->
     </div><!-- #app -->
 
+    @include('frontend.includes.footer')
+
     <!-- Scripts -->
     @stack('before-scripts')
+    @include('includes.scripts')
+    @include('includes.votejs')
     {!! script(mix('js/frontend.js')) !!}
     @stack('after-scripts')
-    @include('includes.commonjs')
-    @include('includes.utilities')
 
     @include('includes.partials.ga')
 </body>

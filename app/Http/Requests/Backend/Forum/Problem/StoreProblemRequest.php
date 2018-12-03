@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Backend\Forum\Problem;
 
+use App\Rules\Sanitize;
 use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -27,11 +28,9 @@ class StoreProblemRequest extends FormRequest
      */
     public function rules()
     {
-        clean($_POST['permalink']);
-        clean($_POST['content']);
         return [
-            'permalink' => 'max:500',
-            'content' => 'required|max:500',
+            'permalink' => [new Sanitize(), 'max:500'],
+            'content' => ['required', new Sanitize(), 'max:500'],
             'difficulty' => 'integer',
         ];
     }

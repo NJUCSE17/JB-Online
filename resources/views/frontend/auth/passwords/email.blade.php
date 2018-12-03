@@ -5,16 +5,16 @@
 
 @section('content')
     <div class="row justify-content-center align-items-center">
-        <div class="col col-sm-6 align-self-center">
+        <div class="col col-sm-8 align-self-center">
             <div class="card">
                 <div class="card-header py-3">
                     <strong>
+                        <i class="fas fa-recycle mr-2"></i>
                         {{ __('labels.frontend.passwords.reset_password_box_title') }}
                     </strong>
                 </div><!--card-header-->
 
                 <div class="card-body">
-
                     @if (session('status'))
                         <div class="alert alert-success">
                             {{ session('status') }}
@@ -22,11 +22,12 @@
                     @endif
 
                     {{ html()->form('POST', route('frontend.auth.password.email.post'))->open() }}
-                        <div class="row">
+                        <div class="row mb-3">
                             <div class="col">
-                                <div class="form-group">
-                                    {{ html()->label(__('validation.attributes.frontend.email'))->for('email') }}
-
+                                <div class="input-group input-group-seamless">
+                                    <div class="input-group-prepend">
+                                        <div class="input-group-text"><i class="fas fa-envelope"></i></div>
+                                    </div>
                                     {{ html()->email('email')
                                         ->class('form-control')
                                         ->placeholder(__('validation.attributes.frontend.email'))

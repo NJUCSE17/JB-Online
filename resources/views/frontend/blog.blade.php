@@ -40,7 +40,7 @@
                 </nav>
                 @foreach ($feeds as $feed)
                     <div class="card my-3" id="{{ $feed['title'] }}" >
-                        <a class="card-header py-3 btn-outline-dark" style="font-size: 150%; line-height: 36px"
+                        <a class="card-header btn-outline-dark" style="font-size: 150%; line-height: 36px"
                            href="{{ $feed['permalink'] }}">
                             {{ $feed['title'] }}
                             <span class="float-right">

@@ -165,7 +165,7 @@ if (! function_exists('form_cancel')) {
      *
      * @return mixed
      */
-    function form_cancel($cancel_to, $title, $classes = 'btn btn-danger btn-sm')
+    function form_cancel($cancel_to, $title, $classes = 'btn btn-danger')
     {
         return resolve(HtmlHelper::class)->formCancel($cancel_to, $title, $classes);
     }
@@ -179,7 +179,7 @@ if (! function_exists('form_submit')) {
      *
      * @return mixed
      */
-    function form_submit($title, $classes = 'btn btn-success btn-sm pull-right')
+    function form_submit($title, $classes = 'btn btn-success pull-right')
     {
         return resolve(HtmlHelper::class)->formSubmit($title, $classes);
     }

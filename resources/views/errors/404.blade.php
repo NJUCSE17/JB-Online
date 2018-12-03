@@ -6,21 +6,33 @@
 @section('content')
     <div class="row justify-content-center align-items-center">
         <div class="col">
-            <div class="card px-5 py-5">
-                <div class="page-header">
-                    <h3 class="display-3">
-                        404 😪 <br /> Not Found
-                    </h3>
+            <div class="card">
+                <h4 class="card-header">
+                    😪 404 Not Found
+                </h4>
+                <div class="card-body">
+                    <p>
+                        您想要访问的页面不存在。<br/>
+                        The page you are visiting does not exist.
+                    </p>
+                    <p>
+                        具体的错误信息如下：<br/>
+                        Detailed error message is given below:
+                    </p>
+                    <p>
+                        <code class="my-3">
+                            @if($exception->getMessage())
+                                {{ $exception->getMessage() }}
+                            @else
+                                Sorry, not available. (No message)
+                            @endif
+                        </code>
+                    </p>
+                    <p>
+                        请检查您的输入/地址并重试。<br/>
+                        Check your input/address and try again.
+                    </p>
                 </div>
-                <hr/>
-                <h5 style="font-size: 120%;">You were trying to visit a non-existent page.</h5>
-                <h5 style="font-size: 120%;">Details of the error are given below:</h5>
-                <code class="mb-3">
-                    {{ $exception->getMessage() }}
-                </code>
-                <h5 style="font-size: 120%;">You may check your spell and try again.</h5>
-                <h5 style="font-size: 120%;">Anyway, we are sorry about the error.
-                    If you believe the error is not caused by yourself, please contact admin or RTFSC.</h5>
             </div>
         </div>
     </div>

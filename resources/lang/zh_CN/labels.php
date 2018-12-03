@@ -317,6 +317,7 @@ return [
     'frontend' => [
 
         'auth' => [
+            'not_logged_in'      => '未登录',
             'login_box_title'    => '登录',
             'login_button'       => '登录',
             'login_with'         => '使用 :social_media 登录',

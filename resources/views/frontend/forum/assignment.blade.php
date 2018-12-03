@@ -8,7 +8,7 @@
     <div class="row">
         <div class="col">
             <div class="card my-3">
-                <h4 class="card-header py-3">
+                <h4 class="card-header">
                     <i class="fas fa-pencil-ruler mr-2"></i>
                     {{ __('labels.frontend.forum.assignments.assignment_content') }}
                     @if(Auth::user()->isExecutive())
@@ -42,7 +42,7 @@
                 </div>
             </div>
             <div class="card my-3">
-                <h4 class="card-header py-3">
+                <h4 class="card-header">
                     <i class="fas fa-comments mr-2"></i>
                     {{ __('labels.frontend.forum.assignments.post_list') }}
                     <span class="float-right d-flex">
@@ -72,7 +72,7 @@
                         @include('frontend.forum.post.list',['group'=>$posts[0]])
                     </div>
                 @else
-                    <div class="card-body px-3 py-3">
+                    <div class="card-body px-3">
                         <div class="text-center">
                             {{ __('strings.frontend.assignments.no_post') }}
                         </div>

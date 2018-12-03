@@ -17,6 +17,10 @@
     {{-- See https://laravel.com/docs/5.5/blade#stacks for usage --}}
     @stack('before-styles')
 
+    @include('includes.stylesheets')
+    <!-- Required by shards dashboard -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Sharrre/2.0.1/jquery.sharrre.min.js"></script>
+
     <!-- Check if the language is set to RTL, so apply the RTL layouts -->
     <!-- Otherwise apply the normal LTR layouts -->
     {{ style(mix('css/backend.css')) }}
@@ -24,29 +28,34 @@
     @stack('after-styles')
 </head>
 
-<body id="backend">
+<body id="backend" class="h-100">
     <p id="preamble" hidden>\( @include('includes.preamble') \)</p>
-    <div id="app">
-        @include('includes.partials.logged-in-as')
-        @include('backend.includes.nav')
-        @include('backend.includes.sidebar')
+    @include('includes.partials.logged-in-as')
 
-        <div id="app" class="@yield('appClass', '')">
-            <div class="container-fluid my-3">
-                @include('includes.partials.messages')
-                <div style="vertical-align: center; line-height: 50px">
-                    {!! Breadcrumbs::render() !!}
+    <div class="container-fluid @yield('appClass', '')">
+        <div class="row">
+            <aside class="main-sidebar col-12 col-md-3 col-lg-2 p-0">
+                @include('backend.includes.sidebar')
+            </aside>
+
+            <main class="main-content col-lg-10 col-md-9 col-sm-12 p-0 offset-lg-2 offset-md-3">
+                <div class="main-navbar sticky-top bg-white">
+                    @include('backend.includes.nav')
+                    @include('includes.partials.messages')
                 </div>
-                @yield('content')
-            </div><!-- container -->
-        </div><!-- #app -->
-    </div><!-- #app -->
+                <div class="main-content-container container-fluid my-3">
+                    {!! Breadcrumbs::render() !!}
+                    @yield('content')
+                </div>
+            </main>
+        </div>
+    </div><!-- container -->
 
     <!-- Scripts -->
     @stack('before-scripts')
+    @include('includes.scripts')
     {!! script(mix('js/backend.js')) !!}
     @stack('after-scripts')
-    @include('includes.utilities')
 
     @include('includes.partials.ga')
 </body>

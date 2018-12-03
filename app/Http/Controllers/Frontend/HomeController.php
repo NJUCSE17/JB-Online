@@ -47,7 +47,6 @@ class HomeController extends Controller
      */
     public function index()
     {
-
         $feeds = array();
         if(app_blogonhome()) {
             $originFeed = \Feeds::make(app_blogrss(), 0, false);

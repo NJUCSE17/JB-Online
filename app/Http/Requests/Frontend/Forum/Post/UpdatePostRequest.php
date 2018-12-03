@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Frontend\Forum\Post;
 
+use App\Rules\Sanitize;
 use Illuminate\Foundation\Http\FormRequest;
 
 /**
@@ -26,9 +27,8 @@ class UpdatePostRequest extends FormRequest
      */
     public function rules()
     {
-        clean($_POST['content']);
         return [
-            'content' => 'required|max:10000'
+            'content' => ['required', new Sanitize(), 'max:10000']
         ];
     }
 }

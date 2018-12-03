@@ -16,6 +16,7 @@ return [
     'general' => [
         'home'   => 'Home',
         'logout' => 'Logout',
+        'account' => 'Account Settings',
     ],
 
     'frontend' => [

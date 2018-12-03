@@ -48,6 +48,7 @@ of Laravel-boilerplate. But there are some difference.
    php artisan key:generate
    php artisan migrate
    php artisan db:seed
+   php artisan passport:install --force // force is required!
    ```
 
    This would create an administrator user whose
@@ -88,6 +89,21 @@ folder (/public/storage) using command
  names in folder ``/resources/lang/vendor`` so that 
  localized language files can be shown correctly.
  
+6. Caching
+    ```
+    php artisan config:cache
+    php artisan route:cache
+    ```
+    helps to cache configure file and routes. To disable caching, use 'clear' instead.
+ 
+## API
+
+The forum uses Passport to provide OAuth authentication. API is currently under construction.
+
+Tokens are valid for 15 days, and can be renewed for a month.
+
+The 'api/assignments' has been implemented, and can be used to fetch all ongoing assignments. 
+
 ## Customization
 
 There four major models, assignment, course, notice
@@ -106,6 +122,7 @@ If you have any issues about safety or functions, you are welcome to open an iss
 *   [Carbon 2](https://carbon.nesbot.com/) and [laravel-carbon-2](https://github.com/kylekatarnls/laravel-carbon-2) for time localization and display.
 *   [Elfinder](https://github.com/Studio-42/elFinder) and [laravel-elfinder](https://github.com/barryvdh/laravel-elfinder) for file storage.
 *   [Glide](http://glide.thephpleague.com/) for image processing.
+*   [Headroom.js](https://github.com/WickyNilliams/headroom.js) for hiding navigation bar.
 *   [Highlight.JS](https://highlightjs.org/) for code formatting.
 *   [jQuery](http://jquery.com/), [jQuery UI](https://jqueryui.com/) and [jQuery-Confirm v3](https://github.com/craftpip/jquery-confirm) for JS based utils.
 *   [Laravel 5.6](https://laravel.com/) as PHP framework.

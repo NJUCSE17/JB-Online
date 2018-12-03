@@ -41,16 +41,6 @@ class CreateRoleTest extends TestCase
     }
 
     /** @test */
-    public function at_least_one_permission_is_required()
-    {
-        $this->loginAsAdmin();
-
-        $response = $this->post('/admin/auth/role', ['name' => 'new role']);
-
-        $response->assertSessionHas(['flash_danger' => __('exceptions.backend.access.roles.needs_permission')]);
-    }
-
-    /** @test */
     public function a_role_can_be_created()
     {
         $this->loginAsAdmin();

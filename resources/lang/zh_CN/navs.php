@@ -16,6 +16,7 @@ return [
     'general' => [
         'home'   => '首页',
         'logout' => '退出',
+        'account' => '账户设置',
     ],
 
     'frontend' => [
@@ -31,7 +32,7 @@ return [
 
         'user' => [
             'account'         => '我的账户',
-            'administration'  => '管理',
+            'administration'  => '管理页面',
             'change_password' => '更改密码',
             'my_information'  => '我的信息',
             'profile'         => '个人资料',

@@ -13,4 +13,9 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/user', 'ApiController@user');
+Route::group(['namespace' => 'API'], function () {
+    Route::post('login', 'UserController@login');
+    Route::group(['middleware' => 'auth:api'], function(){
+        Route::post('assignments', 'UserController@getAssignments');
+    });
+});

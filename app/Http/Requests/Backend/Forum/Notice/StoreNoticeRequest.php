@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Backend\Forum\Notice;
 
+use App\Rules\Sanitize;
 use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -27,9 +28,8 @@ class StoreNoticeRequest extends FormRequest
      */
     public function rules()
     {
-        clean($_POST['content']);
         return [
-            'content'  => 'max:10000',
+            'content'  => [new Sanitize(), 'max:10000'],
             'sendmail' => 'required',
         ];
     }

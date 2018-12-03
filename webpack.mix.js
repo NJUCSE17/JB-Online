@@ -11,7 +11,7 @@ const mix = require('laravel-mix');
  |
  */
 
-mix.setPublicPath('public')
+mix.setPublicPath('public');
 
 mix.sass('resources/assets/sass/frontend/app.scss', 'css/frontend.css')
     .sass('resources/assets/sass/backend/app.scss', 'css/backend.css')

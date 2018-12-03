@@ -1,39 +1,4 @@
 /**
- * This bootstrap file is used for both frontend and backend
- */
-
-window._ = require('lodash');
-window.swal = require('sweetalert2');
-// Required for BS4
-import Popper from 'popper.js/dist/umd/popper.js';
-
-/**
- * Font Awesome >=5.1
- */
-
-import { library, dom } from '@fortawesome/fontawesome-svg-core';
-import { fab } from '@fortawesome/free-brands-svg-icons';
-import { far } from '@fortawesome/free-regular-svg-icons';
-import { fas } from '@fortawesome/free-solid-svg-icons';
-
-library.add(fab, far, fas);
-
-// Kicks off the process of finding <i> tags and replacing with <svg>
-dom.watch()
-
-/**
- * We'll load jQuery and the Bootstrap jQuery plugin which provides support
- * for JavaScript based Bootstrap features such as modals and tabs. This
- * code may be modified to fit the specific needs of your application.
- */
-
-try {
-    window.$ = window.jQuery = require('jquery');
-
-    require('bootstrap');
-} catch (e) {}
-
-/**
  * We'll load the axios HTTP library which allows us to easily issue requests
  * to our Laravel back-end. This library automatically handles sending the
  * CSRF token as a header based on the value of the "XSRF" token cookie.

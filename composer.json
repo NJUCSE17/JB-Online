@@ -1,7 +1,7 @@
 {
-    "name": "rappasoft/laravel-5-boilerplate",
-    "description": "The Laravel Boilerplate Project.",
-    "keywords": ["framework", "laravel", "boilerplate"],
+    "name": "doowzs/Class-Forum",
+    "description": "Class forum project (JB Online).",
+    "keywords": ["framework", "laravel", "forum"],
     "license": "MIT",
     "type": "project",
     "require": {
@@ -22,6 +22,7 @@
         "hieu-le/active": "^3.5",
         "kylekatarnls/laravel-carbon-2": "^1.0.0",
         "laravel/framework": "5.6.*",
+        "laravel/passport": "^7.0",
         "laravel/socialite": "^3.0",
         "laravel/tinker": "^1.0",
         "league/glide": "^1.3",
@@ -119,5 +120,11 @@
         "preferred-install": "dist",
         "sort-packages": true,
         "optimize-autoloader": true
+    },
+    "repositories": {
+        "packagist": {
+            "type": "composer",
+            "url": "https://packagist.phpcomposer.com"
+        }
     }
 }
