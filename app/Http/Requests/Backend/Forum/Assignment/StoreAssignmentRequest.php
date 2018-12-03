@@ -47,7 +47,7 @@ class StoreAssignmentRequest extends FormRequest
                 'required',
                 'date',
                 'max:200',
-                'date_format:Y-m-d G:i:s'
+                'date_format:Y-m-d H:i:s'
             ],
         ];
     }

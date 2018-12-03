@@ -48,7 +48,7 @@
                             {{ html()->label(__('validation.attributes.frontend.forum.personal.due_time'))->class('col-md-2 form-control-label')->for('due_time') }}
 
                             <div class="col-md-10">
-                                {{ html()->text('due_time', date('Y-m-d G:i:s'))
+                                {{ html()->text('due_time', date('Y-m-d H:i:s'))
                                     ->class('form-control')
                                     ->placeholder(__('validation.attributes.frontend.forum.personal.due_time'))
                                     ->attribute('maxlength', 191)

@@ -60,7 +60,7 @@
                             {{ html()->label(__('validation.attributes.backend.forum.assignments.due_time'))->class('col-md-2 form-control-label')->for('due_time') }}
 
                             <div class="col-md-10">
-                                {{ html()->text('due_time', '2017-09-01 21:59:59')
+                                {{ html()->text('due_time', date('Y-m-d H:i:s'))
                                     ->class('form-control')
                                     ->placeholder(__('validation.attributes.backend.forum.assignments.due_time'))
                                     ->attribute('maxlength', 191)
