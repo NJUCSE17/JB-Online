@@ -1,6 +1,6 @@
 <div class="main-navbar">
     <nav class="navbar align-items-stretch navbar-light bg-white flex-md-nowrap border-bottom p-0">
-        <a class="navbar-brand w-100 mr-0" href="#" style="line-height: 25px;">
+        <a class="navbar-brand w-100 mr-0" href="{{ route("frontend.index") }}" style="line-height: 25px;">
             <div class="d-table m-auto">
                 <img src="{{ asset('favicon.ico') }}" style="height: 25px;" class="mr-1">
                 <span class="d-none d-md-inline ml-1">JB Online Admin</span>
