@@ -68,7 +68,7 @@ class HtmlHelper
      *
      * @return HtmlString
      */
-    public function formCancel($cancel_to, $title, $classes = 'btn btn-danger btn-sm')
+    public function formCancel($cancel_to, $title, $classes = 'btn btn-danger')
     {
         return html()->a($cancel_to, $title)->class($classes);
     }
@@ -79,7 +79,7 @@ class HtmlHelper
      *
      * @return HtmlString
      */
-    public function formSubmit($title, $classes = 'btn btn-success btn-sm pull-right')
+    public function formSubmit($title, $classes = 'btn btn-success pull-right')
     {
         return html()->submit($title)->class($classes);
     }
