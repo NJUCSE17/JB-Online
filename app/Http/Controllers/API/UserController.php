@@ -3,48 +3,88 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
+use App\Repositories\Frontend\Forum\NoticeRepository;
 use App\Repositories\Frontend\Forum\AssignmentRepository;
 use Carbon\Carbon;
+use http\Env\Response;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\User;
 
 class UserController extends Controller
 {
     /**
      * @var AssignmentRepository
+     * @var NoticeRepository
      */
-    protected $assignmentRepository;
+    protected $assignmentRepository, $noticeRepository;
 
     /**
-     * AssignmentController & CourseController constructor.
+     * UserController constructor.
      *
      * @param AssignmentRepository $assignmentRepository
+     * @param NoticeRepository $noticeRepository
      */
-    public function __construct(AssignmentRepository $assignmentRepository)
+    public function __construct(AssignmentRepository $assignmentRepository,
+                                NoticeRepository $noticeRepository)
     {
         $this->assignmentRepository = $assignmentRepository;
+        $this->noticeRepository = $noticeRepository;
     }
 
     /**
-     * login api
+     * API for login.
      *
      * @return \Illuminate\Http\Response
      */
-    public function login(Request $request){
-        if(Auth::attempt(['student_id' => $request->student_id, 'password' => $request->password])){
+    public function login(Request $request)
+    {
+        if(Auth::attempt([
+            'student_id' => $request->student_id,
+            'password' => $request->password
+        ])){
             $user = Auth::user();
-            $success['token'] =  $user->createToken('LaraPassport')->accessToken;
+            $token = $user->createToken('Passport API')->accessToken;
             return response()->json([
                 'status' => 'success',
-                'data' => $success
+                'message' => 'Successfully logged in as ' . $user->full_name . '.',
+                'token'   => $token,
             ], 200);
         } else {
             return response()->json([
                 'status' => 'error',
-                'data' => 'Unauthorized Access'
+                'message' => 'Unauthorized Access',
             ], 401);
         }
+    }
+
+    /**
+     * API for logout.
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function logout(Request $request)
+    {
+        $user = Auth::user();
+        $user->token()->revoke();
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Successfully logged out as ' . $user->full_name . '.',
+        ], 200);
+    }
+
+    /**
+     * Fetch the current notice.
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function getNotice(Request $request)
+    {
+        $notice = $this->noticeRepository->APIGetNotice();
+        return response()->json([
+            "data" => $notice,
+        ], 200);
     }
 
     /**
@@ -55,9 +95,9 @@ class UserController extends Controller
      */
     public function getAssignments(Request $request)
     {
-        $assignments = $this->assignmentRepository->getOngoingAssignments();
+        $assignments = $this->assignmentRepository->APIGetOngoingAssignments();
         return response()->json([
-            "assignments" => $assignments,
+            "data" => $assignments,
         ], 200);
     }
 }

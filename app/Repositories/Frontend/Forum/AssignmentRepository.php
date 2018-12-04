@@ -34,8 +34,8 @@ class AssignmentRepository extends BaseRepository
     }
 
     /**
-        * @return mixed
-    */
+     * @return mixed
+     */
     public function getOngoingCount(): int
     {
         return $this->model
@@ -54,7 +54,7 @@ class AssignmentRepository extends BaseRepository
                 ->where(function ($query) {
                     $query->where('issuer', 0)
                         ->orWhere('issuer', \Auth::user()->id);
-                    })
+                })
                 ->orderBy('due_time')
                 ->get();
         } else {
@@ -67,11 +67,23 @@ class AssignmentRepository extends BaseRepository
     }
 
     /**
+     * @return Assignment array
+     */
+    public function APIGetOngoingAssignments()
+    {
+        return $this->model
+            ->where('due_time', '>', date("Y-m-d H:i:s"))
+            ->where('issuer', '=', 0)
+            ->orderBy('due_time')
+            ->get(['id', 'course_id', 'name', 'content', 'due_time', 'issuer']);
+    }
+
+    /**
      * @param $name
      *
      * @return bool
      */
-    protected function assignmentExists($course, $name) : bool
+    protected function assignmentExists($course, $name): bool
     {
         return $this->model
                 ->where('course', $course)
@@ -84,7 +96,8 @@ class AssignmentRepository extends BaseRepository
      *
      * @return Assignment
      */
-    public function findAssignmentByID($id) {
+    public function findAssignmentByID($id)
+    {
         return $this->model
             ->find($id);
     }
@@ -94,7 +107,8 @@ class AssignmentRepository extends BaseRepository
      *
      * @return mixed
      */
-    public function getPersonalAssignmentsPaginated($userID) {
+    public function getPersonalAssignmentsPaginated($userID)
+    {
         return $this->model
             ->where('issuer', $userID)
             ->where('due_time', '>', date("Y-m-d H:i:s"))
@@ -103,7 +117,7 @@ class AssignmentRepository extends BaseRepository
     }
 
     /**
-     * @param int    $paged
+     * @param int $paged
      * @param string $orderBy
      * @param string $sort
      *
@@ -119,7 +133,7 @@ class AssignmentRepository extends BaseRepository
     }
 
     /**
-     * @param int    $paged
+     * @param int $paged
      * @param string $orderBy
      * @param string $sort
      *
@@ -140,7 +154,7 @@ class AssignmentRepository extends BaseRepository
      * @return Assignment
      * @throws GeneralException
      */
-    public function create(array $data) : Assignment
+    public function create(array $data): Assignment
     {
         return DB::transaction(function () use ($data) {
             $assignment = parent::create([
@@ -191,7 +205,7 @@ class AssignmentRepository extends BaseRepository
      * @throws \Exception
      * @throws \Throwable
      */
-    public function forceDelete(Assignment $assignment) : Assignment
+    public function forceDelete(Assignment $assignment): Assignment
     {
         if (is_null($assignment->deleted_at)) {
             throw new GeneralException(__('exceptions.backend.access.assignments.delete_first'));
@@ -213,7 +227,7 @@ class AssignmentRepository extends BaseRepository
      * @return Assignment
      * @throws GeneralException
      */
-    public function restore(Assignment $assignment) : Assignment
+    public function restore(Assignment $assignment): Assignment
     {
         if (is_null($assignment->deleted_at)) {
             throw new GeneralException(__('exceptions.backend.access.assignments.cant_restore'));

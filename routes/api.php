@@ -15,7 +15,17 @@ use Illuminate\Http\Request;
 
 Route::group(['namespace' => 'API'], function () {
     Route::post('login', 'UserController@login');
-    Route::group(['middleware' => 'auth:api'], function(){
+    Route::group(['middleware' => 'auth:api'], function () {
+        Route::post('logout', 'UserController@logout');
+
+        Route::post('notice', 'UserController@getNotice');
         Route::post('assignments', 'UserController@getAssignments');
+
+        //Route::group(['middleware' => 'admin', 'prefix' => 'admin/'], function () {
+        //    Route::group(['prefix' => 'assignment'], function () {
+        //        Route::post('create', 'AdminController@createAssignment');
+        //        Route::post('edit', 'AdminController@editAssignment');
+        //    });
+        //});
     });
 });
