@@ -47,7 +47,9 @@ class UserController extends Controller
             return response()->json([
                 'status' => 'success',
                 'message' => 'Successfully logged in as ' . $user->full_name . '.',
-                'token'   => $token,
+                'user_id'   => $user->student_id,
+                'user_name' => $user->full_name,
+                'token'     => $token,
             ], 200);
         } else {
             return response()->json([

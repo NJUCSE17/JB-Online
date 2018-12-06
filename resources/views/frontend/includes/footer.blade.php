@@ -14,7 +14,7 @@
     @endif
     <span class="sm-hidden">
             <span class="mx-2">|</span>
-            <a href="https://github.com/doowzs/Class-Forum" class="text-dark">
+            <a href="https://github.com/doowzs/JB-Online" class="text-dark">
                 <i class="far fa-file-code mr-2"></i>
                 RTFSC
             </a>
