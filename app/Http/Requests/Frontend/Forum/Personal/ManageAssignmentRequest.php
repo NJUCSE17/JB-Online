@@ -18,7 +18,7 @@ class ManageAssignmentRequest extends FormRequest
     public function authorize()
     {
         $assignment = $this->route('assignment');
-        return !(is_null($assignment->deleted_at)) && $this->user()->id == $assignment->issuer;
+        return !(is_null($assignment)) && $this->user()->id == $assignment->issuer;
     }
 
     /**

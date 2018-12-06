@@ -1,30 +1,20 @@
-# Class-Forum
+# JB Online
 
-*A hidden(?) place for we students.*
+**Note:** The project has changed its name from "Class-Forum" 
+to "JB Online". 
 
-## Introduction
+This is the public code repository for JB Online 
+website, based on Laravel 5.6 and written in PHP 7+.
 
-This project (originally called *Physics-Homework-Forum*) was 
- originally designed for students to  share sorrow as well as
- joy when learning University Physics. It was implemented as 
- a universal forum for students to check homework, talk about
- key points and share knowledge.
+## Installation
 
-The project is based on Laravel-5-boilerplate. 
- Hence it is issued under MIT license. Besides, the 
- project employs many open source plugins, which you can learn
- more about in the 'credit' part.
-
-## Requirement
-
+Requirements:
 - PHP 7.1+
   - with ``gd2``, ``path_info``, ``mbstring``, ``exif`` modules installed.
   - enabled ``proc_open`` and other functions in 
     ``php.ini`` config file.
 - SQL 5.6+
 - Apache (recommended) / Nginx
-
-## Installation
 
 You can refer to the start guide and documentation 
 of Laravel-boilerplate. But there are some difference.
@@ -33,46 +23,35 @@ of Laravel-boilerplate. But there are some difference.
 
    ```shell
    composer install
-   ```
-
-   and
-
-   ```shell
    npm install
    ```
 
-2. Second, create database by making a .env file 
+2. Second, create database by copying a .env file 
    and run the following commands.
 
    ```shell
    php artisan key:generate
    php artisan migrate
    php artisan db:seed
-   php artisan passport:install --force // force is required!
+   php artisan passport:install --force
+   php artisan storage:link
    ```
 
-   This would create an administrator user whose
-   student ID is 10000 (quite like QQ, huh?) and 
-   password is 'secret'. You can login using this 
-   account.
+   This would create an administrator whose
+   student ID is 10000 and password is 'secret'. 
+   You can login using this account.
+   
+   As a reminder, if you cloned the repository using Git,
+   you have to pay special attention to the file privileges
+   or you may suffer from finding the cause of HTTP 500 errors.
 
-3. Build your stylesheets and scripts using
+3. (optional) Build **minimized** stylesheets and scripts using
 
    ```shell
    npm run production
    ```
 
-   You could check all available commands inside the 
-   package.json file.
-
-4. Last but not least, create a link for storage 
-folder (/public/storage) using command 
-
-   ```
-   php artisan storage:link
-   ```
-
-   and don't forget to create scheduled tasks
+4. Don't forget to create scheduled tasks
 
    ```
    crontab -e
@@ -82,12 +61,6 @@ folder (/public/storage) using command
    ```
 
    Now you can enjoy the forum!
-   
-5. (P.S.) If you encounter errors, please refer to 
- error log file. The most common cause to errors is 
- wrong permission. Also, you might have to change file
- names in folder ``/resources/lang/vendor`` so that 
- localized language files can be shown correctly.
  
 6. Caching
     ```
@@ -96,25 +69,30 @@ folder (/public/storage) using command
     ```
     helps to cache configure file and routes. To disable caching, use 'clear' instead.
  
-## API
+## API and commands
 
-The forum uses Passport to provide OAuth authentication. API is currently under construction.
+JB Online now provides basic APIs, described as follow:
 
-Tokens are valid for 15 days, and can be renewed for a month.
+- ``/api/login``, authorize with POST request, return a
+    token, user id and name on success.
+- ``/api/logout``, revoke the token.
+- ``/api/assignments``, fetch all ongoing assignments in 
+    JSON object array.
+- ``/api/notice``, fetch the current notice.
 
-The 'api/assignments' has been implemented, and can be used to fetch all ongoing assignments. 
+All APIs except login requires authentication by including
+passport token in request header. On a failure attempt, a 401
+or 'auth failure' will be returned.
 
-## Customization
-
-There four major models, assignment, course, notice
- and forum. And there are two customized commands,
- ``forum::updatefeeds`` and ``forum::checkassignments``
- which would respectively cache blog feeds and check
- assignments and send warning notifications.
+JB Online has 2 kernel commands described below:
+- ``forum::updatefeeds`` caches feeds for 30 min intervals.
+- ``forum::checkassignments`` checks assignments that will due 
+soon (today and tomorrow) and send warning emails at 22:30.
 
 ## Contact
 
 If you have any issues about safety or functions, you are welcome to open an issue to this repository.
+Questions about how to install/modify codes are not welcomed.
 
 ## License and Credit
 

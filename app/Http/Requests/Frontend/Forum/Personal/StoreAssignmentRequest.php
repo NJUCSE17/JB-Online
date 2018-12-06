@@ -32,7 +32,7 @@ class StoreAssignmentRequest extends FormRequest
         return [
             'name' => ['required', new Sanitize(), 'max:200'],
             'content' => ['required', new Sanitize(), 'max:10000'],
-            'due_time' => ['required', 'date', 'max:200', 'date_format:Y-m-d G:i:s'],
+            'due_time' => ['required', 'date', 'max:200', 'date_format:Y-m-d H:i:s'],
         ];
     }
 }

@@ -27,7 +27,16 @@ class NoticeRepository extends BaseRepository
     {
         return $this->model
             ->orderBy('updated_at', 'dec')
-            ->get()
             ->first();
+    }
+
+    /**
+     * @return mixed
+     */
+    public function APIGetNotice()
+    {
+        return $this->model
+            ->orderBy('updated_at', 'dec')
+            ->first(['content', 'updated_at']);
     }
 }
