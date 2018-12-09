@@ -3,12 +3,12 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
+use App\Models\Forum\Assignment;
 use App\Repositories\Frontend\Forum\NoticeRepository;
 use App\Repositories\Frontend\Forum\AssignmentRepository;
-use Carbon\Carbon;
-use http\Env\Response;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
 {
@@ -107,6 +107,32 @@ class UserController extends Controller
         $assignments = $this->assignmentRepository->APIGetOngoingAssignments();
         return response()->json([
             "data" => $assignments,
+        ], 200);
+    }
+
+    /**
+     * @var Request
+     * @var Assignment
+     * @return mixed
+     */
+    public function finishAssignment(Request $request, Assignment $assignment)
+    {
+        $assignment->finish();
+        return response()->json([
+            'status' => 'success',
+        ], 200);
+    }
+
+    /**
+     * @var Request
+     * @var Assignment
+     * @return mixed
+     */
+    public function resetAssignment(Request $request, Assignment $assignment)
+    {
+        $assignment->reset();
+        return response()->json([
+            'status' => 'success',
         ], 200);
     }
 }

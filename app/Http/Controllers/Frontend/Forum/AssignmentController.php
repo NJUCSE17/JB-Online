@@ -63,33 +63,15 @@ class AssignmentController extends Controller
      */
     public function finish(Course $course, Assignment $assignment)
     {
-        $records = DB::table('assignment_finish_records');
-        $exists = $records->where('user_id', '=', \Auth::id())
-            ->where('assignment_id', '=', $assignment->id)->exists();
-        if ($exists) {
-            return json_encode([
-                'status' => -1,
-                'ddl_badge_api' => '',
-                'ddl_badge_class' => '',
-                'ddl_badge_content' => '',
-                'ddl_badge_finished' => '',
-                'prompt' => __('strings.frontend.assignments.finish_fail', ['name' => $assignment->name])
-            ]);
-        } else {
-            $records->insert([
-                'user_id' => \Auth::id(),
-                'assignment_id' => $assignment->id,
-                'finished_at' => \Carbon\Carbon::now(),
-            ]);
-            return json_encode([
-                'status' => 1,
-                'ddl_badge_api' => route('frontend.forum.assignment.reset', [$assignment->source, $assignment]),
-                'ddl_badge_class' => 'btn btn-sm btn-outline-success resetBtn',
-                'ddl_badge_content' => $assignment->ddl_badge_content,
-                'ddl_badge_finished' => '1',
-                'prompt' => __('strings.frontend.assignments.finish', ['name' => $assignment->name])
-            ]);
-        }
+        $assignment->finish();
+        return json_encode([
+            'status' => 1,
+            'ddl_badge_api' => route('frontend.forum.assignment.reset', [$assignment->source, $assignment]),
+            'ddl_badge_class' => 'btn btn-sm btn-outline-success resetBtn',
+            'ddl_badge_content' => $assignment->ddl_badge_content,
+            'ddl_badge_finished' => '1',
+            'prompt' => __('strings.frontend.assignments.finish', ['name' => $assignment->name])
+        ]);
     }
 
     /**
@@ -99,29 +81,14 @@ class AssignmentController extends Controller
      */
     public function reset(Course $course, Assignment $assignment)
     {
-        $records = DB::table('assignment_finish_records');
-        $exists = $records->where('user_id', '=', \Auth::id())
-            ->where('assignment_id', '=', $assignment->id)->exists();
-        if ($exists) {
-            $records->where('user_id', '=', \Auth::id())
-                ->where('assignment_id', '=', $assignment->id)->delete();
-            return json_encode([
-                'status' => 1,
-                'ddl_badge_api' => route('frontend.forum.assignment.finish', [$assignment->source, $assignment]),
-                'ddl_badge_class' => "btn btn-sm btn-outline-" . $assignment->ddl_color . " finishBtn",
-                'ddl_badge_content' => $assignment->ddl_badge_content,
-                'ddl_badge_finished' => '0',
-                'prompt' => __('strings.frontend.assignments.reset', ['name' => $assignment->name])
-            ]);
-        } else {
-            return json_encode([
-                'status' => -1,
-                'ddl_badge_api' => '',
-                'ddl_badge_class' => '',
-                'ddl_badge_content' => '',
-                'ddl_badge_finished' => '',
-                'prompt' => __('strings.frontend.assignments.reset_fail', ['name' => $assignment->name])
-            ]);
-        }
+        $assignment->reset();
+        return json_encode([
+            'status' => 1,
+            'ddl_badge_api' => route('frontend.forum.assignment.finish', [$assignment->source, $assignment]),
+            'ddl_badge_class' => "btn btn-sm btn-outline-" . $assignment->ddl_color . " finishBtn",
+            'ddl_badge_content' => $assignment->ddl_badge_content,
+            'ddl_badge_finished' => '0',
+            'prompt' => __('strings.frontend.assignments.reset', ['name' => $assignment->name])
+        ]);
     }
 }

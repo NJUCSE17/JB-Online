@@ -22,6 +22,11 @@ Route::group(['namespace' => 'API'], function () {
         Route::post('notice', 'UserController@getNotice');
         Route::post('assignments', 'UserController@getAssignments');
 
+        Route::group(['prefix' => 'assignment/{assignment}'], function () {
+            Route::post('finish', 'UserController@finishAssignment');
+            Route::post('reset', 'UserController@resetAssignment');
+        });
+
         //Route::group(['middleware' => 'admin', 'prefix' => 'admin/'], function () {
         //    Route::group(['prefix' => 'assignment'], function () {
         //        Route::post('create', 'AdminController@createAssignment');
