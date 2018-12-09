@@ -90,9 +90,8 @@ class UserController extends Controller
      */
     public function getNotice(Request $request)
     {
-        $notice = $this->noticeRepository->APIGetNotice();
         return response()->json([
-            "data" => $notice,
+            "data" => $this->noticeRepository->APIGetNotice(),
         ], 200);
     }
 
@@ -104,9 +103,8 @@ class UserController extends Controller
      */
     public function getAssignments(Request $request)
     {
-        $assignments = $this->assignmentRepository->APIGetOngoingAssignments();
         return response()->json([
-            "data" => $assignments,
+            "data" => $this->assignmentRepository->APIGetOngoingAssignments(),
         ], 200);
     }
 
@@ -120,6 +118,7 @@ class UserController extends Controller
         $assignment->finish();
         return response()->json([
             'status' => 'success',
+            'data' => $this->assignmentRepository->APIGetOngoingAssignments(),
         ], 200);
     }
 
@@ -133,6 +132,7 @@ class UserController extends Controller
         $assignment->reset();
         return response()->json([
             'status' => 'success',
+            'data' => $this->assignmentRepository->APIGetOngoingAssignments(),
         ], 200);
     }
 }
