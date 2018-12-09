@@ -31,6 +31,13 @@ class UserController extends Controller
         $this->noticeRepository = $noticeRepository;
     }
 
+    public function app(Request $request)
+    {
+        return response()->json([
+            "data" => mobile_app_version(),
+        ], 200);
+    }
+
     /**
      * API for login.
      *
