@@ -46,8 +46,25 @@ return [
     |
     */
 
-    'blogonhome' => env('APP_BLOGONHOME', "false"),
+    'blogonhome' => env('APP_BLOGONHOME', false),
     'blogrss' => env('APP_BLOGRSS', "#"),
+
+    /*
+    |--------------------------------------------------------------------------
+    | Mobile Application version check
+    |--------------------------------------------------------------------------
+    |
+    | Values for API version check.
+    |
+    */
+
+    'mobile_app_enable' => env("MOBILE_VERSION_ENABLE", false),
+    'mobile_app_version_json' => array(
+        "number" => env("MOBILE_VERSION_NUMBER", '0'),
+        "name" => env("MOBILE_VERSION_NAME", 'null'),
+        "info" => env("MOBILE_VERSION_INFO", 'null'),
+        "link" => env("MOBILE_VERSION_LINK", 'null')
+    ),
 
     /*
     |--------------------------------------------------------------------------

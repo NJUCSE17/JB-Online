@@ -9,8 +9,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0, shrink-to-fit=yes">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>@yield('title', app_name())</title>
-    <meta name="description" content="@yield('meta_description', 'Homework Forum')">
-    <meta name="author" content="@yield('meta_author', 'Anthony Rappa + doowzs')">
+    <meta name="description" content="@yield('meta_description', 'JB Online')">
+    <meta name="author" content="@yield('meta_author', 'CS Elite 17')">
 
     @yield('meta')
 

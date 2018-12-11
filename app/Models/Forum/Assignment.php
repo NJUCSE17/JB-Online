@@ -8,6 +8,7 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Models\Forum\Traits\Attribute\AssignmentAttribute;
 use App\Models\Forum\Traits\Relationship\AssignmentRelationship;
+use App\Models\Forum\Traits\Method\AssignmentMethod;
 
 /**
  * Class Assignment.
@@ -18,7 +19,8 @@ class Assignment extends Model
         Notifiable,
         SoftDeletes,
         AssignmentAttribute,
-        AssignmentRelationship;
+        AssignmentRelationship,
+        AssignmentMethod;
 
     /**
      * The attributes that are mass assignable.

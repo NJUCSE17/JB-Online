@@ -66,6 +66,22 @@ if (! function_exists('app_blogrss')) {
     }
 }
 
+if (! function_exists('mobile_app_version')) {
+    /**
+     * Helper to grab the mobile application version
+     *
+     * @return mixed
+     */
+    function mobile_app_version()
+    {
+        if (config("app.mobile_app_enable")) {
+            return config("app.mobile_app_version_json");
+        } else {
+            return null;
+        }
+    }
+}
+
 if (! function_exists('gravatar')) {
     /**
      * Access the gravatar helper.

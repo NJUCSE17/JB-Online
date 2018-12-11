@@ -3,12 +3,12 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
+use App\Models\Forum\Assignment;
 use App\Repositories\Frontend\Forum\NoticeRepository;
 use App\Repositories\Frontend\Forum\AssignmentRepository;
-use Carbon\Carbon;
-use http\Env\Response;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
 {
@@ -29,6 +29,13 @@ class UserController extends Controller
     {
         $this->assignmentRepository = $assignmentRepository;
         $this->noticeRepository = $noticeRepository;
+    }
+
+    public function app(Request $request)
+    {
+        return response()->json([
+            "data" => mobile_app_version(),
+        ], 200);
     }
 
     /**
@@ -83,9 +90,8 @@ class UserController extends Controller
      */
     public function getNotice(Request $request)
     {
-        $notice = $this->noticeRepository->APIGetNotice();
         return response()->json([
-            "data" => $notice,
+            "data" => $this->noticeRepository->APIGetNotice(),
         ], 200);
     }
 
@@ -97,9 +103,36 @@ class UserController extends Controller
      */
     public function getAssignments(Request $request)
     {
-        $assignments = $this->assignmentRepository->APIGetOngoingAssignments();
         return response()->json([
-            "data" => $assignments,
+            "data" => $this->assignmentRepository->APIGetOngoingAssignments(),
+        ], 200);
+    }
+
+    /**
+     * @var Request
+     * @var Assignment
+     * @return mixed
+     */
+    public function finishAssignment(Request $request, Assignment $assignment)
+    {
+        $assignment->finish();
+        return response()->json([
+            'status' => 'success',
+            'data' => $this->assignmentRepository->APIGetOngoingAssignments(),
+        ], 200);
+    }
+
+    /**
+     * @var Request
+     * @var Assignment
+     * @return mixed
+     */
+    public function resetAssignment(Request $request, Assignment $assignment)
+    {
+        $assignment->reset();
+        return response()->json([
+            'status' => 'success',
+            'data' => $this->assignmentRepository->APIGetOngoingAssignments(),
         ], 200);
     }
 }

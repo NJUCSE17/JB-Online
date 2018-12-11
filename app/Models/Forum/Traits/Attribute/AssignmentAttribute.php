@@ -133,6 +133,14 @@ trait AssignmentAttribute
     }
 
     /**
+     * @return bool
+     */
+    public function getIsFinishedAttribute()
+    {
+        return $this->finish_status != NULL;
+    }
+
+    /**
      * @return mixed
      */
     public function getProblemsTableAttribute()

@@ -46,6 +46,11 @@
         body_class: 'px-2 py-2',
         toolbar1:"styleselect fontsizeselect forecolor backcolor | bold italic underline strikethrough | alignleft aligncenter alignright | code",
         toolbar2:"bullist numlist outdent indent | subscript superscript blockquote hr | pastetext removeformat link unlink | image table codesample tinymceEmoji",
+        // Use absolute URLs
+        relative_urls : false,
+        remove_script_host : false,
+        convert_urls : true,
+        // Code Paste and Highlight
         codesample_languages: [
             {text: 'C', value: 'c'},
             {text: 'C++', value: 'cpp'},
@@ -60,6 +65,7 @@
             {text: 'Shell', value: 'shell'},
             {text: 'SQL', value: 'sql'}
         ],
+        // Simple Markdown support
         textpattern_patterns: [
             {start: '*', end: '*', format: 'italic'},
             {start: '**', end: '**', format: 'bold'},
@@ -74,6 +80,7 @@
             {start: '* ', cmd: 'InsertUnorderedList'},
             {start: '- ', cmd: 'InsertUnorderedList'}
         ],
+        // Emojis
         emoji_add_space: true,
         emoji_show_groups: true,
         emoji_show_subgroups: true,
