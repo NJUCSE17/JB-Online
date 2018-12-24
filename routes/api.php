@@ -14,6 +14,8 @@ use Illuminate\Http\Request;
 */
 
 Route::group(['namespace' => 'API'], function () {
+    Route::get('heatmap', 'UserController@heatmap')->name("api.heatmap");
+
     Route::post('app', 'UserController@app');
     Route::post('login', 'UserController@login');
     Route::group(['middleware' => 'auth:api'], function () {

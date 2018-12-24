@@ -73,6 +73,12 @@ of Laravel-boilerplate. But there are some difference.
 
 ### List of APIs
 
+API requiring "GET" method
+- `/api/heatmap?st=timestamp&ed=timestamp` - Fetch assignment heatmap data, please refer to
+  [Cal-Heatmap](https://cal-heatmap.com/) v3.6.2 for detailed usage.
+
+
+APIs requiring "POST" method
 - `/api/login` - Sign in using credentials
 - Through `auth:api` middleware:
   - `/api/logout` - Revoke user's current token
@@ -84,8 +90,8 @@ of Laravel-boilerplate. But there are some difference.
 **Note: Assignment ID is specified by link address, not a request parameter**
   
 
-You need to use "POST" verb for all APIs. API will return a JSON object on success, 
-with status code 200. On auth failure, status code 401 will be returned.
+API will return a JSON object on success, with status code 200. On auth failure, 
+status code 401 will be returned.
 
 Below is an example of HTTP headers for API visit (tested in PHPStorm):
 
@@ -189,6 +195,7 @@ Questions about how to install/modify codes are not welcomed.
 
 *   [Bootstrap 4](http://getbootstrap.com/) as layout framework.
 *   [Carbon 2](https://carbon.nesbot.com/) and [laravel-carbon-2](https://github.com/kylekatarnls/laravel-carbon-2) for time localization and display.
+*   [D3](https://d3js.org/) and [Cal-Heatmap](https://cal-heatmap.com/) for heatmap display.
 *   [Elfinder](https://github.com/Studio-42/elFinder) and [laravel-elfinder](https://github.com/barryvdh/laravel-elfinder) for file storage.
 *   [Glide](http://glide.thephpleague.com/) for image processing.
 *   [Headroom.js](https://github.com/WickyNilliams/headroom.js) for hiding navigation bar.

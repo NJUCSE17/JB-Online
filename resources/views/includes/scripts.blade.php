@@ -10,6 +10,9 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script>
 
+<script type="text/javascript" src="//d3js.org/d3.v3.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/cal-heatmap/3.6.2/cal-heatmap.min.js"></script>
+
 <script type="text/x-mathjax-config">
             MathJax.Hub.Config({
                 tex2jax: {
@@ -23,6 +26,7 @@
                                           useLabelIds: true}
                 }
             });
+
 </script>
 <script type="text/javascript"
         src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_SVG.js"></script>
@@ -44,12 +48,12 @@
         branding: false,
         content_css: '/css/frontend.css',
         body_class: 'px-2 py-2',
-        toolbar1:"styleselect fontsizeselect forecolor backcolor | bold italic underline strikethrough | alignleft aligncenter alignright | code",
-        toolbar2:"bullist numlist outdent indent | subscript superscript blockquote hr | pastetext removeformat link unlink | image table codesample tinymceEmoji",
+        toolbar1: "styleselect fontsizeselect forecolor backcolor | bold italic underline strikethrough | alignleft aligncenter alignright | code",
+        toolbar2: "bullist numlist outdent indent | subscript superscript blockquote hr | pastetext removeformat link unlink | image table codesample tinymceEmoji",
         // Use absolute URLs
-        relative_urls : false,
-        remove_script_host : false,
-        convert_urls : true,
+        relative_urls: false,
+        remove_script_host: false,
+        convert_urls: true,
         // Code Paste and Highlight
         codesample_languages: [
             {text: 'C', value: 'c'},
