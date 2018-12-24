@@ -67,9 +67,11 @@ class CourseRepository extends BaseRepository
      *
      * @return mixed
      */
-    public function getCoursePlucked()
+    public function getOngoingCoursePlucked()
     {
         return $this->model
+            ->where('start_time', '<=', date("Y-m-d H:i:s"))
+            ->where('end_time', '>=', date("Y-m-d H:i:s"))
             ->orderBy('id', 'dec')
             ->get()
             ->pluck('name', 'id');

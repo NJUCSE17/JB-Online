@@ -85,7 +85,7 @@ class AssignmentController extends Controller
     public function create(ManageAssignmentRequest $request)
     {
         return view('backend.forum.assignment.create')
-            ->withCourseList($this->courseRepository->getCoursePlucked());
+            ->withCourseList($this->courseRepository->getOngoingCoursePlucked());
     }
 
     /**
