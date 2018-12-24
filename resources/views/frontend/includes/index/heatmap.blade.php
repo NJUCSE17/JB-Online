@@ -44,7 +44,6 @@
                         position: "top",
                     },
                     domainDynamicDimension: false,
-                    tooltip: true,
                 });
             </script>
         @endpush
