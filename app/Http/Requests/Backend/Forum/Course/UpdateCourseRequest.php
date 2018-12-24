@@ -30,8 +30,8 @@ class UpdateCourseRequest extends FormRequest
         return [
             'name' => ['required', new Sanitize(), 'max:200'],
             'semester'  => ['required', 'int', 'max:20'],
-            'start_time' => ['required', 'date', 'max:200', 'date_format:Y-m-d'],
-            'end_time' => ['required', 'date', 'max:200', 'date_format:Y-m-d'],
+            'start_time' => ['required', 'date', 'max:200', 'date_format:Y-m-d H:i:s'],
+            'end_time' => ['required', 'date', 'max:200', 'date_format:Y-m-d H:i:s'],
             'notice' => [ new Sanitize(), 'max:10000'],
             'difficulty' => ['required', 'int', 'max:1000'],
             'restrict_level' => ['required', 'int', 'max:20'],
