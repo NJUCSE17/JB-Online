@@ -23,10 +23,24 @@
                 <div class="card-body p-0 d-flex">
                     <div class="d-flex flex-column m-auto">
                         <div class="stats-small__data text-center">
-                            <span class="stats-small__label text-uppercase">作业</span>
+                            <span class="stats-small__label text-uppercase">系统作业</span>
                             <h6 class="stats-small__value count my-3">
-                                {{ \App\Models\Forum\Assignment::all()->where('due_time', '>', now())->count() }} /
-                                {{ \App\Models\Forum\Assignment::all()->count() }}
+                                {{ \App\Models\Forum\Assignment::all()->where('issuer', '=', 0)->where('due_time', '>', now())->count() }} /
+                                {{ \App\Models\Forum\Assignment::all()->where('issuer', '=', 0)->count() }}
+                            </h6>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="stats-small stats-small--1 card card-small">
+                <div class="card-body p-0 d-flex">
+                    <div class="d-flex flex-column m-auto">
+                        <div class="stats-small__data text-center">
+                            <span class="stats-small__label text-uppercase">个人作业</span>
+                            <h6 class="stats-small__value count my-3">
+                                {{ \App\Models\Forum\Assignment::all()->where('issuer', '!=', 0)->count() }}
                             </h6>
                         </div>
                     </div>
