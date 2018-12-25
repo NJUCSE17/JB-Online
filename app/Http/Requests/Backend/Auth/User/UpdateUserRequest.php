@@ -35,7 +35,6 @@ class UpdateUserRequest extends FormRequest
                 new Sanitize(),
                 'min:100000000',
                 'max:300000000',
-                Rule::unique('users'),
             ],
             'first_name' => [
                 'required',
@@ -51,7 +50,6 @@ class UpdateUserRequest extends FormRequest
                 'email',
                 new Sanitize(),
                 'max:191',
-                Rule::unique('users'),
             ],
             'blog'     => [
                 new Sanitize(),
