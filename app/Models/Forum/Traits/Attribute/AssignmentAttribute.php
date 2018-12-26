@@ -96,18 +96,39 @@ trait AssignmentAttribute
     /**
      * @return string
      */
+    public function getFinishLinkAttribute()
+    {
+        if ($this->issuer == 0) {
+            return route('frontend.forum.assignment.finish', [$this->source, $this]);
+        } else {
+            return route('frontend.forum.personal.finish', [$this]);
+        }
+    }
+
+    public function getResetLinkAttribute()
+    {
+        if ($this->issuer == 0) {
+            return route('frontend.forum.assignment.reset', [$this->source, $this]);
+        } else {
+            return route('frontend.forum.personal.reset', [$this]);
+        }
+    }
+
+    /**
+     * @return string
+     */
     public function getDDLBadgeAttribute()
     {
         $finishStatus = $this->finish_status;
         if ($finishStatus == null) {
             return "<a class=\"btn btn-outline-" . $this->ddl_color . " assignmentBtn"
                 . "\" id=\"assignment_ddl_" . $this->id . "\" data-aid=\"" . $this->id
-                . "\"" . "data-api=\"" . route('frontend.forum.assignment.finish', [$this->source, $this])
+                . "\"" . " data-api=\"" . $this->finish_link
                 . "\" data-finished='0' href='#'>" . $this->ddl_badge_content . "</a>";
         } else {
             return "<a class=\"btn btn-outline-success assignmentBtn" . "\" id=\"assignment_ddl_" . $this->id
                 . "\" data-aid=\"" . $this->id . "\" data-ddl=\"" . $this->ddl_badge_content
-                . "\"" . " data-api=\"" . route('frontend.forum.assignment.reset', [$this->source, $this])
+                . "\"" . " data-api=\"" . $this->reset_link
                 . "\" data-finished='1' href='#'>" . $this->ddl_badge_content . "</a>";
         }
     }

@@ -29,9 +29,14 @@ Route::group(['middleware' => ['auth', 'password_expires']], function () {
         Route::group(['prefix' => 'personal/{assignment}'], function () {
             Route::get('delete', 'PersonalController@delete')->name('personal.delete-permanently');
             Route::get('restore', 'PersonalController@restore')->name('personal.restore');
+            Route::get('finish', 'AssignmentController@finish')->name('personal.finish');
+            Route::get('reset', 'AssignmentController@reset')->name('personal.reset');
         });
 
         Route::group(['prefix' => '/{course}'], function () {
+            Route::get('/enroll', 'CourseController@enroll')->name('course.enroll');
+            Route::get('/disenroll', 'CourseController@disenroll')->name('course.disenroll');
+
             Route::get('/', 'CourseController@specific')->name('course.view');
             Route::group(['prefix' => 'assignment/{assignment}'], function () {
                 Route::get('finish', 'AssignmentController@finish')->name('assignment.finish');
