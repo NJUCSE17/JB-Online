@@ -25,7 +25,7 @@
     @stack('after-styles')
 </head>
 <body id="frontend"
-      style="background-image: url('{{ asset('images/frontend/background/bg_'.random_int(1, 20).'.svg')}}');
+      style="background-image: url('{{ asset('svg/bg_'.random_int(1, 20).'.svg')}}');
               background-size: auto; background-position: center center;">
     <p id="preamble" hidden>\( @include('includes.preamble') \)</p>
     @include('includes.partials.logged-in-as')
