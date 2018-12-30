@@ -44,6 +44,12 @@
                     </span>
                 </a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ route('telescope') }}">
+                    <i class="fas fa-chart-pie"></i>
+                    <span> Telescope </span>
+                </a>
+            </li>
         @endif
 
         @if ($logged_in_user->isExecutive())
@@ -94,25 +100,5 @@
                 </a>
             </li>
         @endif
-
-        <li class="px-3 py-2">{{ __('menus.backend.sidebar.log') }}</li>
-        <li class="nav-item">
-            <a class="nav-link {{ active_class(Active::checkUriPattern('admin/log-viewer')) }}"
-               href="{{ route('log-viewer::dashboard') }}">
-                <i class="fas fa-table"></i>
-                <span>
-                    {{ __('menus.backend.log-viewer.dashboard') }}
-                </span>
-            </a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link {{ active_class(Active::checkUriPattern('admin/log-viewer/logs*')) }}"
-               href="{{ route('log-viewer::logs.list') }}">
-                <i class="fas fa-cookie"></i>
-                <span>
-                    {{ __('menus.backend.log-viewer.logs') }}
-                </span>
-            </a>
-        </li>
     </ul>
 </div>
