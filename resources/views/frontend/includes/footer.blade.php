@@ -23,9 +23,5 @@
                 <i class="far fa-comment-alt mr-2"></i>
                 JB Voice
             </a>
-            <a href="https://git.njujb.com" class="text-dark">
-                <i class="fab fa-gitlab mr-2"></i>
-                JB GitLab
-            </a>
         </span>
 </footer>
