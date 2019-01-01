@@ -13,7 +13,7 @@
                 <div class="card-body">
                     <p>
                         服务器拒绝了您的请求。请登陆后重试。<br/>
-                        Your request is blocked by server. Please login and request again.
+                        Your request is blocked by server. Please login and try again.
                     </p>
                     <p>
                         具体的错误信息如下：<br/>
