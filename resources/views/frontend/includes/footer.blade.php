@@ -1,7 +1,7 @@
 <footer class="footer border-top bg-white">
     <i class="fas fa-copyright mr-2"></i>
     <a href="{{ route('frontend.about') }}">JB Online</a>
-    ({{ date('Y') }}). All rights reserved.
+    (2018 - {{ date('Y') }}). All rights reserved.
     @if (config('locale.status') && count(config('locale.languages')) > 1)
         <span class="mx-2">|</span>
         <span class="dropdown">

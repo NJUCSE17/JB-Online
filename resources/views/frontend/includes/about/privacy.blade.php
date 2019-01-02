@@ -65,7 +65,7 @@
             <li>
                 <p>账号的使用与删除</p>
                 <p>
-                    网站当前注册开放状态：{{ env('ENABLE_REGISTRATION', true) ? "允许注册" : "禁止注册" }}。
+                    网站当前注册开放状态：{{ env('ENABLE_REGISTRATION', false) ? "允许注册" : "禁止注册" }}。
                 </p>
                 <p>
                     您的账号密码、API接口的验证令牌都通过加密传输、存储。
