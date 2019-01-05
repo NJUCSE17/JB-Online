@@ -15,10 +15,15 @@ class CheckClientIP
      */
     public function handle($request, Closure $next)
     {
+        if (\Auth::hasUser() || $request->url() == route('frontend.auth.login')) {
+            return $next($request);
+        }
+
         if (!app()->isLocal() && env('APP_BLOCK_IP', true)) {
-            $location = geoip()->getLocation(geoip()->getClientIP());
+            $ip = geoip()->getClientIP();
+            $location = geoip()->getLocation($ip);
             if ($location['country'] != 'China') {
-                return abort(451, 'Bad client country: ' . $location['country']);
+                return abort(233, "GeoIP check failed: " . $ip . " from " . $location['country']);
             }
         }
         return $next($request);
