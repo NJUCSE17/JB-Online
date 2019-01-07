@@ -32,6 +32,17 @@ class AssignmentRepository extends BaseRepository
     public function getAllCount(): int
     {
         return $this->model
+            ->where('issuer', '=', 0)
+            ->count();
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPersonalCount(): int
+    {
+        return $this->model
+            ->where('issuer', '!=', 0)
             ->count();
     }
 
@@ -85,6 +96,7 @@ class AssignmentRepository extends BaseRepository
     {
         return $this->model
             ->where('due_time', '>', date("Y-m-d H:i:s"))
+            ->where('issuer', '=', 0)
             ->orderBy($orderBy, $sort)
             ->paginate($paged);
     }
@@ -100,6 +112,7 @@ class AssignmentRepository extends BaseRepository
     {
         return $this->model
             ->where('due_time', '<=', date("Y-m-d H:i:s"))
+            ->where('issuer', '=', 0)
             ->orderBy($orderBy, $sort)
             ->paginate($paged);
     }

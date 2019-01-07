@@ -6,9 +6,12 @@ use App\Http\Controllers\Controller;
 use App\Models\Forum\Assignment;
 use App\Repositories\Frontend\Forum\NoticeRepository;
 use App\Repositories\Frontend\Forum\AssignmentRepository;
+use Carbon\Traits\Timestamp;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Input;
+use Illuminate\Validation\Rules\In;
 
 class UserController extends Controller
 {
@@ -29,6 +32,24 @@ class UserController extends Controller
     {
         $this->assignmentRepository = $assignmentRepository;
         $this->noticeRepository = $noticeRepository;
+    }
+
+    public function heatmap(Request $request)
+    {
+        $st = (Input::get('st', 0));
+        $ed = (Input::get('ed', 0));
+        $assignments = $this->assignmentRepository
+            ->getAssignmentsByTimestamps($st, $ed);
+        $jsonValueArray = array();
+        foreach ($assignments as $assignment) {
+            $timestamp = date_timestamp_get($assignment->due_time);
+            if (isset($jsonValueArray[$timestamp])) {
+                $jsonValueArray[$timestamp]++;
+            } else {
+                $jsonValueArray[$timestamp] = 1;
+            }
+        }
+        return response()->json($jsonValueArray);
     }
 
     public function app(Request $request)

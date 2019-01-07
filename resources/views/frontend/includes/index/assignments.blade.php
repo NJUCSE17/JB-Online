@@ -3,12 +3,16 @@
         <i class="fas fa-calendar-alt mr-2"></i>
         {{ __('labels.frontend.home.assignment') }}
         <span class="float-right d-flex">
-                        @auth
+            @auth
                 @if(Auth::user()->isExecutive())
                     <a class="text-sm-center text-dark ml-2"
+                       href="{{ route('admin.forum.assignment.create') }}">
+                        <i class="fas fa-plus mr-2"></i>
+                    </a>
+                    <a class="text-sm-center text-dark ml-2"
                        href="{{ route('admin.forum.assignment.index') }}">
-                                    <i class="fas fa-cog"></i>
-                                </a>
+                        <i class="fas fa-cog"></i>
+                    </a>
                 @endif
             @else
                 <a class="badge badge-sm badge-secondary" href="{{ route('frontend.auth.login') }}">

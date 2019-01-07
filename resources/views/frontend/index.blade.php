@@ -19,6 +19,7 @@
         </div>
 
         <div class="col col-lg-5 col-12" id="rightCol">
+            @include('frontend.includes.index.heatmap')
             @include('frontend.includes.index.notice', [$notice])
             @include('frontend.includes.index.courses', [$ongoingCourses])
             @include('frontend.includes.index.blogonhome')

@@ -381,6 +381,7 @@ return [
 
 
         'home' => [
+            'heatmap'       => '热度图',
             'notice'        => '首页公告',
             'ongoing'       => '我的课程',
             'others'        => '其他课程',

@@ -86,10 +86,32 @@ trait AssignmentAttribute
             return $this->due_time->isoFormat("Y-MM-DD (ddd) H:mm:ss") . "<br />"
                 . $this->due_time->diffForHumans(null, null, false, 2);
         } else {
-            return $this->due_time->isoFormat("Y-MM-DD (ddd) H:mm:ss")
-                . "<br /><i class='fas fa-check mr-1'></i>"
+            return $this->due_time->isoFormat("Y-MM-DD (ddd) H:mm:ss") . "<br />"
+                . $this->due_time->diffForHumans(null, null, false, 2)
+                . "<hr class='my-1' /><i class='fas fa-check mr-1'></i>"
                 . __('strings.frontend.home.finished_at')
                 . $finishStatus->finished_at;
+        }
+    }
+
+    /**
+     * @return string
+     */
+    public function getFinishLinkAttribute()
+    {
+        if ($this->issuer == 0) {
+            return route('frontend.forum.assignment.finish', [$this->source, $this]);
+        } else {
+            return route('frontend.forum.personal.finish', [$this]);
+        }
+    }
+
+    public function getResetLinkAttribute()
+    {
+        if ($this->issuer == 0) {
+            return route('frontend.forum.assignment.reset', [$this->source, $this]);
+        } else {
+            return route('frontend.forum.personal.reset', [$this]);
         }
     }
 
@@ -102,12 +124,12 @@ trait AssignmentAttribute
         if ($finishStatus == null) {
             return "<a class=\"btn btn-outline-" . $this->ddl_color . " assignmentBtn"
                 . "\" id=\"assignment_ddl_" . $this->id . "\" data-aid=\"" . $this->id
-                . "\"" . "data-api=\"" . route('frontend.forum.assignment.finish', [$this->source, $this])
+                . "\"" . " data-api=\"" . $this->finish_link
                 . "\" data-finished='0' href='#'>" . $this->ddl_badge_content . "</a>";
         } else {
             return "<a class=\"btn btn-outline-success assignmentBtn" . "\" id=\"assignment_ddl_" . $this->id
                 . "\" data-aid=\"" . $this->id . "\" data-ddl=\"" . $this->ddl_badge_content
-                . "\"" . " data-api=\"" . route('frontend.forum.assignment.reset', [$this->source, $this])
+                . "\"" . " data-api=\"" . $this->reset_link
                 . "\" data-finished='1' href='#'>" . $this->ddl_badge_content . "</a>";
         }
     }

@@ -34,11 +34,17 @@
                 </div>
             </div>
         @endif
-        <hr/>
-        <a class="btn btn-outline-dark text-justify float-left"
-           href="{{ route('frontend.forum.personal.index') }}">
-            <i class="fas fa-user mr-1"></i>{{ __('labels.frontend.home.personal') }}
-        </a>
+        <hr />
+        <span class="float-left">
+            <a class="btn btn-outline-dark text-justify"
+               href="{{ route('frontend.forum.personal.index') }}">
+                <i class="fas fa-user mr-1"></i>{{ __('labels.frontend.home.personal') }}
+            </a>
+            <a class="btn btn-outline-dark text-justify"
+               href="{{ route('frontend.forum.personal.create') }}">
+                <i class="fas fa-plus"></i>
+            </a>
+        </span>
         <a class="btn btn-outline-dark text-justify float-right"
            href="{{ route('frontend.forum.course') }}">
             {{ __('labels.frontend.home.course') }} <i class="fas fa-angle-right"></i>

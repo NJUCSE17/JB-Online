@@ -28,26 +28,10 @@ class UpdateAssignmentRequest extends FormRequest
     public function rules()
     {
         return [
-            'course_id'  => [
-                'required',
-                'int'
-            ],
-            'name' => [
-                'required',
-                new Sanitize(),
-                'max:200',
-                ],
-            'content' => [
-                'required',
-                new Sanitize(),
-                'max:10000',
-            ],
-            'due_time' => [
-                'required',
-                'date',
-                'max:200',
-                'date_format:Y-m-d H:i:s'
-            ],
+            'course_id'  => ['required', 'int'],
+            'name' => ['required', new Sanitize(), 'max:200'],
+            'content' => ['required', new Sanitize(), 'max:10000'],
+            'due_time' => ['required', 'date', 'max:200', 'date_format:Y-m-d H:i:s'],
         ];
     }
 }

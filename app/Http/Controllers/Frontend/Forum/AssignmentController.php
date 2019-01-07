@@ -66,8 +66,8 @@ class AssignmentController extends Controller
         $assignment->finish();
         return json_encode([
             'status' => 1,
-            'ddl_badge_api' => route('frontend.forum.assignment.reset', [$assignment->source, $assignment]),
-            'ddl_badge_class' => 'btn btn-sm btn-outline-success resetBtn',
+            'ddl_badge_api' => $assignment->reset_link,
+            'ddl_badge_class' => 'btn btn-outline-success resetBtn',
             'ddl_badge_content' => $assignment->ddl_badge_content,
             'ddl_badge_finished' => '1',
             'prompt' => __('strings.frontend.assignments.finish', ['name' => $assignment->name])
@@ -84,8 +84,8 @@ class AssignmentController extends Controller
         $assignment->reset();
         return json_encode([
             'status' => 1,
-            'ddl_badge_api' => route('frontend.forum.assignment.finish', [$assignment->source, $assignment]),
-            'ddl_badge_class' => "btn btn-sm btn-outline-" . $assignment->ddl_color . " finishBtn",
+            'ddl_badge_api' => $assignment->finish_link,
+            'ddl_badge_class' => "btn btn-outline-" . $assignment->ddl_color . " finishBtn",
             'ddl_badge_content' => $assignment->ddl_badge_content,
             'ddl_badge_finished' => '0',
             'prompt' => __('strings.frontend.assignments.reset', ['name' => $assignment->name])

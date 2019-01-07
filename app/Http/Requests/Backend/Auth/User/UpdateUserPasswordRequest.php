@@ -31,10 +31,8 @@ class UpdateUserPasswordRequest extends FormRequest
     public function rules()
     {
         return [
-            'password'     => [
-                'required',
+            'password'     => ['required', 'confirmed',
                 new Sanitize(),
-                'confirmed',
                 new ChangePassword(),
                 new PasswordExposed(),
                 new UnusedPassword((int) $this->segment(4)),

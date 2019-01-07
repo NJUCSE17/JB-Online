@@ -8,7 +8,7 @@ return [
          * The name of this application. You can use this name to monitor
          * the backups.
          */
-        'name' => config('app.name') . "-backupb",
+        'name' => config('app.name') . "-backup",
 
         'source' => [
 
@@ -29,8 +29,7 @@ return [
                 'exclude' => [
                     base_path('vendor'),
                     base_path('node_modules'),
-                    storage_path('app') . '/private',
-                    public_path() . '/storage',
+                    storage_path('app'),
                 ],
 
                 /*
@@ -79,7 +78,7 @@ return [
              * The disk names on which the backups will be stored.
              */
             'disks' => [
-                'local',
+                'backup',
             ],
         ],
 
@@ -114,7 +113,7 @@ return [
         'notifiable' => \Spatie\Backup\Notifications\Notifiable::class,
 
         'mail' => [
-            'to' => '',
+            'to' => env('MAIL_ADMIN_ADDR', ''),
         ],
 
         'slack' => [

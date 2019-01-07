@@ -1,7 +1,7 @@
 <footer class="footer border-top bg-white">
     <i class="fas fa-copyright mr-2"></i>
     <a href="{{ route('frontend.about') }}">JB Online</a>
-    ({{ date('Y') }}). All rights reserved.
+    (2018 - {{ date('Y') }}). All rights reserved.
     @if (config('locale.status') && count(config('locale.languages')) > 1)
         <span class="mx-2">|</span>
         <span class="dropdown">
@@ -22,10 +22,6 @@
             <a href="https://voice.njujb.com" class="text-dark mr-2">
                 <i class="far fa-comment-alt mr-2"></i>
                 JB Voice
-            </a>
-            <a href="https://git.njujb.com" class="text-dark">
-                <i class="fab fa-gitlab mr-2"></i>
-                JB GitLab
             </a>
         </span>
 </footer>

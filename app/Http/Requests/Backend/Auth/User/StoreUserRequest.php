@@ -29,40 +29,13 @@ class StoreUserRequest extends FormRequest
     public function rules()
     {
         return [
-            'student_id' => [
-                'required',
-                'int',
-                new Sanitize(),
-                'min:100000000',
-                'max:300000000',
-                Rule::unique('users'),
-            ],
-            'first_name' => [
-                'required',
-                new Sanitize(),
-                'max:191',
-            ],
-            'last_name'  => [
-                new Sanitize(),
-                'max:191',
-            ],
-            'email' => [
-                'required',
-                'email',
-                new Sanitize(),
-                'max:191',
-                Rule::unique('users'),
-            ],
-            'blog'     => [
-                new Sanitize(),
-                'max:191',
-            ],
-            'password' => [
-                'required',
-                new Sanitize(),
-                'min:6',
-                'confirmed',
-            ],
+            'student_id' => ['required', 'int', new Sanitize(), 'min:100000000',
+                'max:300000000', Rule::unique('users')],
+            'first_name' => ['required', new Sanitize(), 'max:191'],
+            'last_name'  => [new Sanitize(), 'max:191'],
+            'email' => ['required', 'email', new Sanitize(), 'max:191', Rule::unique('users')],
+            'blog' => [new Sanitize(), 'max:191'],
+            'password' => ['required', new Sanitize(), 'min:6', 'confirmed'],
             'roles' => 'required|array',
         ];
     }

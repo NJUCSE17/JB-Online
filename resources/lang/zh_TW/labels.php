@@ -381,6 +381,7 @@ return [
 
 
         'home' => [
+            'heatmap'       => '马赛克墙',
             'notice'        => '狗管理公告',
             'ongoing'       => '即将扑街',
             'others'        => '强碧名单',

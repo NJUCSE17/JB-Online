@@ -91,6 +91,7 @@ Questions about how to install/modify codes are not welcomed.
 
 *   [Bootstrap 4](http://getbootstrap.com/) as layout framework.
 *   [Carbon 2](https://carbon.nesbot.com/) and [laravel-carbon-2](https://github.com/kylekatarnls/laravel-carbon-2) for time localization and display.
+*   [D3](https://d3js.org/) and [Cal-Heatmap](https://cal-heatmap.com/) for heatmap display.
 *   [Elfinder](https://github.com/Studio-42/elFinder) and [laravel-elfinder](https://github.com/barryvdh/laravel-elfinder) for file storage.
 *   [Glide](http://glide.thephpleague.com/) for image processing.
 *   [Headroom.js](https://github.com/WickyNilliams/headroom.js) for hiding navigation bar.

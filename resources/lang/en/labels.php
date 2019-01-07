@@ -354,6 +354,7 @@ return [
         ],
 
         'home' => [
+            'heatmap'       => 'Heatmap',
             'notice'        => 'Bulletin',
             'ongoing'       => 'My Courses',
             'others'        => 'Other Courses',
