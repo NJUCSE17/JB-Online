@@ -71,113 +71,9 @@ of Laravel-boilerplate. But there are some difference.
  
 ## API Usage
 
-### List of APIs
-
-API requiring "GET" method
-- `/api/heatmap?st=timestamp&ed=timestamp` - Fetch assignment heatmap data, please refer to
-  [Cal-Heatmap](https://cal-heatmap.com/) v3.6.2 for detailed usage.
-
-
-APIs requiring "POST" method
-- `/api/login` - Sign in using credentials
-- Through `auth:api` middleware:
-  - `/api/logout` - Revoke user's current token
-  - `/api/notice` - Fetch the current notice
-  - `/api/assignments` - Fetch the current ongoing assignments
-  - `/api/assignment/{$id}/finish` - Mark an assignment as finished
-  - `/api/assignment/{$id}/reset` - Mark an assignment as unfinished
- 
-**Note: Assignment ID is specified by link address, not a request parameter**
-  
-
-API will return a JSON object on success, with status code 200. On auth failure, 
-status code 401 will be returned.
-
-Below is an example of HTTP headers for API visit (tested in PHPStorm):
-
-````http request
-Accept: "application/json"
-Cache-Control: "no-cache"
-````
-
-### Sign in and go through ``auth`` guard
-
-To visit all APIs behind ``auth`` guard, you need to sign in
-using API and get the token of your account.
-
-Make a POST request to ``/api/login`` with the following
-**request parameters**:
-````http request
-student_id = yourID
-password = yourPW
-````
-
-On success, server will return a JSON Object in the following format:
-````json
-{
-  "status": "success",
-  "message": "Successfully logged in as Admin.",
-  "user_id": "10000",
-  "user_name": "Admin",
-  "token": "eyJ0eXAiO..."
-}
-````
-
-You need to save the "token" field. And for all of your sequent requests, add the following **header** to your request:
-````http request
-Authorization: "Bearer eyJ0eXAiO... (yourToken)"
-````
-
-**The string "Bearer" is required** so that the server will know how to 
-validate your identification using the token given.
-
-### JSON Objects of Different APIs
-
-- Auth Failure (401)
-    ````json
-    { "message":"Unauthenticated." }
-    ````
-- Login: described as above.
-- Logout:
-    ````json
-    {
-      "status": "success",
-      "message": "Successfully logged out as Admin."
-    }
-    ````
-- Get the otice:
-    ````json
-    {
-      "data": {
-        "content": "<p>Test<\/p>",
-        "updated_at": "2018-12-04 23:03:44"
-      }
-    }
-    ````
-- Get assignments:
-    ````json
-    {
-      "data": [
-        {
-          "id": 1,
-          "course_id": 1,
-          "name": "测试1",
-          "content": "<p>test1<\/p>",
-          "due_time": "2019-09-01 21:59:59",
-          "issuer": 0,
-          "finished": false
-        }
-      ]
-    }
-    ````
-- Finish/reset assignment: assignments will also be returned so that 
-you can also update the status of all assignments with one request. 
-    ````json
-    {
-      "status": "success",
-      "data": [ "..." ]
-    }
-    ````
+> This part has been removed because the current API specifics does not meet OAuth2 standards. 
+APIs, especially ones for authenticating will be reconstructed. All APIs will be listed in Swagger documentation afterwards.
+See [Issue #15](https://github.com/doowzs/JB-Online/issues/15) for detailed information.
 
 ## Laravel Kernel Commands
 
@@ -201,8 +97,9 @@ Questions about how to install/modify codes are not welcomed.
 *   [Headroom.js](https://github.com/WickyNilliams/headroom.js) for hiding navigation bar.
 *   [Highlight.JS](https://highlightjs.org/) for code formatting.
 *   [jQuery](http://jquery.com/), [jQuery UI](https://jqueryui.com/) and [jQuery-Confirm v3](https://github.com/craftpip/jquery-confirm) for JS based utils.
-*   [Laravel 5.6](https://laravel.com/) as PHP framework.
+*   [Laravel 5.7](https://laravel.com/) as PHP framework.
 *   [Laravel Boilerplate](http://laravel-boilerplate.com/) as code basement.
 *   [MathJax](https://www.mathjax.org/) for TeX and LaTeX display.
 *   [TinyMCE 4](https://www.tiny.cloud/) as WYSIWYG editor.
+*   [Swagger 3](https://github.com/swagger-api/swagger-ui) for API documentation.
 *   All icons from [FlatIcon](https://www.flaticon.com/).

@@ -14,6 +14,7 @@
         "beyondcode/laravel-self-diagnosis": "^1.0.2",
         "creativeorange/gravatar": "~1.0",
         "cybercog/laravel-love": "^5.2",
+        "darkaonline/l5-swagger": "5.7.*",
         "davejamesmiller/laravel-breadcrumbs": "^5.2",
         "divineomega/laravel-password-exposed-validation-rule": "^1.2.3",
         "fideloper/proxy": "^4.0",
@@ -34,7 +35,8 @@
         "spatie/laravel-permission": "^2.29",
         "torann/geoip": "^1.0.8",
         "webpatser/laravel-uuid": "^3.0.1",
-        "willvincent/feeds": "^1.1.7"
+        "willvincent/feeds": "^1.1.7",
+        "zircote/swagger-php": "^3.0"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.2.1",

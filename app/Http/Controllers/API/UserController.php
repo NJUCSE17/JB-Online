@@ -34,6 +34,37 @@ class UserController extends Controller
         $this->noticeRepository = $noticeRepository;
     }
 
+    /**
+     * @OA\Get(
+     *     path="/api/heatmap",
+     *     tags={"Utils"},
+     *     summary="Get the JSON data of heatmap on index page",
+     *     @OA\Parameter(
+     *         name="st",
+     *         description="Start time (in timestamp format).",
+     *         required=false,
+     *         in="query",
+     *         @OA\Schema(
+     *             type="integer"
+     *         )
+     *     ),
+     *     @OA\Parameter(
+     *         name="ed",
+     *         description="End time (in timestamp format).",
+     *         required=false,
+     *         in="query",
+     *         @OA\Schema(
+     *             type="integer"
+     *         )
+     *     ),
+     *     @OA\Response(response=200, description="Successful operation",
+     *         @OA\MediaType(
+     *             mediaType="application/json",
+     *             @OA\Schema(ref="#/components/schemas/Heatmap"),
+     *         )
+     *     ),
+     * )
+     */
     public function heatmap(Request $request)
     {
         $st = (Input::get('st', 0));
@@ -52,6 +83,19 @@ class UserController extends Controller
         return response()->json($jsonValueArray);
     }
 
+    /**
+     * @OA\Post(
+     *     path="/api/app",
+     *     tags={"Utils"},
+     *     summary="Get the JSON data of latest mobile app info",
+     *     @OA\Response(response=200, description="Successful operation",
+     *         @OA\MediaType(
+     *             mediaType="application/json",
+     *             @OA\Schema(ref="#/components/schemas/AppInfo"),
+     *         )
+     *     ),
+     * )
+     */
     public function app(Request $request)
     {
         return response()->json([
@@ -59,34 +103,60 @@ class UserController extends Controller
         ], 200);
     }
 
-    /**
-     * API for login.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function login(Request $request)
-    {
-        if(Auth::attempt([
-            'student_id' => $request->student_id,
-            'password' => $request->password
-        ])){
-            $user = Auth::user();
-            $token = $user->createToken('Passport API')->accessToken;
-            return response()->json([
-                'status' => 'success',
-                'message' => 'Successfully logged in as ' . $user->full_name . '.',
-                'user_id'   => $user->student_id,
-                'user_name' => $user->full_name,
-                'token'     => $token,
-            ], 200);
-        } else {
-            return response()->json([
-                'status' => 'error',
-                'message' => 'Unauthorized Access',
-            ], 401);
-        }
-    }
 
+
+    /**
+     * @OA\Post(
+     *     path="/oauth/token",
+     *     tags={"Authenticate"},
+     *     summary="Authenticate and get API token",
+     *     @OA\Parameter(
+     *         name="student_id",
+     *         description="Student ID. Can use 'username' instead.",
+     *         required=true,
+     *         in="query",
+     *         @OA\Schema(
+     *             type="integer"
+     *         )
+     *     ),
+     *     @OA\Parameter(
+     *         name="password",
+     *         description="Account password.",
+     *         required=true,
+     *         in="query",
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *     @OA\Response(response=200, description="Authenticate success",
+     *         @OA\MediaType(
+     *             mediaType="application/json",
+     *             @OA\Schema(ref="#/components/schemas/LoginSuccess"),
+     *         )
+     *     ),
+     *     @OA\Response(response=401, description="Authenticate failure",
+     *         @OA\MediaType(
+     *             mediaType="application/json",
+     *             @OA\Schema(ref="#/components/schemas/NormalMessage"),
+     *         )
+     *     ),
+     * )
+     */
+
+    /**
+     * @OA\Post(
+     *     path="/api/logout",
+     *     tags={"Authenticate"},
+     *     summary="Logout and revoke API token",
+     *     @OA\Response(response=200, description="Authenticate success",
+     *         @OA\MediaType(
+     *             mediaType="application/json",
+     *             @OA\Schema(ref="#/components/schemas/NormalMessage"),
+     *         )
+     *     ),
+     *     security={{"passport": {}}},
+     * )
+     */
     /**
      * API for logout.
      *
@@ -156,4 +226,112 @@ class UserController extends Controller
             'data' => $this->assignmentRepository->APIGetOngoingAssignments(),
         ], 200);
     }
+}
+
+/**
+ * @OA\Schema()
+ */
+class Heatmap {
+    /**
+     * The number of entries of a timestamp
+     * @var integer
+     * @OA\Property()
+     */
+    public $timestamp;
+}
+
+/**
+ * @OA\Schema()
+ */
+class AppInfo {
+    /**
+     * App data
+     * @var AppInfo_Data
+     * @OA\Property()
+     */
+    public $data;
+}
+
+/**
+ * @OA\Schema()
+ */
+class AppInfo_Data {
+    /**
+     * Version number
+     * @var integer
+     * @OA\Property()
+     */
+    public $number;
+    /**
+     * Version name
+     * @var string
+     * @OA\Property()
+     */
+    public $name;
+    /**
+     * Version info
+     * @var string
+     * @OA\Property()
+     */
+    public $info;
+    /**
+     * App download link
+     * @var string
+     * @OA\Property()
+     */
+    public $link;
+}
+
+/**
+ * @OA\Schema()
+ */
+class LoginSuccess {
+    /**
+     * "success"
+     * @var string
+     * @OA\Property()
+     */
+    public $status;
+    /**
+     * API Message
+     * @var string
+     * @OA\Property()
+     */
+    public $message;
+    /**
+     * User ID
+     * @var integer
+     * @OA\Property()
+     */
+    public $user_id;
+    /**
+     * User Name
+     * @var string
+     * @OA\Property()
+     */
+    public $user_name;
+    /**
+     * API Token
+     * @var string
+     * @OA\Property()
+     */
+    public $token;
+}
+
+/**
+ * @OA\Schema()
+ */
+class NormalMessage {
+    /**
+     * API Returning Status
+     * @var string
+     * @OA\Property()
+     */
+    public $status;
+    /**
+     * API Message
+     * @var string
+     * @OA\Property()
+     */
+    public $message;
 }
