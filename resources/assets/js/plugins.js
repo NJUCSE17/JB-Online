@@ -52,7 +52,7 @@ $(function () {
     $("[data-toggle='tooltip']").tooltip();
 
     /**
-     * Generic confirm form delete using Sweet Alert
+     * Generic confirm form delete using JQuery-Confirm v3
      */
     $('body').on('submit', 'form[name=delete_item]', function (e) {
         e.preventDefault();
