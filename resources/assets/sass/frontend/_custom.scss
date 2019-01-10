@@ -29,14 +29,3 @@ body {
   background-color: rgba(255, 255, 255, 0.6);
   text-align: center;
 }
-
-.headroom {
-  will-change: transform;
-  transition: transform 200ms linear;
-}
-.headroom--pinned {
-  transform: translateY(0%);
-}
-.headroom--unpinned {
-  transform: translateY(-100%);
-}

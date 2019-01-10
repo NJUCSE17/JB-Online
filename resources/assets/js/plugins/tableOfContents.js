@@ -19,7 +19,7 @@
                 var text = $(el).text();
                 // https://stackoverflow.com/questions/21109011/javascript-unicode-string-chinese-character-but-no-punctuation
                 // https://stackoverflow.com/questions/20306204/using-queryselector-with-ids-that-are-numbers
-                var anchor = text.trim().toLowerCase().replace(/[^A-Za-z0-9\u4E00-\u9FCC]+/g, '-').replace(/^(\d)/g, 'a-$1');
+                var anchor = text.trim().toLowerCase().replace(/[^A-Za-z0-9\u4E00-\u9FCC]+/g, '-').replace(/^(\d)/g, 'feed-$1');
                 return anchor || el.tagName.toLowerCase();
             },
 
@@ -74,33 +74,19 @@
                 return this.generateNavEl(anchor, text);
             },
 
-            // Find the first heading level (`<h1>`, then `<h2>`, etc.) that has more than one element. Defaults to 1 (for `<h1>`).
-            getTopLevel: function($scope) {
-                for (var i = 1; i <= 6; i++) {
-                    var $headings = this.findOrFilter($scope, 'h' + i);
-                    if ($headings.length > 1) {
-                        return i;
-                    }
-                }
-
-                return 1;
-            },
-
             // returns the elements for the top level, and the next below it
-            getHeadings: function($scope, topLevel) {
-                var topSelector = 'h' + topLevel;
+            getHeadings: function($scope) {
+                var topSelector = '.card-header';
 
-                var secondaryLevel = topLevel + 1;
-                var secondarySelector = 'h' + secondaryLevel;
-
-                return this.findOrFilter($scope, topSelector + ',' + secondarySelector);
+                return this.findOrFilter($scope, topSelector + ', h1, h2');
             },
 
             getNavLevel: function(el) {
+                if (el.tagName.charAt(0) !== 'H') return 0; // card-header
                 return parseInt(el.tagName.charAt(1), 10);
             },
 
-            populateNav: function($topContext, topLevel, $headings) {
+            populateNav: function($topContext, toplevel, $headings) {
                 var $context = $topContext;
                 var $prevNav;
 
@@ -108,9 +94,10 @@
                 $headings.each(function(i, el) {
                     var $newNav = helpers.generateNavItem(el);
                     var navLevel = helpers.getNavLevel(el);
+                    console.log('level of ' + el.id + 'is' + navLevel);
 
                     // determine the proper $context
-                    if (navLevel === topLevel) {
+                    if (navLevel === toplevel) {
                         // use top level
                         $context = $topContext;
                     } else if ($prevNav && $context === $topContext) {
@@ -146,9 +133,8 @@
             opts.$nav.attr('data-toggle', 'toc');
 
             var $topContext = this.helpers.createChildNavList(opts.$nav);
-            var topLevel = this.helpers.getTopLevel(opts.$scope);
-            var $headings = this.helpers.getHeadings(opts.$scope, topLevel);
-            this.helpers.populateNav($topContext, topLevel, $headings);
+            var $headings = this.helpers.getHeadings(opts.$scope);
+            this.helpers.populateNav($topContext, 0, $headings);
         }
     };
 
