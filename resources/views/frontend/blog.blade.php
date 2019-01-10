@@ -20,7 +20,8 @@
                     <div class="card-footer py-2">
                         <div class="row">
                             <div class="col col-3 px-0 text-center">
-                                <a class="btn" href="{{ $feeds->currentPage() > 1 ? $this->previousPage() : "#"}}">
+                                <a class="btn {{ $feeds->currentPage() > 1 ? "text-primary" : ""}}"
+                                   href="{{ $feeds->currentPage() > 1 ? $feeds->previousPageUrl() : "#"}}">
                                     <i class="fas fa-arrow-left"></i>
                                 </a>
                             </div>
@@ -29,12 +30,12 @@
                                     <input type="number" class="form-control text-center mx-1 px-0" value=""
                                            id="customPage" data-total-page="{{ $feeds->lastPage() }}"
                                            style="width: 100%; height: 36px;" min="1" max="{{ $feeds->lastPage() }}"
-                                           placeholder="1-{{ $feeds->lastPage() }}">
-                                    {!! $feeds->render() !!}
+                                           placeholder="{{ $feeds->currentPage() }} / {{ $feeds->lastPage() }}">
                                 </div>
                             </div>
                             <div class="col col-3 px-0 text-center">
-                                <a class="btn" href="{{ $feeds->lastPage() > $feeds->currentPage() ? $this->nextPage() : "#"}}">
+                                <a class="btn {{ $feeds->lastPage() > $feeds->currentPage() ? "text-primary" : ""}}"
+                                   href="{{ $feeds->lastPage() > $feeds->currentPage() ? $feeds->nextPageUrl() : "#"}}">
                                     <i class="fas fa-arrow-right"></i>
                                 </a>
                             </div>
