@@ -40,7 +40,7 @@
 
             generateAnchor: function(el) {
                 if (el.id) {
-                    return el.id;
+                    return el.id.replace(/[^A-Za-z0-9\u4E00-\u9FCC]+/g, '-').replace(/^(\d)/g, 'feed-$1');
                 } else {
                     var anchor = this.generateUniqueId(el);
                     el.id = anchor;
