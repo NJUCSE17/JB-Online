@@ -16,6 +16,7 @@
     "ajv": "^6.6.2",
     "axios": "^0.18",
     "babel-jest": "^23.6.0",
+    "babel-preset-env": "^1.7.0",
     "cross-env": "^5.2.0",
     "imagemin": "^6.1.0",
     "jest": "^23.6.0",
@@ -23,8 +24,12 @@
     "laravel-mix": "^4.0",
     "lodash": "^4.17.11",
     "pace": "github:HubSpot/pace#v1.0.2",
+    "resolve-url-loader": "^2.3.1",
+    "sass": "^1.16.0",
+    "sass-loader": "^7.1.0",
     "simple-line-icons": "^2.4.1",
-    "vue": "^2.5.21"
+    "vue": "^2.5.21",
+    "vue-template-compiler": "^2.5.21"
   },
   "jest": {
     "testURL": "http://localhost",
@@ -42,5 +47,10 @@
       "^.+\\.js$": "<rootDir>/node_modules/babel-jest",
       ".*\\.(vue)$": "<rootDir>/node_modules/jest-vue-preprocessor"
     }
+  },
+  "dependencies": {
+    "@babel/core": "^7.2.2",
+    "@babel/preset-env": "^7.2.3",
+    "bootstrap": "^4.2.1"
   }
 }

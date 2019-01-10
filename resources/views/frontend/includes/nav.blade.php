@@ -1,4 +1,4 @@
-<header class="header headroom sticky-top">
+<header class="header">
     <nav class="navbar navbar-expand-lg navbar-light bg-white with-shadows">
         <div class="container">
             <a href="{{ route('frontend.index') }}" class="navbar-brand">
@@ -92,9 +92,3 @@
         </div>
     </nav>
 </header>
-
-@push('after-scripts')
-    <script type="text/javascript">
-        $("header").headroom();
-    </script>
-@endpush
