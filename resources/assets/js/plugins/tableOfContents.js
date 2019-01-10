@@ -19,14 +19,16 @@
                 var text = $(el).text();
                 // https://stackoverflow.com/questions/21109011/javascript-unicode-string-chinese-character-but-no-punctuation
                 // https://stackoverflow.com/questions/20306204/using-queryselector-with-ids-that-are-numbers
-                var anchor = text.trim().toLowerCase().replace(/[^A-Za-z0-9\u4E00-\u9FCC]+/g, '-').replace(/^(\d)/g, 'feed-$1');
+                var anchor = text.trim().toLowerCase()
+                    .replace(/[^A-Za-z0-9\u4E00-\u9FCC]+/g, '-');
                 return anchor || el.tagName.toLowerCase();
             },
 
             generateUniqueId: function(el) {
-                var anchorBase = this.generateUniqueIdBase(el);
+                var anchorBase = (el.id) ? el.id : this.generateUniqueIdBase(el);
                 for (var i = 0; ; i++) {
-                    var anchor = anchorBase;
+                    // add prefix
+                    var anchor = 'feed-' + anchorBase;
                     if (i > 0) {
                         // add suffix
                         anchor += '-' + i;
@@ -39,13 +41,9 @@
             },
 
             generateAnchor: function(el) {
-                if (el.id) {
-                    return el.id.replace(/[^A-Za-z0-9\u4E00-\u9FCC]+/g, '-').replace(/^(\d)/g, 'feed-$1');
-                } else {
-                    var anchor = this.generateUniqueId(el);
-                    el.id = anchor;
-                    return anchor;
-                }
+                var anchor = this.generateUniqueId(el);
+                el.id = anchor;
+                return anchor;
             },
 
             createNavList: function() {
