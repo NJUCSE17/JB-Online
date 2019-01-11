@@ -6,16 +6,17 @@
 @section('content')
     <div class="row">
         <div class="col col-12 col-md-3">
-            <div class="sticky-top" style="top:20px;">
+            <div class="sticky-top" style="top: 20px; bottom: 20px;">
                 <div class="card my-3">
                     <h4 class="card-header text-center">{{ __('labels.general.contents') }}</h4>
-                    <div class="card-body p-3">
-                        <nav id="toc" class="nav nav-pills flex-column"></nav>
-                        <div class="text-center">
-                            <div id="toc-spinner" class="spinner-grow" role="status">
-                                <span class="sr-only">Loading...</span>
+                    <div class="card-body p-3" style="max-height: 75vh;">
+                        <nav id="toc" class="nav nav-pills flex-column" style="max-height: 70vh; overflow-y: auto;">
+                            <div class="text-center">
+                                <div id="toc-spinner" class="spinner-grow" role="status">
+                                    <span class="sr-only">Loading...</span>
+                                </div>
                             </div>
-                        </div>
+                        </nav>
                     </div>
                     <div class="card-footer py-2">
                         <div class="row">

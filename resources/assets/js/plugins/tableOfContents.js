@@ -19,14 +19,16 @@
                 var text = $(el).text();
                 // https://stackoverflow.com/questions/21109011/javascript-unicode-string-chinese-character-but-no-punctuation
                 // https://stackoverflow.com/questions/20306204/using-queryselector-with-ids-that-are-numbers
-                var anchor = text.trim().toLowerCase().replace(/[^A-Za-z0-9\u4E00-\u9FCC]+/g, '-').replace(/^(\d)/g, 'feed-$1');
+                var anchor = text.trim().toLowerCase()
+                    .replace(/[^A-Za-z0-9\u4E00-\u9FCC]+/g, '-');
                 return anchor || el.tagName.toLowerCase();
             },
 
             generateUniqueId: function(el) {
-                var anchorBase = this.generateUniqueIdBase(el);
+                var anchorBase = (el.id) ? el.id : this.generateUniqueIdBase(el);
                 for (var i = 0; ; i++) {
-                    var anchor = anchorBase;
+                    // add prefix
+                    var anchor = 'feed-' + el.tagName + '-' + anchorBase;
                     if (i > 0) {
                         // add suffix
                         anchor += '-' + i;
@@ -39,17 +41,13 @@
             },
 
             generateAnchor: function(el) {
-                if (el.id) {
-                    return el.id.replace(/[^A-Za-z0-9\u4E00-\u9FCC]+/g, '-').replace(/^(\d)/g, 'feed-$1');
-                } else {
-                    var anchor = this.generateUniqueId(el);
-                    el.id = anchor;
-                    return anchor;
-                }
+                var anchor = this.generateUniqueId(el);
+                el.id = anchor;
+                return anchor;
             },
 
             createNavList: function() {
-                return $('<ul class="nav navbar-nav"></ul>');
+                return $('<ul class="nav nav-toc"></ul>');
             },
 
             createChildNavList: function($parent) {
@@ -86,28 +84,38 @@
                 return parseInt(el.tagName.charAt(1), 10);
             },
 
-            populateNav: function($topContext, toplevel, $headings) {
-                var $context = $topContext;
-                var $prevNav;
+            populateNav: function($topContext, $headings) {
+                var $curContext = null;
+                var $cardItem = null;
+                var $h1Item   = null;
+                var $h1ListEl = null;
+                var $h2ListEl = null;
 
                 var helpers = this;
                 $headings.each(function(i, el) {
                     var $newNav = helpers.generateNavItem(el);
                     var navLevel = helpers.getNavLevel(el);
-                    console.log('level of ' + el.id + 'is' + navLevel);
 
                     // determine the proper $context
-                    if (navLevel === toplevel) {
-                        // use top level
-                        $context = $topContext;
-                    } else if ($prevNav && $context === $topContext) {
-                        // create a new level of the tree and switch to it
-                        $context = helpers.createChildNavList($prevNav);
-                    } // else use the current $context
-
-                    $context.append($newNav);
-
-                    $prevNav = $newNav;
+                    if (navLevel === 0) {
+                        $topContext.append($newNav);
+                        $h1ListEl = $h1Item = $h2ListEl = null;
+                        $cardItem = $newNav;
+                    } else if (navLevel === 1 || (navLevel === 2 && !$h1Item)) {
+                        if (!$h1ListEl) {
+                            $curContext = $h1ListEl = helpers.createChildNavList($cardItem);
+                        }
+                        $h1ListEl.append($newNav);
+                        if (navLevel === 1) {
+                            $h1Item = $newNav;
+                            $h2ListEl = null;
+                        }
+                    } else {
+                        if (!$h2ListEl) {
+                            $curContext = $h2ListEl = helpers.createChildNavList($h1Item);
+                        }
+                        $h2ListEl.append($newNav);
+                    }
                 });
             },
 
@@ -134,7 +142,7 @@
 
             var $topContext = this.helpers.createChildNavList(opts.$nav);
             var $headings = this.helpers.getHeadings(opts.$scope);
-            this.helpers.populateNav($topContext, 0, $headings);
+            this.helpers.populateNav($topContext, $headings);
         }
     };
 
