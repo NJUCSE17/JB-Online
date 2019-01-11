@@ -47,7 +47,7 @@
             },
 
             createNavList: function() {
-                return $('<ul class="nav navbar-nav"></ul>');
+                return $('<ul class="nav nav-toc"></ul>');
             },
 
             createChildNavList: function($parent) {
@@ -92,7 +92,6 @@
                 $headings.each(function(i, el) {
                     var $newNav = helpers.generateNavItem(el);
                     var navLevel = helpers.getNavLevel(el);
-                    console.log('level of ' + el.id + 'is' + navLevel);
 
                     // determine the proper $context
                     if (navLevel === toplevel) {
