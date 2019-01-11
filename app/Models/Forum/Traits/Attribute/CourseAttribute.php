@@ -2,11 +2,35 @@
 
 namespace App\Models\Forum\Traits\Attribute;
 
+use App\Models\Auth\User;
+
 /**
  * Trait CourseAttribute.
  */
 trait CourseAttribute
 {
+    /**
+     * Check whether a user is a student of the course.
+     *
+     * @param User $user
+     * @return bool
+     */
+    public function hasStudent(User $user) : bool
+    {
+        return $this->isLikedBy($user);
+    }
+
+    /**
+     * Check whether a user is an admin of the course.
+     *
+     * @param User $user
+     * @return bool
+     */
+    public function hasAdmin(User $user) : bool
+    {
+        return $this->isDislikedBy($user);
+    }
+
     /**
      * @return string
      */

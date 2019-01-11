@@ -29,11 +29,19 @@ Route::group(['namespace' => 'API'], function () {
             Route::post('reset', 'UserController@resetAssignment');
         });
 
-        //Route::group(['middleware' => 'admin', 'prefix' => 'admin/'], function () {
-        //    Route::group(['prefix' => 'assignment'], function () {
-        //        Route::post('create', 'AdminController@createAssignment');
-        //        Route::post('edit', 'AdminController@editAssignment');
-        //    });
-        //});
+        Route::group(['namespace' => 'Forum'], function () {
+            Route::group(['prefix' => 'course/{course}'], function () {
+                Route::post('check/student/{user?}', 'CourseController@checkStudent')->name('api.forum.course.check.student');
+                Route::post('check/admin/{user?}', 'CourseController@checkAdmin')->name('api.forum.course.check.admin');
+                Route::post('add/student', 'CourseController@addStudent')->name('api.forum.course.add.student');
+                Route::post('delete/user', 'CourseController@deleteUser')->name('api.forum.course.delete.user');
+                Route::group(['middleware' => 'admin'], function () {
+                    // Only admin can add admin, and control other users.
+                    Route::post('add/student/{user?}', 'CourseController@addStudent')->name('api.forum.course.add.student');
+                    Route::post('add/admin/{user?}', 'CourseController@addAdmin')->name('api.forum.course.add.admin');
+                    Route::post('delete/user/{user?}', 'CourseController@deleteUser')->name('api.forum.course.delete.user');
+                });
+            });
+        });
     });
 });
