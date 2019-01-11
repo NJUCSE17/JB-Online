@@ -28,7 +28,7 @@
                 var anchorBase = (el.id) ? el.id : this.generateUniqueIdBase(el);
                 for (var i = 0; ; i++) {
                     // add prefix
-                    var anchor = 'feed-' + anchorBase;
+                    var anchor = 'feed-' + el.tagName + '-' + anchorBase;
                     if (i > 0) {
                         // add suffix
                         anchor += '-' + i;
@@ -84,9 +84,12 @@
                 return parseInt(el.tagName.charAt(1), 10);
             },
 
-            populateNav: function($topContext, toplevel, $headings) {
-                var $context = $topContext;
-                var $prevNav;
+            populateNav: function($topContext, $headings) {
+                var $curContext = null;
+                var $cardItem = null;
+                var $h1Item   = null;
+                var $h1ListEl = null;
+                var $h2ListEl = null;
 
                 var helpers = this;
                 $headings.each(function(i, el) {
@@ -94,17 +97,25 @@
                     var navLevel = helpers.getNavLevel(el);
 
                     // determine the proper $context
-                    if (navLevel === toplevel) {
-                        // use top level
-                        $context = $topContext;
-                    } else if ($prevNav && $context === $topContext) {
-                        // create a new level of the tree and switch to it
-                        $context = helpers.createChildNavList($prevNav);
-                    } // else use the current $context
-
-                    $context.append($newNav);
-
-                    $prevNav = $newNav;
+                    if (navLevel === 0) {
+                        $topContext.append($newNav);
+                        $h1ListEl = $h1Item = $h2ListEl = null;
+                        $cardItem = $newNav;
+                    } else if (navLevel === 1 || (navLevel === 2 && !$h1Item)) {
+                        if (!$h1ListEl) {
+                            $curContext = $h1ListEl = helpers.createChildNavList($cardItem);
+                        }
+                        $h1ListEl.append($newNav);
+                        if (navLevel === 1) {
+                            $h1Item = $newNav;
+                            $h2ListEl = null;
+                        }
+                    } else {
+                        if (!$h2ListEl) {
+                            $curContext = $h2ListEl = helpers.createChildNavList($h1Item);
+                        }
+                        $h2ListEl.append($newNav);
+                    }
                 });
             },
 
@@ -131,7 +142,7 @@
 
             var $topContext = this.helpers.createChildNavList(opts.$nav);
             var $headings = this.helpers.getHeadings(opts.$scope);
-            this.helpers.populateNav($topContext, 0, $headings);
+            this.helpers.populateNav($topContext, $headings);
         }
     };
 
