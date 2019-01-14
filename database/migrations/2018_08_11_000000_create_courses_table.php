@@ -30,6 +30,12 @@ class CreateCoursesTable extends Migration
             $table->timestamps();
             $table->softDeletes();
         });
+        Schema::create('course_enroll_records', function (Blueprint $table) {
+            $table->increments('id');
+            $table->integer('course_id');
+            $table->integer('user_id');
+            $table->boolean('type_is_admin');
+        });
     }
 
     /**
@@ -40,5 +46,6 @@ class CreateCoursesTable extends Migration
     public function down()
     {
         Schema::dropIfExists('courses');
+        Schema::dropIfExists('course_enroll_records');
     }
 }

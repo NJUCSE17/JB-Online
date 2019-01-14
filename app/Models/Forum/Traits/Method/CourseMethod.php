@@ -3,7 +3,7 @@
 namespace App\Models\Forum\Traits\Method;
 
 use App\Models\Auth\User;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 trait CourseMethod {
 
@@ -15,8 +15,16 @@ trait CourseMethod {
     public function addStudent(User $user)
     {
         /* remove admin and add normal student */
-        if ($this->dislikeBy($user)) $this->undislikeBy($user);
-        if (!$this->isLikedBy($user)) $this->likeBy($user);
+        DB::table('course_enroll_records')
+            ->where('course_id', $this->id)
+            ->where('user_id', $user->id)
+            ->where('type_is_admin', true)
+            ->delete();
+        DB::table('course_enroll_records')->insert([
+            'course_id' => $this->id,
+            'user_id'   => $user->id,
+            'type_is_admin' => false,
+        ]);
     }
 
     /**
@@ -26,7 +34,11 @@ trait CourseMethod {
      */
     public function deleteStudent(User $user)
     {
-        if ($this->isLikedBy($user)) $this->unlikeBy($user);
+        DB::table('course_enroll_records')
+            ->where('course_id', $this->id)
+            ->where('user_id', $user->id)
+            ->where('type_is_admin', false)
+            ->delete();
     }
 
     /**
@@ -36,9 +48,17 @@ trait CourseMethod {
      */
     public function addAdmin(User $user)
     {
-        /* remove admin and normal student */
-        if ($this->likeBy($user)) $this->unlikeBy($user);
-        if (!$this->isDislikedBy($user)) $this->dislikeBy($user);
+        /* remove normal student and add admin  */
+        DB::table('course_enroll_records')
+            ->where('course_id', $this->id)
+            ->where('user_id', $user->id)
+            ->where('type_is_admin', false)
+            ->delete();
+        DB::table('course_enroll_records')->insert([
+            'course_id' => $this->id,
+            'user_id'   => $user->id,
+            'type_is_admin' => true,
+        ]);
     }
 
     /**
@@ -48,6 +68,10 @@ trait CourseMethod {
      */
     public function deleteAdmin(User $user)
     {
-        if ($this->isDislikedBy($user)) $this->undislikeBy($user);
+        DB::table('course_enroll_records')
+            ->where('course_id', $this->id)
+            ->where('user_id', $user->id)
+            ->where('type_is_admin', true)
+            ->delete();
     }
 }

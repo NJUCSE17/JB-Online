@@ -4,6 +4,8 @@ namespace App\Models\Forum\Traits\Attribute;
 
 use App\Models\Auth\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use phpDocumentor\Reflection\Types\Integer;
 
 /**
  * Trait CourseAttribute.
@@ -11,44 +13,47 @@ use Illuminate\Support\Facades\Auth;
 trait CourseAttribute
 {
     /**
-     * Check whether a user is a student of the course.
+     * Check whether a user is a student/admin of the course.
+     * 0 for no-enrollment, 1 for student, 2 for admin
      *
      * @param User $user
-     * @return bool
+     * @return int
      */
-    public function hasStudent(User $user) : bool
+    public function checkEnrollment(User $user = null) : int
     {
-        return $this->isLikedBy($user);
-    }
-
-    /**
-     * Check whether a user is an admin of the course.
-     *
-     * @param User $user
-     * @return bool
-     */
-    public function hasAdmin(User $user) : bool
-    {
-        return $this->isDislikedBy($user);
+        if (!$user) $user = Auth::user();
+        $record = DB::table('course_enroll_records')
+            ->where('course_id', $this->id)
+            ->where('user_id', $user->id)
+            ->first();
+        if (!$record) return 0;
+        else {
+            return $record->type_is_admin ? 2 : 1;
+        }
     }
 
     public function getCourseEnrollButtonAttribute(User $user = null) : string
     {
         if (!$user) $user = Auth::user();
-        if ($this->hasAdmin($user)) {
-            return "<a class='btn btn-outline-dark text-center my-1 disabled'"
-                . "style='width: 100%; line-height: 30px'><i class='fas fa-star mr-2'></i>"
-                . __('buttons.frontend.forum.course.admin') . "</a>";
-        } else if ($this->hasStudent($user)) {
-            return "<a class='btn enrollBtn btn-outline-danger text-danger text-center my-1' "
-                . "style='width: 100%; line-height: 30px' id='enrollBtn-" . $this->id . "' data-api='"
-                . route('frontend.forum.course.delete.user.myself', [$this->id]) . "' data-cid='" . $this->id
-                . "'><i class='fas fa-sign-out-alt mr-2'></i>" . __('buttons.frontend.forum.course.quit') . "</a>";
-        } else {
+        $enrollment = $this->checkEnrollment($user);
+        if (!$enrollment) {
             return "<a class='btn enrollBtn btn-outline-success text-success text-center my-1' "
                 . "style='width: 100%; line-height: 30px' id='enrollBtn-" . $this->id . "' data-api='"
                 . route('frontend.forum.course.add.student.myself', [$this->id]) . "' data-cid='" . $this->id
                 . "'><i class='fas fa-star mr-2'></i>" . __('buttons.frontend.forum.course.enroll') . "</a>";
+        } else {
+            if ($enrollment == 1) {
+                /* student */
+                return "<a class='btn enrollBtn btn-outline-danger text-danger text-center my-1' "
+                    . "style='width: 100%; line-height: 30px' id='enrollBtn-" . $this->id . "' data-api='"
+                    . route('frontend.forum.course.delete.user.myself', [$this->id]) . "' data-cid='" . $this->id
+                    . "'><i class='fas fa-sign-out-alt mr-2'></i>" . __('buttons.frontend.forum.course.quit') . "</a>";
+            } else {
+                /* admin */
+                return "<a class='btn btn-outline-dark text-center my-1 disabled'"
+                    . "style='width: 100%; line-height: 30px'><i class='fas fa-star mr-2'></i>"
+                    . __('buttons.frontend.forum.course.admin') . "</a>";
+            }
         }
     }
 

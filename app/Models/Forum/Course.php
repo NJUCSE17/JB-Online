@@ -3,10 +3,7 @@
 namespace App\Models\Forum;
 
 use App\Models\Traits\Uuid;
-use Cog\Laravel\Love\Likeable\Models\Traits\Likeable;
-use Cog\Contracts\Love\Likeable\Models\Likeable as LikeableContract;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Models\Forum\Traits\Attribute\CourseAttribute;
 use App\Models\Forum\Traits\Relationship\CourseRelationship;
@@ -15,11 +12,9 @@ use App\Models\Forum\Traits\Method\CourseMethod;
 /**
  * Class Course.
  */
-class Course extends Model implements LikeableContract
+class Course extends Model
 {
     use Uuid,
-        Likeable,
-        Notifiable,
         SoftDeletes,
         CourseAttribute,
         CourseRelationship,
