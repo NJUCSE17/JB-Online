@@ -33,8 +33,8 @@ Route::group(['namespace' => 'API'], function () {
             Route::group(['prefix' => 'course/{course}'], function () {
                 Route::post('check/student/{user?}', 'CourseController@checkStudent')->name('api.forum.course.check.student');
                 Route::post('check/admin/{user?}', 'CourseController@checkAdmin')->name('api.forum.course.check.admin');
-                Route::post('add/student', 'CourseController@addStudent')->name('api.forum.course.add.student');
-                Route::post('delete/user', 'CourseController@deleteUser')->name('api.forum.course.delete.user');
+                Route::post('add/student', 'CourseController@addStudent')->name('api.forum.course.add.student.myself');
+                Route::post('delete/user', 'CourseController@deleteUser')->name('api.forum.course.delete.user.myself');
                 Route::group(['middleware' => 'admin'], function () {
                     // Only admin can add admin, and control other users.
                     Route::post('add/student/{user?}', 'CourseController@addStudent')->name('api.forum.course.add.student');

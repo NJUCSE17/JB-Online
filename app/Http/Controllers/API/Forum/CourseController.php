@@ -62,6 +62,7 @@ class CourseController extends Controller
         $course->addStudent($user);
         return response()->json([
             'message' => 'Successfully added ' . $user->name . ' as a student of ' . $course->name,
+            'button_html' => $course->getCourseEnrollButtonAttribute($user),
         ], 200);
     }
 
@@ -85,6 +86,7 @@ class CourseController extends Controller
         $course->addAdmin($user);
         return response()->json([
             'message' => 'Successfully added ' . $user->name . ' as an admin of ' . $course->name,
+            'button_html' => $course->getCourseEnrollButtonAttribute($user),
         ], 200);
     }
 
@@ -109,6 +111,7 @@ class CourseController extends Controller
         $course->deleteAdmin($user);
         return response()->json([
             'message' => 'Successfully deleted ' . $user->name . ' from course ' . $course->name,
+            'button_html' => $course->getCourseEnrollButtonAttribute($user),
         ], 200);
     }
 }
