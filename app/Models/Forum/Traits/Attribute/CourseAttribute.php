@@ -3,6 +3,7 @@
 namespace App\Models\Forum\Traits\Attribute;
 
 use App\Models\Auth\User;
+use Illuminate\Support\Facades\Auth;
 
 /**
  * Trait CourseAttribute.
@@ -29,6 +30,26 @@ trait CourseAttribute
     public function hasAdmin(User $user) : bool
     {
         return $this->isDislikedBy($user);
+    }
+
+    public function getCourseEnrollButtonAttribute(User $user = null) : string
+    {
+        if (!$user) $user = Auth::user();
+        if ($this->hasAdmin($user)) {
+            return "<a class='btn btn-outline-dark text-center my-1 disabled'"
+                . "style='width: 100%; line-height: 30px'><i class='fas fa-star mr-2'></i>"
+                . __('buttons.frontend.forum.course.admin') . "</a>";
+        } else if ($this->hasStudent($user)) {
+            return "<a class='btn enrollBtn btn-outline-danger text-danger text-center my-1' "
+                . "style='width: 100%; line-height: 30px' id='enrollBtn-" . $this->id . "' data-api='"
+                . route('frontend.forum.course.delete.user.myself', [$this->id]) . "' data-cid='" . $this->id
+                . "'><i class='fas fa-sign-out-alt mr-2'></i>" . __('buttons.frontend.forum.course.quit') . "</a>";
+        } else {
+            return "<a class='btn enrollBtn btn-outline-success text-success text-center my-1' "
+                . "style='width: 100%; line-height: 30px' id='enrollBtn-" . $this->id . "' data-api='"
+                . route('frontend.forum.course.add.student.myself', [$this->id]) . "' data-cid='" . $this->id
+                . "'><i class='fas fa-star mr-2'></i>" . __('buttons.frontend.forum.course.enroll') . "</a>";
+        }
     }
 
     /**

@@ -60,4 +60,14 @@ return [
         'save' => '保存',
         'view' => '康康',
     ],
+
+    'frontend' => [
+        'forum' => [
+            'course' => [
+                'enroll' => '加入',
+                'quit'   => '退出',
+                'admin'  => '管理员',
+            ]
+        ]
+    ],
 ];
