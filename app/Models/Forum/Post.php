@@ -6,7 +6,6 @@ use App\Models\Traits\Uuid;
 use Cog\Laravel\Love\Likeable\Models\Traits\Likeable;
 use Cog\Contracts\Love\Likeable\Models\Likeable as LikeableContract;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Models\Forum\Traits\Attribute\PostAttribute;
 use App\Models\Forum\Traits\Relationship\PostRelationship;
@@ -18,7 +17,6 @@ class Post extends Model implements LikeableContract
 {
     use Uuid,
         Likeable,
-        Notifiable,
         SoftDeletes,
         PostAttribute,
         PostRelationship;
