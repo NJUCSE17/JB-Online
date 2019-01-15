@@ -77,10 +77,7 @@ class AssignmentRepository extends BaseRepository
         return $this->model
             ->where('due_time', '>', date("Y-m-d H:i:s"))
             ->where('due_time', '<=', $targetDatetime)
-            ->where(function ($query) use ($userID) {
-                $query->where('issuer', 0)
-                    ->orWhere('issuer', $userID);
-            })
+            ->subscribedByUser($userID)
             ->orderBy('due_time')
             ->get();
     }
