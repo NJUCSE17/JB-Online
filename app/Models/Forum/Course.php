@@ -2,12 +2,13 @@
 
 namespace App\Models\Forum;
 
+use App\Models\Forum\Traits\Scope\CourseScope;
 use App\Models\Traits\Uuid;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Models\Forum\Traits\Attribute\CourseAttribute;
 use App\Models\Forum\Traits\Relationship\CourseRelationship;
+use App\Models\Forum\Traits\Method\CourseMethod;
 
 /**
  * Class Course.
@@ -15,10 +16,11 @@ use App\Models\Forum\Traits\Relationship\CourseRelationship;
 class Course extends Model
 {
     use Uuid,
-        Notifiable,
         SoftDeletes,
         CourseAttribute,
-        CourseRelationship;
+        CourseRelationship,
+        CourseMethod,
+        CourseScope;
 
     /**
      * The attributes that are mass assignable.

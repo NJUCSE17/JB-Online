@@ -37,7 +37,7 @@ trait ProblemAttribute
     public function getContentDisplayAttribute()
     {
         if ($this->permalink != null) {
-            return "<a href=\"" . $this->permalink . "\">" . $this->content . "</a>";
+            return "<a href='" . $this->permalink . "'>" . $this->content . "</a>";
         } else {
             return $this->content;
         }
@@ -76,15 +76,15 @@ trait ProblemAttribute
      */
     public function getVoteButtonsAttribute()
     {
-        return "<a id=\"vote_down_" . $this->id . "\" class=\"voteBtn text-" . ($this->isDislikedBy() ? 'danger' : 'dark')
-            . "\" href=\"#\" data-pid=\"" . $this->id . "\" data-api=\"" . route('frontend.forum.problem.votedown', [$this->source->source, $this->source, $this])
-            . "\"><i class='far fa-thumbs-down mr-1'></i></a>"
+        return "<a id='vote_down_" . $this->id . "' class='voteBtn text-" . ($this->isDislikedBy() ? 'danger' : 'dark')
+            . "' href='#' data-pid='problem-" . $this->id . "' data-api='" . route('frontend.forum.problem.votedown', [$this->source->source, $this->source, $this])
+            . "'><i class='far fa-thumbs-down mr-1'></i></a>"
 
-            . "<span id=\"vote_count_label_" . $this->id . "\">" . $this->voteCountLabel . "</span>"
+            . "<span id='vote_count_label_" . $this->id . "'>" . $this->voteCountLabel . "</span>"
 
-            . "<a id=\"vote_up_" . $this->id . "\" class=\"voteBtn text-" . ($this->isLikedBy() ? 'success' : 'dark')
-            . "\" href=\"#\" data-pid=\"" . $this->id . "\" data-api=\"" . route('frontend.forum.problem.voteup', [$this->source->source, $this->source, $this])
-            . "\"><i class='far fa-thumbs-up ml-1'></i></a>";
+            . "<a id='vote_up_" . $this->id . "' class='voteBtn text-" . ($this->isLikedBy() ? 'success' : 'dark')
+            . "' href='#' data-pid='problem-" . $this->id . "' data-api='" . route('frontend.forum.problem.voteup', [$this->source->source, $this->source, $this])
+            . "'><i class='far fa-thumbs-up ml-1'></i></a>";
     }
 
     /**

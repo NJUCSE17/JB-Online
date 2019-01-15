@@ -22,21 +22,15 @@
         <div class="card-body">
             @if ($courses->count())
                 @foreach($courses as $course)
-                    <a class="btn btn-outline-{{ $course->color_label }} text-justify my-1"
-                       style="width: 100%; line-height: 30px" href="{{ $course->course_link }}">
-                        {{ __('strings.frontend.home.semester.left') }}
-                        {{ $course->semester }}
-                        {{ __('strings.frontend.home.semester.right') }} &nbsp;
-                        {{ $course->name }}
-                        <div class="float-right">
-                            <span>
-                                <i class="fas fa-folder"></i>
-                                {{ $course->assignmentsCount() }}
-                                <i class="fas fa-comments"></i>
-                                {{ $course->postsCount() }}
-                            </span>
+                    <div class="row">
+                        <div class="col col-12 col-md-9">
+                            @include('frontend.includes.course.button', [$course])
                         </div>
-                    </a>
+                        <div id="enrollBtnContainer-{{ $course->id }}"
+                             class="col col-12 col-md-3 d-none d-md-block enrollBtnContainer">
+                            @include('frontend.includes.course.enroll', [$course])
+                        </div>
+                    </div>
                 @endforeach
                 <div class="row mt-3 mb-0">
                     <div class="col">
@@ -62,3 +56,32 @@
         </div>
     </div>
 @endsection
+
+@if($courses->count())
+    @push('after-scripts')
+        <script type="text/javascript" id="enrollBtnScript">
+            $('.enrollBtnContainer').on('click', '.enrollBtn', function (e) {
+                e.preventDefault();
+                let api = this.dataset.api;
+                let cid = this.dataset.cid;
+                axios.post(api, {})
+                    .then(function (response) {
+                        $('#enrollBtnContainer-' + cid).html(response.data.button_html);
+                    })
+                    .catch(function (error) {
+                        $.alert({
+                            title: 'Fail',
+                            content: "Failed to proceed. Error: " + error,
+                            type: 'red',
+                            typeAnimated: true,
+                            backgroundDismiss: 'close',
+                            buttons: {
+                                close: function () {
+                                }
+                            }
+                        });
+                    });
+            });
+        </script>
+    @endpush
+@endif

@@ -21,6 +21,7 @@ return [
         'custom'  => '自定义',
         'actions' => '操作',
         'active'  => '激活',
+        'admin'   => '管理员',
         'buttons' => [
             'save'   => '保存',
             'update' => '更新',
@@ -32,6 +33,7 @@ return [
         'show'              => '显示',
         'toggle_navigation' => '切换导航',
         'course'            => '课程',
+        'enroll'            => '订阅',
         'assignment'        => '作业',
         'problem'           => '题目',
         'post'              => '帖子',
@@ -45,8 +47,8 @@ return [
         'hour'              => '小时',
         'minute'            => '分钟',
         'remain'            => '剩余',
-        'personal_data'     => '（个人）',
-        'deleted_data'      => '（已删除）',
+        'personal_data'     => '个人',
+        'deleted_data'      => '已删除',
     ],
 
     'backend' => [

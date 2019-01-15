@@ -21,6 +21,7 @@ return [
         'custom'  => 'Custom',
         'actions' => 'Actions',
         'active'  => 'Active',
+        'admin'   => 'Admin',
         'buttons' => [
             'save'   => 'Save',
             'update' => 'Update',
@@ -32,6 +33,7 @@ return [
         'show'              => 'Show',
         'toggle_navigation' => 'Toggle Navigation',
         'course'            => 'Course',
+        'enroll'            => 'Enrollment',
         'assignment'        => 'Assignment',
         'problem'           => 'Problem',
         'post'              => 'Post',
@@ -45,8 +47,8 @@ return [
         'hour'              => 'Hour',
         'minute'            => 'Min',
         'remain'            => 'Remaining',
-        'personal_data'     => '(personal)',
-        'deleted_data'      => '(deleted)',
+        'personal_data'     => 'Personal',
+        'deleted_data'      => 'Deleted',
     ],
 
     'backend' => [

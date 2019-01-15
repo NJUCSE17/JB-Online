@@ -64,14 +64,11 @@ class AssignmentController extends Controller
     public function finish(Course $course, Assignment $assignment)
     {
         $assignment->finish();
-        return json_encode([
-            'status' => 1,
-            'ddl_badge_api' => $assignment->reset_link,
-            'ddl_badge_class' => 'btn btn-outline-success resetBtn',
-            'ddl_badge_content' => $assignment->ddl_badge_content,
-            'ddl_badge_finished' => '1',
-            'prompt' => __('strings.frontend.assignments.finish', ['name' => $assignment->name])
-        ]);
+        return response()->json([
+            'success' => true,
+            'button_html' => $assignment->getDDLButtonAttribute(),
+            'ddl_html' => $assignment->getDDLContentAttribute(),
+        ], 200);
     }
 
     /**
@@ -82,13 +79,10 @@ class AssignmentController extends Controller
     public function reset(Course $course, Assignment $assignment)
     {
         $assignment->reset();
-        return json_encode([
-            'status' => 1,
-            'ddl_badge_api' => $assignment->finish_link,
-            'ddl_badge_class' => "btn btn-outline-" . $assignment->ddl_color . " finishBtn",
-            'ddl_badge_content' => $assignment->ddl_badge_content,
-            'ddl_badge_finished' => '0',
-            'prompt' => __('strings.frontend.assignments.reset', ['name' => $assignment->name])
-        ]);
+        return response()->json([
+            'success' => true,
+            'button_html' => $assignment->getDDLButtonAttribute(),
+            'ddl_html' => $assignment->getDDLContentAttribute(),
+        ], 200);
     }
 }
