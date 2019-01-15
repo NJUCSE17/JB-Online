@@ -29,7 +29,8 @@
                     subDomain: "x_day",
                     itemName: "assignment",
                     start: date,
-                    data: "{{ route("api.heatmap") }}" + "?st=\{\{t:start\}\}&ed=\{\{t:end\}\}",
+                    data: "{{ route("api.heatmap") }}"
+                        + "?userID={{ Auth::user()->id }}&st=\{\{t:start\}\}&ed=\{\{t:end\}\}",
                     cellSize: 15,
                     cellPadding: 5,
                     domainGutter: 20,

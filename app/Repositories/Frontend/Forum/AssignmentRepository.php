@@ -74,12 +74,12 @@ class AssignmentRepository extends BaseRepository
     /**
      * @return Assignment array
      */
-    public function getAssignmentsByTimestamps(int $st, int $ed)
+    public function getAssignmentsByTimestamps(int $userID, int $st, int $ed)
     {
         return $this->model
             ->where('due_time', '>=', date("Y-m-d H:i:s", $st))
             ->where('due_time', '<=', date("Y-m-d H:i:s", $ed))
-            ->subscribedByUser(Auth::user()->id)
+            ->subscribedByUser($userID)
             ->get();
     }
 
