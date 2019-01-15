@@ -14,12 +14,12 @@
     @endif
     <span class="sm-hidden">
             <span class="mx-2">|</span>
-            <a href="https://github.com/doowzs/JB-Online" class="text-dark">
+            <a target="_blank" href="https://github.com/NJUCSE17/JB-Online" class="text-dark">
                 <i class="far fa-file-code mr-2"></i>
                 RTFSC
             </a>
             <span class="mx-2">|</span>
-            <a href="https://voice.njujb.com" class="text-dark mr-2">
+            <a target="_blank" href="https://voice.njujb.com" class="text-dark mr-2">
                 <i class="far fa-comment-alt mr-2"></i>
                 JB Voice
             </a>
