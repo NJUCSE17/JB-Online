@@ -73,7 +73,10 @@ class AssignmentRepository extends BaseRepository
     {
         $assignments = $this->model
             ->where('due_time', '>', date("Y-m-d H:i:s"))
-            ->where('issuer', '=', 0)
+            ->where(function ($query) {
+                $query->where('issuer', 0)
+                    ->orWhere('issuer', \Auth::user()->id);
+            })
             ->orderBy('due_time')
             ->get(['id', 'course_id', 'name', 'content', 'due_time', 'issuer']);
         foreach ($assignments as $assignment) {
