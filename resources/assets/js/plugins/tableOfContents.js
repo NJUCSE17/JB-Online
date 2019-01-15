@@ -47,7 +47,7 @@
             },
 
             createNavList: function() {
-                return $('<ul class="nav nav-toc"></ul>');
+                return $('<ul class="nav nav-toc flex-column"></ul>');
             },
 
             createChildNavList: function($parent) {
