@@ -9,6 +9,7 @@ use App\Events\Backend\Forum\Assignment\AssignmentUpdated;
 use App\Exceptions\GeneralException;
 use App\Models\Forum\Assignment;
 use App\Repositories\BaseRepository;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 /**
@@ -29,8 +30,7 @@ class AssignmentRepository extends BaseRepository
      */
     public function getAllCount(): int
     {
-        return $this->model
-            ->count();
+        return $this->model->count();
     }
 
     /**
@@ -48,22 +48,11 @@ class AssignmentRepository extends BaseRepository
      */
     public function getOngoingAssignments()
     {
-        if (\Auth::user() != null) {
-            return $this->model
-                ->where('due_time', '>', date("Y-m-d H:i:s"))
-                ->where(function ($query) {
-                    $query->where('issuer', 0)
-                        ->orWhere('issuer', \Auth::user()->id);
-                })
-                ->orderBy('due_time')
-                ->get();
-        } else {
-            return $this->model
-                ->where('due_time', '>', date("Y-m-d H:i:s"))
-                ->where('issuer', '=', 0)
-                ->orderBy('due_time')
-                ->get();
-        }
+        return $this->model
+            ->where('due_time', '>', date("Y-m-d H:i:s"))
+            ->subscribedByUser(Auth::user()->id)
+            ->orderBy('due_time')
+            ->get(['assignments.*']);
     }
 
     /**
@@ -73,7 +62,7 @@ class AssignmentRepository extends BaseRepository
     {
         $assignments = $this->model
             ->where('due_time', '>', date("Y-m-d H:i:s"))
-            ->where('issuer', '=', 0)
+            ->subscribedByUser(Auth::user()->id)
             ->orderBy('due_time')
             ->get(['id', 'course_id', 'name', 'content', 'due_time', 'issuer']);
         foreach ($assignments as $assignment) {
@@ -90,7 +79,7 @@ class AssignmentRepository extends BaseRepository
         return $this->model
             ->where('due_time', '>=', date("Y-m-d H:i:s", $st))
             ->where('due_time', '<=', date("Y-m-d H:i:s", $ed))
-            ->where('issuer', '=', 0)
+            ->subscribedByUser(Auth::user()->id)
             ->get();
     }
 

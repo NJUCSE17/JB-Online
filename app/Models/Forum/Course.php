@@ -2,6 +2,7 @@
 
 namespace App\Models\Forum;
 
+use App\Models\Forum\Traits\Scope\CourseScope;
 use App\Models\Traits\Uuid;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -18,7 +19,8 @@ class Course extends Model
         SoftDeletes,
         CourseAttribute,
         CourseRelationship,
-        CourseMethod;
+        CourseMethod,
+        CourseScope;
 
     /**
      * The attributes that are mass assignable.
