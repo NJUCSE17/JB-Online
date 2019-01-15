@@ -20,6 +20,6 @@ trait AssignmentScope
                                     ->on('assignments.course_id', '=', 'course_enroll_records.course_id');
                             });
                     });
-            });
+            })->distinct('assignments.id');
     }
 }

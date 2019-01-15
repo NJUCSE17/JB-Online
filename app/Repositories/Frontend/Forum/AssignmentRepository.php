@@ -80,7 +80,7 @@ class AssignmentRepository extends BaseRepository
             ->where('due_time', '>=', date("Y-m-d H:i:s", $st))
             ->where('due_time', '<=', date("Y-m-d H:i:s", $ed))
             ->subscribedByUser($userID)
-            ->get();
+            ->get(['assignments.*']);
     }
 
     /**

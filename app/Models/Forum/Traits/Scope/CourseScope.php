@@ -12,6 +12,6 @@ trait CourseScope
         return $query->join('course_enroll_records', function ($join) use ($userID) {
             $join->where('course_enroll_records.user_id', $userID)
                 ->on('courses.id', '=', 'course_enroll_records.course_id');
-        });
+        })->distinct('courses.id');
     }
 }
