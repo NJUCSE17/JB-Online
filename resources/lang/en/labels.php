@@ -25,6 +25,7 @@ return [
             'save'   => 'Save',
             'update' => 'Update',
         ],
+        'contents'          => 'Contents',
         'hide'              => 'Hide',
         'inactive'          => 'Inactive',
         'none'              => 'None',

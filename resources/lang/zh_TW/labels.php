@@ -25,6 +25,7 @@ return [
             'save'   => '保存',
             'update' => '更新',
         ],
+        'contents'          => '目录',
         'hide'              => '隐藏',
         'inactive'          => '禁用',
         'none'              => '空',
