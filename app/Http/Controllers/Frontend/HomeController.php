@@ -10,6 +10,7 @@ use App\Repositories\Frontend\Forum\AssignmentRepository;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Auth;
+use Mews\Purifier\Facades\Purifier;
 
 /**
  * Class HomeController.
@@ -110,7 +111,7 @@ class HomeController extends Controller
                     $feeds[] = array(
                         'permalink'   => $item->get_permalink(),
                         'title'       => $item->get_title(),
-                        'content'     => $item->get_content(),
+                        'content'     => Purifier::clean($item->get_content()),
                         'author'      => $user->full_name,
                         'avatar'      => $user->picture,
                         'date'        => $date,
