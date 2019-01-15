@@ -4,7 +4,9 @@
              style="height: 45px !important;">
         <span> {{$post->author->name}} </span>
         |
-        <span> {!!  $post->vote_buttons !!} </span>
+        <span class="voteBtnContainer" id="voteBtnContainer-post-{{ $post->id }}">
+            {!!  $post->vote_buttons !!}
+        </span>
         |
         <small class="text-muted">#{{ $post->id }}</small>
         <span class="float-right" style="line-height: 45px">

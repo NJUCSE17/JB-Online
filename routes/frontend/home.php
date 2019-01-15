@@ -64,8 +64,8 @@ Route::group(['middleware' => ['auth', 'password_expires']], function () {
                     });
 
                     Route::group(['prefix' => 'post/{post}'], function() {
-                        Route::get('voteup', 'PostController@voteUp')->name('post.voteup');
-                        Route::get('votedown', 'PostController@voteDown')->name('post.votedown');
+                        Route::post('voteup', 'PostController@voteUp')->name('post.voteup');
+                        Route::post('votedown', 'PostController@voteDown')->name('post.votedown');
                     });
                 });
             });

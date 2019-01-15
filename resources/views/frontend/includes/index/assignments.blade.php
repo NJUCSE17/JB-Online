@@ -61,14 +61,13 @@
             let aid = this.dataset.aid;
             axios.post(api, {})
                 .then(function (response) {
-                    console.log(response);
                     $('#ddlBtnContainer-' + aid).html(response.data.button_html);
                     $('#ddlContentContainer-' + aid).html(response.data.ddl_html);
                 })
                 .catch(function (error) {
                     $.alert({
                         title: 'Fail',
-                        content: "Failed to proceed.\nError: " + error,
+                        content: "Failed to proceed. Error: " + error,
                         type: 'red',
                         typeAnimated: true,
                         backgroundDismiss: 'close',

@@ -96,7 +96,7 @@ trait PostAttribute
     public function getVoteButtonsAttribute()
     {
         return "<a id=\"vote_down_post_" . $this->id . "\" class=\"voteBtn text-" . ($this->isDislikedBy() ? 'danger' : 'dark')
-            . "\" href=\"#\" data-pid=\"post_" . $this->id . "\" data-api=\"" . route('frontend.forum.post.votedown', [$this->source->source, $this->source, $this])
+            . "\" href=\"#\" data-pid=\"post-" . $this->id . "\" data-api=\"" . route('frontend.forum.post.votedown', [$this->source->source, $this->source, $this])
             . "\"><i class='far fa-thumbs-down mr-1'></i></a>"
 
             . "<span id=\"vote_count_label_post_" . $this->id . "\">" . $this->voteCountLabel . "</span>"
