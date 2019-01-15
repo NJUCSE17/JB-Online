@@ -21,6 +21,7 @@ return [
         'custom'  => '自定义',
         'actions' => '操作',
         'active'  => '激活',
+        'admin'   => '管理员',
         'buttons' => [
             'save'   => '保存',
             'update' => '更新',

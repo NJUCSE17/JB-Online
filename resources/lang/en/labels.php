@@ -21,6 +21,7 @@ return [
         'custom'  => 'Custom',
         'actions' => 'Actions',
         'active'  => 'Active',
+        'admin'   => 'Admin',
         'buttons' => [
             'save'   => 'Save',
             'update' => 'Update',
