@@ -7,7 +7,7 @@
     </ul>
     <ul class="navbar-nav flex-row py-2">
         <li class="nav-item pr-3">
-            <a href="{{ route('frontend.index') }}" class="nav-link">
+            <a href="{{ route('frontend.home') }}" class="nav-link">
                 <i class="fas fa-home mr-2"></i>
                 <span>{{ __('navs.general.home') }}</span>
             </a>

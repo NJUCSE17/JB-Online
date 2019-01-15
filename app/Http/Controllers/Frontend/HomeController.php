@@ -9,6 +9,7 @@ use App\Repositories\Frontend\Forum\NoticeRepository;
 use App\Repositories\Frontend\Forum\AssignmentRepository;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Pagination\Paginator;
+use Illuminate\Support\Facades\Auth;
 
 /**
  * Class HomeController.
@@ -47,6 +48,15 @@ class HomeController extends Controller
      */
     public function index()
     {
+        if (Auth::hasUser()) return redirect()->route('frontend.home');
+        return redirect()->route('frontend.auth.login');
+    }
+
+    /**
+     * @return \Illuminate\View\View
+     */
+    public function home()
+    {
         $feeds = array();
         if(app_blogonhome()) {
             $originFeed = \Feeds::make(app_blogrss(), 0, false);
@@ -65,7 +75,7 @@ class HomeController extends Controller
             }
         }
 
-        return view('frontend.index')
+        return view('frontend.home')
             ->withNotice($this->noticeRepository->getNotice())
             ->withOngoingCourses($this->courseRepository->getOngoingCourses())
             ->withAssignments($this->assignmentRepository->getOngoingAssignments())
