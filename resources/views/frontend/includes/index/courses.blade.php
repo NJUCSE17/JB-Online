@@ -1,4 +1,8 @@
 <div class="card my-3">
+    <h5 class="card-header text-center py-2">
+        <i class="fas fa-book-open mr-2"></i>
+        {{ __('labels.frontend.home.ongoing') }}
+    </h5>
     <div class="card-body p-3">
         @if ($ongoingCourses->count())
             @foreach($ongoingCourses as $course)
@@ -37,7 +41,7 @@
             </div>
         </div>
     </div>
-    <a class="card-footer btn text-center"
+    <a class="card-footer btn text-center py-2"
        href="{{ route('frontend.forum.course') }}">
         {{ __('labels.frontend.home.course') }} <i class="fas fa-angle-right"></i>
     </a>

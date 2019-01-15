@@ -1,4 +1,8 @@
 <div class="card my-3">
+    <h5 class="card-header text-center py-2">
+        <i class="fas fa-broadcast-tower mr-2"></i>
+        {{ __('labels.frontend.home.notice') }}
+    </h5>
     <div class="card-body text-justify p-3" id="notice_content">
         @if($notice != null && $notice->content != null)
             {!! $notice->content !!}

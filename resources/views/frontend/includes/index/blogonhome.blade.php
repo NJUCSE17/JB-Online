@@ -1,5 +1,9 @@
 @if(app_blogonhome())
     <div class="card my-3">
+        <h5 class="card-header py-2 text-center">
+            <i class="fab fa-vuejs mr-2"></i>
+            {{ __('labels.frontend.home.class_blog') }}
+        </h5>
         @if ($feeds->count())
             <div class="card-body p-0">
                 <div class="list-group list-group-flush" id="assignments"
