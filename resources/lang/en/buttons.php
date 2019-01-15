@@ -63,6 +63,11 @@ return [
 
     'frontend' => [
         'forum' => [
+            'assignment' => [
+                'finished'   => 'Finished',
+                'unfinished' => 'Unfinished',
+            ],
+
             'course' => [
                 'enroll' => 'Enroll',
                 'quit'   => 'Quit',

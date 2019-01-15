@@ -59,7 +59,7 @@ class HomeController extends Controller
     {
         $feeds = array();
         if(app_blogonhome()) {
-            $originFeed = \Feeds::make(app_blogrss(), 0, false);
+            $originFeed = \Feeds::make([app_blogrss()], 5, false);
             $items = $originFeed->get_items();
             foreach ($items as $item) {
                 //$description = $item->get_description();

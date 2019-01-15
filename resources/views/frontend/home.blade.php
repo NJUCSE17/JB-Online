@@ -14,15 +14,20 @@
         </div>
     </div>
     <div class="row">
-        <div class="col col-lg-7 col-12" id="leftCol">
+        <div class="col col-xl-3 col-12 pr-2 d-none d-xl-block" id="leftCol">
+            @include('frontend.includes.index.heatmap')
+            @include('frontend.includes.index.blogonhome', [$feeds])
+        </div>
+        <div class="col col-xl-6 col-md-8 col-12 px-xl-2 pr-md-2" id="middleCol">
             @include('frontend.includes.index.assignments', [$assignments])
         </div>
 
-        <div class="col col-lg-5 col-12" id="rightCol">
-            @include('frontend.includes.index.heatmap')
+        <div class="col col-xl-3 col-md-4 col-12 pl-2" id="rightCol">
+            @if(Auth::user()->isAdmin())
+                @include('frontend.includes.index.admin')
+            @endif
             @include('frontend.includes.index.notice', [$notice])
             @include('frontend.includes.index.courses', [$ongoingCourses])
-            @include('frontend.includes.index.blogonhome')
         </div>
     </div>
 @endsection

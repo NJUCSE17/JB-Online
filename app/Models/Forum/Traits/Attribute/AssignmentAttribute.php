@@ -28,10 +28,19 @@ trait AssignmentAttribute
     /**
      * @return string
      */
+    public function getCourseNameAttribute()
+    {
+        $course = $this->source;
+        return ($course == null) ? __('labels.general.personal_data') : $course->name;
+    }
+
+    /**
+     * @return string
+     */
     public function getCourseNameLabelAttribute()
     {
         $course = $this->source;
-        $courseNameLabel = ($course == null) ? __('labels.general.personal_data') : $course->name_label;
+        $courseNameLabel = ($course == null) ? ("PA - " . __('labels.general.personal_data')) : $course->name_label;
         return $courseNameLabel;
     }
 
@@ -79,17 +88,16 @@ trait AssignmentAttribute
     /**
      * @return string
      */
-    public function getDDLBadgeContentAttribute()
+    public function getDDLContentAttribute()
     {
         $finishStatus = $this->finish_status;
         if ($finishStatus == null) {
-            return $this->due_time->isoFormat("Y-MM-DD (ddd) H:mm:ss") . "<br />"
+            return $this->due_time->isoFormat("Y-MM-DD (ddd) H:mm:ss") . ",&nbsp;"
                 . $this->due_time->diffForHumans(null, null, false, 2);
         } else {
-            return $this->due_time->isoFormat("Y-MM-DD (ddd) H:mm:ss") . "<br />"
+            return "<s>" . $this->due_time->isoFormat("Y-MM-DD (ddd) H:mm:ss") . ",&nbsp;"
                 . $this->due_time->diffForHumans(null, null, false, 2)
-                . "<hr class='my-1' /><i class='fas fa-check mr-1'></i>"
-                . __('strings.frontend.home.finished_at')
+                . "</s> &nbsp;" . __('strings.frontend.home.finished_at')
                 . $finishStatus->finished_at;
         }
     }
@@ -118,19 +126,21 @@ trait AssignmentAttribute
     /**
      * @return string
      */
-    public function getDDLBadgeAttribute()
+    public function getDDLButtonAttribute()
     {
         $finishStatus = $this->finish_status;
         if ($finishStatus == null) {
-            return "<a class=\"btn btn-outline-" . $this->ddl_color . " assignmentBtn"
-                . "\" id=\"assignment_ddl_" . $this->id . "\" data-aid=\"" . $this->id
-                . "\"" . " data-api=\"" . $this->finish_link
-                . "\" data-finished='0' href='#'>" . $this->ddl_badge_content . "</a>";
+            return "<a class=\"btn btn-sm btn-outline-" . $this->ddl_color . " ddlBtn"
+                . "\" id=\"assignment_ddl_" . $this->id . "\" data-aid=\""
+                . $this->id . "\"" . " data-api=\"" . $this->finish_link
+                . "\" href='#'><i class='fas fa-times mr-2'></i>"
+                . __('buttons.frontend.forum.assignment.unfinished') . "</a>";
         } else {
-            return "<a class=\"btn btn-outline-success assignmentBtn" . "\" id=\"assignment_ddl_" . $this->id
-                . "\" data-aid=\"" . $this->id . "\" data-ddl=\"" . $this->ddl_badge_content
-                . "\"" . " data-api=\"" . $this->reset_link
-                . "\" data-finished='1' href='#'>" . $this->ddl_badge_content . "</a>";
+            return "<a class=\"btn btn-sm btn-outline-success ddlBtn"
+                . "\" id=\"assignment_ddl_" . $this->id . "\" data-aid=\""
+                . $this->id . "\"" . " data-api=\"" . $this->reset_link
+                . "\" href='#'><i class='fas fa-check mr-2'></i>"
+                . __('buttons.frontend.forum.assignment.finished') . "</a>";
         }
     }
 

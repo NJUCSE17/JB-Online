@@ -46,8 +46,8 @@ return [
         'hour'              => '小时',
         'minute'            => '分钟',
         'remain'            => '剩余',
-        'personal_data'     => '（非诚勿扰）',
-        'deleted_data'      => '（数据删除）',
+        'personal_data'     => '非诚勿扰',
+        'deleted_data'      => '数据删除',
     ],
 
     'backend' => [

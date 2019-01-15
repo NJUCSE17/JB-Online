@@ -46,8 +46,8 @@ return [
         'hour'              => 'Hour',
         'minute'            => 'Min',
         'remain'            => 'Remaining',
-        'personal_data'     => '(personal)',
-        'deleted_data'      => '(deleted)',
+        'personal_data'     => 'Personal',
+        'deleted_data'      => 'Deleted',
     ],
 
     'backend' => [

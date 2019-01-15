@@ -1,28 +1,13 @@
 <div class="card my-3">
-    <h4 class="card-header">
-        <i class="fas fa-fire-alt mr-2"></i>
-        {{ __('labels.frontend.home.heatmap') }}
-    </h4>
-    <div class="card-body text-center" id="notice_content"
+    <div class="card-body text-center p-3" id="notice_content"
         style="overflow: hidden;">
-        <div id="cal-heatmap" class="ml-0 mr-3 text-center" style="width: 100%; overflow: hidden;"></div>
-        <div class="row mt-3">
-            <div class="col">
-                <button class="btn" id="heatmap-prev">
-                    <i class="fas fa-arrow-left"></i>
-                </button>
-            </div>
-            <div class="col">
-                <button class="btn" id="heatmap-next">
-                    <i class="fas fa-arrow-right"></i>
-                </button>
-            </div>
-        </div>
+        <div id="cal-heatmap" class="m-0 text-center" style="width: 100%; overflow: hidden;"></div>
+
         @push('after-scripts')
             <script type="text/javascript">
                 let cal = new CalHeatMap();
                 let date = new Date();
-                date.setMonth(date.getMonth() - 1);
+                //date.setMonth(date.getMonth() - 1);
 
                 cal.init({
                     domain: "month",

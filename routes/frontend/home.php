@@ -30,8 +30,8 @@ Route::group(['middleware' => ['auth', 'password_expires']], function () {
         Route::group(['prefix' => 'personal/{assignment}'], function () {
             Route::get('delete', 'PersonalController@delete')->name('personal.delete-permanently');
             Route::get('restore', 'PersonalController@restore')->name('personal.restore');
-            Route::get('finish', 'AssignmentController@finish')->name('personal.finish');
-            Route::get('reset', 'AssignmentController@reset')->name('personal.reset');
+            Route::post('finish', 'AssignmentController@finish')->middleware('throttle:60,1')->name('personal.finish');
+            Route::post('reset', 'AssignmentController@reset')->middleware('throttle:60,1')->name('personal.reset');
         });
 
         Route::group(['prefix' => '/{course}'], function () {
@@ -49,8 +49,8 @@ Route::group(['middleware' => ['auth', 'password_expires']], function () {
             });
 
             Route::group(['prefix' => 'assignment/{assignment}'], function () {
-                Route::get('finish', 'AssignmentController@finish')->name('assignment.finish');
-                Route::get('reset', 'AssignmentController@reset')->name('assignment.reset');
+                Route::post('finish', 'AssignmentController@finish')->middleware('throttle:60,1')->name('assignment.finish');
+                Route::post('reset', 'AssignmentController@reset')->middleware('throttle:60,1')->name('assignment.reset');
                 Route::get('/{sort}', 'AssignmentController@index')->name('assignment.view');
                 Route::resource('post', 'PostController');
 
