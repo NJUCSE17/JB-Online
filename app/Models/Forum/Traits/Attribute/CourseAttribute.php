@@ -193,7 +193,7 @@ trait CourseAttribute
         return '<a href="'.route('admin.forum.course.edit', $this)
             .'" data-toggle="tooltip" data-placement="top" title="'
             .__('buttons.general.crud.edit').' '.__('labels.general.course')
-            .'" class="btn btn-primary"><i class="far fa-edit"></i></a>';
+            .'" class="btn btn-success"><i class="far fa-edit"></i></a>';
     }
 
     /**
@@ -204,7 +204,18 @@ trait CourseAttribute
         return '<a href="'.route('admin.forum.assignment.specific', $this)
             .'" data-toggle="tooltip" data-placement="top" title="'
             .__('buttons.general.crud.edit').' '.__('labels.general.assignment')
-            .'" class="btn btn-warning"><i class="far fa-edit"></i></a>';
+            .'" class="btn btn-info"><i class="fas fa-pencil-ruler"></i></a>';
+    }
+
+    /**
+     * @return string
+     */
+    public function getEnrollButtonAttribute()
+    {
+        return '<a href="'.route('admin.forum.course.enroll.show', $this)
+            .'" data-toggle="tooltip" data-placement="top" title="'
+            .__('buttons.general.crud.edit').' '.__('labels.general.enroll')
+            .'" class="btn btn-primary"><i class="far fa-user"></i></a>';
     }
 
     /**
@@ -253,6 +264,7 @@ trait CourseAttribute
     	<div class="btn-group" role="group" aria-label="Course Actions">
 		  '.$this->edit_button.'
 		  '.$this->assignment_button.'
+		  '.$this->enroll_button.'
 		
 		  <div class="btn-group btn-group-sm" role="group">
 			<button id="CourseActions" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

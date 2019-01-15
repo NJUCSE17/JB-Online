@@ -31,6 +31,7 @@ return [
         'show'              => 'Show',
         'toggle_navigation' => 'Toggle Navigation',
         'course'            => 'Course',
+        'enroll'            => 'Enrollment',
         'assignment'        => 'Assignment',
         'problem'           => 'Problem',
         'post'              => 'Post',

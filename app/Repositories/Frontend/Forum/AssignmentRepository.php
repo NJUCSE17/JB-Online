@@ -50,7 +50,7 @@ class AssignmentRepository extends BaseRepository
     {
         return $this->model
             ->where('due_time', '>', date("Y-m-d H:i:s"))
-            ->subscribedByUser(Auth::user()->id)
+            ->subscribedByUser(Auth::id())
             ->orderBy('due_time')
             ->get(['assignments.*']);
     }
@@ -62,7 +62,7 @@ class AssignmentRepository extends BaseRepository
     {
         $assignments = $this->model
             ->where('due_time', '>', date("Y-m-d H:i:s"))
-            ->subscribedByUser(Auth::user()->id)
+            ->subscribedByUser(Auth::id())
             ->orderBy('due_time')
             ->get(['id', 'course_id', 'name', 'content', 'due_time', 'issuer']);
         foreach ($assignments as $assignment) {
@@ -167,7 +167,7 @@ class AssignmentRepository extends BaseRepository
                 'name' => $data['name'],
                 'content' => $data['content'],
                 'due_time' => $data['due_time'],
-                'issuer' => \Auth::user()->id,
+                'issuer' => Auth::id(),
             ]);
 
             if ($assignment) {

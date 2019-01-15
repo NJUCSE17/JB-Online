@@ -31,6 +31,7 @@ return [
         'show'              => '显示',
         'toggle_navigation' => '切换导航',
         'course'            => '课程',
+        'enroll'            => '订阅',
         'assignment'        => '作业',
         'problem'           => '题目',
         'post'              => '帖子',

@@ -107,8 +107,7 @@ class CourseController extends Controller
         }
         if (!$user) $user = $currentUser;
 
-        $course->deleteStudent($user);
-        $course->deleteAdmin($user);
+        $course->deleteUser($user);
         return response()->json([
             'message' => 'Successfully deleted ' . $user->name . ' from course ' . $course->name,
             'button_html' => $course->getCourseEnrollButtonAttribute($user),

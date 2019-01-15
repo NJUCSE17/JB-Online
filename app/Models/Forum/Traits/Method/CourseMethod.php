@@ -15,30 +15,12 @@ trait CourseMethod {
     public function addStudent(User $user)
     {
         /* remove admin and add normal student */
-        DB::table('course_enroll_records')
-            ->where('course_id', $this->id)
-            ->where('user_id', $user->id)
-            ->where('type_is_admin', true)
-            ->delete();
+        $this->deleteUser($user);
         DB::table('course_enroll_records')->insert([
             'course_id' => $this->id,
             'user_id'   => $user->id,
             'type_is_admin' => false,
         ]);
-    }
-
-    /**
-     * Delete a user from a course.
-     *
-     * @param User $user
-     */
-    public function deleteStudent(User $user)
-    {
-        DB::table('course_enroll_records')
-            ->where('course_id', $this->id)
-            ->where('user_id', $user->id)
-            ->where('type_is_admin', false)
-            ->delete();
     }
 
     /**
@@ -49,11 +31,7 @@ trait CourseMethod {
     public function addAdmin(User $user)
     {
         /* remove normal student and add admin  */
-        DB::table('course_enroll_records')
-            ->where('course_id', $this->id)
-            ->where('user_id', $user->id)
-            ->where('type_is_admin', false)
-            ->delete();
+        $this->deleteUser($user);
         DB::table('course_enroll_records')->insert([
             'course_id' => $this->id,
             'user_id'   => $user->id,
@@ -62,16 +40,15 @@ trait CourseMethod {
     }
 
     /**
-     * Delete an admin of a course.
+     * Delete a user from a course.
      *
      * @param User $user
      */
-    public function deleteAdmin(User $user)
+    public function deleteUser(User $user)
     {
         DB::table('course_enroll_records')
             ->where('course_id', $this->id)
             ->where('user_id', $user->id)
-            ->where('type_is_admin', true)
             ->delete();
     }
 }

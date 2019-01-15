@@ -37,7 +37,7 @@ class CourseRepository extends BaseRepository
         return $this->model
             ->where('start_time', '<=', date("Y-m-d H:i:s"))
             ->where('end_time', '>=', date("Y-m-d H:i:s"))
-            ->subscribedByUser(Auth::user()->id)
+            ->subscribedByUser(Auth::id())
             ->get(['courses.*']);
     }
 

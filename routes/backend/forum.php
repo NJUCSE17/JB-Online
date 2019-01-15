@@ -29,6 +29,8 @@ Route::group([
         * Specific course
         */
         Route::group(['prefix' => 'course/{course}'], function () {
+            Route::get('enroll', 'CourseController@showEnrollment')->name('course.enroll.show');
+            Route::post('enroll', 'CourseController@editEnrollment')->name('course.enroll.edit');
             // Deleted
             Route::get('delete', 'CourseStatusController@delete')->name('course.delete-permanently');
             Route::get('restore', 'CourseStatusController@restore')->name('course.restore');
