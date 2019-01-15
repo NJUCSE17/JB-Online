@@ -2,9 +2,9 @@
 
 namespace App\Models\Forum;
 
+use App\Models\Forum\Traits\Scope\AssignmentScope;
 use App\Models\Traits\Uuid;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Models\Forum\Traits\Attribute\AssignmentAttribute;
 use App\Models\Forum\Traits\Relationship\AssignmentRelationship;
@@ -16,11 +16,11 @@ use App\Models\Forum\Traits\Method\AssignmentMethod;
 class Assignment extends Model
 {
     use Uuid,
-        Notifiable,
         SoftDeletes,
         AssignmentAttribute,
         AssignmentRelationship,
-        AssignmentMethod;
+        AssignmentMethod,
+        AssignmentScope;
 
     /**
      * The attributes that are mass assignable.

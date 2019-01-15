@@ -35,10 +35,19 @@ Route::group(['middleware' => ['auth', 'password_expires']], function () {
         });
 
         Route::group(['prefix' => '/{course}'], function () {
-            Route::get('/enroll', 'CourseController@enroll')->name('course.enroll');
-            Route::get('/disenroll', 'CourseController@disenroll')->name('course.disenroll');
-
             Route::get('/', 'CourseController@specific')->name('course.view');
+
+            Route::post('check/student/{user?}', 'CourseController@checkStudent')->name('course.check.student');
+            Route::post('check/admin/{user?}', 'CourseController@checkAdmin')->name('course.check.admin');
+            Route::post('add/student', 'CourseController@addStudent')->name('course.add.student.myself');
+            Route::post('delete/user', 'CourseController@deleteUser')->name('course.delete.user.myself');
+            Route::group(['middleware' => 'admin'], function () {
+                // Only admin can add admin, and control other users.
+                Route::post('add/student/{user?}', 'CourseController@addStudent')->name('course.add.student');
+                Route::post('add/admin/{user?}', 'CourseController@addAdmin')->name('course.add.admin');
+                Route::post('delete/user/{user?}', 'CourseController@deleteUser')->name('course.delete.user');
+            });
+
             Route::group(['prefix' => 'assignment/{assignment}'], function () {
                 Route::get('finish', 'AssignmentController@finish')->name('assignment.finish');
                 Route::get('reset', 'AssignmentController@reset')->name('assignment.reset');

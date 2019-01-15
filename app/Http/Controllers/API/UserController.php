@@ -36,10 +36,11 @@ class UserController extends Controller
 
     public function heatmap(Request $request)
     {
+        $userID = (Input::get('userID', 0));
         $st = (Input::get('st', 0));
         $ed = (Input::get('ed', 0));
         $assignments = $this->assignmentRepository
-            ->getAssignmentsByTimestamps($st, $ed);
+            ->getAssignmentsByTimestamps($userID, $st, $ed);
         $jsonValueArray = array();
         foreach ($assignments as $assignment) {
             $timestamp = date_timestamp_get($assignment->due_time);
@@ -156,4 +157,6 @@ class UserController extends Controller
             'data' => $this->assignmentRepository->APIGetOngoingAssignments(),
         ], 200);
     }
+
+
 }

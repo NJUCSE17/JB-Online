@@ -47,6 +47,7 @@ return [
                 'edit'            => '编辑课程',
                 'main'            => '课程',
                 'view'            => '查看课程',
+                'enroll'          => '课程订阅',
             ],
 
             'assignments' => [

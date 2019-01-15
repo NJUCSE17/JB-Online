@@ -24,3 +24,8 @@ Breadcrumbs::for('admin.forum.course.edit', function ($trail, $id) {
     $trail->parent('admin.forum.course.index');
     $trail->push(__('menus.backend.forum.courses.edit'), route('admin.forum.course.edit', $id));
 });
+
+Breadcrumbs::for('admin.forum.course.enroll.show', function ($trail, $id) {
+    $trail->parent('admin.forum.course.index');
+    $trail->push(__('menus.backend.forum.courses.enroll'), route('admin.forum.course.enroll.show', $id));
+});
