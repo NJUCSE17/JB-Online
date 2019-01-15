@@ -47,7 +47,7 @@
             },
 
             createNavList: function() {
-                return $('<ul class="nav nav-toc flex-column"></ul>');
+                return $('<ul class="nav nav-toc"></ul>');
             },
 
             createChildNavList: function($parent) {
@@ -60,7 +60,7 @@
                 var $a = $('<a class="nav-link"></a>');
                 $a.attr('href', '#' + anchor);
                 $a.text(text);
-                var $li = $('<li></li>');
+                var $li = $('<li style="width: 100%;"></li>');
                 $li.append($a);
                 return $li;
             },
