@@ -30,8 +30,10 @@ Route::group(['middleware' => ['auth', 'password_expires']], function () {
         Route::group(['prefix' => 'personal/{assignment}'], function () {
             Route::get('delete', 'PersonalController@delete')->name('personal.delete-permanently');
             Route::get('restore', 'PersonalController@restore')->name('personal.restore');
-            Route::post('finish', 'AssignmentController@finish')->middleware('throttle:60,1')->name('personal.finish');
-            Route::post('reset', 'AssignmentController@reset')->middleware('throttle:60,1')->name('personal.reset');
+            Route::group(['middleware' => 'throttle:60,1'], function () {
+                Route::post('finish', 'AssignmentController@finish')->name('personal.finish');
+                Route::post('reset', 'AssignmentController@reset')->name('personal.reset');
+            });
         });
 
         Route::group(['prefix' => '/{course}'], function () {
@@ -49,19 +51,22 @@ Route::group(['middleware' => ['auth', 'password_expires']], function () {
             });
 
             Route::group(['prefix' => 'assignment/{assignment}'], function () {
-                Route::post('finish', 'AssignmentController@finish')->middleware('throttle:60,1')->name('assignment.finish');
-                Route::post('reset', 'AssignmentController@reset')->middleware('throttle:60,1')->name('assignment.reset');
                 Route::get('/{sort}', 'AssignmentController@index')->name('assignment.view');
                 Route::resource('post', 'PostController');
 
-                Route::group(['prefix' => 'problem/{problem}'], function() {
-                    Route::get('voteup', 'ProblemController@voteUp')->name('problem.voteup');
-                    Route::get('votedown', 'ProblemController@voteDown')->name('problem.votedown');
-                });
+                Route::group(['middleware' => 'throttle:60,1'], function () {
+                    Route::post('finish', 'AssignmentController@finish')->name('assignment.finish');
+                    Route::post('reset', 'AssignmentController@reset')->name('assignment.reset');
 
-                Route::group(['prefix' => 'post/{post}'], function() {
-                    Route::get('voteup', 'PostController@voteUp')->name('post.voteup');
-                    Route::get('votedown', 'PostController@voteDown')->name('post.votedown');
+                    Route::group(['prefix' => 'problem/{problem}'], function() {
+                        Route::post('voteup', 'ProblemController@voteUp')->name('problem.voteup');
+                        Route::post('votedown', 'ProblemController@voteDown')->name('problem.votedown');
+                    });
+
+                    Route::group(['prefix' => 'post/{post}'], function() {
+                        Route::get('voteup', 'PostController@voteUp')->name('post.voteup');
+                        Route::get('votedown', 'PostController@voteDown')->name('post.votedown');
+                    });
                 });
             });
         });
