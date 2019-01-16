@@ -8,6 +8,7 @@
 
 @section('content')
     <div class="card">
+        <h2 class="card-header">{{ $course->name }}: Enrollment Control</h2>
         <div class="card-body">
             {{ html()->form('POST', route('admin.forum.course.enroll.edit', [$course]))->class('form-horizontal')->open() }}
             <div class="row">
@@ -28,7 +29,10 @@
                         ->required() }}
                 </div>
                 <div class="col col-12 col-md-2">
-                    {{ form_submit(__('buttons.general.crud.create')) }}
+                    {{ html()->button(__('buttons.general.crud.create'))
+                        ->class('btn btn-sm btn-success')
+                        ->style('width:100%;')
+                        ->type('submit') }}
                 </div>
             </div>
             {{ html()->form()->close() }}
