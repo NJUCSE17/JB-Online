@@ -132,21 +132,25 @@ class CourseController extends Controller
      */
     public function showEnrollment(ManageCourseRequest $request, Course $course)
     {
-        $records = DB::table('course_enroll_records')
-            ->where('course_id', $course->id)
-            ->get();
+        $users = User::all();
+        $others = Array();
         $students = Array();
         $admins = Array();
-        foreach ($records as $record) {
-            if ($record->type_is_admin) {
-                $admins[] = User::where('id', $record->user_id)->first();
-            } else {
-                $students[] = User::where('id', $record->user_id)->first();
+        foreach ($users as $user) {
+            $type = $course->checkEnrollment($user);
+            if (!$type) $others[] = $user;
+            else {
+                if ($type == 1) {
+                    $students[] = $user;
+                } else {
+                    $admins[] = $user;
+                }
             }
         }
 
         return view('backend.forum.course.enroll')
             ->with('course', $course)
+            ->with('others', $others)
             ->with('students', $students)
             ->with('admins', $admins);
     }

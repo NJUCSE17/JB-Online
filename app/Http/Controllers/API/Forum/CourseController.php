@@ -22,7 +22,7 @@ class CourseController extends Controller
         if (!$user) $user = Auth::user();
         return response()->json([
             'message' => 'Query success.',
-            'result' => $course->hasStudent($user),
+            'result' => $course->checkEnrollment($user) == 1,
         ], 200);
     }
 
@@ -38,7 +38,7 @@ class CourseController extends Controller
         if (!$user) $user = Auth::user();
         return response()->json([
             'message' => 'Query success.',
-            'result' => $course->hasAdmin($user),
+            'result' => $course->checkEnrollment($user) == 2,
         ], 200);
     }
 
