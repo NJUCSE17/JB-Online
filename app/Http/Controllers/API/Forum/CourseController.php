@@ -52,12 +52,13 @@ class CourseController extends Controller
      */
     public function addStudent(Request $request, Course $course, User $user = null) {
         $currentUser = Auth::user();
-        if (!$currentUser->isAdmin() && $user !== $currentUser) {
+        if (!$user) $user = $currentUser;
+        if ($user !== $currentUser
+            && !($currentUser->isExecutive() || $currentUser->isAdmin())) {
             return response()->json([
                 'message' => 'Not authorized.',
             ], 401);
         }
-        if (!$user) $user = $currentUser;
 
         $course->addStudent($user);
         return response()->json([
@@ -76,12 +77,13 @@ class CourseController extends Controller
      */
     public function addAdmin(Request $request, Course $course, User $user = null) {
         $currentUser = Auth::user();
-        if (!$currentUser->isAdmin() && $user !== $currentUser) {
+        if (!$user) $user = $currentUser;
+        if ($user !== $currentUser
+            && !($currentUser->isExecutive() || $currentUser->isAdmin())) {
             return response()->json([
                 'message' => 'Not authorized.',
             ], 401);
         }
-        if (!$user) $user = $currentUser;
 
         $course->addAdmin($user);
         return response()->json([
@@ -100,12 +102,13 @@ class CourseController extends Controller
      */
     public function deleteUser(Request $request, Course $course, User $user = null) {
         $currentUser = Auth::user();
-        if (!$currentUser->isAdmin() && $user !== $currentUser) {
+        if (!$user) $user = $currentUser;
+        if ($user !== $currentUser
+            && !($currentUser->isExecutive() || $currentUser->isAdmin())) {
             return response()->json([
                 'message' => 'Not authorized.',
             ], 401);
         }
-        if (!$user) $user = $currentUser;
 
         $course->deleteUser($user);
         return response()->json([

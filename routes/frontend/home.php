@@ -43,12 +43,6 @@ Route::group(['middleware' => ['auth', 'password_expires']], function () {
             Route::post('check/admin/{user?}', 'CourseController@checkAdmin')->name('course.check.admin');
             Route::post('add/student', 'CourseController@addStudent')->name('course.add.student.myself');
             Route::post('delete/user', 'CourseController@deleteUser')->name('course.delete.user.myself');
-            Route::group(['middleware' => 'admin'], function () {
-                // Only admin can add admin, and control other users.
-                Route::post('add/student/{user?}', 'CourseController@addStudent')->name('course.add.student');
-                Route::post('add/admin/{user?}', 'CourseController@addAdmin')->name('course.add.admin');
-                Route::post('delete/user/{user?}', 'CourseController@deleteUser')->name('course.delete.user');
-            });
 
             Route::group(['prefix' => 'assignment/{assignment}'], function () {
                 Route::get('/{sort}', 'AssignmentController@index')->name('assignment.view');
