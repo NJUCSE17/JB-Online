@@ -12,26 +12,11 @@ use phpDocumentor\Reflection\Types\Integer;
  */
 trait CourseAttribute
 {
-    /**
-     * Check whether a user is a student/admin of the course.
-     * 0 for no-enrollment, 1 for student, 2 for admin
-     *
-     * @param User $user
-     * @return int
-     */
-    public function checkEnrollment(User $user = null) : int
-    {
-        if (!$user) $user = Auth::user();
-        $record = DB::table('course_enroll_records')
-            ->where('course_id', $this->id)
-            ->where('user_id', $user->id)
-            ->first();
-        if (!$record) return 0;
-        else {
-            return $record->type_is_admin ? 2 : 1;
-        }
-    }
 
+    /**
+     * @param User|null $user
+     * @return string
+     */
     public function getCourseEnrollButtonAttribute(User $user = null) : string
     {
         if (!$user) $user = Auth::user();

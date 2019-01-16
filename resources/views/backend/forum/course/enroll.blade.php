@@ -36,11 +36,35 @@
 
             <div class="row">
                 <div class="col">
+                    <h3>Not Enrolled</h3>
+                    <div class="list-group">
+                        @foreach($others as $other)
+                            <div class="list-group-item" style="line-height: 30px;">
+                                {{ $other->student_id }} - {{ $other->name }}
+                                <span class="float-right">
+                                    {{ html()->form("POST", route('admin.forum.course.enroll.edit', [$course]))->open() }}
+                                        {{ html()->text('student_id', $other->student_id)->attribute('hidden') }}
+                                        {{ html()->text('type', 1)->attribute('hidden') }}
+                                        {{ html()->button('<i class="fas fa-check"></i>')->class('btn btn-sm btn-success')->type('submit') }}
+                                    {{ html()->form()->close() }}
+                                </span>
+                            </div>
+                        @endforeach
+                    </div>
+                </div>
+                <div class="col">
                     <h3>Students</h3>
                     <div class="list-group">
                         @foreach($students as $student)
-                            <div class="list-group-item">
+                            <div class="list-group-item" style="line-height: 30px;">
                                 {{ $student->student_id }} - {{ $student->name }}
+                                <span class="float-right">
+                                    {{ html()->form("POST", route('admin.forum.course.enroll.edit', [$course]))->open() }}
+                                        {{ html()->text('student_id', $student->student_id)->attribute('hidden') }}
+                                        {{ html()->text('type', 0)->attribute('hidden') }}
+                                        {{ html()->button('<i class="fas fa-times"></i>')->class('btn btn-sm btn-danger')->type('submit') }}
+                                    {{ html()->form()->close() }}
+                                </span>
                             </div>
                         @endforeach
                     </div>
@@ -49,7 +73,7 @@
                     <h3>Admins</h3>
                     <div class="list-group">
                         @foreach($admins as $admin)
-                            <div class="list-group-item">
+                            <div class="list-group-item" style="line-height: 30px;">
                                 {{ $admin->student_id }} - {{ $admin->name }}
                             </div>
                         @endforeach
