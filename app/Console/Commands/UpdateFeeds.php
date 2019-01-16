@@ -54,14 +54,14 @@ class UpdateFeeds extends Command
         foreach ($users as $user) {
             if ($user->blog != null) {
                 $originFeed = \Feeds::make([$user->blog], 0, false);
-                echo "Updated blog feed for " . $user->full_name . "... ";
                 if (count($originFeed->get_items())) {
-                    echo "success.\n";
+                    echo "[success] " . $user->id . " - " . $user->full_name
+                        . " [" . count($originFeed->get_items()) . " posts]\n";
                 } else {
-                    echo "failed.\n";
+                    echo "[failure] " . $user->id . " - " . $user->full_name . "\n";
                 }
             } else {
-                echo "Skipping for " . $user->full_name . "\n";
+                echo "[skipped] " . $user->id . " - " . $user->full_name . "\n";
             }
         }
 
