@@ -64,7 +64,14 @@ class AssignmentRepository extends BaseRepository
             ->where('due_time', '>', date("Y-m-d H:i:s"))
             ->subscribedByUser(Auth::id())
             ->orderBy('due_time')
-            ->get(['id', 'course_id', 'name', 'content', 'due_time', 'issuer']);
+            ->get([
+                'assignments.id',
+                'assignments.course_id',
+                'assignments.name',
+                'assignments.content',
+                'assignments.due_time',
+                'assignments.issuer'
+            ]);
         foreach ($assignments as $assignment) {
             $assignment['finished'] = $assignment->is_finished;
         }
