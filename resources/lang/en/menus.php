@@ -47,6 +47,7 @@ return [
                 'edit'            => 'Edit Course',
                 'main'            => 'Courses',
                 'view'            => 'View Course',
+                'enroll'          => 'Enrollment',
             ],
 
             'assignments' => [

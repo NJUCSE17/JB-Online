@@ -60,4 +60,19 @@ return [
         'save' => '保存',
         'view' => '查看',
     ],
+
+    'frontend' => [
+        'forum' => [
+            'assignment' => [
+                'finished'   => '已完成',
+                'unfinished' => '未完成',
+            ],
+
+            'course' => [
+                'enroll' => '加入',
+                'quit'   => '退出',
+                'admin'  => '管理员',
+            ]
+        ]
+    ],
 ];

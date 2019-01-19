@@ -110,23 +110,16 @@ class PostController extends Controller
      */
     public function voteUp(Course $course, Assignment $assignment, Post $post)
     {
-        if ($post->isDislikedBy()) {
-            $post->undislikeBy();
-        }
-        $downClass = "voteBtn text-dark";
+        if ($post->isDislikedBy()) $post->undislikeBy();
         if ($post->isLikedBy()) {
             $post->unlikeBy();
-            $upClass = "voteBtn text-dark";
         } else {
             $post->likeBy();
-            $upClass = "voteBtn text-success";
         }
-        return json_encode([
-            'status' => 1,
-            'vote_up_class' => $upClass,
-            'vote_down_class' => $downClass,
-            'vote_count_label' => $post->voteCountLabel,
-        ]);
+        return response()->json([
+            'success' => true,
+            'vote_buttons_html' => $post->getVoteButtonsAttribute(),
+        ], 200);
     }
 
     /**
@@ -137,22 +130,15 @@ class PostController extends Controller
      */
     public function voteDown(Course $course, Assignment $assignment, Post $post)
     {
-        if ($post->isLikedBy()) {
-            $post->unlikeBy();
-        }
-        $upClass = "voteBtn text-dark";
+        if ($post->isLikedBy()) $post->unlikeBy();
         if ($post->isDislikedBy()) {
             $post->undislikeBy();
-            $downClass = "voteBtn text-dark";
         } else {
             $post->dislikeBy();
-            $downClass = "voteBtn text-danger";
         }
-        return json_encode([
-            'status' => 1,
-            'vote_up_class' => $upClass,
-            'vote_down_class' => $downClass,
-            'vote_count_label' => $post->voteCountLabel,
-        ]);
+        return response()->json([
+            'success' => true,
+            'vote_buttons_html' => $post->getVoteButtonsAttribute(),
+        ], 200);
     }
 }

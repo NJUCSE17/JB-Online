@@ -9,6 +9,8 @@ use App\Repositories\Frontend\Forum\NoticeRepository;
 use App\Repositories\Frontend\Forum\AssignmentRepository;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Pagination\Paginator;
+use Illuminate\Support\Facades\Auth;
+use Mews\Purifier\Facades\Purifier;
 
 /**
  * Class HomeController.
@@ -47,9 +49,18 @@ class HomeController extends Controller
      */
     public function index()
     {
+        if (Auth::hasUser()) return redirect()->route('frontend.home');
+        return redirect()->route('frontend.auth.login');
+    }
+
+    /**
+     * @return \Illuminate\View\View
+     */
+    public function home()
+    {
         $feeds = array();
         if(app_blogonhome()) {
-            $originFeed = \Feeds::make(app_blogrss(), 0, false);
+            $originFeed = \Feeds::make([app_blogrss()], 5, false);
             $items = $originFeed->get_items();
             foreach ($items as $item) {
                 //$description = $item->get_description();
@@ -65,7 +76,7 @@ class HomeController extends Controller
             }
         }
 
-        return view('frontend.index')
+        return view('frontend.home')
             ->withNotice($this->noticeRepository->getNotice())
             ->withOngoingCourses($this->courseRepository->getOngoingCourses())
             ->withAssignments($this->assignmentRepository->getOngoingAssignments())
@@ -89,7 +100,7 @@ class HomeController extends Controller
         $users = $this->userRepository->getAllUsers();
         foreach ($users as $user) {
             if ($user->blog != null) {
-                $originFeed = \Feeds::make([$user->blog], 0, false);
+                $originFeed = \Feeds::make([$user->blog], 20, false);
                 $items = $originFeed->get_items();
                 foreach ($items as $item) {
                     //$description = $item->get_description();
@@ -100,7 +111,7 @@ class HomeController extends Controller
                     $feeds[] = array(
                         'permalink'   => $item->get_permalink(),
                         'title'       => $item->get_title(),
-                        'content'     => $item->get_content(),
+                        'content'     => Purifier::clean($item->get_content()),
                         'author'      => $user->full_name,
                         'avatar'      => $user->picture,
                         'date'        => $date,

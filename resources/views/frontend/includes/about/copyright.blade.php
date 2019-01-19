@@ -14,6 +14,7 @@
         <p>使用的组件/脚本：</p>
         <ul>
             <li><a href="http://getbootstrap.com/" target="_blank" rel="noopener">Bootstrap 4</a> as layout framework.</li>
+            <li><a href="https://github.com/afeld/bootstrap-toc" target="_blank" rel="noopener">Bootstrap-toc</a> by Aidan Feldman for TOC display.</li>
             <li>
                 <a href="https://carbon.nesbot.com/" target="_blank" rel="noopener">Carbon 2</a>
                 and
@@ -34,7 +35,7 @@
                 <a href="https://github.com/craftpip/jquery-confirm" target="_blank" rel="noopener">jQuery-Confirm v3</a>
                 for JQuery based utils.
             </li>
-            <li><a href="https://laravel.com/" target="_blank" rel="noopener">Laravel 5.7</a> as PHP framework.</li>
+            <li><a href="https://laravel.com/" target="_blank" rel="noopener">Laravel {{ laravel_version() }}</a> as PHP framework.</li>
             <li><a href="http://laravel-boilerplate.com/" target="_blank" rel="noopener">Laravel Boilerplate</a> as code basement.</li>
             <li><a href="https://www.mathjax.org/" target="_blank" rel="noopener">MathJax</a> for TeX and LaTeX display.</li>
             <li><a href="https://www.tiny.cloud/" target="_blank" rel="noopener">TinyMCE 4</a> as WYSIWYG editor.</li>

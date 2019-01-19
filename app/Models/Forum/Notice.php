@@ -4,7 +4,6 @@ namespace App\Models\Forum;
 
 use App\Models\Traits\Uuid;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Models\Forum\Traits\Attribute\NoticeAttribute;
 use App\Models\Forum\Traits\Relationship\NoticeRelationship;
@@ -15,7 +14,6 @@ use App\Models\Forum\Traits\Relationship\NoticeRelationship;
 class Notice extends Model
 {
     use Uuid,
-        Notifiable,
         SoftDeletes,
         NoticeAttribute,
         NoticeRelationship;

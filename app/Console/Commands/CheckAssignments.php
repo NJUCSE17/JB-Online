@@ -58,9 +58,7 @@ class CheckAssignments extends Command
         $users = $this->userRepository->get();
         foreach ($users as $user) {
             if ($user->isConfirmed() && $user->wantMail()) {
-                echo $user->id . "-" . $user->full_name . " ";
                 $assignments = $this->assignmentRepository->getMailAssignments($user->id);
-                echo "has " . count($assignments) . " assignment(s). ";
                 if (count($assignments)) {
                     $content = "<ul style='list-style-type: none;'>";
                     foreach ($assignments as $assignment) {
@@ -74,15 +72,17 @@ class CheckAssignments extends Command
                         'content' => $content,
                         'user'    => $user,
                     ));
-                    echo "Queued sending assignment mail.\n";
+                    echo "[success] [" . count($assignments) . " assignments] "
+                        . $user->id . " - " . $user->full_name . "\n";
                 } else {
-                    echo "Skipped.\n";
+                    echo "[skipped] [0 assignments] "
+                        . $user->id . " - " . $user->full_name . "\n";
                 }
             } else {
-                echo "Skipping for " . $user->full_name . "\n";
+                echo "[skipped] [hate mail]" . $user->id . " - " . $user->full_name . "\n";
             }
         }
-        echo "Done handling assignment mails.";
+        echo "Done handling assignment mails.\n";
         return $this;
     }
 }

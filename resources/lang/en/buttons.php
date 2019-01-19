@@ -60,4 +60,19 @@ return [
         'save' => 'Save',
         'view' => 'View',
     ],
+
+    'frontend' => [
+        'forum' => [
+            'assignment' => [
+                'finished'   => 'Finished',
+                'unfinished' => 'Unfinished',
+            ],
+
+            'course' => [
+                'enroll' => 'Enroll',
+                'quit'   => 'Quit',
+                'admin'  => 'Admin',
+            ]
+        ]
+    ],
 ];

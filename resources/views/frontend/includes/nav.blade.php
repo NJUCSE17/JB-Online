@@ -1,7 +1,7 @@
-<header class="header headroom sticky-top">
+<header class="header">
     <nav class="navbar navbar-expand-lg navbar-light bg-white with-shadows">
         <div class="container">
-            <a href="{{ route('frontend.index') }}" class="navbar-brand">
+            <a href="{{ route('frontend.home') }}" class="navbar-brand">
                 <img src="{{ asset('favicon.ico') }}" style="height: 25px;" class="mr-2">
                 <span>@yield('navBrand', app_name())</span>
             </a>
@@ -92,9 +92,3 @@
         </div>
     </nav>
 </header>
-
-@push('after-scripts')
-    <script type="text/javascript">
-        $("header").headroom();
-    </script>
-@endpush

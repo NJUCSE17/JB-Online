@@ -2,11 +2,46 @@
 
 namespace App\Models\Forum\Traits\Attribute;
 
+use App\Models\Auth\User;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use phpDocumentor\Reflection\Types\Integer;
+
 /**
  * Trait CourseAttribute.
  */
 trait CourseAttribute
 {
+
+    /**
+     * @param User|null $user
+     * @return string
+     */
+    public function getCourseEnrollButtonAttribute(User $user = null) : string
+    {
+        if (!$user) $user = Auth::user();
+        $enrollment = $this->checkEnrollment($user);
+        if (!$enrollment) {
+            return "<a class='btn enrollBtn btn-outline-success text-success text-center my-1' "
+                . "style='width: 100%; line-height: 30px' id='enrollBtn-" . $this->id . "' data-api='"
+                . route('frontend.forum.course.add.student.myself', [$this->id]) . "' data-cid='" . $this->id
+                . "'><i class='fas fa-star mr-2'></i>" . __('buttons.frontend.forum.course.enroll') . "</a>";
+        } else {
+            if ($enrollment == 1) {
+                /* student */
+                return "<a class='btn enrollBtn btn-outline-danger text-danger text-center my-1' "
+                    . "style='width: 100%; line-height: 30px' id='enrollBtn-" . $this->id . "' data-api='"
+                    . route('frontend.forum.course.delete.user.myself', [$this->id]) . "' data-cid='" . $this->id
+                    . "'><i class='fas fa-sign-out-alt mr-2'></i>" . __('buttons.frontend.forum.course.quit') . "</a>";
+            } else {
+                /* admin */
+                return "<a class='btn btn-outline-dark text-center my-1 disabled'"
+                    . "style='width: 100%; line-height: 30px'><i class='fas fa-star mr-2'></i>"
+                    . __('buttons.frontend.forum.course.admin') . "</a>";
+            }
+        }
+    }
+
     /**
      * @return string
      */
@@ -143,7 +178,7 @@ trait CourseAttribute
         return '<a href="'.route('admin.forum.course.edit', $this)
             .'" data-toggle="tooltip" data-placement="top" title="'
             .__('buttons.general.crud.edit').' '.__('labels.general.course')
-            .'" class="btn btn-primary"><i class="far fa-edit"></i></a>';
+            .'" class="btn btn-success"><i class="far fa-edit"></i></a>';
     }
 
     /**
@@ -154,7 +189,18 @@ trait CourseAttribute
         return '<a href="'.route('admin.forum.assignment.specific', $this)
             .'" data-toggle="tooltip" data-placement="top" title="'
             .__('buttons.general.crud.edit').' '.__('labels.general.assignment')
-            .'" class="btn btn-warning"><i class="far fa-edit"></i></a>';
+            .'" class="btn btn-info"><i class="fas fa-pencil-ruler"></i></a>';
+    }
+
+    /**
+     * @return string
+     */
+    public function getEnrollButtonAttribute()
+    {
+        return '<a href="'.route('admin.forum.course.enroll.show', $this)
+            .'" data-toggle="tooltip" data-placement="top" title="'
+            .__('buttons.general.crud.edit').' '.__('labels.general.enroll')
+            .'" class="btn btn-primary"><i class="far fa-user"></i></a>';
     }
 
     /**
@@ -203,6 +249,7 @@ trait CourseAttribute
     	<div class="btn-group" role="group" aria-label="Course Actions">
 		  '.$this->edit_button.'
 		  '.$this->assignment_button.'
+		  '.$this->enroll_button.'
 		
 		  <div class="btn-group btn-group-sm" role="group">
 			<button id="CourseActions" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

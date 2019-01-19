@@ -51,7 +51,7 @@
                             {{ html()->label(__('validation.attributes.backend.forum.courses.start_time'))->class('col-md-2 form-control-label')->for('start_time') }}
 
                             <div class="col-md-10">
-                                {{ html()->text('start_time', '2017-09-01')
+                                {{ html()->text('start_time', '2017-09-01 00:00:00')
                                     ->class('form-control')
                                     ->attribute('maxlength', 191)
                                     ->required() }}
@@ -62,7 +62,7 @@
                             {{ html()->label(__('validation.attributes.backend.forum.courses.end_time'))->class('col-md-2 form-control-label')->for('end_time') }}
 
                             <div class="col-md-10">
-                                {{ html()->text('end_time', '2021-07-01')
+                                {{ html()->text('end_time', '2021-07-01 00:00:00')
                                     ->class('form-control')
                                     ->attribute('maxlength', 191)
                                     ->required() }}

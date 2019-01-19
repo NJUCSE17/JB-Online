@@ -23,23 +23,16 @@ class ProblemController extends Controller
      */
     public function voteUp(Course $course, Assignment $assignment, Problem $problem)
     {
-        if ($problem->isDislikedBy()) {
-            $problem->undislikeBy();
-        }
-        $downClass = "voteBtn text-dark";
+        if ($problem->isDislikedBy()) $problem->undislikeBy();
         if ($problem->isLikedBy()) {
             $problem->unlikeBy();
-            $upClass = "voteBtn text-dark";
         } else {
             $problem->likeBy();
-            $upClass = "voteBtn text-success";
         }
-        return json_encode([
-            'status' => 1,
-            'vote_up_class' => $upClass,
-            'vote_down_class' => $downClass,
-            'vote_count_label' => $problem->voteCountLabel,
-        ]);
+        return response()->json([
+            'success' => true,
+            'vote_buttons_html' => $problem->getVoteButtonsAttribute(),
+        ], 200);
     }
 
     /**
@@ -50,22 +43,15 @@ class ProblemController extends Controller
      */
     public function voteDown(Course $course, Assignment $assignment, Problem $problem)
     {
-        if ($problem->isLikedBy()) {
-            $problem->unlikeBy();
-        }
-        $upClass = "voteBtn text-dark";
+        if ($problem->isLikedBy()) $problem->unlikeBy();
         if ($problem->isDislikedBy()) {
             $problem->undislikeBy();
-            $downClass = "voteBtn text-dark";
         } else {
             $problem->dislikeBy();
-            $downClass = "voteBtn text-danger";
         }
-        return json_encode([
-            'status' => 1,
-            'vote_up_class' => $upClass,
-            'vote_down_class' => $downClass,
-            'vote_count_label' => $problem->voteCountLabel,
-        ]);
+        return response()->json([
+            'success' => true,
+            'vote_buttons_html' => $problem->getVoteButtonsAttribute(),
+        ], 200);
     }
 }

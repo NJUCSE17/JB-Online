@@ -15,7 +15,8 @@ class CheckClientIP
      */
     public function handle($request, Closure $next)
     {
-        if (\Auth::hasUser() || $request->url() == route('frontend.auth.login')
+        if (\Auth::hasUser() || $request->url() == route('frontend.index')
+                || $request->url() == route('frontend.auth.login')
                 || $request->url() == route('frontend.auth.login.post')) {
             return $next($request);
         }
