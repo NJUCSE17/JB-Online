@@ -36,7 +36,7 @@
         plugins: 'placeholder hr advlist paste textcolor link wordcount codesample code codesample image imagetools tinymceEmoji lists table preview textpattern',
         menubar: '',
         branding: false,
-        content_css: '/css/frontend.css',
+        content_css: '/css/app-{{ $theme }}.css',
         body_class: 'px-2 py-2',
         toolbar1: "styleselect fontsizeselect forecolor backcolor | bold italic underline strikethrough | alignleft aligncenter alignright | code",
         toolbar2: "bullist numlist outdent indent | subscript superscript blockquote hr | pastetext removeformat link unlink | image table codesample tinymceEmoji",
