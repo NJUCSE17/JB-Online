@@ -69,17 +69,7 @@
                         $('#enrollBtnContainer-' + cid).html(response.data.button_html);
                     })
                     .catch(function (error) {
-                        $.alert({
-                            title: 'Fail',
-                            content: "Failed to proceed. Error: " + error,
-                            type: 'red',
-                            typeAnimated: true,
-                            backgroundDismiss: 'close',
-                            buttons: {
-                                close: function () {
-                                }
-                            }
-                        });
+                        alertError(error);
                     });
             });
         </script>

@@ -1,3 +1,3 @@
 require('./plugins/bootstrap');
-require('./plugins/addDeleteForms');
+require('./plugins/jQueryConfirm');
 require('./plugins/tableOfContents');

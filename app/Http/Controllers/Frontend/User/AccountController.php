@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Frontend\User;
 
 use App\Http\Controllers\Controller;
+use Laravel\Passport\Passport;
 
 /**
  * Class AccountController.
