@@ -37512,10 +37512,21 @@ if (token) {
 
 /***/ }),
 
-/***/ "./resources/assets/sass/app.scss":
-/*!****************************************!*\
-  !*** ./resources/assets/sass/app.scss ***!
-  \****************************************/
+/***/ "./resources/assets/sass/app-darkly.scss":
+/*!***********************************************!*\
+  !*** ./resources/assets/sass/app-darkly.scss ***!
+  \***********************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+
+/***/ "./resources/assets/sass/app-default.scss":
+/*!************************************************!*\
+  !*** ./resources/assets/sass/app-default.scss ***!
+  \************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -37524,14 +37535,15 @@ if (token) {
 /***/ }),
 
 /***/ 0:
-/*!***************************************************************************!*\
-  !*** multi ./resources/assets/js/app.js ./resources/assets/sass/app.scss ***!
-  \***************************************************************************/
+/*!***************************************************************************************************************************!*\
+  !*** multi ./resources/assets/js/app.js ./resources/assets/sass/app-default.scss ./resources/assets/sass/app-darkly.scss ***!
+  \***************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(/*! E:\GitHub\Class-Forum\resources\assets\js\app.js */"./resources/assets/js/app.js");
-module.exports = __webpack_require__(/*! E:\GitHub\Class-Forum\resources\assets\sass\app.scss */"./resources/assets/sass/app.scss");
+__webpack_require__(/*! E:\GitHub\Class-Forum\resources\assets\sass\app-default.scss */"./resources/assets/sass/app-default.scss");
+module.exports = __webpack_require__(/*! E:\GitHub\Class-Forum\resources\assets\sass\app-darkly.scss */"./resources/assets/sass/app-darkly.scss");
 
 
 /***/ })

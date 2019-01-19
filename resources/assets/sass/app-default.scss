@@ -2,10 +2,13 @@
 @import url('https://fonts.googleapis.com/css?family=Nunito');
 
 // Bootstrap
-@import "../../../node_modules/bootstrap/scss/bootstrap";
+@import "~bootstrap/scss/bootstrap";
 
 // Bootstrap Overrides
 @import 'custom';
+body {
+  background: #d2e9fb;
+}
 
 // Plugins
 @import 'plugins/tableOfContents';

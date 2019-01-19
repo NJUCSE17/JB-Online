@@ -11,7 +11,16 @@
                 {{ count($ongoingCourses) }} <br/> {{ __('labels.general.course') }}
             </div>
             <div class="col text-center">
-                {{ count($assignments) }} <br/> {{ __('labels.general.assignment') }}
+                <?php
+                    $finishedCount = 0;
+                    foreach ($assignments as $assignment) {
+                        if ($assignment->finish_status) {
+                            $finishedCount++;
+                        }
+                    }
+                ?>
+                {{ count($assignments) - $finishedCount }} / {{ count($assignments) }}
+                <br/> {{ __('labels.general.assignment') }}
             </div>
         </div>
     </div>

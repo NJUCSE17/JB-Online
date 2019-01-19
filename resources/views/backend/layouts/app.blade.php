@@ -14,17 +14,10 @@
 
     @yield('meta')
 
-    {{-- See https://laravel.com/docs/5.5/blade#stacks for usage --}}
     @stack('before-styles')
-
     @include('includes.stylesheets')
-    <!-- Required by shards dashboard -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Sharrre/2.0.1/jquery.sharrre.min.js"></script>
-
-    <!-- Check if the language is set to RTL, so apply the RTL layouts -->
-    <!-- Otherwise apply the normal LTR layouts -->
-    {{ style(mix('css/app.css')) }}
-
+    {{ style(mix('css/app-' . $appTheme . '.css')) }}
     @stack('after-styles')
 </head>
 

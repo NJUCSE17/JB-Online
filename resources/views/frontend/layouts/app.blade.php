@@ -16,10 +16,10 @@
 
     @stack('before-styles')
     @include('includes.stylesheets')
-    {{ style(mix('css/app.css')) }}
+    {{ style(mix('css/app-' . $appTheme . '.css')) }}
     @stack('after-styles')
 </head>
-<body id="frontend" class="{{ Session::get('dark-theme') ? '' : 'bg-light-blue' }}">
+<body id="frontend">
     <p id="preamble" hidden>\( @include('includes.preamble') \)</p>
     @include('includes.partials.logged-in-as')
     @include('frontend.includes.nav')
