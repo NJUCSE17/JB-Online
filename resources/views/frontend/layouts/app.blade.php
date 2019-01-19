@@ -16,7 +16,7 @@
 
     @stack('before-styles')
     @include('includes.stylesheets')
-    {{ style(mix('css/app-' . $appTheme . '.css')) }}
+    {{ style(mix('css/app-' . $theme . '.css')) }}
     @stack('after-styles')
 </head>
 <body id="frontend">

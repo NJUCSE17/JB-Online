@@ -37512,10 +37512,10 @@ if (token) {
 
 /***/ }),
 
-/***/ "./resources/assets/sass/app-darkly.scss":
-/*!***********************************************!*\
-  !*** ./resources/assets/sass/app-darkly.scss ***!
-  \***********************************************/
+/***/ "./resources/assets/sass/app-dark.scss":
+/*!*********************************************!*\
+  !*** ./resources/assets/sass/app-dark.scss ***!
+  \*********************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -37523,10 +37523,10 @@ if (token) {
 
 /***/ }),
 
-/***/ "./resources/assets/sass/app-default.scss":
-/*!************************************************!*\
-  !*** ./resources/assets/sass/app-default.scss ***!
-  \************************************************/
+/***/ "./resources/assets/sass/app-light.scss":
+/*!**********************************************!*\
+  !*** ./resources/assets/sass/app-light.scss ***!
+  \**********************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -37535,15 +37535,15 @@ if (token) {
 /***/ }),
 
 /***/ 0:
-/*!***************************************************************************************************************************!*\
-  !*** multi ./resources/assets/js/app.js ./resources/assets/sass/app-default.scss ./resources/assets/sass/app-darkly.scss ***!
-  \***************************************************************************************************************************/
+/*!***********************************************************************************************************************!*\
+  !*** multi ./resources/assets/js/app.js ./resources/assets/sass/app-light.scss ./resources/assets/sass/app-dark.scss ***!
+  \***********************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(/*! E:\GitHub\Class-Forum\resources\assets\js\app.js */"./resources/assets/js/app.js");
-__webpack_require__(/*! E:\GitHub\Class-Forum\resources\assets\sass\app-default.scss */"./resources/assets/sass/app-default.scss");
-module.exports = __webpack_require__(/*! E:\GitHub\Class-Forum\resources\assets\sass\app-darkly.scss */"./resources/assets/sass/app-darkly.scss");
+__webpack_require__(/*! E:\GitHub\Class-Forum\resources\assets\sass\app-light.scss */"./resources/assets/sass/app-light.scss");
+module.exports = __webpack_require__(/*! E:\GitHub\Class-Forum\resources\assets\sass\app-dark.scss */"./resources/assets/sass/app-dark.scss");
 
 
 /***/ })

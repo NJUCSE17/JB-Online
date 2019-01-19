@@ -118,4 +118,12 @@ return [
             'zh_TW' => '嘤语(Amazing Language)',
         ],
     ],
+
+    'theme-picker' => [
+        'themes' => [
+            'auto'  => '自动切换',
+            'light' => '比利比利',
+            'dark'  => '深邃暗黑',
+        ],
+    ],
 ];

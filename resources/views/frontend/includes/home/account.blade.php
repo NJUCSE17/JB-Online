@@ -8,7 +8,7 @@
         <hr/>
         <div class="row">
             <div class="col text-center">
-                {{ count($ongoingCourses) }} <br/> {{ __('labels.general.course') }}
+                {{ count($ongoingCourses) }}<br/>{{ __('labels.general.course') }}
             </div>
             <div class="col text-center">
                 <?php
@@ -19,8 +19,7 @@
                         }
                     }
                 ?>
-                {{ count($assignments) - $finishedCount }} / {{ count($assignments) }}
-                <br/> {{ __('labels.general.assignment') }}
+                {{ count($assignments) - $finishedCount }} / {{ count($assignments) }}<br/>{{ __('labels.general.assignment') }}
             </div>
         </div>
     </div>

@@ -14,8 +14,8 @@ const mix = require('laravel-mix');
 mix.setPublicPath('public');
 
 mix.js('resources/assets/js/app.js', 'js/app.js')
-    .sass('resources/assets/sass/app-default.scss', 'css/app-default.css')
-    .sass('resources/assets/sass/app-darkly.scss', 'css/app-darkly.css');
+    .sass('resources/assets/sass/app-light.scss', 'css/app-light.css')
+    .sass('resources/assets/sass/app-dark.scss', 'css/app-dark.css');
 
 if (mix.inProduction() || process.env.npm_lifecycle_event !== 'hot') {
     mix.version();
