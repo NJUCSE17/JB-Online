@@ -1,0 +1,18 @@
+// Fonts
+@import url('https://fonts.googleapis.com/css?family=Nunito');
+
+// Bootstrap
+@import "~bootstrap/scss/bootstrap";
+
+// Bootstrap Overrides
+@import 'custom';
+body {
+  background: #d2e9fb;
+}
+.bg-light {
+  background-color: #ffffff !important;
+}
+
+// Plugins
+@import 'plugins/sideBar';
+@import 'plugins/tableOfContents';

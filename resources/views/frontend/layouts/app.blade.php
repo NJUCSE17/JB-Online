@@ -14,19 +14,12 @@
 
     @yield('meta')
 
-    {{-- See https://laravel.com/docs/5.5/blade#stacks for usage --}}
     @stack('before-styles')
-
-    <!-- Check if the language is set to RTL, so apply the RTL layouts -->
-    <!-- Otherwise apply the normal LTR layouts -->
     @include('includes.stylesheets')
-    {{ style(mix('css/frontend.css')) }}
-
+    {{ style(mix('css/app-' . $theme . '.css')) }}
     @stack('after-styles')
 </head>
-<body id="frontend"
-      style="background-image: url('{{ asset('svg/bg_'.random_int(1, 20).'.svg')}}');
-              background-size: auto; background-position: center center;">
+<body id="frontend">
     <p id="preamble" hidden>\( @include('includes.preamble') \)</p>
     @include('includes.partials.logged-in-as')
     @include('frontend.includes.nav')
@@ -42,9 +35,9 @@
 
     <!-- Scripts -->
     @stack('before-scripts')
+    {!! script(mix('js/app.js')) !!}
     @include('includes.scripts')
     @include('includes.votejs')
-    {!! script(mix('js/frontend.js')) !!}
     @stack('after-scripts')
 
     @include('includes.partials.ga')

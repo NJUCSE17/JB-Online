@@ -109,4 +109,12 @@ return [
             'zh_TW' => 'Amazing Language(嘤语)',
         ],
     ],
+
+    'theme-picker' => [
+        'themes' => [
+            'auto'  => 'Auto',
+            'light' => 'Light',
+            'dark'  => 'Dark',
+        ],
+    ],
 ];

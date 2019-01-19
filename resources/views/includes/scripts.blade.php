@@ -1,9 +1,3 @@
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.2.1/js/bootstrap.bundle.min.js"></script>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script>
 
 <script type="text/javascript" src="//d3js.org/d3.v3.min.js"></script>
@@ -42,7 +36,7 @@
         plugins: 'placeholder hr advlist paste textcolor link wordcount codesample code codesample image imagetools tinymceEmoji lists table preview textpattern',
         menubar: '',
         branding: false,
-        content_css: '/css/frontend.css',
+        content_css: '/css/app-{{ $theme }}.css',
         body_class: 'px-2 py-2',
         toolbar1: "styleselect fontsizeselect forecolor backcolor | bold italic underline strikethrough | alignleft aligncenter alignright | code",
         toolbar2: "bullist numlist outdent indent | subscript superscript blockquote hr | pastetext removeformat link unlink | image table codesample tinymceEmoji",

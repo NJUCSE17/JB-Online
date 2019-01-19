@@ -1,4 +1,4 @@
-<div class="card my-3">
+<div class="card mb-3">
     <h5 class="card-header text-center py-2">
         <i class="fas fa-fire-alt mr-2"></i>
         {{ __('labels.frontend.home.heatmap') }}

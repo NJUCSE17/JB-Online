@@ -6,7 +6,8 @@
  */
 
 // Switch between the included languages
-Route::get('lang/{lang}', 'LanguageController');
+Route::get('lang/{lang}', 'StyleController@lang');
+Route::get('theme/{theme}', 'StyleController@theme');
 
 Route::get('img/private/{path}', 'GlideController@privateGlide')->where('path', '.+');
 Route::get('img/public/{path}', 'GlideController@publicGlide')->where('path', '.+');

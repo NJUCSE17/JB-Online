@@ -1,6 +1,5 @@
 {
-    "/js/backend.js": "/js/backend.js?id=e03e446fc8a45e56df74",
-    "/js/frontend.js": "/js/frontend.js?id=2cfcc6ec802935b650fb",
-    "/css/frontend.css": "/css/frontend.css?id=58ff1c4c5b092284c3bf",
-    "/css/backend.css": "/css/backend.css?id=b33593db9dd07c6f42dd"
+    "/js/app.js": "/js/app.js?id=245fa11026b9244099bc",
+    "/css/app-light.css": "/css/app-light.css?id=5725b3a392a864928cda",
+    "/css/app-dark.css": "/css/app-dark.css?id=ed085a45497b6d53f540"
 }

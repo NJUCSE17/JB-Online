@@ -17,6 +17,7 @@ return [
         'all'     => '全部',
         'yes'     => '是',
         'no'      => '否',
+        'menu'    => '菜单',
         'copyright' => '版权所有',
         'custom'  => '自定义',
         'actions' => '操作',
