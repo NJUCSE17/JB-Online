@@ -1,5 +1,5 @@
 <header class="header">
-    <nav class="navbar navbar-expand-lg navbar-light bg-white with-shadows">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light shadow">
         <div class="container">
             <a href="{{ route('frontend.home') }}" class="navbar-brand">
                 <img src="{{ asset('favicon.ico') }}" style="height: 25px;" class="mr-2">
@@ -55,11 +55,11 @@
                         </li>
                         <li class="nav-item">
                             <div class="dropdown">
-                                <a href="#" class="nav-link dropdown-toggle text-nowrap px-3" role="button"
+                                <a href="#" class="nav-link dropdown-toggle text-nowrap" role="button"
                                    id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
                                    aria-expanded="false">
                                     <img class="user-avatar rounded-circle mr-2" src="{{ $logged_in_user->picture }}"
-                                         style="height: 25px !important;">
+                                         style="height: 25px !important;" alt="avatar">
                                     {{ $logged_in_user->name }}
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">

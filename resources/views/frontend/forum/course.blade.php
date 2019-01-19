@@ -7,7 +7,7 @@
     {!! Breadcrumbs::render() !!}
     <div class="row">
         <div class="col col-md-4 col-12">
-            <div class="card my-3">
+            <div class="card mb-3">
                 <h4 class="card-header">
                     <i class="fas fa-bullhorn mr-2"></i> {{ __('labels.frontend.forum.courses.course_notice') }}
                     @if(Auth::user()->isExecutive())
@@ -33,7 +33,7 @@
             </div>
         </div>
         <div class="col col-md-8 col-12">
-            <div class="card my-3">
+            <div class="card mb-3">
                 <h4 class="card-header">
                     <i class="fas fa-folder-open mr-2"></i> {{ __('labels.frontend.forum.courses.assignment_list') }}
                     <span class="float-right d-flex">

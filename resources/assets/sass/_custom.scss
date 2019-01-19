@@ -1,0 +1,77 @@
+// Override the Bootstrap defaults without modifying key, versioned files.
+.logged-in-as {
+  margin: 0;
+  border-radius: 0;
+}
+
+html {
+  height: 100%;
+  min-height: 100%;
+  box-sizing: border-box;
+}
+
+body {
+  position: relative;
+  margin: 0;
+  padding-bottom: 4rem;
+  min-height: 100%;
+}
+
+.bg-light-blue {
+  background: #d2e9fb;
+}
+
+.app-center {
+  /* 10% left for nav bar. */
+  min-height: 90vh;
+  display: flex;
+  align-items: center;
+}
+
+.footer {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  padding: 1rem;
+  background-color: rgba(255, 255, 255, 0.6);
+  text-align: center;
+}
+
+.feed-content {
+  a:before {
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    content: "\f360";
+    padding: 0 0.25em;
+  }
+
+  img{
+    border: 0;
+    max-width: 90%;
+    margin: 1em auto 1em auto;
+    display: block;
+    position: relative;
+  }
+
+  blockquote {
+    border-left: solid 4px ;
+    margin-bottom: 1em;
+    padding: 10px 20px;
+    background: rgba(150, 150, 150, 0.05);
+  }
+
+  blockquote p {
+    margin: 0.5em 0;
+  }
+
+  .blockquote-footer {
+    display: block;
+    font-size: 80%;
+
+    &::before {
+      content: "\2014 \00A0"; // em dash, nbsp
+    }
+  }
+
+}

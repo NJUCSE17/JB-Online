@@ -13,10 +13,8 @@ const mix = require('laravel-mix');
 
 mix.setPublicPath('public');
 
-mix.sass('resources/assets/sass/frontend/app.scss', 'css/frontend.css')
-    .sass('resources/assets/sass/backend/app.scss', 'css/backend.css')
-    .js('resources/assets/js/frontend/app.js', 'js/frontend.js')
-    .js('resources/assets/js/backend/app.js', 'js/backend.js');
+mix.sass('resources/assets/sass/app.scss', 'css/app.css')
+    .js('resources/assets/js/app.js', 'js/app.js');
 
 if (mix.inProduction() || process.env.npm_lifecycle_event !== 'hot') {
     mix.version();

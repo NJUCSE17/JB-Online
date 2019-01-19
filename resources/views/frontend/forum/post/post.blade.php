@@ -1,5 +1,5 @@
 <div class="mx-0 my-3">
-    <h5 class="py-0 align-middle" style="background-color: #fafafa; height: 100%; overflow-x: auto;">
+    <h5 class="py-0 align-middle" style="height: 100%; overflow-x: auto;">
         <img class="img-avatar mr-2" src="{{ $post->author->picture }}"
              style="height: 45px !important;">
         <span> {{$post->author->name}} </span>
