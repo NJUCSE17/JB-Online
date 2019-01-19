@@ -1,8 +1,8 @@
 <div class="card mb-3">
     <div class="card-body p-3">
-        <p class="text-center">
+        <p class="text-center" style="font-size: 1.2rem;">
             <img class="user-avatar rounded-circle mr-2" src="{{ $logged_in_user->picture }}"
-                 style="height: 25px !important;" alt="avatar">
+                 style="height: 30px !important;" alt="avatar">
             {{ $logged_in_user->full_name }}
         </p>
         <hr/>

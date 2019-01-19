@@ -2,14 +2,15 @@
 @import url('https://fonts.googleapis.com/css?family=Nunito');
 
 // Bootstrap
-@import "~bootswatch/dist/flatly/variables";
 @import "~bootstrap/scss/bootstrap";
-@import "~bootswatch/dist/flatly/bootswatch";
 
 // Bootstrap Overrides
 @import 'custom';
 body {
   background: #d2e9fb;
+}
+.bg-light {
+  background-color: #ffffff !important;
 }
 
 // Plugins

@@ -121,9 +121,9 @@ return [
 
     'theme-picker' => [
         'themes' => [
-            'auto'  => '自动切换',
-            'light' => '比利比利',
-            'dark'  => '深邃暗黑',
+            'auto'  => '自动',
+            'light' => '明亮',
+            'dark'  => '暗黑',
         ],
     ],
 ];

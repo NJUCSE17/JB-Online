@@ -10711,6 +10711,10 @@ a.text-dark:focus {
   color: #fff;
 }
 
+.navbar {
+  padding: 0.5rem 1rem !important;
+}
+
 .logged-in-as {
   margin: 0;
   border-radius: 0;
