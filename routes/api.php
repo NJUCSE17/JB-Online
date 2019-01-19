@@ -17,17 +17,17 @@ Route::group(['namespace' => 'API', 'middleware' => 'auth:api'], function () {
     Route::get('heatmap', 'UserController@heatmap')->name("api.heatmap");
 
     Route::group(['namespace' => 'Forum'], function () {
-        Route::post('notice', 'NoticeController@getNotice');
+        Route::get('notice', 'NoticeController@getNotice');
 
-        Route::post('assignments', 'AssignmentController@getAssignments');
+        Route::get('assignments', 'AssignmentController@getAssignments');
         Route::group(['prefix' => 'assignment/{assignment}'], function () {
             Route::post('finish', 'AssignmentController@finishAssignment');
             Route::post('reset', 'AssignmentController@resetAssignment');
         });
 
         Route::group(['prefix' => 'course/{course}'], function () {
-            Route::post('check/student/{user?}', 'CourseController@checkStudent')->name('api.forum.course.check.student');
-            Route::post('check/admin/{user?}', 'CourseController@checkAdmin')->name('api.forum.course.check.admin');
+            Route::get('check/student/{user?}', 'CourseController@checkStudent')->name('api.forum.course.check.student');
+            Route::get('check/admin/{user?}', 'CourseController@checkAdmin')->name('api.forum.course.check.admin');
             Route::post('add/student', 'CourseController@addStudent')->name('api.forum.course.add.student.myself');
             Route::post('delete/user', 'CourseController@deleteUser')->name('api.forum.course.delete.user.myself');
             Route::group(['middleware' => 'admin'], function () {
