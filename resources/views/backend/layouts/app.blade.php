@@ -1,38 +1,37 @@
 <!DOCTYPE html>
 @langrtl
-    <html lang="{{ app()->getLocale() }}" dir="rtl">
+<html lang="{{ app()->getLocale() }}" dir="rtl">
 @else
     <html lang="{{ app()->getLocale() }}">
-@endlangrtl
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0, shrink-to-fit=no">
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>@yield('title', app_name())</title>
-    <meta name="description" content="@yield('meta_description', 'JB Online')">
-    <meta name="author" content="@yield('meta_author', 'CS Elite 17')">
+    @endlangrtl
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport"
+              content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0, shrink-to-fit=no">
+        <meta name="csrf-token" content="{{ csrf_token() }}">
+        <title>@yield('title', app_name())</title>
+        <meta name="description" content="@yield('meta_description', 'JB Online')">
+        <meta name="author" content="@yield('meta_author', 'CS Elite 17')">
 
-    @yield('meta')
+        @yield('meta')
 
-    @stack('before-styles')
-    @include('includes.stylesheets')
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Sharrre/2.0.1/jquery.sharrre.min.js"></script>
-    {{ style(mix('css/app-' . $theme . '.css')) }}
-    @stack('after-styles')
-</head>
+        @stack('before-styles')
+        @include('includes.stylesheets')
+        {{ style(mix('css/app-' . $theme . '.css')) }}
+        @stack('after-styles')
+    </head>
 
-<body id="backend" class="h-100">
+    <body id="backend">
     <p id="preamble" hidden>\( @include('includes.preamble') \)</p>
     @include('includes.partials.logged-in-as')
 
-    <div class="container-fluid @yield('appClass', '')">
-        <div class="row">
-            <aside class="main-sidebar col-12 col-md-3 col-lg-2 p-0">
-                @include('backend.includes.sidebar')
-            </aside>
-
-            <main class="main-content col-lg-10 col-md-9 col-sm-12 p-0 offset-lg-2 offset-md-3">
-                <div class="main-navbar sticky-top bg-white">
+    <div id="wrapper">
+        <div id="sidebar-wrapper">
+            @include('backend.includes.sidebar')
+        </div>
+        <div id="page-content-wrapper" class="p-0">
+            <div class="container-fluid p-0 @yield('appClass', '')">
+                <div class="main-navbar sticky-top bg-light">
                     @include('backend.includes.nav')
                     @include('includes.partials.messages')
                 </div>
@@ -40,16 +39,17 @@
                     {!! Breadcrumbs::render() !!}
                     @yield('content')
                 </div>
-            </main>
+            </div>
         </div>
-    </div><!-- container -->
+    </div>
 
     <!-- Scripts -->
     @stack('before-scripts')
-    @include('includes.scripts')
     {!! script(mix('js/app.js')) !!}
+    @include('includes.scripts')
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Sharrre/2.0.1/jquery.sharrre.min.js"></script>
     @stack('after-scripts')
 
     @include('includes.partials.ga')
-</body>
-</html>
+    </body>
+    </html>

@@ -17,6 +17,7 @@ return [
         'all'     => 'All',
         'yes'     => 'Yes',
         'no'      => 'No',
+        'menu'    => 'Menu',
         'copyright' => 'Copyright',
         'custom'  => 'Custom',
         'actions' => 'Actions',
