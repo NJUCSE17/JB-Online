@@ -5,11 +5,11 @@
     {{ __('strings.frontend.home.semester.right') }} &nbsp;
     {{ $course->name }}
     <div class="float-right">
-                            <span>
-                                <i class="fas fa-folder"></i>
-                                {{ $course->assignmentsCount() }}
-                                <i class="fas fa-comments"></i>
-                                {{ $course->postsCount() }}
-                            </span>
+        <span>
+            <i class="fas fa-folder"></i>
+            {{ $course->assignmentsCount() }}
+            <i class="fas fa-comments"></i>
+            {{ $course->postsCount() }}
+        </span>
     </div>
 </a>

@@ -30,18 +30,6 @@ if (! function_exists('app_version')) {
     }
 }
 
-if (! function_exists('app_coverart')) {
-    /**
-     * Helper to grab the application cover art.
-     *
-     * @return mixed
-     */
-    function app_coverart()
-    {
-        return config('app.coverart');
-    }
-}
-
 if (! function_exists('app_blogonhome')) {
     /**
      * Helper to grab the option of home page blog.

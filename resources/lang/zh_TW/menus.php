@@ -118,4 +118,12 @@ return [
             'zh_TW' => '厉害之语',
         ],
     ],
+
+    'theme-picker' => [
+        'themes' => [
+            'auto'  => '自动',
+            'light' => '圣光',
+            'dark'  => '暗牧',
+        ],
+    ],
 ];

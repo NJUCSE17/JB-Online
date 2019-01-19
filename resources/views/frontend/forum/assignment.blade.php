@@ -7,7 +7,7 @@
     {!! Breadcrumbs::render() !!}
     <div class="row">
         <div class="col">
-            <div class="card my-3">
+            <div class="card mb-3">
                 <h4 class="card-header">
                     <i class="fas fa-pencil-ruler mr-2"></i>
                     {{ __('labels.frontend.forum.assignments.assignment_content') }}

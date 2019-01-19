@@ -1,0 +1,17 @@
+// Fonts
+@import url('https://fonts.googleapis.com/css?family=Nunito');
+
+// Bootstrap
+@import "~bootswatch/dist/darkly/variables";
+@import "~bootstrap/scss/bootstrap";
+@import "~bootswatch/dist/darkly/bootswatch";
+.navbar {
+  padding: 0.5rem 1rem !important;
+}
+
+// Bootstrap Overrides
+@import 'custom';
+
+// Plugins
+@import 'plugins/sideBar';
+@import 'plugins/tableOfContents';

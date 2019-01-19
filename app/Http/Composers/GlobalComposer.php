@@ -2,6 +2,8 @@
 
 namespace App\Http\Composers;
 
+use Carbon\Carbon;
+use Illuminate\Support\Facades\Session;
 use Illuminate\View\View;
 
 /**
@@ -19,5 +21,13 @@ class GlobalComposer
     public function compose(View $view)
     {
         $view->with('logged_in_user', auth()->user());
+
+        /* Get the theme of app */
+        $theme = Session::has('theme') ? Session::get('theme') : 'auto';
+        if ($theme === 'auto') {
+            $hour = Carbon::now()->hour;
+            $theme = ($hour >= 7 && $hour <= 21) ? 'light' : 'dark';
+        }
+        $view->with('theme', $theme);
     }
 }

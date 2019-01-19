@@ -40,6 +40,7 @@
                         <div class="stats-small__data text-center">
                             <span class="stats-small__label text-uppercase">个人作业</span>
                             <h6 class="stats-small__value count my-3">
+                                {{ \App\Models\Forum\Assignment::all()->where('issuer', '!=', 0)->where('due_time', '>', now())->count() }} /
                                 {{ \App\Models\Forum\Assignment::all()->where('issuer', '!=', 0)->count() }}
                             </h6>
                         </div>

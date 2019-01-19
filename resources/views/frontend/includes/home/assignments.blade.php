@@ -1,7 +1,7 @@
 @if ($assignments->count())
-    <div id="assignments" class="my-3">
+    <div id="assignments">
         @foreach($assignments as $assignment)
-            <div class="card my-3">
+            <div class="card mb-3">
                 <div class="card-body p-3" id="assignment">
                     <div class="d-inline w-100 justify-content-between">
                         <span class="float-right ddlBtnContainer" id="ddlBtnContainer-{{ $assignment->id }}">

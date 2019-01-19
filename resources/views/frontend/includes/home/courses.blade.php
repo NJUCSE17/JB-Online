@@ -1,4 +1,4 @@
-<div class="card my-3">
+<div class="card mb-3">
     <h5 class="card-header text-center py-2">
         <i class="fas fa-book-open mr-2"></i>
         {{ __('labels.frontend.home.ongoing') }}
@@ -8,9 +8,6 @@
             @foreach($ongoingCourses as $course)
                 <a class="btn btn-outline-{{ $course->color_label }} text-justify my-1"
                    style="width: 100%;" href="{{ $course->course_link }}">
-                    {{ __('strings.frontend.home.semester.left') }}
-                    {{ $course->semester }}
-                    {{ __('strings.frontend.home.semester.right') }} &nbsp;
                     {{ $course->name }}
                     <span class="float-right">
                         <i class="fas fa-folder"></i>
