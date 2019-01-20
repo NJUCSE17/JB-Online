@@ -12,9 +12,10 @@ use Illuminate\Http\Request;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+Route::get('app/{system?}', 'API\HomeController@app')->name('api.app');
 
 Route::group(['namespace' => 'API', 'middleware' => 'auth:api'], function () {
-    Route::get('heatmap', 'UserController@heatmap')->name("api.heatmap");
+    Route::get('heatmap', 'HomeController@heatmap')->name('api.heatmap');
 
     Route::group(['namespace' => 'Forum'], function () {
         Route::get('notice', 'NoticeController@getNotice');

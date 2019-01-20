@@ -23,13 +23,15 @@
                 </button>
             </div>
             <div class="modal-body">
-                <div class="alert alert-info" role="alert">
-                    <i class="fas fa-info-circle mr-2"></i>A redirect URL must be
+                <div class="alert alert-success" role="alert">
+                    <i class="fas fa-laptop-code mr-2"></i> A redirect URL must be
                     provided and shall it be <strong>valid</strong>,
                     or you would get 422 (Unprocessable Entity) error.
+                    To try APIs in the Swagger documentation,
+                    leave the redirect url empty.
                 </div>
                 {{ html()->text('name')->id('createName')->placeholder('Client Name')->class('form-control my-3')->required() }}
-                {{ html()->text('redirect')->id('createRedirect')->placeholder('Redirect URL [https://]')->class('form-control')->required() }}
+                {{ html()->text('redirect')->id('createRedirect')->placeholder('Redirect URL [empty => ' . config('app.url') . '/api/docs/oauth2-callback]')->class('form-control') }}
             </div>
             <div class="modal-footer">
                 <button id="createClientSubmit" type="submit" class="btn btn-success">Submit</button>
@@ -50,13 +52,15 @@
                 </button>
             </div>
             <div class="modal-body">
-                <div class="alert alert-info" role="alert">
-                    <i class="fas fa-info-circle mr-2"></i>A redirect URL must be
+                <div class="alert alert-success" role="alert">
+                    <i class="fas fa-laptop-code mr-2"></i> A redirect URL must be
                     provided and shall it be <strong>valid</strong>,
                     or you would get 422 (Unprocessable Entity) error.
+                    To try APIs in the Swagger documentation,
+                    leave the redirect url empty.
                 </div>
                 {{ html()->text('name')->id('updateName')->placeholder('Client Name')->class('form-control my-3')->required() }}
-                {{ html()->text('redirect')->id('updateRedirect')->placeholder('Redirect URL [https://]')->class('form-control')->required() }}
+                {{ html()->text('redirect')->id('updateRedirect')->placeholder('Redirect URL [empty => ' . config('app.url') . '/api/docs/oauth2-callback]')->class('form-control') }}
             </div>
             <div class="modal-footer">
                 <button id="updateClientSubmit" type="submit" class="btn btn-info">Update</button>
@@ -77,6 +81,7 @@
             e.preventDefault();
             let name = $('#createClientForm #createName').val();
             let redirect = $('#createClientForm #createRedirect').val();
+            if (redirect === '') redirect = "{{ config('app.url') . '/api/docs/oauth2-callback' }}";
             $('#createClientSubmit').removeAttr('disabled');
             createClient(name, redirect);
         })
@@ -90,6 +95,7 @@
                 let clientID = this.dataset.cid;
                 let name = $('#updateClientForm #updateName').val();
                 let redirect = $('#updateClientForm #updateRedirect').val();
+                if (redirect === '') redirect = "{{ config('app.url') . '/api/docs/oauth2-callback' }}";
                 $('#updateClientSubmit').removeAttr('disabled');
                 updateClient(clientID, name, redirect);
             })

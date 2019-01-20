@@ -8,7 +8,7 @@ return [
         |--------------------------------------------------------------------------
         */
 
-        'title' => 'JB Online API Docs',
+        'title' => config('app.name') . ' API Docs',
     ],
 
     'routes' => [
@@ -42,10 +42,10 @@ return [
         |--------------------------------------------------------------------------
          */
         'middleware' => [
-            'api' => [],
-            'asset' => [],
-            'docs' => [],
-            'oauth2_callback' => [],
+            'api' => ['web'],
+            'asset' => ['web'],
+            'docs' => ['web'],
+            'oauth2_callback' => ['web'],
         ],
     ],
 
@@ -119,8 +119,9 @@ return [
             'in' => 'header',
             'scheme' => 'https',
             'flows' => [
-                "password" => [
-                    "tokenUrl" => env('APP_URL') . '/api/login',
+                "authorizationCode" => [
+                    "authorizationUrl" => env('APP_URL') . '/oauth/authorize',
+                    "tokenUrl" => env('APP_URL') . '/oauth/token',
                     "scopes" => []
                 ],
             ],

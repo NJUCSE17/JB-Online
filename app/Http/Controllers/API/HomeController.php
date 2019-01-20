@@ -26,18 +26,14 @@ class HomeController extends Controller
      *         description="Start time (in timestamp format).",
      *         required=false,
      *         in="query",
-     *         @OA\Schema(
-     *             type="integer"
-     *         )
+     *         @OA\Schema(type="integer")
      *     ),
      *     @OA\Parameter(
      *         name="ed",
      *         description="End time (in timestamp format).",
      *         required=false,
      *         in="query",
-     *         @OA\Schema(
-     *             type="integer"
-     *         )
+     *         @OA\Schema(type="integer")
      *     ),
      *     @OA\Response(response=200, description="Successful operation",
      *         @OA\MediaType(
@@ -67,7 +63,7 @@ class HomeController extends Controller
     }
 
     /**
-     * @OA\Post(
+     * @OA\Get(
      *     path="/api/app",
      *     tags={"Utils"},
      *     summary="Get the JSON data of latest mobile app info",
@@ -79,11 +75,14 @@ class HomeController extends Controller
      *     ),
      * )
      */
-    public function app(Request $request)
+    /**\
+     * @param Request $request
+     * @param string $app
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function app(Request $request, $app = 'android')
     {
-        return response()->json([
-            "data" => mobile_app_version(),
-        ], 200);
+        return response()->json(mobile_app_version(), 200);
     }
 
 
@@ -105,18 +104,6 @@ class Heatmap {
  * @OA\Schema()
  */
 class AppInfo {
-    /**
-     * App data
-     * @var AppInfo_Data
-     * @OA\Property()
-     */
-    public $data;
-}
-
-/**
- * @OA\Schema()
- */
-class AppInfo_Data {
     /**
      * Version number
      * @var integer
@@ -141,58 +128,4 @@ class AppInfo_Data {
      * @OA\Property()
      */
     public $link;
-}
-
-/**
- * @OA\Schema()
- */
-class LoginSuccess {
-    /**
-     * "success"
-     * @var string
-     * @OA\Property()
-     */
-    public $status;
-    /**
-     * API Message
-     * @var string
-     * @OA\Property()
-     */
-    public $message;
-    /**
-     * Student ID
-     * @var integer
-     * @OA\Property()
-     */
-    public $student_id;
-    /**
-     * User's Name
-     * @var string
-     * @OA\Property()
-     */
-    public $full_name;
-    /**
-     * API Token
-     * @var string
-     * @OA\Property()
-     */
-    public $token;
-}
-
-/**
- * @OA\Schema()
- */
-class NormalMessage {
-    /**
-     * API Returning Status
-     * @var string
-     * @OA\Property()
-     */
-    public $status;
-    /**
-     * API Message
-     * @var string
-     * @OA\Property()
-     */
-    public $message;
 }
