@@ -20,7 +20,7 @@ class HomeController extends Controller
      * @OA\Get(
      *     path="/api/heatmap",
      *     tags={"Utils"},
-     *     summary="Get the JSON data of heatmap on index page",
+     *     summary="Get the JSON data of heatmap on index page.",
      *     @OA\Parameter(
      *         name="st",
      *         description="Start time (in timestamp format).",
@@ -42,6 +42,9 @@ class HomeController extends Controller
      *         )
      *     ),
      * )
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
      */
     public function heatmap(Request $request)
     {
@@ -66,7 +69,7 @@ class HomeController extends Controller
      * @OA\Get(
      *     path="/api/app",
      *     tags={"Utils"},
-     *     summary="Get the JSON data of latest mobile app info",
+     *     summary="Get the JSON data of latest mobile app info.",
      *     @OA\Response(response=200, description="Successful operation",
      *         @OA\MediaType(
      *             mediaType="application/json",
@@ -74,8 +77,7 @@ class HomeController extends Controller
      *         )
      *     ),
      * )
-     */
-    /**\
+     *
      * @param Request $request
      * @param string $app
      * @return \Illuminate\Http\JsonResponse

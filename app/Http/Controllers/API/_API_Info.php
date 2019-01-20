@@ -12,220 +12,235 @@
  * )
  */
 
-/**
- * @OA\Get(
- *     path="/oauth/clients",
- *     tags={"OAuth2"},
- *     summary="Get the list of clients of current user.",
- *     security={{"passport" : {}}},
- *     @OA\Response(response=200, description="Successful operation",
- *         @OA\JSONContent(ref="#/components/schemas/ClientFullInfo"),
- *     ),
- * )
- */
+class OAuth2API
+{
+    /**
+     * @OA\Get(
+     *     path="/oauth/clients",
+     *     tags={"OAuth2"},
+     *     summary="Get the list of clients of current user.",
+     *     security={{"passport" : {}}},
+     *     @OA\Response(response=200, description="Successful operation",
+     *         @OA\JSONContent(type="array", items=@OA\Property(ref="#/components/schemas/ClientInfo"))
+     *     )
+     * )
+     */
 
-/**
- * @OA\Post(
- *     path="/oauth/clients",
- *     tags={"OAuth2"},
- *     summary="Create a new OAuth2 authorization code grant type client.",
- *     security={{"passport" : {}}},
- *     @OA\RequestBody(
- *          @OA\MediaType(
- *              mediaType="application/x-www-form-urlencoded",
- *              @OA\Schema(
- *                  @OA\Property(
- *                      property="name", type="string",
- *                      description="Name of the client."
- *                  ),
- *                  @OA\Property(
- *                      property="redirect", type="string",
- *                      description="Redirect URI of the client."
- *                  ),
- *                  required={"name", "redirect"}
- *              )
- *          )
- *     ),
- *     @OA\Response(response=200, description="Successful operation",
- *         @OA\JSONContent(ref="#/components/schemas/ClientFullInfo"),
- *     ),
- * )
- */
+    /**
+     * @OA\Post(
+     *     path="/oauth/clients",
+     *     tags={"OAuth2"},
+     *     summary="Create a new OAuth2 authorization code grant type client.",
+     *     security={{"passport" : {}}},
+     *     @OA\RequestBody(
+     *          @OA\MediaType(
+     *              mediaType="application/x-www-form-urlencoded",
+     *              @OA\Schema(
+     *                  @OA\Property(
+     *                      property="name", type="string",
+     *                      description="Name of the client."
+     *                  ),
+     *                  @OA\Property(
+     *                      property="redirect", type="string",
+     *                      description="Redirect URI of the client."
+     *                  ),
+     *                  required={"name", "redirect"}
+     *              )
+     *          )
+     *     ),
+     *     @OA\Response(response=200, description="Successful operation",
+     *         @OA\JSONContent(ref="#/components/schemas/ClientInfo"),
+     *     ),
+     * )
+     */
 
-/**
- * @OA\Put(
- *     path="/oauth/clients/{client-id}",
- *     tags={"OAuth2"},
- *     summary="Update an OAuth2 client.",
- *     security={{"passport" : {}}},
- *     @OA\Parameter(
- *         name="client-id",
- *         description="Numeric ID of the client.",
- *         required=true,
- *         in="path",
- *         @OA\Schema(type="integer")
- *     ),
- *     @OA\RequestBody(
- *          @OA\MediaType(
- *              mediaType="application/x-www-form-urlencoded",
- *              @OA\Schema(
- *                  @OA\Property(
- *                      property="name", type="string",
- *                      description="Name of the client."
- *                  ),
- *                  @OA\Property(
- *                      property="redirect", type="string",
- *                      description="Redirect URI of the client."
- *                  ),
- *                  required={"name", "redirect"}
- *              )
- *          )
- *     ),
- *     @OA\Response(response=200, description="Successful operation",
- *         @OA\JSONContent(ref="#/components/schemas/ClientFullInfo"),
- *     ),
- * )
- */
+    /**
+     * @OA\Put(
+     *     path="/oauth/clients/{client-id}",
+     *     tags={"OAuth2"},
+     *     summary="Update an OAuth2 client.",
+     *     security={{"passport" : {}}},
+     *     @OA\Parameter(
+     *         name="client-id",
+     *         description="Numeric ID of the client.",
+     *         required=true,
+     *         in="path",
+     *         @OA\Schema(type="integer")
+     *     ),
+     *     @OA\RequestBody(
+     *          @OA\MediaType(
+     *              mediaType="application/x-www-form-urlencoded",
+     *              @OA\Schema(
+     *                  @OA\Property(
+     *                      property="name", type="string",
+     *                      description="Name of the client."
+     *                  ),
+     *                  @OA\Property(
+     *                      property="redirect", type="string",
+     *                      description="Redirect URI of the client."
+     *                  ),
+     *                  required={"name", "redirect"}
+     *              )
+     *          )
+     *     ),
+     *     @OA\Response(response=200, description="Successful operation",
+     *         @OA\JSONContent(ref="#/components/schemas/ClientInfo"),
+     *     ),
+     * )
+     */
 
-/**
- * @OA\Delete(
- *     path="/oauth/clients/{client-id}",
- *     tags={"OAuth2"},
- *     summary="Delete an OAuth2 client.",
- *     security={{"passport" : {}}},
- *     @OA\Parameter(
- *         name="client-id",
- *         description="Numeric ID of the client.",
- *         required=true,
- *         in="path",
- *         @OA\Schema(type="integer")
- *     ),
- *     @OA\Response(response=200, description="Successful operation"),
- * )
- */
+    /**
+     * @OA\Delete(
+     *     path="/oauth/clients/{client-id}",
+     *     tags={"OAuth2"},
+     *     summary="Delete an OAuth2 client.",
+     *     security={{"passport" : {}}},
+     *     @OA\Parameter(
+     *         name="client-id",
+     *         description="Numeric ID of the client.",
+     *         required=true,
+     *         in="path",
+     *         @OA\Schema(type="integer")
+     *     ),
+     *     @OA\Response(response=200, description="Successful operation"),
+     * )
+     */
 
-/**
- * @OA\Get(
- *     path="/oauth/authorize",
- *     tags={"OAuth2"},
- *     summary="Compose an OAuth2 authorization request and get authorization code.",
- *     @OA\Parameter(
- *         name="client_id",
- *         description="Numeric ID of the client.",
- *         required=true,
- *         in="query",
- *         @OA\Schema(type="integer")
- *     ),
- *     @OA\Parameter(
- *         name="redirect_uri",
- *         description="Redirect URI of the client.",
- *         required=true,
- *         in="query",
- *         @OA\Schema(type="string")
- *     ),
- *     @OA\Parameter(
- *         name="response_type",
- *         description="Response type of the request.",
- *         required=true,
- *         in="query",
- *         @OA\Schema(type="string", enum={"code"})
- *     ),
- *     @OA\Parameter(
- *         name="scope",
- *         description="Scope requested, (there is no scope registered in JB Online).",
- *         required=false,
- *         in="query",
- *         @OA\Schema(type="string", enum={""})
- *     ),
- *     @OA\Response(response=401, description="Client authorization failure"),
- *     @OA\Response(response=200, description="Authorization page"),
- *     @OA\Response(response=302, description="Succeed and redirect to callback page"),
- * )
- */
+    /**
+     * @OA\Get(
+     *     path="/oauth/authorize",
+     *     tags={"OAuth2"},
+     *     summary="Compose an OAuth2 authorization request and get authorization code.",
+     *     @OA\Parameter(
+     *         name="client_id",
+     *         description="Numeric ID of the client.",
+     *         required=true,
+     *         in="query",
+     *         @OA\Schema(type="integer")
+     *     ),
+     *     @OA\Parameter(
+     *         name="redirect_uri",
+     *         description="Redirect URI of the client.",
+     *         required=true,
+     *         in="query",
+     *         @OA\Schema(type="string")
+     *     ),
+     *     @OA\Parameter(
+     *         name="response_type",
+     *         description="Response type of the request.",
+     *         required=true,
+     *         in="query",
+     *         @OA\Schema(type="string", enum={"code"})
+     *     ),
+     *     @OA\Parameter(
+     *         name="scope",
+     *         description="Scope requested, (there is no scope registered in JB Online).",
+     *         required=false,
+     *         in="query",
+     *         @OA\Schema(type="string", enum={""})
+     *     ),
+     *     @OA\Response(response=401, description="Client authorization failure"),
+     *     @OA\Response(response=200, description="Authorization page"),
+     *     @OA\Response(response=302, description="Succeed and redirect to callback page"),
+     * )
+     */
 
-/**
- * @OA\Post(
- *     path="/oauth/token",
- *     tags={"OAuth2"},
- *     summary="Request for an access token with one-time authorization code.",
- *     @OA\RequestBody(
- *          @OA\MediaType(
- *              mediaType="application/x-www-form-urlencoded",
- *              @OA\Schema(ref="#/components/schemas/AccessRequest")
- *          )
- *     ),
- *     @OA\Response(
- *          response=201,
- *          description="Successful access request",
- *          @OA\JSONContent(ref="#/components/schemas/AccessSuccessfulResponse")
- *     ),
- *     @OA\Response(
- *          response=400,
- *          description="Unsuccessful access request",
- *          @OA\JSONContent(ref="#/components/schemas/AccessUnsuccessfulResponse")
- *     ),
- * )
- */
+    /**
+     * @OA\Post(
+     *     path="/oauth/token",
+     *     tags={"OAuth2"},
+     *     summary="Request for an access token with one-time authorization code.",
+     *     @OA\RequestBody(
+     *          @OA\MediaType(
+     *              mediaType="application/x-www-form-urlencoded",
+     *              @OA\Schema(ref="#/components/schemas/AccessRequest")
+     *          )
+     *     ),
+     *     @OA\Response(
+     *          response=200,
+     *          description="Successful access request",
+     *          @OA\JSONContent(ref="#/components/schemas/AccessSuccessfulResponse")
+     *     ),
+     *     @OA\Response(
+     *          response=400,
+     *          description="Unsuccessful access request",
+     *          @OA\JSONContent(ref="#/components/schemas/AccessUnsuccessfulResponse")
+     *     ),
+     * )
+     */
+}
 
 /**
  * @OA\Schema()
  */
-class ClientFullInfo
+class ClientInfo
 {
     /**
-     * Client numeric ID
+     * Numeric ID of the client.
+     *
      * @var integer
      * @OA\Property()
      */
     public $id;
+
     /**
-     * Client issuer's ID
+     * Numeric ID of the issuer of the client.
+     *
      * @var integer
      * @OA\Property()
      */
     public $user_id;
+
     /**
-     * Client name
+     * Name of the client.
+     *
      * @var string
      * @OA\Property()
      */
     public $name;
+
     /**
-     * Client secret token
+     * Secret token of the client.
      * @var string
      * @OA\Property()
      */
     public $secret;
+
     /**
-     * Client redirect URI
+     * Redirect URI of the client.
      * @var string
      * @OA\Property()
      */
     public $redirect;
+
     /**
      * Whether this is a personal access type client.
      * @var boolean
      * @OA\Property()
      */
     public $personal_access_client;
+
     /**
      * Whether this is a password grant type client.
      * @var boolean
      * @OA\Property()
      */
     public $password_client;
+
     /**
      * Whether this client is revoked.
      * @var boolean
      * @OA\Property()
      */
     public $revoked;
+
     /**
      * Timestamp of the created time of the client.
      * @var string
      * @OA\Property()
      */
     public $created_at;
+
     /**
      * Timestamp of the last updated time of the client.
      * @var string
@@ -302,35 +317,40 @@ class AccessRequest
 class AccessSuccessfulResponse
 {
     /**
-     * OAuth2 Grant Type
+     * Access token.
+     *
      * @var string
      * @OA\Property()
      */
     public $access_token;
 
     /**
-     * OAuth2 Grant Type
+     * Type of the token.
+     *
      * @var string
      * @OA\Property()
      */
     public $token_type;
 
     /**
-     * OAuth2 Grant Type
+     * Time before the token expires.
+     *
      * @var string
      * @OA\Property()
      */
     public $expires_in;
 
     /**
-     * OAuth2 Grant Type
+     * Refresh token.
+     *
      * @var string
      * @OA\Property()
      */
     public $refresh_token;
 
     /**
-     * OAuth2 Grant Type
+     * Scopes of the token.
+     *
      * @var string
      * @OA\Property()
      */
@@ -343,21 +363,24 @@ class AccessSuccessfulResponse
 class AccessUnsuccessfulResponse
 {
     /**
-     * OAuth2 Grant Type
+     * Error type.
+     *
      * @var string
      * @OA\Property()
      */
     public $error;
 
     /**
-     * OAuth2 Grant Type
+     * Error message.
+     *
      * @var string
      * @OA\Property()
      */
     public $message;
 
     /**
-     * OAuth2 Grant Type
+     * Hint to solve the error.
+     *
      * @var string
      * @OA\Property()
      */
