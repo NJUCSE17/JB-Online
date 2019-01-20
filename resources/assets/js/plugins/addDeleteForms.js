@@ -12,7 +12,7 @@
  * Injects a form with that's fired on click of the link with a DELETE request.
  * Good because you don't have to dirty your HTML with delete forms everywhere.
  */
-function JQueryConfirm() {
+window.addDeleteForms = function () {
     $('[data-method]').append(function () {
         if (!$(this).find('form').length > 0)
             return "\n" +
@@ -26,7 +26,7 @@ function JQueryConfirm() {
         .removeAttr('href')
         .attr('style', 'cursor:pointer;')
         .attr('onclick', '$(this).find("form").submit();');
-}
+};
 
 /**
  * Place any jQuery/helper plugins in here.
@@ -35,7 +35,7 @@ $(function () {
     /**
      * Add the data-method="delete" forms to all delete links
      */
-    JQueryConfirm();
+    window.addDeleteForms();
 
     /**
      * Disable all submit buttons once clicked
