@@ -27,7 +27,7 @@
                 <i class="far fa-file-code"></i>
             </a>
             <span class="mx-2">|</span>
-            {{ round(microtime(true) - LARAVEL_START, 2) }}ms
+            {{ round(microtime(true) - LARAVEL_START, 2) }}s
         </span>
     </div>
 </footer>
