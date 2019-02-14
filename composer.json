@@ -15,7 +15,6 @@
         "creativeorange/gravatar": "~1.0",
         "cybercog/laravel-love": "^5.2",
         "davejamesmiller/laravel-breadcrumbs": "^5.2",
-        "divineomega/laravel-password-exposed-validation-rule": "^1.2.3",
         "fideloper/proxy": "^4.0",
         "graham-campbell/flysystem": "^5.1",
         "hieu-le/active": "^3.5.1",

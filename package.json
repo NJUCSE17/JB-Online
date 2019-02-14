@@ -12,8 +12,8 @@
     "tdd": "npm run test -- --watch --notify"
   },
   "devDependencies": {
-    "@vue/test-utils": "^1.0.0-beta.28",
-    "ajv": "^6.6.2",
+    "@vue/test-utils": "^1.0.0-beta.29",
+    "ajv": "^6.9.1",
     "axios": "^0.18.0",
     "babel-jest": "^23.6.0",
     "babel-preset-env": "^1.7.0",
@@ -21,15 +21,15 @@
     "imagemin": "^6.1.0",
     "jest": "^23.6.0",
     "jest-vue-preprocessor": "^1.4.0",
-    "laravel-mix": "^4.0",
+    "laravel-mix": "^4.0.14",
     "lodash": "^4.17.11",
     "pace": "github:HubSpot/pace#v1.0.2",
     "resolve-url-loader": "^2.3.1",
-    "sass": "^1.16.0",
+    "sass": "^1.17.0",
     "sass-loader": "^7.1.0",
     "simple-line-icons": "^2.4.1",
-    "vue": "^2.5.21",
-    "vue-template-compiler": "^2.5.22"
+    "vue": "^2.6.6",
+    "vue-template-compiler": "^2.6.6"
   },
   "jest": {
     "testURL": "http://localhost",
@@ -50,12 +50,12 @@
   },
   "dependencies": {
     "@babel/core": "^7.2.2",
-    "@babel/preset-env": "^7.2.3",
-    "bootstrap": "^4.2.1",
-    "bootswatch": "^4.2.1",
+    "@babel/preset-env": "^7.3.1",
+    "bootstrap": "^4.3.1",
+    "bootswatch": "^4.3.1",
     "jquery": "^3.3.1",
     "jquery-confirm": "3.3.2",
     "jquery-ui": "^1.12.1",
-    "popper.js": "^1.14.6"
+    "popper.js": "^1.14.7"
   }
 }
