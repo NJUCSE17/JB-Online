@@ -3,16 +3,8 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
-use App\Models\Forum\Assignment;
-use App\Repositories\Frontend\Forum\NoticeRepository;
-use App\Repositories\Frontend\Forum\AssignmentRepository;
-use Carbon\Traits\Timestamp;
-use http\Env\Response;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
-use Illuminate\Validation\Rules\In;
 
 class HomeController extends Controller
 {

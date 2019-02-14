@@ -2,7 +2,7 @@
 
 /**
  * @OA\Info(
- *      version="v1",
+ *      version="v0.2.0",
  *      title="JB Online API Documentation",
  *      description="JB Online OpenApi description",
  *     @OA\License(
@@ -56,12 +56,12 @@ class OAuth2API
 
     /**
      * @OA\Put(
-     *     path="/oauth/clients/{client-id}",
+     *     path="/oauth/clients/{client_id}",
      *     tags={"OAuth2"},
      *     summary="Update an OAuth2 client.",
      *     security={{"passport" : {}}},
      *     @OA\Parameter(
-     *         name="client-id",
+     *         name="client_id",
      *         description="Numeric ID of the client.",
      *         required=true,
      *         in="path",
@@ -91,12 +91,12 @@ class OAuth2API
 
     /**
      * @OA\Delete(
-     *     path="/oauth/clients/{client-id}",
+     *     path="/oauth/clients/{client_id}",
      *     tags={"OAuth2"},
      *     summary="Delete an OAuth2 client.",
      *     security={{"passport" : {}}},
      *     @OA\Parameter(
-     *         name="client-id",
+     *         name="client_id",
      *         description="Numeric ID of the client.",
      *         required=true,
      *         in="path",
