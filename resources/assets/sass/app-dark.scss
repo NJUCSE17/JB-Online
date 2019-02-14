@@ -8,6 +8,14 @@
 .navbar {
   padding: 0.5rem 1rem !important;
 }
+input, textarea{
+  background-color: #444 !important;
+  color: #aaa !important;
+  ::-webkit-input-placeholder { color: #aaa; }
+  :-moz-placeholder { color: #aaa; }
+  ::-moz-placeholder { color: #aaa; }
+  :-ms-input-placeholder { color: #aaa; }
+}
 
 // Bootstrap Overrides
 @import 'custom';
@@ -16,3 +24,4 @@
 @import 'plugins/sideBar';
 @import 'plugins/jQueryConfirm';
 @import 'plugins/tableOfContents';
+@import 'plugins/simpleMDE/dark';

@@ -57,3 +57,13 @@ if (token) {
 //     cluster: process.env.MIX_PUSHER_APP_CLUSTER,
 //     encrypted: true
 // });
+
+/**
+ * Load SimpleMDE editor.
+ */
+try {
+    SimpleMDE = require('simplemde');
+    let simplemde = new SimpleMDE();
+} catch (e) {
+    //console.error('Loading SimpleMDE failed. ' + e);
+}
