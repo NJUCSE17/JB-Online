@@ -6,7 +6,6 @@ use App\Rules\Auth\ChangePassword;
 use App\Rules\Auth\UnusedPassword;
 use App\Rules\Sanitize;
 use Illuminate\Foundation\Http\FormRequest;
-use DivineOmega\LaravelPasswordExposedValidationRule\PasswordExposed;
 
 /**
  * Class UpdatePasswordRequest.
@@ -37,7 +36,6 @@ class UpdatePasswordRequest extends FormRequest
                 'confirmed',
                 new Sanitize(),
                 new ChangePassword(),
-                new PasswordExposed(),
                 new UnusedPassword($this->user()),
             ],
         ];

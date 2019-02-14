@@ -39,7 +39,7 @@
         @endforeach
     </div>
 @else
-    <div class="card my-3">
+    <div class="card mb-3">
         <div class="card-body p-3">
             <div class="row">
                 <div class="col text-center">

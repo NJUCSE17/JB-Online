@@ -13,7 +13,7 @@ try {
 
     require('bootstrap');
 
-    require('jquery-ui');
+    require('jquery-ui-bundle');
     require('jquery-confirm');
 } catch (e) {}
 
