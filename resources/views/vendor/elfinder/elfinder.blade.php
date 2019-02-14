@@ -5,15 +5,15 @@
 
 @section('content')
     <!-- Element where elFinder will be created (REQUIRED) -->
-    <div id="elfinder"></div>
+    <div id="elfinder" class="my-3"></div>
 @endsection
 
 @push('after-scripts')
-    <!-- jQuery and jQuery UI (REQUIRED) -->
+        <!-- jQuery and jQuery UI (REQUIRED) -->
 
     <!-- elFinder CSS (REQUIRED) -->
     <link rel="stylesheet" type="text/css" href="{{ asset($dir.'/css/elfinder.min.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset($dir.'/css/theme.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset($dir.'/css/theme-' . $theme . '.css') }}">
 
     <!-- elFinder JS (REQUIRED) -->
     <script src="{{ asset($dir.'/js/elfinder.min.js') }}"></script>
