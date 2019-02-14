@@ -6,7 +6,7 @@
 
 @section('content')
     <div class="row justify-content-center align-items-center mb-3">
-        <div class="col col-sm-10 align-self-center">
+        <div class="col align-self-center">
             <div class="card">
                 <div class="card-header">
                     <ul class="nav nav-tabs nav-justified card-header-tabs" role="tablist">
@@ -26,6 +26,10 @@
                                 <a href="#password" class="nav-link" aria-controls="password" role="tab" data-toggle="tab">{{ __('navs.frontend.user.change_password') }}</a>
                             </li>
                         @endif
+
+                        <li class="nav-item">
+                            <a href="#oauth" class="nav-link" aria-controls="oauth" role="tab" data-toggle="tab">OAuth</a>
+                        </li>
                     </ul>
                 </div>
 
@@ -45,6 +49,10 @@
                                     @include('frontend.user.account.tabs.change-password')
                                 </div><!--tab panel change password-->
                             @endif
+
+                            <div role="tabpanel" class="tab-pane fade show" id="oauth" aria-labelledby="oauth-tab">
+                                @include('frontend.user.account.tabs.oauth')
+                            </div><!--tab panel profile-->
                         </div><!--tab content-->
                     </div><!--tab panel-->
                 </div><!--card body-->

@@ -29,4 +29,5 @@ If you have any issues about safety or functions, you are welcome to open an iss
 *   [Laravel Boilerplate](http://laravel-boilerplate.com/) as code basement.
 *   [MathJax](https://www.mathjax.org/) for TeX and LaTeX display.
 *   [TinyMCE 4](https://www.tiny.cloud/) as WYSIWYG editor.
+*   [Swagger 3](https://github.com/swagger-api/swagger-ui) for API documentation.
 *   All icons from [FlatIcon](https://www.flaticon.com/).

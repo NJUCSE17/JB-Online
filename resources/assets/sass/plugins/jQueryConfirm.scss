@@ -1,0 +1,36 @@
+.jconfirm.jconfirm-light {
+  .jconfirm-bg {
+    background: rgba(0, 0, 0, 0.2);
+  }
+  .jconfirm-box {
+    @extend .bg-light;
+    &.loading {
+      &:before {
+      }
+      &:after {
+      }
+    }
+    div.jconfirm-closeIcon {
+    }
+    div.jconfirm-title-c {
+      .jconfirm-icon-c {
+        @extend .mr-2;
+      }
+    }
+    div.jconfirm-content-pane {
+    }
+    div.jconfirm-content {
+      &:empty {
+      }
+    }
+    .jconfirm-buttons {
+      @extend .float-right;
+      button {
+      }
+      button + button {
+      }
+    }
+    &.hilight {
+    }
+  }
+}

@@ -58,29 +58,6 @@ class AssignmentRepository extends BaseRepository
     /**
      * @return Assignment array
      */
-    public function APIGetOngoingAssignments()
-    {
-        $assignments = $this->model
-            ->where('due_time', '>', date("Y-m-d H:i:s"))
-            ->subscribedByUser(Auth::id())
-            ->orderBy('due_time')
-            ->get([
-                'assignments.id',
-                'assignments.course_id',
-                'assignments.name',
-                'assignments.content',
-                'assignments.due_time',
-                'assignments.issuer'
-            ]);
-        foreach ($assignments as $assignment) {
-            $assignment['finished'] = $assignment->is_finished;
-        }
-        return $assignments;
-    }
-
-    /**
-     * @return Assignment array
-     */
     public function getAssignmentsByTimestamps(int $userID, int $st, int $ed)
     {
         return $this->model
