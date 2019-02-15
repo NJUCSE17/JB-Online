@@ -36,7 +36,7 @@
                                     <tr>
                                         <td class="font-weight-bold">{{ $assignment->id }}</td>
                                         <td>{{ $assignment->name }}</td>
-                                        <td>{!! $assignment->content !!}</td>
+                                        <td>{!! $assignment->content_html !!}</td>
                                         <td>{{ $assignment->due_time }}</td>
                                         <td>{!! $assignment->action_buttons !!}</td>
                                     </tr>

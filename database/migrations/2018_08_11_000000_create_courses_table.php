@@ -24,6 +24,7 @@ class CreateCoursesTable extends Migration
             $table->dateTime('start_time');
             $table->dateTime('end_time');
             $table->text('notice')->nullable();
+            $table->text('notice_html')->nullable();
             $table->integer('user_id');
             $table->integer('difficulty');
             $table->integer('restrict_level');

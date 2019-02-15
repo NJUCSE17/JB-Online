@@ -63,9 +63,11 @@ class NoticeRepository extends BaseRepository
      */
     public function create(array $data) : Notice
     {
-        return DB::transaction(function () use ($data) {
+        $parser = new \Parsedown();
+        return DB::transaction(function () use ($data, $parser) {
             $notice = parent::create([
                 'content' => $data['content'],
+                'content_html' => $parser->text($data['content']),
                 'user_id' => $data['user_id'],
             ]);
 
@@ -89,9 +91,11 @@ class NoticeRepository extends BaseRepository
      */
     public function update(Notice $notice, array $data) : Notice
     {
-        return DB::transaction(function () use ($notice, $data) {
+        $parser = new \Parsedown();
+        return DB::transaction(function () use ($notice, $data, $parser) {
             if ($notice->update([
                 'content' => $data['content'],
+                'content_html' => $parser->text($data['content']),
                 'user_id' => $data['user_id'],
             ])) {
                 event(new NoticeUpdated($notice));

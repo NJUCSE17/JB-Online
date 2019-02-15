@@ -33,6 +33,7 @@ class Course extends Model
         'start_time',
         'end_time',
         'notice',
+        'notice_html',
         'difficulty',
         'restrict_level',
         'user_id',

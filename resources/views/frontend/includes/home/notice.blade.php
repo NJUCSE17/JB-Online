@@ -5,7 +5,7 @@
     </h5>
     <div class="card-body text-justify p-3" id="notice_content">
         @if($notice != null && $notice->content != null)
-            {!! $notice->content !!}
+            {!! $notice->content_html !!}
             <p class="float-right text-muted my-0">{{ $notice->time_label }}</p>
         @else
             <div class="row">

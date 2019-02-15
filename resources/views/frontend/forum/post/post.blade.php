@@ -2,7 +2,7 @@
     <h5 class="py-0 align-middle" style="height: 100%; overflow-x: auto;">
         <img class="img-avatar mr-2" src="{{ $post->author->picture }}"
              style="height: 45px !important;">
-        <span> {{$post->author->name}} </span>
+        <span> {{ $post->author->name }} </span>
         |
         <span class="voteBtnContainer" id="voteBtnContainer-post-{{ $post->id }}">
             {!!  $post->vote_buttons !!}
@@ -29,7 +29,7 @@
     <div class="px-0 py-0 my-0 border-left">
         <div class="row mx-0 my-0">
             <div class="col pl-3 pr-0 py-0">
-                <h5>{!! $post->content !!}</h5>
+                <h5>{!! $post->content_html !!}</h5>
                 <p class="float-right text-muted my-0">
                     {{ $post->time_label }}
                 </p>

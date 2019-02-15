@@ -145,11 +145,13 @@ class AssignmentRepository extends BaseRepository
      */
     public function create(array $data): Assignment
     {
-        return DB::transaction(function () use ($data) {
+        $parser = new \Parsedown();
+        return DB::transaction(function () use ($data, $parser) {
             $assignment = parent::create([
                 'course_id' => 0, // personal
                 'name' => $data['name'],
                 'content' => $data['content'],
+                'content_html' => $parser->text($data['content']),
                 'due_time' => $data['due_time'],
                 'issuer' => Auth::id(),
             ]);
@@ -172,10 +174,12 @@ class AssignmentRepository extends BaseRepository
      */
     public function update(Assignment $assignment, array $data)
     {
-        return DB::transaction(function () use ($assignment, $data) {
+        $parser = new \Parsedown();
+        return DB::transaction(function () use ($assignment, $data, $parser) {
             if ($assignment->update([
                 'name' => $data['name'],
                 'content' => $data['content'],
+                'content_html' => $parser->text($data['content']),
                 'due_time' => $data['due_time'],
             ])) {
                 event(new AssignmentUpdated($assignment));

@@ -86,13 +86,15 @@ class CourseRepository extends BaseRepository
      */
     public function create(array $data) : Course
     {
-        return DB::transaction(function () use ($data) {
+        $parser = new \Parsedown();
+        return DB::transaction(function () use ($data, $parser) {
             $course = parent::create([
                 'name' => $data['name'],
                 'semester' => $data['semester'],
                 'start_time' => $data['start_time'],
                 'end_time' => $data['end_time'],
                 'notice' => $data['notice'],
+                'notice_html' => $parser->text($data['notice']),
                 'difficulty' => $data['difficulty'],
                 'restrict_level' => $data['restrict_level'],
                 'user_id' => $data['user_id'],
@@ -118,13 +120,15 @@ class CourseRepository extends BaseRepository
      */
     public function update(Course $course, array $data) : Course
     {
-        return DB::transaction(function () use ($course, $data) {
+        $parser = new \Parsedown();
+        return DB::transaction(function () use ($course, $data, $parser) {
             if ($course->update([
                 'name' => $data['name'],
                 'semester' => $data['semester'],
                 'start_time' => $data['start_time'],
                 'end_time' => $data['end_time'],
                 'notice' => $data['notice'],
+                'notice_html' => $parser->text($data['notice']),
                 'difficulty' => $data['difficulty'],
                 'restrict_level' => $data['restrict_level'],
                 'user_id' => $data['user_id'],

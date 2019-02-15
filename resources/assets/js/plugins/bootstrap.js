@@ -64,11 +64,6 @@ if (token) {
 try {
     SimpleMDE = require('simplemde');
     let simplemde = new SimpleMDE({
-        autosave: {
-            enabled: true,
-            uniqueId: "SimpleMDEAutoSave",
-            delay: 1000,
-        },
         previewRender: function(plainText) {
             var preview = document.getElementsByClassName("editor-preview-side")[0];
             preview.innerHTML = this.parent.markdown(plainText);

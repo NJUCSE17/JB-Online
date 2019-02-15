@@ -50,7 +50,7 @@
                                 <td class="font-weight-bold">{{ $assignment->id }}</td>
                                 <td>{{ $assignment->course_name_label }}</td>
                                 <td>{{ $assignment->name }}</td>
-                                <td>{!! $assignment->content !!}
+                                <td>{!! $assignment->content_html !!}
                                     @if ($assignment->problems_table)
                                         <div id="assignment_problems_{{ $assignment->id }}">
                                             <object>

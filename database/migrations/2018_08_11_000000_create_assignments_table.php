@@ -22,6 +22,7 @@ class CreateAssignmentsTable extends Migration
             $table->integer('course_id');
             $table->string('name');
             $table->text('content');
+            $table->text('content_html');
             $table->dateTime('due_time');
             $table->integer('issuer')->default(0);
             $table->timestamps();

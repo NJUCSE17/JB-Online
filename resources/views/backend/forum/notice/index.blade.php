@@ -39,7 +39,7 @@
                             <tr>
                                 <td class="font-weight-bold">{{ $notice->id }}</td>
                                 <td>{{ $notice->user_id }}</td>
-                                <td>{!! $notice->content !!}</td>
+                                <td>{!! $notice->content_html !!}</td>
                                 <td>{{ $notice->updated_at->diffForHumans() }}</td>
                                 <td>{!! $notice->action_buttons !!}</td>
                             </tr>

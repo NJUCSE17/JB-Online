@@ -31,6 +31,7 @@ class Assignment extends Model
         'course_id',
         'name',
         'content',
+        'content_html',
         'due_time',
         'issuer',
     ];

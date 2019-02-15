@@ -22,7 +22,7 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col mx-3">
-                            <h5>{!! $assignment->content !!}</h5>
+                            <h5>{!! $assignment->content_html !!}</h5>
                             @if ($assignment->problems_table)
                                 <div id="assignment_problems_{{ $assignment->id }}">
                                     <object>

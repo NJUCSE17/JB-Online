@@ -46,7 +46,7 @@
                                 <td>{{ $course->semester }}</td>
                                 <td>{{ $course->start_time }}</td>
                                 <td>{{ $course->end_time }}</td>
-                                <td>{!! $course->notice !!}</td>
+                                <td>{!! $course->notice_html !!}</td>
                                 <td>{!!  $course->difficulty_label !!}</td>
                                 <td>{!! $course->restrict_label !!}</td>
                                 <td>{!! $course->action_buttons !!}</td>

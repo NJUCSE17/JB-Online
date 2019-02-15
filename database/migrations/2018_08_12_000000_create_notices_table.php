@@ -20,6 +20,7 @@ class CreateNoticesTable extends Migration
             $table->increments('id');
             $table->uuid('uuid');
             $table->text('content')->nullable();
+            $table->text('content_html')->nullable();
             $table->integer('user_id');
             $table->timestamps();
             $table->softDeletes();

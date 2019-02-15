@@ -31,7 +31,7 @@
         </div>
         <div id="page-content-wrapper" class="p-0">
             <div class="container-fluid p-0 @yield('appClass', '')">
-                <div class="main-navbar sticky-top bg-light">
+                <div class="main-navbar bg-light">
                     @include('backend.includes.nav')
                     @include('includes.partials.messages')
                 </div>
