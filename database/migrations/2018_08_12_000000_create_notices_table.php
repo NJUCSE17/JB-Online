@@ -19,8 +19,8 @@ class CreateNoticesTable extends Migration
         Schema::create('notices', function (Blueprint $table) {
             $table->increments('id');
             $table->uuid('uuid');
-            $table->text('content')->nullable();
-            $table->text('content_html')->nullable();
+            $table->text('content');
+            $table->text('content_html');
             $table->integer('user_id');
             $table->timestamps();
             $table->softDeletes();
