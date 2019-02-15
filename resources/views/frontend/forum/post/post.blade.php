@@ -21,7 +21,7 @@
                     </a>
                 @endif
             @endif
-            <a class="btn btn-sm btn-outline-success" onclick="triggerCreateModal({{ $post->id }})">
+            <a class="btn btn-sm btn-outline-success" href="#" onclick="triggerCreateModal({{ $post->id }})">
                 <i class="fas fa-reply mr-2"></i> {{ __('buttons.general.new_reply') }}
             </a>
         </span>
