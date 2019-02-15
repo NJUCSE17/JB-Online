@@ -63,7 +63,33 @@ if (token) {
  */
 try {
     SimpleMDE = require('simplemde');
-    let simplemde = new SimpleMDE();
+    let simplemde = new SimpleMDE({
+        autosave: {
+            enabled: true,
+            uniqueId: "SimpleMDEAutoSave",
+            delay: 1000,
+        },
+        previewRender: function(plainText) {
+            var preview = document.getElementsByClassName("editor-preview-side")[0];
+            preview.innerHTML = this.parent.markdown(plainText);
+            preview.setAttribute('id','editor-preview');
+            MathJax.Hub.Queue(["Typeset",MathJax.Hub,"editor-preview"]);
+            return preview.innerHTML;
+        },
+        promptURLs: true,
+        toolbar: ["bold", "italic", "heading",
+            "|", "code", "quote", "unordered-list", "ordered-list",
+            "|", "link", "table", "image",
+            {
+                name: "ElFinder",
+                action: function callElFinder(editor) {
+                    window.open("/filehub");
+                },
+                className: "fa fa-folder",
+                title: "Open Elfinder",
+            },
+            "|", "preview", "side-by-side", "fullscreen"],
+    });
 } catch (e) {
     //console.error('Loading SimpleMDE failed. ' + e);
 }
