@@ -8,9 +8,18 @@
 .navbar {
   padding: 0.5rem 1rem !important;
 }
-input, textarea{
+.form-control {
   background-color: #444 !important;
   color: #aaa !important;
+  border: 1px solid #555 !important;
+}
+.input-group-text {
+  border: 1px solid #555;
+}
+input, textarea{
+  background-color: #444;
+  color: #aaa;
+  border: 1px solid #555;
   ::-webkit-input-placeholder { color: #aaa; }
   :-moz-placeholder { color: #aaa; }
   ::-moz-placeholder { color: #aaa; }
