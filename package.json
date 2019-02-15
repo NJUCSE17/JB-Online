@@ -56,6 +56,7 @@
     "jquery": "^3.3.1",
     "jquery-confirm": "3.3.2",
     "jquery-ui-bundle": "^1.12.1-migrate",
-    "popper.js": "^1.14.7"
+    "popper.js": "^1.14.7",
+    "simplemde": "^1.11.2"
   }
 }

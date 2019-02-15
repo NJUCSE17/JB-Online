@@ -53,7 +53,7 @@
                                 <td>{{ $post->parent_id }}</td>
                                 <td>{{ $post->author_name_label }}</td>
                                 <td>{{ $post->editor_name_label }}</td>
-                                <td>{!! $post->content !!}</td>
+                                <td>{!! $post->content_html !!}</td>
                                 <td>{{ $post->updated_at->diffForHumans() }}</td>
                                 <td>{!! $post->action_buttons !!}</td>
                             </tr>

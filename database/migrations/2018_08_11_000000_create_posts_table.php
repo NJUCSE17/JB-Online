@@ -26,6 +26,7 @@ class CreatePostsTable extends Migration
             $table->integer('editor_id');
             $table->integer('rating')->default(0);
             $table->text('content');
+            $table->text('content_html');
             $table->timestamps();
             $table->softDeletes();
         });

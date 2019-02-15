@@ -34,6 +34,7 @@ class Post extends Model implements LikeableContract
         'parent_id',
         'rating',
         'content',
+        'content_html',
     ];
 
     /**

@@ -22,7 +22,7 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col mx-3">
-                            <h5>{!! $assignment->content !!}</h5>
+                            <h5>{!! $assignment->content_html !!}</h5>
                             @if ($assignment->problems_table)
                                 <div id="assignment_problems_{{ $assignment->id }}">
                                     <object>
@@ -110,14 +110,10 @@
 
                     <div class="row">
                         <div class="col">
-                            <div class="form-group">
-                                {{ html()->label(__('validation.attributes.frontend.content'))->for('content') }}
-
-                                {{ html()->textarea('content')
+                            {{ html()->textarea('content')
                                     ->class('form-control')
                                     ->placeholder(__('validation.attributes.frontend.content'))
                                     ->attribute('rows', 3) }}
-                            </div><!--form-group-->
                         </div><!--col-->
                     </div><!--row-->
                 </div>
@@ -138,11 +134,5 @@
             $('#createModal').modal('show');
             document.getElementById('parent_id_box').value = parent_id;
         };
-
-        $(document).on('focusin', function(e) {
-            if ($(e.target).closest(".mce-window").length) {
-                e.stopImmediatePropagation();
-            }
-        });
     </script>
 @endpush

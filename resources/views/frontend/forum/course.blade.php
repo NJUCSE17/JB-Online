@@ -20,7 +20,7 @@
                 </h4>
                 <div class="card-body text-justify">
                     @if($course->notice != null)
-                        {!! $course->notice !!}
+                        {!! $course->notice_html !!}
                         <p class="float-right text-muted">{{ $course->time_label }}</p>
                     @else
                         <div class="row">

@@ -50,7 +50,8 @@ class PostRepository extends BaseRepository
      */
     public function create(array $data) : Post
     {
-        return DB::transaction(function () use ($data) {
+        $parser = new \Parsedown();
+        return DB::transaction(function () use ($data, $parser) {
             $post = parent::create([
                 'course_id' => $data['course_id'],
                 'assignment_id' => $data['assignment_id'],
@@ -58,6 +59,7 @@ class PostRepository extends BaseRepository
                 'user_id' => $data['user_id'],
                 'editor_id' => $data['user_id'],
                 'content' => $data['content'],
+                'content_html' => $parser->text($data['content']),
             ]);
 
             if ($post) {
@@ -80,9 +82,11 @@ class PostRepository extends BaseRepository
      */
     public function update(Post $post, array $data) : Post
     {
-        return DB::transaction(function () use ($post, $data) {
+        $parser = new \Parsedown();
+        return DB::transaction(function () use ($post, $data, $parser) {
             if ($post->update([
                 'content' => $data['content'],
+                'content_html' => $parser->text($data['content']),
                 'editor_id' => $data['editor_id'],
             ])) {
                 event(new PostUpdated($post));

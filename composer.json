@@ -16,6 +16,7 @@
         "cybercog/laravel-love": "^5.2",
         "darkaonline/l5-swagger": "5.7.*",
         "davejamesmiller/laravel-breadcrumbs": "^5.2",
+        "erusev/parsedown": "^1.7",
         "fideloper/proxy": "^4.0",
         "graham-campbell/flysystem": "^5.1",
         "hieu-le/active": "^3.5.1",

@@ -24,7 +24,7 @@
                     </div>
                     <div id="assignment_content_{{ $assignment->id }}" class="pt-3">
                         <object class="my-0">
-                            {!! $assignment->content !!}
+                            {!! $assignment->content_html !!}
                         </object>
                     </div>
                     @if ($assignment->problems_table)
