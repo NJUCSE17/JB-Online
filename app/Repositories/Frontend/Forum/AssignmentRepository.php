@@ -49,8 +49,8 @@ class AssignmentRepository extends BaseRepository
     public function getOngoingAssignments()
     {
         return $this->model
-            ->where('due_time', '>', date("Y-m-d H:i:s"))
             ->subscribedByUser(Auth::id())
+            ->where('due_time', '>=', date("Y-m-d H:i:s"))
             ->orderBy('due_time')
             ->get(['assignments.*']);
     }
@@ -61,9 +61,9 @@ class AssignmentRepository extends BaseRepository
     public function getAssignmentsByTimestamps(int $userID, int $st, int $ed)
     {
         return $this->model
+            ->subscribedByUser($userID)
             ->where('due_time', '>=', date("Y-m-d H:i:s", $st))
             ->where('due_time', '<=', date("Y-m-d H:i:s", $ed))
-            ->subscribedByUser($userID)
             ->get(['assignments.*']);
     }
 
