@@ -12,7 +12,7 @@
         <title>@yield('title', app_name())</title>
         <meta name="description" content="@yield('meta_description', 'JB Online')">
         <meta name="author" content="@yield('meta_author', 'CS Elite 17')">
-
+        <meta name="theme-color" content="{{ $theme === 'light' ? "#fff" : "#303030" }}">
         @yield('meta')
 
         @stack('before-styles')
