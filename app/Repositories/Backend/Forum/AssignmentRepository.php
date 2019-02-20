@@ -62,7 +62,7 @@ class AssignmentRepository extends BaseRepository
     public function getOngoingAssignments()
     {
         return $this->model
-            ->where('due_time', '>', date("Y-m-d H:i:s"))
+            ->where('due_time', '>=', date("Y-m-d H:i:s"))
             ->orderBy('due_time')
             ->get();
     }
@@ -75,9 +75,9 @@ class AssignmentRepository extends BaseRepository
     {
         $targetDatetime = \Carbon\Carbon::now()->addDay(2)->startOfDay()->format("Y-m-d H:i:s");
         return $this->model
-            ->where('due_time', '>', date("Y-m-d H:i:s"))
-            ->where('due_time', '<=', $targetDatetime)
             ->subscribedByUser($userID)
+            ->where('due_time', '>=', date("Y-m-d H:i:s"))
+            ->where('due_time', '<=', $targetDatetime)
             ->orderBy('due_time')
             ->get();
     }
@@ -92,7 +92,7 @@ class AssignmentRepository extends BaseRepository
     public function getOngoingPaginated($paged = 25, $orderBy = 'created_at', $sort = 'desc') : LengthAwarePaginator
     {
         return $this->model
-            ->where('due_time', '>', date("Y-m-d H:i:s"))
+            ->where('due_time', '>=', date("Y-m-d H:i:s"))
             ->where('issuer', '=', 0)
             ->orderBy($orderBy, $sort)
             ->paginate($paged);
