@@ -51,7 +51,7 @@
   "dependencies": {
     "@babel/core": "^7.2.2",
     "@babel/preset-env": "^7.3.1",
-    "bootstrap": "^4.3.1",
+    "bootstrap": ">=4.3.1",
     "bootswatch": "^4.3.1",
     "jquery": "^3.3.1",
     "jquery-confirm": "3.3.2",
