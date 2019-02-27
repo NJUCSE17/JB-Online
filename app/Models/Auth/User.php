@@ -85,4 +85,15 @@ class User extends Authenticatable implements LikerContract
         'want_mail' => 'boolean',
         'confirmed' => 'boolean',
     ];
+
+    /**
+     * Find the user instance for the given username.
+     *
+     * @param  string  $username
+     * @return User
+     */
+    public function findForPassport($username)
+    {
+        return $this->where('student_id', $username)->first();
+    }
 }
