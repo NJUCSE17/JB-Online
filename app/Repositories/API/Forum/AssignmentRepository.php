@@ -33,12 +33,13 @@ class AssignmentRepository extends BaseRepository
                 'assignments.id',
                 'assignments.course_id',
                 'assignments.name',
-                'assignments.content',
+                'assignments.content_html',
                 'assignments.due_time',
                 'assignments.issuer'
             ]);
         foreach ($assignments as $assignment) {
             $assignment['finished'] = $assignment->is_finished;
+            $assignment['course_name'] = $assignment->course_name;
         }
         return $assignments;
     }
