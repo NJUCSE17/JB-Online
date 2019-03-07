@@ -56,30 +56,6 @@ class HomeController extends Controller
         }
         return response()->json($jsonValueArray);
     }
-
-    /**
-     * @OA\Get(
-     *     path="/api/app",
-     *     tags={"Utils"},
-     *     summary="Get the JSON data of latest mobile app info.",
-     *     @OA\Response(response=200, description="Successful operation",
-     *         @OA\MediaType(
-     *             mediaType="application/json",
-     *             @OA\Schema(ref="#/components/schemas/AppInfo"),
-     *         )
-     *     ),
-     * )
-     *
-     * @param Request $request
-     * @param string $app
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public function app(Request $request, $app = 'android')
-    {
-        return response()->json(mobile_app_version(), 200);
-    }
-
-
 }
 
 /**

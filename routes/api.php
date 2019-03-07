@@ -12,8 +12,6 @@ use Illuminate\Http\Request;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-Route::get('app/{system?}', 'API\HomeController@app')->name('api.app');
-
 Route::group(['namespace' => 'API', 'middleware' => 'auth:api'], function () {
     Route::get('heatmap', 'HomeController@heatmap')->name('api.heatmap');
 
