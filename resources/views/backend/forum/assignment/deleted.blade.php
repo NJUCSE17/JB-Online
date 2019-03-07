@@ -40,7 +40,7 @@
                                     <td class="font-weight-bold">{{ $assignment->id }}</td>
                                     <td>{{ $assignment->course_name_label }}</td>
                                     <td>{{ $assignment->name }}</td>
-                                    <td>{!! $assignment->content_html !!}</td>
+                                    <td><div class="content">{!! $assignment->content_html !!}</div></td>
                                     <td>{{ $assignment->due_time }}</td>
                                     <td>{!! $assignment->action_buttons !!}</td>
                                 </tr>
