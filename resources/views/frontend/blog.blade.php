@@ -56,7 +56,7 @@
                                      style="height: 45px !important;">
                                 {{ $feed['author'] }} - {{ $feed['title'] }}
                             </a>
-                            <div class="card-body feed-content" style="overflow: auto;">
+                            <div class="card-body content" style="overflow: auto;">
                                 {!! $feed['content'] !!}
                                 <div class="text-right">
                                     <small class="mb-0 text-muted">

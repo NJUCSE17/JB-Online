@@ -22,7 +22,7 @@
                             {!! $assignment->ddl_content !!}
                         </small>
                     </div>
-                    <div id="assignment_content_{{ $assignment->id }}" class="pt-3">
+                    <div id="assignment_content_{{ $assignment->id }}" class="pt-3 content">
                         <object class="my-0">
                             {!! $assignment->content_html !!}
                         </object>

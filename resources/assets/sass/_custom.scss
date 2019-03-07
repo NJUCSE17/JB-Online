@@ -34,7 +34,7 @@ body {
   text-align: center;
 }
 
-.feed-content {
+.content {
   a:before {
     font-family: "Font Awesome 5 Free";
     font-weight: 900;
@@ -69,5 +69,4 @@ body {
       content: "\2014 \00A0"; // em dash, nbsp
     }
   }
-
 }
