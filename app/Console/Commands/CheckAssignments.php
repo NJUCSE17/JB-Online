@@ -63,9 +63,9 @@ class CheckAssignments extends Command
                     $content = "<ul style='list-style-type: none;'>";
                     foreach ($assignments as $assignment) {
                         $content = $content . "<li><h1><a href='" . $assignment->assignment_link . "'>"
-                            . $assignment->name . "</a></h1><p>" . $assignment->content
+                            . $assignment->name . "</a></h1><p>" . $assignment->content_html
                             . "</p><div style='text-align: right;'>"
-                            . $assignment->ddl_badge_content . "</div></li>";
+                            . $assignment->ddl_content . "</div></li>";
                     }
                     $content = $content . "</ul>";
                     SendAssignmentMail::dispatch(array(
