@@ -36,4 +36,14 @@ class LoginController extends Controller
     {
         $this->middleware('guest')->except('logout');
     }
+
+    /**
+     * Use Student ID (SID) as username.
+     *
+     * @return string
+     */
+    public function username()
+    {
+        return 'student_id';
+    }
 }

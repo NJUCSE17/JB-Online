@@ -16,5 +16,9 @@ Route::get('/', function () {
 });
 
 Auth::routes();
+Route::group(['namespace' => 'Auth', 'as' => 'auth'], function () {
+    Route::get('/login/github', 'SocialLoginController@githubRedirect')->name('login.github.redirect');
+    Route::get('/login/github/callback', 'SocialLoginController@githubCallback')->name('login.github.callback');
+});
 
 Route::get('/home', 'HomeController@index')->name('home');
