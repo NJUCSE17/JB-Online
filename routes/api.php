@@ -13,6 +13,23 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+$authMiddleware  = ['middleware' => 'auth:api'];
+$adminMiddleware = []; // TODO: IMPLEMENT PREMISSIONS!!
+
+Route::group(['as' => 'api', 'namespace' => 'API', 'middleware' => 'throttle:20'],
+    function () use ($authMiddleware, $adminMiddleware) {
+        /**
+         * User-related APIs.
+         */
+        Route::group(['prefix' => '/user/{user_id}', 'as' => 'user'],
+            function () use ($authMiddleware, $adminMiddleware) {
+                Route::group($authMiddleware, function() {
+                    Route::get('/', 'UserController@get')->name('get');
+                    Route::put('/', 'UserController@update')->name('update');
+                });
+                Route::group($adminMiddleware, function () {
+                    Route::post('/', 'UserController@create')->name('create');
+                    Route::delete('/', 'UserController@delete')->name('delete');
+                });
+        });
 });
