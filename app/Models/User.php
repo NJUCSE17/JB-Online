@@ -29,6 +29,7 @@ class User extends Authenticatable
         'avatar_upload',
         'avatar_github',
         'blog',
+        'email_verified_at',
         'activated_at',
     ];
 

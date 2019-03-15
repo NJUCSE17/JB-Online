@@ -13,8 +13,8 @@ class APIController extends Controller
     public function data($data)
     {
         return response()->json([
-            'status'  => 'OK',
-            'data' => $data,
+            'success' => true,
+            'data'    => $data,
         ]);
     }
 
@@ -28,7 +28,7 @@ class APIController extends Controller
     public function error($message, $status)
     {
         return response()->json([
-            'status'  => 'Error',
+            'success' => false,
             'message' => $message,
         ], $status);
     }

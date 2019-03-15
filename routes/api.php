@@ -13,23 +13,28 @@ use Illuminate\Http\Request;
 |
 */
 
-$authMiddleware  = ['middleware' => 'auth:api'];
-$adminMiddleware = []; // TODO: IMPLEMENT PREMISSIONS!!
+// TODO: IMPLEMENT API MIDDLEWARES!!!
+$authMiddleware  = [];
+$adminMiddleware = [];
 
 Route::group(['as' => 'api', 'namespace' => 'API', 'middleware' => 'throttle:20'],
     function () use ($authMiddleware, $adminMiddleware) {
         /**
          * User-related APIs.
          */
-        Route::group(['prefix' => '/user/{user_id}', 'as' => 'user'],
+        Route::group(['prefix' => '/user', 'as' => 'user'],
             function () use ($authMiddleware, $adminMiddleware) {
-                Route::group($authMiddleware, function() {
-                    Route::get('/', 'UserController@get')->name('get');
+                Route::group($authMiddleware, function() use ($adminMiddleware) {
+                    Route::group($adminMiddleware, function () {
+                        Route::post('/', 'UserController@create')->name('create');
+                        Route::group(['prefix' => '/{user_id}'], function () {
+                            Route::delete('/', 'UserController@delete')->name('delete');
+                            Route::post('/activate', 'UserController@activate')->name('activate');
+                            Route::post('/deactivate', 'UserController@deactivate')->name('deactivate');
+                        });
+                    });
+                    Route::get('/{user_id?}', 'UserController@get')->name('get');
                     Route::put('/', 'UserController@update')->name('update');
-                });
-                Route::group($adminMiddleware, function () {
-                    Route::post('/', 'UserController@create')->name('create');
-                    Route::delete('/', 'UserController@delete')->name('delete');
                 });
         });
 });
