@@ -14,6 +14,12 @@ class UserController extends APIController
         //
     }
 
+    /**
+     * Get info of a user.
+     *
+     * @param $user_id
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function get($user_id)
     {
         if (!($user = User::find($user_id))) {
