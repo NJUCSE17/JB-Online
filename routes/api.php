@@ -37,4 +37,22 @@ Route::group(['as' => 'api', 'namespace' => 'API', 'middleware' => 'throttle:20'
                     Route::put('/', 'UserController@update')->name('update');
                 });
         });
+
+        /**
+         * Course-related APIs.
+         */
+        Route::group(['prefix' => '/course', 'as' => 'course'],
+            function () use ($authMiddleware, $adminMiddleware) {
+                Route::group($authMiddleware, function() use ($adminMiddleware) {
+                    Route::group($adminMiddleware, function () {
+                        Route::post('/', 'CourseController@create')->name('create');
+                        Route::group(['prefix' => '/{course_id}'], function () {
+                            Route::put('/', 'CourseController@update')->name('update');
+                            Route::delete('/', 'CourseController@delete')->name('delete');
+                        });
+                    });
+                    Route::get('/', 'CourseController@all')->name('all');
+                    Route::get('/{course_id}', 'CourseController@get')->name('get');
+                });
+            });
 });

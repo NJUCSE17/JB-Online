@@ -5,12 +5,25 @@ namespace App\Http\Controllers;
 class APIController extends Controller
 {
     /**
+     * @var \Parsedown
+     */
+    protected $parser;
+
+    /**
+     * APIController constructor.
+     */
+    public function __construct()
+    {
+        $this->parser = new \Parsedown();
+    }
+
+    /**
      * Package data with OK status
      *
      * @param $data
      * @return \Illuminate\Http\JsonResponse
      */
-    public function data($data)
+    protected function data($data)
     {
         return response()->json([
             'success' => true,
@@ -25,7 +38,7 @@ class APIController extends Controller
      * @param $status
      * @return \Illuminate\Http\JsonResponse
      */
-    public function error($message, $status)
+    protected function error($message, $status)
     {
         return response()->json([
             'success' => false,

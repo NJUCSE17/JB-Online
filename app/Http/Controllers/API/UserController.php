@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\API;
 
-use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Requests\User\StoreUserRequest;
 use App\Http\Requests\User\UpdateUserRequest;
 use App\Http\Resources\UserRecourse;
@@ -98,7 +97,7 @@ class UserController extends APIController
             return $this->error('User not found.', 404);
         } else {
             $user->delete();
-            return $this->data(null);
+            return $this->data('User deleted.');
         }
     }
 
@@ -136,13 +135,5 @@ class UserController extends APIController
             $user->deactivate();
             return $this->data(new UserRecourse($user));
         }
-    }
-
-    protected function validateUpdateData(Request $request) {
-        return $request->validate([
-            'name'       => ['string', 'max:255'],
-            'email'      => ['string', 'email', 'max:255', 'unique:users'],
-            'password'   => ['string', 'min:8', 'confirmed'],
-        ]);
     }
 }
