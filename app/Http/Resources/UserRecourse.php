@@ -22,6 +22,7 @@ class UserRecourse extends JsonResource
             'blog'       => $this->blog,
             'verified'   => $this->isVerified(),
             'active'     => $this->isActive(),
+            // TODO: ADD PERSONAL ASSIGNMENTS IN ARRAY
         ];
     }
 }

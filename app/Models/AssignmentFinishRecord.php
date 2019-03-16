@@ -14,7 +14,6 @@ class AssignmentFinishRecord extends Model
     protected $fillable = [
         'user_id',
         'assignment_id',
-        'created_at',
     ];
     // TODO: WHEN AN ASSIGNMENT IS CHANGED, REVOKE THE RECORD (ISSUE BY KSL)
 

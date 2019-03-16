@@ -18,11 +18,11 @@ class CourseResource extends JsonResource
             'id'          => $this->id,
             'name'        => $this->name,
             'semester'    => $this->semester,
-            'start_time'  => $this->start_time,
-            'end_time'    => $this->end_time,
+            'start_time'  => $this->start_time->format('Y-m-d H:i:s'),
+            'end_time'    => $this->end_time->format('Y-m-d H:i:s'),
             'notice'      => $this->notice,
             'notice_html' => $this->notice_html,
-            'assignments' => new AssignmentResourceCollection(collect([])), //TODO: IMPLEMENT RELATIONSHIP
+            'assignments' => new AssignmentResourceCollection($this->assignments), // TODO: SELECT ONGOING ASSIGNMENTS
         ];
     }
 }
