@@ -2,10 +2,13 @@
 
 namespace App\Models;
 
+use App\Models\Traits\Course\CourseScopes;
 use Illuminate\Database\Eloquent\Model;
 
 class Course extends Model
 {
+    use CourseScopes;
+
     /**
      * The attributes that are mass assignable.
      *

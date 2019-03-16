@@ -51,7 +51,7 @@ Route::group(['as' => 'api', 'namespace' => 'API', 'middleware' => 'throttle:20'
                             Route::delete('/', 'CourseController@delete')->name('delete');
                         });
                     });
-                    Route::get('/', 'CourseController@all')->name('all');
+                    Route::get('/', 'CourseController@view')->name('view');
                     Route::get('/{course_id}', 'CourseController@get')->name('get');
                 });
             });

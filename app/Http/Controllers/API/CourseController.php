@@ -4,9 +4,12 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\APIController;
 use App\Http\Requests\Course\StoreCourseRequest;
+use App\Http\Requests\Course\ViewCourseRequest;
 use App\Http\Resources\CourseResource;
 use App\Http\Resources\CourseResourceCollection;
 use App\Models\Course;
+use Carbon\Carbon;
+use Carbon\Traits\Date;
 use Illuminate\Http\Request;
 
 class CourseController extends APIController
@@ -28,13 +31,21 @@ class CourseController extends APIController
     // TODO: SELECT COURSES ACCORDING TO TIME
     // TODO: SELECT ASSIGNMENTS ACCORDING TO TIME
     /**
-     * Get all courses.
+     * View all courses satisfying the constraints.
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function all()
+    public function view(ViewCourseRequest $request)
     {
-        return $this->data(new CourseResourceCollection(Course::all()));
+        $query = Course::query();
+        if ($request->has('semester')) {
+            $query->Semester($request->get('semester'));
+        }
+        if ($request->has('start_before')) {
+            $query->Between(Carbon::parse($request->get('start_before')),
+                Carbon::parse($request->get('end_after')));
+        }
+        return $this->data(new CourseResourceCollection($query->get()));
     }
 
     /**
