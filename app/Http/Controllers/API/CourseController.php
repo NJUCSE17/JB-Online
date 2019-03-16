@@ -3,17 +3,23 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\APIController;
+use App\Http\Requests\Course\GetCourseRequest;
 use App\Http\Requests\Course\StoreCourseRequest;
+use App\Http\Requests\Course\UpdateCourseRequest;
 use App\Http\Requests\Course\ViewCourseRequest;
 use App\Http\Resources\CourseResource;
 use App\Http\Resources\CourseResourceCollection;
 use App\Models\Course;
 use Carbon\Carbon;
-use Carbon\Traits\Date;
-use Illuminate\Http\Request;
 
 class CourseController extends APIController
 {
+    /**
+     * Create a course.
+     *
+     * @param StoreCourseRequest $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function create(StoreCourseRequest $request)
     {
         $data = $request->only(['name', 'semester', 'start_time', 'end_time', 'notice']);
@@ -28,11 +34,10 @@ class CourseController extends APIController
         return $this->data(new CourseResource($course));
     }
 
-    // TODO: SELECT COURSES ACCORDING TO TIME
-    // TODO: SELECT ASSIGNMENTS ACCORDING TO TIME
     /**
      * View all courses satisfying the constraints.
      *
+     * @param ViewCourseRequest $request
      * @return \Illuminate\Http\JsonResponse
      */
     public function view(ViewCourseRequest $request)
@@ -51,10 +56,11 @@ class CourseController extends APIController
     /**
      * Get a course.
      *
+     * @param GetCourseRequest $request
      * @param $course_id
      * @return \Illuminate\Http\JsonResponse
      */
-    public function get($course_id)
+    public function get(GetCourseRequest $request, $course_id)
     {
         $course = Course::find($course_id);
         if (!$course) {
@@ -67,11 +73,11 @@ class CourseController extends APIController
     /**
      * Update a course.
      *
-     * @param Request $request
+     * @param UpdateCourseRequest $request
      * @param $course_id
      * @return \Illuminate\Http\JsonResponse
      */
-    public function update(Request $request, $course_id)
+    public function update(UpdateCourseRequest $request, $course_id)
     {
         $course = Course::find($course_id);
         if (!$course) {
@@ -97,11 +103,10 @@ class CourseController extends APIController
     /**
      * Delete a course.
      *
-     * @param Request $request
      * @param $course_id
      * @return \Illuminate\Http\JsonResponse
      */
-    public function delete(Request $request, $course_id)
+    public function delete($course_id)
     {
         $course = Course::find($course_id);
         if (!$course) {
