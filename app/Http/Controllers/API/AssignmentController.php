@@ -7,7 +7,12 @@ use App\Http\Controllers\Controller;
 
 class AssignmentController extends Controller
 {
-    public function create(Request $request, $assignment_id)
+    public function create(Request $request)
+    {
+
+    }
+
+    public function view()
     {
         //
     }

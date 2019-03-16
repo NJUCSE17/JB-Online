@@ -43,7 +43,7 @@ Route::group(['as' => 'api', 'namespace' => 'API', 'middleware' => 'throttle:20'
          */
         Route::group(['prefix' => '/course', 'as' => 'course'],
             function () use ($authMiddleware, $adminMiddleware) {
-                Route::group($authMiddleware, function() use ($adminMiddleware) {
+                Route::group($authMiddleware, function () use ($adminMiddleware) {
                     Route::group($adminMiddleware, function () {
                         Route::post('/', 'CourseController@create')->name('create');
                         Route::group(['prefix' => '/{course_id}'], function () {
@@ -54,5 +54,23 @@ Route::group(['as' => 'api', 'namespace' => 'API', 'middleware' => 'throttle:20'
                     Route::get('/', 'CourseController@view')->name('view');
                     Route::get('/{course_id}', 'CourseController@get')->name('get');
                 });
+            });
+
+        /**
+         * Assignment-related APIs
+         */
+        Route::group(['prefix' => '/assignment', 'as' => 'assignment'],
+            function () use ($authMiddleware, $adminMiddleware) {
+                Route::group($authMiddleware, function () use ($adminMiddleware) {
+                    Route::group($adminMiddleware, function () {
+                        Route::post('/', 'AssignmentController@create')->name('create');
+                        Route::group(['prefix' => '/{assignment_id}'], function () {
+                            Route::put('/', 'AssignmentController@update')->name('update');
+                            Route::delete('/', 'AssignmentController@delete')->name('delete');
+                        });
+                    });
+                });
+                Route::get('/', 'AssignmentController@view')->name('view');
+                Route::get('/{assignment_id}', 'AssignmentController@get')->name('get');
             });
 });
