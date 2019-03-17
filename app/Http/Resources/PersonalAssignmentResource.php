@@ -2,10 +2,9 @@
 
 namespace App\Http\Resources;
 
-use Carbon\Carbon;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class AssignmentResource extends JsonResource
+class PersonalAssignmentResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -17,7 +16,7 @@ class AssignmentResource extends JsonResource
     {
         return [
             'id'           => $this->id,
-            'course_id'    => $this->course_id,
+            'user_id'      => $this->user_id,
             'name'         => $this->name,
             'content'      => $this->content,
             'content_html' => $this->content_html,

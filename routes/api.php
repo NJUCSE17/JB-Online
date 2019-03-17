@@ -73,4 +73,40 @@ Route::group(['as' => 'api', 'namespace' => 'API', 'middleware' => 'throttle:20'
                 Route::get('/', 'AssignmentController@view')->name('view');
                 Route::get('/{assignment_id}', 'AssignmentController@get')->name('get');
             });
+
+        /**
+         * Personal-assignment-related APIs
+         */
+        Route::group(['prefix' => '/personal', 'as' => 'personal'],
+            function () use ($authMiddleware, $adminMiddleware) {
+                Route::group($authMiddleware, function () use ($adminMiddleware) {
+                    Route::group($adminMiddleware, function () {
+                        Route::post('/', 'PersonalAssignmentController@create')->name('create');
+                        Route::group(['prefix' => '/{personal_assignment_id}'], function () {
+                            Route::put('/', 'PersonalAssignmentController@update')->name('update');
+                            Route::delete('/', 'PersonalAssignmentController@delete')->name('delete');
+                        });
+                    });
+                });
+                Route::get('/', 'PersonalAssignmentController@view')->name('view');
+                Route::get('/{personal_assignment_id}', 'PersonalAssignmentController@get')->name('get');
+            });
+
+        /**
+         * Problem-related APIs
+         */
+        Route::group(['prefix' => '/problem', 'as' => 'problem'],
+            function () use ($authMiddleware, $adminMiddleware) {
+                Route::group($authMiddleware, function () use ($adminMiddleware) {
+                    Route::group($adminMiddleware, function () {
+                        Route::post('/', 'ProblemController@create')->name('create');
+                        Route::group(['prefix' => '/{problem_id}'], function () {
+                            Route::put('/', 'ProblemController@update')->name('update');
+                            Route::delete('/', 'ProblemController@delete')->name('delete');
+                        });
+                    });
+                });
+                Route::get('/', 'ProblemController@view')->name('view');
+                Route::get('/{problem_id}', 'ProblemController@get')->name('get');
+            });
 });

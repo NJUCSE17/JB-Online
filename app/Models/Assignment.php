@@ -12,7 +12,6 @@ class Assignment extends Model
      * @var array
      */
     protected $fillable = [
-        'user_id',
         'course_id',
         'name',
         'content',

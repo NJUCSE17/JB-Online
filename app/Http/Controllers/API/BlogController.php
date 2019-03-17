@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\API;
 
+use App\Http\Controllers\APIController;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 
-class BlogController extends Controller
+class BlogController extends APIController
 {
     public function create(Request $request, $blog_id)
     {

@@ -37,7 +37,7 @@ class GetCourseRequest extends FormRequest
     public function rules()
     {
         return [
-            'course_id' => ['required', 'int', 'min:1'],
+            'course_id' => ['required', 'int', 'min:1'], // TODO: HOW TO VALIDATE THIS ROUTE PARAMETER?
         ];
     }
 }
