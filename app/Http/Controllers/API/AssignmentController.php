@@ -3,12 +3,16 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\APIController;
+use App\Http\Requests\Assignment\FinishAssignmentRequest;
+use App\Http\Requests\Assignment\ResetAssignmentRequest;
 use App\Http\Requests\Assignment\StorePersonalAssignmentRequest;
 use App\Http\Requests\Assignment\UpdatePersonalAssignmentRequest;
 use App\Http\Requests\Assignment\ViewPersonalAssignmentRequest;
+use App\Http\Resources\AssignmentFinishRecordResource;
 use App\Http\Resources\AssignmentResource;
 use App\Http\Resources\AssignmentResourceCollection;
 use App\Models\Assignment;
+use App\Models\AssignmentFinishRecord;
 
 class AssignmentController extends APIController
 {
@@ -98,5 +102,39 @@ class AssignmentController extends APIController
     {
         Assignment::query()->findOrFail($assignment_id)->delete();
         return $this->data('Assignment deleted.');
+    }
+
+    /**
+     * Finish an assignment.
+     *
+     * @param FinishAssignmentRequest $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function finish(FinishAssignmentRequest $request)
+    {
+        $data = $request->only('user_id', 'assignment_id');
+        $record = AssignmentFinishRecord::query()->updateOrCreate([
+            'user_id'       => $data['user_id'],
+            'assignment_id' => $data['assignment_id'],
+        ]);
+        return $this->data(new AssignmentFinishRecordResource($record));
+    }
+
+    /**
+     * Reset an assignment.
+     *
+     * @param ResetAssignmentRequest $request
+     * @return \Illuminate\Http\JsonResponse
+     * @throws \Exception
+     */
+    public function reset(ResetAssignmentRequest $request)
+    {
+        $data = $request->only('user_id', 'assignment_id');
+        AssignmentFinishRecord::query()
+            ->where('user_id', $data['user_id'])
+            ->where('assignment_id', $data['assignment_id'])
+            ->firstOrFail()
+            ->delete();
+        return $this->data('Assignment reset.');
     }
 }

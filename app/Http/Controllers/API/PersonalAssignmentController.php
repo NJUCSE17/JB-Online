@@ -6,9 +6,12 @@ use App\Http\Controllers\APIController;
 use App\Http\Requests\Assignment\StorePersonalAssignmentRequest;
 use App\Http\Requests\Assignment\UpdatePersonalAssignmentRequest;
 use App\Http\Requests\Assignment\ViewPersonalAssignmentRequest;
+use App\Http\Requests\PersonalAssignment\FinishPersonalAssignmentRequest;
+use App\Http\Requests\PersonalAssignment\ResetPersonalAssignmentRequest;
 use App\Http\Resources\PersonalAssignmentResource;
 use App\Http\Resources\PersonalAssignmentResourceCollection;
 use App\Models\PersonalAssignment;
+use App\Models\PersonalAssignmentFinishRecord;
 use Illuminate\Support\Facades\Auth;
 
 class PersonalAssignmentController extends APIController
@@ -97,5 +100,39 @@ class PersonalAssignmentController extends APIController
     {
         PersonalAssignment::query()->findOrFail($personal_assignment_id)->delete();
         return $this->data('Personal assignment deleted.');
+    }
+
+    /**
+     * Finish a personal assignment.
+     *
+     * @param FinishPersonalAssignmentRequest $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function finish(FinishPersonalAssignmentRequest $request)
+    {
+        $data = $request->only('user_id', 'personal_assignment_id');
+        $record = PersonalAssignment::query()->updateOrCreate([
+            'user_id'                => $data['user_id'],
+            'personal_assignment_id' => $data['assignment_id'],
+        ]);
+        return $this->data(new PersonalAssignmentResource($record));
+    }
+
+    /**
+     * Reset a personal assignment.
+     *
+     * @param ResetPersonalAssignmentRequest $request
+     * @return \Illuminate\Http\JsonResponse
+     * @throws \Exception
+     */
+    public function reset(ResetPersonalAssignmentRequest $request)
+    {
+        $data = $request->only('user_id', 'personal_assignment_id');
+        PersonalAssignmentFinishRecord::query()
+            ->where('user_id', $data['user_id'])
+            ->where('personal_assignment_id', $data['personal_assignment_id'])
+            ->firstOrFail()
+            ->delete();
+        return $this->data('Personal assignment reset.');
     }
 }

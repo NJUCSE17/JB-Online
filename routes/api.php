@@ -74,6 +74,8 @@ Route::group(['as' => 'api', 'namespace' => 'API', 'middleware' => 'throttle:20'
                 });
                 Route::get('/', 'AssignmentController@view')->name('view');
                 Route::get('/{assignment_id}', 'AssignmentController@get')->name('get');
+                Route::post('/finish', 'AssignmentController@finish')->name('finish');
+                Route::post('/reset', 'AssignmentController@reset')->name('reset');
             });
 
         /**
@@ -92,6 +94,8 @@ Route::group(['as' => 'api', 'namespace' => 'API', 'middleware' => 'throttle:20'
                 });
                 Route::get('/', 'PersonalAssignmentController@view')->name('view');
                 Route::get('/{personal_assignment_id}', 'PersonalAssignmentController@get')->name('get');
+                Route::post('/finish', 'PersonalAssignmentController@finish')->name('finish');
+                Route::post('/reset', 'PersonalAssignmentController@reset')->name('reset');
             });
 
         /**

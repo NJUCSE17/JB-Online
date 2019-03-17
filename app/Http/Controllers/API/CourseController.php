@@ -117,14 +117,12 @@ class CourseController extends APIController
      */
     public function enroll(EnrollCourseRequest $request)
     {
-        $data = $request->only('user_id', 'course_id');
-        $record = CourseEnrollRecord::query()->findOrNew([
-            'user_id'   => $data['user_id'],
-            'course_id' => $data['course_id'],
+        $data = $request->only('user_id', 'course_id', 'type_is_admin');
+        $record = CourseEnrollRecord::query()->updateOrCreate([
+            'user_id'       => $data['user_id'],
+            'course_id'     => $data['course_id'],
+            'type_is_admin' => $request->has('type_is_admin') ? $request->get('type_is_admin') : false,
         ]);
-        if ($request->has('type_is_admin')) {
-            $record->type_is_admin = $request->get('type_is_admin');
-        }
         return $this->data(new CourseEnrollRecordResource($record));
     }
 
