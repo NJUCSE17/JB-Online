@@ -22,7 +22,7 @@ class UserController extends APIController
     public function create(StoreUserRequest $request)
     {
         $data = $request->only(['student_id', 'name', 'email', 'blog', 'password']);
-        $user = User::create([
+        $user = User::query()->create([
             'student_id' => $data['student_id'],
             'name'       => $data['name'],
             'email'      => $data['email'],
@@ -41,12 +41,8 @@ class UserController extends APIController
      */
     public function get($user_id = null)
     {
-        $user = $user_id ? User::find($user_id) : Auth::getUser();
-        if (!$user) {
-            return $this->error('User not found.', 404);
-        } else {
-            return $this->data(new UserRecourse($user));
-        }
+        $user = $user_id ? User::query()->findOrFail($user_id) : Auth::getUser();
+        return $this->data(new UserRecourse($user));
     }
 
     /**
@@ -58,28 +54,24 @@ class UserController extends APIController
      */
     public function update(UpdateUserRequest $request, $user_id = null)
     {
-        $user = $user_id ? User::find($user_id) : Auth::getUser();
-        if (!$user) {
-            return $this->error('User not found.', 404);
-        } else {
-            // Authorization is checked by request
-            $name  = $request->has('name')     ? $request->get('name')                 : $user->name;
-            $email = $request->has('email')    ? $request->get('email')                : $user->email;
-            $blog  = $request->has('blog')     ? $request->get('blog')                 : $user->blog;
-            $pass  = $request->has('password') ? Hash::make($request->get('password')) : $user->password;
-            if ($request->has('email')) {
-                $user->resetEmail();
-                $user->deactivate();
-            }
-            $user->update([
-                'name'     => $name,
-                'email'    => $email,
-                'blog'     => $blog,
-                'password' => $pass,
-            ]);
-            // TODO: FIRE USER UPDATED EVENT
-            return $this->data(new UserRecourse($user));
+        $user = $user_id ? User::query()->findOrFail($user_id) : Auth::getUser();
+        // Authorization is checked by request
+        $name  = $request->has('name')     ? $request->get('name')                 : $user->name;
+        $email = $request->has('email')    ? $request->get('email')                : $user->email;
+        $blog  = $request->has('blog')     ? $request->get('blog')                 : $user->blog;
+        $pass  = $request->has('password') ? Hash::make($request->get('password')) : $user->password;
+        if ($request->has('email')) {
+            $user->resetEmail();
+            $user->deactivate();
         }
+        $user->update([
+            'name'     => $name,
+            'email'    => $email,
+            'blog'     => $blog,
+            'password' => $pass,
+        ]);
+        // TODO: FIRE USER UPDATED EVENT
+        return $this->data(new UserRecourse($user));
     }
 
     /**
@@ -88,52 +80,38 @@ class UserController extends APIController
      * @param Request $request
      * @param $user_id
      * @return \Illuminate\Http\JsonResponse
+     * @throws \Exception
      */
     public function delete(Request $request, $user_id)
     {
         // TODO: ADMINS CANNOT BE DELETED!
-        $user = User::find($user_id);
-        if (!$user) {
-            return $this->error('User not found.', 404);
-        } else {
-            $user->delete();
-            return $this->data('User deleted.');
-        }
+        User::query()->findOrFail($user_id)->delete();
+        return $this->data('User deleted.');
     }
 
     /**
      * Activate an user.
      *
-     * @param Request $request
      * @param $user_id
      * @return \Illuminate\Http\JsonResponse
      */
-    public function activate(Request $request, $user_id)
+    public function activate($user_id)
     {
-        $user = User::find($user_id);
-        if (!$user) {
-            return $this->error('User not found.', 404);
-        } else {
-            $user->activate();
-            return $this->data(new UserRecourse($user));
-        }
+        $user = User::query()->findOrFail($user_id);
+        $user->activate();
+        return $this->data(new UserRecourse($user));
     }
 
     /**
      * Deactivate an user.
      *
-     * @param Request $request
      * @param $user_id
      * @return \Illuminate\Http\JsonResponse
      */
-    public function deactivate(Request $request, $user_id)
+    public function deactivate($user_id)
     {
-        $user = User::find($user_id);
-        if (!$user) {
-            return $this->error('User not found.', 404);
-        } else {
-            $user->deactivate();
-            return $this->data(new UserRecourse($user));
-        }
+        $user = User::query()->findOrFail($user_id);
+        $user->deactivate();
+        return $this->data(new UserRecourse($user));
     }
 }

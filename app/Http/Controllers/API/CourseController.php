@@ -23,7 +23,7 @@ class CourseController extends APIController
     public function create(StoreCourseRequest $request)
     {
         $data = $request->only(['name', 'semester', 'start_time', 'end_time', 'notice']);
-        $course = Course::create([
+        $course = Course::query()->create([
             'name'        => $data['name'],
             'semester'    => $data['semester'],
             'start_time'  => $data['start_time'],
@@ -62,12 +62,8 @@ class CourseController extends APIController
      */
     public function get(GetCourseRequest $request, $course_id)
     {
-        $course = Course::find($course_id);
-        if (!$course) {
-            return $this->error('Course not found.', 404);
-        } else {
-            return $this->data(new CourseResource($course));
-        }
+        $course = Course::query()->findOrFail($course_id);
+        return $this->data(new CourseResource($course));
     }
 
     /**
@@ -79,25 +75,21 @@ class CourseController extends APIController
      */
     public function update(UpdateCourseRequest $request, $course_id)
     {
-        $course = Course::find($course_id);
-        if (!$course) {
-            return $this->error('Course not found.', 404);
-        } else {
-            $name       = $request->has('name')       ? $request->get('name')       : $course->name;
-            $semester   = $request->has('semester')   ? $request->get('semester')   : $course->semester;
-            $start_time = $request->has('start_time') ? $request->get('start_time') : $course->start_time;
-            $end_time   = $request->has('end_time')   ? $request->get('end_time')   : $course->end_time;
-            $notice     = $request->has('notice')     ? $request->get('notice')     : $course->notice;
-            $course->update([
-                'name'        => $name,
-                'semester'    => $semester,
-                'start_time'  => $start_time,
-                'end_time'    => $end_time,
-                'notice'      => $notice,
-                'notice_html' => clean($this->parser->parse($notice)),
-            ]);
-            return $this->data(new CourseResource($course));
-        }
+        $course = Course::query()->findOrFail($course_id);
+        $name       = $request->has('name')       ? $request->get('name')       : $course->name;
+        $semester   = $request->has('semester')   ? $request->get('semester')   : $course->semester;
+        $start_time = $request->has('start_time') ? $request->get('start_time') : $course->start_time;
+        $end_time   = $request->has('end_time')   ? $request->get('end_time')   : $course->end_time;
+        $notice     = $request->has('notice')     ? $request->get('notice')     : $course->notice;
+        $course->update([
+            'name'        => $name,
+            'semester'    => $semester,
+            'start_time'  => $start_time,
+            'end_time'    => $end_time,
+            'notice'      => $notice,
+            'notice_html' => clean($this->parser->parse($notice)),
+        ]);
+        return $this->data(new CourseResource($course));
     }
 
     /**
@@ -105,15 +97,11 @@ class CourseController extends APIController
      *
      * @param $course_id
      * @return \Illuminate\Http\JsonResponse
+     * @throws \Exception
      */
     public function delete($course_id)
     {
-        $course = Course::find($course_id);
-        if (!$course) {
-            return $this->error('Course not found.', 404);
-        } else {
-            $course->delete();
-            return $this->data('Course deleted.');
-        }
+        Course::query()->findOrFail($course_id)->delete();
+        return $this->data('Course deleted.');
     }
 }

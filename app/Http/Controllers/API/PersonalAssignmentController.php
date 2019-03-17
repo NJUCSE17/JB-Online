@@ -22,7 +22,7 @@ class PersonalAssignmentController extends APIController
     public function create(StorePersonalAssignmentRequest $request)
     {
         $data = $request->only('user_id', 'name', 'content', 'due_time');
-        $personal_assignment = PersonalAssignment::create([
+        $personal_assignment = PersonalAssignment::query()->create([
             'user_id'      => $data['user_id'],
             'name'         => $data['name'],
             'content'      => $data['content'],
@@ -60,12 +60,8 @@ class PersonalAssignmentController extends APIController
      */
     public function get($personal_assignment_id)
     {
-        $personal_assignment = PersonalAssignment::find($personal_assignment_id);
-        if (!$personal_assignment) {
-            return $this->error('Personal assignment not found.', 404);
-        } else {
-            return $this->data(new PersonalAssignmentResource($personal_assignment));
-        }
+        $personal_assignment = PersonalAssignment::query()->findOrFail($personal_assignment_id);
+        return $this->data(new PersonalAssignmentResource($personal_assignment));
     }
 
     /**
@@ -77,21 +73,17 @@ class PersonalAssignmentController extends APIController
      */
     public function update(UpdatePersonalAssignmentRequest $request, $personal_assignment_id)
     {
-        $personal_assignment = PersonalAssignment::find($personal_assignment_id);
-        if (!$personal_assignment) {
-            return $this->error('Personal assignment not found.', 404);
-        } else {
-            $name     = $request->has('name')     ? $request->get('name')     : $personal_assignment->name;
-            $content  = $request->has('content')  ? $request->get('content')  : $personal_assignment->content;
-            $due_time = $request->has('due_time') ? $request->get('due_time') : $personal_assignment->due_time;
-            $personal_assignment->update([
-                'name'         => $name,
-                'content'      => $content,
-                'content_html' => $this->parser->text($content),
-                'due_time'     => $due_time,
-            ]);
-            return $this->data(new PersonalAssignmentResource($personal_assignment));
-        }
+        $personal_assignment = PersonalAssignment::query()->findOrFail($personal_assignment_id);
+        $name     = $request->has('name')     ? $request->get('name')     : $personal_assignment->name;
+        $content  = $request->has('content')  ? $request->get('content')  : $personal_assignment->content;
+        $due_time = $request->has('due_time') ? $request->get('due_time') : $personal_assignment->due_time;
+        $personal_assignment->update([
+            'name'         => $name,
+            'content'      => $content,
+            'content_html' => $this->parser->text($content),
+            'due_time'     => $due_time,
+        ]);
+        return $this->data(new PersonalAssignmentResource($personal_assignment));
     }
 
     /**
@@ -99,15 +91,11 @@ class PersonalAssignmentController extends APIController
      *
      * @param $personal_assignment_id
      * @return \Illuminate\Http\JsonResponse
+     * @throws \Exception
      */
     public function delete($personal_assignment_id)
     {
-        $personal_assignment = Assignment::find($personal_assignment);
-        if (!$personal_assignment) {
-            return $this->error('Personal assignment not found.', 404);
-        } else {
-            $personal_assignment->delete();
-            return $this->data('Personal assignment deleted.');
-        }
+        PersonalAssignment::query()->findOrFail($personal_assignment_id)->delete();
+        return $this->data('Personal assignment deleted.');
     }
 }
