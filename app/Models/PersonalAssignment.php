@@ -2,10 +2,13 @@
 
 namespace App\Models;
 
+use App\Models\Traits\PersonalAssignment\PersonalAssignmentRelationships;
 use Illuminate\Database\Eloquent\Model;
 
 class PersonalAssignment extends Model
 {
+    use PersonalAssignmentRelationships;
+
     /**
      * The attributes that are mass assignable.
      *

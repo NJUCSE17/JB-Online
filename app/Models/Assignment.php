@@ -2,10 +2,13 @@
 
 namespace App\Models;
 
+use App\Models\Traits\Assignment\AssignmentRelationships;
 use Illuminate\Database\Eloquent\Model;
 
 class Assignment extends Model
 {
+    use AssignmentRelationships;
+
     /**
      * The attributes that are mass assignable.
      *

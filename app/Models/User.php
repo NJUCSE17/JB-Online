@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Models\Traits\User\UserAttributes;
 use App\Models\Traits\User\UserMethods;
+use App\Models\Traits\User\UserRelationships;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -12,7 +13,8 @@ class User extends Authenticatable
 {
     use Notifiable,
         UserAttributes,
-        UserMethods;
+        UserMethods,
+        UserRelationships;
 
     /**
      * The attributes that are mass assignable.

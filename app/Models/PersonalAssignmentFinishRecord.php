@@ -2,10 +2,13 @@
 
 namespace App\Models;
 
+use App\Models\Traits\PersonalAssignmentFinishRecord\PersonalAssignmentFinishRecordRelationships;
 use Illuminate\Database\Eloquent\Model;
 
 class PersonalAssignmentFinishRecord extends Model
 {
+    use PersonalAssignmentFinishRecordRelationships;
+
     /**
      * The attributes that are mass assignable.
      *

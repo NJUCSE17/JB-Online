@@ -2,10 +2,13 @@
 
 namespace App\Models;
 
+use App\Models\Traits\CourseEnrollRecord\CourseEnrollRecordRelationships;
 use Illuminate\Database\Eloquent\Model;
 
 class CourseEnrollRecord extends Model
 {
+    use CourseEnrollRecordRelationships;
+
     /**
      * The attributes that are mass assignable.
      *
