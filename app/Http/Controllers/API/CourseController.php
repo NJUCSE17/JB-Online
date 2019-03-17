@@ -3,13 +3,17 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\APIController;
+use App\Http\Requests\Course\EnrollCourseRequest;
 use App\Http\Requests\Course\GetCourseRequest;
+use App\Http\Requests\Course\QuitCourseRequest;
 use App\Http\Requests\Course\StoreCourseRequest;
 use App\Http\Requests\Course\UpdateCourseRequest;
 use App\Http\Requests\Course\ViewCourseRequest;
+use App\Http\Resources\CourseEnrollRecordResource;
 use App\Http\Resources\CourseResource;
 use App\Http\Resources\CourseResourceCollection;
 use App\Models\Course;
+use App\Models\CourseEnrollRecord;
 use Carbon\Carbon;
 
 class CourseController extends APIController
@@ -103,5 +107,42 @@ class CourseController extends APIController
     {
         Course::query()->findOrFail($course_id)->delete();
         return $this->data('Course deleted.');
+    }
+
+    /**
+     * Enroll a user to a course.
+     *
+     * @param EnrollCourseRequest $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function enroll(EnrollCourseRequest $request)
+    {
+        $data = $request->only('user_id', 'course_id');
+        $record = CourseEnrollRecord::query()->findOrNew([
+            'user_id'   => $data['user_id'],
+            'course_id' => $data['course_id'],
+        ]);
+        if ($request->has('type_is_admin')) {
+            $record->type_is_admin = $request->get('type_is_admin');
+        }
+        return $this->data(new CourseEnrollRecordResource($record));
+    }
+
+    /**
+     * Quit a user from a course.
+     *
+     * @param QuitCourseRequest $request
+     * @return \Illuminate\Http\JsonResponse
+     * @throws \Exception
+     */
+    public function quit(QuitCourseRequest $request)
+    {
+        $data = $request->only('user_id', 'course_id');
+        CourseEnrollRecord::query()
+            ->where('user_id', $data['user_id'])
+            ->where('course_id', $data['course_id'])
+            ->firstOrFail()
+            ->delete();
+        return $this->data('Course quited.');
     }
 }

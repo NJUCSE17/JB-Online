@@ -53,6 +53,8 @@ Route::group(['as' => 'api', 'namespace' => 'API', 'middleware' => 'throttle:20'
                     });
                     Route::get('/', 'CourseController@view')->name('view');
                     Route::get('/{course_id}', 'CourseController@get')->name('get');
+                    Route::post('/enroll', 'CourseController@enroll')->name('enroll');
+                    Route::post('/quit', 'CourseController@quit')->name('quit');
                 });
             });
 

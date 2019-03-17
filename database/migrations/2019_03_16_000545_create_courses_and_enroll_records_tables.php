@@ -29,7 +29,7 @@ class CreateCoursesAndEnrollRecordsTables extends Migration
             $table->foreign('user_id')->references('id')->on('users');
             $table->unsignedBigInteger('course_id');
             $table->foreign('course_id')->references('id')->on('courses');
-            $table->boolean('type_is_admin');
+            $table->boolean('type_is_admin')->default(false);
             $table->timestamps();
         });
     }
