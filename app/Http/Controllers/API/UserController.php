@@ -30,7 +30,7 @@ class UserController extends APIController
             'password'   => Hash::make($data['password']),
         ]);
         // TODO: FIRE USER CREATED EVENT.
-        return $this->data(new UserRecourse($user));
+        return $this->created(new UserRecourse($user));
     }
 
     /**

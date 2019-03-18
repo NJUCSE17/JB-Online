@@ -32,7 +32,7 @@ class AssignmentController extends APIController
             'content_html' => $this->parser->text($data['content']),
             'due_time'     => $data['due_time'],
         ]);
-        return $this->data(new AssignmentResource($assignment));
+        return $this->created(new AssignmentResource($assignment));
     }
 
     /**

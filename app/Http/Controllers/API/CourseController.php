@@ -35,7 +35,7 @@ class CourseController extends APIController
             'notice'      => $data['notice'],
             'notice_html' => clean($this->parser->parse($data['notice'])),
         ]);
-        return $this->data(new CourseResource($course));
+        return $this->created(new CourseResource($course));
     }
 
     /**

@@ -18,7 +18,7 @@ class APIController extends Controller
     }
 
     /**
-     * Package data with OK status
+     * Package data with OK(200) status
      *
      * @param $data
      * @return \Illuminate\Http\JsonResponse
@@ -28,7 +28,21 @@ class APIController extends Controller
         return response()->json([
             'success' => true,
             'data'    => $data,
-        ]);
+        ], 200);
+    }
+
+    /**
+     * Package data with created(201) status
+     *
+     * @param $data
+     * @return \Illuminate\Http\JsonResponse
+     */
+    protected function created($data)
+    {
+        return response()->json([
+            'success' => true,
+            'data'    => $data,
+        ], 201);
     }
 
     /**

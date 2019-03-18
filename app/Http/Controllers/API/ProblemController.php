@@ -26,7 +26,7 @@ class ProblemController extends APIController
             'assignment_id' => $data['assignment_id'],
             'content'       => $data['content'],
         ]);
-        return $this->data(new ProblemResource($problem));
+        return $this->created(new ProblemResource($problem));
     }
 
     /**
