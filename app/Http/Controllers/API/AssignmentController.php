@@ -3,11 +3,12 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\APIController;
+use App\Http\Requests\Assignment\DeleteAssignmentRequest;
 use App\Http\Requests\Assignment\FinishAssignmentRequest;
 use App\Http\Requests\Assignment\ResetAssignmentRequest;
 use App\Http\Requests\Assignment\StoreAssignmentRequest;
 use App\Http\Requests\Assignment\UpdateAssignmentRequest;
-use App\Http\Requests\Assignment\ViewAssignmentRequest;
+use App\Http\Requests\Assignment\ReadAssignmentRequest;
 use App\Http\Resources\AssignmentFinishRecordResource;
 use App\Http\Resources\AssignmentResource;
 use App\Http\Resources\AssignmentResourceCollection;
@@ -36,49 +37,42 @@ class AssignmentController extends APIController
     }
 
     /**
-     * View assignments that satisfy constraints.
+     * Read(Get) assignments that satisfy constraints.
      * Default: subscribed by user, due in future.
      *
-     * @param ViewAssignmentRequest $request
+     * @param ReadAssignmentRequest $request
      * @return \Illuminate\Http\JsonResponse
      */
-    public function view(ViewAssignmentRequest $request)
+    public function read(ReadAssignmentRequest $request)
     {
-        $query = Assignment::query(); // TODO: SUBSCRIBED BY USER (COURSE ENROLL)
-        if ($request->has('course_id')) {
-            $query->where('course_id', $request->get('course_id'));
+        $query = Assignment::query();
+        if ($request->has('assignment_id')) {
+            $query->findOrFail('assignment_id');
+        } else {
+            if ($request->has('course_id')) {
+                $query->where('course_id', $request->get('course_id'));
+            } else {
+                // TODO: SUBSCRIBED BY USER (COURSE ENROLL)
+            }
+            if ($request->has('due_before')) {
+                $query->where('due_time', '<=', $request->get('due_before'));
+            }
+            $query->where('due_time', '>=',
+                $request->has('due_after') ? $request->get('due_after') : now());
+            // TODO: FINISHED ASSIGNMENT ONLY (ASSIGNMENT FINISH)
         }
-        if ($request->has('due_before')) {
-            $query->where('due_time', '<=', $request->get('due_before'));
-        }
-        $query->where('due_time', '>=',
-            $request->has('due_after') ? $request->get('due_after') : now());
-        // TODO: FINISHED ASSIGNMENT ONLY (ASSIGNMENT FINISH)
         return $this->data(new AssignmentResourceCollection($query->get()));
-    }
-
-    /**
-     * Get an assignment.
-     *
-     * @param $assignment_id
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public function get($assignment_id)
-    {
-        $assignment = Assignment::query()->findOrFail($assignment_id);
-        return $this->data(new AssignmentResource($assignment));
     }
 
     /**
      * Update an assignment.
      * 
      * @param UpdateAssignmentRequest $request
-     * @param $assignment_id
      * @return \Illuminate\Http\JsonResponse
      */
-    public function update(UpdateAssignmentRequest $request, $assignment_id)
+    public function update(UpdateAssignmentRequest $request)
     {
-        $assignment = Assignment::query()->findOrFail($assignment_id);
+        $assignment = Assignment::query()->findOrFail($request->get('assignment_id'));
         $name     = $request->has('name')     ? $request->get('name')     : $assignment->name;
         $content  = $request->has('content')  ? $request->get('content')  : $assignment->content;
         $due_time = $request->has('due_time') ? $request->get('due_time') : $assignment->due_time;
@@ -94,13 +88,12 @@ class AssignmentController extends APIController
     /**
      * Delete an assignment.
      *
-     * @param $assignment_id
      * @return \Illuminate\Http\JsonResponse
      * @throws \Exception
      */
-    public function delete($assignment_id)
+    public function delete(DeleteAssignmentRequest $request)
     {
-        Assignment::query()->findOrFail($assignment_id)->delete();
+        Assignment::query()->findOrFail($request->get('assignment_id'))->delete();
         return $this->data('Assignment deleted.');
     }
 

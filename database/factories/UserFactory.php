@@ -19,7 +19,13 @@ $factory->define(User::class, function (Faker $faker) {
     return [
         'name' => $faker->name,
         'email' => $faker->unique()->safeEmail,
+        'want_email' => $faker->boolean,
+        'avatar_type' => $faker->randomElement(array('upload', 'github', 'gravatar')),
+        'avatar_upload' => $faker->imageUrl(),
+        'avatar_github' => $faker->imageUrl(),
+        'blog' => $faker->url,
         'email_verified_at' => now(),
+        'activated_at' => now(),
         'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
         'remember_token' => Str::random(10),
     ];

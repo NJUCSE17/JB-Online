@@ -17,11 +17,12 @@ use Faker\Generator as Faker;
 
 $factory->define(Assignment::class, function (Faker $faker) {
     $fakeCourse = factory(Course::class)->create();
+    $content = $faker->paragraph;
     return [
         'course_id'    => $fakeCourse->id,
-        'name'         => $faker->name,
-        'content'      => $faker->paragraph,
-        'content_html' => $faker->paragraph,
-        'due_time'     => $faker->dateTime,
+        'name'         => $faker->realText(20),
+        'content'      => $content,
+        'content_html' => Parsedown::instance()->text($content),
+        'due_time'     => $faker->dateTimeBetween('now', '+5 days')->format('Y-m-d H:i:s'),
     ];
 });

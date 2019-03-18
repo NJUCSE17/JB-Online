@@ -15,12 +15,13 @@ use Faker\Generator as Faker;
 */
 
 $factory->define(Course::class, function (Faker $faker) {
+    $notice = $faker->paragraph;
     return [
-        'name'        => $faker->name,
+        'name'        => $faker->realText(20),
         'semester'    => $faker->numberBetween(1, 10),
-        'start_time'  => $faker->dateTimeBetween('-1 year', 'now'),
-        'end_time'    => $faker->dateTimeBetween('now', '+1 year'),
-        'notice'      => $faker->paragraph,
-        'notice_html' => $faker->paragraph,
+        'start_time'  => $faker->dateTimeBetween('-1 year', 'now')->format('Y-m-d H:i:s'),
+        'end_time'    => $faker->dateTimeBetween('now', '+1 year')->format('Y-m-d H:i:s'),
+        'notice'      => $notice,
+        'notice_html' => Parsedown::instance()->text($notice),
     ];
 });

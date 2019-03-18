@@ -61,22 +61,14 @@ Route::group(['as' => 'api', 'namespace' => 'API', 'middleware' => 'throttle:20'
         /**
          * Assignment-related APIs
          */
-        Route::group(['prefix' => '/assignment', 'as' => 'assignment'],
-            function () use ($authMiddleware, $adminMiddleware) {
-                Route::group($authMiddleware, function () use ($adminMiddleware) {
-                    Route::group($adminMiddleware, function () {
-                        Route::post('/', 'AssignmentController@create')->name('create');
-                        Route::group(['prefix' => '/{assignment_id}'], function () {
-                            Route::put('/', 'AssignmentController@update')->name('update');
-                            Route::delete('/', 'AssignmentController@delete')->name('delete');
-                        });
-                    });
-                });
-                Route::get('/', 'AssignmentController@view')->name('view');
-                Route::get('/{assignment_id}', 'AssignmentController@get')->name('get');
-                Route::post('/finish', 'AssignmentController@finish')->name('finish');
-                Route::post('/reset', 'AssignmentController@reset')->name('reset');
-            });
+        Route::group(['prefix' => '/assignment', 'as' => 'assignment'], function () {
+            Route::post('/', 'AssignmentController@create')->name('create');
+            Route::get('/', 'AssignmentController@read')->name('read');
+            Route::put('/', 'AssignmentController@update')->name('update');
+            Route::delete('/', 'AssignmentController@delete')->name('delete');
+            Route::post('/finish', 'AssignmentController@finish')->name('finish');
+            Route::post('/reset', 'AssignmentController@reset')->name('reset');
+        });
 
         /**
          * Personal-assignment-related APIs
