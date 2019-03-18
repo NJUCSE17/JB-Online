@@ -1,7 +1,7 @@
 <?php
 
-use App\Models\User;
-use Illuminate\Support\Str;
+use App\Models\Assignment;
+use App\Models\Course;
 use Faker\Generator as Faker;
 
 /*
@@ -15,12 +15,13 @@ use Faker\Generator as Faker;
 |
 */
 
-$factory->define(User::class, function (Faker $faker) {
+$factory->define(Assignment::class, function (Faker $faker) {
+    $fakeCourse = factory(Course::class)->create();
     return [
-        'name' => $faker->name,
-        'email' => $faker->unique()->safeEmail,
-        'email_verified_at' => now(),
-        'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
-        'remember_token' => Str::random(10),
+        'course_id'    => $fakeCourse->id,
+        'name'         => $faker->name,
+        'content'      => $faker->paragraph,
+        'content_html' => $faker->paragraph,
+        'due_time'     => $faker->dateTime,
     ];
 });

@@ -5,9 +5,9 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\APIController;
 use App\Http\Requests\Assignment\FinishAssignmentRequest;
 use App\Http\Requests\Assignment\ResetAssignmentRequest;
-use App\Http\Requests\Assignment\StorePersonalAssignmentRequest;
-use App\Http\Requests\Assignment\UpdatePersonalAssignmentRequest;
-use App\Http\Requests\Assignment\ViewPersonalAssignmentRequest;
+use App\Http\Requests\Assignment\StoreAssignmentRequest;
+use App\Http\Requests\Assignment\UpdateAssignmentRequest;
+use App\Http\Requests\Assignment\ViewAssignmentRequest;
 use App\Http\Resources\AssignmentFinishRecordResource;
 use App\Http\Resources\AssignmentResource;
 use App\Http\Resources\AssignmentResourceCollection;
@@ -19,10 +19,10 @@ class AssignmentController extends APIController
     /**
      * Create a new assignment.
      *
-     * @param StorePersonalAssignmentRequest $request
+     * @param StoreAssignmentRequest $request
      * @return \Illuminate\Http\JsonResponse
      */
-    public function create(StorePersonalAssignmentRequest $request)
+    public function create(StoreAssignmentRequest $request)
     {
         $data = $request->only('course_id', 'name', 'content', 'due_time');
         $assignment = Assignment::query()->create([
@@ -39,10 +39,10 @@ class AssignmentController extends APIController
      * View assignments that satisfy constraints.
      * Default: subscribed by user, due in future.
      *
-     * @param ViewPersonalAssignmentRequest $request
+     * @param ViewAssignmentRequest $request
      * @return \Illuminate\Http\JsonResponse
      */
-    public function view(ViewPersonalAssignmentRequest $request)
+    public function view(ViewAssignmentRequest $request)
     {
         $query = Assignment::query(); // TODO: SUBSCRIBED BY USER (COURSE ENROLL)
         if ($request->has('course_id')) {
@@ -72,11 +72,11 @@ class AssignmentController extends APIController
     /**
      * Update an assignment.
      * 
-     * @param UpdatePersonalAssignmentRequest $request
+     * @param UpdateAssignmentRequest $request
      * @param $assignment_id
      * @return \Illuminate\Http\JsonResponse
      */
-    public function update(UpdatePersonalAssignmentRequest $request, $assignment_id)
+    public function update(UpdateAssignmentRequest $request, $assignment_id)
     {
         $assignment = Assignment::query()->findOrFail($assignment_id);
         $name     = $request->has('name')     ? $request->get('name')     : $assignment->name;
