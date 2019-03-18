@@ -6,6 +6,12 @@ language: php
 php:
   - 7.2
 
+services:
+  - mysql
+
+before_install:
+  - mysql -e 'CREATE DATABASE IF NOT EXISTS jbonline_test;'
+
 before_script:
   - cp .env.travis .env
   - chmod 777 -R storage
