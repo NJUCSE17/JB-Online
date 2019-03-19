@@ -2,9 +2,10 @@
 
 namespace App\Http\Requests\Assignment;
 
+use App\Models\Assignment;
 use Illuminate\Foundation\Http\FormRequest;
 
-class ReadAssignmentRequest extends FormRequest
+class ViewAssignmentRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -13,7 +14,7 @@ class ReadAssignmentRequest extends FormRequest
      */
     public function authorize()
     {
-        return true; // TODO: PERMISSION
+        return $this->user()->can('view', Assignment::class);
     }
 
     /**

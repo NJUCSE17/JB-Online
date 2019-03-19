@@ -6,9 +6,9 @@ use App\Http\Controllers\APIController;
 use App\Http\Requests\Course\DeleteCourseRequest;
 use App\Http\Requests\Course\EnrollCourseRequest;
 use App\Http\Requests\Course\QuitCourseRequest;
-use App\Http\Requests\Course\ReadCourseRequest;
 use App\Http\Requests\Course\StoreCourseRequest;
 use App\Http\Requests\Course\UpdateCourseRequest;
+use App\Http\Requests\Course\ViewCourseRequest;
 use App\Http\Resources\CourseEnrollRecordResource;
 use App\Http\Resources\CourseResource;
 use App\Http\Resources\CourseResourceCollection;
@@ -41,10 +41,10 @@ class CourseController extends APIController
     /**
      * View all courses satisfying the constraints.
      *
-     * @param ReadCourseRequest $request
+     * @param ViewCourseRequest $request
      * @return \Illuminate\Http\JsonResponse
      */
-    public function read(ReadCourseRequest $request)
+    public function view(ViewCourseRequest $request)
     {
         $query = Course::query();
         if ($request->has('course_id')) {

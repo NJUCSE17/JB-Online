@@ -2,6 +2,9 @@
 
 namespace App\Models\Traits\User;
 
+use App\Models\Course;
+use App\Models\CourseEnrollRecord;
+
 trait UserAttributes
 {
     /**
@@ -59,5 +62,34 @@ trait UserAttributes
                         . "?d=" . urlencode( "identicon" );
                 }
         }
+    }
+
+    /**
+     * Check whether a user is in course.
+     *
+     * @param Course $course
+     * @return bool
+     */
+    public function isInCourse(Course $course)
+    {
+        return CourseEnrollRecord::query()
+            ->where('user_id', $this->id)
+            ->where('course_id', $course->id)
+            ->exists();
+    }
+
+    /**
+     * Check whether a user is admin of a course.
+     *
+     * @param Course $course
+     * @return bool
+     */
+    public function isCourseAdmin(Course $course)
+    {
+        return CourseEnrollRecord::query()
+            ->where('user_id', $this->id)
+            ->where('course_id', $course->id)
+            ->where('type_is_admin', true)
+            ->exists();
     }
 }

@@ -5,9 +5,9 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\APIController;
 use App\Http\Requests\User\ActivateUserRequest;
 use App\Http\Requests\User\DeleteUserRequest;
-use App\Http\Requests\User\ReadUserRequest;
 use App\Http\Requests\User\StoreUserRequest;
 use App\Http\Requests\User\UpdateUserRequest;
+use App\Http\Requests\User\ViewUserRequest;
 use App\Http\Resources\UserRecourse;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
@@ -38,10 +38,10 @@ class UserController extends APIController
     /**
      * Get info of a user.
      *
-     * @param ReadUserRequest $request
+     * @param ViewUserRequest $request
      * @return \Illuminate\Http\JsonResponse
      */
-    public function read(ReadUserRequest $request)
+    public function view(ViewUserRequest $request)
     {
         $user = $request->has('user_id') ? User::query()->findOrFail($request->get('user_id')) : Auth::getUser();
         return $this->data(new UserRecourse($user));

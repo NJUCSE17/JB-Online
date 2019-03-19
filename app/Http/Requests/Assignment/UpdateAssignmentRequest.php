@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Assignment;
 
+use App\Models\Assignment;
 use App\Rules\Sanitize;
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -14,7 +15,8 @@ class UpdateAssignmentRequest extends FormRequest
      */
     public function authorize()
     {
-        return true; // TODO: PERMISSIONS!!
+        $assignment = Assignment::query()->findOrFail($this->request->get('assignment_id'));
+        return $this->user()->can('update', $assignment);
     }
 
     /**

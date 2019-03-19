@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Assignment;
 
+use App\Models\Assignment;
 use Illuminate\Foundation\Http\FormRequest;
 
 class FinishAssignmentRequest extends FormRequest
@@ -13,7 +14,8 @@ class FinishAssignmentRequest extends FormRequest
      */
     public function authorize()
     {
-        return true; // TODO: PERMISSION
+        $assignment = Assignment::query()->findOrFail($this->request->get('assignment_id'));
+        return $this->user()->can('finish', $assignment);
     }
 
     /**
@@ -24,7 +26,6 @@ class FinishAssignmentRequest extends FormRequest
     public function rules()
     {
         return [
-            'user_id'       => ['required', 'int', 'exists:users,id'],
             'assignment_id' => ['required', 'int', 'exists:assignments,id'],
         ];
     }

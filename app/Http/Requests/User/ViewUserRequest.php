@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Assignment;
+namespace App\Http\Requests\User;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class ReadPersonalAssignmentRequest extends FormRequest
+class ViewUserRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -13,7 +13,7 @@ class ReadPersonalAssignmentRequest extends FormRequest
      */
     public function authorize()
     {
-        return true; // TODO: PERMISSION
+        return true; // TODO: PERMISSIONS
     }
 
     /**
@@ -24,11 +24,7 @@ class ReadPersonalAssignmentRequest extends FormRequest
     public function rules()
     {
         return [
-            'personal_assignment_id' => ['sometimes', 'int', 'exists:personal_assignments,id'],
             'user_id' => ['sometimes', 'int', 'exists:users,id'],
-            'due_after'  => ['sometimes', 'date_format:Y-m-d H:i:s'],
-            'due_before' => ['sometimes', 'date_format:Y-m-d H:i:s'],
-            'unfinished_only' => ['sometimes', 'boolean'],
         ];
     }
 }

@@ -3,27 +3,28 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\APIController;
+use App\Http\Requests\Assignment\CreateAssignmentRequest;
 use App\Http\Requests\Assignment\DeleteAssignmentRequest;
 use App\Http\Requests\Assignment\FinishAssignmentRequest;
 use App\Http\Requests\Assignment\ResetAssignmentRequest;
-use App\Http\Requests\Assignment\StoreAssignmentRequest;
 use App\Http\Requests\Assignment\UpdateAssignmentRequest;
-use App\Http\Requests\Assignment\ReadAssignmentRequest;
+use App\Http\Requests\Assignment\ViewAssignmentRequest;
 use App\Http\Resources\AssignmentFinishRecordResource;
 use App\Http\Resources\AssignmentResource;
 use App\Http\Resources\AssignmentResourceCollection;
 use App\Models\Assignment;
 use App\Models\AssignmentFinishRecord;
+use Illuminate\Support\Facades\Auth;
 
 class AssignmentController extends APIController
 {
     /**
      * Create a new assignment.
      *
-     * @param StoreAssignmentRequest $request
+     * @param CreateAssignmentRequest $request
      * @return \Illuminate\Http\JsonResponse
      */
-    public function create(StoreAssignmentRequest $request)
+    public function create(CreateAssignmentRequest $request)
     {
         $data = $request->only('course_id', 'name', 'content', 'due_time');
         $assignment = Assignment::query()->create([
@@ -37,13 +38,13 @@ class AssignmentController extends APIController
     }
 
     /**
-     * Read(Get) assignments that satisfy constraints.
+     * View assignments that satisfy constraints.
      * Default: subscribed by user, due in future.
      *
-     * @param ReadAssignmentRequest $request
+     * @param ViewAssignmentRequest $request
      * @return \Illuminate\Http\JsonResponse
      */
-    public function read(ReadAssignmentRequest $request)
+    public function view(ViewAssignmentRequest $request)
     {
         $query = Assignment::query();
         if ($request->has('assignment_id')) {
@@ -105,10 +106,9 @@ class AssignmentController extends APIController
      */
     public function finish(FinishAssignmentRequest $request)
     {
-        $data = $request->only('user_id', 'assignment_id');
         $record = AssignmentFinishRecord::query()->updateOrCreate([
-            'user_id'       => $data['user_id'],
-            'assignment_id' => $data['assignment_id'],
+            'user_id' => Auth::id(),
+            'assignment_id' => $request->get('assignment_id'),
         ]);
         return $this->data(new AssignmentFinishRecordResource($record));
     }
@@ -122,10 +122,9 @@ class AssignmentController extends APIController
      */
     public function reset(ResetAssignmentRequest $request)
     {
-        $data = $request->only('user_id', 'assignment_id');
         AssignmentFinishRecord::query()
-            ->where('user_id', $data['user_id'])
-            ->where('assignment_id', $data['assignment_id'])
+            ->where('user_id', Auth::id())
+            ->where('assignment_id', $request->get('assignment_id'))
             ->firstOrFail()
             ->delete();
         return $this->data('Assignment reset.');

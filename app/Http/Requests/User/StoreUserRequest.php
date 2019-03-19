@@ -13,7 +13,7 @@ class StoreUserRequest extends FormRequest
      */
     public function authorize()
     {
-        return true; // TODO: IMPLEMENT USER PERMISSION
+        return false; // TODO: PERMISSION
     }
 
     /**

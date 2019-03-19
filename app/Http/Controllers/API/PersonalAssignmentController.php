@@ -3,9 +3,9 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\APIController;
-use App\Http\Requests\Assignment\ReadPersonalAssignmentRequest;
 use App\Http\Requests\Assignment\StorePersonalAssignmentRequest;
 use App\Http\Requests\Assignment\UpdatePersonalAssignmentRequest;
+use App\Http\Requests\Assignment\ViewPersonalAssignmentRequest;
 use App\Http\Requests\PersonalAssignment\DeletePersonalAssignmentRequest;
 use App\Http\Requests\PersonalAssignment\FinishPersonalAssignmentRequest;
 use App\Http\Requests\PersonalAssignment\ResetPersonalAssignmentRequest;
@@ -40,10 +40,10 @@ class PersonalAssignmentController extends APIController
      * View personal assignments that satisfy constraints.
      * Default: current user, due in future.
      *
-     * @param ReadPersonalAssignmentRequest $request
+     * @param ViewPersonalAssignmentRequest $request
      * @return \Illuminate\Http\JsonResponse
      */
-    public function read(ReadPersonalAssignmentRequest $request)
+    public function view(ViewPersonalAssignmentRequest $request)
     {
         $query = PersonalAssignment::query();
         $query->where('user_id', $request->has('user_id') ? $request->get('user_id') : Auth::id());

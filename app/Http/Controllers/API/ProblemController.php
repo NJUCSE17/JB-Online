@@ -4,9 +4,9 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\APIController;
 use App\Http\Requests\Problem\DeleteProblemRequest;
-use App\Http\Requests\Problem\ReadProblemRequest;
 use App\Http\Requests\Problem\StoreProblemRequest;
 use App\Http\Requests\Problem\UpdateProblemRequest;
+use App\Http\Requests\Problem\ViewProblemRequest;
 use App\Http\Resources\ProblemResource;
 use App\Http\Resources\ProblemResourceCollection;
 use App\Models\Problem;
@@ -33,10 +33,10 @@ class ProblemController extends APIController
     /**
      * View problems of a course or an assignment.
      *
-     * @param ReadProblemRequest $request
+     * @param ViewProblemRequest $request
      * @return \Illuminate\Http\JsonResponse
      */
-    public function read(ReadProblemRequest $request)
+    public function view(ViewProblemRequest $request)
     {
         $query = Problem::query();
         if ($request->has('problem_id')) {

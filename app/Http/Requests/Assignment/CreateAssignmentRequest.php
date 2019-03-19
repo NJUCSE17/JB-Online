@@ -2,10 +2,12 @@
 
 namespace App\Http\Requests\Assignment;
 
+use App\Models\Assignment;
+use App\Models\Course;
 use App\Rules\Sanitize;
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreAssignmentRequest extends FormRequest
+class CreateAssignmentRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -14,7 +16,8 @@ class StoreAssignmentRequest extends FormRequest
      */
     public function authorize()
     {
-        return true; // TODO: PREMISSION!!
+        $course = Course::query()->findOrFail($this->request->get('course_id'));
+        return $this->user()->can('create', Assignment::class) || $this->user()->isCourseAdmin($course);
     }
 
     /**

@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\User;
+namespace App\Http\Requests\Problem;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class ReadUserRequest extends FormRequest
+class ViewProblemRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -13,7 +13,7 @@ class ReadUserRequest extends FormRequest
      */
     public function authorize()
     {
-        return true; // TODO: PERMISSIONS
+        return true; // TODO: PERMISSION
     }
 
     /**
@@ -24,7 +24,9 @@ class ReadUserRequest extends FormRequest
     public function rules()
     {
         return [
-            'user_id' => ['sometimes', 'int', 'exists:users,id'],
+            'problem_id' => ['sometimes', 'int', 'exists:problems,id'],
+            'course_id'     => ['required_without:assignment_id', 'int', 'exists:courses,id'],
+            'assignment_id' => ['sometimes', 'int', 'exists:assignments,id'],
         ];
     }
 }
