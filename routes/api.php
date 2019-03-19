@@ -1,7 +1,5 @@
 <?php
 
-use Illuminate\Http\Request;
-
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -13,50 +11,30 @@ use Illuminate\Http\Request;
 |
 */
 
-// TODO: IMPLEMENT API MIDDLEWARES!!!
-$authMiddleware  = [];
-$adminMiddleware = [];
-
-Route::group(['as' => 'api', 'namespace' => 'API', 'middleware' => 'throttle:20'],
-    function () use ($authMiddleware, $adminMiddleware) {
+Route::group(['as' => 'api', 'namespace' => 'API', 'middleware' => 'throttle:20'], function () {
         /**
          * User-related APIs.
          */
-        Route::group(['prefix' => '/user', 'as' => 'user'],
-            function () use ($authMiddleware, $adminMiddleware) {
-                Route::group($authMiddleware, function() use ($adminMiddleware) {
-                    Route::group($adminMiddleware, function () {
-                        Route::post('/', 'UserController@create')->name('create');
-                        Route::group(['prefix' => '/{user_id}'], function () {
-                            Route::delete('/', 'UserController@delete')->name('delete');
-                            Route::post('/activate', 'UserController@activate')->name('activate');
-                            Route::post('/deactivate', 'UserController@deactivate')->name('deactivate');
-                        });
-                    });
-                    Route::get('/{user_id?}', 'UserController@get')->name('get');
-                    Route::put('/', 'UserController@update')->name('update');
-                });
+    Route::group(['prefix' => '/user', 'as' => 'user'], function () {
+        Route::post('/', 'UserController@create')->name('create');
+        Route::get('/', 'UserController@read')->name('read');
+        Route::put('/', 'UserController@update')->name('update');
+        Route::delete('/', 'UserController@delete')->name('delete');
+        Route::post('/activate', 'UserController@activate')->name('activate');
+        Route::post('/deactivate', 'UserController@deactivate')->name('deactivate');
         });
 
         /**
          * Course-related APIs.
          */
-        Route::group(['prefix' => '/course', 'as' => 'course'],
-            function () use ($authMiddleware, $adminMiddleware) {
-                Route::group($authMiddleware, function () use ($adminMiddleware) {
-                    Route::group($adminMiddleware, function () {
-                        Route::post('/', 'CourseController@create')->name('create');
-                        Route::group(['prefix' => '/{course_id}'], function () {
-                            Route::put('/', 'CourseController@update')->name('update');
-                            Route::delete('/', 'CourseController@delete')->name('delete');
-                        });
-                    });
-                    Route::get('/', 'CourseController@view')->name('view');
-                    Route::get('/{course_id}', 'CourseController@get')->name('get');
-                    Route::post('/enroll', 'CourseController@enroll')->name('enroll');
-                    Route::post('/quit', 'CourseController@quit')->name('quit');
-                });
-            });
+    Route::group(['prefix' => '/course', 'as' => 'course'], function () {
+        Route::post('/', 'CourseController@create')->name('create');
+        Route::get('/', 'CourseController@read')->name('read');
+        Route::put('/', 'CourseController@update')->name('update');
+        Route::delete('/', 'CourseController@delete')->name('delete');
+        Route::post('/enroll', 'CourseController@enroll')->name('enroll');
+        Route::post('/quit', 'CourseController@quit')->name('quit');
+    });
 
         /**
          * Assignment-related APIs
@@ -73,38 +51,22 @@ Route::group(['as' => 'api', 'namespace' => 'API', 'middleware' => 'throttle:20'
         /**
          * Personal-assignment-related APIs
          */
-        Route::group(['prefix' => '/personal', 'as' => 'personal'],
-            function () use ($authMiddleware, $adminMiddleware) {
-                Route::group($authMiddleware, function () use ($adminMiddleware) {
-                    Route::group($adminMiddleware, function () {
-                        Route::post('/', 'PersonalAssignmentController@create')->name('create');
-                        Route::group(['prefix' => '/{personal_assignment_id}'], function () {
-                            Route::put('/', 'PersonalAssignmentController@update')->name('update');
-                            Route::delete('/', 'PersonalAssignmentController@delete')->name('delete');
-                        });
-                    });
-                });
-                Route::get('/', 'PersonalAssignmentController@view')->name('view');
-                Route::get('/{personal_assignment_id}', 'PersonalAssignmentController@get')->name('get');
-                Route::post('/finish', 'PersonalAssignmentController@finish')->name('finish');
-                Route::post('/reset', 'PersonalAssignmentController@reset')->name('reset');
-            });
+    Route::group(['prefix' => '/personal', 'as' => 'personal'], function () {
+        Route::post('/', 'PersonalAssignmentController@create')->name('create');
+        Route::get('/', 'PersonalAssignmentController@read')->name('read');
+        Route::put('/', 'PersonalAssignmentController@update')->name('update');
+        Route::delete('/', 'PersonalAssignmentController@delete')->name('delete');
+        Route::post('/finish', 'PersonalAssignmentController@finish')->name('finish');
+        Route::post('/reset', 'PersonalAssignmentController@reset')->name('reset');
+    });
 
         /**
          * Problem-related APIs
          */
-        Route::group(['prefix' => '/problem', 'as' => 'problem'],
-            function () use ($authMiddleware, $adminMiddleware) {
-                Route::group($authMiddleware, function () use ($adminMiddleware) {
-                    Route::group($adminMiddleware, function () {
-                        Route::post('/', 'ProblemController@create')->name('create');
-                        Route::group(['prefix' => '/{problem_id}'], function () {
-                            Route::put('/', 'ProblemController@update')->name('update');
-                            Route::delete('/', 'ProblemController@delete')->name('delete');
-                        });
-                    });
-                });
-                Route::get('/', 'ProblemController@view')->name('view');
-                Route::get('/{problem_id}', 'ProblemController@get')->name('get');
-            });
+    Route::group(['prefix' => '/problem', 'as' => 'problem'], function () {
+        Route::post('/', 'ProblemController@create')->name('create');
+        Route::get('/', 'ProblemController@read')->name('read');
+        Route::put('/', 'ProblemController@update')->name('update');
+        Route::delete('/', 'ProblemController@delete')->name('delete');
+    });
 });

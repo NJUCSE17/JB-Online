@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Course;
+namespace App\Http\Requests\Problem;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class ViewCourseRequest extends FormRequest
+class DeleteProblemRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -13,7 +13,7 @@ class ViewCourseRequest extends FormRequest
      */
     public function authorize()
     {
-        return true; // TODO: PERMISSION!!
+        return true; // TODO: PERMISSIONS
     }
 
     /**
@@ -24,9 +24,7 @@ class ViewCourseRequest extends FormRequest
     public function rules()
     {
         return [
-            'semester' => ['sometimes', 'int', 'between:1,20'],
-            'start_before' => ['sometimes', 'date_format:Y-m-d H:i:s'],
-            'end_after' => ['required_with:start_before', 'date_format:Y-m-d H:i:s', 'after_or_equal:start_before'],
+            'problem_id' => ['required', 'int', 'exists:problems,id'],
         ];
     }
 }

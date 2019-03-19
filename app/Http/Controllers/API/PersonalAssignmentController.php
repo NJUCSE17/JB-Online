@@ -3,9 +3,10 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\APIController;
+use App\Http\Requests\Assignment\ReadPersonalAssignmentRequest;
 use App\Http\Requests\Assignment\StorePersonalAssignmentRequest;
 use App\Http\Requests\Assignment\UpdatePersonalAssignmentRequest;
-use App\Http\Requests\Assignment\ViewPersonalAssignmentRequest;
+use App\Http\Requests\PersonalAssignment\DeletePersonalAssignmentRequest;
 use App\Http\Requests\PersonalAssignment\FinishPersonalAssignmentRequest;
 use App\Http\Requests\PersonalAssignment\ResetPersonalAssignmentRequest;
 use App\Http\Resources\PersonalAssignmentResource;
@@ -39,44 +40,35 @@ class PersonalAssignmentController extends APIController
      * View personal assignments that satisfy constraints.
      * Default: current user, due in future.
      *
-     * @param ViewPersonalAssignmentRequest $request
+     * @param ReadPersonalAssignmentRequest $request
      * @return \Illuminate\Http\JsonResponse
      */
-    public function view(ViewPersonalAssignmentRequest $request)
+    public function read(ReadPersonalAssignmentRequest $request)
     {
         $query = PersonalAssignment::query();
         $query->where('user_id', $request->has('user_id') ? $request->get('user_id') : Auth::id());
-        if ($request->has('due_before')) {
-            $query->where('due_time', '<=', $request->get('due_before'));
+        if ($request->has('personal_assignment_id')) {
+            $query->findOrFail($request->get('personal_assignment_id'));
+        } else {
+            if ($request->has('due_before')) {
+                $query->where('due_time', '<=', $request->get('due_before'));
+            }
+            $query->where('due_time', '>=',
+                $request->has('due_after') ? $request->get('due_after') : now());
+            // TODO: FINISHED ASSIGNMENT ONLY (ASSIGNMENT FINISH)
         }
-        $query->where('due_time', '>=',
-            $request->has('due_after') ? $request->get('due_after') : now());
-        // TODO: FINISHED ASSIGNMENT ONLY (ASSIGNMENT FINISH)
         return $this->data(new PersonalAssignmentResourceCollection($query->get()));
-    }
-
-    /**
-     * Get a personal assignment.
-     *
-     * @param $personal_assignment_id
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public function get($personal_assignment_id)
-    {
-        $personal_assignment = PersonalAssignment::query()->findOrFail($personal_assignment_id);
-        return $this->data(new PersonalAssignmentResource($personal_assignment));
     }
 
     /**
      * Update a personal assignment.
      * 
      * @param UpdatePersonalAssignmentRequest $request
-     * @param $personal_assignment_id
      * @return \Illuminate\Http\JsonResponse
      */
-    public function update(UpdatePersonalAssignmentRequest $request, $personal_assignment_id)
+    public function update(UpdatePersonalAssignmentRequest $request)
     {
-        $personal_assignment = PersonalAssignment::query()->findOrFail($personal_assignment_id);
+        $personal_assignment = PersonalAssignment::query()->findOrFail($request->get('personal_assignment_id'));
         $name     = $request->has('name')     ? $request->get('name')     : $personal_assignment->name;
         $content  = $request->has('content')  ? $request->get('content')  : $personal_assignment->content;
         $due_time = $request->has('due_time') ? $request->get('due_time') : $personal_assignment->due_time;
@@ -92,13 +84,13 @@ class PersonalAssignmentController extends APIController
     /**
      * Delete a personal assignment.
      *
-     * @param $personal_assignment_id
+     * @param DeletePersonalAssignmentRequest $request
      * @return \Illuminate\Http\JsonResponse
      * @throws \Exception
      */
-    public function delete($personal_assignment_id)
+    public function delete(DeletePersonalAssignmentRequest $request)
     {
-        PersonalAssignment::query()->findOrFail($personal_assignment_id)->delete();
+        PersonalAssignment::query()->findOrFail($request->get('personal_assignment_id'))->delete();
         return $this->data('Personal assignment deleted.');
     }
 

@@ -1,0 +1,32 @@
+<?php
+
+namespace App\Http\Requests\Problem;
+
+use Illuminate\Foundation\Http\FormRequest;
+
+class ReadProblemRequest extends FormRequest
+{
+    /**
+     * Determine if the user is authorized to make this request.
+     *
+     * @return bool
+     */
+    public function authorize()
+    {
+        return true; // TODO: PERMISSION
+    }
+
+    /**
+     * Get the validation rules that apply to the request.
+     *
+     * @return array
+     */
+    public function rules()
+    {
+        return [
+            'problem_id' => ['sometimes', 'int', 'exists:problems,id'],
+            'course_id'     => ['required_without:assignment_id', 'int', 'exists:courses,id'],
+            'assignment_id' => ['sometimes', 'int', 'exists:assignments,id'],
+        ];
+    }
+}

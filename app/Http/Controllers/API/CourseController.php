@@ -3,12 +3,12 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\APIController;
+use App\Http\Requests\Course\DeleteCourseRequest;
 use App\Http\Requests\Course\EnrollCourseRequest;
-use App\Http\Requests\Course\GetCourseRequest;
 use App\Http\Requests\Course\QuitCourseRequest;
+use App\Http\Requests\Course\ReadCourseRequest;
 use App\Http\Requests\Course\StoreCourseRequest;
 use App\Http\Requests\Course\UpdateCourseRequest;
-use App\Http\Requests\Course\ViewCourseRequest;
 use App\Http\Resources\CourseEnrollRecordResource;
 use App\Http\Resources\CourseResource;
 use App\Http\Resources\CourseResourceCollection;
@@ -41,45 +41,35 @@ class CourseController extends APIController
     /**
      * View all courses satisfying the constraints.
      *
-     * @param ViewCourseRequest $request
+     * @param ReadCourseRequest $request
      * @return \Illuminate\Http\JsonResponse
      */
-    public function view(ViewCourseRequest $request)
+    public function read(ReadCourseRequest $request)
     {
         $query = Course::query();
-        if ($request->has('semester')) {
-            $query->Semester($request->get('semester'));
-        }
-        if ($request->has('start_before')) {
-            $query->Between(Carbon::parse($request->get('start_before')),
-                Carbon::parse($request->get('end_after')));
+        if ($request->has('course_id')) {
+            $query->findOrFail($request->get('course_id'));
+        } else {
+            if ($request->has('semester')) {
+                $query->Semester($request->get('semester'));
+            }
+            if ($request->has('start_before')) {
+                $query->Between(Carbon::parse($request->get('start_before')),
+                    Carbon::parse($request->get('end_after')));
+            }
         }
         return $this->data(new CourseResourceCollection($query->get()));
-    }
-
-    /**
-     * Get a course.
-     *
-     * @param GetCourseRequest $request
-     * @param $course_id
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public function get(GetCourseRequest $request, $course_id)
-    {
-        $course = Course::query()->findOrFail($course_id);
-        return $this->data(new CourseResource($course));
     }
 
     /**
      * Update a course.
      *
      * @param UpdateCourseRequest $request
-     * @param $course_id
      * @return \Illuminate\Http\JsonResponse
      */
-    public function update(UpdateCourseRequest $request, $course_id)
+    public function update(UpdateCourseRequest $request)
     {
-        $course = Course::query()->findOrFail($course_id);
+        $course = Course::query()->findOrFail($request->get('course_id'));
         $name       = $request->has('name')       ? $request->get('name')       : $course->name;
         $semester   = $request->has('semester')   ? $request->get('semester')   : $course->semester;
         $start_time = $request->has('start_time') ? $request->get('start_time') : $course->start_time;
@@ -99,13 +89,13 @@ class CourseController extends APIController
     /**
      * Delete a course.
      *
-     * @param $course_id
+     * @param DeleteCourseRequest $request
      * @return \Illuminate\Http\JsonResponse
      * @throws \Exception
      */
-    public function delete($course_id)
+    public function delete(DeleteCourseRequest $request)
     {
-        Course::query()->findOrFail($course_id)->delete();
+        Course::query()->findOrFail($request->get('course_id'))->delete();
         return $this->data('Course deleted.');
     }
 

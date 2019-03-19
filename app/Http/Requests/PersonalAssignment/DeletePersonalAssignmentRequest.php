@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Problem;
+namespace App\Http\Requests\PersonalAssignment;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class ViewProblemRequest extends FormRequest
+class DeletePersonalAssignmentRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -13,7 +13,7 @@ class ViewProblemRequest extends FormRequest
      */
     public function authorize()
     {
-        return true; // TODO: PERMISSION
+        return true;  // TODO: PERMISSIONS
     }
 
     /**
@@ -24,8 +24,7 @@ class ViewProblemRequest extends FormRequest
     public function rules()
     {
         return [
-            'course_id'     => ['required_without:assignment_id', 'int', 'exists:courses,id'],
-            'assignment_id' => ['sometimes', 'int', 'exists:assignments,id'],
+            'personal_assignment_id' => ['required', 'int', 'exists:personal_assignments,id'],
         ];
     }
 }

@@ -2,10 +2,9 @@
 
 namespace App\Http\Requests\Course;
 
-use App\Rules\Sanitize;
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateCourseRequest extends FormRequest
+class DeleteCourseRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -14,7 +13,7 @@ class UpdateCourseRequest extends FormRequest
      */
     public function authorize()
     {
-        return true; // TODO: PERMISSION!!
+        return true; // TODO: PERMISSIONS
     }
 
     /**
@@ -26,11 +25,6 @@ class UpdateCourseRequest extends FormRequest
     {
         return [
             'course_id' => ['required', 'int', 'exists:courses,id'],
-            'name' => ['sometimes', 'max:200'],
-            'semester'  => ['sometimes', 'int', 'between:1,20'],
-            'start_time' => ['sometimes', 'date_format:Y-m-d H:i:s'],
-            'end_time' => ['sometimes', 'date_format:Y-m-d H:i:s', 'after_or_equal:start_before'],
-            'notice' => [ new Sanitize(), 'max:10000'],
         ];
     }
 }

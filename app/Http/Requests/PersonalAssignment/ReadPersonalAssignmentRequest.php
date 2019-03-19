@@ -4,7 +4,7 @@ namespace App\Http\Requests\Assignment;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class ViewPersonalAssignmentRequest extends FormRequest
+class ReadPersonalAssignmentRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,7 +24,8 @@ class ViewPersonalAssignmentRequest extends FormRequest
     public function rules()
     {
         return [
-            'user_id'  => ['sometimes', 'int', 'exists:users,id'],
+            'personal_assignment_id' => ['sometimes', 'int', 'exists:personal_assignments,id'],
+            'user_id' => ['sometimes', 'int', 'exists:users,id'],
             'due_after'  => ['sometimes', 'date_format:Y-m-d H:i:s'],
             'due_before' => ['sometimes', 'date_format:Y-m-d H:i:s'],
             'unfinished_only' => ['sometimes', 'boolean'],
