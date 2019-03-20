@@ -11,7 +11,7 @@ trait ProblemRelationships
      */
     public function course()
     {
-        return $this->assignment()->course();
+        return $this->assignment->course;
     }
 
     /**

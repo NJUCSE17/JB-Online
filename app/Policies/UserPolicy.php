@@ -10,13 +10,30 @@ class UserPolicy
     use HandlesAuthorization;
 
     /**
-     * Determine whether the user can view the model.
+     * Filter for all polices in this class.
      *
-     * @param  \App\Models\User $user
-     * @param  \App\Models\User $model
+     * @param User $user
      * @return mixed
      */
-    public function view(User $user, User $model)
+    public function before(User $user)
+    {
+        if ($user->isActive() && $user->isVerified()) {
+            if ($user->privilege_level <= 1) {
+                return true;
+            } else {
+                return null;
+            }
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * Determine whether the user can view the model.
+     *
+     * @return mixed
+     */
+    public function view()
     {
         return true;
     }
@@ -24,12 +41,11 @@ class UserPolicy
     /**
      * Determine whether the user can create models.
      *
-     * @param  \App\Models\User $user
      * @return mixed
      */
-    public function create(User $user)
+    public function create()
     {
-        return $user->privilege_level <= 1;
+        return false;
     }
 
     /**
@@ -41,66 +57,35 @@ class UserPolicy
      */
     public function update(User $user, User $model)
     {
-        return $user->privilege_level <= 1 || $user->id === $model->id;
+        return $user->id === $model->id;
     }
 
     /**
      * Determine whether the user can delete the model.
      *
-     * @param  \App\Models\User $user
-     * @param  \App\Models\User $model
      * @return mixed
      */
-    public function delete(User $user, User $model)
-    {
-        return ($user->privilege_level <= 1 || $user->id === $model->id)
-            && ($model->privilege_level > 1);
-    }
-
-    /**
-     * Determine whether the user can activate the model.
-     *
-     * @param User $user
-     * @param User $model
-     * @return bool
-     */
-    public function activate(User $user, User $model)
-    {
-        return $user->privilege_level <= 1;
-    }
-
-    /**
-     * Determine whether the user can deactivate the model.
-     *
-     * @param User $user
-     * @param User $model
-     * @return bool
-     */
-    public function deactivate(User $user, User $model)
-    {
-        return $user->privilege_level <= 1;
-    }
-
-    /**
-     * Determine whether the user can restore the model.
-     *
-     * @param  \App\Models\User $user
-     * @param  \App\Models\User $model
-     * @return mixed
-     */
-    public function restore(User $user, User $model)
+    public function delete()
     {
         return false;
     }
 
     /**
-     * Determine whether the user can permanently delete the model.
+     * Determine whether the user can activate the model.
      *
-     * @param  \App\Models\User $user
-     * @param  \App\Models\User $model
-     * @return mixed
+     * @return bool
      */
-    public function forceDelete(User $user, User $model)
+    public function activate()
+    {
+        return false;
+    }
+
+    /**
+     * Determine whether the user can deactivate the model.
+     *
+     * @return bool
+     */
+    public function deactivate()
     {
         return false;
     }

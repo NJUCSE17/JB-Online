@@ -11,13 +11,30 @@ class CoursePolicy
     use HandlesAuthorization;
 
     /**
-     * Determine whether the user can view the course.
+     * Filter for all polices in this class.
      *
-     * @param  \App\Models\User $user
-     * @param  \App\Models\Course $course
+     * @param User $user
      * @return mixed
      */
-    public function view(User $user, Course $course)
+    public function before(User $user)
+    {
+        if ($user->isActive() && $user->isVerified()) {
+            if ($user->privilege_level <= 2) {
+                return true;
+            } else {
+                return null;
+            }
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * Determine whether the user can view the course.
+     *
+     * @return mixed
+     */
+    public function view()
     {
         return true;
     }
@@ -25,12 +42,11 @@ class CoursePolicy
     /**
      * Determine whether the user can create courses.
      *
-     * @param  \App\Models\User $user
      * @return mixed
      */
-    public function create(User $user)
+    public function create()
     {
-        return $user->privilege_level <= 2;
+        return false;
     }
 
     /**
@@ -42,29 +58,25 @@ class CoursePolicy
      */
     public function update(User $user, Course $course)
     {
-        return $user->privilege_level <= 2 || $user->isCourseAdmin($course);
+        return $user->isCourseAdmin($course);
     }
 
     /**
      * Determine whether the user can delete the course.
      *
-     * @param  \App\Models\User $user
-     * @param  \App\Models\Course $course
      * @return mixed
      */
-    public function delete(User $user, Course $course)
+    public function delete()
     {
-        return $user->privilege_level <= 2;
+        return false;
     }
 
     /**
      * Determine whether the user can enroll to a course.
      *
-     * @param User $user
-     * @param Course $course
      * @return bool
      */
-    public function enroll(User $user, Course $course)
+    public function enroll()
     {
         return true;
     }
@@ -72,36 +84,10 @@ class CoursePolicy
     /**
      * Determine whether the user can quit from a course.
      *
-     * @param User $user
-     * @param Course $course
      * @return bool
      */
-    public function quit(User $user, Course $course)
+    public function quit()
     {
         return true;
-    }
-
-    /**
-     * Determine whether the user can restore the course.
-     *
-     * @param  \App\Models\User $user
-     * @param  \App\Models\Course $course
-     * @return mixed
-     */
-    public function restore(User $user, Course $course)
-    {
-        return false;
-    }
-
-    /**
-     * Determine whether the user can permanently delete the course.
-     *
-     * @param  \App\Models\User $user
-     * @param  \App\Models\Course $course
-     * @return mixed
-     */
-    public function forceDelete(User $user, Course $course)
-    {
-        return false;
     }
 }

@@ -11,6 +11,25 @@ class PersonalAssignmentPolicy
     use HandlesAuthorization;
 
     /**
+     * Filter for all polices in this class.
+     *
+     * @param User $user
+     * @return mixed
+     */
+    public function before(User $user)
+    {
+        if ($user->isActive() && $user->isVerified()) {
+            if ($user->privilege_level <= 2) {
+                return true;
+            } else {
+                return null;
+            }
+        } else {
+            return false;
+        }
+    }
+
+    /**
      * Determine whether the user can view the personal assignment.
      *
      * @param  \App\Models\User $user
@@ -19,16 +38,15 @@ class PersonalAssignmentPolicy
      */
     public function view(User $user, PersonalAssignment $personalAssignment)
     {
-        return $user === $personalAssignment->user();
+        return $user === $personalAssignment->user;
     }
 
     /**
      * Determine whether the user can create personal assignments.
      *
-     * @param  \App\Models\User $user
      * @return mixed
      */
-    public function create(User $user)
+    public function create()
     {
         return true;
     }
@@ -42,7 +60,7 @@ class PersonalAssignmentPolicy
      */
     public function update(User $user, PersonalAssignment $personalAssignment)
     {
-        return $user === $personalAssignment->user();
+        return $user === $personalAssignment->user;
     }
 
     /**
@@ -54,7 +72,7 @@ class PersonalAssignmentPolicy
      */
     public function delete(User $user, PersonalAssignment $personalAssignment)
     {
-        return $user === $personalAssignment->user();
+        return $user === $personalAssignment->user;
     }
 
     /**
@@ -66,7 +84,7 @@ class PersonalAssignmentPolicy
      */
     public function finish(User $user, PersonalAssignment $personalAssignment)
     {
-        return $user === $personalAssignment->user();
+        return $user === $personalAssignment->user;
     }
 
     /**
@@ -78,30 +96,6 @@ class PersonalAssignmentPolicy
      */
     public function reset(User $user, PersonalAssignment $personalAssignment)
     {
-        return $user === $personalAssignment->user();
-    }
-
-    /**
-     * Determine whether the user can restore the personal assignment.
-     *
-     * @param  \App\Models\User $user
-     * @param  \App\Models\PersonalAssignment $personalAssignment
-     * @return mixed
-     */
-    public function restore(User $user, PersonalAssignment $personalAssignment)
-    {
-        return false;
-    }
-
-    /**
-     * Determine whether the user can permanently delete the personal assignment.
-     *
-     * @param  \App\Models\User $user
-     * @param  \App\Models\PersonalAssignment $personalAssignment
-     * @return mixed
-     */
-    public function forceDelete(User $user, PersonalAssignment $personalAssignment)
-    {
-        return false;
+        return $user === $personalAssignment->user;
     }
 }

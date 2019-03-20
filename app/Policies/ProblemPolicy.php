@@ -11,13 +11,30 @@ class ProblemPolicy
     use HandlesAuthorization;
 
     /**
-     * Determine whether the user can view the problem.
+     * Filter for all polices in this class.
      *
-     * @param  \App\Models\User $user
-     * @param  \App\Models\Problem $problem
+     * @param User $user
      * @return mixed
      */
-    public function view(User $user, Problem $problem)
+    public function before(User $user)
+    {
+        if ($user->isActive() && $user->isVerified()) {
+            if ($user->privilege_level <= 2) {
+                return true;
+            } else {
+                return null;
+            }
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * Determine whether the user can view the problem.
+     *
+     * @return mixed
+     */
+    public function view()
     {
         return true;
     }
@@ -25,12 +42,11 @@ class ProblemPolicy
     /**
      * Determine whether the user can create problems.
      *
-     * @param  \App\Models\User $user
      * @return mixed
      */
-    public function create(User $user)
+    public function create()
     {
-        return $user->privilege_level <= 2;
+        return false;
     }
 
     /**
@@ -42,7 +58,7 @@ class ProblemPolicy
      */
     public function update(User $user, Problem $problem)
     {
-        return $user->privilege_level <= 2 || $user->isCourseAdmin($problem->course());
+        return $user->isCourseAdmin($problem->course);
     }
 
     /**
@@ -54,30 +70,6 @@ class ProblemPolicy
      */
     public function delete(User $user, Problem $problem)
     {
-        return $user->privilege_level <= 2 || $user->isCourseAdmin($problem->course());
-    }
-
-    /**
-     * Determine whether the user can restore the problem.
-     *
-     * @param  \App\Models\User $user
-     * @param  \App\Models\Problem $problem
-     * @return mixed
-     */
-    public function restore(User $user, Problem $problem)
-    {
-        return false;
-    }
-
-    /**
-     * Determine whether the user can permanently delete the problem.
-     *
-     * @param  \App\Models\User $user
-     * @param  \App\Models\Problem $problem
-     * @return mixed
-     */
-    public function forceDelete(User $user, Problem $problem)
-    {
-        return false;
+        return $user->isCourseAdmin($problem->course);
     }
 }
