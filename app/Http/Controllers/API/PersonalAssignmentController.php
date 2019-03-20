@@ -104,12 +104,9 @@ class PersonalAssignmentController extends APIController
      */
     public function finish(FinishPersonalAssignmentRequest $request)
     {
-        $data = $request->only('user_id', 'personal_assignment_id');
-        $record = PersonalAssignment::query()->updateOrCreate([
-            'user_id'                => $data['user_id'],
-            'personal_assignment_id' => $data['assignment_id'],
-        ]);
-        return $this->data(new PersonalAssignmentResource($record));
+        $personal_assignment = PersonalAssignment::query()->findOrFail($request->only('personal_assignment_id'));
+        $personal_assignment->finished_at = now();
+        return $this->data(new PersonalAssignmentResource($personal_assignment));
     }
 
     /**
@@ -121,12 +118,8 @@ class PersonalAssignmentController extends APIController
      */
     public function reset(ResetPersonalAssignmentRequest $request)
     {
-        $data = $request->only('user_id', 'personal_assignment_id');
-        PersonalAssignmentFinishRecord::query()
-            ->where('user_id', $data['user_id'])
-            ->where('personal_assignment_id', $data['personal_assignment_id'])
-            ->firstOrFail()
-            ->delete();
+        $personal_assignment = PersonalAssignment::query()->findOrFail($request->only('personal_assignment_id'));
+        $personal_assignment->finished_at = null;
         return $this->data('Personal assignment reset.');
     }
 }

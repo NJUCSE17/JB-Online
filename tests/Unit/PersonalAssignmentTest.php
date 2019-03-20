@@ -44,6 +44,19 @@ class PersonalAssignmentTest extends TestCase
         $user2 = factory(User::class)->create();
         $this->actingAs($user, 'api');
 
+        $personal_assignments = array();
+        for ($i = 0; $i < 2; ++$i) {
+            $personal_assignments[] = [
+                'id'          => $i + 1,
+                'user_id'     => $user->id,
+                'name'        => $this->faker->text(20),
+                'content'     => $this->faker->paragraph,
+                'due_time'    => $this->faker->dateTimeBetween('now', '+5 days')->format('Y-m-d H:i:s'),
+                'finished_at' => null,
+            ];
+            $personal_assignments[$i]['content_html'] = $this->parser->text($personal_assignments[$i]['content']);
+        }
+
         // User can read empty personal assignments
         $response = $this->get('api/personal');
         $response->assertStatus(200);
@@ -51,5 +64,8 @@ class PersonalAssignmentTest extends TestCase
             'success' => true,
             'data'    => [],
         ]);
+
+        // User can create a personal assignment
+        // TODO
     }
 }

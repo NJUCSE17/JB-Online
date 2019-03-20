@@ -3,21 +3,11 @@
 namespace App\Models;
 
 use App\Models\Traits\PersonalAssignment\PersonalAssignmentRelationships;
-use App\Models\Traits\PersonalAssignment\WithPersonalAssignmentFinishRecordScope;
 use Illuminate\Database\Eloquent\Model;
 
 class PersonalAssignment extends Model
 {
     use PersonalAssignmentRelationships;
-
-    /**
-     * The "booting" method of the model.
-     */
-    protected static function boot()
-    {
-        parent::boot();
-        static::addGlobalScope(new WithPersonalAssignmentFinishRecordScope);
-    }
 
     /**
      * The attributes that are mass assignable.
@@ -30,6 +20,7 @@ class PersonalAssignment extends Model
         'content',
         'content_html',
         'due_time',
+        'finished_at',
     ];
 
     /**
@@ -39,5 +30,6 @@ class PersonalAssignment extends Model
      */
     protected $casts = [
         'due_time' => 'datetime',
+        'finished_at' => 'datetime',
     ];
 }

@@ -5,6 +5,7 @@ namespace App\Policies;
 use App\Models\PersonalAssignment;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
+use Illuminate\Support\Facades\Auth;
 
 class PersonalAssignmentPolicy
 {
@@ -32,11 +33,13 @@ class PersonalAssignmentPolicy
     /**
      * Determine whether the user can view the personal assignment.
      *
+     * @param  \App\Models\User $user
+     * @param  \App\Models\PersonalAssignment $personalAssignment
      * @return mixed
      */
-    public function view()
+    public function view(User $user, PersonalAssignment $personalAssignment)
     {
-        return true;
+        return $user === $personalAssignment->user;
     }
 
     /**

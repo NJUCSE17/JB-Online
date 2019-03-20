@@ -13,14 +13,4 @@ trait PersonalAssignmentRelationships
     {
         return $this->belongsTo('App\Models\User');
     }
-
-    /**
-     * Get the finish records of this assignment.
-     *
-     * @return mixed
-     */
-    public function finishRecords()
-    {
-        return $this->hasMany('App\Models\PersonalAssignmentFinishRecord');
-    }
 }
