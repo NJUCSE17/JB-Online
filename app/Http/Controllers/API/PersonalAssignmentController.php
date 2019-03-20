@@ -3,16 +3,15 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\APIController;
-use App\Http\Requests\Assignment\StorePersonalAssignmentRequest;
-use App\Http\Requests\Assignment\UpdatePersonalAssignmentRequest;
-use App\Http\Requests\Assignment\ViewPersonalAssignmentRequest;
+use App\Http\Requests\PersonalAssignment\CreatePersonalAssignmentRequest;
+use App\Http\Requests\PersonalAssignment\UpdatePersonalAssignmentRequest;
+use App\Http\Requests\PersonalAssignment\ViewPersonalAssignmentRequest;
 use App\Http\Requests\PersonalAssignment\DeletePersonalAssignmentRequest;
 use App\Http\Requests\PersonalAssignment\FinishPersonalAssignmentRequest;
 use App\Http\Requests\PersonalAssignment\ResetPersonalAssignmentRequest;
 use App\Http\Resources\PersonalAssignmentResource;
 use App\Http\Resources\PersonalAssignmentResourceCollection;
 use App\Models\PersonalAssignment;
-use App\Models\PersonalAssignmentFinishRecord;
 use Illuminate\Support\Facades\Auth;
 
 class PersonalAssignmentController extends APIController
@@ -20,18 +19,19 @@ class PersonalAssignmentController extends APIController
     /**
      * Create a new personal assignment.
      *
-     * @param StorePersonalAssignmentRequest $request
+     * @param CreatePersonalAssignmentRequest $request
      * @return \Illuminate\Http\JsonResponse
      */
-    public function create(StorePersonalAssignmentRequest $request)
+    public function create(CreatePersonalAssignmentRequest $request)
     {
-        $data = $request->only('user_id', 'name', 'content', 'due_time');
+        $data = $request->only('name', 'content', 'due_time');
         $personal_assignment = PersonalAssignment::query()->create([
-            'user_id'      => $data['user_id'],
+            'user_id'      => Auth::id(),
             'name'         => $data['name'],
             'content'      => $data['content'],
             'content_html' => $this->parser->text($data['content']),
             'due_time'     => $data['due_time'],
+            'finished_at'  => null,
         ]);
         return $this->created(new PersonalAssignmentResource($personal_assignment));
     }

@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Requests\Assignment;
+namespace App\Http\Requests\PersonalAssignment;
 
+use App\Models\PersonalAssignment;
 use App\Rules\Sanitize;
 use Illuminate\Foundation\Http\FormRequest;
 
-class StorePersonalAssignmentRequest extends FormRequest
+class CreatePersonalAssignmentRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -14,7 +15,7 @@ class StorePersonalAssignmentRequest extends FormRequest
      */
     public function authorize()
     {
-        return true; // TODO: PREMISSION!!
+        return $this->user()->can('create', PersonalAssignment::class);
     }
 
     /**
@@ -25,7 +26,6 @@ class StorePersonalAssignmentRequest extends FormRequest
     public function rules()
     {
         return [
-            'user_id' => ['required', 'int', 'exists:users,id'],
             'name' => ['required', new Sanitize(), 'max:100'],
             'content' => ['required', new Sanitize(), 'max:2000'],
             'due_time' => ['required', 'date_format:Y-m-d H:i:s'],

@@ -58,7 +58,7 @@ class PersonalAssignmentTest extends TestCase
         }
 
         // User can read empty personal assignments
-        $response = $this->get('api/personal');
+        $response = $this->get('/api/personal');
         $response->assertStatus(200);
         $response->assertExactJson([
             'success' => true,
@@ -66,6 +66,15 @@ class PersonalAssignmentTest extends TestCase
         ]);
 
         // User can create a personal assignment
-        // TODO
+        $response = $this->post('/api/personal', [
+            'name'     => $personal_assignments[0]['name'],
+            'content'  => $personal_assignments[0]['content'],
+            'due_time' => $personal_assignments[0]['due_time'],
+        ]);
+        $response->assertStatus(201);
+        $response->assertExactJson([
+            'success' => true,
+            'data'    => $personal_assignments[0],
+        ]);
     }
 }

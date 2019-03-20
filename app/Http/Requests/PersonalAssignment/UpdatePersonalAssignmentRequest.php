@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\Assignment;
+namespace App\Http\Requests\PersonalAssignment;
 
 use App\Rules\Sanitize;
 use Illuminate\Foundation\Http\FormRequest;
