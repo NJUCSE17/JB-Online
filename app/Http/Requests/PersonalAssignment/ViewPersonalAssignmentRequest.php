@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Assignment;
 
+use App\Models\PersonalAssignment;
 use Illuminate\Foundation\Http\FormRequest;
 
 class ViewPersonalAssignmentRequest extends FormRequest
@@ -13,7 +14,7 @@ class ViewPersonalAssignmentRequest extends FormRequest
      */
     public function authorize()
     {
-        return true; // TODO: PERMISSION
+        return $this->user()->can('view', PersonalAssignment::class);
     }
 
     /**
@@ -25,10 +26,9 @@ class ViewPersonalAssignmentRequest extends FormRequest
     {
         return [
             'personal_assignment_id' => ['sometimes', 'int', 'exists:personal_assignments,id'],
-            'user_id' => ['sometimes', 'int', 'exists:users,id'],
-            'due_after'  => ['sometimes', 'date_format:Y-m-d H:i:s'],
-            'due_before' => ['sometimes', 'date_format:Y-m-d H:i:s'],
-            'unfinished_only' => ['sometimes', 'boolean'],
+            'due_after'              => ['sometimes', 'date_format:Y-m-d H:i:s'],
+            'due_before'             => ['sometimes', 'date_format:Y-m-d H:i:s'],
+            'unfinished_only'        => ['sometimes', 'boolean'],
         ];
     }
 }

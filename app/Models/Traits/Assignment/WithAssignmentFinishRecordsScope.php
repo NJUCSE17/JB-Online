@@ -5,6 +5,7 @@ namespace App\Models\Traits\Assignment;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Scope;
+use Illuminate\Database\Query\JoinClause;
 use Illuminate\Support\Facades\Auth;
 
 class WithAssignmentFinishRecordsScope implements Scope
@@ -17,9 +18,12 @@ class WithAssignmentFinishRecordsScope implements Scope
      */
     public function apply(Builder $builder, Model $model)
     {
-        $builder->leftJoin('assignment_finish_records', function ($join) {
+        $builder->leftJoin('assignment_finish_records', function (JoinClause $join) {
             $join->on('assignment_finish_records.assignment_id', '=', 'assignments.id');
             $join->where('assignment_finish_records.user_id', '=', Auth::id());
-        })->select(['assignments.*', 'assignment_finish_records.updated_at as finished_at']);
+        })->select([
+            'assignments.*',
+            'assignment_finish_records.updated_at as finished_at'
+        ]);
     }
 }

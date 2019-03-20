@@ -45,19 +45,21 @@ class PersonalAssignmentController extends APIController
      */
     public function view(ViewPersonalAssignmentRequest $request)
     {
-        $query = PersonalAssignment::query();
-        $query->where('user_id', $request->has('user_id') ? $request->get('user_id') : Auth::id());
+        // TODO: LET ADMIN CAN VIEW ALL ASSIGNMENTS
+        $personal_assignments = PersonalAssignment::query()->get()->where('user_id', Auth::id());
         if ($request->has('personal_assignment_id')) {
-            $query->findOrFail($request->get('personal_assignment_id'));
+            $personal_assignments = $personal_assignments->find($request->get('personal_assignment_id'));
         } else {
             if ($request->has('due_before')) {
-                $query->where('due_time', '<=', $request->get('due_before'));
+                $personal_assignments = $personal_assignments->where('due_time', '<=', $request->get('due_before'));
             }
-            $query->where('due_time', '>=',
+            $personal_assignments = $personal_assignments->where('due_time', '>=',
                 $request->has('due_after') ? $request->get('due_after') : now());
-            // TODO: FINISHED ASSIGNMENT ONLY (ASSIGNMENT FINISH)
+            if ($request->has('unfinished_only') && $request->get('unfinished_only')) {
+                $personal_assignments = $personal_assignments->where('finished_at', '=', null);
+            }
         }
-        return $this->data(new PersonalAssignmentResourceCollection($query->get()));
+        return $this->data(new PersonalAssignmentResourceCollection($personal_assignments));
     }
 
     /**

@@ -2,8 +2,6 @@
 
 namespace Tests\Feature;
 
-use App\Models\Assignment;
-use App\Models\AssignmentFinishRecord;
 use App\Models\Course;
 use App\Models\CourseEnrollRecord;
 use App\Models\User;
@@ -37,6 +35,12 @@ class AssignmentTest extends TestCase
      */
     public function testAssignmentFunctions()
     {
+        // Unauthorized user cannot perform CRUD operations
+        $this->get('api/assignment')->assertStatus(302);
+        $this->post('api/assignment')->assertStatus(302);
+        $this->put('api/assignment')->assertStatus(302);
+        $this->delete('api/assignment')->assertStatus(302);
+
         $user = factory(User::class)->create();
         $this->actingAs($user, 'api');
 

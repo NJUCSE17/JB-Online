@@ -32,13 +32,11 @@ class PersonalAssignmentPolicy
     /**
      * Determine whether the user can view the personal assignment.
      *
-     * @param  \App\Models\User $user
-     * @param  \App\Models\PersonalAssignment $personalAssignment
      * @return mixed
      */
-    public function view(User $user, PersonalAssignment $personalAssignment)
+    public function view()
     {
-        return $user === $personalAssignment->user;
+        return true;
     }
 
     /**
