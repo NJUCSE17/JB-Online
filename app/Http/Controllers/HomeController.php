@@ -2,7 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\API\AssignmentController;
+use App\Http\Requests\Assignment\ViewAssignmentRequest;
+use App\Models\Assignment;
+use App\Models\User;
+use Faker\Factory;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -13,7 +19,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        //$this->middleware('auth');
     }
 
     /**
@@ -24,5 +30,12 @@ class HomeController extends Controller
     public function index()
     {
         return view('home');
+    }
+
+    public function test(Request $request)
+    {
+        $user = Factory(User::class)->create();
+        Auth::login($user);
+        return Assignment::query()->withRecords()->get();
     }
 }

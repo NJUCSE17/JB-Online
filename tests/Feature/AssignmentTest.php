@@ -2,6 +2,8 @@
 
 namespace Tests\Feature;
 
+use App\Models\Assignment;
+use App\Models\AssignmentFinishRecord;
 use App\Models\Course;
 use App\Models\CourseEnrollRecord;
 use App\Models\User;
@@ -42,124 +44,173 @@ class AssignmentTest extends TestCase
         $assignments = array();
         for ($i = 0; $i < 2; ++$i) {
             $assignments[] = [
-                'id' => $i + 1,
-                'course_id' => $course->id,
-                'name' => $this->faker->text(20),
-                'content' => $this->faker->paragraph,
-                'due_time' => $this->faker->dateTimeBetween('now', '+5 days')->format('Y-m-d H:i:s'),
+                'id'          => $i + 1,
+                'course_id'   => $course->id,
+                'name'        => $this->faker->text(20),
+                'content'     => $this->faker->paragraph,
+                'due_time'    => $this->faker->dateTimeBetween('now', '+5 days')->format('Y-m-d H:i:s'),
+                'finished_at' => null,
             ];
             $assignments[$i]['content_html'] = $this->parser->text($assignments[$i]['content']);
         }
 
-        /**
-         * Get (EMPTY)
-         */
-        $this->get('/api/assignment')
-            ->assertStatus(200)
-            ->assertJson([
-                'success' => true,
-                'data' => [],
-            ]);
+        // Assignment is empty at first
+        $response = $this->get('/api/assignment');
+        $response->assertStatus(200);
+        $response->assertExactJson([
+            'success' => true,
+            'data' => [],
+        ]);
 
-        /**
-         * Create
-         */
-        $this->post('/api/assignment', [
+        // A non-admin user cannot create assignments
+        $response = $this->post('/api/assignment', [
             'course_id' => $assignments[0]['course_id'],
             'name' => $assignments[0]['name'],
             'content' => $assignments[0]['content'],
             'due_time' => $assignments[0]['due_time'],
-        ])->assertStatus(403);
+        ]);
+        $response->assertStatus(403);
 
+        // An admin user can create assignments
         $this->enroll($user->id, $assignments[0]['course_id'], true);
-        $this->post('/api/assignment', [
+        $response = $this->post('/api/assignment', [
             'course_id' => $assignments[0]['course_id'],
             'name' => $assignments[0]['name'],
             'content' => $assignments[0]['content'],
             'due_time' => $assignments[0]['due_time'],
-        ])->assertStatus(201);
+        ]);
+        $response->assertStatus(201);
         $this->quit($user->id, $assignments[0]['course_id']);
 
-        $this->get('/api/assignment')
-            ->assertStatus(200)
-            ->assertJson([
-                'success' => true,
-                'data'    => [$assignments[0]],
-            ]);
+        // Check the assignment is correctly created.
+        $response = $this->get('/api/assignment');
+        $response->assertStatus(200);
+        $response->assertExactJson([
+            'success' => true,
+            'data'    => [$assignments[0]],
+        ]);
 
-        $this->post('/api/assignment', [
+        // Privileged user can create assignments
+        $user->privilege_level = 2;
+        $response = $this->post('/api/assignment', [
             'course_id' => $assignments[1]['course_id'],
             'name' => $assignments[1]['name'],
             'content' => $assignments[1]['content'],
             'due_time' => $assignments[1]['due_time'],
-        ])->assertStatus(403);
+        ]);
+        $response->assertStatus(201);
+        $user->privilege_level = 3;
 
-        $this->enroll($user->id, $assignments[0]['course_id'], true);
-        $this->post('/api/assignment', [
-            'course_id' => $assignments[1]['course_id'],
-            'name' => $assignments[1]['name'],
-            'content' => $assignments[1]['content'],
-            'due_time' => $assignments[1]['due_time'],
-        ])->assertStatus(201);
-        $this->quit($user->id, $assignments[0]['course_id']);
+        // Check the assignments have been created
+        $response = $this->get('/api/assignment');
+        $response->assertStatus(200);
+        $response->assertExactJson([
+            'success' => true,
+            'data'    => $assignments,
+        ]);
 
-        $this->get('/api/assignment')
-            ->assertStatus(200)
-            ->assertJson([
-                'success' => true,
-                'data'    => $assignments,
-            ]);
-
-        /**
-         * Update
-         */
         $assignments[0]['content'] = $this->faker->paragraph(2);
         $assignments[0]['content_html'] = $this->parser->text($assignments[0]['content']);
         $assignments[0]['due_time'] = $this->faker->dateTimeInInterval('now', '+5 days')->format('Y-m-d H:i:s');
 
-        $this->put('/api/assignment', [
+        // A non-admin user cannot update assignments
+        $response = $this->put('/api/assignment', [
             'assignment_id' => $assignments[0]['id'],
             'content' => $assignments[0]['content'],
             'due_time' => $assignments[0]['due_time'],
-        ])->assertStatus(403);
+        ]);
+        $response->assertStatus(403);
+
+        // An admin user can update assignments
         $this->enroll($user->id, $assignments[0]['course_id'], true);
-        $this->put('/api/assignment', [
+        $response = $this->put('/api/assignment', [
             'assignment_id' => $assignments[0]['id'],
             'content' => $assignments[0]['content'],
             'due_time' => $assignments[0]['due_time'],
-        ])->assertStatus(200);
+        ]);
+        $response->assertStatus(200);
         $this->quit($user->id, $assignments[0]['course_id']);
 
-        $this->get('/api/assignment')
-            ->assertStatus(200)
-            ->assertJson([
-                'success' => true,
-                'data'    => $assignments,
-            ]);
+        // Check the assignments have been updated
+        $response = $this->get('/api/assignment');
+        $response->assertStatus(200);
+        $response->assertExactJson([
+            'success' => true,
+            'data'    => $assignments,
+        ]);
 
-        /**
-         * Delete
-         */
-        $this->delete('/api/assignment', [
+        // A non-admin user cannot delete assignments
+        $response = $this->delete('/api/assignment', [
             'assignment_id' => $assignments[0]['id'],
-        ])->assertStatus(403);
+        ]);
+        $response->assertStatus(403);
 
+        // An admin user can delete assignments
         $this->enroll($user->id, $assignments[0]['course_id'], true);
-        $this->delete('/api/assignment', [
+        $response = $this->delete('/api/assignment', [
             'assignment_id' => $assignments[0]['id'],
-        ])->assertStatus(200)
-            ->assertJson([
-                'success' => true,
-                'data'    => 'Assignment deleted.',
-            ]);
+        ]);
+        $response->assertStatus(200);
+        $response->assertExactJson([
+            'success' => true,
+            'data'    => 'Assignment deleted.',
+        ]);
         $this->quit($user->id, $assignments[0]['course_id']);
 
-        $this->get('/api/assignment')
-            ->assertStatus(200)
-            ->assertJson([
-                'success' => true,
-                'data'    => [$assignments[1]],
-            ]);
+        // Check the assignment has been deleted
+        $response = $this->get('/api/assignment');
+        $response->assertStatus(200);
+        $response->assertExactJson([
+            'success' => true,
+            'data'    => [$assignments[1]],
+        ]);
+
+        // A user cannot finish assignment if not enrolled in course
+        $response = $this->post('/api/assignment/finish', [
+            'assignment_id' => $assignments[1]['id'],
+        ]);
+        $response->assertStatus(403);
+
+        // A user can finish assignment if enrolled in course
+        $this->enroll($user->id, $assignments[1]['course_id'], false);
+        $response = $this->post('/api/assignment/finish', [
+            'assignment_id' => $assignments[1]['id'],
+        ]);
+        $response->assertStatus(200);
+        $response->assertJson([ // not an exact check
+            'success' => true,
+            'data'    => [
+                'user_id' => $user->id,
+                'assignment_id' => $assignments[1]['id'],
+            ]
+        ]);
+        $this->quit($user->id, $assignments[1]['course_id']);
+
+        // Finished assignments will not be shown in assignments list if required
+        $response = $this->get('/api/assignment?unfinished_only=1');
+        $response->assertStatus(200);
+        $response->assertExactJson([
+            'success' => true,
+            'data'    => [],
+        ]);
+
+        // A user cannot reset assignment if not enrolled in course
+        $response = $this->post('/api/assignment/reset', [
+            'assignment_id' => $assignments[1]['id'],
+        ]);
+        $response->assertStatus(403);
+
+        // A user can reset assignment if enrolled in course
+        $this->enroll($user->id, $assignments[1]['course_id'], false);
+        $response = $this->post('/api/assignment/reset', [
+            'assignment_id' => $assignments[1]['id'],
+        ]);
+        $response->assertStatus(200);
+        $response->assertExactJson([
+            'success' => true,
+            'data'    => 'Assignment reset.'
+        ]);
+        $this->quit($user->id, $assignments[1]['course_id']);
     }
 
     /**

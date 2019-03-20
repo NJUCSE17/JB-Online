@@ -46,23 +46,25 @@ class AssignmentController extends APIController
      */
     public function view(ViewAssignmentRequest $request)
     {
-        $query = Assignment::query();
+        $assignments = Assignment::query()->get();
         if ($request->has('assignment_id')) {
-            $query->findOrFail('assignment_id');
+            $assignments = $assignments->find('assignment_id');
         } else {
             if ($request->has('course_id')) {
-                $query->where('course_id', $request->get('course_id'));
+                $assignments = $assignments->where('course_id', $request->get('course_id'));
             } else {
                 // TODO: SUBSCRIBED BY USER (COURSE ENROLL)
             }
             if ($request->has('due_before')) {
-                $query->where('due_time', '<=', $request->get('due_before'));
+                $assignments = $assignments->where('due_time', '<=', $request->get('due_before'));
             }
-            $query->where('due_time', '>=',
+            $assignments = $assignments->where('due_time', '>=',
                 $request->has('due_after') ? $request->get('due_after') : now());
-            // TODO: FINISHED ASSIGNMENT ONLY (ASSIGNMENT FINISH)
+            if ($request->has('unfinished_only') && $request->get('unfinished_only')) {
+                $assignments = $assignments->where('finished_at', '=', null);
+            }
         }
-        return $this->data(new AssignmentResourceCollection($query->get()));
+        return $this->data(new AssignmentResourceCollection($assignments));
     }
 
     /**
@@ -125,7 +127,6 @@ class AssignmentController extends APIController
         AssignmentFinishRecord::query()
             ->where('user_id', Auth::id())
             ->where('assignment_id', $request->get('assignment_id'))
-            ->firstOrFail()
             ->delete();
         return $this->data('Assignment reset.');
     }

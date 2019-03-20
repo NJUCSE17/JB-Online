@@ -3,11 +3,21 @@
 namespace App\Models;
 
 use App\Models\Traits\Assignment\AssignmentRelationships;
+use App\Models\Traits\Assignment\WithAssignmentFinishRecordsScope;
 use Illuminate\Database\Eloquent\Model;
 
 class Assignment extends Model
 {
     use AssignmentRelationships;
+
+    /**
+     * The "booting" method of the model.
+     */
+    protected static function boot()
+    {
+        parent::boot();
+        static::addGlobalScope(new WithAssignmentFinishRecordsScope);
+    }
 
     /**
      * The attributes that are mass assignable.

@@ -22,6 +22,7 @@ class AssignmentResource extends JsonResource
             'content'      => $this->content,
             'content_html' => $this->content_html,
             'due_time'     => $this->due_time->format('Y-m-d H:i:s'),
+            'finished_at'  => $this->finished_at,
         ];
     }
 }

@@ -11,7 +11,7 @@
 |
 */
 
-Route::group(['as' => 'api', 'namespace' => 'API', 'middleware' => ['auth:api', 'throttle:20']], function () {
+Route::group(['as' => 'api', 'namespace' => 'API', 'middleware' => ['auth', 'throttle:20']], function () {
     /**
      * User-related APIs.
      */
