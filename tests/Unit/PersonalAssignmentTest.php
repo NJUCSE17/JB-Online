@@ -117,9 +117,24 @@ class PersonalAssignmentTest extends TestCase
             ]);
         }
 
-        // TODO TODO TODO
         // One user cannot view others' PA
+        if (true) {
+            $response = $this->get('/api/personal?personal_assignment_id=' . $personal_assignments[0]['id']);
+            $response->assertStatus(403);
+        }
+
         // However, a privileged user (<=2) can view others' PA
+        $users[1]->privilege_level = 2;
+        if (true) {
+            $response = $this->get('/api/personal?personal_assignment_id=' . $personal_assignments[0]['id']);
+            $response->assertStatus(200);
+            $response->assertJson([
+                'success' => true,
+                'data'    => $personal_assignments[0],
+            ]);
+        }
+        $users[1]->privilege_level = 3;
+
         // One user can update his/her own PA
         // One user cannot update others' PA
         // Even a privileged user (<=2) cannot update others' PA

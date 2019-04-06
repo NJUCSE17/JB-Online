@@ -45,11 +45,11 @@ class PersonalAssignmentController extends APIController
      */
     public function view(ViewPersonalAssignmentRequest $request)
     {
-        // TODO: LET ADMIN CAN VIEW ALL ASSIGNMENTS
-        $personal_assignments = PersonalAssignment::query()->get()->where('user_id', Auth::id());
         if ($request->has('personal_assignment_id')) {
-            $personal_assignments = $personal_assignments->find($request->get('personal_assignment_id'));
+            $personal_assignment = PersonalAssignment::query()->findOrFail($request->get('personal_assignment_id'));
+            return $this->data(new PersonalAssignmentResource($personal_assignment));
         } else {
+            $personal_assignments = PersonalAssignment::query()->get()->where('user_id', Auth::id());
             if ($request->has('due_before')) {
                 $personal_assignments = $personal_assignments->where('due_time', '<=', $request->get('due_before'));
             }
@@ -58,8 +58,8 @@ class PersonalAssignmentController extends APIController
             if ($request->has('unfinished_only') && $request->get('unfinished_only')) {
                 $personal_assignments = $personal_assignments->where('finished_at', '=', null);
             }
+            return $this->data(new PersonalAssignmentResourceCollection($personal_assignments));
         }
-        return $this->data(new PersonalAssignmentResourceCollection($personal_assignments));
     }
 
     /**

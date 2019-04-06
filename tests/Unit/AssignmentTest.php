@@ -103,6 +103,16 @@ class AssignmentTest extends TestCase
             ]);
         }
 
+        // Assignment can be specified by assignment ID.
+        if (true) {
+            $response = $this->get('/api/assignment?assignment_id=' . $assignments[0]['id']);
+            $response->assertStatus(200);
+            $response->assertExactJson([
+                'success' => true,
+                'data'    => $assignments[0],
+            ]);
+        }
+
         // Privileged user can create assignments
         $user->privilege_level = 2;
         if (true) {

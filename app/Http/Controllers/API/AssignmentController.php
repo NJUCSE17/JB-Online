@@ -15,6 +15,7 @@ use App\Http\Resources\AssignmentResourceCollection;
 use App\Models\Assignment;
 use App\Models\AssignmentFinishRecord;
 use Illuminate\Support\Facades\Auth;
+use PhpParser\Node\Expr\Assign;
 
 class AssignmentController extends APIController
 {
@@ -46,10 +47,11 @@ class AssignmentController extends APIController
      */
     public function view(ViewAssignmentRequest $request)
     {
-        $assignments = Assignment::query()->get();
         if ($request->has('assignment_id')) {
-            $assignments = $assignments->find('assignment_id');
+            $assignment = Assignment::query()->findOrFail($request->get('assignment_id'));
+            return $this->data(new AssignmentResource($assignment));
         } else {
+            $assignments = Assignment::query()->get();
             if ($request->has('course_id')) {
                 $assignments = $assignments->where('course_id', $request->get('course_id'));
             } else {
@@ -63,8 +65,8 @@ class AssignmentController extends APIController
             if ($request->has('unfinished_only') && $request->get('unfinished_only')) {
                 $assignments = $assignments->where('finished_at', '=', null);
             }
+            return $this->data(new AssignmentResourceCollection($assignments));
         }
-        return $this->data(new AssignmentResourceCollection($assignments));
     }
 
     /**
