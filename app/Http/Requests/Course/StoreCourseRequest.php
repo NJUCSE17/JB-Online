@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Course;
 
+use App\Models\Course;
 use App\Rules\Sanitize;
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -14,7 +15,7 @@ class StoreCourseRequest extends FormRequest
      */
     public function authorize()
     {
-        return true; // TODO: IMPLEMENT PREMISSIONS.
+        return $this->user()->can('create', Course::class);
     }
 
     /**
@@ -26,14 +27,14 @@ class StoreCourseRequest extends FormRequest
     {
         return [
             'name'       => ['required', new Sanitize(), 'max:200'],
-            'semester'   => ['required', 'int', 'between:1,20'],
+            'semester'   => ['required', 'integer', 'between:1,20'],
             'start_time' => ['required', 'date_format:Y-m-d H:i:s'],
             'end_time'   => [
                 'required',
                 'date_format:Y-m-d H:i:s',
                 'after_or_equal:start_before',
             ],
-            'notice'     => ['sometimes', new Sanitize(), 'max:10000'],
+            'notice'     => ['sometimes', 'required', new Sanitize(), 'max:10000'],
         ];
     }
 }
