@@ -6,7 +6,7 @@ use App\Http\Controllers\APIController;
 use App\Http\Requests\Course\DeleteCourseRequest;
 use App\Http\Requests\Course\EnrollCourseRequest;
 use App\Http\Requests\Course\QuitCourseRequest;
-use App\Http\Requests\Course\StoreCourseRequest;
+use App\Http\Requests\Course\CreateCourseRequest;
 use App\Http\Requests\Course\UpdateCourseRequest;
 use App\Http\Requests\Course\ViewCourseRequest;
 use App\Http\Resources\CourseEnrollRecordResource;
@@ -21,11 +21,11 @@ class CourseController extends APIController
     /**
      * Create a course.
      *
-     * @param  StoreCourseRequest  $request
+     * @param  CreateCourseRequest  $request
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function create(StoreCourseRequest $request)
+    public function create(CreateCourseRequest $request)
     {
         $data = $request->only(
             ['name', 'semester', 'start_time', 'end_time', 'notice']

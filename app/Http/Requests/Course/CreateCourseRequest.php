@@ -6,7 +6,7 @@ use App\Models\Course;
 use App\Rules\Sanitize;
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreCourseRequest extends FormRequest
+class CreateCourseRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.

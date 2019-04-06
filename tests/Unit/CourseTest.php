@@ -2,7 +2,6 @@
 
 namespace Tests\Feature\Unit;
 
-use App\Models\Course;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
@@ -32,7 +31,22 @@ class CourseTest extends TestCase
         $this->course_admin = factory(User::class)->create();
         $this->admin = factory(User::class)->create();
         $this->admin->privilege_level = 2;
-        $this->course = factory(Course::class)->create();
+
+        $notice = $this->faker->paragraph;
+        $this->course = [
+            'id'          => 1,
+            'name'        => $this->faker->realText(20),
+            'semester'    => $this->faker->numberBetween(1, 10),
+            'start_time'  => $this->faker->dateTimeBetween('-1 year', 'now')->format(
+                'Y-m-d H:i:s'
+            ),
+            'end_time'    => $this->faker->dateTimeBetween('now', '+1 year')->format(
+                'Y-m-d H:i:s'
+            ),
+            'notice'      => $notice,
+            'notice_html' => $this->parser->text($notice),
+            'assignments' => [],
+        ];
     }
 
     /**
@@ -74,31 +88,31 @@ class CourseTest extends TestCase
         $this->actingAs($this->user, 'api');
         $this->post('/api/course',
             [
-                'name'       => $this->course->name,
-                'semester'   => $this->course->semester,
-                'start_time' => $this->course->start_time,
-                'end_time'   => $this->course->end_time,
-                'notice'     => $this->course->notice,
+                'name'       => $this->course['name'],
+                'semester'   => $this->course['semester'],
+                'start_time' => $this->course['start_time'],
+                'end_time'   => $this->course['end_time'],
+                'notice'     => $this->course['notice'],
             ]
         )->assertStatus(403);
     }
 
     public function adminCanCreateCourse()
     {
-        $this->actingAs($this->user, 'api');
+        $this->actingAs($this->admin, 'api');
         $this->post('/api/course',
             [
-                'name'       => $this->course->name,
-                'semester'   => $this->course->semester,
-                'start_time' => $this->course->start_time,
-                'end_time'   => $this->course->end_time,
-                'notice'     => $this->course->notice,
+                'name'       => $this->course['name'],
+                'semester'   => $this->course['semester'],
+                'start_time' => $this->course['start_time'],
+                'end_time'   => $this->course['end_time'],
+                'notice'     => $this->course['notice'],
             ]
-        )->assertStatus(403)
+        )->assertStatus(201)
             ->assertExactJson(
                 [
                     'success' => true,
-                    'data'    => [$this->course],
+                    'data'    => $this->course,
                 ]
             );
     }
