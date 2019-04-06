@@ -24,10 +24,14 @@ class ViewCourseRequest extends FormRequest
     public function rules()
     {
         return [
-            'course_id' => ['sometimes', 'int', 'exists:courses,id'],
-            'semester' => ['sometimes', 'int', 'between:1,20'],
+            'course_id'    => ['sometimes', 'int', 'exists:courses,id'],
+            'semester'     => ['sometimes', 'int', 'between:1,20'],
             'start_before' => ['sometimes', 'date_format:Y-m-d H:i:s'],
-            'end_after' => ['required_with:start_before', 'date_format:Y-m-d H:i:s', 'after_or_equal:start_before'],
+            'end_after'    => [
+                'required_with:start_before',
+                'date_format:Y-m-d H:i:s',
+                'after_or_equal:start_before',
+            ],
         ];
     }
 }

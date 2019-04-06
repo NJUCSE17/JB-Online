@@ -12,7 +12,8 @@ class UserPolicy
     /**
      * Filter for all polices in this class.
      *
-     * @param User $user
+     * @param  User  $user
+     *
      * @return mixed
      */
     public function before(User $user)
@@ -51,8 +52,9 @@ class UserPolicy
     /**
      * Determine whether the user can update the model.
      *
-     * @param  \App\Models\User $user
-     * @param  \App\Models\User $model
+     * @param  \App\Models\User  $user
+     * @param  \App\Models\User  $model
+     *
      * @return mixed
      */
     public function update(User $user, User $model)

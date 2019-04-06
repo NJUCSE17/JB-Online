@@ -21,28 +21,36 @@ class APIController extends Controller
      * Package data with OK(200) status
      *
      * @param $data
+     *
      * @return \Illuminate\Http\JsonResponse
      */
     protected function data($data)
     {
-        return response()->json([
-            'success' => true,
-            'data'    => $data,
-        ], 200);
+        return response()->json(
+            [
+                'success' => true,
+                'data'    => $data,
+            ],
+            200
+        );
     }
 
     /**
      * Package data with created(201) status
      *
      * @param $data
+     *
      * @return \Illuminate\Http\JsonResponse
      */
     protected function created($data)
     {
-        return response()->json([
-            'success' => true,
-            'data'    => $data,
-        ], 201);
+        return response()->json(
+            [
+                'success' => true,
+                'data'    => $data,
+            ],
+            201
+        );
     }
 
     /**
@@ -50,13 +58,17 @@ class APIController extends Controller
      *
      * @param $message
      * @param $status
+     *
      * @return \Illuminate\Http\JsonResponse
      */
     protected function error($message, $status)
     {
-        return response()->json([
-            'success' => false,
-            'message' => $message,
-        ], $status);
+        return response()->json(
+            [
+                'success' => false,
+                'message' => $message,
+            ],
+            $status
+        );
     }
 }

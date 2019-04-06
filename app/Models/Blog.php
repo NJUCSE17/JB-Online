@@ -11,19 +11,21 @@ class Blog extends Model
      *
      * @var array
      */
-    protected $fillable = [
-        'user_id',
-        'title',
-        'content_html',
-        'published_at',
-    ];
+    protected $fillable
+        = [
+            'user_id',
+            'title',
+            'content_html',
+            'published_at',
+        ];
 
     /**
      * The attributes that should be cast to native types.
      *
      * @var array
      */
-    protected $casts = [
-        'published_at' => 'datetime',
-    ];
+    protected $casts
+        = [
+            'published_at' => 'datetime',
+        ];
 }

@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 class CreateAssignmentsAndFinishRecordsTables extends Migration
 {
@@ -13,24 +13,32 @@ class CreateAssignmentsAndFinishRecordsTables extends Migration
      */
     public function up()
     {
-        Schema::create('assignments', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->unsignedBigInteger('course_id');
-            $table->foreign('course_id')->references('id')->on('courses');
-            $table->string('name');
-            $table->text('content');
-            $table->text('content_html');
-            $table->timestamp('due_time');
-            $table->timestamps();
-        });
-        Schema::create('assignment_finish_records', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users');
-            $table->unsignedBigInteger('assignment_id');
-            $table->foreign('assignment_id')->references('id')->on('assignments');
-            $table->timestamps();
-        });
+        Schema::create(
+            'assignments',
+            function (Blueprint $table) {
+                $table->bigIncrements('id');
+                $table->unsignedBigInteger('course_id');
+                $table->foreign('course_id')->references('id')->on('courses');
+                $table->string('name');
+                $table->text('content');
+                $table->text('content_html');
+                $table->timestamp('due_time');
+                $table->timestamps();
+            }
+        );
+        Schema::create(
+            'assignment_finish_records',
+            function (Blueprint $table) {
+                $table->bigIncrements('id');
+                $table->unsignedBigInteger('user_id');
+                $table->foreign('user_id')->references('id')->on('users');
+                $table->unsignedBigInteger('assignment_id');
+                $table->foreign('assignment_id')->references('id')->on(
+                    'assignments'
+                );
+                $table->timestamps();
+            }
+        );
     }
 
     /**

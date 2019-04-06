@@ -13,7 +13,8 @@ class CoursePolicy
     /**
      * Filter for all polices in this class.
      *
-     * @param User $user
+     * @param  User  $user
+     *
      * @return mixed
      */
     public function before(User $user)
@@ -52,8 +53,9 @@ class CoursePolicy
     /**
      * Determine whether the user can update the course.
      *
-     * @param  \App\Models\User $user
-     * @param  \App\Models\Course $course
+     * @param  \App\Models\User    $user
+     * @param  \App\Models\Course  $course
+     *
      * @return mixed
      */
     public function update(User $user, Course $course)

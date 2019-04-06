@@ -14,7 +14,10 @@ class FinishAssignmentRequest extends FormRequest
      */
     public function authorize()
     {
-        $assignment = Assignment::query()->findOrFail($this->request->get('assignment_id'));
+        $assignment = Assignment::query()->findOrFail(
+            $this->request->get('assignment_id')
+        );
+
         return $this->user()->can('finish', $assignment);
     }
 

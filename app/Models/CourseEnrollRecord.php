@@ -14,19 +14,21 @@ class CourseEnrollRecord extends Model
      *
      * @var array
      */
-    protected $fillable = [
-        'user_id',
-        'course_id',
-        'type_is_admin',
-        'created_at',
-    ];
+    protected $fillable
+        = [
+            'user_id',
+            'course_id',
+            'type_is_admin',
+            'created_at',
+        ];
 
     /**
      * The attributes that should be cast to native types.
      *
      * @var array
      */
-    protected $casts = [
-        'created_at' => 'datetime',
-    ];
+    protected $casts
+        = [
+            'created_at' => 'datetime',
+        ];
 }

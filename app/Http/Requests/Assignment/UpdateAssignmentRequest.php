@@ -15,7 +15,10 @@ class UpdateAssignmentRequest extends FormRequest
      */
     public function authorize()
     {
-        $assignment = Assignment::query()->findOrFail($this->request->get('assignment_id'));
+        $assignment = Assignment::query()->findOrFail(
+            $this->request->get('assignment_id')
+        );
+
         return $this->user()->can('update', $assignment);
     }
 
@@ -28,9 +31,23 @@ class UpdateAssignmentRequest extends FormRequest
     {
         return [
             'assignment_id' => ['required', 'integer', 'exists:assignments,id'],
-            'name'          => ['sometimes', 'required', new Sanitize(), 'max:100'],
-            'content'       => ['sometimes', 'required', new Sanitize(), 'max:2000'],
-            'due_time'      => ['sometimes', 'required', 'date_format:Y-m-d H:i:s'],
+            'name'          => [
+                'sometimes',
+                'required',
+                new Sanitize(),
+                'max:100',
+            ],
+            'content'       => [
+                'sometimes',
+                'required',
+                new Sanitize(),
+                'max:2000',
+            ],
+            'due_time'      => [
+                'sometimes',
+                'required',
+                'date_format:Y-m-d H:i:s',
+            ],
         ];
     }
 }

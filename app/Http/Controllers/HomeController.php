@@ -2,12 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\API\AssignmentController;
-use App\Http\Requests\Assignment\ViewAssignmentRequest;
-use App\Models\Assignment;
 use App\Models\PersonalAssignment;
 use App\Models\User;
-use Faker\Factory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -37,6 +33,7 @@ class HomeController extends Controller
     {
         $user = Factory(User::class)->create();
         Auth::login($user);
+
         return PersonalAssignment::query()->get();
     }
 }

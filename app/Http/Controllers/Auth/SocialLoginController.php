@@ -10,6 +10,7 @@ class SocialLoginController extends Controller
 {
     /**
      * Handle socialite login event
+     *
      * @return mixed
      */
     public function githubRedirect()
@@ -20,6 +21,7 @@ class SocialLoginController extends Controller
 
     /**
      * Handle socialite login callback
+     *
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function githubCallback()

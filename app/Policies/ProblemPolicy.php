@@ -13,7 +13,8 @@ class ProblemPolicy
     /**
      * Filter for all polices in this class.
      *
-     * @param User $user
+     * @param  User  $user
+     *
      * @return mixed
      */
     public function before(User $user)
@@ -52,8 +53,9 @@ class ProblemPolicy
     /**
      * Determine whether the user can update the problem.
      *
-     * @param  \App\Models\User $user
-     * @param  \App\Models\Problem $problem
+     * @param  \App\Models\User     $user
+     * @param  \App\Models\Problem  $problem
+     *
      * @return mixed
      */
     public function update(User $user, Problem $problem)
@@ -64,8 +66,9 @@ class ProblemPolicy
     /**
      * Determine whether the user can delete the problem.
      *
-     * @param  \App\Models\User $user
-     * @param  \App\Models\Problem $problem
+     * @param  \App\Models\User     $user
+     * @param  \App\Models\Problem  $problem
+     *
      * @return mixed
      */
     public function delete(User $user, Problem $problem)

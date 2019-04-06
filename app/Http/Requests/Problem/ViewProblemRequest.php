@@ -24,8 +24,12 @@ class ViewProblemRequest extends FormRequest
     public function rules()
     {
         return [
-            'problem_id' => ['sometimes', 'int', 'exists:problems,id'],
-            'course_id'     => ['required_without:assignment_id', 'int', 'exists:courses,id'],
+            'problem_id'    => ['sometimes', 'int', 'exists:problems,id'],
+            'course_id'     => [
+                'required_without:assignment_id',
+                'int',
+                'exists:courses,id',
+            ],
             'assignment_id' => ['sometimes', 'int', 'exists:assignments,id'],
         ];
     }

@@ -14,10 +14,11 @@ class AssignmentFinishRecord extends Model
      *
      * @var array
      */
-    protected $fillable = [
-        'user_id',
-        'assignment_id',
-    ];
+    protected $fillable
+        = [
+            'user_id',
+            'assignment_id',
+        ];
     // TODO: WHEN AN ASSIGNMENT IS CHANGED, REVOKE THE RECORD (ISSUE BY KSL)
 
     /**
@@ -25,7 +26,8 @@ class AssignmentFinishRecord extends Model
      *
      * @var array
      */
-    protected $casts = [
-        'created_at' => 'datetime',
-    ];
+    protected $casts
+        = [
+            'created_at' => 'datetime',
+        ];
 }

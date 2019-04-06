@@ -17,7 +17,9 @@ class CreateAssignmentRequest extends FormRequest
     public function authorize()
     {
         $course = Course::query()->findOrFail($this->request->get('course_id'));
-        return $this->user()->can('create', Assignment::class) || $this->user()->isCourseAdmin($course);
+
+        return $this->user()->can('create', Assignment::class)
+            || $this->user()->isCourseAdmin($course);
     }
 
     /**
@@ -29,9 +31,9 @@ class CreateAssignmentRequest extends FormRequest
     {
         return [
             'course_id' => ['required', 'integer', 'exists:courses,id'],
-            'name' => ['required', new Sanitize(), 'max:100'],
-            'content' => ['required', new Sanitize(), 'max:2000'],
-            'due_time' => ['required', 'date_format:Y-m-d H:i:s'],
+            'name'      => ['required', new Sanitize(), 'max:100'],
+            'content'   => ['required', new Sanitize(), 'max:2000'],
+            'due_time'  => ['required', 'date_format:Y-m-d H:i:s'],
         ];
     }
 }

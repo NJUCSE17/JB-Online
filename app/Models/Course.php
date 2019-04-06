@@ -15,22 +15,24 @@ class Course extends Model
      *
      * @var array
      */
-    protected $fillable = [
-        'name',
-        'semester',
-        'start_time',
-        'end_time',
-        'notice',
-        'notice_html',
-    ];
+    protected $fillable
+        = [
+            'name',
+            'semester',
+            'start_time',
+            'end_time',
+            'notice',
+            'notice_html',
+        ];
 
     /**
      * The attributes that should be cast to native types.
      *
      * @var array
      */
-    protected $casts = [
-        'start_time' => 'datetime',
-        'end_time' => 'datetime',
-    ];
+    protected $casts
+        = [
+            'start_time' => 'datetime',
+            'end_time'   => 'datetime',
+        ];
 }

@@ -14,7 +14,10 @@ class DeleteAssignmentRequest extends FormRequest
      */
     public function authorize()
     {
-        $assignment = Assignment::query()->findOrFail($this->request->get('assignment_id'));
+        $assignment = Assignment::query()->findOrFail(
+            $this->request->get('assignment_id')
+        );
+
         return $this->user()->can('delete', $assignment);
     }
 
@@ -26,7 +29,12 @@ class DeleteAssignmentRequest extends FormRequest
     public function rules()
     {
         return [
-            'assignment_id'   => ['sometimes', 'required', 'integer', 'exists:assignments,id'],
+            'assignment_id' => [
+                'sometimes',
+                'required',
+                'integer',
+                'exists:assignments,id',
+            ],
         ];
     }
 }

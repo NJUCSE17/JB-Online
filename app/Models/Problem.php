@@ -14,9 +14,10 @@ class Problem extends Model
      *
      * @var array
      */
-    protected $fillable = [
-        'course_id',
-        'assignment_id',
-        'content',
-    ];
+    protected $fillable
+        = [
+            'course_id',
+            'assignment_id',
+            'content',
+        ];
 }

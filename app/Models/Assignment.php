@@ -11,6 +11,29 @@ class Assignment extends Model
     use AssignmentRelationships;
 
     /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable
+        = [
+            'course_id',
+            'name',
+            'content',
+            'content_html',
+            'due_time',
+        ];
+    /**
+     * The attributes that should be cast to native types.
+     *
+     * @var array
+     */
+    protected $casts
+        = [
+            'due_time' => 'datetime',
+        ];
+
+    /**
      * The "booting" method of the model.
      */
     protected static function boot()
@@ -18,26 +41,4 @@ class Assignment extends Model
         parent::boot();
         static::addGlobalScope(new WithAssignmentFinishRecordsScope);
     }
-
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
-    protected $fillable = [
-        'course_id',
-        'name',
-        'content',
-        'content_html',
-        'due_time',
-    ];
-
-    /**
-     * The attributes that should be cast to native types.
-     *
-     * @var array
-     */
-    protected $casts = [
-        'due_time' => 'datetime',
-    ];
 }

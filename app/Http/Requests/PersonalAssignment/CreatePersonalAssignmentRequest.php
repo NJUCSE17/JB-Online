@@ -26,8 +26,8 @@ class CreatePersonalAssignmentRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => ['required', new Sanitize(), 'max:100'],
-            'content' => ['required', new Sanitize(), 'max:2000'],
+            'name'     => ['required', new Sanitize(), 'max:100'],
+            'content'  => ['required', new Sanitize(), 'max:2000'],
             'due_time' => ['required', 'date_format:Y-m-d H:i:s'],
         ];
     }

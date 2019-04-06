@@ -11,14 +11,24 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get(
+    '/',
+    function () {
+        return view('welcome');
+    }
+);
 
 Route::get('/test', 'HomeController@test')->name('test');
 
 Auth::routes();
-Route::group(['namespace' => 'Auth', 'as' => 'auth'], function () {
-    Route::get('/login/github', 'SocialLoginController@githubRedirect')->name('login.github.redirect');
-    Route::get('/login/github/callback', 'SocialLoginController@githubCallback')->name('login.github.callback');
-});
+Route::group(
+    ['namespace' => 'Auth', 'as' => 'auth'],
+    function () {
+        Route::get('/login/github', 'SocialLoginController@githubRedirect')
+            ->name('login.github.redirect');
+        Route::get(
+            '/login/github/callback',
+            'SocialLoginController@githubCallback'
+        )->name('login.github.callback');
+    }
+);

@@ -24,10 +24,22 @@ class UpdateUserRequest extends FormRequest
     public function rules()
     {
         return [
-            'user_id' => ['sometimes', 'int', 'exists:users,id'],
+            'user_id'  => ['sometimes', 'int', 'exists:users,id'],
             'name'     => ['sometimes', 'string', 'max:255'],
-            'email'    => ['sometimes', 'string', 'email', 'max:255', 'unique:users'],
-            'blog'     => ['sometimes', 'string', 'url', 'max:255', 'unique:users'],
+            'email'    => [
+                'sometimes',
+                'string',
+                'email',
+                'max:255',
+                'unique:users',
+            ],
+            'blog'     => [
+                'sometimes',
+                'string',
+                'url',
+                'max:255',
+                'unique:users',
+            ],
             'password' => ['sometimes', 'string', 'min:8'],
         ];
     }

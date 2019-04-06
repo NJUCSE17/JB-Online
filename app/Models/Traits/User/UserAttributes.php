@@ -35,7 +35,7 @@ trait UserAttributes
     public function getAvatarImage()
     {
         return "<img style='height: 32px; width: 32px;' src='"
-            . $this->getAvatarURL() . "' alt='' />";
+            .$this->getAvatarURL()."' alt='' />";
     }
 
     /**
@@ -58,8 +58,8 @@ trait UserAttributes
             default:
                 {
                     return "https://www.gravatar.com/avatar/"
-                        . md5( strtolower( trim( $this->email ) ) )
-                        . "?d=" . urlencode( "identicon" );
+                        .md5(strtolower(trim($this->email)))
+                        ."?d=".urlencode("identicon");
                 }
         }
     }
@@ -67,7 +67,8 @@ trait UserAttributes
     /**
      * Check whether a user is in course.
      *
-     * @param Course $course
+     * @param  Course  $course
+     *
      * @return bool
      */
     public function isInCourse(Course $course)
@@ -81,7 +82,8 @@ trait UserAttributes
     /**
      * Check whether a user is admin of a course.
      *
-     * @param Course $course
+     * @param  Course  $course
+     *
      * @return bool
      */
     public function isCourseAdmin(Course $course)

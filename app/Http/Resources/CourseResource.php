@@ -10,6 +10,7 @@ class CourseResource extends JsonResource
      * Transform the resource into an array.
      *
      * @param  \Illuminate\Http\Request  $request
+     *
      * @return array
      */
     public function toArray($request)
@@ -22,7 +23,9 @@ class CourseResource extends JsonResource
             'end_time'    => $this->end_time->format('Y-m-d H:i:s'),
             'notice'      => $this->notice,
             'notice_html' => $this->notice_html,
-            'assignments' => new AssignmentResourceCollection($this->assignments), // TODO: SELECT ONGOING ASSIGNMENTS
+            'assignments' => new AssignmentResourceCollection(
+                $this->assignments
+            ), // TODO: SELECT ONGOING ASSIGNMENTS
         ];
     }
 }

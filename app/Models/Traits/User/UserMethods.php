@@ -9,7 +9,9 @@ trait UserMethods
      */
     public function resetEmail()
     {
-        if (!$this->isVerified()) return;
+        if (!$this->isVerified()) {
+            return;
+        }
         $this->email_verified_at = null;
         $this->save();
     }
@@ -19,7 +21,9 @@ trait UserMethods
      */
     public function activate()
     {
-        if ($this->isActive()) return;
+        if ($this->isActive()) {
+            return;
+        }
         $this->activated_at = now()->timestamp;
         $this->save();
     }
@@ -29,7 +33,9 @@ trait UserMethods
      */
     public function deactivate()
     {
-        if (!$this->isActive()) return;
+        if (!$this->isActive()) {
+            return;
+        }
         $this->activated_at = null;
         $this->save();
     }

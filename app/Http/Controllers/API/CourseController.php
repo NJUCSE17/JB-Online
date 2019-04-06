@@ -21,27 +21,34 @@ class CourseController extends APIController
     /**
      * Create a course.
      *
-     * @param StoreCourseRequest $request
+     * @param  StoreCourseRequest  $request
+     *
      * @return \Illuminate\Http\JsonResponse
      */
     public function create(StoreCourseRequest $request)
     {
-        $data = $request->only(['name', 'semester', 'start_time', 'end_time', 'notice']);
-        $course = Course::query()->create([
-            'name'        => $data['name'],
-            'semester'    => $data['semester'],
-            'start_time'  => $data['start_time'],
-            'end_time'    => $data['end_time'],
-            'notice'      => $data['notice'],
-            'notice_html' => clean($this->parser->parse($data['notice'])),
-        ]);
+        $data = $request->only(
+            ['name', 'semester', 'start_time', 'end_time', 'notice']
+        );
+        $course = Course::query()->create(
+            [
+                'name'        => $data['name'],
+                'semester'    => $data['semester'],
+                'start_time'  => $data['start_time'],
+                'end_time'    => $data['end_time'],
+                'notice'      => $data['notice'],
+                'notice_html' => clean($this->parser->parse($data['notice'])),
+            ]
+        );
+
         return $this->created(new CourseResource($course));
     }
 
     /**
      * View all courses satisfying the constraints.
      *
-     * @param ViewCourseRequest $request
+     * @param  ViewCourseRequest  $request
+     *
      * @return \Illuminate\Http\JsonResponse
      */
     public function view(ViewCourseRequest $request)
@@ -54,72 +61,91 @@ class CourseController extends APIController
                 $query->Semester($request->get('semester'));
             }
             if ($request->has('start_before')) {
-                $query->Between(Carbon::parse($request->get('start_before')),
-                    Carbon::parse($request->get('end_after')));
+                $query->Between(
+                    Carbon::parse($request->get('start_before')),
+                    Carbon::parse($request->get('end_after'))
+                );
             }
         }
+
         return $this->data(new CourseResourceCollection($query->get()));
     }
 
     /**
      * Update a course.
      *
-     * @param UpdateCourseRequest $request
+     * @param  UpdateCourseRequest  $request
+     *
      * @return \Illuminate\Http\JsonResponse
      */
     public function update(UpdateCourseRequest $request)
     {
         $course = Course::query()->findOrFail($request->get('course_id'));
-        $name       = $request->has('name')       ? $request->get('name')       : $course->name;
-        $semester   = $request->has('semester')   ? $request->get('semester')   : $course->semester;
-        $start_time = $request->has('start_time') ? $request->get('start_time') : $course->start_time;
-        $end_time   = $request->has('end_time')   ? $request->get('end_time')   : $course->end_time;
-        $notice     = $request->has('notice')     ? $request->get('notice')     : $course->notice;
-        $course->update([
-            'name'        => $name,
-            'semester'    => $semester,
-            'start_time'  => $start_time,
-            'end_time'    => $end_time,
-            'notice'      => $notice,
-            'notice_html' => clean($this->parser->parse($notice)),
-        ]);
+        $name = $request->has('name') ? $request->get('name') : $course->name;
+        $semester = $request->has('semester') ? $request->get('semester')
+            : $course->semester;
+        $start_time = $request->has('start_time') ? $request->get('start_time')
+            : $course->start_time;
+        $end_time = $request->has('end_time') ? $request->get('end_time')
+            : $course->end_time;
+        $notice = $request->has('notice') ? $request->get('notice')
+            : $course->notice;
+        $course->update(
+            [
+                'name'        => $name,
+                'semester'    => $semester,
+                'start_time'  => $start_time,
+                'end_time'    => $end_time,
+                'notice'      => $notice,
+                'notice_html' => clean($this->parser->parse($notice)),
+            ]
+        );
+
         return $this->data(new CourseResource($course));
     }
 
     /**
      * Delete a course.
      *
-     * @param DeleteCourseRequest $request
+     * @param  DeleteCourseRequest  $request
+     *
      * @return \Illuminate\Http\JsonResponse
      * @throws \Exception
      */
     public function delete(DeleteCourseRequest $request)
     {
         Course::query()->findOrFail($request->get('course_id'))->delete();
+
         return $this->data('Course deleted.');
     }
 
     /**
      * Enroll a user to a course.
      *
-     * @param EnrollCourseRequest $request
+     * @param  EnrollCourseRequest  $request
+     *
      * @return \Illuminate\Http\JsonResponse
      */
     public function enroll(EnrollCourseRequest $request)
     {
         $data = $request->only('user_id', 'course_id', 'type_is_admin');
-        $record = CourseEnrollRecord::query()->updateOrCreate([
-            'user_id'       => $data['user_id'],
-            'course_id'     => $data['course_id'],
-            'type_is_admin' => $request->has('type_is_admin') ? $request->get('type_is_admin') : false,
-        ]);
+        $record = CourseEnrollRecord::query()->updateOrCreate(
+            [
+                'user_id'       => $data['user_id'],
+                'course_id'     => $data['course_id'],
+                'type_is_admin' => $request->has('type_is_admin')
+                    ? $request->get('type_is_admin') : false,
+            ]
+        );
+
         return $this->data(new CourseEnrollRecordResource($record));
     }
 
     /**
      * Quit a user from a course.
      *
-     * @param QuitCourseRequest $request
+     * @param  QuitCourseRequest  $request
+     *
      * @return \Illuminate\Http\JsonResponse
      * @throws \Exception
      */
@@ -131,6 +157,7 @@ class CourseController extends APIController
             ->where('course_id', $data['course_id'])
             ->firstOrFail()
             ->delete();
+
         return $this->data('Course quited.');
     }
 }

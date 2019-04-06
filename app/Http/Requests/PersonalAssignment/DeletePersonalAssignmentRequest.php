@@ -14,7 +14,10 @@ class DeletePersonalAssignmentRequest extends FormRequest
      */
     public function authorize()
     {
-        $personal_assignment = PersonalAssignment::query()->findOrFail($this->request->get('personal_assignment_id'));
+        $personal_assignment = PersonalAssignment::query()->findOrFail(
+            $this->request->get('personal_assignment_id')
+        );
+
         return $this->user()->can('delete', $personal_assignment);
     }
 
@@ -26,7 +29,11 @@ class DeletePersonalAssignmentRequest extends FormRequest
     public function rules()
     {
         return [
-            'personal_assignment_id' => ['required', 'integer', 'exists:personal_assignments,id'],
+            'personal_assignment_id' => [
+                'required',
+                'integer',
+                'exists:personal_assignments,id',
+            ],
         ];
     }
 }

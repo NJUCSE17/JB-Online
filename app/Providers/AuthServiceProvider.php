@@ -21,13 +21,14 @@ class AuthServiceProvider extends ServiceProvider
      *
      * @var array
      */
-    protected $policies = [
-        Assignment::class => AssignmentPolicy::class,
-        Course::class => CoursePolicy::class,
-        PersonalAssignment::class => PersonalAssignmentPolicy::class,
-        Problem::class => ProblemPolicy::class,
-        User::class => UserPolicy::class,
-    ];
+    protected $policies
+        = [
+            Assignment::class         => AssignmentPolicy::class,
+            Course::class             => CoursePolicy::class,
+            PersonalAssignment::class => PersonalAssignmentPolicy::class,
+            Problem::class            => ProblemPolicy::class,
+            User::class               => UserPolicy::class,
+        ];
 
     /**
      * Register any authentication / authorization services.
