@@ -5,7 +5,6 @@ namespace App\Policies;
 use App\Models\PersonalAssignment;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
-use Illuminate\Support\Facades\Auth;
 
 class PersonalAssignmentPolicy
 {
@@ -20,11 +19,7 @@ class PersonalAssignmentPolicy
     public function before(User $user)
     {
         if ($user->isActive() && $user->isVerified()) {
-            if ($user->privilege_level <= 2) {
-                return true;
-            } else {
-                return null;
-            }
+            return null;
         } else {
             return false;
         }
@@ -39,7 +34,7 @@ class PersonalAssignmentPolicy
      */
     public function view(User $user, PersonalAssignment $personalAssignment)
     {
-        return $user === $personalAssignment->user;
+        return $user->privilege_level <= 2 || $user->is($personalAssignment->user);
     }
 
     /**
@@ -61,7 +56,7 @@ class PersonalAssignmentPolicy
      */
     public function update(User $user, PersonalAssignment $personalAssignment)
     {
-        return $user === $personalAssignment->user;
+        return $user->privilege_level <= 2 || $user->is($personalAssignment->user);
     }
 
     /**
@@ -73,7 +68,7 @@ class PersonalAssignmentPolicy
      */
     public function delete(User $user, PersonalAssignment $personalAssignment)
     {
-        return $user === $personalAssignment->user;
+        return $user->privilege_level <= 2 || $user->is($personalAssignment->user);
     }
 
     /**

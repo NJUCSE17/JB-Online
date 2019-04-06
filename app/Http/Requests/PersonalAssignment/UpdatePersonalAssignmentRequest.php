@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\PersonalAssignment;
 
+use App\Models\PersonalAssignment;
 use App\Rules\Sanitize;
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -14,7 +15,8 @@ class UpdatePersonalAssignmentRequest extends FormRequest
      */
     public function authorize()
     {
-        return true; // TODO: PERMISSIONS!!
+        $personal_assignment = PersonalAssignment::query()->findOrFail($this->request->get('personal_assignment_id'));
+        return $this->user()->can('update', $personal_assignment);
     }
 
     /**

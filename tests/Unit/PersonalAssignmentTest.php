@@ -128,7 +128,7 @@ class PersonalAssignmentTest extends TestCase
         if (true) {
             $response = $this->get('/api/personal?personal_assignment_id=' . $personal_assignments[0]['id']);
             $response->assertStatus(200);
-            $response->assertJson([
+            $response->assertExactJson([
                 'success' => true,
                 'data'    => $personal_assignments[0],
             ]);
@@ -136,8 +136,49 @@ class PersonalAssignmentTest extends TestCase
         $users[1]->privilege_level = 3;
 
         // One user can update his/her own PA
+        $personal_assignments[1]['content'] = $this->faker->paragraph;
+        $personal_assignments[1]['content_html'] = $this->parser->text($personal_assignments[1]['content']);
+        $personal_assignments[1]['due_time'] = $this->faker->dateTimeBetween('now', '+5 days')->format('Y-m-d H:i:s');
+        if (true) {
+            $response = $this->put('/api/personal', [
+                'personal_assignment_id' => $personal_assignments[1]['id'],
+                'content'                => $personal_assignments[1]['content'],
+                'due_time'               => $personal_assignments[1]['due_time'],
+            ]);
+            $response->assertStatus(200);
+            $response->assertExactJson([
+                'success' => true,
+                'data'    => $personal_assignments[1],
+            ]);
+        }
+
         // One user cannot update others' PA
-        // Even a privileged user (<=2) cannot update others' PA
+        $this->actingAs($users[0], 'api');
+        if (true) {
+            $response = $this->put('/api/personal', [
+                'personal_assignment_id' => $personal_assignments[1]['id'],
+                'content'                => $personal_assignments[1]['content'],
+                'due_time'               => $personal_assignments[1]['due_time'],
+            ]);
+            $response->assertStatus(403);
+        }
+
+        // However, a privileged user (<=2) can update others' PA
+        $users[0]->privilege_level = 2;
+        if (true) {
+            $response = $this->put('/api/personal', [
+                'personal_assignment_id' => $personal_assignments[1]['id'],
+                'content'                => $personal_assignments[1]['content'],
+                'due_time'               => $personal_assignments[1]['due_time'],
+            ]);
+            $response->assertStatus(200);
+            $response->assertExactJson([
+                'success' => true,
+                'data'    => $personal_assignments[1],
+            ]);
+        }
+        $users[0]->privilege_level = 3;
+
         // One user can finish his/her own PA
         // One user cannot finish his/her own PA
         // Even privileged users cannot finish others' PA

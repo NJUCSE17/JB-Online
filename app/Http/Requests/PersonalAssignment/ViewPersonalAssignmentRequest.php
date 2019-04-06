@@ -15,7 +15,7 @@ class ViewPersonalAssignmentRequest extends FormRequest
     public function authorize()
     {
         if ($this->request->has('personal_assignment_id')) {
-            $personal_assignment = PersonalAssignment::query()->find($this->request->get('personal_assignment_id'));
+            $personal_assignment = PersonalAssignment::query()->findOrFail($this->request->get('personal_assignment_id'));
             return $this->user()->can('view', $personal_assignment);
         } else {
             return true;
