@@ -25,11 +25,11 @@ class ViewAssignmentRequest extends FormRequest
     public function rules()
     {
         return [
-            'assignment_id'   => ['sometimes', 'int', 'exists:assignments,id'],
-            'course_id'       => ['sometimes', 'int', 'exists:courses,id'],
-            'due_after'       => ['sometimes', 'date_format:Y-m-d H:i:s'],
-            'due_before'      => ['sometimes', 'date_format:Y-m-d H:i:s'],
-            'unfinished_only' => ['sometimes', 'boolean'],
+            'assignment_id'   => ['sometimes', 'required', 'integer', 'exists:assignments,id'],
+            'course_id'       => ['sometimes', 'required', 'integer', 'exists:courses,id'],
+            'due_after'       => ['sometimes', 'required', 'date_format:Y-m-d H:i:s'],
+            'due_before'      => ['sometimes', 'required', 'date_format:Y-m-d H:i:s'],
+            'unfinished_only' => ['sometimes', 'required', 'boolean'],
         ];
     }
 }

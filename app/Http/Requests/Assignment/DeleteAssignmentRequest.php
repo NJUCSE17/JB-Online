@@ -26,7 +26,7 @@ class DeleteAssignmentRequest extends FormRequest
     public function rules()
     {
         return [
-            'assignment_id'   => ['sometimes', 'int', 'exists:assignments,id'],
+            'assignment_id'   => ['sometimes', 'required', 'integer', 'exists:assignments,id'],
         ];
     }
 }

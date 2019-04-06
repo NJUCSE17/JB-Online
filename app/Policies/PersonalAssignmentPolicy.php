@@ -80,7 +80,7 @@ class PersonalAssignmentPolicy
      */
     public function finish(User $user, PersonalAssignment $personalAssignment)
     {
-        return $user === $personalAssignment->user;
+        return $user->is($personalAssignment->user);
     }
 
     /**
@@ -92,6 +92,6 @@ class PersonalAssignmentPolicy
      */
     public function reset(User $user, PersonalAssignment $personalAssignment)
     {
-        return $user === $personalAssignment->user;
+        return $user->is($personalAssignment->user);
     }
 }

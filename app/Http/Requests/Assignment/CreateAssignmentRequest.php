@@ -28,7 +28,7 @@ class CreateAssignmentRequest extends FormRequest
     public function rules()
     {
         return [
-            'course_id' => ['required', 'int', 'exists:courses,id'],
+            'course_id' => ['required', 'integer', 'exists:courses,id'],
             'name' => ['required', new Sanitize(), 'max:100'],
             'content' => ['required', new Sanitize(), 'max:2000'],
             'due_time' => ['required', 'date_format:Y-m-d H:i:s'],

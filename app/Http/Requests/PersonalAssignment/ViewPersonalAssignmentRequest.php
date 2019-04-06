@@ -30,10 +30,10 @@ class ViewPersonalAssignmentRequest extends FormRequest
     public function rules()
     {
         return [
-            'personal_assignment_id' => ['sometimes', 'int', 'exists:personal_assignments,id'],
-            'due_after'              => ['sometimes', 'date_format:Y-m-d H:i:s'],
-            'due_before'             => ['sometimes', 'date_format:Y-m-d H:i:s'],
-            'unfinished_only'        => ['sometimes', 'boolean'],
+            'personal_assignment_id' => ['sometimes', 'required', 'integer', 'exists:personal_assignments,id'],
+            'due_after'              => ['sometimes', 'required', 'date_format:Y-m-d H:i:s'],
+            'due_before'             => ['sometimes', 'required', 'date_format:Y-m-d H:i:s'],
+            'unfinished_only'        => ['sometimes', 'required', 'boolean'],
         ];
     }
 }

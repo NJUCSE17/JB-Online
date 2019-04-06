@@ -28,6 +28,7 @@ class AssignmentTest extends TestCase
     {
         parent::__construct($name, $data, $dataName);
         $this->parser = new \Parsedown();
+        $this->withHeader('Accept', 'application/json');
     }
 
     /**
@@ -52,10 +53,10 @@ class AssignmentTest extends TestCase
 
         // Unauthorized user cannot perform CRUD operations
         if (true) {
-            $this->get('api/assignment')->assertStatus(302);
-            $this->post('api/assignment')->assertStatus(302);
-            $this->put('api/assignment')->assertStatus(302);
-            $this->delete('api/assignment')->assertStatus(302);
+            $this->get('api/assignment')->assertStatus(401);
+            $this->post('api/assignment')->assertStatus(401);
+            $this->put('api/assignment')->assertStatus(401);
+            $this->delete('api/assignment')->assertStatus(401);
         }
 
         // Assignment is empty at first

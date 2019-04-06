@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\PersonalAssignment;
 
+use App\Models\PersonalAssignment;
 use Illuminate\Foundation\Http\FormRequest;
 
 class ResetPersonalAssignmentRequest extends FormRequest
@@ -13,7 +14,8 @@ class ResetPersonalAssignmentRequest extends FormRequest
      */
     public function authorize()
     {
-        return true; // TODO: PERMISSION
+        $personal_assignment = PersonalAssignment::query()->findOrFail($this->request->get('personal_assignment_id'));
+        return $this->user()->can('reset', $personal_assignment);
     }
 
     /**
@@ -24,8 +26,7 @@ class ResetPersonalAssignmentRequest extends FormRequest
     public function rules()
     {
         return [
-            'user_id'                => ['required', 'int', 'exists:users,id'],
-            'personal_assignment_id' => ['required', 'int', 'exists:personal_assignments,id'],
+            'personal_assignment_id' => ['required', 'integer', 'exists:personal_assignments,id'],
         ];
     }
 }

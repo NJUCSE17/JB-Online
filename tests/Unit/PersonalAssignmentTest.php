@@ -2,7 +2,9 @@
 
 namespace Tests\Feature\Unit;
 
+use App\Models\PersonalAssignment;
 use App\Models\User;
+use Illuminate\Support\Facades\DB;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -26,6 +28,7 @@ class PersonalAssignmentTest extends TestCase
     {
         parent::__construct($name, $data, $dataName);
         $this->parser = new \Parsedown();
+        $this->withHeader('Accept', 'application/json');
     }
 
     /**
@@ -53,10 +56,10 @@ class PersonalAssignmentTest extends TestCase
 
         // Unauthorized user cannot perform CRUD operations
         if (true) {
-            $this->get('api/personal')->assertStatus(302);
-            $this->post('api/personal')->assertStatus(302);
-            $this->put('api/personal')->assertStatus(302);
-            $this->delete('api/personal')->assertStatus(302);
+            $this->get('api/personal')->assertStatus(401);
+            $this->post('api/personal')->assertStatus(401);
+            $this->put('api/personal')->assertStatus(401);
+            $this->delete('api/personal')->assertStatus(401);
         }
 
         // User can read empty personal assignments
@@ -114,6 +117,16 @@ class PersonalAssignmentTest extends TestCase
             $response->assertExactJson([
                 'success' => true,
                 'data'    => [$personal_assignments[1]],
+            ]);
+        }
+
+        // One user can view his own PA
+        if (true) {
+            $response = $this->get('/api/personal?personal_assignment_id=' . $personal_assignments[1]['id']);
+            $response->assertStatus(200);
+            $response->assertExactJson([
+                'success' => true,
+                'data'    => $personal_assignments[1],
             ]);
         }
 
@@ -180,12 +193,88 @@ class PersonalAssignmentTest extends TestCase
         $users[0]->privilege_level = 3;
 
         // One user can finish his/her own PA
-        // One user cannot finish his/her own PA
+        unset($personal_assignments[0]['finished_at']); // remove for non-exact assertions
+        if (true) {
+            $response = $this->post('/api/personal/finish', [
+                'personal_assignment_id' => $personal_assignments[0]['id'],
+            ]);
+            $response->assertStatus(200);
+            $response->assertJson([ // not an exact assertion
+                'success' => true,
+                'data'    => $personal_assignments[0],
+            ]);
+        }
+
+        // One user cannot finish others' PA
+        if (true) {
+            $response = $this->post('/api/personal/finish', [
+                'personal_assignment_id' => $personal_assignments[1]['id'],
+            ]);
+            $response->assertStatus(403);
+        }
+
         // Even privileged users cannot finish others' PA
+        $users[0]->privilege_level = 0;
+        if (true) {
+            $response = $this->post('/api/personal/finish', [
+                'personal_assignment_id' => $personal_assignments[1]['id'],
+            ]);
+            $response->assertStatus(403);
+        }
+        $users[0]->privilege_level = 3;
+
         // One user can reset his/her own PA
-        // One user cannot reset his/her own PA
+        if (true) {
+            $response = $this->post('/api/personal/reset', [
+                'personal_assignment_id' => $personal_assignments[0]['id'],
+            ]);
+            $response->assertStatus(200);
+            $response->assertExactJson([
+                'success' => true,
+                'data'    => 'Personal assignment reset.',
+            ]);
+        }
+
+        // One user cannot reset others' PA
+        if (true) {
+            $response = $this->post('/api/personal/reset', [
+                'personal_assignment_id' => $personal_assignments[1]['id'],
+            ]);
+            $response->assertStatus(403);
+        }
+
         // Even privileged users cannot reset others' PA
+        $users[0]->privilege_level = 0;
+        if (true) {
+            $response = $this->post('/api/personal/reset', [
+                'personal_assignment_id' => $personal_assignments[1]['id'],
+            ]);
+            $response->assertStatus(403);
+        }
+        $users[0]->privilege_level = 3;
+
         // One user can delete his/her own PA
+        if (true) {
+            $response = $this->delete('/api/personal', [
+                'personal_assignment_id' => $personal_assignments[0]['id'],
+            ]);
+            $response->assertStatus(200);
+            $response->assertExactJson([
+                'success' => true,
+                'data'    => 'Personal assignment deleted.',
+            ]);
+
+            // check the assignment has been deleted
+            $response = $this->get('/api/personal?personal_assignment_id=' . $personal_assignments[0]['id']);
+            $response->assertStatus(422);
+
+            $response = $this->get('/api/personal');
+            $response->assertStatus(200);
+            $response->assertExactJson([
+                'success' => true,
+                'data'    => [],
+            ]);
+        }
         // One user cannot update others' PA
         // However, a privileged user (<=2) can delete others' PA
     }

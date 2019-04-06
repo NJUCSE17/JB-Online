@@ -26,7 +26,7 @@ class FinishAssignmentRequest extends FormRequest
     public function rules()
     {
         return [
-            'assignment_id' => ['required', 'int', 'exists:assignments,id'],
+            'assignment_id' => ['required', 'integer', 'exists:assignments,id'],
         ];
     }
 }

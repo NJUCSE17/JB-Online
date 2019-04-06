@@ -27,10 +27,10 @@ class UpdatePersonalAssignmentRequest extends FormRequest
     public function rules()
     {
         return [
-            'personal_assignment_id' => ['required', 'int', 'exists:personal_assignments,id'],
-            'name' => ['sometimes', new Sanitize(), 'max:100'],
-            'content' => ['sometimes', new Sanitize(), 'max:2000'],
-            'due_time' => ['sometimes', 'date_format:Y-m-d H:i:s'],
+            'personal_assignment_id' => ['required', 'integer', 'exists:personal_assignments,id'],
+            'name' => ['sometimes', 'required', new Sanitize(), 'max:100'],
+            'content' => ['sometimes', 'required', new Sanitize(), 'max:2000'],
+            'due_time' => ['sometimes', 'required', 'date_format:Y-m-d H:i:s'],
         ];
     }
 }
