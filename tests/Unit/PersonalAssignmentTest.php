@@ -2,9 +2,7 @@
 
 namespace Tests\Feature\Unit;
 
-use App\Models\PersonalAssignment;
 use App\Models\User;
-use Illuminate\Support\Facades\DB;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -118,6 +116,12 @@ class PersonalAssignmentTest extends TestCase
                 'success' => true,
                 'data'    => [$personal_assignments[1]],
             ]);
+        }
+
+        // Can only view PA that exists in the table
+        if (true) {
+            $response = $this->get('/api/personal?personal_assignment_id=404');
+            $response->assertStatus(404);
         }
 
         // One user can view his own PA
@@ -266,7 +270,7 @@ class PersonalAssignmentTest extends TestCase
 
             // check the assignment has been deleted
             $response = $this->get('/api/personal?personal_assignment_id=' . $personal_assignments[0]['id']);
-            $response->assertStatus(422);
+            $response->assertStatus(404);
 
             $response = $this->get('/api/personal');
             $response->assertStatus(200);
@@ -275,7 +279,30 @@ class PersonalAssignmentTest extends TestCase
                 'data'    => [],
             ]);
         }
-        // One user cannot update others' PA
+
+        // One user cannot delete others' PA
+        if (true) {
+            $response = $this->delete('/api/personal', [
+                'personal_assignment_id' => $personal_assignments[1]['id'],
+            ]);
+            $response->assertStatus(403);
+        }
+
         // However, a privileged user (<=2) can delete others' PA
+        $users[0]->privilege_level = 2;
+        if (true) {
+            $response = $this->delete('/api/personal', [
+                'personal_assignment_id' => $personal_assignments[1]['id'],
+            ]);
+            $response->assertStatus(200);
+            $response->assertExactJson([
+                'success' => true,
+                'data'    => 'Personal assignment deleted.',
+            ]);
+
+            $response = $this->get('/api/personal?personal_assignment_id=' . $personal_assignments[1]['id']);
+            $response->assertStatus(404);
+        }
+        $users[0]->privilege_level = 3;
     }
 }
