@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Problem;
 
+use App\Models\Problem;
 use Illuminate\Foundation\Http\FormRequest;
 
 class DeleteProblemRequest extends FormRequest
@@ -13,7 +14,10 @@ class DeleteProblemRequest extends FormRequest
      */
     public function authorize()
     {
-        return true; // TODO: PERMISSIONS
+        $problem = Problem::query()
+            ->findOrFail($this->request->get('problem_id'));
+
+        return $this->user()->can('delete', $problem);
     }
 
     /**
@@ -24,7 +28,7 @@ class DeleteProblemRequest extends FormRequest
     public function rules()
     {
         return [
-            'problem_id' => ['required', 'int', 'exists:problems,id'],
+            'problem_id' => ['required', 'integer', 'exists:problems,id'],
         ];
     }
 }

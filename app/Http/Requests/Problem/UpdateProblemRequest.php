@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Problem;
 
+use App\Models\Problem;
 use App\Rules\Sanitize;
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -14,7 +15,10 @@ class UpdateProblemRequest extends FormRequest
      */
     public function authorize()
     {
-        return true; // TODO: PERMISSION
+        $problem = Problem::query()
+            ->findOrFail($this->request->get('problem_id'));
+
+        return $this->user()->can('update', $problem);
     }
 
     /**
@@ -25,7 +29,8 @@ class UpdateProblemRequest extends FormRequest
     public function rules()
     {
         return [
-            'content' => ['required', new Sanitize(), 'max:200'],
+            'problem_id' => ['required', 'integer', 'exists:problems,id'],
+            'content'    => ['required', new Sanitize(), 'max:200'],
         ];
     }
 }

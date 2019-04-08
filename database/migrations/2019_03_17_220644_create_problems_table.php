@@ -18,11 +18,11 @@ class CreateProblemsTable extends Migration
             function (Blueprint $table) {
                 $table->bigIncrements('id');
                 $table->unsignedBigInteger('course_id');
-                $table->foreign('course_id')->references('id')->on('courses');
+                $table->foreign('course_id')
+                    ->references('id')->on('courses');
                 $table->unsignedBigInteger('assignment_id');
-                $table->foreign('assignment_id')->references('id')->on(
-                    'assignments'
-                );
+                $table->foreign('assignment_id')
+                    ->references('id')->on('assignments');
                 $table->string('content');
                 $table->timestamps();
             }

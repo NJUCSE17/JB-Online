@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\APIController;
+use App\Http\Requests\Problem\CreateProblemRequest;
 use App\Http\Requests\Problem\DeleteProblemRequest;
-use App\Http\Requests\Problem\StoreProblemRequest;
 use App\Http\Requests\Problem\UpdateProblemRequest;
 use App\Http\Requests\Problem\ViewProblemRequest;
 use App\Http\Resources\ProblemResource;
@@ -16,11 +16,11 @@ class ProblemController extends APIController
     /**
      * Create a problem.
      *
-     * @param  StoreProblemRequest  $request
+     * @param  CreateProblemRequest  $request
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function create(StoreProblemRequest $request)
+    public function create(CreateProblemRequest $request)
     {
         $data = $request->only('course_id', 'assignment_id', 'content');
         $problem = Problem::query()->create(
@@ -43,20 +43,18 @@ class ProblemController extends APIController
      */
     public function view(ViewProblemRequest $request)
     {
-        $query = Problem::query();
         if ($request->has('problem_id')) {
-            $query->findOrFail($request->get('problem_id'));
-        } else {
-            if ($request->has('course_id')) {
-                $query->where('course_id', $request->get('course_id'))->get();
-            }
-            if ($request->has('assignment_id')) {
-                $query->where('assignment_id', $request->get('assignment_id'))
-                    ->get();
-            }
-        }
+            $problem = Problem::query()
+                ->findOrFail($request->get('problem_id'));
 
-        return $this->data(new ProblemResourceCollection($query->get()));
+            return $this->data(new ProblemResource($problem));
+        } else {
+            $problems = Problem::query()
+                ->where('assignment_id', $request->get('assignment_id'))
+                ->get();
+
+            return $this->data(new ProblemResourceCollection($problems));
+        }
     }
 
     /**

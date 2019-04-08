@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Problem;
 
+use App\Models\Problem;
 use Illuminate\Foundation\Http\FormRequest;
 
 class ViewProblemRequest extends FormRequest
@@ -13,7 +14,7 @@ class ViewProblemRequest extends FormRequest
      */
     public function authorize()
     {
-        return true; // TODO: PERMISSION
+        return $this->user()->can('view', Problem::class);
     }
 
     /**
@@ -24,13 +25,17 @@ class ViewProblemRequest extends FormRequest
     public function rules()
     {
         return [
-            'problem_id'    => ['sometimes', 'int', 'exists:problems,id'],
-            'course_id'     => [
-                'required_without:assignment_id',
-                'int',
-                'exists:courses,id',
+            'problem_id' => [
+                'sometimes',
+                'required',
+                'integer',
+                'exists:problems,id',
             ],
-            'assignment_id' => ['sometimes', 'int', 'exists:assignments,id'],
+            'assignment_id' => [
+                'required_without:problem_id',
+                'integer',
+                'exists:assignments,id',
+            ],
         ];
     }
 }
