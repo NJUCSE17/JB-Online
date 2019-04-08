@@ -2,6 +2,8 @@
 
 namespace App\Models\Traits\User;
 
+use App\Models\Course;
+
 trait UserRelationships
 {
     /**
@@ -22,5 +24,25 @@ trait UserRelationships
     public function courseEnrollRecords()
     {
         return $this->hasMany('App\Models\CourseEnrollRecord');
+    }
+
+    /**
+     * Get the IDs of the courses the user enrolled in.
+     *
+     * @return mixed
+     */
+    public function courseIDs()
+    {
+        return $this->courseEnrollRecords()->pluck('course_id')->toArray();
+    }
+
+    /**
+     * Get the courses the user enrolled in.
+     *
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
+    public function courses()
+    {
+        return Course::query()->whereIn('id', $this->courseIDs())->get();
     }
 }

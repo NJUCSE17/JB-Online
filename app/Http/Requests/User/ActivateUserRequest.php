@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\User;
 
+use App\Models\User;
 use Illuminate\Foundation\Http\FormRequest;
 
 class ActivateUserRequest extends FormRequest
@@ -13,7 +14,9 @@ class ActivateUserRequest extends FormRequest
      */
     public function authorize()
     {
-        return true; // TODO: PERMISSIONS
+        $user = User::query()->findOrFail($this->request->get('user_id'));
+
+        return $this->user()->can('activate', $user);
     }
 
     /**
@@ -24,7 +27,7 @@ class ActivateUserRequest extends FormRequest
     public function rules()
     {
         return [
-            'user_id' => ['required', 'int', 'exists:users,id'],
+            'user_id' => ['required', 'integer', 'exists:users,id'],
         ];
     }
 }

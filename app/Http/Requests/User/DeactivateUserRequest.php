@@ -2,9 +2,10 @@
 
 namespace App\Http\Requests\User;
 
+use App\Models\User;
 use Illuminate\Foundation\Http\FormRequest;
 
-class DeleteUserRequest extends FormRequest
+class DeactivateUserRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -13,7 +14,9 @@ class DeleteUserRequest extends FormRequest
      */
     public function authorize()
     {
-        return true; // TODO: PERMISSIONS
+        $user = User::query()->findOrFail($this->request->get('user_id'));
+
+        return $this->user()->can('deactivate', $user);
     }
 
     /**
@@ -24,7 +27,7 @@ class DeleteUserRequest extends FormRequest
     public function rules()
     {
         return [
-            'user_id' => ['required', 'int', 'exists:users,id'],
+            'user_id' => ['required', 'integer', 'exists:users,id'],
         ];
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\User;
 
+use App\Models\User;
 use Illuminate\Foundation\Http\FormRequest;
 
 class ViewUserRequest extends FormRequest
@@ -13,7 +14,14 @@ class ViewUserRequest extends FormRequest
      */
     public function authorize()
     {
-        return true; // TODO: PERMISSIONS
+        if ($this->request->has('user_id')) {
+            $user = User::query()
+                ->findOrFail($this->request->getInt('user_id'));
+
+            return $this->user()->can('view', $user);
+        } else {
+            return true;
+        }
     }
 
     /**
@@ -24,7 +32,7 @@ class ViewUserRequest extends FormRequest
     public function rules()
     {
         return [
-            'user_id' => ['sometimes', 'int', 'exists:users,id'],
+            'user_id' => ['sometimes', 'required', 'integer', 'exists:users,id'],
         ];
     }
 }

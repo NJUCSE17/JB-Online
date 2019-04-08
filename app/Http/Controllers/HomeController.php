@@ -34,6 +34,6 @@ class HomeController extends Controller
         $user = Factory(User::class)->create();
         Auth::login($user);
 
-        return PersonalAssignment::query()->get();
+        return Auth::getUser()->courseIDs();
     }
 }

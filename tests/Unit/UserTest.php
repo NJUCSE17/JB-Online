@@ -45,6 +45,19 @@ class UserTest extends TestCase
         ]);
     }
 
+    protected function getUserData(User $user)
+    {
+        return [
+            'id'         => $user->id,
+            'student_id' => $user->student_id,
+            'name'       => $user->name,
+            'email'      => $user->email,
+            'blog'       => $user->blog,
+            'verified'   => $user->isVerified(),
+            'active'     => $user->isActive(),
+        ];
+    }
+
     public function testUserFunctions()
     {
         $this->unauthorizedUserCannotPerformOperations();
@@ -54,6 +67,7 @@ class UserTest extends TestCase
         $this->adminCanViewUsersInfo();
 
         $this->userCanEditItsInfo();
+        $this->userWillBeDeactivedIfEmailEdited();
         $this->userCannotEditOthersInfo();
         $this->adminCannotEditOthersInfo();
         $this->superAdminCanEditOthersInfo();
@@ -82,73 +96,173 @@ class UserTest extends TestCase
             ->assertStatus(200)
             ->assertExactJson([
                 'success' => true,
-                'data'    => $this->user,
+                'data'    => $this->getUserData($this->user),
             ]);
     }
 
     protected function userCanViewOthersInfo()
     {
         $this->actingAs($this->user, 'api');
+        $this->get('/api/user?user_id='.$this->admin->id)
+            ->assertStatus(200)
+            ->assertExactJson([
+                'success' => true,
+                'data'    => $this->getUserData($this->admin),
+            ]);
     }
 
     protected function adminCanViewUsersInfo()
     {
         $this->actingAs($this->admin, 'api');
+        $this->get('/api/user?user_id='.$this->user->id)
+            ->assertStatus(200)
+            ->assertExactJson([
+                'success' => true,
+                'data'    => $this->getUserData($this->user),
+            ]);
     }
 
     protected function userCanEditItsInfo()
     {
         $this->actingAs($this->user, 'api');
+        $this->put('/api/user',
+            [
+                'name' => $this->faker->name,
+            ]
+        )->assertStatus(200)
+            ->assertExactJson([
+                'success' => true,
+                'data'    => $this->getUserData($this->user),
+            ]);
+        $this->assertDatabaseHas('users', [
+            'id'   => $this->user->id,
+            'name' => $this->user->name,
+        ]);
+    }
+
+    protected function userWillBeDeactivedIfEmailEdited()
+    {
+        $this->actingAs($this->user, 'api');
+        $this->put('/api/user',
+            [
+                'email' => $this->faker->safeEmail,
+            ]
+        )->assertStatus(200)
+            ->assertExactJson([
+                'success' => true,
+                'data'    => $this->getUserData($this->user),
+            ]);
+        $this->assertDatabaseHas('users', [
+            'id'                => $this->user->id,
+            'name'              => $this->user->name,
+            'email_verified_at' => null,
+            'activated_at'      => null,
+        ]);
     }
 
     protected function userCannotEditOthersInfo()
     {
         $this->actingAs($this->user, 'api');
+        $this->put('/api/user',
+            [
+                'user_id' => $this->admin->id,
+                'name'    => $this->faker->name,
+            ]
+        )->assertStatus(403);
     }
 
     protected function adminCannotEditOthersInfo()
     {
         $this->actingAs($this->admin, 'api');
+        $this->put('/api/user',
+            [
+                'user_id' => $this->user->id,
+                'name'    => $this->faker->name,
+            ]
+        )->assertStatus(403);
     }
 
     protected function superAdminCanEditOthersInfo()
     {
         $this->actingAs($this->super_admin, 'api');
+        $this->user->name = $this->faker->name;
+        $this->put('/api/user',
+            [
+                'user_id' => $this->user->id,
+                'name'    => $this->user->name,
+            ]
+        )->assertStatus(200)
+            ->assertExactJson([
+                'success' => true,
+                'data'    => $this->getUserData($this->user),
+            ]);
     }
 
     protected function userCannotActivateUser()
     {
         $this->actingAs($this->user, 'api');
-
+        $this->post('/api/user/activate',
+            [
+                'user_id' => $this->user->id,
+            ]
+        )->assertStatus(403);
     }
 
     protected function adminCannotActivateUser()
     {
         $this->actingAs($this->admin, 'api');
-
+        $this->post('/api/user/activate',
+            [
+                'user_id' => $this->user->id,
+            ]
+        )->assertStatus(403);
     }
 
     protected function superAdminCanActivateUser()
     {
         $this->actingAs($this->super_admin, 'api');
-
+        $this->post('/api/user/activate',
+            [
+                'user_id' => $this->user->id,
+            ]
+        )->assertStatus(200);
+        $this->assertDatabaseMissing('users', [
+            'id'           => $this->user->id,
+            'activated_at' => null,
+        ]);
     }
 
     protected function userCannotDeactivateUser()
     {
         $this->actingAs($this->user, 'api');
-
+        $this->post('/api/user/deactivate',
+            [
+                'user_id' => $this->user->id,
+            ]
+        )->assertStatus(403);
     }
 
     protected function adminCannotDeactivateUser()
     {
         $this->actingAs($this->admin, 'api');
-
+        $this->post('/api/user/deactivate',
+            [
+                'user_id' => $this->user->id,
+            ]
+        )->assertStatus(403);
     }
 
     protected function superAdminCanDeactivateUser()
     {
         $this->actingAs($this->super_admin, 'api');
-
+        $this->post('/api/user/deactivate',
+            [
+                'user_id' => $this->user->id,
+            ]
+        )->assertStatus(200);
+        $this->assertDatabaseHas('users', [
+            'id'           => $this->user->id,
+            'activated_at' => null,
+        ]);
     }
 }

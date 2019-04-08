@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\User;
 
+use App\Models\User;
 use Illuminate\Foundation\Http\FormRequest;
 
 class UpdateUserRequest extends FormRequest
@@ -13,7 +14,13 @@ class UpdateUserRequest extends FormRequest
      */
     public function authorize()
     {
-        return true; // TODO: AUTHORIZE UPDATE OPERATION!
+        if ($this->request->has('user_id')) {
+            $user = User::query()->findOrFail($this->request->get('user_id'));
+
+            return $this->user()->can('update', $user);
+        } else {
+            return true;
+        }
     }
 
     /**
@@ -24,10 +31,16 @@ class UpdateUserRequest extends FormRequest
     public function rules()
     {
         return [
-            'user_id'  => ['sometimes', 'int', 'exists:users,id'],
-            'name'     => ['sometimes', 'string', 'max:255'],
+            'user_id'  => [
+                'sometimes',
+                'required',
+                'integer',
+                'exists:users,id',
+            ],
+            'name'     => ['sometimes', 'required', 'string', 'max:255'],
             'email'    => [
                 'sometimes',
+                'required',
                 'string',
                 'email',
                 'max:255',
@@ -35,12 +48,13 @@ class UpdateUserRequest extends FormRequest
             ],
             'blog'     => [
                 'sometimes',
+                'required',
                 'string',
                 'url',
                 'max:255',
                 'unique:users',
             ],
-            'password' => ['sometimes', 'string', 'min:8'],
+            'password' => ['sometimes', 'required', 'string', 'min:8'],
         ];
     }
 }
