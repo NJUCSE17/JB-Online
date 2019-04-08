@@ -2,14 +2,14 @@
 
 namespace App\Observers;
 
-use App\Blog;
+use App\Models\Blog;
 
 class BlogObserver
 {
     /**
      * Handle the blog "created" event.
      *
-     * @param  \App\Blog  $blog
+     * @param  \App\Models\Blog  $blog
      * @return void
      */
     public function created(Blog $blog)
@@ -20,7 +20,7 @@ class BlogObserver
     /**
      * Handle the blog "updated" event.
      *
-     * @param  \App\Blog  $blog
+     * @param  \App\Models\Blog  $blog
      * @return void
      */
     public function updated(Blog $blog)
@@ -31,7 +31,7 @@ class BlogObserver
     /**
      * Handle the blog "deleted" event.
      *
-     * @param  \App\Blog  $blog
+     * @param  \App\Models\Blog  $blog
      * @return void
      */
     public function deleted(Blog $blog)
@@ -42,7 +42,7 @@ class BlogObserver
     /**
      * Handle the blog "restored" event.
      *
-     * @param  \App\Blog  $blog
+     * @param  \App\Models\Blog  $blog
      * @return void
      */
     public function restored(Blog $blog)
@@ -53,7 +53,7 @@ class BlogObserver
     /**
      * Handle the blog "force deleted" event.
      *
-     * @param  \App\Blog  $blog
+     * @param  \App\Models\Blog  $blog
      * @return void
      */
     public function forceDeleted(Blog $blog)
