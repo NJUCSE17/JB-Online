@@ -1,7 +1,7 @@
 <?php
 
 use App\Models\Assignment;
-use App\Models\User;
+use App\Models\Problem;
 use Faker\Generator as Faker;
 
 /*
@@ -16,7 +16,7 @@ use Faker\Generator as Faker;
 */
 
 $factory->define(
-    User::class,
+    Problem::class,
     function (Faker $faker) {
         $fakeAssignment = factory(Assignment::class)->create();
 
