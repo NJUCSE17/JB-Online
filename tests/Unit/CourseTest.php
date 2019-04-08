@@ -75,7 +75,7 @@ class CourseTest extends TestCase
         $this->adminCanDeleteCourse();
     }
 
-    public function noCoursesAtFirst()
+    protected function noCoursesAtFirst()
     {
         $this->actingAs($this->user, 'api');
         $this->get('/api/course')
@@ -88,7 +88,7 @@ class CourseTest extends TestCase
             );
     }
 
-    public function userCannotCreateCourse()
+    protected function userCannotCreateCourse()
     {
         $this->actingAs($this->user, 'api');
         $this->post('/api/course',
@@ -102,7 +102,7 @@ class CourseTest extends TestCase
         )->assertStatus(403);
     }
 
-    public function adminCanCreateCourse()
+    protected function adminCanCreateCourse()
     {
         $this->actingAs($this->admin, 'api');
         $this->post('/api/course',
@@ -122,7 +122,7 @@ class CourseTest extends TestCase
             );
     }
 
-    public function userCanViewCourses()
+    protected function userCanViewCourses()
     {
         $this->actingAs($this->user, 'api');
         $this->get('/api/course')
@@ -135,7 +135,7 @@ class CourseTest extends TestCase
             );
     }
 
-    public function userCanFilterCourses()
+    protected function userCanFilterCourses()
     {
         $this->actingAs($this->user, 'api');
         $this->get('/api/course?semester='.$this->course['semester'])
@@ -156,7 +156,7 @@ class CourseTest extends TestCase
             );
     }
 
-    public function userCanViewSpecificCourse()
+    protected function userCanViewSpecificCourse()
     {
         $this->actingAs($this->user, 'api');
         $this->get('/api/course?course_id=' . $this->course['id'])
@@ -169,7 +169,7 @@ class CourseTest extends TestCase
             );
     }
 
-    public function userCanEnrollCourse()
+    protected function userCanEnrollCourse()
     {
         $this->actingAs($this->user, 'api');
         $this->post('/api/course/enroll',
@@ -197,7 +197,7 @@ class CourseTest extends TestCase
         );
     }
 
-    public function userCanQuitCourse()
+    protected function userCanQuitCourse()
     {
         $this->actingAs($this->user, 'api');
         $this->post('/api/course/quit',
@@ -220,7 +220,7 @@ class CourseTest extends TestCase
         );
     }
 
-    public function userCanNotJoinAsCourseAdmin()
+    protected function userCanNotJoinAsCourseAdmin()
     {
         $this->actingAs($this->course_admin, 'api');
         $this->assertDatabaseMissing('course_enroll_records',
@@ -243,7 +243,7 @@ class CourseTest extends TestCase
         )->assertStatus(403);
     }
 
-    public function userCanBeSetAsCourseAdmin()
+    protected function userCanBeSetAsCourseAdmin()
     {
         $this->actingAs($this->admin, 'api');
         $this->assertDatabaseMissing('course_enroll_records',
@@ -278,7 +278,7 @@ class CourseTest extends TestCase
         );
     }
 
-    public function userCannotUpdateCourse()
+    protected function userCannotUpdateCourse()
     {
         $this->actingAs($this->user, 'api');
         $notice = $this->faker->paragraph;
@@ -292,7 +292,7 @@ class CourseTest extends TestCase
         )->assertStatus(403);
     }
 
-    public function adminCanUpdateCourse()
+    protected function adminCanUpdateCourse()
     {
         $this->actingAs($this->admin, 'api');
         $notice = $this->faker->paragraph;
@@ -312,7 +312,7 @@ class CourseTest extends TestCase
             );
     }
 
-    public function courseAdminCanUpdateCourse()
+    protected function courseAdminCanUpdateCourse()
     {
         $this->actingAs($this->course_admin, 'api');
         $this->course['semester'] = $this->faker->numberBetween(1, 10);
@@ -330,7 +330,7 @@ class CourseTest extends TestCase
             );
     }
 
-    public function userCannotDeleteCourse()
+    protected function userCannotDeleteCourse()
     {
         $this->actingAs($this->user, 'api');
         $this->delete('/api/course',
@@ -340,7 +340,7 @@ class CourseTest extends TestCase
         )->assertStatus(403);
     }
 
-    public function courseAdminCannotDeleteCourse()
+    protected function courseAdminCannotDeleteCourse()
     {
         $this->actingAs($this->course_admin, 'api');
         $this->delete('/api/course',
@@ -350,7 +350,7 @@ class CourseTest extends TestCase
         )->assertStatus(403);
     }
 
-    public function adminCanDeleteCourse()
+    protected function adminCanDeleteCourse()
     {
         $this->actingAs($this->admin, 'api');
         $this->delete('/api/course',
