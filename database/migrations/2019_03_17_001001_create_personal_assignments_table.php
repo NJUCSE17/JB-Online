@@ -25,6 +25,7 @@ class CreatePersonalAssignmentsTable extends Migration
                 $table->timestamp('due_time');
                 $table->timestamp('finished_at')->nullable()->default(null);
                 $table->timestamps();
+                $table->softDeletes();
             }
         );
     }

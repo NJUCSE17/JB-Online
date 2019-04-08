@@ -135,8 +135,9 @@ class UserTest extends TestCase
                 'data'    => $this->getUserData($this->user),
             ]);
         $this->assertDatabaseHas('users', [
-            'id'   => $this->user->id,
-            'name' => $this->user->name,
+            'id'         => $this->user->id,
+            'name'       => $this->user->name,
+            'deleted_at' => null,
         ]);
     }
 
@@ -157,6 +158,7 @@ class UserTest extends TestCase
             'name'              => $this->user->name,
             'email_verified_at' => null,
             'activated_at'      => null,
+            'deleted_at'        => null,
         ]);
     }
 
@@ -229,6 +231,7 @@ class UserTest extends TestCase
         $this->assertDatabaseMissing('users', [
             'id'           => $this->user->id,
             'activated_at' => null,
+            'deleted_at'   => null,
         ]);
     }
 
@@ -263,6 +266,7 @@ class UserTest extends TestCase
         $this->assertDatabaseHas('users', [
             'id'           => $this->user->id,
             'activated_at' => null,
+            'deleted_at'   => null,
         ]);
     }
 }

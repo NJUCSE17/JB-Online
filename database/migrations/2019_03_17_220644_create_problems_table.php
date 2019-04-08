@@ -25,6 +25,7 @@ class CreateProblemsTable extends Migration
                     ->references('id')->on('assignments');
                 $table->string('content');
                 $table->timestamps();
+                $table->softDeletes();
             }
         );
     }

@@ -24,6 +24,7 @@ class CreateAssignmentsAndFinishRecordsTables extends Migration
                 $table->text('content_html');
                 $table->timestamp('due_time');
                 $table->timestamps();
+                $table->softDeletes();
             }
         );
         Schema::create(
@@ -37,6 +38,7 @@ class CreateAssignmentsAndFinishRecordsTables extends Migration
                 $table->foreign('assignment_id')->references('id')
                     ->on('assignments')->onDelete('cascade');
                 $table->timestamps();
+                $table->softDeletes();
             }
         );
     }

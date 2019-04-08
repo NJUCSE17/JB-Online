@@ -4,10 +4,11 @@ namespace App\Models;
 
 use App\Models\Traits\AssignmentFinishRecord\AssignmentFinishRecordRelationships;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class AssignmentFinishRecord extends Model
 {
-    use AssignmentFinishRecordRelationships;
+    use SoftDeletes, AssignmentFinishRecordRelationships;
 
     /**
      * The attributes that are mass assignable.

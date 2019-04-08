@@ -158,7 +158,7 @@ class CourseTest extends TestCase
     protected function userCanViewSpecificCourse()
     {
         $this->actingAs($this->user, 'api');
-        $this->get('/api/course?course_id=' . $this->course['id'])
+        $this->get('/api/course?course_id='.$this->course['id'])
             ->assertStatus(200)
             ->assertExactJson(
                 [
@@ -192,6 +192,7 @@ class CourseTest extends TestCase
                 'user_id'       => $this->user->id,
                 'course_id'     => $this->course['id'],
                 'type_is_admin' => false,
+                'deleted_at'    => null,
             ]
         );
     }
@@ -213,8 +214,9 @@ class CourseTest extends TestCase
             );
         $this->assertDatabaseMissing('course_enroll_records',
             [
-                'user_id'   => $this->user->id,
-                'course_id' => $this->course['id'],
+                'user_id'    => $this->user->id,
+                'course_id'  => $this->course['id'],
+                'deleted_at' => null,
             ]
         );
     }
@@ -224,8 +226,9 @@ class CourseTest extends TestCase
         $this->actingAs($this->course_admin, 'api');
         $this->assertDatabaseMissing('course_enroll_records',
             [
-                'user_id'   => $this->course_admin->id,
-                'course_id' => $this->course['id'],
+                'user_id'    => $this->course_admin->id,
+                'course_id'  => $this->course['id'],
+                'deleted_at' => null,
             ]
         );
         $this->post('/api/course/enroll',
@@ -247,8 +250,9 @@ class CourseTest extends TestCase
         $this->actingAs($this->admin, 'api');
         $this->assertDatabaseMissing('course_enroll_records',
             [
-                'user_id'   => $this->course_admin->id,
-                'course_id' => $this->course['id'],
+                'user_id'    => $this->course_admin->id,
+                'course_id'  => $this->course['id'],
+                'deleted_at' => null,
             ]
         );
         $this->post('/api/course/enroll',
@@ -273,6 +277,7 @@ class CourseTest extends TestCase
                 'user_id'       => $this->course_admin->id,
                 'course_id'     => $this->course['id'],
                 'type_is_admin' => true,
+                'deleted_at'    => null,
             ]
         );
     }
@@ -286,7 +291,7 @@ class CourseTest extends TestCase
         $this->put('/api/course',
             [
                 'course_id' => $this->course['id'],
-                'notice' => $notice,
+                'notice'    => $notice,
             ]
         )->assertStatus(403);
     }
@@ -300,7 +305,7 @@ class CourseTest extends TestCase
         $this->put('/api/course',
             [
                 'course_id' => $this->course['id'],
-                'notice' => $notice,
+                'notice'    => $notice,
             ]
         )->assertStatus(200)
             ->assertExactJson(
@@ -364,7 +369,8 @@ class CourseTest extends TestCase
                 ]
             );
         $this->assertDatabaseMissing('courses', [
-            'id' => $this->course['id'],
+            'id'         => $this->course['id'],
+            'deleted_at' => null,
         ]);
     }
 }

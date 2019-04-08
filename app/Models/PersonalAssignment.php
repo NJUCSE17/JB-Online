@@ -4,10 +4,11 @@ namespace App\Models;
 
 use App\Models\Traits\PersonalAssignment\PersonalAssignmentRelationships;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class PersonalAssignment extends Model
 {
-    use PersonalAssignmentRelationships;
+    use SoftDeletes, PersonalAssignmentRelationships;
 
     /**
      * The attributes that are mass assignable.

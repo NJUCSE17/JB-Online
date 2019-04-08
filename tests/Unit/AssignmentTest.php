@@ -169,10 +169,11 @@ class AssignmentTest extends TestCase
 
         // Check the assignment is correctly created.
         $this->assertDatabaseHas('assignments', [
-            'course_id' => $this->assignments[0]['course_id'],
-            'name'      => $this->assignments[0]['name'],
-            'content'   => $this->assignments[0]['content'],
-            'due_time'  => $this->assignments[0]['due_time'],
+            'course_id'  => $this->assignments[0]['course_id'],
+            'name'       => $this->assignments[0]['name'],
+            'content'    => $this->assignments[0]['content'],
+            'due_time'   => $this->assignments[0]['due_time'],
+            'deleted_at' => null,
         ]);
     }
 
@@ -228,10 +229,11 @@ class AssignmentTest extends TestCase
 
         // Check the assignments have been created
         $this->assertDatabaseHas('assignments', [
-            'course_id' => $this->assignments[1]['course_id'],
-            'name'      => $this->assignments[1]['name'],
-            'content'   => $this->assignments[1]['content'],
-            'due_time'  => $this->assignments[1]['due_time'],
+            'course_id'  => $this->assignments[1]['course_id'],
+            'name'       => $this->assignments[1]['name'],
+            'content'    => $this->assignments[1]['content'],
+            'due_time'   => $this->assignments[1]['due_time'],
+            'deleted_at' => null,
         ]);
     }
 
@@ -282,10 +284,11 @@ class AssignmentTest extends TestCase
 
         // Check the assignments have been updated
         $this->assertDatabaseHas('assignments', [
-            'course_id' => $this->assignments[0]['course_id'],
-            'name'      => $this->assignments[0]['name'],
-            'content'   => $this->assignments[0]['content'],
-            'due_time'  => $this->assignments[0]['due_time'],
+            'course_id'  => $this->assignments[0]['course_id'],
+            'name'       => $this->assignments[0]['name'],
+            'content'    => $this->assignments[0]['content'],
+            'due_time'   => $this->assignments[0]['due_time'],
+            'deleted_at' => null,
         ]);
     }
 
@@ -319,7 +322,8 @@ class AssignmentTest extends TestCase
 
         // Check the assignments have been deleted
         $this->assertDatabaseMissing('assignments', [
-            'id' => $this->assignments[0]['id'],
+            'id'         => $this->assignments[0]['id'],
+            'deleted_at' => null,
         ]);
     }
 

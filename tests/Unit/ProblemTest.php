@@ -171,6 +171,7 @@ class ProblemTest extends TestCase
             'assignment_id' => $this->assignments[0]->id,
             'course_id'     => $this->assignments[0]->course->id,
             'content'       => $this->problems[0]['content'],
+            'deleted_at'    => null,
         ]);
     }
 
@@ -193,6 +194,7 @@ class ProblemTest extends TestCase
             'assignment_id' => $this->assignments[1]->id,
             'course_id'     => $this->assignments[1]->course->id,
             'content'       => $this->problems[1]['content'],
+            'deleted_at'    => null,
         ]);
     }
 
@@ -219,8 +221,9 @@ class ProblemTest extends TestCase
                 'data'    => 'Problem deleted.',
             ]);
         $this->assertDatabaseMissing('problems', [
-            'id'            => $this->problems[0]['id'],
-            'content'       => $this->problems[0]['content'],
+            'id'         => $this->problems[0]['id'],
+            'content'    => $this->problems[0]['content'],
+            'deleted_at' => null,
         ]);
     }
 
@@ -237,8 +240,9 @@ class ProblemTest extends TestCase
                 'data'    => 'Problem deleted.',
             ]);
         $this->assertDatabaseMissing('problems', [
-            'id'            => $this->problems[1]['id'],
-            'content'       => $this->problems[1]['content'],
+            'id'         => $this->problems[1]['id'],
+            'content'    => $this->problems[1]['content'],
+            'deleted_at' => null,
         ]);
     }
 }

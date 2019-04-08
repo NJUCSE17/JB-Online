@@ -5,10 +5,11 @@ namespace App\Models;
 use App\Models\Traits\Assignment\AssignmentRelationships;
 use App\Models\Traits\Assignment\WithAssignmentFinishRecordsScope;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Assignment extends Model
 {
-    use AssignmentRelationships;
+    use SoftDeletes, AssignmentRelationships;
 
     /**
      * The attributes that are mass assignable.

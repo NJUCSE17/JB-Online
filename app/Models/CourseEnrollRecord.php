@@ -4,10 +4,11 @@ namespace App\Models;
 
 use App\Models\Traits\CourseEnrollRecord\CourseEnrollRecordRelationships;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class CourseEnrollRecord extends Model
 {
-    use CourseEnrollRecordRelationships;
+    use SoftDeletes, CourseEnrollRecordRelationships;
 
     /**
      * The attributes that are mass assignable.

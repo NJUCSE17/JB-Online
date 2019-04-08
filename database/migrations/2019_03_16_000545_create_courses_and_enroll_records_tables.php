@@ -24,6 +24,7 @@ class CreateCoursesAndEnrollRecordsTables extends Migration
                 $table->text('notice')->nullable();
                 $table->text('notice_html')->nullable();
                 $table->timestamps();
+                $table->softDeletes();
             }
         );
         Schema::create(
@@ -38,6 +39,7 @@ class CreateCoursesAndEnrollRecordsTables extends Migration
                     ->on('courses')->onDelete('cascade');
                 $table->boolean('type_is_admin')->default(false);
                 $table->timestamps();
+                $table->softDeletes();
             }
         );
     }
