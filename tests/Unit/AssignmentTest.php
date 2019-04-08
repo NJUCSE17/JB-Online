@@ -21,7 +21,7 @@ class AssignmentTest extends TestCase
     private $user = null;
     private $admin = null;
     private $course = null;
-    private $assignments = null;
+    private $assignments = array();
 
     /**
      * Setup the test case.
@@ -37,7 +37,6 @@ class AssignmentTest extends TestCase
         $this->admin = factory(User::class)->create();
         $this->admin->privilege_level = 2;
         $this->course = factory(Course::class)->create();
-        $this->assignments = array();
         for ($i = 0; $i < 2; ++$i) {
             $this->assignments[] = [
                 'id'          => $i
