@@ -1,7 +1,7 @@
 <?php
 
-use App\Models\Assignment;
-use App\Models\Course;
+use App\Models\PersonalAssignment;
+use App\Models\User;
 use Faker\Generator as Faker;
 
 /*
@@ -16,18 +16,19 @@ use Faker\Generator as Faker;
 */
 
 $factory->define(
-    Assignment::class,
+    PersonalAssignment::class,
     function (Faker $faker) {
-        $fakeCourse = factory(Course::class)->create();
+        $fakeUser = factory(User::class)->create();
         $content = $faker->paragraph;
 
         return [
-            'course_id'    => $fakeCourse->id,
+            'user_id'      => $fakeUser->id,
             'name'         => $faker->realText(20),
             'content'      => $content,
             'content_html' => Parsedown::instance()->text($content),
             'due_time'     => $faker->dateTimeBetween('now', '+5 days')
                 ->format('Y-m-d H:i:s'),
+            'finished_at'  => null,
         ];
     }
 );

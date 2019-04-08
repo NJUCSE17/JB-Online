@@ -52,37 +52,32 @@ class AssignmentController extends APIController
     public function view(ViewAssignmentRequest $request)
     {
         if ($request->has('assignment_id')) {
-            $assignment = Assignment::query()->findOrFail(
-                $request->get('assignment_id')
-            );
+            $assignment = Assignment::query()
+                ->findOrFail($request->get('assignment_id'));
 
             return $this->data(new AssignmentResource($assignment));
         } else {
             $assignments = Assignment::query()->get();
             if ($request->has('course_id')) {
-                $assignments = $assignments->where(
-                    'course_id',
-                    $request->get('course_id')
-                );
+                $assignments = $assignments
+                    ->where('course_id', $request->get('course_id'));
             } else {
-                // TODO: SUBSCRIBED BY USER (COURSE ENROLL)
+                $assignments = $assignments
+                    ->whereIn('course_id', Auth::user()->courseIDs());
             }
+
             if ($request->has('due_before')) {
-                $assignments = $assignments->where(
-                    'due_time',
-                    '<=',
-                    $request->get('due_before')
-                );
+                $assignments = $assignments
+                    ->where('due_time', '<=', $request->get('due_before'));
             }
             $assignments = $assignments->where(
                 'due_time',
                 '>=',
                 $request->has('due_after') ? $request->get('due_after') : now()
             );
+
             if ($request->has('unfinished_only')
-                && $request->get(
-                    'unfinished_only'
-                )
+                && $request->get('unfinished_only')
             ) {
                 $assignments = $assignments->where('finished_at', '=', null);
             }

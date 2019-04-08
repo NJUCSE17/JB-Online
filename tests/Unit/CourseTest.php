@@ -48,7 +48,6 @@ class CourseTest extends TestCase
                 ),
             'notice'      => $notice,
             'notice_html' => $this->parser->text($notice),
-            'assignments' => [],
         ];
     }
 
