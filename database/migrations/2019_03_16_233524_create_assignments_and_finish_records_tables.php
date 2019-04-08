@@ -31,11 +31,11 @@ class CreateAssignmentsAndFinishRecordsTables extends Migration
             function (Blueprint $table) {
                 $table->bigIncrements('id');
                 $table->unsignedBigInteger('user_id');
-                $table->foreign('user_id')->references('id')->on('users');
+                $table->foreign('user_id')->references('id')
+                    ->on('users')->onDelete('cascade');
                 $table->unsignedBigInteger('assignment_id');
-                $table->foreign('assignment_id')->references('id')->on(
-                    'assignments'
-                );
+                $table->foreign('assignment_id')->references('id')
+                    ->on('assignments')->onDelete('cascade');
                 $table->timestamps();
             }
         );
