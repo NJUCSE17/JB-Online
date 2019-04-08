@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Course;
 
+use App\Models\Course;
 use Illuminate\Foundation\Http\FormRequest;
 
 class DeleteCourseRequest extends FormRequest
@@ -13,7 +14,10 @@ class DeleteCourseRequest extends FormRequest
      */
     public function authorize()
     {
-        return true; // TODO: PERMISSIONS
+        $course = Course::query()
+            ->findOrFail($this->request->getInt('course_id'));
+
+        return $this->user()->can('delete', $course);
     }
 
     /**
@@ -24,7 +28,7 @@ class DeleteCourseRequest extends FormRequest
     public function rules()
     {
         return [
-            'course_id' => ['required', 'int', 'exists:courses,id'],
+            'course_id' => ['required', 'integer', 'exists:courses,id'],
         ];
     }
 }

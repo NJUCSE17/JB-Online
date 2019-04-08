@@ -34,7 +34,12 @@ class CreateCourseRequest extends FormRequest
                 'date_format:Y-m-d H:i:s',
                 'after_or_equal:start_before',
             ],
-            'notice'     => ['sometimes', 'required', new Sanitize(), 'max:10000'],
+            'notice'     => [
+                'sometimes',
+                'required',
+                new Sanitize(),
+                'max:10000',
+            ],
         ];
     }
 }

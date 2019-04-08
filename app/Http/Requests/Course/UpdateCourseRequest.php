@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Course;
 
+use App\Models\Course;
 use App\Rules\Sanitize;
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -14,7 +15,10 @@ class UpdateCourseRequest extends FormRequest
      */
     public function authorize()
     {
-        return true; // TODO: PERMISSION!!
+        $course = Course::query()
+            ->findOrFail($this->request->getInt('course_id'));
+
+        return $this->user()->can('update', $course);
     }
 
     /**
@@ -25,16 +29,16 @@ class UpdateCourseRequest extends FormRequest
     public function rules()
     {
         return [
-            'course_id'  => ['required', 'int', 'exists:courses,id'],
-            'name'       => ['sometimes', 'max:200'],
-            'semester'   => ['sometimes', 'int', 'between:1,20'],
-            'start_time' => ['sometimes', 'date_format:Y-m-d H:i:s'],
+            'course_id'  => ['required', 'integer', 'exists:courses,id'],
+            'name'       => ['sometimes', 'required', 'max:200'],
+            'semester'   => ['sometimes', 'required', 'integer', 'between:1,20'],
+            'start_time' => ['sometimes', 'required', 'date_format:Y-m-d H:i:s'],
             'end_time'   => [
-                'sometimes',
+                'sometimes', 'required',
                 'date_format:Y-m-d H:i:s',
                 'after_or_equal:start_before',
             ],
-            'notice'     => [new Sanitize(), 'max:10000'],
+            'notice'     => ['sometimes', 'required', new Sanitize(), 'max:10000'],
         ];
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Course;
 
+use App\Models\Course;
 use Illuminate\Foundation\Http\FormRequest;
 
 class QuitCourseRequest extends FormRequest
@@ -13,7 +14,13 @@ class QuitCourseRequest extends FormRequest
      */
     public function authorize()
     {
-        return true; // TODO: PERMISSION
+        $course = Course::query()
+            ->findOrFail($this->request->getInt('course_id'));
+        if ($this->request->has('user_id')) {
+            return $this->user()->can('update', $course);
+        } else {
+            return $this->user()->can('enroll', $course);
+        }
     }
 
     /**
@@ -24,7 +31,13 @@ class QuitCourseRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'user_id'   => [
+                'sometimes',
+                'required',
+                'integer',
+                'exists:users,id',
+            ],
+            'course_id' => ['required', 'integer', 'exists:courses,id'],
         ];
     }
 }

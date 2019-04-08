@@ -3,10 +3,10 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\APIController;
+use App\Http\Requests\Course\CreateCourseRequest;
 use App\Http\Requests\Course\DeleteCourseRequest;
 use App\Http\Requests\Course\EnrollCourseRequest;
 use App\Http\Requests\Course\QuitCourseRequest;
-use App\Http\Requests\Course\CreateCourseRequest;
 use App\Http\Requests\Course\UpdateCourseRequest;
 use App\Http\Requests\Course\ViewCourseRequest;
 use App\Http\Resources\CourseEnrollRecordResource;
@@ -15,6 +15,7 @@ use App\Http\Resources\CourseResourceCollection;
 use App\Models\Course;
 use App\Models\CourseEnrollRecord;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 
 class CourseController extends APIController
 {
@@ -53,10 +54,12 @@ class CourseController extends APIController
      */
     public function view(ViewCourseRequest $request)
     {
-        $query = Course::query();
         if ($request->has('course_id')) {
-            $query->findOrFail($request->get('course_id'));
+            $course = Course::query()->findOrFail($request->get('course_id'));
+
+            return $this->data(new CourseResource($course));
         } else {
+            $query = Course::query();
             if ($request->has('semester')) {
                 $query->Semester($request->get('semester'));
             }
@@ -66,9 +69,9 @@ class CourseController extends APIController
                     Carbon::parse($request->get('end_after'))
                 );
             }
-        }
 
-        return $this->data(new CourseResourceCollection($query->get()));
+            return $this->data(new CourseResourceCollection($query->get()));
+        }
     }
 
     /**
@@ -128,11 +131,11 @@ class CourseController extends APIController
      */
     public function enroll(EnrollCourseRequest $request)
     {
-        $data = $request->only('user_id', 'course_id', 'type_is_admin');
         $record = CourseEnrollRecord::query()->updateOrCreate(
             [
-                'user_id'       => $data['user_id'],
-                'course_id'     => $data['course_id'],
+                'user_id'       => $request->has('user_id')
+                    ? $request->get('user_id') : Auth::id(),
+                'course_id'     => $request->get('course_id'),
                 'type_is_admin' => $request->has('type_is_admin')
                     ? $request->get('type_is_admin') : false,
             ]
@@ -151,10 +154,10 @@ class CourseController extends APIController
      */
     public function quit(QuitCourseRequest $request)
     {
-        $data = $request->only('user_id', 'course_id');
         CourseEnrollRecord::query()
-            ->where('user_id', $data['user_id'])
-            ->where('course_id', $data['course_id'])
+            ->where('user_id', $request->has('user_id')
+                ? $request->get('user_id') : Auth::id())
+            ->where('course_id', $request->get('course_id'))
             ->firstOrFail()
             ->delete();
 

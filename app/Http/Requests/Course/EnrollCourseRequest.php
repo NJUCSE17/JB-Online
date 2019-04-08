@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Course;
 
+use App\Models\Course;
 use Illuminate\Foundation\Http\FormRequest;
 
 class EnrollCourseRequest extends FormRequest
@@ -13,7 +14,15 @@ class EnrollCourseRequest extends FormRequest
      */
     public function authorize()
     {
-        return true; // TODO: PERMISSION
+        $course = Course::query()
+            ->findOrFail($this->request->getInt('course_id'));
+        if ($this->request->has('user_id')
+            || $this->request->has('type_is_admin')
+        ) {
+            return $this->user()->can('update', $course);
+        } else {
+            return $this->user()->can('enroll', $course);
+        }
     }
 
     /**
@@ -24,8 +33,13 @@ class EnrollCourseRequest extends FormRequest
     public function rules()
     {
         return [
-            'user_id'       => ['required', 'int', 'exists:users,id'],
-            'course_id'     => ['required', 'int', 'exists:courses,id'],
+            'user_id'       => [
+                'sometimes',
+                'required',
+                'integer',
+                'exists:users,id',
+            ],
+            'course_id'     => ['required', 'integer', 'exists:courses,id'],
             'type_is_admin' => ['sometimes', 'boolean'],
         ];
     }
