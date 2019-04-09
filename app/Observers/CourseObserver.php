@@ -3,6 +3,7 @@
 namespace App\Observers;
 
 use App\Models\Course;
+use App\Models\CourseEnrollRecord;
 
 class CourseObserver
 {
@@ -39,7 +40,9 @@ class CourseObserver
      */
     public function deleted(Course $course)
     {
-        //
+        CourseEnrollRecord::query()
+            ->where('course_id', $course->id)
+            ->delete();
     }
 
     /**

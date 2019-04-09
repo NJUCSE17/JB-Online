@@ -129,6 +129,9 @@ class AssignmentFinishingAndResetingTest extends TestCase
         );
     }
 
+    /**
+     * Setup the test case.
+     */
     protected function setUp(): void
     {
         parent::setUp();
