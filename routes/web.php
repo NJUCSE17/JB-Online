@@ -16,9 +16,11 @@ Route::get('/', 'HomeController@welcome')->name('welcome');
 Auth::routes(
     [
         'register' => env('APP_ALLOW_REGISTER'),
-        'verify' => true
+        'verify'   => true,
     ]
 );
+Route::get('/activation', 'Auth\ActivationController@notice')
+    ->name('activate.notice');
 Route::group(
     ['namespace' => 'Auth', 'as' => 'auth'],
     function () {
@@ -32,7 +34,7 @@ Route::group(
 );
 
 Route::group(
-    ['middleware' => ['auth', 'verified']],
+    ['middleware' => ['auth', 'verified', 'activated']],
     function () {
         Route::get('/home', 'HomeController@home')->name('home');
     }

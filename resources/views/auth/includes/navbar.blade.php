@@ -18,18 +18,31 @@
                     </li>
                 </ul>
                 <ul class="navbar-nav align-items-lg-center ml-lg-auto">
-                    @if(Route::has('register'))
+                    @guest
+                        @if(Route::has('register'))
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('register') }}">
+                                    <i class="fas fa-user-plus mr-1"></i> 注册
+                                </a>
+                            </li>
+                        @endif
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('register') }}">
-                                <i class="fas fa-user-plus mr-1"></i> 注册
+                            <a class="nav-link" href="{{ route('login') }}">
+                                <i class="fas fa-sign-in-alt mr-1"></i> 登陆
                             </a>
                         </li>
-                    @endif
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('login') }}">
-                            <i class="fas fa-sign-in-alt mr-1"></i> 登陆
-                        </a>
-                    </li>
+                    @else
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('logout') }}"
+                               onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                <i class="fas fa-sign-out-alt mr-1"></i> 退出 [{{ \Auth::user()->name }}]
+                            </a>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                  style="display: none;">
+                                @csrf
+                            </form>
+                        </li>
+                    @endguest
                 </ul>
             </div>
         </div>
