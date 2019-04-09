@@ -3,6 +3,7 @@
 namespace App\Observers;
 
 use App\Models\Assignment;
+use App\Models\AssignmentFinishRecord;
 
 class AssignmentObserver
 {
@@ -25,7 +26,11 @@ class AssignmentObserver
      */
     public function updated(Assignment $assignment)
     {
-        //
+        $records = AssignmentFinishRecord::query()
+            ->where('assignment_id', '=', $assignment->id);
+        $user_ids = $records->pluck('user_id')->toArray();
+        $records->delete();
+        // TODO: SEND NOTIFICATION TO USERS
     }
 
     /**
