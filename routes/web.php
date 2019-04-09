@@ -11,16 +11,9 @@
 |
 */
 
-Route::get(
-    '/',
-    function () {
-        return view('welcome');
-    }
-);
+Route::get('/', 'HomeController@welcome')->name('welcome');
 
-Route::get('/test', 'HomeController@test')->name('test');
-
-Auth::routes();
+Auth::routes(['register' => env('APP_ALLOW_REGISTER')]);
 Route::group(
     ['namespace' => 'Auth', 'as' => 'auth'],
     function () {
@@ -36,6 +29,6 @@ Route::group(
 Route::group(
     ['middleware' => 'auth'],
     function () {
-        //
+        Route::get('/home', 'HomeController@home')->name('home');
     }
 );

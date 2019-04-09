@@ -57,16 +57,23 @@ class RegisterController extends Controller
                     'integer',
                     'between:100000000,999999999',
                 ],
-                'name'       => ['required', 'string', 'max:255'],
-                'email'      => [
+                'name' => ['required', 'string', 'max:255'],
+                'email' => [
                     'required',
                     'string',
                     'email',
                     'max:255',
                     'unique:users',
                 ],
-                'blog'       => ['string', 'url', 'max:255', 'unique:users'],
-                'password'   => ['required', 'string', 'min:8', 'confirmed'],
+                'blog_feed_url' => [
+                    'sometimes',
+                    'required',
+                    'string',
+                    'url',
+                    'max:255',
+                    'unique:users',
+                ],
+                'password' => ['required', 'string', 'min:8', 'confirmed'],
             ]
         );
     }

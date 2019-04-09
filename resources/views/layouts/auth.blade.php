@@ -11,13 +11,11 @@
 </head>
 <body>
 <div id="app">
-    @include('includes.navbar')
+    @include('auth.includes.navbar')
 
     <div class="main-content">
         @yield('content')
     </div>
-
-    @include('includes.footer')
 
     <script src="{{ asset('js/app.core.js') }}" defer></script>
     <script src="{{ asset('js/app.js') }}" defer></script>

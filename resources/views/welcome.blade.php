@@ -1,99 +1,62 @@
-<!doctype html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+@extends('layouts.welcome')
 
-    <title>Laravel</title>
-
-    <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
-
-    <!-- Styles -->
-    <style>
-        html, body {
-            background-color: #fff;
-            color: #636b6f;
-            font-family: 'Nunito', sans-serif;
-            font-weight: 200;
-            height: 100vh;
-            margin: 0;
-        }
-
-        .full-height {
-            height: 100vh;
-        }
-
-        .flex-center {
-            align-items: center;
-            display: flex;
-            justify-content: center;
-        }
-
-        .position-ref {
-            position: relative;
-        }
-
-        .top-right {
-            position: absolute;
-            right: 10px;
-            top: 18px;
-        }
-
-        .content {
-            text-align: center;
-        }
-
-        .title {
-            font-size: 84px;
-        }
-
-        .links > a {
-            color: #636b6f;
-            padding: 0 25px;
-            font-size: 13px;
-            font-weight: 600;
-            letter-spacing: .1rem;
-            text-decoration: none;
-            text-transform: uppercase;
-        }
-
-        .m-b-md {
-            margin-bottom: 30px;
-        }
-    </style>
-</head>
-<body>
-<div class="flex-center position-ref full-height">
-    @if (Route::has('login'))
-        <div class="top-right links">
-            @auth
-                <a href="{{ url('/home') }}">Home</a>
-            @else
-                <a href="{{ route('login') }}">Login</a>
-
-                @if (Route::has('register'))
-                    <a href="{{ route('register') }}">Register</a>
-                @endif
-            @endauth
+@section('content')
+    <section class="slice slice-xl bg-gradient-primary vh-100">
+        <!-- SVG background -->
+        <div class="bg-absolute-cover bg-size--contain d-flex align-items-center">
+            <figure class="w-100 d-none d-lg-block">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1500 820" class="injected-svg svg-inject">
+                    <path class="fill-cyan"
+                          d="M 153.37 455.293 L 143.264 444.989 C 142.269 443.976 142.269 442.371 143.264 441.358 L 153.37 431.055 C 154.364 430.042 155.938 430.042 156.932 431.055 L 167.038 441.358 C 168.032 442.371 168.032 443.976 167.038 444.989 L 156.932 455.293 C 156.02 456.306 154.364 456.306 153.37 455.293 Z"
+                          style=""></path>
+                    <circle class="fill-pink" cx="1184.025" cy="85.335" r="9.723" style=""></circle>
+                    <circle class="fill-yellow" stroke-width="3" stroke-miterlimit="10" cx="320.504" cy="209.51"
+                            r="12.587" style=""></circle>
+                    <path class="fill-blue"
+                          d="M 42.564 -16.417 C 43.206 -18.074 44.682 -19.262 46.438 -19.535 L 62.879 -22.089 C 64.634 -22.362 66.401 -21.677 67.515 -20.294 L 77.948 -7.333 C 79.062 -5.949 79.353 -4.076 78.712 -2.419 L 72.703 13.096 C 72.061 14.753 70.585 15.941 68.829 16.215 L 52.388 18.769 C 50.633 19.042 48.865 18.358 47.752 16.973 L 37.319 4.012 C 36.205 2.628 35.914 0.755 36.555 -0.902 L 42.564 -16.417 Z"
+                          style=""></path>
+                    <path class="fill-pink"
+                          d="M 1128.161 586.512 C 1128.462 585.735 1129.154 585.178 1129.977 585.05 L 1137.684 583.853 C 1138.506 583.725 1139.335 584.046 1139.857 584.695 L 1144.747 590.77 C 1145.269 591.419 1145.406 592.297 1145.105 593.073 L 1142.289 600.346 C 1141.988 601.123 1141.296 601.68 1140.473 601.808 L 1132.767 603.005 C 1131.944 603.133 1131.115 602.812 1130.593 602.163 L 1125.703 596.088 C 1125.181 595.439 1125.044 594.561 1125.345 593.785 L 1128.161 586.512 Z"
+                          style=""></path>
+                    <path class="fill-purple"
+                          d="M 109.272 171.631 C 109.643 170.672 110.497 169.986 111.512 169.828 L 121.017 168.352 C 122.032 168.193 123.054 168.59 123.698 169.389 L 129.729 176.883 C 130.373 177.683 130.542 178.766 130.171 179.723 L 126.697 188.693 C 126.326 189.651 125.473 190.339 124.458 190.497 L 114.952 191.973 C 113.937 192.131 112.916 191.736 112.272 190.935 L 106.24 183.442 C 105.596 182.641 105.428 181.559 105.798 180.601 L 109.272 171.631 Z"
+                          style=""></path>
+                    <path class="fill-purple"
+                          d="M 258.215 770.571 C 258.563 769.674 259.363 769.03 260.314 768.882 L 269.221 767.499 C 270.171 767.351 271.129 767.722 271.732 768.471 L 277.384 775.492 C 277.988 776.243 278.146 777.257 277.798 778.155 L 274.543 786.559 C 274.195 787.457 273.395 788.101 272.444 788.249 L 263.538 789.633 C 262.587 789.781 261.629 789.41 261.026 788.66 L 255.374 781.639 C 254.771 780.889 254.613 779.874 254.96 778.976 L 258.215 770.571 Z"
+                          style=""></path>
+                    <circle class="fill-cyan" stroke-width="3" stroke-miterlimit="10" cx="730.584" cy="767.881"
+                            r="9.997" style=""></circle>
+                    <path class="fill-purple"
+                          d="M 1390.234 263.204 C 1390.491 262.543 1391.08 262.067 1391.782 261.958 L 1398.352 260.938 C 1399.053 260.829 1399.759 261.103 1400.204 261.655 L 1404.373 266.834 C 1404.818 267.387 1404.934 268.136 1404.678 268.798 L 1402.277 274.997 C 1402.021 275.659 1401.43 276.134 1400.729 276.244 L 1394.16 277.265 C 1393.459 277.373 1392.752 277.1 1392.307 276.547 L 1388.138 271.368 C 1387.693 270.815 1387.577 270.066 1387.833 269.404 L 1390.234 263.204 Z"
+                          style=""></path>
+                </svg>
+            </figure>
         </div>
-    @endif
-
-    <div class="content">
-        <div class="title m-b-md">
-            Laravel
+        <div class="container position-relative zindex-100 pt-7">
+            <div class="row align-items-center">
+                <div class="col-lg-6 py-6 py-lg-9">
+                    <h1 class="text-white mb-4 lh-110">JB-Online</h1>
+                    <div class="row">
+                        <div class="col-lg-10">
+                            <p class="lead text-white lh-180">
+                                南京大学计算机系2017级拔尖班作业管理系统
+                            </p>
+                        </div>
+                    </div>
+                    <a href="{{ route('home') }}" class="btn btn-white btn-icon mt-5">
+                        <span class="btn-inner--icon"><i class="far fa-sign-in-alt"></i></span>
+                        <span class="btn-inner--text">进入系统</span>
+                    </a>
+                </div>
+                <div class="col-xl-4 col-lg-5 offset-lg-1 d-none d-lg-block">
+                </div>
+            </div>
         </div>
-
-        <div class="links">
-            <a href="https://laravel.com/docs">Docs</a>
-            <a href="https://laracasts.com">Laracasts</a>
-            <a href="https://laravel-news.com">News</a>
-            <a href="https://blog.laravel.com">Blog</a>
-            <a href="https://nova.laravel.com">Nova</a>
-            <a href="https://forge.laravel.com">Forge</a>
-            <a href="https://github.com/laravel/laravel">GitHub</a>
+        <div class="shape-container" data-shape-position="bottom" style="height: 403.797px;">
+            <svg xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" x="0px" y="0px" viewBox="0 0 1000 300"
+                 style="enable-background:new 0 0 1000 300;" xml:space="preserve" class="ie-shape-wave-1 fill-primary">
+          <path d="M 0 246.131 C 0 246.131 31.631 250.035 47.487 249.429 C 65.149 248.755 82.784 245.945 99.944 241.732 C 184.214 221.045 222.601 171.885 309.221 166.413 C 369.892 162.581 514.918 201.709 573.164 201.709 C 714.375 201.709 772.023 48.574 910.547 21.276 C 939.811 15.509 1000 24.025 1000 24.025 L 1000 300.559 L -0.002 300.559 L 0 246.131 Z"></path>
+        </svg>
         </div>
-    </div>
-</div>
-</body>
-</html>
+    </section>
+@stop
