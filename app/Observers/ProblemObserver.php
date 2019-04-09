@@ -9,7 +9,8 @@ class ProblemObserver
     /**
      * Handle the problem "created" event.
      *
-     * @param  \App\Models\Problem  $problem
+     * @param  Problem  $problem
+     *
      * @return void
      */
     public function created(Problem $problem)
@@ -20,7 +21,8 @@ class ProblemObserver
     /**
      * Handle the problem "updated" event.
      *
-     * @param  \App\Models\Problem  $problem
+     * @param  Problem  $problem
+     *
      * @return void
      */
     public function updated(Problem $problem)
@@ -31,7 +33,8 @@ class ProblemObserver
     /**
      * Handle the problem "deleted" event.
      *
-     * @param  \App\Models\Problem  $problem
+     * @param  Problem  $problem
+     *
      * @return void
      */
     public function deleted(Problem $problem)
@@ -42,7 +45,8 @@ class ProblemObserver
     /**
      * Handle the problem "restored" event.
      *
-     * @param  \App\Models\Problem  $problem
+     * @param  Problem  $problem
+     *
      * @return void
      */
     public function restored(Problem $problem)
@@ -53,7 +57,8 @@ class ProblemObserver
     /**
      * Handle the problem "force deleted" event.
      *
-     * @param  \App\Models\Problem  $problem
+     * @param  Problem  $problem
+     *
      * @return void
      */
     public function forceDeleted(Problem $problem)

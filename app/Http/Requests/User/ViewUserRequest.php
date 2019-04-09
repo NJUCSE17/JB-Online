@@ -32,7 +32,12 @@ class ViewUserRequest extends FormRequest
     public function rules()
     {
         return [
-            'user_id' => ['sometimes', 'required', 'integer', 'exists:users,id'],
+            'user_id' => [
+                'sometimes',
+                'required',
+                'integer',
+                'exists:users,id',
+            ],
         ];
     }
 }

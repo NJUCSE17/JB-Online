@@ -24,68 +24,6 @@ class AssignmentTest extends TestCase
     private $assignments = array();
 
     /**
-     * Setup the test case.
-     */
-    protected function setUp(): void
-    {
-        parent::setUp();
-
-        $this->parser = new \Parsedown();
-        $this->withHeader('Accept', 'application/json');
-
-        $this->user = factory(User::class)->create();
-        $this->admin = factory(User::class)->create();
-        $this->admin->privilege_level = 2;
-        $this->course = factory(Course::class)->create();
-        for ($i = 0; $i < 2; ++$i) {
-            $this->assignments[] = [
-                'id'          => $i
-                    + DB::select("SHOW TABLE STATUS LIKE 'assignments'")[0]->Auto_increment,
-                'course_id'   => $this->course->id,
-                'name'        => $this->faker->text(20),
-                'content'     => $this->faker->paragraph,
-                'due_time'    => $this->faker->dateTimeBetween('now', '+5 days')
-                    ->format('Y-m-d H:i:s'),
-                'finished_at' => null,
-            ];
-            $this->assignments[$i]['content_html'] = $this->parser->text(
-                $this->assignments[$i]['content']
-            );
-        }
-    }
-
-    /**
-     * Enroll a user to a course.
-     *
-     * @param $user_id
-     * @param $course_id
-     */
-    private function enroll($user_id, $course_id, $as_admin)
-    {
-        CourseEnrollRecord::query()->create(
-            [
-                'user_id'       => $user_id,
-                'course_id'     => $course_id,
-                'type_is_admin' => $as_admin,
-            ]
-        );
-    }
-
-    /**
-     * Quit a user from a course.
-     *
-     * @param $user_id
-     * @param $course_id
-     */
-    private function quit($user_id, $course_id)
-    {
-        CourseEnrollRecord::query()
-            ->where('user_id', $user_id)
-            ->where('course_id', $course_id)
-            ->delete();
-    }
-
-    /**
      * Test Assignment CRUD Functions
      */
     public function testAssignmentFunctions()
@@ -111,9 +49,6 @@ class AssignmentTest extends TestCase
         $this->finishedAssignmentsAreHiddenIfRequired();
         $this->userCannotResetAssignmentIfNotEnrolledInCourse();
         $this->userCanResetAssignmentIfEnrolledInCourse();
-
-        // TODO: Assignment records will be cleaned once the user quits the course
-        // TODO: Assignment records will be cleaned once the assignment is updated
     }
 
     protected function unauthorizedUserCannotPerformOperations()
@@ -177,6 +112,59 @@ class AssignmentTest extends TestCase
         ]);
     }
 
+    /**
+     * Enroll a user to a course.
+     *
+     * @param $user_id
+     * @param $course_id
+     */
+    private function enroll($user_id, $course_id, $as_admin)
+    {
+        CourseEnrollRecord::query()->create(
+            [
+                'user_id'       => $user_id,
+                'course_id'     => $course_id,
+                'type_is_admin' => $as_admin,
+            ]
+        );
+    }
+
+    /**
+     * Quit a user from a course.
+     *
+     * @param $user_id
+     * @param $course_id
+     */
+    private function quit($user_id, $course_id)
+    {
+        CourseEnrollRecord::query()
+            ->where('user_id', $user_id)
+            ->where('course_id', $course_id)
+            ->delete();
+    }
+
+    protected function adminCanCreateAssignment()
+    {
+        $this->actingAs($this->admin, 'api');
+        $this->post('/api/assignment',
+            [
+                'course_id' => $this->assignments[1]['course_id'],
+                'name'      => $this->assignments[1]['name'],
+                'content'   => $this->assignments[1]['content'],
+                'due_time'  => $this->assignments[1]['due_time'],
+            ]
+        )->assertStatus(201);
+
+        // Check the assignments have been created
+        $this->assertDatabaseHas('assignments', [
+            'course_id'  => $this->assignments[1]['course_id'],
+            'name'       => $this->assignments[1]['name'],
+            'content'    => $this->assignments[1]['content'],
+            'due_time'   => $this->assignments[1]['due_time'],
+            'deleted_at' => null,
+        ]);
+    }
+
     protected function userCanViewAssignmentsOfEnrolledCourses()
     {
         $this->actingAs($this->user, 'api');
@@ -213,28 +201,6 @@ class AssignmentTest extends TestCase
                     'data'    => $this->assignments[0],
                 ]
             );
-    }
-
-    protected function adminCanCreateAssignment()
-    {
-        $this->actingAs($this->admin, 'api');
-        $this->post('/api/assignment',
-            [
-                'course_id' => $this->assignments[1]['course_id'],
-                'name'      => $this->assignments[1]['name'],
-                'content'   => $this->assignments[1]['content'],
-                'due_time'  => $this->assignments[1]['due_time'],
-            ]
-        )->assertStatus(201);
-
-        // Check the assignments have been created
-        $this->assertDatabaseHas('assignments', [
-            'course_id'  => $this->assignments[1]['course_id'],
-            'name'       => $this->assignments[1]['name'],
-            'content'    => $this->assignments[1]['content'],
-            'due_time'   => $this->assignments[1]['due_time'],
-            'deleted_at' => null,
-        ]);
     }
 
     protected function userCannotUpdateAssignment()
@@ -406,5 +372,36 @@ class AssignmentTest extends TestCase
                 ]
             );
         $this->quit($this->user->id, $this->assignments[1]['course_id']);
+    }
+
+    /**
+     * Setup the test case.
+     */
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->parser = new \Parsedown();
+        $this->withHeader('Accept', 'application/json');
+
+        $this->user = factory(User::class)->create();
+        $this->admin = factory(User::class)->create();
+        $this->admin->privilege_level = 2;
+        $this->course = factory(Course::class)->create();
+        for ($i = 0; $i < 2; ++$i) {
+            $this->assignments[] = [
+                'id'          => $i
+                    + DB::select("SHOW TABLE STATUS LIKE 'assignments'")[0]->Auto_increment,
+                'course_id'   => $this->course->id,
+                'name'        => $this->faker->text(20),
+                'content'     => $this->faker->paragraph,
+                'due_time'    => $this->faker->dateTimeBetween('now', '+5 days')
+                    ->format('Y-m-d H:i:s'),
+                'finished_at' => null,
+            ];
+            $this->assignments[$i]['content_html'] = $this->parser->text(
+                $this->assignments[$i]['content']
+            );
+        }
     }
 }

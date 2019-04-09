@@ -10,7 +10,8 @@ class AssignmentObserver
     /**
      * Handle the assignment "created" event.
      *
-     * @param  \App\Models\Assignment  $assignment
+     * @param  Assignment  $assignment
+     *
      * @return void
      */
     public function created(Assignment $assignment)
@@ -21,7 +22,8 @@ class AssignmentObserver
     /**
      * Handle the assignment "updated" event.
      *
-     * @param  \App\Models\Assignment  $assignment
+     * @param  Assignment  $assignment
+     *
      * @return void
      */
     public function updated(Assignment $assignment)
@@ -36,7 +38,8 @@ class AssignmentObserver
     /**
      * Handle the assignment "deleted" event.
      *
-     * @param  \App\Models\Assignment  $assignment
+     * @param  Assignment  $assignment
+     *
      * @return void
      */
     public function deleted(Assignment $assignment)
@@ -47,7 +50,8 @@ class AssignmentObserver
     /**
      * Handle the assignment "restored" event.
      *
-     * @param  \App\Models\Assignment  $assignment
+     * @param  Assignment  $assignment
+     *
      * @return void
      */
     public function restored(Assignment $assignment)
@@ -58,7 +62,8 @@ class AssignmentObserver
     /**
      * Handle the assignment "force deleted" event.
      *
-     * @param  \App\Models\Assignment  $assignment
+     * @param  Assignment  $assignment
+     *
      * @return void
      */
     public function forceDeleted(Assignment $assignment)

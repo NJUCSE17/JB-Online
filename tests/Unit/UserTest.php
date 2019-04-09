@@ -20,44 +20,6 @@ class UserTest extends TestCase
     private $assignment = null;
     private $personal_assignment = null;
 
-    protected function setUp(): void
-    {
-        parent::setUp();
-
-        $this->withHeader('Accept', 'application/json');
-
-        $this->user = factory(User::class)->create();
-        $this->admin = factory(User::class)->create();
-        $this->admin->privilege_level = 2;
-        $this->super_admin = factory(User::class)->create();
-        $this->super_admin->privilege_level = 1;
-
-        $this->assignment = factory(Assignment::class)->create();
-        DB::table('course_enroll_records')->insert([
-            'user_id'       => $this->user->id,
-            'course_id'     => $this->assignment->course_id,
-            'type_is_admin' => false,
-        ]);
-
-        $this->personal_assignment
-            = factory(PersonalAssignment::class)->create([
-            'user_id' => $this->user->id,
-        ]);
-    }
-
-    protected function getUserData(User $user)
-    {
-        return [
-            'id'         => $user->id,
-            'student_id' => $user->student_id,
-            'name'       => $user->name,
-            'email'      => $user->email,
-            'blog'       => $user->blog,
-            'verified'   => $user->isVerified(),
-            'active'     => $user->isActive(),
-        ];
-    }
-
     public function testUserFunctions()
     {
         $this->unauthorizedUserCannotPerformOperations();
@@ -98,6 +60,19 @@ class UserTest extends TestCase
                 'success' => true,
                 'data'    => $this->getUserData($this->user),
             ]);
+    }
+
+    protected function getUserData(User $user)
+    {
+        return [
+            'id'         => $user->id,
+            'student_id' => $user->student_id,
+            'name'       => $user->name,
+            'email'      => $user->email,
+            'blog'       => $user->blog,
+            'verified'   => $user->isVerified(),
+            'active'     => $user->isActive(),
+        ];
     }
 
     protected function userCanViewOthersInfo()
@@ -267,6 +242,31 @@ class UserTest extends TestCase
             'id'           => $this->user->id,
             'activated_at' => null,
             'deleted_at'   => null,
+        ]);
+    }
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->withHeader('Accept', 'application/json');
+
+        $this->user = factory(User::class)->create();
+        $this->admin = factory(User::class)->create();
+        $this->admin->privilege_level = 2;
+        $this->super_admin = factory(User::class)->create();
+        $this->super_admin->privilege_level = 1;
+
+        $this->assignment = factory(Assignment::class)->create();
+        DB::table('course_enroll_records')->insert([
+            'user_id'       => $this->user->id,
+            'course_id'     => $this->assignment->course_id,
+            'type_is_admin' => false,
+        ]);
+
+        $this->personal_assignment
+            = factory(PersonalAssignment::class)->create([
+            'user_id' => $this->user->id,
         ]);
     }
 }

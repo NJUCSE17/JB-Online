@@ -29,16 +29,31 @@ class UpdateCourseRequest extends FormRequest
     public function rules()
     {
         return [
-            'course_id'  => ['required', 'integer', 'exists:courses,id'],
-            'name'       => ['sometimes', 'required', 'max:200'],
-            'semester'   => ['sometimes', 'required', 'integer', 'between:1,20'],
-            'start_time' => ['sometimes', 'required', 'date_format:Y-m-d H:i:s'],
-            'end_time'   => [
-                'sometimes', 'required',
+            'course_id' => ['required', 'integer', 'exists:courses,id'],
+            'name' => ['sometimes', 'required', 'max:200'],
+            'semester' => [
+                'sometimes',
+                'required',
+                'integer',
+                'between:1,20',
+            ],
+            'start_time' => [
+                'sometimes',
+                'required',
+                'date_format:Y-m-d H:i:s',
+            ],
+            'end_time' => [
+                'sometimes',
+                'required',
                 'date_format:Y-m-d H:i:s',
                 'after_or_equal:start_before',
             ],
-            'notice'     => ['sometimes', 'required', new Sanitize(), 'max:10000'],
+            'notice' => [
+                'sometimes',
+                'required',
+                new Sanitize(),
+                'max:10000',
+            ],
         ];
     }
 }

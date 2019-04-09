@@ -21,41 +21,6 @@ class PersonalAssignmentTest extends TestCase
     private $personal_assignments = array();
 
     /**
-     * Setup the test case.
-     */
-    protected function setUp(): void
-    {
-        parent::setUp();
-
-        $this->parser = new \Parsedown();
-        $this->withHeader('Accept', 'application/json');
-
-        for ($i = 0; $i < 2; ++$i) {
-            $this->users[] = factory(User::class)->create();
-        }
-
-        $this->admin = factory(User::class)->create();
-        $this->admin->privilege_level = 2;
-
-        for ($i = 0; $i < 2; ++$i) {
-            $this->personal_assignments[] = [
-                'id'          => $i
-                    + DB::select("SHOW TABLE STATUS LIKE 'personal_assignments'")[0]->Auto_increment,
-                'user_id'     => $this->users[$i]->id,
-                'name'        => $this->faker->text(20),
-                'content'     => $this->faker->paragraph,
-                'due_time'    => $this->faker->dateTimeBetween('now', '+5 days')
-                    ->format('Y-m-d H:i:s'),
-                'finished_at' => null,
-            ];
-            $this->personal_assignments[$i]['content_html']
-                = $this->parser->text(
-                $this->personal_assignments[$i]['content']
-            );
-        }
-    }
-
-    /**
      * Test Personal Assignment CRUD Functions
      */
     public function testPersonalAssignmentFunctions()
@@ -324,7 +289,6 @@ class PersonalAssignmentTest extends TestCase
         )->assertStatus(403);
     }
 
-
     protected function adminCannotResetOthersPA()
     {
         $this->actingAs($this->admin, 'api');
@@ -393,5 +357,40 @@ class PersonalAssignmentTest extends TestCase
         $this->get('/api/personal?personal_assignment_id='
             .$this->personal_assignments[1]['id']
         )->assertStatus(404);
+    }
+
+    /**
+     * Setup the test case.
+     */
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->parser = new \Parsedown();
+        $this->withHeader('Accept', 'application/json');
+
+        for ($i = 0; $i < 2; ++$i) {
+            $this->users[] = factory(User::class)->create();
+        }
+
+        $this->admin = factory(User::class)->create();
+        $this->admin->privilege_level = 2;
+
+        for ($i = 0; $i < 2; ++$i) {
+            $this->personal_assignments[] = [
+                'id'          => $i
+                    + DB::select("SHOW TABLE STATUS LIKE 'personal_assignments'")[0]->Auto_increment,
+                'user_id'     => $this->users[$i]->id,
+                'name'        => $this->faker->text(20),
+                'content'     => $this->faker->paragraph,
+                'due_time'    => $this->faker->dateTimeBetween('now', '+5 days')
+                    ->format('Y-m-d H:i:s'),
+                'finished_at' => null,
+            ];
+            $this->personal_assignments[$i]['content_html']
+                = $this->parser->text(
+                $this->personal_assignments[$i]['content']
+            );
+        }
     }
 }

@@ -30,9 +30,9 @@ class CreateProblemRequest extends FormRequest
     public function rules()
     {
         return [
-            'course_id' => ['required', 'integer', 'exists:courses,id'],
+            'course_id'     => ['required', 'integer', 'exists:courses,id'],
             'assignment_id' => ['required', 'integer', 'exists:assignments,id'],
-            'content' => ['required', new Sanitize(), 'max:200'],
+            'content'       => ['required', new Sanitize(), 'max:200'],
         ];
     }
 }

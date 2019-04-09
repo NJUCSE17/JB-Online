@@ -25,13 +25,13 @@ class ViewCourseRequest extends FormRequest
     public function rules()
     {
         return [
-            'course_id' => [
+            'course_id'    => [
                 'sometimes',
                 'required',
                 'integer',
                 'exists:courses,id',
             ],
-            'semester' => [
+            'semester'     => [
                 'sometimes',
                 'required',
                 'integer',
@@ -42,7 +42,7 @@ class ViewCourseRequest extends FormRequest
                 'required',
                 'date_format:Y-m-d H:i:s',
             ],
-            'end_after' => [
+            'end_after'    => [
                 'required_with:start_before',
                 'date_format:Y-m-d H:i:s',
                 'after_or_equal:start_before',

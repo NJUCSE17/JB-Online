@@ -19,39 +19,6 @@ class CourseTest extends TestCase
     private $course = null;
 
     /**
-     * Setup the test case.
-     */
-    protected function setUp(): void
-    {
-        parent::setUp();
-
-        $this->parser = new \Parsedown();
-        $this->withHeader('Accept', 'application/json');
-
-        $this->user = factory(User::class)->create();
-        $this->course_admin = factory(User::class)->create();
-        $this->admin = factory(User::class)->create();
-        $this->admin->privilege_level = 2;
-
-        $notice = $this->faker->paragraph;
-        $this->course = [
-            'id'          => DB::select("SHOW TABLE STATUS LIKE 'courses'")[0]->Auto_increment,
-            'name'        => $this->faker->realText(20),
-            'semester'    => $this->faker->numberBetween(1, 10),
-            'start_time'  => $this->faker->dateTimeBetween('-1 year', 'now')
-                ->format(
-                    'Y-m-d H:i:s'
-                ),
-            'end_time'    => $this->faker->dateTimeBetween('now', '+1 year')
-                ->format(
-                    'Y-m-d H:i:s'
-                ),
-            'notice'      => $notice,
-            'notice_html' => $this->parser->text($notice),
-        ];
-    }
-
-    /**
      * Test Course CRUD Functions
      */
     public function testCourseFunctions()
@@ -372,5 +339,38 @@ class CourseTest extends TestCase
             'id'         => $this->course['id'],
             'deleted_at' => null,
         ]);
+    }
+
+    /**
+     * Setup the test case.
+     */
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->parser = new \Parsedown();
+        $this->withHeader('Accept', 'application/json');
+
+        $this->user = factory(User::class)->create();
+        $this->course_admin = factory(User::class)->create();
+        $this->admin = factory(User::class)->create();
+        $this->admin->privilege_level = 2;
+
+        $notice = $this->faker->paragraph;
+        $this->course = [
+            'id'          => DB::select("SHOW TABLE STATUS LIKE 'courses'")[0]->Auto_increment,
+            'name'        => $this->faker->realText(20),
+            'semester'    => $this->faker->numberBetween(1, 10),
+            'start_time'  => $this->faker->dateTimeBetween('-1 year', 'now')
+                ->format(
+                    'Y-m-d H:i:s'
+                ),
+            'end_time'    => $this->faker->dateTimeBetween('now', '+1 year')
+                ->format(
+                    'Y-m-d H:i:s'
+                ),
+            'notice'      => $notice,
+            'notice_html' => $this->parser->text($notice),
+        ];
     }
 }

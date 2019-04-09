@@ -25,7 +25,7 @@ class ViewProblemRequest extends FormRequest
     public function rules()
     {
         return [
-            'problem_id' => [
+            'problem_id'    => [
                 'sometimes',
                 'required',
                 'integer',

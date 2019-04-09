@@ -19,35 +19,6 @@ class ProblemTest extends TestCase
     private $assignments = array();
     private $problems = array();
 
-    protected function setUp(): void
-    {
-        parent::setUp();
-
-        $this->withHeader('Accept', 'application/json');
-
-        $this->user = factory(User::class)->create();
-        $this->course_admin = factory(User::class)->create();
-        $this->admin = factory(User::class)->create();
-        $this->admin->privilege_level = 2;
-
-        for ($i = 0; $i < 2; ++$i) {
-            $this->assignments[] = factory(Assignment::class)->create();
-        }
-        DB::table('course_enroll_records')->insert([
-            'user_id'       => $this->course_admin->id,
-            'course_id'     => $this->assignments[0]->course->id,
-            'type_is_admin' => true,
-        ]);
-
-        for ($i = 0; $i < 2; ++$i) {
-            $this->problems[] = [
-                'id'      => $i
-                    + DB::select("SHOW TABLE STATUS LIKE 'problems'")[0]->Auto_increment,
-                'content' => $this->faker->realText(50),
-            ];
-        }
-    }
-
     public function testProblemFunctions()
     {
         $this->unauthorizedUserCannotPerformOperations();
@@ -244,5 +215,34 @@ class ProblemTest extends TestCase
             'content'    => $this->problems[1]['content'],
             'deleted_at' => null,
         ]);
+    }
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->withHeader('Accept', 'application/json');
+
+        $this->user = factory(User::class)->create();
+        $this->course_admin = factory(User::class)->create();
+        $this->admin = factory(User::class)->create();
+        $this->admin->privilege_level = 2;
+
+        for ($i = 0; $i < 2; ++$i) {
+            $this->assignments[] = factory(Assignment::class)->create();
+        }
+        DB::table('course_enroll_records')->insert([
+            'user_id'       => $this->course_admin->id,
+            'course_id'     => $this->assignments[0]->course->id,
+            'type_is_admin' => true,
+        ]);
+
+        for ($i = 0; $i < 2; ++$i) {
+            $this->problems[] = [
+                'id'      => $i
+                    + DB::select("SHOW TABLE STATUS LIKE 'problems'")[0]->Auto_increment,
+                'content' => $this->faker->realText(50),
+            ];
+        }
     }
 }

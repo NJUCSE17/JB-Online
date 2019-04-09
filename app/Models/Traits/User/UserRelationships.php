@@ -17,13 +17,13 @@ trait UserRelationships
     }
 
     /**
-     * Get the course enroll records of this user.
+     * Get the courses the user enrolled in.
      *
-     * @return mixed
+     * @return \Illuminate\Database\Eloquent\Collection
      */
-    public function courseEnrollRecords()
+    public function courses()
     {
-        return $this->hasMany('App\Models\CourseEnrollRecord');
+        return Course::query()->whereIn('id', $this->courseIDs())->get();
     }
 
     /**
@@ -37,12 +37,12 @@ trait UserRelationships
     }
 
     /**
-     * Get the courses the user enrolled in.
+     * Get the course enroll records of this user.
      *
-     * @return \Illuminate\Database\Eloquent\Collection
+     * @return mixed
      */
-    public function courses()
+    public function courseEnrollRecords()
     {
-        return Course::query()->whereIn('id', $this->courseIDs())->get();
+        return $this->hasMany('App\Models\CourseEnrollRecord');
     }
 }

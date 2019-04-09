@@ -20,7 +20,6 @@ class AssignmentFinishRecord extends Model
             'user_id',
             'assignment_id',
         ];
-    // TODO: WHEN AN ASSIGNMENT IS CHANGED, REVOKE THE RECORD (ISSUE BY KSL)
 
     /**
      * The attributes that should be cast to native types.

@@ -9,7 +9,8 @@ class CourseObserver
     /**
      * Handle the course "created" event.
      *
-     * @param  \App\Models\Course  $course
+     * @param  Course  $course
+     *
      * @return void
      */
     public function created(Course $course)
@@ -20,7 +21,8 @@ class CourseObserver
     /**
      * Handle the course "updated" event.
      *
-     * @param  \App\Models\Course  $course
+     * @param  Course  $course
+     *
      * @return void
      */
     public function updated(Course $course)
@@ -31,7 +33,8 @@ class CourseObserver
     /**
      * Handle the course "deleted" event.
      *
-     * @param  \App\Models\Course  $course
+     * @param  Course  $course
+     *
      * @return void
      */
     public function deleted(Course $course)
@@ -42,7 +45,8 @@ class CourseObserver
     /**
      * Handle the course "restored" event.
      *
-     * @param  \App\Models\Course  $course
+     * @param  Course  $course
+     *
      * @return void
      */
     public function restored(Course $course)
@@ -53,7 +57,8 @@ class CourseObserver
     /**
      * Handle the course "force deleted" event.
      *
-     * @param  \App\Models\Course  $course
+     * @param  Course  $course
+     *
      * @return void
      */
     public function forceDeleted(Course $course)

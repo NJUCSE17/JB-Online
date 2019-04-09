@@ -21,9 +21,9 @@ $factory->define(
         $fakeAssignment = factory(Assignment::class)->create();
 
         return [
-            'course_id' => $fakeAssignment->course->id,
+            'course_id'     => $fakeAssignment->course->id,
             'assignment_id' => $fakeAssignment->id,
-            'content' => $faker->realText(50),
+            'content'       => $faker->realText(50),
         ];
     }
 );
