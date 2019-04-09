@@ -20,7 +20,7 @@ class UserRecourse extends JsonResource
             'student_id'    => $this->student_id,
             'name'          => $this->name,
             'email'         => $this->email,
-            'blog_feed_url' => $this->blog,
+            'blog_feed_url' => $this->blog_feed_url,
             'verified'      => $this->isVerified(),
             'active'        => $this->isActive(),
         ];

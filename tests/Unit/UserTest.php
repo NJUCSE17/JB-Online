@@ -65,13 +65,13 @@ class UserTest extends TestCase
     protected function getUserData(User $user)
     {
         return [
-            'id'         => $user->id,
-            'student_id' => $user->student_id,
-            'name'       => $user->name,
-            'email'      => $user->email,
-            'blog'       => $user->blog,
-            'verified'   => $user->isVerified(),
-            'active'     => $user->isActive(),
+            'id'            => $user->id,
+            'student_id'    => $user->student_id,
+            'name'          => $user->name,
+            'email'         => $user->email,
+            'blog_feed_url' => $user->blog_feed_url,
+            'verified'      => $user->isVerified(),
+            'active'        => $user->isActive(),
         ];
     }
 
