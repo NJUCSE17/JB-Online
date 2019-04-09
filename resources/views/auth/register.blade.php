@@ -113,10 +113,7 @@
                         </div>
                     </div>
                     <div class="col-lg-5 order-lg-1 d-none d-lg-block">
-                        <blockquote>
-                            <h3 class="h2 mb-4">Share assignments,<br/>Share joyness.</h3>
-                            <footer>— <cite class="text-lg">NJUJB Idiom</cite></footer>
-                        </blockquote>
+                        {!! \App\Helpers\FrontPageQuotes::getQuote() !!}
                     </div>
                 </div>
             </div>
