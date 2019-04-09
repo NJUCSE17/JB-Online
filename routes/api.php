@@ -19,6 +19,11 @@ Route::group(
     ],
     function () {
         /**
+         * Get Blog Feeds.
+         */
+        Route::get('/feeds', 'BlogFeedController@feed');
+
+        /**
          * User-related APIs.
          */
         Route::group(

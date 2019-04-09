@@ -4,7 +4,7 @@ namespace App\Providers;
 
 use App\Models\Assignment;
 use App\Models\AssignmentFinishRecord;
-use App\Models\Blog;
+use App\Models\BlogFeed;
 use App\Models\Course;
 use App\Models\CourseEnrollRecord;
 use App\Models\PersonalAssignment;
@@ -44,7 +44,7 @@ class AppServiceProvider extends ServiceProvider
 
         AssignmentFinishRecord::observe(AssignmentFinishRecordObserver::class);
         Assignment::observe(AssignmentObserver::class);
-        Blog::observe(BlogObserver::class);
+        BlogFeed::observe(BlogObserver::class);
         CourseEnrollRecord::observe(CourseEnrollRecordObserver::class);
         Course::observe(CourseObserver::class);
         PersonalAssignment::observe(PersonalAssignmentObserver::class);

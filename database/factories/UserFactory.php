@@ -28,7 +28,7 @@ $factory->define(
             ),
             'avatar_upload'     => $faker->imageUrl(),
             'avatar_github'     => $faker->imageUrl(),
-            'blog'              => $faker->url,
+            'blog_feed_url'     => $faker->url,
             'email_verified_at' => now(),
             'activated_at'      => now(),
             'privilege_level'   => 3,

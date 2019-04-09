@@ -45,7 +45,8 @@ class UserController extends APIController
         // Authorization is checked by request
         $name = $request->has('name') ? $request->get('name') : $user->name;
         $email = $request->has('email') ? $request->get('email') : $user->email;
-        $blog = $request->has('blog') ? $request->get('blog') : $user->blog;
+        $blog = $request->has('blog_feed_url')
+            ? $request->get('blog_feed_url') : $user->blog;
         $pass = $request->has('password')
             ? Hash::make($request->get('password')) : $user->password;
         if ($request->has('email')) {
@@ -54,10 +55,10 @@ class UserController extends APIController
         }
         $user->update(
             [
-                'name'     => $name,
-                'email'    => $email,
-                'blog'     => $blog,
-                'password' => $pass,
+                'name'          => $name,
+                'email'         => $email,
+                'blog_feed_url' => $blog,
+                'password'      => $pass,
             ]
         );
 

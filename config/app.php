@@ -1,5 +1,7 @@
 <?php
 
+use willvincent\Feeds\FeedsServiceProvider;
+
 return [
 
     /*
@@ -165,6 +167,7 @@ return [
         /*
          * Package Service Providers...
          */
+        willvincent\Feeds\FeedsServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -205,6 +208,7 @@ return [
         'DB'           => Illuminate\Support\Facades\DB::class,
         'Eloquent'     => Illuminate\Database\Eloquent\Model::class,
         'Event'        => Illuminate\Support\Facades\Event::class,
+        'Feeds'        => willvincent\Feeds\Facades\FeedsFacade::class,
         'File'         => Illuminate\Support\Facades\File::class,
         'Gate'         => Illuminate\Support\Facades\Gate::class,
         'Hash'         => Illuminate\Support\Facades\Hash::class,

@@ -31,14 +31,14 @@ class UpdateUserRequest extends FormRequest
     public function rules()
     {
         return [
-            'user_id'  => [
+            'user_id'       => [
                 'sometimes',
                 'required',
                 'integer',
                 'exists:users,id',
             ],
-            'name'     => ['sometimes', 'required', 'string', 'max:255'],
-            'email'    => [
+            'name'          => ['sometimes', 'required', 'string', 'max:255'],
+            'email'         => [
                 'sometimes',
                 'required',
                 'string',
@@ -46,7 +46,7 @@ class UpdateUserRequest extends FormRequest
                 'max:255',
                 'unique:users',
             ],
-            'blog'     => [
+            'blog_feed_url' => [
                 'sometimes',
                 'required',
                 'string',
@@ -54,7 +54,7 @@ class UpdateUserRequest extends FormRequest
                 'max:255',
                 'unique:users',
             ],
-            'password' => ['sometimes', 'required', 'string', 'min:8'],
+            'password'      => ['sometimes', 'required', 'string', 'min:8'],
         ];
     }
 }

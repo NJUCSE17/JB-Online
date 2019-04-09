@@ -2,10 +2,13 @@
 
 namespace App\Models;
 
+use App\Models\Traits\BlogFeed\BlogFeedAttributes;
 use Illuminate\Database\Eloquent\Model;
 
-class Blog extends Model
+class BlogFeed extends Model
 {
+    use BlogFeedAttributes;
+
     /**
      * The attributes that are mass assignable.
      *
@@ -14,6 +17,8 @@ class Blog extends Model
     protected $fillable
         = [
             'user_id',
+            'user_name',
+            'permalink',
             'title',
             'content_html',
             'published_at',

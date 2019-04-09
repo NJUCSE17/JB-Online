@@ -24,7 +24,7 @@ class CreateUsersTable extends Migration
                 $table->string('avatar_type')->default('gravatar');
                 $table->string('avatar_upload')->nullable();
                 $table->string('avatar_github')->nullable();
-                $table->string('blog')->nullable();
+                $table->string('blog_feed_url')->nullable();
                 $table->string('password');
                 $table->timestamp('email_verified_at')->nullable();
                 $table->timestamp('activated_at')->nullable();

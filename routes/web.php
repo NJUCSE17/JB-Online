@@ -32,3 +32,10 @@ Route::group(
         )->name('login.github.callback');
     }
 );
+
+Route::group(
+    ['middleware' => 'auth'],
+    function () {
+        //
+    }
+);

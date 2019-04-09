@@ -32,7 +32,7 @@ class User extends Authenticatable
             'avatar_type',
             'avatar_upload',
             'avatar_github',
-            'blog',
+            'blog_feed_url',
             'email_verified_at',
             'activated_at',
         ];

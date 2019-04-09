@@ -16,13 +16,13 @@ class UserRecourse extends JsonResource
     public function toArray($request)
     {
         return [
-            'id'         => $this->id,
-            'student_id' => $this->student_id,
-            'name'       => $this->name,
-            'email'      => $this->email,
-            'blog'       => $this->blog,
-            'verified'   => $this->isVerified(),
-            'active'     => $this->isActive(),
+            'id'            => $this->id,
+            'student_id'    => $this->student_id,
+            'name'          => $this->name,
+            'email'         => $this->email,
+            'blog_feed_url' => $this->blog,
+            'verified'      => $this->isVerified(),
+            'active'        => $this->isActive(),
         ];
     }
 }
