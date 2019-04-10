@@ -53,7 +53,7 @@
             <div class="row">
                 <div class="col col-md-8">
                     <assignments-collection-component
-                        :assignments='{!! json_encode($assignments) !!}'
+                            :assignments='{!! json_encode($assignments) !!}'
                     ></assignments-collection-component>
                 </div>
             </div>
@@ -62,6 +62,7 @@
 @endsection
 <script>
     import AssignmentsCollectionComponent from "../js/components/AssignmentsCollectionComponent";
+
     export default {
         components: {AssignmentsCollectionComponent}
     }

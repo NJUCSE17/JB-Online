@@ -2,7 +2,6 @@
 
 namespace App\Http\Requests\Course;
 
-use App\Models\Course;
 use Illuminate\Foundation\Http\FormRequest;
 
 class DeleteCourseRequest extends FormRequest

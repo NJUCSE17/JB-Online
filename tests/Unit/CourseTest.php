@@ -197,7 +197,7 @@ class CourseTest extends TestCase
         );
         $this->post('/api/course/'.$this->course['id'].'/enroll',
             [
-                'user_id'   => $this->course_admin->id,
+                'user_id' => $this->course_admin->id,
             ]
         )->assertStatus(403);
         $this->post('/api/course/'.$this->course['id'].'/enroll',
@@ -251,7 +251,7 @@ class CourseTest extends TestCase
         $this->course['notice_html'] = $this->parser->text($notice);
         $this->put('/api/course/'.$this->course['id'],
             [
-                'notice'    => $notice,
+                'notice' => $notice,
             ]
         )->assertStatus(403);
     }
@@ -264,7 +264,7 @@ class CourseTest extends TestCase
         $this->course['notice_html'] = $this->parser->text($notice);
         $this->put('/api/course/'.$this->course['id'],
             [
-                'notice'    => $notice,
+                'notice' => $notice,
             ]
         )->assertStatus(200)
             ->assertExactJson(
@@ -281,7 +281,7 @@ class CourseTest extends TestCase
         $this->course['semester'] = $this->faker->numberBetween(1, 10);
         $this->put('/api/course/'.$this->course['id'],
             [
-                'semester'  => $this->course['semester'],
+                'semester' => $this->course['semester'],
             ]
         )->assertStatus(200)
             ->assertExactJson(

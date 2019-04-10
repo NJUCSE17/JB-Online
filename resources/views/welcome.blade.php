@@ -34,7 +34,7 @@
                             <i class="fas fa-sign-in-alt mr-1"></i> 进入系统
                         </a>
                     </div>
-                    <hr />
+                    <hr/>
                     <div>
                         <a class="text-dark text-underline--dashed mx-3"
                            href="https://njucse17.github.io">

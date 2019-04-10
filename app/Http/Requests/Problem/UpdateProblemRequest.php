@@ -2,7 +2,6 @@
 
 namespace App\Http\Requests\Problem;
 
-use App\Models\Problem;
 use App\Rules\Sanitize;
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -28,7 +27,7 @@ class UpdateProblemRequest extends FormRequest
     public function rules()
     {
         return [
-            'content'    => ['required', new Sanitize(), 'max:200'],
+            'content' => ['required', new Sanitize(), 'max:200'],
         ];
     }
 }

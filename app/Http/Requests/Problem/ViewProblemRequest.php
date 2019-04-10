@@ -31,7 +31,7 @@ class ViewProblemRequest extends FormRequest
                 'integer',
                 'exists:assignments,id',
             ],
-            'course_id' => [
+            'course_id'     => [
                 'sometimes',
                 'required',
                 'integer',

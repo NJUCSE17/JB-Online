@@ -41,6 +41,17 @@ class UserTest extends TestCase
         $this->superAdminCanDeactivateUser();
     }
 
+    protected function userCanViewItsInfo()
+    {
+        $this->actingAs($this->user, 'api');
+        $this->get('/api/user/'.$this->user->id)
+            ->assertStatus(200)
+            ->assertExactJson([
+                'success' => true,
+                'data'    => $this->getUserData($this->user),
+            ]);
+    }
+
     protected function getUserData(User $user)
     {
         return [
@@ -52,17 +63,6 @@ class UserTest extends TestCase
             'verified'      => $user->isVerified(),
             'active'        => $user->isActive(),
         ];
-    }
-
-    protected function userCanViewItsInfo()
-    {
-        $this->actingAs($this->user, 'api');
-        $this->get('/api/user/'.$this->user->id)
-            ->assertStatus(200)
-            ->assertExactJson([
-                'success' => true,
-                'data'    => $this->getUserData($this->user),
-            ]);
     }
 
     protected function userCanViewOthersInfo()

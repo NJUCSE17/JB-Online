@@ -4,10 +4,10 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\APIController;
 use App\Http\Requests\Assignment\ViewAssignmentRequest;
-use App\Http\Requests\Course\StoreCourseRequest;
 use App\Http\Requests\Course\DeleteCourseRequest;
 use App\Http\Requests\Course\EnrollCourseRequest;
 use App\Http\Requests\Course\QuitCourseRequest;
+use App\Http\Requests\Course\StoreCourseRequest;
 use App\Http\Requests\Course\UpdateCourseRequest;
 use App\Http\Requests\Course\ViewCourseRequest;
 use App\Http\Resources\CourseEnrollRecordResource;

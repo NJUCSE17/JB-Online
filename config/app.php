@@ -1,7 +1,5 @@
 <?php
 
-use willvincent\Feeds\FeedsServiceProvider;
-
 return [
 
     /*

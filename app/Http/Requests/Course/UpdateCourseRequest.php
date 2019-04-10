@@ -2,7 +2,6 @@
 
 namespace App\Http\Requests\Course;
 
-use App\Models\Course;
 use App\Rules\Sanitize;
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -28,8 +27,8 @@ class UpdateCourseRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => ['sometimes', 'required', 'max:200'],
-            'semester' => [
+            'name'       => ['sometimes', 'required', 'max:200'],
+            'semester'   => [
                 'sometimes',
                 'required',
                 'integer',
@@ -40,13 +39,13 @@ class UpdateCourseRequest extends FormRequest
                 'required',
                 'date_format:Y-m-d H:i:s',
             ],
-            'end_time' => [
+            'end_time'   => [
                 'sometimes',
                 'required',
                 'date_format:Y-m-d H:i:s',
                 'after_or_equal:start_before',
             ],
-            'notice' => [
+            'notice'     => [
                 'sometimes',
                 'required',
                 new Sanitize(),

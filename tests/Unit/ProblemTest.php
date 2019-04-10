@@ -107,7 +107,7 @@ class ProblemTest extends TestCase
         $this->problems[0]['content'] = $this->faker->realText(50);
         $this->put('/api/problem/'.$this->problems[0]['id'],
             [
-                'content'    => $this->problems[0]['content'],
+                'content' => $this->problems[0]['content'],
             ]
         )->assertStatus(403);
     }
@@ -118,7 +118,7 @@ class ProblemTest extends TestCase
         $this->problems[0]['content'] = $this->faker->realText(50);
         $this->put('/api/problem/'.$this->problems[0]['id'],
             [
-                'content'    => $this->problems[0]['content'],
+                'content' => $this->problems[0]['content'],
             ]
         )->assertStatus(200)
             ->assertExactJson([
@@ -140,7 +140,7 @@ class ProblemTest extends TestCase
         $this->problems[1]['content'] = $this->faker->realText(50);
         $this->put('/api/problem/'.$this->problems[1]['id'],
             [
-                'content'    => $this->problems[1]['content'],
+                'content' => $this->problems[1]['content'],
             ]
         )->assertStatus(200)
             ->assertExactJson([

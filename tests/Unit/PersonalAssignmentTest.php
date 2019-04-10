@@ -118,7 +118,8 @@ class PersonalAssignmentTest extends TestCase
     protected function userCanViewItsOwnPA()
     {
         $this->actingAs($this->users[1], 'api');
-        $this->get('/api/personalAssignment/'.$this->personal_assignments[1]['id'])
+        $this->get('/api/personalAssignment/'
+            .$this->personal_assignments[1]['id'])
             ->assertStatus(200)
             ->assertExactJson(
                 [
@@ -131,14 +132,16 @@ class PersonalAssignmentTest extends TestCase
     protected function userCannotViewOthersPA()
     {
         $this->actingAs($this->users[1], 'api');
-        $this->get('/api/personalAssignment/'.$this->personal_assignments[0]['id'])
+        $this->get('/api/personalAssignment/'
+            .$this->personal_assignments[0]['id'])
             ->assertStatus(403);
     }
 
     protected function adminCanViewOthersPA()
     {
         $this->actingAs($this->admin, 'api');
-        $this->get('/api/personalAssignment/'.$this->personal_assignments[0]['id'])
+        $this->get('/api/personalAssignment/'
+            .$this->personal_assignments[0]['id'])
             ->assertStatus(200)
             ->assertExactJson(
                 [
@@ -161,7 +164,8 @@ class PersonalAssignmentTest extends TestCase
             '+5 days'
         )->format('Y-m-d H:i:s');
 
-        $this->put('/api/personalAssignment/'.$this->personal_assignments[1]['id'],
+        $this->put('/api/personalAssignment/'
+            .$this->personal_assignments[1]['id'],
             [
                 'content'  => $this->personal_assignments[1]['content'],
                 'due_time' => $this->personal_assignments[1]['due_time'],
@@ -178,7 +182,8 @@ class PersonalAssignmentTest extends TestCase
     protected function userCannotUpdateOthersPA()
     {
         $this->actingAs($this->users[0], 'api');
-        $this->put('/api/personalAssignment/'.$this->personal_assignments[1]['id'],
+        $this->put('/api/personalAssignment/'
+            .$this->personal_assignments[1]['id'],
             [
                 'content'  => $this->personal_assignments[1]['content'],
                 'due_time' => $this->personal_assignments[1]['due_time'],
@@ -189,7 +194,8 @@ class PersonalAssignmentTest extends TestCase
     protected function adminCanUpdateOthersPA()
     {
         $this->actingAs($this->admin, 'api');
-        $this->put('/api/personalAssignment/'.$this->personal_assignments[1]['id'],
+        $this->put('/api/personalAssignment/'
+            .$this->personal_assignments[1]['id'],
             [
                 'content'  => $this->personal_assignments[1]['content'],
                 'due_time' => $this->personal_assignments[1]['due_time'],
@@ -208,7 +214,8 @@ class PersonalAssignmentTest extends TestCase
         unset($this->personal_assignments[0]['finished_at']); // remove for non-exact assertions
         $this->actingAs($this->users[0], 'api');
         $this->post(
-            '/api/personalAssignment/'.$this->personal_assignments[0]['id'].'/finish'
+            '/api/personalAssignment/'.$this->personal_assignments[0]['id']
+            .'/finish'
         )->assertStatus(200)
             ->assertJson(
                 [ // not an exact assertion
@@ -222,7 +229,8 @@ class PersonalAssignmentTest extends TestCase
     {
         $this->actingAs($this->users[0], 'api');
         $this->post(
-            '/api/personalAssignment/'.$this->personal_assignments[1]['id'].'/finish'
+            '/api/personalAssignment/'.$this->personal_assignments[1]['id']
+            .'/finish'
         )->assertStatus(403);
     }
 
@@ -230,7 +238,8 @@ class PersonalAssignmentTest extends TestCase
     {
         $this->actingAs($this->admin, 'api');
         $this->post(
-            '/api/personalAssignment/'.$this->personal_assignments[1]['id'].'/finish'
+            '/api/personalAssignment/'.$this->personal_assignments[1]['id']
+            .'/finish'
         )->assertStatus(403);
     }
 
@@ -238,7 +247,8 @@ class PersonalAssignmentTest extends TestCase
     {
         $this->actingAs($this->users[0], 'api');
         $this->post(
-            '/api/personalAssignment/'.$this->personal_assignments[0]['id'].'/reset'
+            '/api/personalAssignment/'.$this->personal_assignments[0]['id']
+            .'/reset'
         )->assertStatus(200)
             ->assertExactJson(
                 [
@@ -252,7 +262,8 @@ class PersonalAssignmentTest extends TestCase
     {
         $this->actingAs($this->users[0], 'api');
         $this->post(
-            '/api/personalAssignment/'.$this->personal_assignments[1]['id'].'/reset'
+            '/api/personalAssignment/'.$this->personal_assignments[1]['id']
+            .'/reset'
         )->assertStatus(403);
     }
 
@@ -260,14 +271,16 @@ class PersonalAssignmentTest extends TestCase
     {
         $this->actingAs($this->admin, 'api');
         $this->post(
-            '/api/personalAssignment/'.$this->personal_assignments[1]['id'].'/reset'
+            '/api/personalAssignment/'.$this->personal_assignments[1]['id']
+            .'/reset'
         )->assertStatus(403);
     }
 
     protected function userCanDeleteItsOwnPA()
     {
         $this->actingAs($this->users[0], 'api');
-        $this->delete('/api/personalAssignment/'.$this->personal_assignments[0]['id'])
+        $this->delete('/api/personalAssignment/'
+            .$this->personal_assignments[0]['id'])
             ->assertStatus(200)
             ->assertExactJson(
                 [
@@ -277,7 +290,8 @@ class PersonalAssignmentTest extends TestCase
             );
 
         // check the assignment has been deleted
-        $this->get('/api/personalAssignment/'.$this->personal_assignments[0]['id'])
+        $this->get('/api/personalAssignment/'
+            .$this->personal_assignments[0]['id'])
             ->assertStatus(404);
 
         $this->get('/api/personalAssignment')
@@ -293,14 +307,16 @@ class PersonalAssignmentTest extends TestCase
     protected function userCannotDeleteOthersPA()
     {
         $this->actingAs($this->users[0], 'api');
-        $this->delete('/api/personalAssignment/'.$this->personal_assignments[1]['id'])
+        $this->delete('/api/personalAssignment/'
+            .$this->personal_assignments[1]['id'])
             ->assertStatus(403);
     }
 
     protected function adminCanDeleteOthersPA()
     {
         $this->actingAs($this->admin, 'api');
-        $this->delete('/api/personalAssignment/'.$this->personal_assignments[1]['id'])
+        $this->delete('/api/personalAssignment/'
+            .$this->personal_assignments[1]['id'])
             ->assertStatus(200)
             ->assertExactJson(
                 [
@@ -309,7 +325,8 @@ class PersonalAssignmentTest extends TestCase
                 ]
             );
 
-        $this->get('/api/personalAssignment/'.$this->personal_assignments[1]['id'])
+        $this->get('/api/personalAssignment/'
+            .$this->personal_assignments[1]['id'])
             ->assertStatus(404);
     }
 

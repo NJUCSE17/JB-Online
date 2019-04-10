@@ -2,7 +2,6 @@
 
 namespace App\Http\Requests\PersonalAssignment;
 
-use App\Models\PersonalAssignment;
 use Illuminate\Foundation\Http\FormRequest;
 
 class ResetPersonalAssignmentRequest extends FormRequest

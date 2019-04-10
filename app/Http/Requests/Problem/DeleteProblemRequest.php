@@ -2,7 +2,6 @@
 
 namespace App\Http\Requests\Problem;
 
-use App\Models\Problem;
 use Illuminate\Foundation\Http\FormRequest;
 
 class DeleteProblemRequest extends FormRequest

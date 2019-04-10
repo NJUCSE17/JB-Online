@@ -2,7 +2,6 @@
 
 namespace App\Http\Requests\Assignment;
 
-use App\Models\Assignment;
 use Illuminate\Foundation\Http\FormRequest;
 
 class FinishAssignmentRequest extends FormRequest

@@ -3,9 +3,9 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\APIController;
-use App\Http\Requests\Problem\StoreProblemRequest;
 use App\Http\Requests\Problem\DeleteProblemRequest;
 use App\Http\Requests\Problem\ShowProblemRequest;
+use App\Http\Requests\Problem\StoreProblemRequest;
 use App\Http\Requests\Problem\UpdateProblemRequest;
 use App\Http\Requests\Problem\ViewProblemRequest;
 use App\Http\Resources\ProblemResource;
@@ -41,7 +41,7 @@ class ProblemController extends APIController
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function store (StoreProblemRequest $request)
+    public function store(StoreProblemRequest $request)
     {
         $data = $request->only('course_id', 'assignment_id', 'content');
         $problem = Problem::query()->create(

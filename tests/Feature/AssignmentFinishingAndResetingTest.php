@@ -48,7 +48,7 @@ class AssignmentFinishingAndResetingTest extends TestCase
         // Update the assignment now.
         $this->put('/api/assignment/'.$assignment->id,
             [
-                'content'       => $this->faker->realText(200),
+                'content' => $this->faker->realText(200),
             ]
         )->assertStatus(200);
 

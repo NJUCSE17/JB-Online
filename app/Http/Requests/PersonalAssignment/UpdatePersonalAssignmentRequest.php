@@ -2,7 +2,6 @@
 
 namespace App\Http\Requests\PersonalAssignment;
 
-use App\Models\PersonalAssignment;
 use App\Rules\Sanitize;
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -28,19 +27,19 @@ class UpdatePersonalAssignmentRequest extends FormRequest
     public function rules()
     {
         return [
-            'name'                   => [
+            'name'     => [
                 'sometimes',
                 'required',
                 new Sanitize(),
                 'max:100',
             ],
-            'content'                => [
+            'content'  => [
                 'sometimes',
                 'required',
                 new Sanitize(),
                 'max:2000',
             ],
-            'due_time'               => [
+            'due_time' => [
                 'sometimes',
                 'required',
                 'date_format:Y-m-d H:i:s',
