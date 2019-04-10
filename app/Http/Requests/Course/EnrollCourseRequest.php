@@ -14,8 +14,8 @@ class EnrollCourseRequest extends FormRequest
      */
     public function authorize()
     {
-        $course = Course::query()
-            ->findOrFail($this->request->getInt('course_id'));
+        $course = $this->route('course');
+
         if ($this->request->has('user_id')
             || $this->request->has('type_is_admin')
         ) {
@@ -39,7 +39,6 @@ class EnrollCourseRequest extends FormRequest
                 'integer',
                 'exists:users,id',
             ],
-            'course_id'     => ['required', 'integer', 'exists:courses,id'],
             'type_is_admin' => ['sometimes', 'boolean'],
         ];
     }

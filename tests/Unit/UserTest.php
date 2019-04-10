@@ -22,8 +22,6 @@ class UserTest extends TestCase
 
     public function testUserFunctions()
     {
-        $this->unauthorizedUserCannotPerformOperations();
-
         $this->userCanViewItsInfo();
         $this->userCanViewOthersInfo();
         $this->adminCanViewUsersInfo();
@@ -43,25 +41,6 @@ class UserTest extends TestCase
         $this->superAdminCanDeactivateUser();
     }
 
-    protected function unauthorizedUserCannotPerformOperations()
-    {
-        $this->get('/api/user')->assertStatus(401);
-        $this->post('/api/user')->assertStatus(401);
-        $this->put('/api/user')->assertStatus(401);
-        $this->delete('/api/user')->assertStatus(401);
-    }
-
-    protected function userCanViewItsInfo()
-    {
-        $this->actingAs($this->user, 'api');
-        $this->get('/api/user')
-            ->assertStatus(200)
-            ->assertExactJson([
-                'success' => true,
-                'data'    => $this->getUserData($this->user),
-            ]);
-    }
-
     protected function getUserData(User $user)
     {
         return [
@@ -75,10 +54,21 @@ class UserTest extends TestCase
         ];
     }
 
+    protected function userCanViewItsInfo()
+    {
+        $this->actingAs($this->user, 'api');
+        $this->get('/api/user/'.$this->user->id)
+            ->assertStatus(200)
+            ->assertExactJson([
+                'success' => true,
+                'data'    => $this->getUserData($this->user),
+            ]);
+    }
+
     protected function userCanViewOthersInfo()
     {
         $this->actingAs($this->user, 'api');
-        $this->get('/api/user?user_id='.$this->admin->id)
+        $this->get('/api/user/'.$this->admin->id)
             ->assertStatus(200)
             ->assertExactJson([
                 'success' => true,
@@ -89,7 +79,7 @@ class UserTest extends TestCase
     protected function adminCanViewUsersInfo()
     {
         $this->actingAs($this->admin, 'api');
-        $this->get('/api/user?user_id='.$this->user->id)
+        $this->get('/api/user/'.$this->user->id)
             ->assertStatus(200)
             ->assertExactJson([
                 'success' => true,
@@ -100,15 +90,18 @@ class UserTest extends TestCase
     protected function userCanEditItsInfo()
     {
         $this->actingAs($this->user, 'api');
-        $this->put('/api/user',
+        $data = $this->getUserData($this->user);
+        $data['name'] = $this->faker->name;
+        $this->put('/api/user/'.$this->user->id,
             [
-                'name' => $this->faker->name,
+                'name' => $data['name'],
             ]
         )->assertStatus(200)
             ->assertExactJson([
                 'success' => true,
-                'data'    => $this->getUserData($this->user),
+                'data'    => $data,
             ]);
+        $this->user->name = $data['name'];
         $this->assertDatabaseHas('users', [
             'id'         => $this->user->id,
             'name'       => $this->user->name,
@@ -119,15 +112,26 @@ class UserTest extends TestCase
     protected function userWillBeDeactivedIfEmailEdited()
     {
         $this->actingAs($this->user, 'api');
-        $this->put('/api/user',
+        $data = $this->getUserData($this->user);
+
+        $data['email'] = $this->faker->safeEmail;
+        $data['active'] = false;
+        $data['verified'] = false;
+
+        $this->put('/api/user/'.$this->user->id,
             [
-                'email' => $this->faker->safeEmail,
+                'email' => $data['email'],
             ]
         )->assertStatus(200)
             ->assertExactJson([
                 'success' => true,
-                'data'    => $this->getUserData($this->user),
+                'data'    => $data,
             ]);
+
+        $this->user->email = $data['email'];
+        $this->user->activated_at = null;
+        $this->user->email_verified_at = null;
+
         $this->assertDatabaseHas('users', [
             'id'                => $this->user->id,
             'name'              => $this->user->name,
@@ -140,10 +144,9 @@ class UserTest extends TestCase
     protected function userCannotEditOthersInfo()
     {
         $this->actingAs($this->user, 'api');
-        $this->put('/api/user',
+        $this->put('/api/user/'.$this->admin->id,
             [
-                'user_id' => $this->admin->id,
-                'name'    => $this->faker->name,
+                'name' => $this->faker->name,
             ]
         )->assertStatus(403);
     }
@@ -151,10 +154,9 @@ class UserTest extends TestCase
     protected function adminCannotEditOthersInfo()
     {
         $this->actingAs($this->admin, 'api');
-        $this->put('/api/user',
+        $this->put('/api/user/'.$this->user->id,
             [
-                'user_id' => $this->user->id,
-                'name'    => $this->faker->name,
+                'name' => $this->faker->name,
             ]
         )->assertStatus(403);
     }
@@ -163,10 +165,9 @@ class UserTest extends TestCase
     {
         $this->actingAs($this->super_admin, 'api');
         $this->user->name = $this->faker->name;
-        $this->put('/api/user',
+        $this->put('/api/user/'.$this->user->id,
             [
-                'user_id' => $this->user->id,
-                'name'    => $this->user->name,
+                'name' => $this->user->name,
             ]
         )->assertStatus(200)
             ->assertExactJson([
@@ -178,31 +179,22 @@ class UserTest extends TestCase
     protected function userCannotActivateUser()
     {
         $this->actingAs($this->user, 'api');
-        $this->post('/api/user/activate',
-            [
-                'user_id' => $this->user->id,
-            ]
-        )->assertStatus(403);
+        $this->post('/api/user/'.$this->user->id.'/activate')
+            ->assertStatus(403);
     }
 
     protected function adminCannotActivateUser()
     {
         $this->actingAs($this->admin, 'api');
-        $this->post('/api/user/activate',
-            [
-                'user_id' => $this->user->id,
-            ]
-        )->assertStatus(403);
+        $this->post('/api/user/'.$this->user->id.'/activate')
+            ->assertStatus(403);
     }
 
     protected function superAdminCanActivateUser()
     {
         $this->actingAs($this->super_admin, 'api');
-        $this->post('/api/user/activate',
-            [
-                'user_id' => $this->user->id,
-            ]
-        )->assertStatus(200);
+        $this->post('/api/user/'.$this->user->id.'/activate')
+            ->assertStatus(200);
         $this->assertDatabaseMissing('users', [
             'id'           => $this->user->id,
             'activated_at' => null,
@@ -213,31 +205,22 @@ class UserTest extends TestCase
     protected function userCannotDeactivateUser()
     {
         $this->actingAs($this->user, 'api');
-        $this->post('/api/user/deactivate',
-            [
-                'user_id' => $this->user->id,
-            ]
-        )->assertStatus(403);
+        $this->post('/api/user/'.$this->user->id.'/deactivate')
+            ->assertStatus(403);
     }
 
     protected function adminCannotDeactivateUser()
     {
         $this->actingAs($this->admin, 'api');
-        $this->post('/api/user/deactivate',
-            [
-                'user_id' => $this->user->id,
-            ]
-        )->assertStatus(403);
+        $this->post('/api/user/'.$this->user->id.'/deactivate')
+            ->assertStatus(403);
     }
 
     protected function superAdminCanDeactivateUser()
     {
         $this->actingAs($this->super_admin, 'api');
-        $this->post('/api/user/deactivate',
-            [
-                'user_id' => $this->user->id,
-            ]
-        )->assertStatus(200);
+        $this->post('/api/user/'.$this->user->id.'/deactivate')
+            ->assertStatus(200);
         $this->assertDatabaseHas('users', [
             'id'           => $this->user->id,
             'activated_at' => null,

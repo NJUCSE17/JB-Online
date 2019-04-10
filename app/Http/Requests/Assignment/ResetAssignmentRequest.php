@@ -2,7 +2,6 @@
 
 namespace App\Http\Requests\Assignment;
 
-use App\Models\Assignment;
 use Illuminate\Foundation\Http\FormRequest;
 
 class ResetAssignmentRequest extends FormRequest
@@ -14,9 +13,7 @@ class ResetAssignmentRequest extends FormRequest
      */
     public function authorize()
     {
-        $assignment = Assignment::query()->findOrFail(
-            $this->request->get('assignment_id')
-        );
+        $assignment = $this->route('assignment');
 
         return $this->user()->can('reset', $assignment);
     }
@@ -29,7 +26,7 @@ class ResetAssignmentRequest extends FormRequest
     public function rules()
     {
         return [
-            'assignment_id' => ['required', 'integer', 'exists:assignments,id'],
+            //
         ];
     }
 }

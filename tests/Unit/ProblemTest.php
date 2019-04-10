@@ -21,13 +21,11 @@ class ProblemTest extends TestCase
 
     public function testProblemFunctions()
     {
-        $this->unauthorizedUserCannotPerformOperations();
-
         $this->userCannotCreateProblem();
         $this->courseAdminCanCreateProblem();
         $this->adminCanCreateProblem();
 
-        $this->problemCanNotBeViewedWithoutFiltering();
+        $this->userCanViewProblems();
         $this->userCanViewProblemIfFiltered();
 
         $this->userCannotUpdateProblem();
@@ -37,14 +35,6 @@ class ProblemTest extends TestCase
         $this->userCannotDeleteProblem();
         $this->courseAdminCanDeleteProblem();
         $this->adminCanDeleteProblem();
-    }
-
-    protected function unauthorizedUserCannotPerformOperations()
-    {
-        $this->get('/api/problem')->assertStatus(401);
-        $this->post('/api/problem')->assertStatus(401);
-        $this->put('/api/problem')->assertStatus(401);
-        $this->delete('/api/problem')->assertStatus(401);
     }
 
     protected function userCannotCreateProblem()
@@ -85,17 +75,17 @@ class ProblemTest extends TestCase
             ]);
     }
 
-    protected function problemCanNotBeViewedWithoutFiltering()
+    protected function userCanViewProblems()
     {
         $this->actingAs($this->user, 'api');
         $this->get('/api/problem')
-            ->assertStatus(422);
+            ->assertStatus(200);
     }
 
     protected function userCanViewProblemIfFiltered()
     {
         $this->actingAs($this->user, 'api');
-        $this->get('/api/problem?problem_id='.$this->problems[0]['id'])
+        $this->get('/api/problem/'.$this->problems[0]['id'])
             ->assertStatus(200)
             ->assertExactJson([
                 'success' => true,
@@ -115,9 +105,8 @@ class ProblemTest extends TestCase
     {
         $this->actingAs($this->user, 'api');
         $this->problems[0]['content'] = $this->faker->realText(50);
-        $this->put('/api/problem',
+        $this->put('/api/problem/'.$this->problems[0]['id'],
             [
-                'problem_id' => $this->problems[0]['id'],
                 'content'    => $this->problems[0]['content'],
             ]
         )->assertStatus(403);
@@ -127,9 +116,8 @@ class ProblemTest extends TestCase
     {
         $this->actingAs($this->course_admin, 'api');
         $this->problems[0]['content'] = $this->faker->realText(50);
-        $this->put('/api/problem',
+        $this->put('/api/problem/'.$this->problems[0]['id'],
             [
-                'problem_id' => $this->problems[0]['id'],
                 'content'    => $this->problems[0]['content'],
             ]
         )->assertStatus(200)
@@ -150,9 +138,8 @@ class ProblemTest extends TestCase
     {
         $this->actingAs($this->admin, 'api');
         $this->problems[1]['content'] = $this->faker->realText(50);
-        $this->put('/api/problem',
+        $this->put('/api/problem/'.$this->problems[1]['id'],
             [
-                'problem_id' => $this->problems[1]['id'],
                 'content'    => $this->problems[1]['content'],
             ]
         )->assertStatus(200)
@@ -172,21 +159,15 @@ class ProblemTest extends TestCase
     protected function userCannotDeleteProblem()
     {
         $this->actingAs($this->user, 'api');
-        $this->delete('/api/problem',
-            [
-                'problem_id' => $this->problems[0]['id'],
-            ]
-        )->assertStatus(403);
+        $this->delete('/api/problem/'.$this->problems[0]['id'])
+            ->assertStatus(403);
     }
 
     protected function courseAdminCanDeleteProblem()
     {
         $this->actingAs($this->course_admin, 'api');
-        $this->delete('/api/problem',
-            [
-                'problem_id' => $this->problems[0]['id'],
-            ]
-        )->assertStatus(200)
+        $this->delete('/api/problem/'.$this->problems[0]['id'])
+            ->assertStatus(200)
             ->assertExactJson([
                 'success' => true,
                 'data'    => 'Problem deleted.',
@@ -201,11 +182,8 @@ class ProblemTest extends TestCase
     protected function adminCanDeleteProblem()
     {
         $this->actingAs($this->admin, 'api');
-        $this->delete('/api/problem',
-            [
-                'problem_id' => $this->problems[1]['id'],
-            ]
-        )->assertStatus(200)
+        $this->delete('/api/problem/'.$this->problems[1]['id'])
+            ->assertStatus(200)
             ->assertExactJson([
                 'success' => true,
                 'data'    => 'Problem deleted.',

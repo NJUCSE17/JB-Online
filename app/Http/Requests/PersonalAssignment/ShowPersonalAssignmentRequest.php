@@ -2,10 +2,9 @@
 
 namespace App\Http\Requests\PersonalAssignment;
 
-use App\Models\PersonalAssignment;
 use Illuminate\Foundation\Http\FormRequest;
 
-class FinishPersonalAssignmentRequest extends FormRequest
+class ShowPersonalAssignmentRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -16,7 +15,7 @@ class FinishPersonalAssignmentRequest extends FormRequest
     {
         $personalAssignment = $this->route('personalAssignment');
 
-        return $this->user()->can('finish', $personalAssignment);
+        return $this->user()->can('show', $personalAssignment);
     }
 
     /**
@@ -27,7 +26,17 @@ class FinishPersonalAssignmentRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'due_after'       => [
+                'sometimes',
+                'required',
+                'date_format:Y-m-d H:i:s',
+            ],
+            'due_before'      => [
+                'sometimes',
+                'required',
+                'date_format:Y-m-d H:i:s',
+            ],
+            'unfinished_only' => ['sometimes', 'required', 'boolean'],
         ];
     }
 }

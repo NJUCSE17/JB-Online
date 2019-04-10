@@ -6,7 +6,7 @@ use App\Models\PersonalAssignment;
 use App\Rules\Sanitize;
 use Illuminate\Foundation\Http\FormRequest;
 
-class CreatePersonalAssignmentRequest extends FormRequest
+class StorePersonalAssignmentRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.

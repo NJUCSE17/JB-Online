@@ -36,6 +36,19 @@ class UserPolicy
      */
     public function view()
     {
+        return false;
+    }
+
+    /**
+     * Determine whether the user can view a specific model.
+     *
+     * @param  User  $user
+     * @param  User  $model
+     *
+     * @return bool
+     */
+    public function show(User $user, User $model)
+    {
         return true;
     }
 

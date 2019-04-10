@@ -41,6 +41,16 @@ class AssignmentPolicy
     }
 
     /**
+     * Determine whether the user can view a specific assignment.
+     *
+     * @return mixed
+     */
+    public function show(User $user, Assignment $assignment)
+    {
+        return true;
+    }
+
+    /**
      * Determine whether the user can create assignments.
      *
      * @return mixed

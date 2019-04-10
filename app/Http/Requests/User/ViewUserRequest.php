@@ -14,14 +14,7 @@ class ViewUserRequest extends FormRequest
      */
     public function authorize()
     {
-        if ($this->request->has('user_id')) {
-            $user = User::query()
-                ->findOrFail($this->request->getInt('user_id'));
-
-            return $this->user()->can('view', $user);
-        } else {
-            return true;
-        }
+        return $this->user()->can('view', User::class);
     }
 
     /**
@@ -32,12 +25,7 @@ class ViewUserRequest extends FormRequest
     public function rules()
     {
         return [
-            'user_id' => [
-                'sometimes',
-                'required',
-                'integer',
-                'exists:users,id',
-            ],
+            //
         ];
     }
 }

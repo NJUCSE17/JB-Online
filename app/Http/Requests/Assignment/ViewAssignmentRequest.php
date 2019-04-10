@@ -14,7 +14,11 @@ class ViewAssignmentRequest extends FormRequest
      */
     public function authorize()
     {
-        return $this->user()->can('view', Assignment::class);
+        if ($this->request->has('show_all')) {
+            return $this->user()->privilege_level <= 2;
+        } else {
+            return $this->user()->can('view', Assignment::class);
+        }
     }
 
     /**
@@ -25,12 +29,7 @@ class ViewAssignmentRequest extends FormRequest
     public function rules()
     {
         return [
-            'assignment_id'   => [
-                'sometimes',
-                'required',
-                'integer',
-                'exists:assignments,id',
-            ],
+            'show_all'        => ['sometimes', 'required', 'boolean'],
             'course_id'       => [
                 'sometimes',
                 'required',

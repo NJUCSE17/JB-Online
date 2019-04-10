@@ -24,18 +24,23 @@ class CourseTest extends TestCase
     public function testCourseFunctions()
     {
         $this->noCoursesAtFirst();
+
         $this->userCannotCreateCourse();
         $this->adminCanCreateCourse();
+
         $this->userCanViewCourses();
         $this->userCanFilterCourses();
         $this->userCanViewSpecificCourse();
+
         $this->userCanEnrollCourse();
         $this->userCanQuitCourse();
         $this->userCanNotJoinAsCourseAdmin();
         $this->userCanBeSetAsCourseAdmin();
+
         $this->userCannotUpdateCourse();
         $this->adminCanUpdateCourse();
         $this->courseAdminCanUpdateCourse();
+
         $this->userCannotDeleteCourse();
         $this->courseAdminCannotDeleteCourse();
         $this->adminCanDeleteCourse();
@@ -125,7 +130,7 @@ class CourseTest extends TestCase
     protected function userCanViewSpecificCourse()
     {
         $this->actingAs($this->user, 'api');
-        $this->get('/api/course?course_id='.$this->course['id'])
+        $this->get('/api/course/'.$this->course['id'])
             ->assertStatus(200)
             ->assertExactJson(
                 [
@@ -138,11 +143,7 @@ class CourseTest extends TestCase
     protected function userCanEnrollCourse()
     {
         $this->actingAs($this->user, 'api');
-        $this->post('/api/course/enroll',
-            [
-                'course_id' => $this->course['id'],
-            ]
-        )
+        $this->post('/api/course/'.$this->course['id'].'/enroll')
             ->assertStatus(200)
             ->assertJson( // not an exact assertion
                 [
@@ -167,11 +168,7 @@ class CourseTest extends TestCase
     protected function userCanQuitCourse()
     {
         $this->actingAs($this->user, 'api');
-        $this->post('/api/course/quit',
-            [
-                'course_id' => $this->course['id'],
-            ]
-        )
+        $this->post('/api/course/'.$this->course['id'].'/quit')
             ->assertStatus(200)
             ->assertExactJson(
                 [
@@ -198,15 +195,13 @@ class CourseTest extends TestCase
                 'deleted_at' => null,
             ]
         );
-        $this->post('/api/course/enroll',
+        $this->post('/api/course/'.$this->course['id'].'/enroll',
             [
                 'user_id'   => $this->course_admin->id,
-                'course_id' => $this->course['id'],
             ]
         )->assertStatus(403);
-        $this->post('/api/course/enroll',
+        $this->post('/api/course/'.$this->course['id'].'/enroll',
             [
-                'course_id'     => $this->course['id'],
                 'type_is_admin' => true,
             ]
         )->assertStatus(403);
@@ -222,10 +217,9 @@ class CourseTest extends TestCase
                 'deleted_at' => null,
             ]
         );
-        $this->post('/api/course/enroll',
+        $this->post('/api/course/'.$this->course['id'].'/enroll',
             [
                 'user_id'       => $this->course_admin->id,
-                'course_id'     => $this->course['id'],
                 'type_is_admin' => true,
             ]
         )->assertStatus(200)
@@ -255,9 +249,8 @@ class CourseTest extends TestCase
         $notice = $this->faker->paragraph;
         $this->course['notice'] = $notice;
         $this->course['notice_html'] = $this->parser->text($notice);
-        $this->put('/api/course',
+        $this->put('/api/course/'.$this->course['id'],
             [
-                'course_id' => $this->course['id'],
                 'notice'    => $notice,
             ]
         )->assertStatus(403);
@@ -269,9 +262,8 @@ class CourseTest extends TestCase
         $notice = $this->faker->paragraph;
         $this->course['notice'] = $notice;
         $this->course['notice_html'] = $this->parser->text($notice);
-        $this->put('/api/course',
+        $this->put('/api/course/'.$this->course['id'],
             [
-                'course_id' => $this->course['id'],
                 'notice'    => $notice,
             ]
         )->assertStatus(200)
@@ -287,9 +279,8 @@ class CourseTest extends TestCase
     {
         $this->actingAs($this->course_admin, 'api');
         $this->course['semester'] = $this->faker->numberBetween(1, 10);
-        $this->put('/api/course',
+        $this->put('/api/course/'.$this->course['id'],
             [
-                'course_id' => $this->course['id'],
                 'semester'  => $this->course['semester'],
             ]
         )->assertStatus(200)
@@ -304,31 +295,22 @@ class CourseTest extends TestCase
     protected function userCannotDeleteCourse()
     {
         $this->actingAs($this->user, 'api');
-        $this->delete('/api/course',
-            [
-                'course_id' => $this->course['id'],
-            ]
-        )->assertStatus(403);
+        $this->delete('/api/course/'.$this->course['id'])
+            ->assertStatus(403);
     }
 
     protected function courseAdminCannotDeleteCourse()
     {
         $this->actingAs($this->course_admin, 'api');
-        $this->delete('/api/course',
-            [
-                'course_id' => $this->course['id'],
-            ]
-        )->assertStatus(403);
+        $this->delete('/api/course/'.$this->course['id'])
+            ->assertStatus(403);
     }
 
     protected function adminCanDeleteCourse()
     {
         $this->actingAs($this->admin, 'api');
-        $this->delete('/api/course',
-            [
-                'course_id' => $this->course['id'],
-            ]
-        )->assertStatus(200)
+        $this->delete('/api/course/'.$this->course['id'])
+            ->assertStatus(200)
             ->assertExactJson(
                 [
                     'success' => true,

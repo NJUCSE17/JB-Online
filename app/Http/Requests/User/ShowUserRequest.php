@@ -1,12 +1,11 @@
 <?php
 
-namespace App\Http\Requests\Problem;
+namespace App\Http\Requests\User;
 
-use App\Models\Problem;
-use App\Rules\Sanitize;
+use App\Models\User;
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateProblemRequest extends FormRequest
+class ShowUserRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -15,9 +14,9 @@ class UpdateProblemRequest extends FormRequest
      */
     public function authorize()
     {
-        $problem = $this->route('problem');
+        $user = $this->route('user');
 
-        return $this->user()->can('update', $problem);
+        return $this->user()->can('show', $user);
     }
 
     /**
@@ -28,7 +27,7 @@ class UpdateProblemRequest extends FormRequest
     public function rules()
     {
         return [
-            'content'    => ['required', new Sanitize(), 'max:200'],
+            //
         ];
     }
 }

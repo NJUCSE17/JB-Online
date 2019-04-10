@@ -1,12 +1,11 @@
 <?php
 
-namespace App\Http\Requests\PersonalAssignment;
+namespace App\Http\Requests\Course;
 
-use App\Models\PersonalAssignment;
-use App\Rules\Sanitize;
+use App\Models\Course;
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdatePersonalAssignmentRequest extends FormRequest
+class ShowCourseRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -15,9 +14,7 @@ class UpdatePersonalAssignmentRequest extends FormRequest
      */
     public function authorize()
     {
-        $personalAssignment = $this->route('personalAssignment');
-
-        return $this->user()->can('update', $personalAssignment);
+        return $this->user()->can('view', Course::class);
     }
 
     /**
@@ -28,22 +25,27 @@ class UpdatePersonalAssignmentRequest extends FormRequest
     public function rules()
     {
         return [
-            'name'                   => [
+            'course_id'    => [
                 'sometimes',
                 'required',
-                new Sanitize(),
-                'max:100',
+                'integer',
+                'exists:courses,id',
             ],
-            'content'                => [
+            'semester'     => [
                 'sometimes',
                 'required',
-                new Sanitize(),
-                'max:2000',
+                'integer',
+                'between:1,20',
             ],
-            'due_time'               => [
+            'start_before' => [
                 'sometimes',
                 'required',
                 'date_format:Y-m-d H:i:s',
+            ],
+            'end_after'    => [
+                'required_with:start_before',
+                'date_format:Y-m-d H:i:s',
+                'after_or_equal:start_before',
             ],
         ];
     }

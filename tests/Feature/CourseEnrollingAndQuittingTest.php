@@ -24,11 +24,8 @@ class CourseEnrollingAndQuittingTest extends TestCase
         $this->actingAs($user, 'api');
 
         // Enroll the user to the course.
-        $this->post('/api/course/enroll',
-            [
-                'course_id' => $course->id,
-            ]
-        )->assertStatus(200);
+        $this->post('/api/course/'.$course->id.'/enroll')
+            ->assertStatus(200);
         $this->assertDatabaseHas('course_enroll_records',
             [
                 'user_id'    => $user->id,
@@ -38,11 +35,8 @@ class CourseEnrollingAndQuittingTest extends TestCase
         );
 
         // Delete the course now.
-        $this->delete('/api/course',
-            [
-                'course_id' => $course->id,
-            ]
-        )->assertStatus(200);
+        $this->delete('/api/course/'.$course->id)
+            ->assertStatus(200);
         $this->assertDatabaseMissing('courses', [
             'id'         => $course->id,
             'deleted_at' => null,

@@ -33,13 +33,4 @@ class Assignment extends Model
         = [
             'due_time' => 'datetime',
         ];
-
-    /**
-     * The "booting" method of the model.
-     */
-    protected static function boot()
-    {
-        parent::boot();
-        static::addGlobalScope(new WithAssignmentFinishRecordsScope);
-    }
 }

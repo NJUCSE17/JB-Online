@@ -4,29 +4,39 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\APIController;
 use App\Http\Requests\User\ActivateUserRequest;
+use App\Http\Requests\User\ShowUserRequest;
 use App\Http\Requests\User\UpdateUserRequest;
 use App\Http\Requests\User\ViewUserRequest;
 use App\Http\Resources\UserRecourse;
 use App\Models\User;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class UserController extends APIController
 {
-
     /**
-     * Get info of a user.
+     * List users.
      *
-     * @param  ViewUserRequest  $request
+     * @param  ShowUserRequest  $request
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function view(ViewUserRequest $request)
+    public function index(ViewUserRequest $request)
     {
-        $user = $request->has('user_id')
-            ? User::query()->findOrFail($request->get('user_id'))
-            : Auth::user();
+        $user = User::all();
 
+        return $this->data(new UserRecourse($user));
+    }
+
+    /**
+     * Show a user.
+     *
+     * @param  ShowUserRequest  $request
+     * @param  User             $user
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function show(ShowUserRequest $request, User $user)
+    {
         return $this->data(new UserRecourse($user));
     }
 
@@ -34,19 +44,16 @@ class UserController extends APIController
      * Update a user.
      *
      * @param  UpdateUserRequest  $request
+     * @param  User               $user
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function update(UpdateUserRequest $request)
+    public function update(UpdateUserRequest $request, User $user)
     {
-        $user = $request->has('user_id')
-            ? User::query()->findOrFail($request->get('user_id'))
-            : Auth::user();
-        // Authorization is checked by request
         $name = $request->has('name') ? $request->get('name') : $user->name;
         $email = $request->has('email') ? $request->get('email') : $user->email;
         $blog = $request->has('blog_feed_url')
-            ? $request->get('blog_feed_url') : $user->blog;
+            ? $request->get('blog_feed_url') : $user->blog_feed_url;
         $pass = $request->has('password')
             ? Hash::make($request->get('password')) : $user->password;
         if ($request->has('email')) {
@@ -69,12 +76,12 @@ class UserController extends APIController
      * Activate an user.
      *
      * @param  ActivateUserRequest  $request
+     * @param  User                 $user
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function activate(ActivateUserRequest $request)
+    public function activate(ActivateUserRequest $request, User $user)
     {
-        $user = User::query()->findOrFail($request->get('user_id'));
         $user->activate();
 
         return $this->data(new UserRecourse($user));
@@ -84,12 +91,12 @@ class UserController extends APIController
      * Deactivate an user.
      *
      * @param  ActivateUserRequest  $request
+     * @param  User                 $user
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function deactivate(ActivateUserRequest $request)
+    public function deactivate(ActivateUserRequest $request, User $user)
     {
-        $user = User::query()->findOrFail($request->get('user_id'));
         $user->deactivate();
 
         return $this->data(new UserRecourse($user));

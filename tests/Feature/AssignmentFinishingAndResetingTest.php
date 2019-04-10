@@ -24,11 +24,8 @@ class AssignmentFinishingAndResetingTest extends TestCase
         $this->actingAs($user, 'api');
 
         // Enroll the user to the course.
-        $this->post('/api/course/enroll',
-            [
-                'course_id' => $assignment->course_id,
-            ]
-        )->assertStatus(200);
+        $this->post('/api/course/'.$assignment->course_id.'/enroll')
+            ->assertStatus(200);
         $this->assertDatabaseHas('course_enroll_records',
             [
                 'user_id'    => $user->id,
@@ -38,11 +35,8 @@ class AssignmentFinishingAndResetingTest extends TestCase
         );
 
         // Finish the assignment.
-        $this->post('/api/assignment/finish',
-            [
-                'assignment_id' => $assignment->id,
-            ]
-        )->assertStatus(200);
+        $this->post('/api/assignment/'.$assignment->id.'/finish')
+            ->assertStatus(200);
         $this->assertDatabaseHas('assignment_finish_records',
             [
                 'user_id'       => $user->id,
@@ -52,9 +46,8 @@ class AssignmentFinishingAndResetingTest extends TestCase
         );
 
         // Update the assignment now.
-        $this->put('/api/assignment',
+        $this->put('/api/assignment/'.$assignment->id,
             [
-                'assignment_id' => $assignment->id,
                 'content'       => $this->faker->realText(200),
             ]
         )->assertStatus(200);
@@ -78,11 +71,8 @@ class AssignmentFinishingAndResetingTest extends TestCase
         $this->actingAs($user, 'api');
 
         // Enroll the user to the course.
-        $this->post('/api/course/enroll',
-            [
-                'course_id' => $assignment->course_id,
-            ]
-        )->assertStatus(200);
+        $this->post('/api/course/'.$assignment->course_id.'/enroll')
+            ->assertStatus(200);
         $this->assertDatabaseHas('course_enroll_records',
             [
                 'user_id'    => $user->id,
@@ -92,11 +82,8 @@ class AssignmentFinishingAndResetingTest extends TestCase
         );
 
         // Finish the assignment.
-        $this->post('/api/assignment/finish',
-            [
-                'assignment_id' => $assignment->id,
-            ]
-        )->assertStatus(200);
+        $this->post('/api/assignment/'.$assignment->id.'/finish')
+            ->assertStatus(200);
         $this->assertDatabaseHas('assignment_finish_records',
             [
                 'user_id'       => $user->id,
@@ -106,11 +93,8 @@ class AssignmentFinishingAndResetingTest extends TestCase
         );
 
         // Quit the course now.
-        $this->post('/api/course/quit',
-            [
-                'course_id' => $assignment->course_id,
-            ]
-        )->assertStatus(200);
+        $this->post('/api/course/'.$assignment->course_id.'/quit')
+            ->assertStatus(200);
         $this->assertDatabaseMissing('course_enroll_records',
             [
                 'user_id'    => $user->id,

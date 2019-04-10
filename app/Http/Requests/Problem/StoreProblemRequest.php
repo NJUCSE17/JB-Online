@@ -7,7 +7,7 @@ use App\Models\Problem;
 use App\Rules\Sanitize;
 use Illuminate\Foundation\Http\FormRequest;
 
-class CreateProblemRequest extends FormRequest
+class StoreProblemRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.

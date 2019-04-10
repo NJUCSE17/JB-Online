@@ -25,12 +25,6 @@ class ViewCourseRequest extends FormRequest
     public function rules()
     {
         return [
-            'course_id'    => [
-                'sometimes',
-                'required',
-                'integer',
-                'exists:courses,id',
-            ],
             'semester'     => [
                 'sometimes',
                 'required',

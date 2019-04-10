@@ -27,19 +27,29 @@ class PersonalAssignmentPolicy
     }
 
     /**
-     * Determine whether the user can view the personal assignment.
+     * Determine whether the user can see personal assignments.
+     *
+     * @param  User  $user
+     *
+     * @return bool
+     */
+    public function view(User $user)
+    {
+        return true;
+    }
+
+    /**
+     * Determine whether the user can show a personal assignment.
      *
      * @param  \App\Models\User                $user
      * @param  \App\Models\PersonalAssignment  $personalAssignment
      *
      * @return mixed
      */
-    public function view(User $user, PersonalAssignment $personalAssignment)
+    public function show(User $user, PersonalAssignment $personalAssignment)
     {
         return $user->privilege_level <= 2
-            || $user->is(
-                $personalAssignment->user
-            );
+            || $user->is($personalAssignment->user);
     }
 
     /**
@@ -63,9 +73,7 @@ class PersonalAssignmentPolicy
     public function update(User $user, PersonalAssignment $personalAssignment)
     {
         return $user->privilege_level <= 2
-            || $user->is(
-                $personalAssignment->user
-            );
+            || $user->is($personalAssignment->user);
     }
 
     /**
@@ -79,9 +87,7 @@ class PersonalAssignmentPolicy
     public function delete(User $user, PersonalAssignment $personalAssignment)
     {
         return $user->privilege_level <= 2
-            || $user->is(
-                $personalAssignment->user
-            );
+            || $user->is($personalAssignment->user);
     }
 
     /**

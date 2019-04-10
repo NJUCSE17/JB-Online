@@ -14,8 +14,7 @@ class DeleteProblemRequest extends FormRequest
      */
     public function authorize()
     {
-        $problem = Problem::query()
-            ->findOrFail($this->request->get('problem_id'));
+        $problem = $this->route('problem');
 
         return $this->user()->can('delete', $problem);
     }
@@ -28,7 +27,7 @@ class DeleteProblemRequest extends FormRequest
     public function rules()
     {
         return [
-            'problem_id' => ['required', 'integer', 'exists:problems,id'],
+            //
         ];
     }
 }

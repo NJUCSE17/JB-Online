@@ -14,14 +14,10 @@ class ViewPersonalAssignmentRequest extends FormRequest
      */
     public function authorize()
     {
-        if ($this->request->has('personal_assignment_id')) {
-            $personal_assignment = PersonalAssignment::query()->findOrFail(
-                $this->request->get('personal_assignment_id')
-            );
-
-            return $this->user()->can('view', $personal_assignment);
+        if ($this->request->has('show_all')) {
+            return $this->user()->privilege_level <= 2;
         } else {
-            return true;
+            return $this->user()->can('view', PersonalAssignment::class);
         }
     }
 
@@ -33,23 +29,24 @@ class ViewPersonalAssignmentRequest extends FormRequest
     public function rules()
     {
         return [
-            'personal_assignment_id' => [
+            'show_all'        => ['sometimes', 'required', 'boolean'],
+            'user_id'         => [
                 'sometimes',
                 'required',
                 'integer',
-                'exists:personal_assignments,id',
+                'exists:users,id',
             ],
-            'due_after'              => [
+            'due_after'       => [
                 'sometimes',
                 'required',
                 'date_format:Y-m-d H:i:s',
             ],
-            'due_before'             => [
+            'due_before'      => [
                 'sometimes',
                 'required',
                 'date_format:Y-m-d H:i:s',
             ],
-            'unfinished_only'        => ['sometimes', 'required', 'boolean'],
+            'unfinished_only' => ['sometimes', 'required', 'boolean'],
         ];
     }
 }

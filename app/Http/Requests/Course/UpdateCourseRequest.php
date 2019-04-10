@@ -15,8 +15,7 @@ class UpdateCourseRequest extends FormRequest
      */
     public function authorize()
     {
-        $course = Course::query()
-            ->findOrFail($this->request->getInt('course_id'));
+        $course = $this->route('course');
 
         return $this->user()->can('update', $course);
     }
@@ -29,7 +28,6 @@ class UpdateCourseRequest extends FormRequest
     public function rules()
     {
         return [
-            'course_id' => ['required', 'integer', 'exists:courses,id'],
             'name' => ['sometimes', 'required', 'max:200'],
             'semester' => [
                 'sometimes',

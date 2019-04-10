@@ -2,7 +2,6 @@
 
 namespace App\Http\Requests\Course;
 
-use App\Models\Course;
 use Illuminate\Foundation\Http\FormRequest;
 
 class QuitCourseRequest extends FormRequest
@@ -14,8 +13,8 @@ class QuitCourseRequest extends FormRequest
      */
     public function authorize()
     {
-        $course = Course::query()
-            ->findOrFail($this->request->getInt('course_id'));
+        $course = $this->route('course');
+
         if ($this->request->has('user_id')) {
             return $this->user()->can('update', $course);
         } else {
@@ -37,7 +36,6 @@ class QuitCourseRequest extends FormRequest
                 'integer',
                 'exists:users,id',
             ],
-            'course_id' => ['required', 'integer', 'exists:courses,id'],
         ];
     }
 }

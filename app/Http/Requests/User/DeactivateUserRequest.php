@@ -14,7 +14,7 @@ class DeactivateUserRequest extends FormRequest
      */
     public function authorize()
     {
-        $user = User::query()->findOrFail($this->request->get('user_id'));
+        $user = $this->route('user');
 
         return $this->user()->can('deactivate', $user);
     }
@@ -27,7 +27,7 @@ class DeactivateUserRequest extends FormRequest
     public function rules()
     {
         return [
-            'user_id' => ['required', 'integer', 'exists:users,id'],
+            //
         ];
     }
 }
