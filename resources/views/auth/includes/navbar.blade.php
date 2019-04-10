@@ -11,11 +11,13 @@
             </button>
             <div class="collapse navbar-collapse" id="navbar-main-collapse">
                 <ul class="navbar-nav align-items-lg-center">
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('welcome') }}">
-                            <i class="fas fa-angle-left mr-1"></i> 返回首页
-                        </a>
-                    </li>
+                    @if(!Route::is('welcome'))
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('welcome') }}">
+                                <i class="fas fa-angle-left mr-1"></i> 返回首页
+                            </a>
+                        </li>
+                    @endif
                 </ul>
                 <ul class="navbar-nav align-items-lg-center ml-lg-auto">
                     @guest

@@ -21,17 +21,19 @@ class AssignmentMerger
         foreach ($publicAssignmentArray as $i => $publicAssignment) {
             $publicAssignmentArray[$i]['type'] = 'public';
             $publicAssignmentArray[$i]['api'] = route('api.assignment.index');
+            $due_time = Carbon::parse($publicAssignmentArray[$i]['due_time']);
             $publicAssignmentArray[$i]['due_time_human']
-                = Carbon::parse($publicAssignmentArray[$i]['due_time'])
-                ->diffForHumans(null, null, false, 2);
+                = $due_time->isoFormat("Y-MM-DD (ddd) H:mm:ss")
+                ." (".$due_time->diffForHumans(null, null, false, 2).")";
         }
         foreach ($privateAssignmentArray as $i => $privateAssignment) {
             $privateAssignmentArray[$i]['type'] = 'private';
             $privateAssignmentArray[$i]['api']
                 = route('api.personalAssignment.index');
+            $due_time = Carbon::parse($privateAssignmentArray[$i]['due_time']);
             $privateAssignmentArray[$i]['due_time_human']
-                = Carbon::parse($privateAssignmentArray[$i]['due_time'])
-                ->diffForHumans(null, null, false, 2);
+                = $due_time->isoFormat("Y-MM-DD (ddd) H:mm:ss")
+                ." (".$due_time->diffForHumans(null, null, false, 2).")";
 
         }
 

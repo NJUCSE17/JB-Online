@@ -23,11 +23,11 @@
                 <a href="#" v-bind:class="this.ddlColor">
                     <div v-if="this.finished_at">
                         <i class="fas fa-check mr-1"></i>
-                        <span><s>{{ due_time }} ({{ due_time_human }})</s></span>
+                        <span><s>{{ due_time_human }}</s></span>
                     </div>
                     <div v-else>
                         <i class="fas fa-times mr-1"></i>
-                        <span>{{ due_time }} ({{ due_time_human }})</span>
+                        <span>{{ due_time_human }}</span>
                     </div>
                 </a>
             </span>
