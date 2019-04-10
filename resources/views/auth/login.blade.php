@@ -40,7 +40,7 @@
                                     @csrf
                                     <div class="form-group">
                                         <label class="form-control-label">NJU ID</label>
-                                        <div class="input-group input-group-merge">
+                                        <div class="input-group">
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text"><i class="fas fa-user"></i></span>
                                             </div>
@@ -61,7 +61,7 @@
                                                 </a>
                                             </div>
                                         </div>
-                                        <div class="input-group input-group-merge">
+                                        <div class="input-group">
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text"><i class="fas fa-key"></i></span>
                                             </div>

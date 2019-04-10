@@ -42,7 +42,7 @@
 
                                     <div class="form-group">
                                         <label class="form-control-label">邮箱地址</label>
-                                        <div class="input-group input-group-merge">
+                                        <div class="input-group">
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text"><i class="fas fa-envelope"></i></span>
                                             </div>
@@ -54,7 +54,7 @@
 
                                     <div class="form-group mb-4">
                                         <label class="form-control-label">密码</label>
-                                        <div class="input-group input-group-merge">
+                                        <div class="input-group">
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text"><i class="fas fa-key"></i></span>
                                             </div>
@@ -62,7 +62,7 @@
                                                    id="password" type="password" name="password"
                                                    placeholder="password" required>
                                         </div>
-                                        <div class="input-group input-group-merge mt-3">
+                                        <div class="input-group mt-3">
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text"><i class="fas fa-redo"></i></span>
                                             </div>

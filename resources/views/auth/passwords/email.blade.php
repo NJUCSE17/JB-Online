@@ -40,7 +40,7 @@
                                     @csrf
                                     <div class="form-group">
                                         <label class="form-control-label">邮箱地址</label>
-                                        <div class="input-group input-group-merge">
+                                        <div class="input-group">
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text"><i class="fas fa-envelope"></i></span>
                                             </div>
