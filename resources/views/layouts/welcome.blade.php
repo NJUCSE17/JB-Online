@@ -6,8 +6,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>{{ config('app.name', 'Laravel') }}</title>
 
-    <link href="{{ asset('css/fa.css') }}" rel="stylesheet" type="text/css">
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet" type="text/css">
+    @include('includes.stylesheets')
 </head>
 <body>
 <div id="app">
@@ -15,8 +14,7 @@
         @yield('content')
     </div>
 
-    <script src="{{ asset('js/app.core.js') }}" defer></script>
-    <script src="{{ asset('js/app.js') }}" defer></script>
+    @include('includes.scripts')
 </div>
 </body>
 </html>
