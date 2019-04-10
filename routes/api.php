@@ -13,7 +13,7 @@
 
 Route::group(
     [
-        'as'         => 'api',
+        'as'         => 'api.',
         'namespace'  => 'API',
         'middleware' => ['auth', 'verified', 'activated', 'throttle:20'],
     ],
@@ -35,7 +35,7 @@ Route::group(
          * User-related APIs.
          */
         Route::group(
-            ['prefix' => '/user/{user}', 'as' => 'user'],
+            ['prefix' => '/user/{user}', 'as' => 'user.'],
             function () {
                 Route::post('/activate', 'UserController@activate')
                     ->name('activate');
@@ -48,7 +48,7 @@ Route::group(
          * Course-related APIs.
          */
         Route::group(
-            ['prefix' => '/course/{course}', 'as' => 'course'],
+            ['prefix' => '/course/{course}', 'as' => 'course.'],
             function () {
                 Route::post('/enroll', 'CourseController@enroll')
                     ->name('enroll');
@@ -61,7 +61,7 @@ Route::group(
          * Assignment-related APIs
          */
         Route::group(
-            ['prefix' => '/assignment/{assignment}', 'as' => 'assignment'],
+            ['prefix' => '/assignment/{assignment}', 'as' => 'assignment.'],
             function () {
                 Route::post('/finish', 'AssignmentController@finish')
                     ->name('finish');
@@ -76,7 +76,7 @@ Route::group(
         Route::group(
             [
                 'prefix' => '/personalAssignment/{personalAssignment}',
-                'as'     => 'personalAssignment',
+                'as'     => 'personalAssignment.',
             ],
             function () {
                 Route::post('/finish', 'PersonalAssignmentController@finish')
