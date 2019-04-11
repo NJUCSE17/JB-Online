@@ -2,11 +2,42 @@
 
 namespace App\Models\Traits\User;
 
+use App\Models\Assignment;
 use App\Models\Course;
 use App\Models\CourseEnrollRecord;
+use App\Models\PersonalAssignment;
+use Illuminate\Database\Query\JoinClause;
 
 trait UserAttributes
 {
+    /**
+     * Get ongoing assignments of the user.
+     */
+    public function getOngoingAssignments()
+    {
+        $a1 = Assignment::query()
+            ->whereIn('course_id', $this->courseIDs())
+            ->leftJoin('assignment_finish_records',
+                function (JoinClause $join) {
+                    $join->on(
+                        'assignment_finish_records.assignment_id',
+                        '=', 'assignments.id'
+                    )->where(
+                        'assignment_finish_records.user_id',
+                        '=', $this->id
+                    );
+                })
+            ->get();
+
+        $a2 = PersonalAssignment::query()
+            ->where('user_id', $this->id)
+            ->where('due_time', '>=', now())
+            ->get();
+
+        return collect($a1)->merge(collect($a2))
+            ->sortBy('due_time');
+    }
+
     /**
      * Check whether user is email-verified.
      *

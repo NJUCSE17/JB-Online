@@ -11,8 +11,6 @@
 |
 */
 
-Route::get('/', 'HomeController@welcome')->name('welcome');
-
 Auth::routes(
     [
         'register' => env('APP_ALLOW_REGISTER'),
@@ -34,13 +32,18 @@ Route::group(
 );
 
 Route::group(
-    [
-        'namespace'  => 'web',
-        'middleware' => ['auth', 'verified', 'activated']
-    ],
+    ['namespace' => 'web'],
     function () {
-        Route::get('/home', 'HomeController@home')->name('home');
+        Route::get('/', 'HomeController@welcome')->name('welcome');
 
-        Route::resource('blog', 'BlogController')->only(['index', 'show']);
+        Route::group(
+            ['middleware' => ['auth', 'verified', 'activated']],
+            function () {
+                Route::get('/home', 'HomeController@home')->name('home');
+
+                Route::resource('blog', 'BlogController')
+                    ->only(['index', 'show',]);
+            }
+        );
     }
 );

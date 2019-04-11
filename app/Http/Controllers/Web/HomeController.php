@@ -4,8 +4,7 @@ namespace App\Http\Controllers\Web;
 
 use App\Helpers\AssignmentMerger;
 use App\Http\Controllers\Controller;
-use App\Models\Assignment;
-use App\Models\PersonalAssignment;
+use App\Models\BlogFeed;
 use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
@@ -37,18 +36,10 @@ class HomeController extends Controller
      */
     public function home()
     {
-        $publicAssignments = Assignment::query()
-            ->whereIn('course_id', Auth::user()->courseIDs())
-            ->where('due_time', '>=', now())
-            ->get();
-        $privateAssignments = PersonalAssignment::query()
-            ->where('user_id', Auth::id())
-            ->where('due_time', '>=', now())
-            ->get();
-        $assignments = AssignmentMerger::mergeAssignments($publicAssignments,
-            $privateAssignments);
-
-        return view('home')
-            ->with('assignments', $assignments);
+        return view('home.home')
+            ->with('assignments', Auth::user()->getOngoingAssignments())
+            ->with('feeds', BlogFeed::query()
+                ->orderBy('published_at', 'DESC')->take(5)
+            );
     }
 }

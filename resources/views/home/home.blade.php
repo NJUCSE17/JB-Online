@@ -12,9 +12,7 @@
 @section('content')
     <div class="row">
         <div class="col col-md-8">
-            <assignments-collection-component
-                    :assignments='{!! json_encode($assignments) !!}'
-            ></assignments-collection-component>
+            @include('home.includes.assignmentslist')
         </div>
     </div>
 @endsection
