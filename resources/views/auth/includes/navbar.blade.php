@@ -29,13 +29,13 @@
                             </li>
                         @endif
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('login') }}">
+                            <a class="nav-link pr-lg-0" href="{{ route('login') }}">
                                 <i class="fas fa-sign-in-alt mr-1"></i> 登陆
                             </a>
                         </li>
                     @else
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('logout') }}"
+                            <a class="nav-link pr-lg-0" href="{{ route('logout') }}"
                                onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                 <i class="fas fa-sign-out-alt mr-1"></i> 退出 [{{ \Auth::user()->name }}]
                             </a>

@@ -3,11 +3,13 @@
 namespace App\Models;
 
 use App\Models\Traits\BlogFeed\BlogFeedAttributes;
+use App\Models\Traits\BlogFeed\BlogFeedRelationship;
 use Illuminate\Database\Eloquent\Model;
 
 class BlogFeed extends Model
 {
-    use BlogFeedAttributes;
+    use BlogFeedAttributes,
+        BlogFeedRelationship;
 
     /**
      * The attributes that are mass assignable.
