@@ -19,7 +19,7 @@
                 <div class="row">
                     <div class=" col-lg-12">
                         <div class="row align-items-center mb-4">
-                            <div class="col-md-5 mb-4 mb-md-0">
+                            <div class="col-md-8 mb-4 mb-md-0">
                                 @yield('header-left')
                             </div>
                             <div class="col-auto flex-fill d-none d-xl-block">
@@ -41,7 +41,7 @@
                                 <a href="#" class="btn btn-icon btn-group-nav shadow btn-neutral"
                                    onclick="history.go(-1)">
                                     <span class="btn-inner--icon"><i class="fas fa-arrow-alt-left"></i></span>
-                                    <span class="btn-inner--text d-none d-md-inline-block">返回上一级</span>
+                                    <span class="btn-inner--text d-none d-md-inline-block">返回</span>
                                 </a>
                             @endif
                             <div class="btn-group btn-group-nav shadow ml-auto" role="group" aria-label="Basic example">

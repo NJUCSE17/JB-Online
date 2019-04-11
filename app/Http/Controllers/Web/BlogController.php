@@ -21,13 +21,14 @@ class BlogController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  BlogFeed  $feed
+     * @param  $feedID
      *
      * @return \Illuminate\Http\Response
      */
-    public function show(BlogFeed $feed)
+    public function show($feedID)
     {
+        /* Blog is not a model, hence we need to find the model manually */
         return view('blog.feed')
-            ->with('feed', $feed);
+            ->with('feed', BlogFeed::query()->findOrFail($feedID));
     }
 }
