@@ -15,7 +15,7 @@ class BlogController extends Controller
     public function index()
     {
         return view('blog.index')
-            ->with('feeds', BlogFeed::query()->paginate(15));
+            ->with('feeds', BlogFeed::query()->paginate(10));
     }
 
     /**
