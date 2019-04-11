@@ -10,7 +10,7 @@
   "require": {
     "php": "^7.2.15",
     "ext-json": "*",
-    "cybercog/laravel-love": "^6.0",
+    "cybercog/laravel-love": "5.*",
     "erusev/parsedown": "^1.7",
     "fideloper/proxy": "^4.0",
     "laravel/framework": "5.8.*",

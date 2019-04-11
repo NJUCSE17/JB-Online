@@ -4,43 +4,40 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "80087dde8fb1899c6410e1d328247636",
+    "content-hash": "f8f2dd3adf20955512831846b4274716",
     "packages": [
         {
             "name": "cybercog/laravel-love",
-            "version": "6.0.1",
+            "version": "5.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/cybercog/laravel-love.git",
-                "reference": "7b6d5012c6d386ff385e616dc4228b4e981ca0b8"
+                "reference": "3634b3b7e5cbc998cf5b4d0e11079f6e1fff821b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/cybercog/laravel-love/zipball/7b6d5012c6d386ff385e616dc4228b4e981ca0b8",
-                "reference": "7b6d5012c6d386ff385e616dc4228b4e981ca0b8",
+                "url": "https://api.github.com/repos/cybercog/laravel-love/zipball/3634b3b7e5cbc998cf5b4d0e11079f6e1fff821b",
+                "reference": "3634b3b7e5cbc998cf5b4d0e11079f6e1fff821b",
                 "shasum": ""
             },
             "require": {
-                "illuminate/database": "5.6.*|5.7.*|5.8.*",
-                "illuminate/support": "5.6.*|5.7.*|5.8.*",
-                "php": "^7.1.3"
+                "illuminate/database": "~5.5.0|~5.6.0|~5.7.0|~5.8.0",
+                "illuminate/support": "~5.5.0|~5.6.0|~5.7.0|~5.8.0",
+                "php": "^7.0"
             },
             "require-dev": {
                 "friendsofphp/php-cs-fixer": "^2.10",
                 "mockery/mockery": "^1.0",
-                "orchestra/database": "~3.6.0|~3.7.0|~3.8.0",
-                "orchestra/testbench": "~3.6.0|~3.7.0|~3.8.0",
-                "phpunit/phpunit": "^7.5"
+                "orchestra/database": "~3.5.0|~3.6.0|~3.7.0|~3.8.0",
+                "orchestra/testbench": "~3.5.0|~3.6.0|~3.7.0|~3.8.0",
+                "phpunit/phpunit": "^6.0|^7.0"
             },
             "type": "library",
             "extra": {
                 "laravel": {
                     "providers": [
-                        "Cog\\Laravel\\Love\\LoveServiceProvider"
-                    ],
-                    "aliases": {
-                        "Love": "Cog\\Laravel\\Love\\Facades\\Love"
-                    }
+                        "Cog\\Laravel\\Love\\Providers\\LoveServiceProvider"
+                    ]
                 }
             },
             "autoload": {
@@ -57,11 +54,11 @@
                 {
                     "name": "Anton Komarev",
                     "email": "a.komarev@cybercog.su",
-                    "homepage": "https://ell.folio.su",
+                    "homepage": "http://ell.folio.su",
                     "role": "Developer"
                 }
             ],
-            "description": "Make Laravel Eloquent models reactable with any type of emotions in a minutes!",
+            "description": "Make Laravel Eloquent models Likeable & Dislikeable in a minutes!",
             "homepage": "https://github.com/cybercog/laravel-love",
             "keywords": [
                 "Rate",
@@ -82,14 +79,12 @@
                 "like",
                 "likeable",
                 "love",
-                "reactable",
-                "reacter",
                 "reaction",
                 "star",
                 "trait",
                 "undislike"
             ],
-            "time": "2019-03-05T11:46:13+00:00"
+            "time": "2019-03-05T16:10:54+00:00"
         },
         {
             "name": "dnoegel/php-xdg-base-dir",
@@ -776,16 +771,16 @@
         },
         {
             "name": "laravel/framework",
-            "version": "v5.8.10",
+            "version": "v5.8.11",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "505325b4577968750e622d7a5a271cf8785a7a1a"
+                "reference": "a2cf7a7983329d63edc6fde43142b232bb61aa0a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/505325b4577968750e622d7a5a271cf8785a7a1a",
-                "reference": "505325b4577968750e622d7a5a271cf8785a7a1a",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/a2cf7a7983329d63edc6fde43142b232bb61aa0a",
+                "reference": "a2cf7a7983329d63edc6fde43142b232bb61aa0a",
                 "shasum": ""
             },
             "require": {
@@ -919,7 +914,7 @@
                 "framework",
                 "laravel"
             ],
-            "time": "2019-04-04T13:39:49+00:00"
+            "time": "2019-04-10T13:05:18+00:00"
         },
         {
             "name": "laravel/socialite",
@@ -3777,16 +3772,16 @@
         },
         {
             "name": "composer/composer",
-            "version": "1.8.4",
+            "version": "1.8.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/composer/composer.git",
-                "reference": "bc364c2480c17941e2135cfc568fa41794392534"
+                "reference": "949b116f9e7d98d8d276594fed74b580d125c0e6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/composer/composer/zipball/bc364c2480c17941e2135cfc568fa41794392534",
-                "reference": "bc364c2480c17941e2135cfc568fa41794392534",
+                "url": "https://api.github.com/repos/composer/composer/zipball/949b116f9e7d98d8d276594fed74b580d125c0e6",
+                "reference": "949b116f9e7d98d8d276594fed74b580d125c0e6",
                 "shasum": ""
             },
             "require": {
@@ -3853,7 +3848,7 @@
                 "dependency",
                 "package"
             ],
-            "time": "2019-02-11T09:52:10+00:00"
+            "time": "2019-04-09T15:46:48+00:00"
         },
         {
             "name": "composer/semver",
@@ -4430,20 +4425,20 @@
         },
         {
             "name": "myclabs/deep-copy",
-            "version": "1.9.0",
+            "version": "1.9.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/myclabs/DeepCopy.git",
-                "reference": "78af75148f9fdd34ea727c8b529a9b4a8f7b740c"
+                "reference": "e6828efaba2c9b79f4499dae1d66ef8bfa7b2b72"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/myclabs/DeepCopy/zipball/78af75148f9fdd34ea727c8b529a9b4a8f7b740c",
-                "reference": "78af75148f9fdd34ea727c8b529a9b4a8f7b740c",
+                "url": "https://api.github.com/repos/myclabs/DeepCopy/zipball/e6828efaba2c9b79f4499dae1d66ef8bfa7b2b72",
+                "reference": "e6828efaba2c9b79f4499dae1d66ef8bfa7b2b72",
                 "shasum": ""
             },
             "require": {
-                "php": "^7.2"
+                "php": "^7.1"
             },
             "replace": {
                 "myclabs/deep-copy": "self.version"
@@ -4451,8 +4446,6 @@
             "require-dev": {
                 "doctrine/collections": "^1.0",
                 "doctrine/common": "^2.6",
-                "phpstan/phpstan": "^0.9.2",
-                "phpstan/phpstan-phpunit": "^0.9.4",
                 "phpunit/phpunit": "^7.1"
             },
             "type": "library",
@@ -4476,7 +4469,7 @@
                 "object",
                 "object graph"
             ],
-            "time": "2018-10-30T00:14:44+00:00"
+            "time": "2019-04-07T13:18:21+00:00"
         },
         {
             "name": "nunomaduro/collision",
