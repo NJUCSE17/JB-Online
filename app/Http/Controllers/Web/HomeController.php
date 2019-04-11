@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Web;
 
 use App\Helpers\AssignmentMerger;
+use App\Http\Controllers\Controller;
 use App\Models\Assignment;
 use App\Models\PersonalAssignment;
 use Illuminate\Support\Facades\Auth;

@@ -34,8 +34,13 @@ Route::group(
 );
 
 Route::group(
-    ['middleware' => ['auth', 'verified', 'activated']],
+    [
+        'namespace'  => 'web',
+        'middleware' => ['auth', 'verified', 'activated']
+    ],
     function () {
         Route::get('/home', 'HomeController@home')->name('home');
+
+        Route::resource('blog', 'BlogController')->only(['index', 'show']);
     }
 );
