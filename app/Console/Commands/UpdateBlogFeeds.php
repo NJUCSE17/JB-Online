@@ -7,6 +7,7 @@ use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
 use Mews\Purifier\Purifier;
+use willvincent\Feeds\FeedsFactory;
 
 class UpdateBlogFeeds extends Command
 {
@@ -47,8 +48,7 @@ class UpdateBlogFeeds extends Command
         $users = User::all();
         foreach ($users as $user) {
             if ($user->blog_feed_url != null) {
-                $items = \Feeds::make([$user->blog_feed_url], 0, false)
-                    ->get_items();
+                $items = \Feeds::make($user->blog_feed_url, 15)->get_items();
                 if (count($items)) {
                     foreach ($items as $item) {
                         BlogFeed::query()->create([
@@ -56,7 +56,7 @@ class UpdateBlogFeeds extends Command
                             'user_name'    => $user->name,
                             'permalink'    => $item->get_permalink(),
                             'title'        => $item->get_title(),
-                            'content_html' => Purifier::clean($item->get_content()),
+                            'content_html' => clean($item->get_content()),
                             'published_at' => Carbon::parse($item->get_date()),
                         ]);
                     }
