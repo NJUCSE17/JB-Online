@@ -1,6 +1,6 @@
 <div id="assignments">
     <div id="assignments-control">
-        <p>当前作业</p>
+        <p class="h3">当前作业</p>
     </div>
     <hr />
     <div id="assignments-content">

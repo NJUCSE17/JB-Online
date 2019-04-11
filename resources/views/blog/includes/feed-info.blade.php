@@ -7,7 +7,7 @@
                 </a>
             </div>
             <div class="col ml-md-n2 text-center text-md-left">
-                <a href="#!" class="h6 text-sm mb-0">{{ $feed->user->name }}</a>
+                <a href="#" class="h6 text-sm mb-0">{{ $feed->user->name }}</a>
                 <p class="card-text text-muted mb-0">
                     {{ $feed->title }}
                 </p>
