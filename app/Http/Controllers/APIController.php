@@ -26,13 +26,7 @@ class APIController extends Controller
      */
     protected function data($data)
     {
-        return response()->json(
-            [
-                'success' => true,
-                'data'    => $data,
-            ],
-            200
-        );
+        return response()->json($data, 200);
     }
 
     /**
@@ -44,13 +38,7 @@ class APIController extends Controller
      */
     protected function created($data)
     {
-        return response()->json(
-            [
-                'success' => true,
-                'data'    => $data,
-            ],
-            201
-        );
+        return response()->json($data, 201);
     }
 
     /**
@@ -63,12 +51,6 @@ class APIController extends Controller
      */
     protected function error($message, $status)
     {
-        return response()->json(
-            [
-                'success' => false,
-                'message' => $message,
-            ],
-            $status
-        );
+        return response()->json($message, $status);
     }
 }

@@ -51,12 +51,7 @@ class CourseTest extends TestCase
         $this->actingAs($this->user, 'api');
         $this->get('/api/course')
             ->assertStatus(200)
-            ->assertExactJson(
-                [
-                    'success' => true,
-                    'data'    => [],
-                ]
-            );
+            ->assertExactJson([]);
     }
 
     protected function userCannotCreateCourse()
@@ -85,12 +80,7 @@ class CourseTest extends TestCase
                 'notice'     => $this->course['notice'],
             ]
         )->assertStatus(201)
-            ->assertExactJson(
-                [
-                    'success' => true,
-                    'data'    => $this->course,
-                ]
-            );
+            ->assertExactJson($this->course);
     }
 
     protected function userCanViewCourses()
@@ -98,12 +88,7 @@ class CourseTest extends TestCase
         $this->actingAs($this->user, 'api');
         $this->get('/api/course')
             ->assertStatus(200)
-            ->assertExactJson(
-                [
-                    'success' => true,
-                    'data'    => [$this->course],
-                ]
-            );
+            ->assertExactJson([$this->course]);
     }
 
     protected function userCanFilterCourses()
@@ -111,20 +96,10 @@ class CourseTest extends TestCase
         $this->actingAs($this->user, 'api');
         $this->get('/api/course?semester='.$this->course['semester'])
             ->assertStatus(200)
-            ->assertExactJson(
-                [
-                    'success' => true,
-                    'data'    => [$this->course],
-                ]
-            );
+            ->assertExactJson([$this->course]);
         $this->get('/api/course?semester='.($this->course['semester'] + 1))
             ->assertStatus(200)
-            ->assertExactJson(
-                [
-                    'success' => true,
-                    'data'    => [],
-                ]
-            );
+            ->assertExactJson([]);
     }
 
     protected function userCanViewSpecificCourse()
@@ -132,12 +107,7 @@ class CourseTest extends TestCase
         $this->actingAs($this->user, 'api');
         $this->get('/api/course/'.$this->course['id'])
             ->assertStatus(200)
-            ->assertExactJson(
-                [
-                    'success' => true,
-                    'data'    => $this->course,
-                ]
-            );
+            ->assertExactJson($this->course);
     }
 
     protected function userCanEnrollCourse()
@@ -147,12 +117,9 @@ class CourseTest extends TestCase
             ->assertStatus(200)
             ->assertJson( // not an exact assertion
                 [
-                    'success' => true,
-                    'data'    => [
-                        'user_id'       => $this->user->id,
-                        'course_id'     => $this->course['id'],
-                        'type_is_admin' => false,
-                    ],
+                    'user_id'       => $this->user->id,
+                    'course_id'     => $this->course['id'],
+                    'type_is_admin' => false,
                 ]
             );
         $this->assertDatabaseHas('course_enroll_records',
@@ -170,12 +137,7 @@ class CourseTest extends TestCase
         $this->actingAs($this->user, 'api');
         $this->post('/api/course/'.$this->course['id'].'/quit')
             ->assertStatus(200)
-            ->assertExactJson(
-                [
-                    'success' => true,
-                    'data'    => 'Course quited.',
-                ]
-            );
+            ->assertExactJson(['Course quited.',]);
         $this->assertDatabaseMissing('course_enroll_records',
             [
                 'user_id'    => $this->user->id,
@@ -225,12 +187,9 @@ class CourseTest extends TestCase
         )->assertStatus(200)
             ->assertJson(
                 [
-                    'success' => true,
-                    'data'    => [
-                        'user_id'       => $this->course_admin->id,
-                        'course_id'     => $this->course['id'],
-                        'type_is_admin' => true,
-                    ],
+                    'user_id'       => $this->course_admin->id,
+                    'course_id'     => $this->course['id'],
+                    'type_is_admin' => true,
                 ]
             );
         $this->assertDatabaseHas('course_enroll_records',
@@ -267,12 +226,7 @@ class CourseTest extends TestCase
                 'notice' => $notice,
             ]
         )->assertStatus(200)
-            ->assertExactJson(
-                [
-                    'success' => true,
-                    'data'    => $this->course,
-                ]
-            );
+            ->assertExactJson($this->course);
     }
 
     protected function courseAdminCanUpdateCourse()
@@ -284,12 +238,7 @@ class CourseTest extends TestCase
                 'semester' => $this->course['semester'],
             ]
         )->assertStatus(200)
-            ->assertExactJson(
-                [
-                    'success' => true,
-                    'data'    => $this->course,
-                ]
-            );
+            ->assertExactJson($this->course);
     }
 
     protected function userCannotDeleteCourse()
@@ -311,12 +260,7 @@ class CourseTest extends TestCase
         $this->actingAs($this->admin, 'api');
         $this->delete('/api/course/'.$this->course['id'])
             ->assertStatus(200)
-            ->assertExactJson(
-                [
-                    'success' => true,
-                    'data'    => 'Course deleted.',
-                ]
-            );
+            ->assertExactJson(['Course deleted.',]);
         $this->assertDatabaseMissing('courses', [
             'id'         => $this->course['id'],
             'deleted_at' => null,

@@ -55,10 +55,7 @@ class ProblemTest extends TestCase
             'assignment_id' => $this->assignments[0]->id,
             'content'       => $this->problems[0]['content'],
         ])->assertStatus(201)
-            ->assertExactJson([
-                'success' => true,
-                'data'    => $this->problems[0],
-            ]);
+            ->assertExactJson($this->problems[0]);
     }
 
     protected function adminCanCreateProblem()
@@ -69,10 +66,7 @@ class ProblemTest extends TestCase
             'assignment_id' => $this->assignments[1]->id,
             'content'       => $this->problems[1]['content'],
         ])->assertStatus(201)
-            ->assertExactJson([
-                'success' => true,
-                'data'    => $this->problems[1],
-            ]);
+            ->assertExactJson($this->problems[1]);
     }
 
     protected function userCanViewProblems()
@@ -87,16 +81,10 @@ class ProblemTest extends TestCase
         $this->actingAs($this->user, 'api');
         $this->get('/api/problem/'.$this->problems[0]['id'])
             ->assertStatus(200)
-            ->assertExactJson([
-                'success' => true,
-                'data'    => $this->problems[0],
-            ]);
+            ->assertExactJson($this->problems[0]);
         $this->get('/api/problem?assignment_id='.$this->assignments[1]->id)
             ->assertStatus(200)
-            ->assertExactJson([
-                'success' => true,
-                'data'    => [$this->problems[1]],
-            ]);
+            ->assertExactJson([$this->problems[1]]);
         $this->get('/api/problem?course_id=-1')
             ->assertStatus(422);
     }
@@ -121,10 +109,7 @@ class ProblemTest extends TestCase
                 'content' => $this->problems[0]['content'],
             ]
         )->assertStatus(200)
-            ->assertExactJson([
-                'success' => true,
-                'data'    => $this->problems[0],
-            ]);
+            ->assertExactJson($this->problems[0]);
         $this->assertDatabaseHas('problems', [
             'id'            => $this->problems[0]['id'],
             'assignment_id' => $this->assignments[0]->id,
@@ -143,10 +128,7 @@ class ProblemTest extends TestCase
                 'content' => $this->problems[1]['content'],
             ]
         )->assertStatus(200)
-            ->assertExactJson([
-                'success' => true,
-                'data'    => $this->problems[1],
-            ]);
+            ->assertExactJson($this->problems[1]);
         $this->assertDatabaseHas('problems', [
             'id'            => $this->problems[1]['id'],
             'assignment_id' => $this->assignments[1]->id,
@@ -168,10 +150,7 @@ class ProblemTest extends TestCase
         $this->actingAs($this->course_admin, 'api');
         $this->delete('/api/problem/'.$this->problems[0]['id'])
             ->assertStatus(200)
-            ->assertExactJson([
-                'success' => true,
-                'data'    => 'Problem deleted.',
-            ]);
+            ->assertExactJson(['Problem deleted.',]);
         $this->assertDatabaseMissing('problems', [
             'id'         => $this->problems[0]['id'],
             'content'    => $this->problems[0]['content'],
@@ -184,10 +163,7 @@ class ProblemTest extends TestCase
         $this->actingAs($this->admin, 'api');
         $this->delete('/api/problem/'.$this->problems[1]['id'])
             ->assertStatus(200)
-            ->assertExactJson([
-                'success' => true,
-                'data'    => 'Problem deleted.',
-            ]);
+            ->assertExactJson(['Problem deleted.',]);
         $this->assertDatabaseMissing('problems', [
             'id'         => $this->problems[1]['id'],
             'content'    => $this->problems[1]['content'],

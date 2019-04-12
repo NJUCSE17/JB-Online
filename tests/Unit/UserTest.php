@@ -46,10 +46,7 @@ class UserTest extends TestCase
         $this->actingAs($this->user, 'api');
         $this->get('/api/user/'.$this->user->id)
             ->assertStatus(200)
-            ->assertExactJson([
-                'success' => true,
-                'data'    => $this->getUserData($this->user),
-            ]);
+            ->assertExactJson($this->getUserData($this->user));
     }
 
     protected function getUserData(User $user)
@@ -70,10 +67,7 @@ class UserTest extends TestCase
         $this->actingAs($this->user, 'api');
         $this->get('/api/user/'.$this->admin->id)
             ->assertStatus(200)
-            ->assertExactJson([
-                'success' => true,
-                'data'    => $this->getUserData($this->admin),
-            ]);
+            ->assertExactJson($this->getUserData($this->admin));
     }
 
     protected function adminCanViewUsersInfo()
@@ -81,10 +75,7 @@ class UserTest extends TestCase
         $this->actingAs($this->admin, 'api');
         $this->get('/api/user/'.$this->user->id)
             ->assertStatus(200)
-            ->assertExactJson([
-                'success' => true,
-                'data'    => $this->getUserData($this->user),
-            ]);
+            ->assertExactJson($this->getUserData($this->user));
     }
 
     protected function userCanEditItsInfo()
@@ -97,10 +88,7 @@ class UserTest extends TestCase
                 'name' => $data['name'],
             ]
         )->assertStatus(200)
-            ->assertExactJson([
-                'success' => true,
-                'data'    => $data,
-            ]);
+            ->assertExactJson($data);
         $this->user->name = $data['name'];
         $this->assertDatabaseHas('users', [
             'id'         => $this->user->id,
@@ -123,10 +111,7 @@ class UserTest extends TestCase
                 'email' => $data['email'],
             ]
         )->assertStatus(200)
-            ->assertExactJson([
-                'success' => true,
-                'data'    => $data,
-            ]);
+            ->assertExactJson($data);
 
         $this->user->email = $data['email'];
         $this->user->activated_at = null;
@@ -170,10 +155,7 @@ class UserTest extends TestCase
                 'name' => $this->user->name,
             ]
         )->assertStatus(200)
-            ->assertExactJson([
-                'success' => true,
-                'data'    => $this->getUserData($this->user),
-            ]);
+            ->assertExactJson($this->getUserData($this->user));
     }
 
     protected function userCannotActivateUser()

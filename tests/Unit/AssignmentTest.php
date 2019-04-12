@@ -55,12 +55,7 @@ class AssignmentTest extends TestCase
         $this->actingAs($this->user, 'api');
         $this->get('/api/assignment')
             ->assertStatus(200)
-            ->assertExactJson(
-                [
-                    'success' => true,
-                    'data'    => [],
-                ]
-            );
+            ->assertExactJson([]);
     }
 
     protected function userCannotCreateAssignment()
@@ -161,23 +156,13 @@ class AssignmentTest extends TestCase
         $this->actingAs($this->user, 'api');
         $this->get('/api/assignment')
             ->assertStatus(200)
-            ->assertExactJson(
-                [
-                    'success' => true,
-                    'data'    => [],
-                ]
-            );
+            ->assertExactJson([]);
 
         $this->enroll($this->user->id, $this->assignments[0]['course_id'],
             false);
         $this->get('/api/assignment')
             ->assertStatus(200)
-            ->assertExactJson(
-                [
-                    'success' => true,
-                    'data'    => $this->assignments,
-                ]
-            );
+            ->assertExactJson($this->assignments);
         $this->quit($this->user->id, $this->assignments[0]['course_id']);
     }
 
@@ -186,12 +171,7 @@ class AssignmentTest extends TestCase
         $this->actingAs($this->user, 'api');
         $this->get('/api/assignment/'.$this->assignments[0]['id'])
             ->assertStatus(200)
-            ->assertExactJson(
-                [
-                    'success' => true,
-                    'data'    => $this->assignments[0],
-                ]
-            );
+            ->assertExactJson($this->assignments[0]);
     }
 
     protected function userCannotUpdateAssignment()
@@ -261,12 +241,7 @@ class AssignmentTest extends TestCase
             true);
         $this->delete('/api/assignment/'.$this->assignments[0]['id'])
             ->assertStatus(200)
-            ->assertExactJson(
-                [
-                    'success' => true,
-                    'data'    => 'Assignment deleted.',
-                ]
-            );
+            ->assertExactJson(['Assignment deleted.']);
         $this->quit($this->user->id, $this->assignments[0]['course_id']);
 
         // Check the assignments have been deleted
@@ -293,11 +268,8 @@ class AssignmentTest extends TestCase
             ->assertStatus(200)
             ->assertJson(
                 [ // not an exact check
-                    'success' => true,
-                    'data'    => [
-                        'user_id'       => $this->user->id,
-                        'assignment_id' => $this->assignments[1]['id'],
-                    ],
+                    'user_id'       => $this->user->id,
+                    'assignment_id' => $this->assignments[1]['id'],
                 ]
             );
         $this->quit($this->user->id, $this->assignments[1]['course_id']);
@@ -310,12 +282,7 @@ class AssignmentTest extends TestCase
             false);
         $this->get('/api/assignment?unfinished_only=1')
             ->assertStatus(200)
-            ->assertExactJson(
-                [
-                    'success' => true,
-                    'data'    => [],
-                ]
-            );
+            ->assertExactJson([]);
         $this->quit($this->user->id, $this->assignments[1]['course_id']);
     }
 
@@ -334,12 +301,7 @@ class AssignmentTest extends TestCase
             false);
         $this->post('/api/assignment/'.$this->assignments[1]['id'].'/reset')
             ->assertStatus(200)
-            ->assertExactJson(
-                [
-                    'success' => true,
-                    'data'    => 'Assignment reset.',
-                ]
-            );
+            ->assertExactJson(['Assignment reset.']);
         $this->quit($this->user->id, $this->assignments[1]['course_id']);
     }
 
