@@ -7,18 +7,11 @@
     </div>
     <div class="card-footer">
         @if(isset($assignment->course_id))
-            <div class="d-inline-flex">
-                <span class="mr-3">
-                    <a href="#" class="text-dark">
-                        <i class="fas fa-heart-broken mr-1"></i> 0
-                    </a>
-                </span>
-                <span>
-                    <a href="#" class="text-dark">
-                        <i class="fas fa-heart mr-1"></i> 0
-                    </a>
-                </span>
-            </div>
+            <rate-component
+                :_api="{{ json_encode(route('api.assignment.rate', $assignment)) }}"
+                :_rated="{{ json_encode($assignment->rated) }}"
+                :_stats="{{ json_encode($assignment->stats) }}"
+            >__RATE_COMPONENT_ASSIGNMENT_{{ $assignment->id }}_HIDDEN__</rate-component>
         @endif
         <span class="float-right">
             <a href="#" class="{{ \App\Helpers\AssignmentDeadlines::DDLColor($assignment) }}">
