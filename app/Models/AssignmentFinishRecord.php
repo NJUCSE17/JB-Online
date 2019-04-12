@@ -8,7 +8,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class AssignmentFinishRecord extends Model
 {
-    use SoftDeletes, AssignmentFinishRecordRelationships;
+    use SoftDeletes,
+        AssignmentFinishRecordRelationships;
 
     /**
      * The attributes that are mass assignable.

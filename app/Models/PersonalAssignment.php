@@ -8,7 +8,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class PersonalAssignment extends Model
 {
-    use SoftDeletes, PersonalAssignmentRelationships;
+    use SoftDeletes,
+        PersonalAssignmentRelationships;
 
     /**
      * The attributes that are mass assignable.

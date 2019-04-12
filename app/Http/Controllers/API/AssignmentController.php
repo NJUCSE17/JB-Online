@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\APIController;
 use App\Http\Requests\Assignment\DeleteAssignmentRequest;
 use App\Http\Requests\Assignment\FinishAssignmentRequest;
+use App\Http\Requests\Assignment\RateAssignmentRequest;
 use App\Http\Requests\Assignment\ResetAssignmentRequest;
 use App\Http\Requests\Assignment\ShowAssignmentRequest;
 use App\Http\Requests\Assignment\StoreAssignmentRequest;
@@ -178,5 +179,50 @@ class AssignmentController extends APIController
             ->delete();
 
         return $this->data('Assignment reset.');
+    }
+
+    /**
+     * Rate an assignment.
+     *
+     * @param  RateAssignmentRequest  $request
+     * @param  Assignment              $assignment
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function rate(
+        RateAssignmentRequest $request,
+        Assignment $assignment
+    ) {
+        $user = Auth::user();
+        $rated = 'null';
+        if ($request->get('like')) {
+            if ($assignment->isDislikedBy($user)) {
+                $assignment->undislikeBy($user);
+            }
+            if ($assignment->isLikedBy($user)) {
+                $assignment->unlikeBy($user);
+            } else {
+                $assignment->likeBy($user);
+                $rated = 'like';
+            }
+        } else {
+            if ($assignment->isLikedBy($user)) {
+                $assignment->unlikeBy($user);
+            }
+            if ($assignment->isDislikedBy($user)) {
+                $assignment->undislikeBy($user);
+            } else {
+                $assignment->dislikeBy($user);
+                $rated = 'dislike';
+            }
+        }
+
+        return $this->data([
+            'rated' => $rated,
+            'stats' => [
+                'like'    => $assignment->likesCount,
+                'dislike' => $assignment->dislikesCount,
+            ],
+        ]);
     }
 }

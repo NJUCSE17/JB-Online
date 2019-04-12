@@ -5,14 +5,18 @@ namespace App\Models;
 use App\Models\Traits\User\UserAttributes;
 use App\Models\Traits\User\UserMethods;
 use App\Models\Traits\User\UserRelationships;
+use Cog\Contracts\Love\Liker\Models\Liker as LikerContract;
+use Cog\Laravel\Love\Liker\Models\Traits\Liker;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
-class User extends Authenticatable implements MustVerifyEmail
+class User extends Authenticatable
+    implements MustVerifyEmail, LikerContract
 {
     use SoftDeletes,
+        Liker,
         Notifiable,
         UserAttributes,
         UserMethods,

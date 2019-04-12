@@ -111,4 +111,17 @@ class AssignmentPolicy
     {
         return $user->isInCourse($assignment->course);
     }
+
+    /**
+     * Determine whether the user can rate the assignment.
+     *
+     * @param  User        $user
+     * @param  Assignment  $assignment
+     *
+     * @return bool
+     */
+    public function rate(User $user, Assignment $assignment)
+    {
+        return $user->isInCourse($assignment->course);
+    }
 }

@@ -8,7 +8,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class CourseEnrollRecord extends Model
 {
-    use SoftDeletes, CourseEnrollRecordRelationships;
+    use SoftDeletes,
+        CourseEnrollRecordRelationships;
 
     /**
      * The attributes that are mass assignable.

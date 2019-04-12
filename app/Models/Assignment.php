@@ -3,13 +3,16 @@
 namespace App\Models;
 
 use App\Models\Traits\Assignment\AssignmentRelationships;
-use App\Models\Traits\Assignment\WithAssignmentFinishRecordsScope;
+use Cog\Contracts\Love\Likeable\Models\Likeable as LikeableContract;
+use Cog\Laravel\Love\Likeable\Models\Traits\Likeable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Assignment extends Model
+class Assignment extends Model implements LikeableContract
 {
-    use SoftDeletes, AssignmentRelationships;
+    use SoftDeletes,
+        Likeable,
+        AssignmentRelationships;
 
     /**
      * The attributes that are mass assignable.

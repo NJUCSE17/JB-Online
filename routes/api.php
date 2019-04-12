@@ -63,6 +63,8 @@ Route::group(
         Route::group(
             ['prefix' => '/assignment/{assignment}', 'as' => 'assignment.'],
             function () {
+                Route::post('/rate', 'AssignmentController@rate')
+                    ->name('rate');
                 Route::post('/finish', 'AssignmentController@finish')
                     ->name('finish');
                 Route::post('/reset', 'AssignmentController@reset')
@@ -83,6 +85,19 @@ Route::group(
                     ->name('finish');
                 Route::post('/reset', 'PersonalAssignmentController@reset')
                     ->name('reset');
+            }
+        );
+
+        /**
+         * Problem-related APIs
+         */
+        Route::group(
+            [
+                'prefix' => '/problem/{problem}',
+                'as'     => 'problem.',
+            ],
+            function () {
+                Route::post('/rate', 'ProblemController@rate')->name('rate');
             }
         );
     }

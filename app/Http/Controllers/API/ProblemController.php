@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\APIController;
 use App\Http\Requests\Problem\DeleteProblemRequest;
+use App\Http\Requests\Problem\RateProblemRequest;
 use App\Http\Requests\Problem\ShowProblemRequest;
 use App\Http\Requests\Problem\StoreProblemRequest;
 use App\Http\Requests\Problem\UpdateProblemRequest;
@@ -11,6 +12,7 @@ use App\Http\Requests\Problem\ViewProblemRequest;
 use App\Http\Resources\ProblemResource;
 use App\Http\Resources\ProblemResourceCollection;
 use App\Models\Problem;
+use Illuminate\Support\Facades\Auth;
 
 class ProblemController extends APIController
 {
@@ -97,5 +99,49 @@ class ProblemController extends APIController
         $problem->delete();
 
         return $this->data('Problem deleted.');
+    }
+
+    /**
+     * Rate a problem.
+     *
+     * @param  RateProblemRequest  $request
+     * @param  Problem               $problem
+     *
+     * @return \Illuminate\Http\JsonResponse
+     * @throws \Exception
+     */
+    public function rate(RateProblemRequest $request, Problem $problem)
+    {
+        $user = Auth::user();
+        $rated = 'null';
+        if ($request->get('like')) {
+            if ($problem->isDislikedBy($user)) {
+                $problem->undislikeBy($user);
+            }
+            if ($problem->isLikedBy($user)) {
+                $problem->unlikeBy($user);
+            } else {
+                $problem->likeBy($user);
+                $rated = 'like';
+            }
+        } else {
+            if ($problem->isLikedBy($user)) {
+                $problem->unlikeBy($user);
+            }
+            if ($problem->isDislikedBy($user)) {
+                $problem->undislikeBy($user);
+            } else {
+                $problem->dislikeBy($user);
+                $rated = 'dislike';
+            }
+        }
+
+        return $this->data([
+            'rated' => $rated,
+            'stats' => [
+                'like'    => $problem->likesCount,
+                'dislike' => $problem->dislikesCount,
+            ],
+        ]);
     }
 }
