@@ -83,8 +83,7 @@
     </div>
 
     @include('includes.footer')
-
-    @include('includes.scripts')
 </div>
 </body>
+@include('includes.scripts')
 </html>

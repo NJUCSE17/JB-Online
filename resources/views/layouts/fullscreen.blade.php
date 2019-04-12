@@ -13,8 +13,7 @@
     <div class="main-content">
         @yield('content')
     </div>
-
-    @include('includes.scripts')
 </div>
 </body>
+@include('includes.scripts')
 </html>

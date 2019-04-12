@@ -42,8 +42,7 @@
             </div>
         </section>
     </div>
-
-    @include('includes.scripts')
 </div>
 </body>
+@include('includes.scripts')
 </html>
