@@ -20,12 +20,12 @@ trait UserAttributes
             ->leftJoin('assignment_finish_records',
                 function (JoinClause $join) {
                     $join->on(
-                        'assignment_finish_records.assignment_id',
-                        '=', 'assignments.id'
+                        'assignments.id',
+                        '=', 'assignment_finish_records.assignment_id'
                     )->where(
                         'assignment_finish_records.user_id',
                         '=', $this->id
-                    );
+                    )->whereNull('assignment_finish_records.deleted_at');
                 })
             ->select(
                 [
