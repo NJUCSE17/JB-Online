@@ -6,27 +6,24 @@
         {!! $assignment->content_html !!}
     </div>
     <div class="card-footer">
-        @if(isset($assignment->course_id))
+        @if(($isPublic = isset($assignment->course_id)))
             <rate-component
-                :_api="{{ json_encode(route('api.assignment.rate', $assignment)) }}"
-                :_rated="{{ json_encode($assignment->rated) }}"
-                :_stats="{{ json_encode($assignment->stats) }}"
-            >__RATE_COMPONENT_ASSIGNMENT_{{ $assignment->id }}_HIDDEN__</rate-component>
+                    :_api="{{ json_encode(route('api.assignment.rate', $assignment)) }}"
+                    :_rated="{{ json_encode($assignment->rated) }}"
+                    :_stats="{{ json_encode($assignment->stats) }}"
+            >
+                __RATE_COMPONENT_ASSIGNMENT_{{ $assignment->id }}__
+            </rate-component>
         @endif
         <span class="float-right">
-            <a href="#" class="{{ \App\Helpers\AssignmentDeadlines::DDLColor($assignment) }}">
-                @if(isset($assignment->finished_at))
-                    <i class="fas fa-times mr-1"></i>
-                    <span>
-                        <s>{{ \App\Helpers\AssignmentDeadlines::DDLForHuman($assignment) }}</s>
-                    </span>
-                @else
-                    <i class="fas fa-check mr-1"></i>
-                    <span>
-                        {{ \App\Helpers\AssignmentDeadlines::DDLForHuman($assignment) }}
-                    </span>
-                @endif
-            </a>
+            <ddl-component
+                    :_api_finish="{{ json_encode($isPublic ? route('api.assignment.finish', $assignment) : route('api.personalAssignment.finish', $assignment)) }}"
+                    :_api_reset="{{ json_encode($isPublic ? route('api.assignment.reset', $assignment) : route('api.personalAssignment.reset', $assignment)) }}"
+                    :_due_time="{{ json_encode($assignment->due_time) }}"
+                    :_finished_at="{{ json_encode($assignment->finished_at) }}"
+            >
+                __DDL_COMPONENT_{{ $isPublic ? 'PUBLIC' : 'PRIVATE' }}_{{ $assignment->id }}__
+            </ddl-component>
         </span>
     </div>
 </div>

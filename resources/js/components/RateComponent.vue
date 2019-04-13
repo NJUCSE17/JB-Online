@@ -18,6 +18,7 @@
 <script>
     export default {
         name: "RateComponent",
+        props: ['_api', '_rated', '_stats'],
         data: function () {
             return {
                 api: this._api,
@@ -25,7 +26,6 @@
                 stats: this._stats,
             }
         },
-        props: ['_api', '_rated', '_stats'],
         methods: {
             rate(like) {
                 window.axios.post(this.api, {

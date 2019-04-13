@@ -11,7 +11,11 @@ try {
     window.$ = window.jQuery = require('jquery');
 
     require('bootstrap');
+
+    window.moment = require('moment');
+    window.moment.locale('zh-cn');
 } catch (e) {
+    console.log(e);
 }
 
 /**
