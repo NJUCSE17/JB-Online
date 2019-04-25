@@ -9,16 +9,18 @@
 @endsection
 
 @section('header-right')
-    <span class="text-white">
-        更新于：{{ $feeds->first()->created_at }}
-    </span>
+    @if(count($feeds) > 0)
+        <span class="text-white">
+            更新于：{{ $feeds->first()->created_at }}
+        </span>
+    @endif
 @endsection
 
 @section('content')
     @foreach($feeds as $feed)
         @include('blog.includes.feed-info', ['feed' => $feed])
     @endforeach
-    <hr class="divider-fade" />
+    <hr class="divider-fade"/>
     <div class="row mx-2 mb-3">
         <p>
             第{{ $feeds->currentPage() }}页，共{{ $feeds->lastPage() }}页（共{{ $feeds->total() }}篇）
