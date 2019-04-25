@@ -30,7 +30,7 @@ class Kernel extends ConsoleKernel
     {
         // Check all assignments and
         $schedule->command('forum:checkassignments')->dailyAt('22:30');
-        $schedule->command('forum:updatefeeds')->everyTenMinutes();
+        $schedule->command('forum:updatefeeds')->everyFiveMinutes();
         $schedule->command('backup:clean')->dailyAt('01:00');
         $schedule->command('backup:run')->dailyAt('02:00');
         $schedule->command('telescope:prune')->daily();

@@ -48,6 +48,10 @@
         <div class="col col-12 col-md-9">
             <div id="feedContents">
                 @if ($feeds->count())
+                    <div class="alert alert-success">
+                        <i class="fas fa-clock mr-1"></i>
+                        更新于{{ $feeds[0]->created_at }}
+                    </div>
                     @foreach ($feeds as $feed)
                         <div class="card my-3" id="{{ $feed['title'] }}">
                             <a class="card-header btn-outline-dark" style="font-size: 150%; line-height: 36px"

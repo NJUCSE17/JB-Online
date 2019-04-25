@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Forum\BlogFeed;
 use App\Repositories\Frontend\Auth\UserRepository;
 use App\Repositories\Frontend\Forum\CourseRepository;
 use App\Repositories\Frontend\Forum\NoticeRepository;
@@ -96,43 +97,7 @@ class HomeController extends Controller
      */
     public function blog()
     {
-        $feeds = array();
-        $users = $this->userRepository->getAllUsers();
-        foreach ($users as $user) {
-            if ($user->blog != null) {
-                $originFeed = \Feeds::make([$user->blog], 20, false);
-                $items = $originFeed->get_items();
-                foreach ($items as $item) {
-                    //$description = $item->get_description();
-                    //$regex = '/(<[^>]+>)/is';
-                    //$content = preg_replace($regex, '', $description);
-
-                    $date = \Carbon\Carbon::parse($item->get_date());
-                    $feeds[] = array(
-                        'permalink'   => $item->get_permalink(),
-                        'title'       => $item->get_title(),
-                        'content'     => Purifier::clean($item->get_content()),
-                        'author'      => $user->full_name,
-                        'avatar'      => $user->picture,
-                        'date'        => $date,
-                    );
-                }
-            }
-        }
-        // sort feeds by time
-        usort($feeds, function ($a, $b) {
-            return ($a['date'] < $b['date']) ? 1 : -1;
-        });
-        // slice feeds
-        $currentPage  = isset($_GET['page']) ? (int) $_GET['page'] : 1;
-        $currentPath  = Paginator::resolveCurrentPath();
-        $perPage      = 5;
-        $slicedFeeds  = array_slice($feeds, $perPage * ($currentPage - 1), $perPage);
-        $paginatedFeeds = new LengthAwarePaginator($slicedFeeds, count($feeds), $perPage, $currentPage, [
-            'path' => $currentPath,
-        ]);
-
         return view('frontend.blog')
-            ->withFeeds($paginatedFeeds);
+            ->withFeeds(BlogFeed::query()->orderBy('date', 'DESC')->paginate(5));
     }
 }

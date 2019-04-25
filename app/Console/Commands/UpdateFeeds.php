@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Models\Forum\BlogFeed;
 use App\Repositories\Frontend\Auth\UserRepository;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
@@ -50,11 +51,29 @@ class UpdateFeeds extends Command
     {
         echo "Caching blog feeds at " . Carbon::now() . "\n";
         echo "Start caching blog feeds. \n";
+        BlogFeed::query()->truncate();
         $users = $this->userRepository->getAllUsers();
         foreach ($users as $user) {
             if ($user->blog != null) {
                 $originFeed = \Feeds::make([$user->blog], 0, false);
                 if (count($originFeed->get_items())) {
+                    $items = $originFeed->get_items();
+                    foreach ($items as $item) {
+                        //$description = $item->get_description();
+                        //$regex = '/(<[^>]+>)/is';
+                        //$content = preg_replace($regex, '', $description);
+
+                        $date = \Carbon\Carbon::parse($item->get_date());
+                        BlogFeed::query()->create([
+                            'permalink'   => $item->get_permalink(),
+                            'title'       => $item->get_title(),
+                            'content'     => \Purifier::clean($item->get_content()),
+                            'author'      => $user->full_name,
+                            'avatar'      => $user->picture,
+                            'date'        => $date,
+                        ]);
+                    }
+
                     echo "[success] " . $user->id . " - " . $user->full_name
                         . " [" . count($originFeed->get_items()) . " posts]\n";
                 } else {
