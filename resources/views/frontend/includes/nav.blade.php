@@ -40,6 +40,13 @@
                         </li>
                     @else
                         <li class="nav-item">
+                            <a href="https://irc.njujb.com"
+                               class="nav-link">
+                                <i class="fas fa-comments-alt mr-2"></i>
+                                <span>IRC</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
                             <a href="{{route('frontend.blog')}}"
                                class="nav-link {{ active_class(Active::checkRoute('frontend.blog')) }}">
                                 <i class="fas fa-rss mr-2"></i>

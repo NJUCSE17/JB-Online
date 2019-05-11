@@ -23,7 +23,7 @@ class GlobalComposer
         $view->with('logged_in_user', auth()->user());
 
         /* Get the theme of app */
-        $theme = Session::has('theme') ? Session::get('theme') : 'auto';
+        $theme = Session::has('theme') ? Session::get('theme') : 'light';
         if ($theme === 'auto') {
             $hour = Carbon::now()->hour;
             $theme = ($hour >= 7 && $hour <= 21) ? 'light' : 'dark';
