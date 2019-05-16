@@ -20,7 +20,7 @@ class CreateBlogFeedsTable extends Migration
             $table->increments('id');
             $table->text('permalink');
             $table->text('title');
-            $table->text('content');
+            $table->longText('content');
             $table->text('author');
             $table->text('avatar');
             $table->dateTime('date');
