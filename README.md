@@ -6,9 +6,11 @@ to "JB Online".
 This is the public code repository for JB Online 
 website, based on Laravel 5.7 and written in PHP 7+.
 
-## Documentation?
+## We are rebuilding this project.
 
-Please refer to [wiki of this repo](https://github.com/doowzs/JB-Online/wiki) for installation, commands and other information.
+The rebuilding of this project is under progress. (Assumed to finish before Sept. 2019)
+
+The next branch is now moved to [doowzs/JB-Online-Remaster](https://github.com/doowzs/JB-Online-Remaster) as an individual repo for better version control.
 
 ## Contact
 
