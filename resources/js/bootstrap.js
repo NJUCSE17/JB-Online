@@ -12,8 +12,8 @@ try {
 
     require('bootstrap');
 
-    window.moment = require('moment');
-    window.moment.locale('zh-cn');
+    window.DateTime = require('luxon');
+    Settings.defaultLocale = DateTime.local().resolvedLocaleOpts().locale;
 } catch (e) {
     console.log(e);
 }

@@ -12,7 +12,7 @@
         href="#" @click.prevent="finish">
         <i class="fas fa-times mr-1"></i>
         <span>
-            {{ this.due_time }}
+            {{ this.ddl_for_human }}
         </span>
     </a>
 </template>
@@ -43,7 +43,7 @@
                 }
             },
             ddl_for_human: function () {
-                return window.moment(this.due_time).calendar();
+                return window.DateTime.fromISO(this.due_time).toISODate();
             }
         },
         methods: {
