@@ -1,10 +1,11 @@
 {
-  "name": "laravel/laravel",
+  "name": "doowzs/jb-online-remaster",
   "type": "project",
-  "description": "The Laravel Framework.",
+  "description": "The Remastered JB Online Website.",
   "keywords": [
-    "framework",
-    "laravel"
+    "jbonline",
+    "student-project",
+    "assignment-tracking"
   ],
   "license": "MIT",
   "require": {
