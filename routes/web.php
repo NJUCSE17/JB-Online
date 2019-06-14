@@ -40,6 +40,7 @@ Route::group(
             ['middleware' => ['auth', 'verified', 'activated']],
             function () {
                 Route::get('/home', 'HomeController@home')->name('home');
+                Route::get('/user/{student_id}', 'HomeController@user')->name('user');
 
                 Route::resource('blog', 'BlogController')
                     ->only(['index', 'show',]);

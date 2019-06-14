@@ -79,8 +79,8 @@ trait UserAttributes
      */
     public function getAvatarImage()
     {
-        return "<img style='height: 32px; width: 32px;' src='"
-            .$this->getAvatarURL()."' alt='' />";
+        return "<img style='height:36px;width:36px;border-radius:4px;'"
+            ." src='".$this->getAvatarURL()."' alt='".$this->name."' />";
     }
 
     /**

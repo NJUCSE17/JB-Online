@@ -11,10 +11,11 @@
 
 @section('content')
     <div class="row">
-        <div class="col col-md-8">
+        <div class="col col-md-8 col-12">
             @include('home.includes.assignmentslist', ['assignments' => $assignments])
         </div>
-        <div class="col col-md-4">
+        <div class="col col-md-4 col-12">
+            <hr class="d-block d-md-none"/>
             @include('home.includes.feeds', ['feeds' => $feeds])
         </div>
     </div>

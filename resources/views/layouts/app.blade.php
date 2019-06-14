@@ -33,7 +33,8 @@
 
                         <div class="d-flex">
                             @if(Route::is('home'))
-                                <a href="#" class="btn btn-icon btn-group-nav shadow btn-neutral">
+                                <a href="{{ route('user', Auth::user()->student_id) }}"
+                                   class="btn btn-icon btn-group-nav shadow btn-neutral">
                                     <span class="btn-inner--icon"><i class="fas fa-user"></i></span>
                                     <span class="btn-inner--text d-none d-md-inline-block">我的账户</span>
                                 </a>

@@ -4,8 +4,12 @@
     </div>
     <hr />
     <div id="assignments-content">
-        @foreach($assignments as $assignment)
-            @include('home.includes.assignment', ['assignment' => $assignment])
-        @endforeach
+        @if(count($assignments))
+            @foreach($assignments as $assignment)
+                @include('home.includes.assignment', ['assignment' => $assignment])
+            @endforeach
+        @else
+            <p class="text-center my-4">现在没有作业。</p>
+        @endif
     </div>
 </div>

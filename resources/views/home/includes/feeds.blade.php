@@ -8,9 +8,13 @@
             <div class="card-body">
                 <div class="row flex-column flex-md-row align-items-center">
                     <div class="col ml-md-n2 text-center text-md-left">
-                        <a href="#" class="h6 text-sm text-muted mb-0">{{ $feed->user->name }}</a>
+                        <a href="{{ route('user', $feed->user->student_id) }}"
+                           class="h6 text-sm text-muted mb-0">
+                            {{ $feed->user->name }}
+                            @ <span>{{ $feed->published_at }}</span>
+                        </a>
                         <a href="{{ route('blog.show', [$feed]) }}">
-                            <p class="card-text text-dark mb-0">
+                            <p class="card-text text-dark mt-3">
                                 {{ $feed->title }}
                             </p>
                         </a>

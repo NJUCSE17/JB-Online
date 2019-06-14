@@ -1,9 +1,9 @@
 <header class="header header-transparent" id="header-main">
     <nav class="navbar navbar-main navbar-expand-lg navbar-transparent navbar-dark bg-dark" id="navbar-main">
         <div class="container">
-            <span class="navbar-brand mr-lg-5">
+            <a class="navbar-brand mr-lg-5" href="{{ route('home') }}">
                 {{ env('APP_NAME') }}
-            </span>
+            </a>
             <button class="navbar-toggler pr-0" type="button" data-toggle="collapse"
                     data-target="#navbar-main-collapse" aria-controls="navbar-main-collapse" aria-expanded="false"
                     aria-label="Toggle navigation">
