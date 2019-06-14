@@ -22,7 +22,7 @@ class CreateAssignmentsAndFinishRecordsTables extends Migration
                 $table->string('name');
                 $table->text('content');
                 $table->text('content_html');
-                $table->timestamp('due_time');
+                $table->dateTime('due_time');
                 $table->timestamps();
                 $table->softDeletes();
             }
