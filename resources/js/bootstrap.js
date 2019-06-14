@@ -12,8 +12,11 @@ try {
 
     require('bootstrap');
 
-    window.DateTime = require('luxon');
-    Settings.defaultLocale = DateTime.local().resolvedLocaleOpts().locale;
+    //window.DateTime = require('luxon');
+    //Settings.defaultLocale = DateTime.local().resolvedLocaleOpts().locale;
+
+    window.Inputmask = require('inputmask');
+    window.Confirm = require('jquery-confirm');
 } catch (e) {
     console.log(e);
 }

@@ -21,6 +21,7 @@ window.Vue = require('vue');
 
 Vue.component('rate-component', require('./components/RateComponent.vue').default);
 Vue.component('ddl-component', require('./components/DDLComponent.vue').default);
+Vue.component('create-assignment-component', require('./components/CreateAssignmentComponent.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

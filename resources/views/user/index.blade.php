@@ -9,7 +9,7 @@
 @endsection
 
 @section('header-right')
-    <span class="h4 mb-0 text-white d-block">
+    <span class="text-white" style="font-size: 110%;">
         {{ $user->student_id }} ({{ $user->id }})
     </span>
 @endsection

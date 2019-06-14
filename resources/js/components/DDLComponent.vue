@@ -43,7 +43,8 @@
                 }
             },
             ddl_for_human: function () {
-                return window.DateTime.fromISO(this.due_time).toISODate();
+                return "TODO: day.js未移植 (in DDLComponent.vue)";
+                //return window.DateTime.fromISO(this.due_time).toISODate();
             }
         },
         methods: {
