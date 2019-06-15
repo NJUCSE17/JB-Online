@@ -52,9 +52,9 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text"><i class="fas fa-rss"></i></span>
                                 </div>
-                                <input id="blog_rss_feed" name="blog_rss_feed"
-                                       type="url" value="{{ old('blog_rss_feed') }}"
-                                       class="form-control{{ $errors->has('blog_rss_feed') ? ' is-invalid' : '' }}"
+                                <input id="blog_feed_url" name="blog_feed_url"
+                                       type="url" value="{{ old('blog_feed_url') }}"
+                                       class="form-control{{ $errors->has('blog_feed_url') ? ' is-invalid' : '' }}"
                                        placeholder="https://alice.io/rss">
                             </div>
                         </div>
