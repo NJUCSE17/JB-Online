@@ -20,8 +20,8 @@
                 <i class="fas fa-code mr-1"></i> 查看源代码
             </a>
             <a class="text-dark text-underline--dashed mx-3 d-none d-md-inline"
-               href="#">
-                <i class="fas fa-book mr-1"></i> 开发人员手册（监修中）
+               href="/docs">
+                <i class="fas fa-book mr-1"></i> 开发人员手册
             </a>
         </div>
     </div>
