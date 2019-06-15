@@ -7,7 +7,8 @@ use App\Http\Requests\User\ActivateUserRequest;
 use App\Http\Requests\User\ShowUserRequest;
 use App\Http\Requests\User\UpdateUserRequest;
 use App\Http\Requests\User\ViewUserRequest;
-use App\Http\Resources\UserRecourse;
+use App\Http\Resources\UserResource;
+use App\Http\Resources\UserResourceCollection;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 
@@ -22,9 +23,9 @@ class UserController extends APIController
      */
     public function index(ViewUserRequest $request)
     {
-        $user = User::all();
+        $users = User::all();
 
-        return $this->data(new UserRecourse($user));
+        return $this->data(new UserResourceCollection($users));
     }
 
     /**
@@ -37,7 +38,7 @@ class UserController extends APIController
      */
     public function show(ShowUserRequest $request, User $user)
     {
-        return $this->data(new UserRecourse($user));
+        return $this->data(new UserResource($user));
     }
 
     /**
@@ -69,7 +70,7 @@ class UserController extends APIController
             ]
         );
 
-        return $this->data(new UserRecourse($user));
+        return $this->data(new UserResource($user));
     }
 
     /**
@@ -84,7 +85,7 @@ class UserController extends APIController
     {
         $user->activate();
 
-        return $this->data(new UserRecourse($user));
+        return $this->data(new UserResource($user));
     }
 
     /**
@@ -99,6 +100,6 @@ class UserController extends APIController
     {
         $user->deactivate();
 
-        return $this->data(new UserRecourse($user));
+        return $this->data(new UserResource($user));
     }
 }

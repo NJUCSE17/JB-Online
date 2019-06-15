@@ -36,7 +36,7 @@ class UserPolicy
      */
     public function view()
     {
-        return false;
+        return true;
     }
 
     /**

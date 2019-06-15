@@ -10,11 +10,25 @@
 
 > {success} 绕过本页面API权限检查的条件：`$user->privilege_level <= 1` 即用户为超级管理员。
 
+用户模型对应的JSON数据结构：
+
+```json
+user: {
+    blog_feed_url: null,
+    email: "alice@utopia.com",
+    id: 1,
+    is_active: true,
+    is_verified: true,
+    name: "Alice",
+    student_id: 170000001
+}
+```
+
 <a name="u-1"></a>
 ## `GET /api/user`
 
 - 用途：获取用户列表
-- 权限：不允许访问
+- 权限：允许所有用户访问
 - 参数：无
 - 返回：所有用户的列表
 
