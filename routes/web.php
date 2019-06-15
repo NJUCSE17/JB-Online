@@ -32,7 +32,7 @@ Route::group(
 );
 
 Route::group(
-    ['namespace' => 'web'],
+    ['namespace' => 'Web'],
     function () {
         Route::get('/', 'HomeController@welcome')->name('welcome');
 

@@ -5,8 +5,9 @@
 - [安装环境依赖](#dependencies)
 - [开发环境下的安装](#install-dev)
 - [生产环境下的安装](#install-prod)
+- [放置闭源文件](#private-files)
 
-<a id="dependencies"></a>
+<a name="dependencies"></a>
 ## 安装环境依赖
 
 一台运行JBOnline的服务器/开发机需要以下环境：
@@ -19,7 +20,7 @@
 - Apache/Caddy
 - [Optional] Docker
 
-<a id="install-dev"></a>
+<a name="install-dev"></a>
 ## 开发环境下的安装
 
 ```shell
@@ -27,7 +28,7 @@ Clone the repository first.
 $ git clone [REPO] njujb && cd njujb
 
 Install code dependencies.
-$ npm install
+$ npm install && npm run dev
 $ composer install
 
 Prepare Laravel and database.
@@ -40,7 +41,7 @@ Start development server.
 $ php artisan serve
 ```
 
-<a id="install-prod"></a>
+<a name="install-prod"></a>
 ## 生产环境下的安装
 
 > {success} 生产环境下可以使用上面开发环境下的方式安装，但不使用PHP开发环境服务器，而是使用Apache/Caddy等网页服务器进行处理。
@@ -63,7 +64,7 @@ $ docker-compose up -d caddy mariadb workspace
 Enter the container and prepare the rest.
 $ docker-compose exec workspace bash
 $ cd /var/www/njujb
-$ npm install
+$ npm install && npm run prod
 $ composer install
 $ php artisan migrate
 $ php artisan key:generate
@@ -90,4 +91,27 @@ https://njujb.com {
         to /index.php?{query}
     }
 }
+```
+
+<a name="private-files"></a>
+## 放置闭源文件
+
+将对应的文件拷贝到`/public`目录对应文件夹中。
+
+注意`app.css`和`app.js`是由npm自动生成的，不需要拷贝。
+
+```shell
+├─css
+│      app.css
+│      fontawesome.css
+│      purpose.css
+│
+├─js
+│      app.js
+│      purpose.core.js
+│      purpose.js
+│
+└─webfonts
+        fa-brands-400.eot
+        ......
 ```
