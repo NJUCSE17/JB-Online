@@ -9,7 +9,7 @@
     - [TODO: 自动化测试](#)
 - ## API
     - [综述](/{{route}}/{{version}}/api/overview)
-    - [TODO: 用户](#)
+    - [用户](/{{route}}/{{version}}/api/user)
     - [TODO: 个人作业](#)
     - [TODO: 课程](#)
     - [TODO: 作业](#)
