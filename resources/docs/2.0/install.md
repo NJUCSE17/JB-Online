@@ -100,6 +100,12 @@ https://njujb.com {
 
 注意`app.css`和`app.js`是由npm自动生成的，不需要拷贝。
 
+> {warning} 可我没有这些闭源文件怎么办？
+>
+> 你傻啊 cmlnaHQgY2xpY2sgYW5kIGluc3BlY3Q=
+>
+> 警告：违反相关授权协议或知识产权相关法律法规是严重的作死行为。
+
 ```shell
 ├─css
 │      app.css
