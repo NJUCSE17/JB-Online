@@ -57,8 +57,8 @@ class UserTest extends TestCase
             'name'          => $user->name,
             'email'         => $user->email,
             'blog_feed_url' => $user->blog_feed_url,
-            'verified'      => $user->isVerified(),
-            'active'        => $user->isActive(),
+            'is_verified'   => $user->isVerified(),
+            'is_active'     => $user->isActive(),
         ];
     }
 
@@ -103,8 +103,8 @@ class UserTest extends TestCase
         $data = $this->getUserData($this->user);
 
         $data['email'] = $this->faker->safeEmail;
-        $data['active'] = false;
-        $data['verified'] = false;
+        $data['is_active'] = false;
+        $data['is_verified'] = false;
 
         $this->put('/api/user/'.$this->user->id,
             [
