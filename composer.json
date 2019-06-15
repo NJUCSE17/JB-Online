@@ -11,6 +11,7 @@
   "require": {
     "php": "^7.2.15",
     "ext-json": "*",
+    "binarytorch/larecipe": "^2.1",
     "cybercog/laravel-love": "5.*",
     "erusev/parsedown": "^1.7",
     "fideloper/proxy": "^4.0",
