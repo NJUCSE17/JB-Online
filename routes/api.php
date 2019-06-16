@@ -28,7 +28,6 @@ Route::group(
             'course'             => 'CourseController',
             'assignment'         => 'AssignmentController',
             'personalAssignment' => 'PersonalAssignmentController',
-            'problem'            => 'ProblemController',
         ]);
 
         /**
@@ -85,19 +84,6 @@ Route::group(
                     ->name('finish');
                 Route::post('/reset', 'PersonalAssignmentController@reset')
                     ->name('reset');
-            }
-        );
-
-        /**
-         * Problem-related APIs
-         */
-        Route::group(
-            [
-                'prefix' => '/problem/{problem}',
-                'as'     => 'problem.',
-            ],
-            function () {
-                Route::post('/rate', 'ProblemController@rate')->name('rate');
             }
         );
     }
