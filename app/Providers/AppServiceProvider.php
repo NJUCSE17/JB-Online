@@ -48,7 +48,6 @@ class AppServiceProvider extends ServiceProvider
         CourseEnrollRecord::observe(CourseEnrollRecordObserver::class);
         Course::observe(CourseObserver::class);
         PersonalAssignment::observe(PersonalAssignmentObserver::class);
-        Problem::observe(ProblemObserver::class);
         User::observe(UserObserver::class);
     }
 }
