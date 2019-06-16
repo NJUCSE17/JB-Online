@@ -130,6 +130,11 @@ class CourseTest extends TestCase
                 'deleted_at'    => null,
             ]
         );
+        $this->course['enroll_records'] = [[
+            'user_id'       => $this->user->id,
+            'course_id'     => $this->course['id'],
+            'type_is_admin' => 0,
+        ]];
     }
 
     protected function userCanQuitCourse()
@@ -144,6 +149,7 @@ class CourseTest extends TestCase
                 'deleted_at' => null,
             ]
         );
+        $this->course['enroll_records'] = [];
     }
 
     protected function userCanNotJoinAsCourseAdmin()
@@ -199,6 +205,11 @@ class CourseTest extends TestCase
                 'deleted_at'    => null,
             ]
         );
+        $this->course['enroll_records'] = [[
+            'user_id'       => $this->course_admin->id,
+            'course_id'     => $this->course['id'],
+            'type_is_admin' => 1,
+        ]];
     }
 
     protected function userCannotUpdateCourse()
@@ -295,6 +306,7 @@ class CourseTest extends TestCase
                 ),
             'notice'      => $notice,
             'notice_html' => $this->parser->text($notice),
+            'enroll_records' => array(),
         ];
     }
 }

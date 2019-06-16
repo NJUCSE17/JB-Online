@@ -36,7 +36,7 @@ class CourseEnrollingAndQuittingTest extends TestCase
 
         // Delete the course now.
         $this->delete('/api/course/'.$course->id)
-            ->assertStatus(200);
+            ->assertStatus(204);
         $this->assertDatabaseMissing('courses', [
             'id'         => $course->id,
             'deleted_at' => null,

@@ -17,6 +17,7 @@ class CourseEnrollRecordResource extends JsonResource
     {
         return [
             'user_id'       => $this->user_id,
+            'course_id'     => $this->course_id,
             'type_is_admin' => $this->type_is_admin,
         ];
     }
