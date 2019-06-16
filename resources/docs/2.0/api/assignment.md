@@ -9,7 +9,7 @@
 - [`DELETE /api/assignment/{id}`](#a-5)
 - [`POST /api/assignment/{id}/finish`](#a-6)
 - [`POST /api/assignment/{id}/reset`](#a-7)
-- [`POST /api/assignment/{id}/rate`](#a-7)
+- [`POST /api/assignment/{id}/rate`](#a-8)
 
 > {success} 绕过本页面API权限检查的条件：要求 `$user->privilege_level <= 2` 即用户为管理员。
 

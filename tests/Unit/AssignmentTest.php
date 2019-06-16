@@ -240,8 +240,7 @@ class AssignmentTest extends TestCase
         $this->enroll($this->user->id, $this->assignments[0]['course_id'],
             true);
         $this->delete('/api/assignment/'.$this->assignments[0]['id'])
-            ->assertStatus(200)
-            ->assertExactJson(['Assignment deleted.']);
+            ->assertStatus(204);
         $this->quit($this->user->id, $this->assignments[0]['course_id']);
 
         // Check the assignments have been deleted
@@ -300,8 +299,7 @@ class AssignmentTest extends TestCase
         $this->enroll($this->user->id, $this->assignments[1]['course_id'],
             false);
         $this->post('/api/assignment/'.$this->assignments[1]['id'].'/reset')
-            ->assertStatus(200)
-            ->assertExactJson(['Assignment reset.']);
+            ->assertStatus(204);
         $this->quit($this->user->id, $this->assignments[1]['course_id']);
     }
 
@@ -328,7 +326,14 @@ class AssignmentTest extends TestCase
                 'content'     => $this->faker->paragraph,
                 'due_time'    => $this->faker->dateTimeBetween('now', '+5 days')
                     ->format('Y-m-d H:i:s'),
-                'finished_at' => null,
+                'finish_record' => null,
+                'rate_info'   => [
+                    'rated' => 'null',
+                    'stats' => [
+                        'like'    => 0,
+                        'dislike' => 0,
+                    ]
+                ]
             ];
             $this->assignments[$i]['content_html'] = $this->parser->text(
                 $this->assignments[$i]['content']

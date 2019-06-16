@@ -131,6 +131,8 @@ class CourseTest extends TestCase
             ]
         );
         $this->course['enroll_records'] = [[
+            'id' => DB::select("SHOW TABLE STATUS LIKE 'course_enroll_records'")[0]
+                    ->Auto_increment - 1,
             'user_id'       => $this->user->id,
             'course_id'     => $this->course['id'],
             'type_is_admin' => 0,
@@ -206,6 +208,8 @@ class CourseTest extends TestCase
             ]
         );
         $this->course['enroll_records'] = [[
+            'id' => DB::select("SHOW TABLE STATUS LIKE 'course_enroll_records'")[0]
+                    ->Auto_increment - 1,
             'user_id'       => $this->course_admin->id,
             'course_id'     => $this->course['id'],
             'type_is_admin' => 1,
