@@ -2,11 +2,9 @@
     <div id="assignments-control">
         <p class="h3">
             当前作业
-            <create-assignment-component
+            <assignment-creator-main
                     class="float-right"
-                    :_api_personal="{{ json_encode(route('api.personalAssignment.store')) }}"
-                    :_api_public="{{ json_encode(route('api.assignment.store')) }}"
-            ></create-assignment-component>
+            ></assignment-creator-main>
         </p>
     </div>
     <hr/>

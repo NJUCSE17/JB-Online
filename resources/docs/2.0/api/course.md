@@ -17,16 +17,9 @@
 ```json
 course: {
     end_time: "2019-07-16 23:59:59",
-    enroll_records: [
-        {
-            id: 1,
-            course_id: 1,
-            type_is_admin: 0,
-            user_id: 1
-        },
-        ...
-    ],
     id: 1,
+    is_in_course: true,
+    is_admin: false,
     name: "ExampleCourse",
     notice: "Example",
     notice_html: "<p>Example</p>",

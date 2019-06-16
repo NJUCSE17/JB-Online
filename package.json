@@ -24,8 +24,9 @@
     "vue-template-compiler": "^2.6.10"
   },
   "dependencies": {
+    "animate.css": "^3.7.2",
     "dayjs": "^1.8.12",
-    "inputmask": "^4.0.8",
-    "jquery-confirm": "^3.3.4"
+    "jquery-confirm": "^3.3.4",
+    "vue-the-mask": "^0.11.1"
   }
 }

@@ -16,14 +16,14 @@
             </rate-component>
         @endif
         <span class="float-right">
-            <ddl-component
+            <d-d-l-component
                     :_api_finish="{{ json_encode($isPublic ? route('api.assignment.finish', $assignment) : route('api.personalAssignment.finish', $assignment)) }}"
                     :_api_reset="{{ json_encode($isPublic ? route('api.assignment.reset', $assignment) : route('api.personalAssignment.reset', $assignment)) }}"
                     :_due_time="{{ json_encode($assignment->due_time) }}"
                     :_finished_at="{{ json_encode($assignment->finished_at) }}"
             >
                 __DDL_COMPONENT_{{ $isPublic ? 'PUBLIC' : 'PRIVATE' }}_{{ $assignment->id }}__
-            </ddl-component>
+            </d-d-l-component>
         </span>
     </div>
 </div>

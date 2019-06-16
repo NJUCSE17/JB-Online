@@ -130,13 +130,8 @@ class CourseTest extends TestCase
                 'deleted_at'    => null,
             ]
         );
-        $this->course['enroll_records'] = [[
-            'id' => DB::select("SHOW TABLE STATUS LIKE 'course_enroll_records'")[0]
-                    ->Auto_increment - 1,
-            'user_id'       => $this->user->id,
-            'course_id'     => $this->course['id'],
-            'type_is_admin' => 0,
-        ]];
+        $this->course['is_in_course'] = true;
+        $this->course['is_course_admin'] = false;
     }
 
     protected function userCanQuitCourse()
@@ -151,7 +146,8 @@ class CourseTest extends TestCase
                 'deleted_at' => null,
             ]
         );
-        $this->course['enroll_records'] = [];
+        $this->course['is_in_course'] = true;
+        $this->course['is_course_admin'] = true;
     }
 
     protected function userCanNotJoinAsCourseAdmin()
@@ -207,13 +203,8 @@ class CourseTest extends TestCase
                 'deleted_at'    => null,
             ]
         );
-        $this->course['enroll_records'] = [[
-            'id' => DB::select("SHOW TABLE STATUS LIKE 'course_enroll_records'")[0]
-                    ->Auto_increment - 1,
-            'user_id'       => $this->course_admin->id,
-            'course_id'     => $this->course['id'],
-            'type_is_admin' => 1,
-        ]];
+        $this->course['is_in_course'] = true;
+        $this->course['is_course_admin'] = true;
     }
 
     protected function userCannotUpdateCourse()
@@ -310,7 +301,8 @@ class CourseTest extends TestCase
                 ),
             'notice'      => $notice,
             'notice_html' => $this->parser->text($notice),
-            'enroll_records' => array(),
+            'is_in_course'    => false,
+            'is_course_admin' => false,
         ];
     }
 }

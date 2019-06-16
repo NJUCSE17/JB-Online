@@ -41,7 +41,7 @@ JBOnline基于Laravel 5.8开发，所以Laravel相关的结构、函数的帮助
 - popper
 - craftpip/jquery-confirm
 - iamkun/dayjs
-- robinherbots/inputmask
+- vuejs-tips/vue-the-mask
 
 <a name="private-source"></a>
 ## 闭源组件
