@@ -203,13 +203,14 @@ class CourseTest extends TestCase
                 'deleted_at'    => null,
             ]
         );
-        $this->course['is_in_course'] = true;
-        $this->course['is_course_admin'] = true;
     }
 
     protected function userCannotUpdateCourse()
     {
         $this->actingAs($this->user, 'api');
+        $this->course['is_in_course'] = false;
+        $this->course['is_course_admin'] = false;
+
         $notice = $this->faker->paragraph;
         $this->course['notice'] = $notice;
         $this->course['notice_html'] = $this->parser->text($notice);
@@ -223,6 +224,9 @@ class CourseTest extends TestCase
     protected function adminCanUpdateCourse()
     {
         $this->actingAs($this->admin, 'api');
+        $this->course['is_in_course'] = false;
+        $this->course['is_course_admin'] = false;
+
         $notice = $this->faker->paragraph;
         $this->course['notice'] = $notice;
         $this->course['notice_html'] = $this->parser->text($notice);
@@ -237,6 +241,9 @@ class CourseTest extends TestCase
     protected function courseAdminCanUpdateCourse()
     {
         $this->actingAs($this->course_admin, 'api');
+        $this->course['is_in_course'] = true;
+        $this->course['is_course_admin'] = true;
+
         $this->course['semester'] = $this->faker->numberBetween(1, 10);
         $this->put('/api/course/'.$this->course['id'],
             [
@@ -249,6 +256,8 @@ class CourseTest extends TestCase
     protected function userCannotDeleteCourse()
     {
         $this->actingAs($this->user, 'api');
+        $this->course['is_in_course'] = false;
+        $this->course['is_course_admin'] = false;
         $this->delete('/api/course/'.$this->course['id'])
             ->assertStatus(403);
     }
@@ -256,6 +265,8 @@ class CourseTest extends TestCase
     protected function courseAdminCannotDeleteCourse()
     {
         $this->actingAs($this->course_admin, 'api');
+        $this->course['is_in_course'] = true;
+        $this->course['is_course_admin'] = true;
         $this->delete('/api/course/'.$this->course['id'])
             ->assertStatus(403);
     }
@@ -263,6 +274,8 @@ class CourseTest extends TestCase
     protected function adminCanDeleteCourse()
     {
         $this->actingAs($this->admin, 'api');
+        $this->course['is_in_course'] = false;
+        $this->course['is_course_admin'] = false;
         $this->delete('/api/course/'.$this->course['id'])
             ->assertStatus(204);
         $this->assertDatabaseMissing('courses', [
