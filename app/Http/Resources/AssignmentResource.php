@@ -20,16 +20,19 @@ class AssignmentResource extends JsonResource
             ->where('user_id', \Auth::id())
             ->where('assignment_id', $this->id)
             ->first();
-        $finished_at = $record ? $record->updated_at : null;
 
         return [
-            'id'           => $this->id,
-            'course_id'    => $this->course_id,
-            'name'         => $this->name,
-            'content'      => $this->content,
-            'content_html' => $this->content_html,
-            'due_time'     => $this->due_time->format('Y-m-d H:i:s'),
-            'finished_at'  => $finished_at,
+            'id'            => $this->id,
+            'course_id'     => $this->course_id,
+            'name'          => $this->name,
+            'content'       => $this->content,
+            'content_html'  => $this->content_html,
+            'due_time'      => $this->due_time->format('Y-m-d H:i:s'),
+            'finish_record' => new AssignmentFinishRecordResource($record),
+            'rate_info'     => [
+                'rated' => $this->rated(),
+                'stats' => $this->stats(),
+            ]
         ];
     }
 }

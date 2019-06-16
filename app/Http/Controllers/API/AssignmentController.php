@@ -136,7 +136,7 @@ class AssignmentController extends APIController
     ) {
         $assignment->delete();
 
-        return $this->data('Assignment deleted.');
+        return $this->deleted();
     }
 
     /**
@@ -178,7 +178,7 @@ class AssignmentController extends APIController
             ->where('assignment_id', $assignment->id)
             ->delete();
 
-        return $this->data('Assignment reset.');
+        return $this->deleted();
     }
 
     /**

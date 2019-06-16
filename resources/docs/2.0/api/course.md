@@ -19,6 +19,8 @@ course: {
     end_time: "2019-07-16 23:59:59",
     enroll_records: [
         {
+            id: 1,
+            course_id: 1,
             type_is_admin: 0,
             user_id: 1
         },
@@ -110,6 +112,8 @@ course: {
 - 返回：`200 OK` 加入课程的记录
   ```json
   enroll_record: {
+        id: 1,
+        course_id: 1,
         type_is_admin: 0,
         user_id: 1
   }

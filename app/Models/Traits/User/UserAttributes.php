@@ -34,14 +34,6 @@ trait UserAttributes
                 ]
             )
             ->get();
-        foreach ($a1 as $i => $a) {
-            $a->rated = $a->isLikedBy($this->id) ? "like"
-                : ($a->isDislikedBy($this->id) ? "dislike" : "null");
-            $a->stats = [
-                'like'    => $a->likesCount,
-                'dislike' => $a->dislikesCount,
-            ];
-        }
 
         $a2 = PersonalAssignment::query()
             ->where('user_id', $this->id)

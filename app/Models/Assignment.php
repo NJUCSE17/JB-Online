@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Traits\Assignment\AssignmentAttributes;
 use App\Models\Traits\Assignment\AssignmentRelationships;
 use Cog\Contracts\Love\Likeable\Models\Likeable as LikeableContract;
 use Cog\Laravel\Love\Likeable\Models\Traits\Likeable;
@@ -12,6 +13,7 @@ class Assignment extends Model implements LikeableContract
 {
     use SoftDeletes,
         Likeable,
+        AssignmentAttributes,
         AssignmentRelationships;
 
     /**

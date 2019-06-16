@@ -9,8 +9,8 @@
         @if(($isPublic = isset($assignment->course_id)))
             <rate-component
                     :_api="{{ json_encode(route('api.assignment.rate', $assignment)) }}"
-                    :_rated="{{ json_encode($assignment->rated) }}"
-                    :_stats="{{ json_encode($assignment->stats) }}"
+                    :_rated="{{ json_encode($assignment->rated()) }}"
+                    :_stats="{{ json_encode($assignment->stats()) }}"
             >
                 __RATE_COMPONENT_ASSIGNMENT_{{ $assignment->id }}__
             </rate-component>

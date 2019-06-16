@@ -14,11 +14,7 @@ class ViewAssignmentRequest extends FormRequest
      */
     public function authorize()
     {
-        if ($this->request->has('show_all')) {
-            return $this->user()->privilege_level <= 2;
-        } else {
-            return $this->user()->can('view', Assignment::class);
-        }
+        return $this->user()->can('view', Assignment::class);
     }
 
     /**
