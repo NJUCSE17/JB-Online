@@ -34,7 +34,7 @@
                             </select>
                             <button class="btn btn-soft-info w-100" type="button"
                                     v-on:click="proceedToPublic"
-                                    :disabled="!courseSelected">
+                                    :disabled="courseSelected === ''">
                                 <i class="fas fa-book mr-2"></i>课程作业
                             </button>
                         </div>
