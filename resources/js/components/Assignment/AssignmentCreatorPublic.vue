@@ -83,7 +83,7 @@
                 if (!this.publicAssignmentName) return false;
                 if (!this.publicAssignmentContent) return false;
                 if (!this.publicAssignmentDDL) return false;
-                return !(this.publicAssignmentDDL.indexOf('_') >= 0);
+                return this.publicAssignmentDDL.length === 19;
             }
         },
         methods: {
