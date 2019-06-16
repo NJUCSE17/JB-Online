@@ -14,7 +14,9 @@ class ViewCourseRequest extends FormRequest
      */
     public function authorize()
     {
-        return $this->user()->can('view', Course::class);
+        $course = $this->route('course');
+
+        return $this->user()->can('show', $course);
     }
 
     /**

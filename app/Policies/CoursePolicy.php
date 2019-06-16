@@ -41,6 +41,16 @@ class CoursePolicy
     }
 
     /**
+     * Determine whether the user can view a specific course.
+     *
+     * @return mixed
+     */
+    public function show(User $user, Course $course)
+    {
+        return true;
+    }
+
+    /**
      * Determine whether the user can create courses.
      *
      * @return mixed

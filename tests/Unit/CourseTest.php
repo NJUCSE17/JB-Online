@@ -136,8 +136,7 @@ class CourseTest extends TestCase
     {
         $this->actingAs($this->user, 'api');
         $this->post('/api/course/'.$this->course['id'].'/quit')
-            ->assertStatus(200)
-            ->assertExactJson(['Course quited.',]);
+            ->assertStatus(204);
         $this->assertDatabaseMissing('course_enroll_records',
             [
                 'user_id'    => $this->user->id,
@@ -259,8 +258,7 @@ class CourseTest extends TestCase
     {
         $this->actingAs($this->admin, 'api');
         $this->delete('/api/course/'.$this->course['id'])
-            ->assertStatus(200)
-            ->assertExactJson(['Course deleted.',]);
+            ->assertStatus(204);
         $this->assertDatabaseMissing('courses', [
             'id'         => $this->course['id'],
             'deleted_at' => null,

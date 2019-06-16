@@ -11,6 +11,6 @@
     - [综述](/{{route}}/{{version}}/api/overview)
     - [用户](/{{route}}/{{version}}/api/user)
     - [个人作业](/{{route}}/{{version}}/api/personalAssignment)
-    - [TODO: 课程](#)
+    - [课程](/{{route}}/{{version}}/api/course)
     - [TODO: 作业](#)
     - [博客](/{{route}}/{{version}}/api/feeds)

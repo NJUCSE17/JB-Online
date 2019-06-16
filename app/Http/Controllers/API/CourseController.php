@@ -128,7 +128,7 @@ class CourseController extends APIController
     {
         $course->delete();
 
-        return $this->data('Course deleted.');
+        return $this->deleted();
     }
 
     /**
@@ -172,6 +172,6 @@ class CourseController extends APIController
             ->firstOrFail()
             ->delete();
 
-        return $this->data('Course quited.');
+        return $this->deleted();
     }
 }

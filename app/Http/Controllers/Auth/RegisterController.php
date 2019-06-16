@@ -67,7 +67,7 @@ class RegisterController extends Controller
                 ],
                 'blog_feed_url' => [
                     'sometimes',
-                    'required',
+                    'nullable',
                     'string',
                     'url',
                     'max:255',

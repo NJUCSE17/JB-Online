@@ -15,6 +15,9 @@ class CourseEnrollRecordResource extends JsonResource
      */
     public function toArray($request)
     {
-        return parent::toArray($request);
+        return [
+            'user_id'       => $this->user_id,
+            'type_is_admin' => $this->type_is_admin,
+        ];
     }
 }

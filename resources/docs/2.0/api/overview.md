@@ -37,7 +37,7 @@ API的用户认证方法有两种：
 
 权限检查通过后服务器会对请求的参数进行检查，具体检查内容见各个API页面。
 
-权限检查使用的格式是 [<Laravel Validator\>](https://laravel.com/docs/5.8/validation) 。常见的有：
+参数检查对应的文档使用的是 [<Laravel Validator\>](https://laravel.com/docs/5.8/validation) 的格式。常见的有：
 
 - `required`：必须存在这个参数
 - `sometimes + required`：如果这个参数存在则检查
