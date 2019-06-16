@@ -52,13 +52,14 @@ class UserTest extends TestCase
     protected function getUserData(User $user)
     {
         return [
-            'id'            => $user->id,
-            'student_id'    => $user->student_id,
-            'name'          => $user->name,
-            'email'         => $user->email,
-            'blog_feed_url' => $user->blog_feed_url,
-            'is_verified'   => $user->isVerified(),
-            'is_active'     => $user->isActive(),
+            'id'              => $user->id,
+            'student_id'      => $user->student_id,
+            'name'            => $user->name,
+            'email'           => $user->email,
+            'blog_feed_url'   => $user->blog_feed_url,
+            'is_verified'     => $user->isVerified(),
+            'is_active'       => $user->isActive(),
+            'privilege_level' => $user->privilege_level,
         ];
     }
 
@@ -219,8 +220,10 @@ class UserTest extends TestCase
         $this->user = factory(User::class)->create();
         $this->admin = factory(User::class)->create();
         $this->admin->privilege_level = 2;
+        $this->admin->save();
         $this->super_admin = factory(User::class)->create();
         $this->super_admin->privilege_level = 1;
+        $this->admin->save();
 
         $this->assignment = factory(Assignment::class)->create();
         DB::table('course_enroll_records')->insert([

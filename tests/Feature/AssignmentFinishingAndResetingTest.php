@@ -94,7 +94,7 @@ class AssignmentFinishingAndResetingTest extends TestCase
 
         // Quit the course now.
         $this->post('/api/course/'.$assignment->course_id.'/quit')
-            ->assertStatus(200);
+            ->assertStatus(204);
         $this->assertDatabaseMissing('course_enroll_records',
             [
                 'user_id'    => $user->id,
