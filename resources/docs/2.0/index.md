@@ -14,4 +14,4 @@
     - [TODO: 课程](#)
     - [TODO: 作业](#)
     - [TODO: 题目](#)
-    - [TODO: 博客](#)
+    - [博客](/{{route}}/{{version}}/api/feeds)

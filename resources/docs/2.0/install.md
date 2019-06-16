@@ -86,7 +86,26 @@ $ php artisan key:generate
 $ php artisan storage:link
 ```
 
-> {warning} 注意：Caddy容器是基于Alpine的，容器里只有一个啥也不能干的ash，所以最好在容器外编辑配置文件。
+> {warning} 致只用过Ubuntu的玩家：
+>
+> 当你发现容器运行不正常想要调试的时候，你就会发现：
+>
+> ```shell
+> $ sudo apt install vim
+> sh: sudo: not found
+> $ apt install vim
+> sh: apt: not found
+> $ vim
+> sh: vim: not found
+> $ vi
+> sh: vi: not found
+> $ fuck
+> sh: fuck: not found
+> ```
+>
+> 你哪来的自信认为这台机器有 `sudo` 呢？
+>
+> ~~对没错我喷的就是你们这群整天玩弱智 `sudo` 梗的人，贱不贱呐（吴京.gif）~~
 
 Laravel的参考Caddyfile：
 ```caddyfile

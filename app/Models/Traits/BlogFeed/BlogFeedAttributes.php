@@ -12,7 +12,7 @@ trait BlogFeedAttributes
         return "  <entry>\n"
             ."    <title>".$this->title."</title>"
             ."    <link href='".$this->permalink."'></link>\n"
-            ."    <id>".route('blog.view', ['slug' => $this->slug])."</id>\n"
+            ."    <id>".route('blog.show', ['id' => $this->id])."</id>\n"
             ."    <published>".Carbon::parse($this->published_at)->format('c')
             ."</published>\n"
             ."    <updated>".Carbon::parse($this->published_at)->format('c')

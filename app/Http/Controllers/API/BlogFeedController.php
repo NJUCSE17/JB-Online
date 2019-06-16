@@ -16,11 +16,11 @@ class BlogFeedController extends APIController
             ."  <updated>".date("c")."</updated>\n";
         $feeds = BlogFeed::all();
         foreach ($feeds as $feed) {
-            $xml .= $feed->xmlItem();
+            $xml .= $feed->feedItem();
         }
-        $feed = $feed."</feed>";
+        $xml = $xml."</feed>";
 
-        return response($feed)->withHeaders([
+        return response($xml)->withHeaders([
             'Content-Type' => 'text/xml',
         ]);
     }
