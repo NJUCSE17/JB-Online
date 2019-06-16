@@ -10,7 +10,7 @@
 - ## API
     - [综述](/{{route}}/{{version}}/api/overview)
     - [用户](/{{route}}/{{version}}/api/user)
-    - [TODO: 个人作业](#)
+    - [个人作业](/{{route}}/{{version}}/api/personalAssignment)
     - [TODO: 课程](#)
     - [TODO: 作业](#)
     - [博客](/{{route}}/{{version}}/api/feeds)

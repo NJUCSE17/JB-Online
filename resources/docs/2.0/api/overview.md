@@ -4,8 +4,8 @@
 
 - [用户认证](#authentication)
 - [权限检查](#privilege)
-- [请求动词](#verbal)
-- [返回值](#return-value)
+- [参数检查](#content)
+- [返回状态](#return-value)
 - [使用示例](#example)
 
 > {primary} JBOnline的API世界第一！（误）
@@ -25,40 +25,41 @@ API的用户认证方法有两种：
 <a name="privilege"></a>
 ## 权限检查
 
-服务器收到请求后会对用户的权限、请求的内容进行检查：
+服务器收到请求后首先会对用户的权限进行检查，不同的API会有不同的权限条件。
 
-- 用户权限不足以进行对应的请求，返回`401 Unauthorized`；
-- 请求的内容存在非法或不满足要求（例如输入了9102年），返回`422 Unprocessable Entity`。
+但是对于所有的API，在进行具体的权限检查前会对用户进行预先检查。
 
-> {success} 绕过权限检查：
->
-> 不同的API会有不同的权限条件。但是对于所有的API，在进行具体的权限检查前会对用户进行预先检查。
->
-> - 用户未认证或未获管理员使用许可，直接拒绝请求。
-> - 用户为管理员或其他特殊身份，则跳过后面的检查，具体要求见各个API页面。
+- 用户未认证或未获管理员使用许可，直接拒绝请求。
+- 用户为管理员或其他特殊身份，则跳过后面的检查，具体要求见各个API页面。
 
-<a name="verbal"></a>
-## 请求动词
+<a name="content"></a>
+## 参数检查
 
-JBOnline的API采用（几乎）标准的CRUD动词：
+权限检查通过后服务器会对请求的参数进行检查，具体检查内容见各个API页面。
 
-- GET：获取资源
-- POST：新建资源
-- PUT：更新资源
-- DELETE：删除资源
+权限检查使用的格式是 [<Laravel Validator\>](https://laravel.com/docs/5.8/validation) 。常见的有：
+
+- `required`：必须存在这个参数
+- `sometimes + required`：如果这个参数存在则检查
+- `unique`：数据库中唯一
+- `exists`：数据库中存在
+- `new Sanitize()`：防注入净化
 
 <a name="return-value"></a>
-## 返回值
+## 返回状态
 
 API返回的HTTP状态可能有：
 
-- 200 OK
-- 201 Created
-- 40X/50X Error
+- GET/PUT: `200 OK`
+- POST: `201 Created`
+- DELETE: `204 No Content`
+- 无用户身份：`401 Unauthorized`
+- 无执行权限：`403 Forbidden`
+- 未找到对应内容：`404 Not Found`
+- 密钥过期：`419 XSRF Token Expired`
+- 参数检查失败：`422 Unprocessable Entity`
 
-当返回200/201时，同时会返回一份JSON格式的对应资源。
-
-发生错误时，会返回对应错误的信息(message)。
+当返回`200/201`时，同时会返回一份JSON格式的对应资源。
 
 <a name="example"></a>
 ## 使用示例

@@ -2,11 +2,11 @@
 
 ---
 
-- [`Get /api/user`](#u-1)
-- [`GET /api/user/{user}`](#u-2)
-- [`PUT /api/user/{user}`](#u-3)
-- [`POST /api/user/{user}/activate`](#u-4)
-- [`POST /api/user/{user}/deactivate`](#u-5)
+- [`GET /api/user`](#u-1)
+- [`GET /api/user/{id}`](#u-2)
+- [`PUT /api/user/{id}`](#u-3)
+- [`POST /api/user/{id}/activate`](#u-4)
+- [`POST /api/user/{id}/deactivate`](#u-5)
 
 > {success} 绕过本页面API权限检查的条件：`$user->privilege_level <= 1` 即用户为超级管理员。
 
@@ -20,6 +20,7 @@ user: {
     is_active: true,
     is_verified: true,
     name: "Alice",
+    privilege_level: 3,
     student_id: 170000001
 }
 ```
@@ -30,19 +31,18 @@ user: {
 - 用途：获取用户列表
 - 权限：允许所有用户访问
 - 参数：无
-- 返回：所有用户的列表
+- 返回：`200 OK` 所有用户的列表
 
 <a name="u-2"></a>
-## `GET /api/user/{user}`
+## `GET /api/user/{id}`
 
 - 用途：获取单个用户信息
 - 权限：允许所有用户访问
 - 参数：无
-- 返回：对应用户的信息
-- 错误：用户不存在时，返回404
+- 返回：`200 OK` 对应用户的信息
 
 <a name="u-3"></a>
-## `PUT /api/user/{user}`
+## `PUT /api/user/{id}`
 
 - 用途：修改单个用户信息
 - 权限：只允许用户访问自己的对应API
@@ -53,23 +53,20 @@ user: {
   'blog_feed_url' => ['sometimes', 'required', 'string', 'url', 'max:255', 'unique:users'],
   'password'      => ['sometimes', 'required', 'string', 'min:8'],
   ```
-- 返回：修改后的用户信息
-- 错误：用户不存在时，返回404
+- 返回：`200 OK` 修改后的用户信息
 
 <a name="u-4"></a>
-## `POST /api/user/{user}/activate`
+## `POST /api/user/{id}/activate`
 
 - 用途：启用某个用户
 - 权限：不允许访问
 - 参数：无
-- 返回：用户更新后的信息
-- 错误：用户不存在时，返回404
+- 返回：`200 OK` 用户更新后的信息
 
 <a name="u-5"></a>
-## `POST /api/user/{user}/deactivate`
+## `POST /api/user/{id}/deactivate`
 
 - 用途：禁用某个用户
 - 权限：不允许访问
 - 参数：无
-- 返回：用户更新后的信息
-- 错误：用户不存在时，返回404
+- 返回：`200 OK` 用户更新后的信息

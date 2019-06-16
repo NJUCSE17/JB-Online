@@ -226,8 +226,7 @@ class PersonalAssignmentTest extends TestCase
         $this->actingAs($this->users[0], 'api');
         $this->delete('/api/personalAssignment/'
             .$this->personal_assignments[0]['id'])
-            ->assertStatus(200)
-            ->assertExactJson(['Personal assignment deleted.',]);
+            ->assertStatus(204);
 
         // check the assignment has been deleted
         $this->get('/api/personalAssignment/'
@@ -252,8 +251,7 @@ class PersonalAssignmentTest extends TestCase
         $this->actingAs($this->admin, 'api');
         $this->delete('/api/personalAssignment/'
             .$this->personal_assignments[1]['id'])
-            ->assertStatus(200)
-            ->assertExactJson(['Personal assignment deleted.',]);
+            ->assertStatus(204);
 
         $this->get('/api/personalAssignment/'
             .$this->personal_assignments[1]['id'])

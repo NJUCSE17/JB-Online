@@ -141,7 +141,7 @@ class PersonalAssignmentController extends APIController
     ) {
         $personalAssignment->delete();
 
-        return $this->data('Personal assignment deleted.');
+        return $this->deleted();
     }
 
     /**

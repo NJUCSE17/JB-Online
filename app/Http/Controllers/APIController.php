@@ -42,6 +42,18 @@ class APIController extends Controller
     }
 
     /**
+     * Package data with no-content(204) status
+     *
+     * @param $data
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    protected function deleted()
+    {
+        return response(null, 204);
+    }
+
+    /**
      * Package JSON error message with specific status code.
      *
      * @param $message

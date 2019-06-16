@@ -14,7 +14,7 @@ class ViewPersonalAssignmentRequest extends FormRequest
      */
     public function authorize()
     {
-        if ($this->request->has('show_all')) {
+        if ($this->request->has('show_all') or $this->request->has('user_id')) {
             return $this->user()->privilege_level <= 2;
         } else {
             return $this->user()->can('view', PersonalAssignment::class);
