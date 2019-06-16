@@ -1,6 +1,6 @@
 <template>
-    <a v-if="finished_at" v-bind:class="'text-success'"
-        href="#" @click.prevent="reset">
+    <a v-if="record" v-bind:class="'text-success'"
+       href="#" @click.prevent="reset">
         <i class="fas fa-check mr-1"></i>
         <span>
             <s>
@@ -9,7 +9,7 @@
         </span>
     </a>
     <a v-else v-bind:class="this.ddl_color"
-        href="#" @click.prevent="finish">
+       href="#" @click.prevent="finish">
         <i class="fas fa-times mr-1"></i>
         <span>
             {{ this.ddl_for_human }}
@@ -19,18 +19,17 @@
 
 <script>
     export default {
-        name: "DDLComponent",
-        props: ['_api_finish', '_api_reset', '_due_time', '_finished_at'],
-        data: function () {
+        name: "AssignmentDDLPartial",
+        props: ['api', 'due_time', 'finish_record'],
+        data: function() {
             return {
-                api_finish: this._api_finish,
-                api_reset: this._api_reset,
-                due_time: this._due_time,
-                finished_at: this._finished_at,
+                api_finish: this.api + "/finish",
+                api_reset: this.api + "/reset",
+                record: this.finish_record,
             }
         },
         computed: {
-            ddl_color: function () {
+            ddl_color: function() {
                 let delta = (Date(this.due_time) - Date()) / (24 * 3600 * 1000);
                 if (delta <= 1) {
                     return 'text-danger';
@@ -43,29 +42,43 @@
                 }
             },
             ddl_for_human: function () {
-                return "TODO: day.js未移植 (in DDLComponent.vue)";
-                //return window.DateTime.fromISO(this.due_time).toISODate();
+                let now = window.Dayjs();
+                let ddl = window.Dayjs(this.due_time);
+                let ret = ddl.format('YYYY-MM-DD （ddd） HH:mm:ss， 剩余');
+                ret += ddl.diff(now, 'day') + "天";
+                ret += ddl.diff(now, 'hour') % 24 + "小时";
+                return ret;
             }
         },
         methods: {
             finish() {
                 window.axios.post(this.api_finish)
                     .then(res => {
-                        console.log(res);
-                        this.finished_at = res.data.finished_at;
+                        console.debug(res);
+                        this.record = res.data;
                     })
                     .catch(err => {
                         console.log(err);
+                        window.$.alert({
+                            type: 'red',
+                            title: '错误',
+                            content: err,
+                        });
                     });
             },
             reset() {
                 window.axios.post(this.api_reset)
                     .then(res => {
-                        console.log(res);
-                        this.finished_at = null;
+                        console.debug(res);
+                        this.record = null;
                     })
                     .catch(err => {
                         console.log(err);
+                        window.$.alert({
+                            type: 'red',
+                            title: '错误',
+                            content: err,
+                        });
                     })
             }
         }

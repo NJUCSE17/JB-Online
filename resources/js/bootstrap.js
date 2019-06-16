@@ -12,8 +12,9 @@ try {
 
     require('bootstrap');
 
-    //window.DateTime = require('luxon');
-    //Settings.defaultLocale = DateTime.local().resolvedLocaleOpts().locale;
+    window.Dayjs = require('dayjs');
+    require('dayjs/locale/zh-cn');
+    window.Dayjs.locale('zh-cn');
 
     window.Confirm = require('jquery-confirm');
 } catch (e) {
