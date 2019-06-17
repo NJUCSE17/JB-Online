@@ -8,7 +8,7 @@
             <assignment-d-d-l-partial
                     :api="api + '/' + assignment.id"
                     :due_time="assignment.due_time"
-                    :finish_record="assignment.finish_record"
+                    :finished_at="assignment.finished_at"
             ></assignment-d-d-l-partial>
         </span>
     </div>

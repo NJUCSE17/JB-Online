@@ -4,6 +4,7 @@ namespace App\Http\Resources;
 
 use App\Models\AssignmentFinishRecord;
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Support\Facades\Auth;
 
 class AssignmentResource extends JsonResource
 {
@@ -16,11 +17,6 @@ class AssignmentResource extends JsonResource
      */
     public function toArray($request)
     {
-        $record = AssignmentFinishRecord::query()
-            ->where('user_id', \Auth::id())
-            ->where('assignment_id', $this->id)
-            ->first();
-
         return [
             'id'            => $this->id,
             'course_id'     => $this->course_id,
@@ -28,11 +24,8 @@ class AssignmentResource extends JsonResource
             'content'       => $this->content,
             'content_html'  => $this->content_html,
             'due_time'      => $this->due_time->format('Y-m-d H:i:s'),
-            'finish_record' => new AssignmentFinishRecordResource($record),
-            'rate_info'     => [
-                'rated' => $this->rated(),
-                'stats' => $this->stats(),
-            ]
+            'finished_at'   => $this->finishedAt(Auth::user()),
+            'rate_info'     => $this->ratedInfo(),
         ];
     }
 }

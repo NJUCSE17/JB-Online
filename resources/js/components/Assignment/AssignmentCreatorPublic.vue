@@ -95,8 +95,10 @@
                     content: this.publicAssignmentContent,
                     due_time: this.publicAssignmentDDL,
                 }).then(res => {
-                    console.log(res);
-                    location.reload();
+                    console.debug(res);
+                    console.log("Assignment created, ID is " + res.data.id);
+                    this.$emit('addAssignment', res.data);
+                    window.$('#publicAssignmentModal').modal('hide');
                 }).catch(err => {
                     console.log(err);
                     window.$.alert({
@@ -104,6 +106,7 @@
                         title: '错误',
                         content: err,
                     });
+                }).finally(() => {
                     this.submitting = false;
                 });
             },

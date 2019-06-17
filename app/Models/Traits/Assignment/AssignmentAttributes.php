@@ -4,10 +4,27 @@
 namespace App\Models\Traits\Assignment;
 
 
+use App\Models\AssignmentFinishRecord;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
 trait AssignmentAttributes
 {
+    /**
+     * Get the timestamp of finished info.
+     *
+     * @param  User  $user
+     *
+     * @return mixed
+     */
+    public function finishedAt(User $user) {
+        $record = AssignmentFinishRecord::query()
+            ->where('user_id', $user)
+            ->where('assignment_id', $this->id)
+            ->first();
+        return $record ? $record->updated_at : null;
+    }
+
     /**
      * Get rated info of an assignment.
      *

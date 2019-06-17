@@ -1,7 +1,6 @@
 <template>
     <div id="AssignmentCreatorMain">
-        <div v-if="initializing" class="spinner-grow mr-2" role="status"></div>
-        <button v-else class="btn btn-sm btn-soft-primary fadeIn animated" type="button"
+        <button class="btn btn-sm btn-soft-primary fadeIn animated" type="button"
             v-on:click="openInitModal">
             <i class="fas fa-plus"></i>
         </button>
@@ -45,11 +44,13 @@
 
         <assignment-creator-personal
                 :api="this.api_personal"
+                v-on:addAssignment="addAssignment"
         ></assignment-creator-personal>
 
         <assignment-creator-public
                 :api="this.api_public"
                 :course="this.courses[this.courseSelected]"
+                v-on:addAssignment="addAssignment"
         ></assignment-creator-public>
     </div>
 </template>
@@ -58,19 +59,11 @@
     import AssignmentCreatorPersonal from "./AssignmentCreatorPersonal";
     import AssignmentCreatorPublic from "./AssignmentCreatorPublic";
     export default {
-        name: "CreateAssignmentComponent",
+        name: "AssignmentCreatorMain",
         components: {AssignmentCreatorPublic, AssignmentCreatorPersonal},
-        created: function() {
-            this.loadCourses();
-        },
+        props: ['courses', 'api_public', 'api_personal'],
         data: function () {
             return {
-                initializing: true,
-                init_failed: false,
-                api_course: '/api/course',
-                api_personal: '/api/personalAssignment',
-                api_public: '/api/assignment',
-                courses: {},
                 courseSelected: '',
             }
         },
@@ -83,22 +76,6 @@
             }
         },
         methods: {
-            loadCourses() {
-                window.axios.get(this.api_course)
-                    .then(res => {
-                        console.debug(res);
-                        this.courses = res.data;
-                        console.log("Course data loaded. "
-                            + (this.hasCourseToSelect ? "Has" : "No")
-                            + " public course available.");
-                        this.initializing = false;
-                    })
-                    .catch(err => {
-                        console.log(err);
-                        console.log("Loading course data failed.");
-                        this.initializing = false;
-                    });
-            },
             openInitModal() {
                 if (this.hasCourseToSelect) {
                     window.$('#createAssignmentModal').modal('show');
@@ -114,6 +91,9 @@
                 window.$('#createAssignmentModal').modal('hide');
                 window.$('#publicAssignmentModal').modal('show');
             },
+            addAssignment(assignment) {
+                this.$emit("addAssignment", assignment);
+            }
         }
     }
 </script>

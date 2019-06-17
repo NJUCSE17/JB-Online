@@ -12,7 +12,7 @@
 @section('content')
     <div class="row">
         <div class="col col-md-8 col-12">
-            @include('home.includes.assignmentslist', ['assignments' => $assignments])
+            <assignment-list-main></assignment-list-main>
         </div>
         <div class="col col-md-4 col-12">
             <hr class="d-block d-md-none"/>

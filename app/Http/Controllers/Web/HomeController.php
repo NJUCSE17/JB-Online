@@ -39,7 +39,6 @@ class HomeController extends Controller
     public function home()
     {
         return view('home.home')
-            ->with('assignments', Auth::user()->getOngoingAssignments())
             ->with('feeds', BlogFeed::query()
                 ->orderBy('published_at', 'DESC')
                 ->take(5)->get()

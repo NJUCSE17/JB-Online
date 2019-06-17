@@ -326,7 +326,7 @@ class AssignmentTest extends TestCase
                 'content'     => $this->faker->paragraph,
                 'due_time'    => $this->faker->dateTimeBetween('now', '+5 days')
                     ->format('Y-m-d H:i:s'),
-                'finish_record' => null,
+                'finished_at' => null,
                 'rate_info'   => [
                     'rated' => 'null',
                     'stats' => [

@@ -10,7 +10,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <div class="alert alert-outline-info" role="alert">
+                    <div class="alert alert-outline-success" role="alert">
                         <i class="fas fa-exclamation-circle"></i>
                         提示：可能遇到的错误和解决方法：
                         <ul class="mb-0">
@@ -82,7 +82,7 @@
                 if (!this.personalAssignmentName) return false;
                 if (!this.personalAssignmentContent) return false;
                 if (!this.personalAssignmentDDL) return false;
-                return this.publicAssignmentDDL.length === 19;
+                return this.personalAssignmentDDL.length === 19;
             }
         },
         methods: {
@@ -93,15 +93,18 @@
                     content: this.personalAssignmentContent,
                     due_time: this.personalAssignmentDDL,
                 }).then(res => {
-                    console.log(res);
-                    location.reload();
+                    console.debug(res);
+                    console.log("Personal assignment created, ID is " + res.data.id);
+                    this.$emit('addAssignment', res.data);
+                    window.$('#personalAssignmentModal').modal('hide');
                 }).catch(err => {
-                    console.log(err);
+                    console.debug(err);
                     window.$.alert({
                         type: 'red',
                         title: '错误',
                         content: err,
                     });
+                }).finally(() => {
                     this.submitting = false;
                 });
             },
