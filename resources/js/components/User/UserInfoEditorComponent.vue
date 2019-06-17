@@ -60,7 +60,7 @@
                                    v-bind:readonly="!canEdit">
                         </div>
                     </div>
-                    <div v-if="canEdit" id="UserInfoEditorControl">
+                    <div v-if="canEdit" v-bind:id="id + 'Control'">
                         <hr/>
                         <div class="form-group">
                             <label class="form-control-label">输入密码以验证身份</label>

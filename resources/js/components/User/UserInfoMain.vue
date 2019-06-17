@@ -58,9 +58,18 @@
                 </div>
 
                 <div v-if="isSuperUser" class="col col-12 col-md-4 mb-2">
-                    <button class="btn btn-soft-danger w-100 disabled">
+                    <button class="btn btn-soft-danger w-100"
+                            v-on:click="manageUser">
                         <i class="fas fa-user-cog mr-2"></i> 用户管理选项
                     </button>
+                    <user-manage-component
+                            :id="manageID"
+                            :api="api + '/' + user.id"
+                            :self="self"
+                            :user="user"
+                            :isSuperUser="isSuperUser"
+                            :isSelf="isSelf"
+                    ></user-manage-component>
                 </div>
             </div>
         </div>
@@ -70,9 +79,10 @@
 <script>
     import ChangePasswordComponent from "./ChangePasswordComponent";
     import UserInfoEditorComponent from "./UserInfoEditorComponent";
+    import UserManageComponent from "./UserManageComponent";
     export default {
         name: "UserInfoMain",
-        components: {UserInfoEditorComponent, ChangePasswordComponent},
+        components: {UserManageComponent, UserInfoEditorComponent, ChangePasswordComponent},
         props: ['user_id'],
         data: function () {
             return {
@@ -83,6 +93,7 @@
                 user: null,
                 passwordID: 'ChangePasswordComponent',
                 infoEditorID: 'UserInfoEditorComponent',
+                manageID: 'UserManageComponent',
             }
         },
         computed: {
@@ -131,6 +142,9 @@
             },
             editUserInfo() {
                 window.$('#' + this.infoEditorID).modal('show');
+            },
+            manageUser() {
+                window.$('#' + this.manageID).modal('show');
             },
         }
     }
