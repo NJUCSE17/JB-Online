@@ -4,7 +4,12 @@
         <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">修改个人作业 - {{ assignment.name }}</h5>
+                    <h5 class="modal-title">
+                        <span v-if="assignment.course_name">
+                            修改{{ assignment.course_name }}的作业 - {{ assignment.name }}
+                        </span>
+                        <span v-else>修改个人作业 - {{ assignment.name }}</span>
+                    </h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true"><i class="fas fa-times"></i></span>
                     </button>

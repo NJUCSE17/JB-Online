@@ -4,7 +4,10 @@
         <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" v-bind:id="id + 'Title'">创建个人作业</h5>
+                    <h5 class="modal-title" v-bind:id="id + 'Title'">
+                        <span v-if="course">创建{{ course.name }}的作业</span>
+                        <span v-else>创建个人作业</span>
+                    </h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true"><i class="fas fa-times"></i></span>
                     </button>
