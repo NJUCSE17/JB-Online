@@ -53,8 +53,8 @@ user: {
 - 参数：
   ```php
   'name'          => ['sometimes', 'required', 'string', 'max:255'],
-  'email'         => ['sometimes', 'required', 'string', 'email', 'max:255', 'unique:users'],
-  'blog_feed_url' => ['sometimes', 'required', 'string', 'url', 'max:255', 'unique:users'],
+  'email'         => ['sometimes', 'required', 'string', 'email', 'max:255', Rule::unique('users')->ignore($user->id)],
+  'blog_feed_url' => ['sometimes', 'nullable', 'string', 'url', 'max:255', Rule::unique('users')->ignore($user->id)],
   'password'      => ['sometimes', 'required', 'string', 'min:8'],
   'new_password'  => ['sometimes', 'required', 'string', 'min:8'],
   ```

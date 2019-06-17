@@ -3,6 +3,7 @@
 namespace App\Http\Requests\User;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class UpdateUserRequest extends FormRequest
 {
@@ -25,6 +26,7 @@ class UpdateUserRequest extends FormRequest
      */
     public function rules()
     {
+        $user = $this->route('user');
         return [
             'name'          => ['sometimes', 'required', 'string', 'max:255'],
             'email'         => [
@@ -33,15 +35,15 @@ class UpdateUserRequest extends FormRequest
                 'string',
                 'email',
                 'max:255',
-                'unique:users',
+                Rule::unique('users')->ignore($user->id),
             ],
             'blog_feed_url' => [
                 'sometimes',
-                'required',
+                'nullable',
                 'string',
                 'url',
                 'max:255',
-                'unique:users',
+                Rule::unique('users')->ignore($user->id),
             ],
             'password'      => ['sometimes', 'required', 'string', 'min:8'],
             'new_password'  => ['sometimes', 'required', 'string', 'min:8'],

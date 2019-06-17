@@ -35,6 +35,7 @@
                     console.error(err);
                     window.$.alert({
                         type: 'red',
+                        icon: 'fas fa-times',
                         title: '错误',
                         content: err,
                     });

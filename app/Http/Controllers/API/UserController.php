@@ -71,7 +71,7 @@ class UserController extends APIController
             ? $request->get('blog_feed_url') : $user->blog_feed_url;
         $pass = $request->has('new_password')
             ? Hash::make($request->get('new_password')) : $user->password;
-        if ($request->has('email')) {
+        if ($email !== $user->email) {
             $user->resetEmail();
             $user->deactivate();
         }

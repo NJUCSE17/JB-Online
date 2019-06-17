@@ -139,6 +139,7 @@
                     this.hasError = true;
                     window.$.alert({
                         type: 'red',
+                        icon: 'fas fa-times',
                         title: '错误',
                         content: err,
                     });

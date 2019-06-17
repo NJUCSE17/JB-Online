@@ -158,6 +158,7 @@
                     this.hasError = true;
                     window.$.alert({
                         type: 'red',
+                        icon: 'fas fa-times',
                         title: '错误',
                         content: err,
                     });
@@ -168,6 +169,7 @@
             destroy() {
                 window.$.confirm({
                     type: 'red',
+                    icon: 'fas fa-exclamation-triangle',
                     title: '注意',
                     content: '你确定要删除作业“' + this.assignment.name + '”吗？',
                     buttons: {
@@ -175,23 +177,7 @@
                             text: '确定',
                             btnClass: 'btn-danger',
                             action: () => {
-                                this.submitting = true;
-                                window.axios.delete(this.api, {
-                                    // no data
-                                }).then(res => {
-                                    console.debug(res);
-                                    window.$('#' + this.id).modal('hide');
-                                    this.$emit('deleteAssignment', this.assignment);
-                                }).catch(err => {
-                                    console.error(err);
-                                    window.$.alert({
-                                        type: 'red',
-                                        title: '错误',
-                                        content: err,
-                                    });
-                                }).finally(() => {
-                                    this.submitting = false;
-                                })
+                                this.doDestroy();
                             }
                         },
                         cancel: {
@@ -200,6 +186,26 @@
                     }
                 });
             },
+            doDestroy() {
+                this.submitting = true;
+                window.axios.delete(this.api, {
+                    // no data
+                }).then(res => {
+                    console.debug(res);
+                    window.$('#' + this.id).modal('hide');
+                    this.$emit('deleteAssignment', this.assignment);
+                }).catch(err => {
+                    console.error(err);
+                    window.$.alert({
+                        type: 'red',
+                        icon: 'fas fa-times',
+                        title: '错误',
+                        content: err,
+                    });
+                }).finally(() => {
+                    this.submitting = false;
+                })
+            }
         }
     }
 </script>

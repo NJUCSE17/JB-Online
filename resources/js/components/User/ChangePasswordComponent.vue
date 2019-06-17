@@ -10,7 +10,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <div v-if="self.id !== user.id" class="alert alert-outline-warning">
+                    <div v-if="!isSelf" class="alert alert-outline-warning">
                         <i class="fas fa-exclamation-circle mr-2"></i> 警告：你正在修改其他用户的信息。
                     </div>
                     <div class="form-group">
@@ -19,7 +19,7 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text"><i class="fas fa-lock"></i></span>
                             </div>
-                            <input id="oldPassword" type="password"
+                            <input id="OldPassword" type="password"
                                    class="form-control"
                                    v-on:keyup.enter="submit"
                                    v-model="oldPassword"
@@ -35,7 +35,7 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text"><i class="fas fa-key"></i></span>
                             </div>
-                            <input id="newPassword" type="password"
+                            <input id="NewPassword" type="password"
                                    class="form-control"
                                    v-on:keyup.enter="submit"
                                    v-model="newPassword">
@@ -49,7 +49,7 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text"><i class="fas fa-redo"></i></span>
                             </div>
-                            <input id="newPasswordRepeat" type="password"
+                            <input id="NewPasswordRepeat" type="password"
                                    class="form-control"
                                    v-on:keyup.enter="submit"
                                    v-model="newPasswordRepeat">
@@ -108,13 +108,14 @@
 
                 this.submitting = true;
                 window.axios.put(this.api, {
-                    password: this.isSuperUser || this.isSelf
+                    password: !this.isSuperUser && this.isSelf
                         ? this.oldPassword : 'AdminDoesNotNeedToGivePassword',
                     new_password: this.newPassword,
                 }).then(res => {
                     console.debug(res);
                     window.$.alert({
                         type: 'green',
+                        icon: 'fas fa-check',
                         title: '成功',
                         content: '成功修改密码。',
                     });
@@ -123,6 +124,7 @@
                     console.error(err);
                     window.$.alert({
                         type: 'red',
+                        icon: 'fas fa-times',
                         title: '错误',
                         content: err,
                     });
