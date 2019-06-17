@@ -89,7 +89,7 @@
                         this.record = res.data;
                     })
                     .catch(err => {
-                        console.log(err);
+                        console.error(err);
                         window.$.alert({
                             type: 'red',
                             title: '错误',
@@ -104,7 +104,7 @@
                         this.record = null;
                     })
                     .catch(err => {
-                        console.log(err);
+                        console.error(err);
                         window.$.alert({
                             type: 'red',
                             title: '错误',

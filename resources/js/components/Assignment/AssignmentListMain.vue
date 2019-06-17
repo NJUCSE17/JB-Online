@@ -37,6 +37,8 @@
                         v-else
                         :api="api_personal"
                         :assignment="assignment"
+                        v-on:updateAssignment="updateAssignment"
+                        v-on:deleteAssignment="deleteAssignment"
                 ></assignment-item-personal>
             </div>
         </div>
@@ -95,7 +97,7 @@
                         this.courses = res.data;
                     })
                     .catch(err => {
-                        console.log(err);
+                        console.error(err);
                     })
                     .finally(() => {
                         this.init_status = '正在加载课程作业...';
@@ -108,7 +110,7 @@
                                 this.assignments = this.assignments.concat(res.data);
                             })
                             .catch(err => {
-                                console.log(err);
+                                console.error(err);
                             })
                             .finally(() => {
                                 this.init_status = '正在加载个人作业...';
@@ -122,7 +124,7 @@
                                         console.debug(this.assignments);
                                     })
                                     .catch(err => {
-                                        console.log(err);
+                                        console.error(err);
                                     })
                                     .finally(() => {
                                         console.log("Courses and assignments loaded.");
@@ -136,6 +138,17 @@
                 let ddl = window.Dayjs(assignment.due_time);
                 this.assignments = this.assignments.concat([assignment]);
                 console.log("Assignment added to list.");
+                this.$forceUpdate();
+            },
+            updateAssignment(data) {
+                let pos = this.assignments.indexOf(data.oldAssignment);
+                this.assignments[pos] = data.newAssignment;
+                this.$forceUpdate();
+            },
+            deleteAssignment(assignment) {
+                let pos = this.assignments.indexOf(assignment);
+                this.assignments.splice(pos, 1);
+                this.$forceUpdate();
             }
         }
     }

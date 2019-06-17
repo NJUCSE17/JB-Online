@@ -34,7 +34,7 @@
                         this.info = res.data;
                     })
                     .catch(err => {
-                        console.log(err);
+                        console.error(err);
                         window.$.alert({
                             type: 'red',
                             title: '错误',

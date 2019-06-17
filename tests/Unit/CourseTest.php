@@ -62,7 +62,7 @@ class CourseTest extends TestCase
         $this->actingAs($this->user, 'api');
         $this->course['is_in_course'] = false;
         $this->course['is_course_admin'] = false;
-        
+
         $this->post('/api/course',
             [
                 'name'       => $this->course['name'],

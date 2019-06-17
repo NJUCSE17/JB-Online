@@ -10,7 +10,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <div class="alert alert-outline-success" role="alert">
+                    <div v-if="hasError" class="alert alert-outline-success" role="alert">
                         <i class="fas fa-exclamation-circle"></i>
                         提示：可能遇到的错误和解决方法：
                         <ul class="mb-0">
@@ -25,6 +25,7 @@
                                 <span class="input-group-text"><i class="fas fa-edit"></i></span>
                             </div>
                             <input id="personalAssignmentName"
+                                   v-on:keyup.enter="submit"
                                    v-model="personalAssignmentName"
                                    class="form-control" placeholder="作业名称">
                         </div>
@@ -45,6 +46,7 @@
                                 <span class="input-group-text"><i class="fas fa-calendar"></i></span>
                             </div>
                             <input id="personalAssignmentDDL" class="form-control"
+                                   v-on:keyup.enter="submit"
                                    v-model="personalAssignmentDDL"
                                    type="tel" v-mask="'####-##-## ##:##:##'"
                                    placeholder="2017-09-01 14:00:00">
@@ -75,6 +77,7 @@
                 personalAssignmentContent: '',
                 personalAssignmentDDL: '',
                 submitting: false,
+                hasError: false,
             }
         },
         computed: {
@@ -87,6 +90,8 @@
         },
         methods: {
             submit() {
+                if (!this.isReady) return;
+
                 this.submitting = true;
                 window.axios.post(this.api, {
                     name: this.personalAssignmentName,
@@ -98,7 +103,8 @@
                     this.$emit('addAssignment', res.data);
                     window.$('#personalAssignmentModal').modal('hide');
                 }).catch(err => {
-                    console.debug(err);
+                    console.error(err);
+                    this.hasError = true;
                     window.$.alert({
                         type: 'red',
                         title: '错误',

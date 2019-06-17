@@ -11,7 +11,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <div class="alert alert-outline-info" role="alert">
+                    <div v-if="hasError" class="alert alert-outline-info" role="alert">
                         <i class="fas fa-exclamation-circle"></i>
                         提示：可能遇到的错误和解决方法：
                         <ul class="mb-0">
@@ -26,6 +26,7 @@
                                 <span class="input-group-text"><i class="fas fa-edit"></i></span>
                             </div>
                             <input id="publicAssignmentName"
+                                   v-on:keyup.enter="submit"
                                    v-model="publicAssignmentName"
                                    class="form-control" placeholder="作业名称">
                         </div>
@@ -46,6 +47,7 @@
                                 <span class="input-group-text"><i class="fas fa-calendar"></i></span>
                             </div>
                             <input id="publicAssignmentDDL" class="form-control"
+                                   v-on:keyup.enter="submit"
                                    v-model="publicAssignmentDDL"
                                    type="tel" v-mask="'####-##-## ##:##:##'"
                                    placeholder="2017-09-01 14:00:00">
@@ -76,6 +78,7 @@
                 publicAssignmentContent: '',
                 publicAssignmentDDL: '',
                 submitting: false,
+                hasError: false,
             }
         },
         computed: {
@@ -88,6 +91,8 @@
         },
         methods: {
             submit() {
+                if (!this.isReady) return;
+
                 this.submitting = true;
                 window.axios.post(this.api, {
                     course_id: this.course.id,
@@ -100,7 +105,8 @@
                     this.$emit('addAssignment', res.data);
                     window.$('#publicAssignmentModal').modal('hide');
                 }).catch(err => {
-                    console.log(err);
+                    console.error(err);
+                    this.hasError = true;
                     window.$.alert({
                         type: 'red',
                         title: '错误',
