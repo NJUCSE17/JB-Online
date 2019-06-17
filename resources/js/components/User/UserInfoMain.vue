@@ -24,20 +24,22 @@
                             v-on:click="editUserInfo">
                         <i class="fas fa-user-edit mr-2"></i> 修改用户信息
                     </button>
-                    <user-info-editor-component
-                            :id="infoEditorID"
-                            :api="api + '/' + user.id"
-                            :self="self"
-                            :user="user"
-                            :isSuperUser="isSuperUser"
-                            :isSelf="isSelf">
-                    </user-info-editor-component>
                 </div>
                 <div v-else class="col col-12 mb-2">
-                    <button class="btn btn-soft-info w-100 disabled">
+                    <button class="btn btn-soft-info w-100"
+                            v-on:click="editUserInfo">
                         <i class="fas fa-user mr-2"></i> 查看用户信息
                     </button>
                 </div>
+                <user-info-editor-component
+                        :id="infoEditorID"
+                        :api="api + '/' + user.id"
+                        :self="self"
+                        :user="user"
+                        :isSuperUser="isSuperUser"
+                        :isSelf="isSelf"
+                        :canEdit="canEdit">
+                </user-info-editor-component>
 
                 <div v-if="canEdit" class="col col-12 mb-2"
                      v-bind:class="isSuperUser ? 'col-md-4' : 'col-md-6'">
