@@ -86,7 +86,8 @@ class UserTest extends TestCase
         $data['name'] = $this->faker->name;
         $this->put('/api/user/'.$this->user->id,
             [
-                'name' => $data['name'],
+                'name'     => $data['name'],
+                'password' => 'password',
             ]
         )->assertStatus(200)
             ->assertExactJson($data);
@@ -109,7 +110,8 @@ class UserTest extends TestCase
 
         $this->put('/api/user/'.$this->user->id,
             [
-                'email' => $data['email'],
+                'email'    => $data['email'],
+                'password' => 'password',
             ]
         )->assertStatus(200)
             ->assertExactJson($data);
@@ -154,6 +156,7 @@ class UserTest extends TestCase
         $this->put('/api/user/'.$this->user->id,
             [
                 'name' => $this->user->name,
+                // no password required
             ]
         )->assertStatus(200)
             ->assertExactJson($this->getUserData($this->user));

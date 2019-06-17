@@ -25,9 +25,11 @@ class UserController extends APIController
     {
         if ($request->has('self') && $request->get('self')) {
             $user = \Auth::user();
+
             return $this->data(new UserResource($user));
         } else {
             $users = User::all();
+
             return $this->data(new UserResourceCollection($users));
         }
     }
@@ -57,11 +59,15 @@ class UserController extends APIController
     {
         if (\Auth::user()->privilege_level >= 2) {
             // non-admin need to validate password
-            if (!\Auth::attempt([
-                'student_id' => $user,
-                'password'   => $request->get('password'),
-            ])) {
-                return $this->error('Password check failed.', 403);
+            if (!$request->has('password')) {
+                return $this->error('No password given.', 403);
+            } else {
+                if (!\Auth::guard('web')->attempt([
+                    'student_id' => $user->student_id,
+                    'password'   => $request->get('password'),
+                ])) {
+                    return $this->error('Password check failed.', 403);
+                }
             }
         }
 
