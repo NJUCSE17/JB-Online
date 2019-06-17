@@ -1,11 +1,11 @@
 <template>
-    <div id="assignmentListMain">
-        <div id="assignmentListControl">
+    <div id="personalAssignmentMain">
+        <div id="personalAssignmentControl">
             <p class="h3">
-                当前作业
+                个人作业
                 <span class="float-right" v-if="!initializing">
                     <assignment-creator-main
-                            :courses="courses"
+                            :courses="[]"
                             :api_public="api_public"
                             :api_personal="api_personal"
                             v-on:addAssignment="addAssignment"
@@ -26,17 +26,9 @@
                 </div>
             </div>
         </div>
-        <div v-else-if="assignments.length > 0" id="assignmentListContent">
-            <div v-for="assignment in assignments_sorted">
-                <assignment-item-public
-                        v-if="assignment.course_id"
-                        :api="api_public"
-                        :assignment="assignment"
-                        v-on:updateAssignment="updateAssignment"
-                        v-on:deleteAssignment="deleteAssignment"
-                ></assignment-item-public>
+        <div v-else-if="assignments.length > 0" id="personalAssignmentContent">
+            <div v-for="assignment in assignments">
                 <assignment-item-personal
-                        v-else
                         :api="api_personal"
                         :assignment="assignment"
                         v-on:updateAssignment="updateAssignment"
@@ -52,7 +44,7 @@
             </div>
             <div class="row">
                 <div class="col text-center">
-                    <p>现在没有作业</p>
+                    <p>没有个人作业</p>
                 </div>
             </div>
         </div>
@@ -61,72 +53,38 @@
 
 <script>
     import AssignmentItemPersonal from "./AssignmentItemPersonal";
-    import AssignmentItemPublic from "./AssignmentItemPublic";
     import AssignmentCreatorMain from "./AssignmentCreatorMain";
 
     export default {
-        name: "AssignmentListMain",
-        components: {AssignmentCreatorMain, AssignmentItemPublic, AssignmentItemPersonal},
+        name: "PersonalAssignmentList",
+        components: {AssignmentCreatorMain, AssignmentItemPersonal},
         props: [],
         data: function () {
             return {
                 initializing: true,
                 init_status: "",
-                api_course: '/api/course',
                 api_public: "/api/assignment",
                 api_personal: "/api/personalAssignment",
-                courses: [],
                 assignments: [],
-            }
-        },
-        computed: {
-            assignments_sorted: function () {
-                return this.assignments.sort(this.sortByDDL)
             }
         },
         created: function () {
             this.loadCoursesAndAssignments();
         },
         methods: {
-            sortByDDL(a, b) {
-                return window.Dayjs(a.due_time).isBefore(window.Dayjs(b.due_time)) ? -1 : 1;
-            },
             loadCoursesAndAssignments() {
-                this.init_status = '正在加载课程列表...';
-                window.axios.get(this.api_course, {
-                    // no data
+                this.init_status = '正在加载个人作业...';
+                window.axios.get(this.api_personal, {
+                    due_after: '2000-01-01 00:00:00'
                 }).then(res => {
-                    console.debug(res);
-                    this.courses = res.data;
+                    this.assignments = this.assignments.concat(res.data);
+                    console.debug(this.assignments);
                 }).catch(err => {
                     console.error(err);
                 }).finally(() => {
-                    this.init_status = '正在加载课程作业...';
-                    window.axios.get(this.api_public, {
-                        params: {
-                            due_after: window.Dayjs().format('YYYY-MM-DD HH:mm:ss'),
-                        }
-                    }).then(res => {
-                        this.assignments = this.assignments.concat(res.data);
-                    }).catch(err => {
-                        console.error(err);
-                    }).finally(() => {
-                        this.init_status = '正在加载个人作业...';
-                        window.axios.get(this.api_personal, {
-                            params: {
-                                due_after: window.Dayjs().format('YYYY-MM-DD HH:mm:ss'),
-                            }
-                        }).then(res => {
-                            this.assignments = this.assignments.concat(res.data);
-                            console.debug(this.assignments);
-                        }).catch(err => {
-                            console.error(err);
-                        }).finally(() => {
-                            console.log("Courses and assignments loaded.");
-                            this.initializing = false;
-                            this.init_status = null;
-                        });
-                    });
+                    console.log("Personal assignments loaded.");
+                    this.initializing = false;
+                    this.init_status = null;
                 });
             },
             addAssignment(assignment) {

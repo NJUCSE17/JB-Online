@@ -26,6 +26,7 @@
             </div>
         </div>
         <hr />
+        <personal-assignment-list></personal-assignment-list>
     @elseif(Auth::user()->privilege_level <= 1)
         <div id="admin">
             <div id="admin-control">
@@ -37,6 +38,7 @@
             </div>
         </div>
         <hr />
+        <personal-assignment-list></personal-assignment-list>
     @endif
     <div id="feed">
         <div id="feed-control">

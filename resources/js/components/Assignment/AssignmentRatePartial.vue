@@ -28,19 +28,17 @@
             rate(like) {
                 window.axios.post(this.api, {
                     'like': like
-                })
-                    .then(res => {
-                        console.debug(res);
-                        this.info = res.data;
-                    })
-                    .catch(err => {
-                        console.error(err);
-                        window.$.alert({
-                            type: 'red',
-                            title: '错误',
-                            content: err,
-                        });
+                }).then(res => {
+                    console.debug(res);
+                    this.info = res.data;
+                }).catch(err => {
+                    console.error(err);
+                    window.$.alert({
+                        type: 'red',
+                        title: '错误',
+                        content: err,
                     });
+                });
             }
         }
     }

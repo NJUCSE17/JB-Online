@@ -40,10 +40,11 @@
                 label: '',
             }
         },
-        created: function() {
+        created: function () {
             this.color = this.getColor();
             this.label = this.getLabel();
             window.setInterval(() => {
+                this.color = this.getColor();
                 this.label = this.getLabel();
             }, 1000);
         },
@@ -52,7 +53,9 @@
                 let now = window.Dayjs();
                 let ddl = window.Dayjs(this.due_time);
                 let delta = ddl.diff(now, 'day');
-                if (delta <= 1) {
+                if (now.isAfter(ddl)) {
+                    return 'text-dark';
+                } else if (delta <= 1) {
                     return 'text-danger';
                 } else if (delta <= 2) {
                     return 'text-warning';
@@ -66,7 +69,7 @@
                 let now = window.Dayjs();
                 let ddl = window.Dayjs(this.due_time);
                 let ret = ddl.format('YYYY-MM-DD (ddd) HH:mm:ss');
-                if (ddl.isBefore(now)) {
+                if (now.isAfter(ddl)) {
                     return ret + '，已截止';
                 } else {
                     ret += '，剩余';
@@ -84,34 +87,34 @@
                 }
             },
             finish() {
-                window.axios.post(this.api_finish)
-                    .then(res => {
-                        console.debug(res);
-                        this.record = res.data;
-                    })
-                    .catch(err => {
-                        console.error(err);
-                        window.$.alert({
-                            type: 'red',
-                            title: '错误',
-                            content: err,
-                        });
+                window.axios.post(this.api_finish, {
+                    // no data
+                }).then(res => {
+                    console.debug(res);
+                    this.record = res.data;
+                }).catch(err => {
+                    console.error(err);
+                    window.$.alert({
+                        type: 'red',
+                        title: '错误',
+                        content: err,
                     });
+                });
             },
             reset() {
-                window.axios.post(this.api_reset)
-                    .then(res => {
-                        console.debug(res);
-                        this.record = null;
-                    })
-                    .catch(err => {
-                        console.error(err);
-                        window.$.alert({
-                            type: 'red',
-                            title: '错误',
-                            content: err,
-                        });
-                    })
+                window.axios.post(this.api_reset, {
+                    // no data
+                }).then(res => {
+                    console.debug(res);
+                    this.record = null;
+                }).catch(err => {
+                    console.error(err);
+                    window.$.alert({
+                        type: 'red',
+                        title: '错误',
+                        content: err,
+                    });
+                })
             }
         }
     }

@@ -26,7 +26,7 @@ class PersonalAssignmentController extends APIController
      */
     public function index(ViewPersonalAssignmentRequest $request)
     {
-        $query = $personal_assignments = PersonalAssignment::query();
+        $query = PersonalAssignment::query()->orderBy('due_time', 'desc');
 
         if (!$request->has('show_all')) {
             $query->where('user_id', $request->has('user_id')
@@ -36,9 +36,9 @@ class PersonalAssignmentController extends APIController
         if ($request->has('due_before')) {
             $query->where('due_time', '<=', $request->get('due_before'));
         }
-        $query->where('due_time', '>=',
-            $request->has('due_after') ? $request->get('due_after') : now()
-        );
+        if ($request->has('due_after')) {
+            $query->where('due_time', '>=', $request->get('due_after'));
+        }
         if ($request->has('unfinished_only')
             && $request->get('unfinished_only')
         ) {

@@ -30,7 +30,7 @@ class AssignmentController extends APIController
      */
     public function index(ViewAssignmentRequest $request)
     {
-        $query = Assignment::query();
+        $query = Assignment::query()->orderBy('due_time', 'desc');
         if (!$request->has('show_all')) {
             if ($request->has('course_id')) {
                 $query->where('course_id', $request->get('course_id'));

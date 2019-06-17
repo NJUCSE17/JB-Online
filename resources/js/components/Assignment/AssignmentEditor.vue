@@ -108,6 +108,7 @@
 
 <script>
     import createAutoCorrectedDatePipe from 'text-mask-addons/dist/createAutoCorrectedDatePipe';
+
     export default {
         name: "AssignmentEditor",
         props: ['id', 'api', 'assignment'],
@@ -175,23 +176,22 @@
                             btnClass: 'btn-danger',
                             action: () => {
                                 this.submitting = true;
-                                window.axios.delete(this.api)
-                                    .then(res => {
-                                        console.debug(res);
-                                        window.$('#' + this.id).modal('hide');
-                                        this.$emit('deleteAssignment', this.assignment);
-                                    })
-                                    .catch(err => {
-                                        console.error(err);
-                                        window.$.alert({
-                                            type: 'red',
-                                            title: '错误',
-                                            content: err,
-                                        });
-                                    })
-                                    .finally(() => {
-                                        this.submitting = false;
-                                    })
+                                window.axios.delete(this.api, {
+                                    // no data
+                                }).then(res => {
+                                    console.debug(res);
+                                    window.$('#' + this.id).modal('hide');
+                                    this.$emit('deleteAssignment', this.assignment);
+                                }).catch(err => {
+                                    console.error(err);
+                                    window.$.alert({
+                                        type: 'red',
+                                        title: '错误',
+                                        content: err,
+                                    });
+                                }).finally(() => {
+                                    this.submitting = false;
+                                })
                             }
                         },
                         cancel: {
