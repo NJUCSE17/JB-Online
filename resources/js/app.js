@@ -8,8 +8,8 @@ require('./bootstrap');
 
 window.Vue = require('vue');
 
-VueTheMask = require('vue-the-mask');
-window.Vue.use(VueTheMask);
+import MaskedInput from 'vue-text-mask';
+window.Vue.component('masked-input', MaskedInput);
 
 /**
  * The following block of code may be used to automatically register your

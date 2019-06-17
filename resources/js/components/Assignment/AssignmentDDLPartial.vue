@@ -65,7 +65,7 @@
             getLabel() {
                 let now = window.Dayjs();
                 let ddl = window.Dayjs(this.due_time);
-                let ret = ddl.format('YYYY-MM-DD （ddd） HH:mm:ss');
+                let ret = ddl.format('YYYY-MM-DD (ddd) HH:mm:ss');
                 if (ddl.isBefore(now)) {
                     return ret + '，已截止';
                 } else {

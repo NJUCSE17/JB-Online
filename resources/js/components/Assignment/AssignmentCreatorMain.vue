@@ -5,12 +5,12 @@
             <i class="fas fa-plus"></i>
         </button>
 
-        <div class="modal fade" id="createAssignmentModal"
-             tabindex="-1" role="dialog" aria-labelledby="createAssignmentModalTitle" aria-hidden="true">
+        <div class="modal fade" v-bind:id="thisID"
+             tabindex="-1" role="dialog" v-bind:aria-labelledby="thisID + 'Title'" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="createAssignmentModalTitle">
+                        <h5 class="modal-title" v-bind:id="thisID + 'Title'">
                             请选择作业类型
                         </h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -42,29 +42,36 @@
             </div>
         </div>
 
-        <assignment-creator-personal
+        <assignment-creator
+                :id="personalID"
+                :type="'personal'"
                 :api="this.api_personal"
+                :course="null"
                 v-on:addAssignment="addAssignment"
-        ></assignment-creator-personal>
+        ></assignment-creator>
 
-        <assignment-creator-public
+        <assignment-creator
                 v-if="hasCourseToSelect"
+                :id="publicID"
+                :type="'public'"
                 :api="this.api_public"
                 :course="this.courses[this.courseSelected]"
                 v-on:addAssignment="addAssignment"
-        ></assignment-creator-public>
+        ></assignment-creator>
     </div>
 </template>
 
 <script>
-    import AssignmentCreatorPersonal from "./AssignmentCreatorPersonal";
-    import AssignmentCreatorPublic from "./AssignmentCreatorPublic";
+    import AssignmentCreator from "./AssignmentCreator";
     export default {
         name: "AssignmentCreatorMain",
-        components: {AssignmentCreatorPublic, AssignmentCreatorPersonal},
+        components: {AssignmentCreator},
         props: ['courses', 'api_public', 'api_personal'],
         data: function () {
             return {
+                thisID: 'AssignmentCreatorMainModal',
+                publicID: 'AssignmentCreatorPublicModal',
+                personalID: 'AssignmentCreatorPersonalModel',
                 courseSelected: '',
             }
         },
@@ -79,18 +86,18 @@
         methods: {
             openInitModal() {
                 if (this.hasCourseToSelect) {
-                    window.$('#createAssignmentModal').modal('show');
+                    window.$('#' + this.thisID).modal('show');
                 } else {
                     this.proceedToPersonal();
                 }
             },
             proceedToPersonal() {
-                window.$('#createAssignmentModal').modal('hide');
-                window.$('#personalAssignmentModal').modal('show');
+                window.$('#' + this.thisID).modal('hide');
+                window.$('#' + this.personalID).modal('show');
             },
             proceedToPublic() {
-                window.$('#createAssignmentModal').modal('hide');
-                window.$('#publicAssignmentModal').modal('show');
+                window.$('#' + this.thisID).modal('hide');
+                window.$('#' + this.publicID).modal('show');
             },
             addAssignment(assignment) {
                 this.$emit("addAssignment", assignment);
