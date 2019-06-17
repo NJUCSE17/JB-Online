@@ -49,6 +49,9 @@ class CourseTest extends TestCase
     protected function noCoursesAtFirst()
     {
         $this->actingAs($this->user, 'api');
+        $this->course['is_in_course'] = false;
+        $this->course['is_course_admin'] = false;
+
         $this->get('/api/course')
             ->assertStatus(200)
             ->assertExactJson([]);
@@ -57,6 +60,9 @@ class CourseTest extends TestCase
     protected function userCannotCreateCourse()
     {
         $this->actingAs($this->user, 'api');
+        $this->course['is_in_course'] = false;
+        $this->course['is_course_admin'] = false;
+        
         $this->post('/api/course',
             [
                 'name'       => $this->course['name'],
@@ -71,6 +77,9 @@ class CourseTest extends TestCase
     protected function adminCanCreateCourse()
     {
         $this->actingAs($this->admin, 'api');
+        $this->course['is_in_course'] = false;
+        $this->course['is_course_admin'] = true;
+
         $this->post('/api/course',
             [
                 'name'       => $this->course['name'],
@@ -86,6 +95,9 @@ class CourseTest extends TestCase
     protected function userCanViewCourses()
     {
         $this->actingAs($this->user, 'api');
+        $this->course['is_in_course'] = false;
+        $this->course['is_course_admin'] = false;
+
         $this->get('/api/course')
             ->assertStatus(200)
             ->assertExactJson([$this->course]);
@@ -94,6 +106,9 @@ class CourseTest extends TestCase
     protected function userCanFilterCourses()
     {
         $this->actingAs($this->user, 'api');
+        $this->course['is_in_course'] = false;
+        $this->course['is_course_admin'] = false;
+
         $this->get('/api/course?semester='.$this->course['semester'])
             ->assertStatus(200)
             ->assertExactJson([$this->course]);
@@ -105,6 +120,9 @@ class CourseTest extends TestCase
     protected function userCanViewSpecificCourse()
     {
         $this->actingAs($this->user, 'api');
+        $this->course['is_in_course'] = false;
+        $this->course['is_course_admin'] = false;
+
         $this->get('/api/course/'.$this->course['id'])
             ->assertStatus(200)
             ->assertExactJson($this->course);
@@ -113,6 +131,9 @@ class CourseTest extends TestCase
     protected function userCanEnrollCourse()
     {
         $this->actingAs($this->user, 'api');
+        $this->course['is_in_course'] = false;
+        $this->course['is_course_admin'] = false;
+
         $this->post('/api/course/'.$this->course['id'].'/enroll')
             ->assertStatus(200)
             ->assertJson( // not an exact assertion
@@ -137,6 +158,9 @@ class CourseTest extends TestCase
     protected function userCanQuitCourse()
     {
         $this->actingAs($this->user, 'api');
+        $this->course['is_in_course'] = true;
+        $this->course['is_course_admin'] = false;
+
         $this->post('/api/course/'.$this->course['id'].'/quit')
             ->assertStatus(204);
         $this->assertDatabaseMissing('course_enroll_records',
@@ -146,13 +170,13 @@ class CourseTest extends TestCase
                 'deleted_at' => null,
             ]
         );
-        $this->course['is_in_course'] = true;
-        $this->course['is_course_admin'] = true;
     }
 
     protected function userCanNotJoinAsCourseAdmin()
     {
         $this->actingAs($this->course_admin, 'api');
+        $this->course['is_in_course'] = false;
+        $this->course['is_course_admin'] = false;
         $this->assertDatabaseMissing('course_enroll_records',
             [
                 'user_id'    => $this->course_admin->id,
@@ -175,6 +199,9 @@ class CourseTest extends TestCase
     protected function userCanBeSetAsCourseAdmin()
     {
         $this->actingAs($this->admin, 'api');
+        $this->course['is_in_course'] = false;
+        $this->course['is_course_admin'] = false;
+
         $this->assertDatabaseMissing('course_enroll_records',
             [
                 'user_id'    => $this->course_admin->id,
@@ -225,7 +252,7 @@ class CourseTest extends TestCase
     {
         $this->actingAs($this->admin, 'api');
         $this->course['is_in_course'] = false;
-        $this->course['is_course_admin'] = false;
+        $this->course['is_course_admin'] = true;
 
         $notice = $this->faker->paragraph;
         $this->course['notice'] = $notice;
@@ -275,7 +302,7 @@ class CourseTest extends TestCase
     {
         $this->actingAs($this->admin, 'api');
         $this->course['is_in_course'] = false;
-        $this->course['is_course_admin'] = false;
+        $this->course['is_course_admin'] = true;
         $this->delete('/api/course/'.$this->course['id'])
             ->assertStatus(204);
         $this->assertDatabaseMissing('courses', [
