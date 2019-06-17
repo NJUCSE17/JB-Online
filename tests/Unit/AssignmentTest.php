@@ -319,12 +319,14 @@ class AssignmentTest extends TestCase
         $this->course = factory(Course::class)->create();
         for ($i = 0; $i < 2; ++$i) {
             $this->assignments[] = [
-                'id'          => $i
+                'id' => $i
                     + DB::select("SHOW TABLE STATUS LIKE 'assignments'")[0]->Auto_increment,
-                'course_id'   => $this->course->id,
-                'name'        => $this->faker->text(20),
-                'content'     => $this->faker->paragraph,
-                'due_time'    => $this->faker->dateTimeBetween('now', '+5 days')
+                'course_id'       => $this->course->id,
+                'course_name'     => $this->course->name,
+                'is_course_admin' => false,
+                'name'            => $this->faker->text(20),
+                'content'         => $this->faker->paragraph,
+                'due_time'        => $this->faker->dateTimeBetween('now', '+5 days')
                     ->format('Y-m-d H:i:s'),
                 'finished_at' => null,
                 'rate_info'   => [
