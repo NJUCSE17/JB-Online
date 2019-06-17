@@ -79,6 +79,7 @@
                             ret += diff + this.periods[i][1];
                         }
                     }
+                    if (left === 2) ret += '0秒';
                     return ret;
                 }
             },

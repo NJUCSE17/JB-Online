@@ -1,7 +1,9 @@
 <template><div class="card">
     <h3 class="card-header">
         {{ assignment.course_name }} - {{ assignment.name }}
-        <button v-if="assignment.is_course_admin" class="float-right btn btn-sm btn-soft-info px-3">
+        <button v-if="assignment.is_course_admin"
+                class="float-right btn btn-sm btn-soft-info px-3"
+                v-on:click="editAssignment">
             <i class="fas fa-edit"></i>
         </button>
     </h3>
@@ -19,16 +21,44 @@
             ></assignment-d-d-l-partial>
         </span>
     </div>
+
+    <assignment-editor
+            :id="editorID"
+            :api="api + '/' + assignment.id"
+            :assignment="assignment"
+            v-on:updateAssignment="updateAssignment"
+            v-on:deleteAssignment="deleteAssignment"
+    ></assignment-editor>
 </div>
 </template>
 
 <script>
     import AssignmentDDLPartial from "./AssignmentDDLPartial";
     import AssignmentRatePartial from "./AssignmentRatePartial";
+    import AssignmentEditor from "./AssignmentEditor";
     export default {
         name: "AssignmentItemPublic",
-        components: {AssignmentRatePartial, AssignmentDDLPartial},
+        components: {AssignmentEditor, AssignmentRatePartial, AssignmentDDLPartial},
         props: ['api', 'assignment'],
+        data: function () {
+            return {
+                editorID: 'AssignmentEditorPublic' + this.assignment.id,
+            }
+        },
+        methods: {
+            editAssignment() {
+                window.$('#' + this.editorID).modal('show');
+            },
+            updateAssignment(newAssignment) {
+                this.$emit('updateAssignment', {
+                    oldAssignment: this.assignment,
+                    newAssignment: newAssignment,
+                });
+            },
+            deleteAssignment() {
+                this.$emit('deleteAssignment', this.assignment);
+            }
+        }
     }
 </script>
 

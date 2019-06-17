@@ -17,26 +17,26 @@
         </span>
     </div>
 
-    <assignment-editor-personal
+    <assignment-editor
             :id="editorID"
             :api="api + '/' + assignment.id"
             :assignment="assignment"
             v-on:updateAssignment="updateAssignment"
             v-on:deleteAssignment="deleteAssignment"
-    ></assignment-editor-personal>
+    ></assignment-editor>
 </div>
 </template>
 
 <script>
     import AssignmentDDLPartial from "./AssignmentDDLPartial";
-    import AssignmentEditorPersonal from "./AssignmentEditorPersonal";
+    import AssignmentEditor from "./AssignmentEditor";
     export default {
         name: "AssignmentItemPersonal",
-        components: {AssignmentEditorPersonal, AssignmentDDLPartial},
+        components: {AssignmentEditor, AssignmentDDLPartial},
         props: ['api', 'assignment'],
         data: function () {
             return {
-                editorID: 'AssignmentEditor' + this.assignment.id,
+                editorID: 'AssignmentEditorPersonal' + this.assignment.id,
             }
         },
         methods: {

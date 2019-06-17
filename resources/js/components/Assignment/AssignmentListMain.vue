@@ -32,6 +32,8 @@
                         v-if="assignment.course_id"
                         :api="api_public"
                         :assignment="assignment"
+                        v-on:updateAssignment="updateAssignment"
+                        v-on:deleteAssignment="deleteAssignment"
                 ></assignment-item-public>
                 <assignment-item-personal
                         v-else

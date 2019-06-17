@@ -12,7 +12,7 @@
                 <div class="modal-body">
                     <div v-bind:id="id + 'DeleteButton'">
                         <button v-if="!isNameCorrect" class="btn btn-danger w-100 disabled" disabled>
-                            <i class="fas fa-lock mr-2"></i> 请输入作业名称来解锁
+                            <i class="fas fa-lock mr-2"></i> 输入作业名称来删除
                         </button>
                         <button v-else-if="!submitting" class="btn btn-danger w-100" v-on:click="destroy">
                             <i class="fas fa-trash mr-2"></i> 删除这个作业
@@ -39,7 +39,7 @@
                             </div>
                             <input class="form-control"
                                    v-on:keyup.enter="submit"
-                                   v-model="personalAssignmentName"
+                                   v-model="assignmentName"
                                    v-bind:id="id + 'InputName'"
                                    v-bind:placeholder="assignment.name">
                         </div>
@@ -50,7 +50,7 @@
                             <textarea class="form-control"
                                       v-bind:id="id + 'InputContent'"
                                       v-bind:disabled="!isNameCorrect"
-                                      v-model="personalAssignmentContent">
+                                      v-model="assignmentContent">
                             </textarea>
                         </div>
                     </div>
@@ -64,21 +64,27 @@
                                    v-bind:id="id + 'InputDDL'"
                                    v-bind:disabled="!isNameCorrect"
                                    v-on:keyup.enter="submit"
-                                   v-model="personalAssignmentDDL"
+                                   v-model="assignmentDDL"
                                    type="tel" v-mask="'####-##-## ##:##:##'"
                                    placeholder="2017-09-01 14:00:00">
                         </div>
                     </div>
                     <hr/>
                     <div v-bind:id="id + 'SubmitButton'">
-                        <button v-if="!isNameCorrect" class="btn btn-success w-100 disabled" disabled>
-                            <i class="fas fa-lock mr-2"></i> 请输入作业名称来解锁
+                        <button v-if="!isNameCorrect"
+                                class="btn w-100 disabled" disabled
+                                v-bind:class="assignment.course_id ? 'btn-info' : 'btn-success'">
+                            <i class="fas fa-lock mr-2"></i> 输入作业名称来编辑
                         </button>
-                        <button v-else-if="!submitting" class="btn btn-success w-100" v-on:click="submit"
-                                v-bind:class="{ disabled : !isReady }" :disabled="!isReady">
+                        <button v-else-if="!submitting"
+                                class="btn btn-success w-100"
+                                v-on:click="submit"
+                                v-bind:disabled="!isReady"
+                                v-bind:class="assignment.course_id ? 'btn-info' : 'btn-success'">
                             <i class="fas fa-edit mr-2"></i> 更新作业
                         </button>
-                        <button class="btn btn-success disabled w-100" v-else disabled>
+                        <button v-else class="btn disabled w-100" disabled
+                                v-bind:class="assignment.course_id ? 'btn-info' : 'btn-success'">
                             <span class="spinner-border spinner-border-sm mr-2" role="status" aria-hidden="true"></span>
                             处理中
                         </button>
@@ -91,38 +97,38 @@
 
 <script>
     export default {
-        name: "AssignmentEditorPersonal",
+        name: "AssignmentEditor",
         props: ['id', 'api', 'assignment'],
         data: function () {
             return {
-                personalAssignmentName: '',
-                personalAssignmentContent: this.assignment.content,
-                personalAssignmentDDL: this.assignment.due_time,
+                assignmentName: '',
+                assignmentContent: this.assignment.content,
+                assignmentDDL: this.assignment.due_time,
                 submitting: false,
                 hasError: false,
             }
         },
         computed: {
             isNameCorrect() {
-                return this.personalAssignmentName === this.assignment.name;
+                return this.assignmentName === this.assignment.name;
             },
             isReady() {
                 if (!this.isNameCorrect) return false;
-                if (!this.personalAssignmentContent) return false;
-                if (!this.personalAssignmentDDL) return false;
-                return this.personalAssignmentDDL.length === 19;
+                if (!this.assignmentContent) return false;
+                if (!this.assignmentDDL) return false;
+                return this.assignmentDDL.length === 19;
             }
         },
         methods: {
             submit() {
                 this.submitting = true;
                 window.axios.put(this.api, {
-                    name: this.personalAssignmentName,
-                    content: this.personalAssignmentContent,
-                    due_time: this.personalAssignmentDDL,
+                    name: this.assignmentName,
+                    content: this.assignmentContent,
+                    due_time: this.assignmentDDL,
                 }).then(res => {
                     console.debug(res);
-                    console.log("Personal assignment updated.");
+                    console.log("Assignment updated.");
                     window.$('#' + this.id).modal('hide');
                     this.$emit('updateAssignment', res.data);
                 }).catch(err => {
@@ -141,13 +147,30 @@
                 window.$.confirm({
                     type: 'red',
                     title: '注意',
-                    content: '你确定要删除个人作业“' + this.assignment.name + '”吗？',
+                    content: '你确定要删除作业“' + this.assignment.name + '”吗？',
                     buttons: {
                         confirm: {
                             text: '确定',
                             btnClass: 'btn-danger',
                             action: () => {
-                                this.doDestroy();
+                                this.submitting = true;
+                                window.axios.delete(this.api)
+                                    .then(res => {
+                                        console.debug(res);
+                                        window.$('#' + this.id).modal('hide');
+                                        this.$emit('deleteAssignment', this.assignment);
+                                    })
+                                    .catch(err => {
+                                        console.error(err);
+                                        window.$.alert({
+                                            type: 'red',
+                                            title: '错误',
+                                            content: err,
+                                        });
+                                    })
+                                    .finally(() => {
+                                        this.submitting = false;
+                                    })
                             }
                         },
                         cancel: {
@@ -155,26 +178,6 @@
                         },
                     }
                 });
-            },
-            doDestroy() {
-                this.submitting = true;
-                window.axios.delete(this.api)
-                    .then(res => {
-                        console.debug(res);
-                        window.$('#' + this.id).modal('hide');
-                        this.$emit('deleteAssignment', this.assignment);
-                    })
-                    .catch(err => {
-                        console.error(err);
-                        window.$.alert({
-                            type: 'red',
-                            title: '错误',
-                            content: err,
-                        });
-                    })
-                    .finally(() => {
-                        this.submitting = false;
-                    })
             },
         }
     }
