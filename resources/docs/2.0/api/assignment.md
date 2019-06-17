@@ -20,13 +20,11 @@ assignment: {
     content: "Hello, world!",
     content_html: "<p>Hello, world!</p>",
     course_id: 2,
+    course_name: 'Problem Solving',
     due_time: "2019-06-20 17:12:06",
-    finish_record: {
-        assignment_id: 2
-        finished_at: "2019-06-16T09:16:46.000000Z"
-        user_id: 5
-    },
+    finished_at: "2019-06-16T09:16:46.000000Z",
     id: 2,
+    is_course_admin: false,
     name: "testAssignment",
     rate_info: {
         rated: "null",

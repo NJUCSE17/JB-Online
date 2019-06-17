@@ -125,6 +125,7 @@ trait UserAttributes
      */
     public function isCourseAdmin(Course $course)
     {
+        if ($this->privilege_level <= 2) return true;
         return CourseEnrollRecord::query()
             ->where('user_id', $this->id)
             ->where('course_id', $course->id)

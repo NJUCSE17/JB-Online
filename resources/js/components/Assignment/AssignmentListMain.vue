@@ -1,6 +1,6 @@
 <template>
     <div id="assignmentListMain">
-        <div id="assignments-control">
+        <div id="assignmentListControl">
             <p class="h3">
                 当前作业
                 <span class="float-right" v-if="!initializing">
@@ -136,7 +136,6 @@
                 let ddl = window.Dayjs(assignment.due_time);
                 this.assignments = this.assignments.concat([assignment]);
                 console.log("Assignment added to list.");
-                console.log(this.assignments);
             }
         }
     }

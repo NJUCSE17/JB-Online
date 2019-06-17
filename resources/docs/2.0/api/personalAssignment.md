@@ -21,7 +21,7 @@ personalAssignment: {
     content: "example",
     content_html: "<p>example</p>",
     due_time: "2019-09-01 11:45:14",
-    finished_at: null,
+    finished_at: "2019-06-16T09:16:46.000000Z",
     id: 1,
     name: "Test Example",
     user_id: 1

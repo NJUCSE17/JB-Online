@@ -1,6 +1,9 @@
 <template><div class="card">
     <h3 class="card-header">
         {{ assignment.name }}
+        <button class="float-right btn btn-sm btn-soft-success px-3">
+            <i class="fas fa-edit"></i>
+        </button>
     </h3>
     <div class="card-body" v-html="assignment.content_html"></div>
     <div class="card-footer">

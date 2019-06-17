@@ -1,6 +1,6 @@
 <template>
     <div id="AssignmentCreatorMain">
-        <button class="btn btn-sm btn-soft-primary fadeIn animated" type="button"
+        <button class="btn btn-sm btn-soft-primary px-3" type="button"
             v-on:click="openInitModal">
             <i class="fas fa-plus"></i>
         </button>
@@ -48,6 +48,7 @@
         ></assignment-creator-personal>
 
         <assignment-creator-public
+                v-if="hasCourseToSelect"
                 :api="this.api_public"
                 :course="this.courses[this.courseSelected]"
                 v-on:addAssignment="addAssignment"
