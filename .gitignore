@@ -97,6 +97,7 @@ public/hot
 public/css
 public/js
 public/webfonts
+public/mix-manifest.json
 storage/*.key
 .env
 Homestead.yaml
