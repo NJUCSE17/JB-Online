@@ -30,7 +30,11 @@ user: {
 
 - 用途：获取用户列表
 - 权限：允许所有用户访问
-- 参数：无
+- 参数：
+  ```php
+  'self' => ['sometimes', 'required', 'boolean'],
+  ```
+- 说明：`self`参数存在时只返回用户自己的信息，不存在时返回所有用户组成的数组。
 - 返回：`200 OK` 所有用户的列表
 
 <a name="u-2"></a>
@@ -52,7 +56,11 @@ user: {
   'email'         => ['sometimes', 'required', 'string', 'email', 'max:255', 'unique:users'],
   'blog_feed_url' => ['sometimes', 'required', 'string', 'url', 'max:255', 'unique:users'],
   'password'      => ['sometimes', 'required', 'string', 'min:8'],
+  'new_password'  => ['sometimes', 'required', 'string', 'min:8'],
   ```
+- 说明：
+  - 非超级管理员访问时，需要提供用户当前的`password`进行身份验证，若密码不正确返回`403 Forbidden`；
+  - 超级管理员访问则无需提供用户旧密码，可以直接修改任何用户的信息。
 - 返回：`200 OK` 修改后的用户信息
 
 <a name="u-4"></a>

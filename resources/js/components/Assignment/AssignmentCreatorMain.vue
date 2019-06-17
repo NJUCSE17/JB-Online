@@ -1,7 +1,6 @@
 <template>
     <div id="AssignmentCreatorMain">
-        <button class="btn btn-sm btn-soft-primary px-3" type="button"
-            v-on:click="openInitModal">
+        <button class="btn btn-sm btn-soft-primary px-3" type="button" v-on:click="openInitModal">
             <i class="fas fa-plus"></i>
         </button>
 
@@ -23,7 +22,7 @@
                             <i class="fas fa-user mr-2"></i>个人作业
                         </button>
                         <div v-if="hasCourseToSelect">
-                            <hr />
+                            <hr/>
                             <select class="custom-select form-control mb-3" v-model="courseSelected">
                                 <option disabled value="">请选择课程</option>
                                 <option v-for="(course, index) in courses"
@@ -63,6 +62,7 @@
 
 <script>
     import AssignmentCreator from "./AssignmentCreator";
+
     export default {
         name: "AssignmentCreatorMain",
         components: {AssignmentCreator},

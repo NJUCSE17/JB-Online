@@ -44,6 +44,7 @@ class UpdateUserRequest extends FormRequest
                 'unique:users',
             ],
             'password'      => ['sometimes', 'required', 'string', 'min:8'],
+            'new_password'  => ['sometimes', 'required', 'string', 'min:8'],
         ];
     }
 }

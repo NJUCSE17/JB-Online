@@ -23,9 +23,13 @@ class UserController extends APIController
      */
     public function index(ViewUserRequest $request)
     {
-        $users = User::all();
-
-        return $this->data(new UserResourceCollection($users));
+        if ($request->has('self') && $request->get('self')) {
+            $user = \Auth::user();
+            return $this->data(new UserResource($user));
+        } else {
+            $users = User::all();
+            return $this->data(new UserResourceCollection($users));
+        }
     }
 
     /**
@@ -51,12 +55,22 @@ class UserController extends APIController
      */
     public function update(UpdateUserRequest $request, User $user)
     {
+        if (\Auth::user()->privilege_level >= 2) {
+            // non-admin need to validate password
+            if (!\Auth::attempt([
+                'student_id' => $user,
+                'password'   => $request->get('password'),
+            ])) {
+                return $this->error('Password check failed.', 403);
+            }
+        }
+
         $name = $request->has('name') ? $request->get('name') : $user->name;
         $email = $request->has('email') ? $request->get('email') : $user->email;
         $blog = $request->has('blog_feed_url')
             ? $request->get('blog_feed_url') : $user->blog_feed_url;
-        $pass = $request->has('password')
-            ? Hash::make($request->get('password')) : $user->password;
+        $pass = $request->has('new_password')
+            ? Hash::make($request->get('new_password')) : $user->password;
         if ($request->has('email')) {
             $user->resetEmail();
             $user->deactivate();

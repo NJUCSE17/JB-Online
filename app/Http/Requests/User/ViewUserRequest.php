@@ -25,7 +25,7 @@ class ViewUserRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'self' => ['sometimes', 'required', 'boolean'],
         ];
     }
 }

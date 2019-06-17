@@ -54,12 +54,12 @@
                                     placeholder="YYYY-MM-DD HH:mm:ss"
                                     v-on:keyup.enter="submit"
                                     v-model="assignmentDDL"
-                                    :pipe="datePipe"
-                                    :mask="[
+                                    v-bind:pipe="datePipe"
+                                    v-bind:mask="[
                                         /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, '-', /\d/, /\d/,
                                         ' ', /\d/, /\d/, ':', /\d/, /\d/, ':', /\d/, /\d/
                                     ]"
-                                    :guide="true" placeholderChar="_">
+                                    v-bind:guide="true" placeholderChar="_">
                             </masked-input>
                         </div>
                     </div>
@@ -70,7 +70,9 @@
                                 v-bind:class="type === 'public' ? 'btn-info' : 'btn-success'">
                             <i class="fas fa-lock mr-2"></i> 填写以上信息来新建作业
                         </button>
-                        <button v-else-if="!submitting" class="btn w-100" v-on:click="submit" :disabled="!isReady"
+                        <button v-else-if="!submitting" class="btn w-100"
+                                v-on:click="submit"
+                                v-bind:disabled="!isReady"
                                 v-bind:class="type === 'public' ? 'btn-info' : 'btn-success'">
                             <i class="fas fa-check mr-2"></i> 新建作业
                         </button>
