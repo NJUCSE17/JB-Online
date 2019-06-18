@@ -99,7 +99,7 @@
                     window.axios.get(this.api_course, {
                         // no data
                     }).then(res => {
-                        console.log(res);
+                        console.debug(res);
                         this.courses = res.data;
                     }).catch(err => {
                         console.error(err);
@@ -112,7 +112,6 @@
             addCourse(course) {
                 this.courses = this.courses.concat([course]);
                 console.log("Course added to list.");
-                console.log(this.courses_sorted);
                 this.$forceUpdate();
             },
             updateCourse(data) {

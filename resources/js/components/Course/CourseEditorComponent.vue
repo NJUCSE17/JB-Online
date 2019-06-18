@@ -207,7 +207,7 @@
                     end_time: this.courseEndDate,
                     notice: this.courseNotice,
                 }).then(res => {
-                    console.log(res);
+                    console.debug(res);
                     window.$.alert({
                         type: 'green',
                         icon: 'fas fa-check',
