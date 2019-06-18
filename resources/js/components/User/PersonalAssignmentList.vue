@@ -52,8 +52,8 @@
 </template>
 
 <script>
-    import AssignmentItemPersonal from "./AssignmentItemPersonal";
-    import AssignmentCreatorMain from "./AssignmentCreatorMain";
+    import AssignmentItemPersonal from "../Assignment/AssignmentItemPersonal";
+    import AssignmentCreatorMain from "../Assignment/AssignmentCreatorMain";
 
     export default {
         name: "PersonalAssignmentList",

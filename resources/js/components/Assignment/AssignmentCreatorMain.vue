@@ -42,6 +42,7 @@
         </div>
 
         <assignment-creator
+                v-if="!isAutoSelected"
                 :id="personalID"
                 :type="'personal'"
                 :api="this.api_personal"
@@ -66,7 +67,7 @@
     export default {
         name: "AssignmentCreatorMain",
         components: {AssignmentCreator},
-        props: ['courses', 'api_public', 'api_personal'],
+        props: ['courses', 'api_public', 'api_personal', 'auto_select'],
         data: function () {
             return {
                 thisID: 'AssignmentCreatorMainModal',
@@ -76,16 +77,25 @@
             }
         },
         computed: {
-            hasCourseToSelect: function () {
+            hasCourseToSelect() {
                 for (let i = 0; i < this.courses.length; ++i) {
                     if (this.courses[i].is_course_admin) return true;
                 }
                 return false;
-            }
+            },
+            isAutoSelected() {
+                if (this.api_personal) return false;
+                if (!this.hasCourseToSelect) return false;
+                if (this.auto_select === null) return false;
+                return this.auto_select < this.courses.length;
+            },
         },
         methods: {
             openInitModal() {
-                if (this.hasCourseToSelect) {
+                if (this.isAutoSelected) {
+                    this.courseSelected = this.auto_select;
+                    this.proceedToPublic();
+                } else if (this.hasCourseToSelect) {
                     window.$('#' + this.thisID).modal('show');
                 } else {
                     this.proceedToPersonal();

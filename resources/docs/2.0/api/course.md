@@ -19,7 +19,7 @@ course: {
     end_time: "2019-07-16 23:59:59",
     id: 1,
     is_in_course: true,
-    is_admin: false,
+    is_course_admin: false,
     name: "ExampleCourse",
     notice: "Example",
     notice_html: "<p>Example</p>",

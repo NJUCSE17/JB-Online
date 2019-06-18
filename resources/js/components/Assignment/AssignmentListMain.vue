@@ -130,7 +130,6 @@
                 });
             },
             addAssignment(assignment) {
-                let ddl = window.Dayjs(assignment.due_time);
                 this.assignments = this.assignments.concat([assignment]);
                 console.log("Assignment added to list.");
                 this.$forceUpdate();
