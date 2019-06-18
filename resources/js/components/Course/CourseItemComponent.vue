@@ -62,7 +62,7 @@
             </div>
         </div>
 
-        <div v-if="course.notice_html && !show_assignments"
+        <div v-if="course.notice_html && !show_assignments && !show_enroll_records"
              class="list-group-item pb-0"
              v-html="course.notice_html"></div>
 
