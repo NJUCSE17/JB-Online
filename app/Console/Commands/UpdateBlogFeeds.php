@@ -6,8 +6,6 @@ use App\Models\BlogFeed;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
-use Mews\Purifier\Purifier;
-use willvincent\Feeds\FeedsFactory;
 
 class UpdateBlogFeeds extends Command
 {
@@ -43,15 +41,15 @@ class UpdateBlogFeeds extends Command
      */
     public function handle()
     {
-        BlogFeed::query()->truncate();
-
         $users = User::all();
         foreach ($users as $user) {
             if ($user->blog_feed_url != null) {
                 $items = \Feeds::make($user->blog_feed_url, 15)->get_items();
                 if (count($items)) {
+                    echo "[Success] ".$user->id." - ".$user->name
+                        ." [".count($items)." posts] [";
                     foreach ($items as $item) {
-                        BlogFeed::query()->create([
+                        $feed = [
                             'user_id'      => $user->id,
                             'user_name'    => $user->name,
                             'user_avatar'  => $user->getAvatarURL(),
@@ -59,10 +57,18 @@ class UpdateBlogFeeds extends Command
                             'title'        => $item->get_title(),
                             'content_html' => clean($item->get_content()),
                             'published_at' => Carbon::parse($item->get_date()),
-                        ]);
+                        ];
+                        $query = BlogFeed::query()
+                            ->where('permalink', '=', $feed['permalink']);
+                        if ($query->exists()) {
+                            $query->first()->update($feed);
+                            echo ".";
+                        } else {
+                            BlogFeed::query()->create($feed)->save();
+                            echo "N";
+                        }
                     }
-                    echo "[Success] ".$user->id." - ".$user->name
-                        ." [".count($items)." posts]\n";
+                    echo "]\n";
                 } else {
                     echo "[Failure] ".$user->id." - ".$user->name."\n";
                 }
@@ -70,6 +76,8 @@ class UpdateBlogFeeds extends Command
                 echo "[Skipped] ".$user->id." - ".$user->name."\n";
             }
         }
+
         echo "Done caching blog feeds.\n";
+        return 0;
     }
 }
