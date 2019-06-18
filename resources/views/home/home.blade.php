@@ -16,7 +16,10 @@
         </div>
         <div class="col col-md-4 col-12">
             <hr class="d-block d-md-none"/>
-            @include('home.includes.feeds', ['feeds' => $feeds])
+            <blog-feed-list
+                    :simple="true"
+                    :limit="5"
+            ></blog-feed-list>
         </div>
     </div>
 @endsection

@@ -6,7 +6,7 @@
 - [`Get /api/blogFeed/{id}`](#b-2)
 - [`Get /api/blogFeed/xml`](#b-3)
 
-> {success} 本页所列API无参数、无权限限制。
+> {success} 本页所列API无权限限制。
 
 数据格式：
 ```json
@@ -25,7 +25,12 @@ blog_feed: {
 ## `GET /api/blogFeed/xml`
 
 - 用途：获取博客列表
-- 返回：`200 OK` 博客列表
+- 参数：
+  ```php
+  'user_id' => ['sometimes', 'required', 'int', 'exists:users,id'],
+  'limit' => ['sometimes', 'required', 'int', 'min:0'],
+  ```
+- 返回：`200 OK` 按时间排序的博客列表，最多`limit`个。
 
 <a name="b-2"></a>
 ## `GET /api/blogFeed/{id}`

@@ -6,7 +6,7 @@ use App\Http\Controllers\APIController;
 use App\Http\Resources\BlogFeedResource;
 use App\Http\Resources\BlogFeedResourceCollection;
 use App\Models\BlogFeed;
-use Illuminate\Support\Facades\Request;
+use Illuminate\Http\Request;
 
 class BlogFeedController extends APIController
 {
@@ -17,8 +17,23 @@ class BlogFeedController extends APIController
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function index(Request $request) {
-        $blogFeeds = BlogFeed::query()->get();
+    public function index(Request $request)
+    {
+        $request->validate([
+            'user_id' => ['sometimes', 'required', 'int', 'exists:users,id'],
+            'limit'   => ['sometimes', 'required', 'int', 'min:0'],
+        ]);
+
+        $query = BlogFeed::query()->orderBy('published_at', 'desc');
+        if ($request->has('user_id')) {
+            $query->where('user_id', '=', $request->get('user_id'));
+        }
+        if ($request->has('limit')) {
+            $query->limit($request->get('limit'));
+        }
+
+        $blogFeeds = $query->get();
+
         return $this->data(new BlogFeedResourceCollection($blogFeeds));
     }
 
@@ -30,7 +45,8 @@ class BlogFeedController extends APIController
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function show(Request $request, BlogFeed $blogFeed) {
+    public function show(Request $request, BlogFeed $blogFeed)
+    {
         return $this->data(new BlogFeedResource($blogFeed));
     }
 

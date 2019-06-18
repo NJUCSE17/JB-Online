@@ -20,6 +20,7 @@ class BlogFeed extends Model
         = [
             'user_id',
             'user_name',
+            'user_avatar',
             'permalink',
             'title',
             'content_html',

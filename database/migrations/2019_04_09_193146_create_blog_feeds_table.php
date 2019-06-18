@@ -19,6 +19,7 @@ class CreateBlogFeedsTable extends Migration
             $table->foreign('user_id')->references('id')
                 ->on('users')->onDelete('cascade');
             $table->string('user_name');
+            $table->string('user_avatar');
             $table->string('permalink');
             $table->string('title');
             $table->text('content_html');

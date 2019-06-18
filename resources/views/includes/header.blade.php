@@ -43,12 +43,6 @@
                 <span class="btn-inner--text d-none d-md-inline-block">课程</span>
             </a>
         @endif
-        @if(!Route::is('resource'))
-            <a href="#" class="btn btn-icon shadow btn-neutral">
-                <span class="btn-inner--icon"><i class="fas fa-folder"></i></span>
-                <span class="btn-inner--text d-none d-md-inline-block">资源</span>
-            </a>
-        @endif
         @if(!Route::is('blog.*'))
             <a href="{{ route('blog.index') }}" class="btn btn-icon shadow btn-neutral">
                 <span class="btn-inner--icon"><i class="fas fa-rss-square"></i></span>

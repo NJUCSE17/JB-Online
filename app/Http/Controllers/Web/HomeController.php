@@ -38,11 +38,7 @@ class HomeController extends Controller
      */
     public function home()
     {
-        return view('home.home')
-            ->with('feeds', BlogFeed::query()
-                ->orderBy('published_at', 'DESC')
-                ->take(5)->get()
-            );
+        return view('home.home');
     }
 
     /**
@@ -55,13 +51,8 @@ class HomeController extends Controller
         $user = User::query()
             ->where('student_id', '=', $student_id)
             ->firstOrFail();
-        $feeds = BlogFeed::query()
-            ->where('user_id', $user->id)
-            ->orderBy('published_at', 'desc')
-            ->limit(10)->get();
 
         return view('user.index')
-            ->with('user', $user)
-            ->with('feeds', $feeds);
+            ->with('user', $user);
     }
 }

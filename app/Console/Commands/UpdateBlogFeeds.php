@@ -54,6 +54,7 @@ class UpdateBlogFeeds extends Command
                         BlogFeed::query()->create([
                             'user_id'      => $user->id,
                             'user_name'    => $user->name,
+                            'user_avatar'  => $user->getAvatarURL(),
                             'permalink'    => $item->get_permalink(),
                             'title'        => $item->get_title(),
                             'content_html' => clean($item->get_content()),

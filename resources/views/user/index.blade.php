@@ -16,22 +16,14 @@
 
 @section('content')
     <user-info-main
-        :user_id="{{ json_encode($user->id) }}"
+            :user_id="{{ json_encode($user->id) }}"
     ></user-info-main>
-    <hr />
+    <hr/>
     @if(\Auth::user()->privilege_level <= 2 or \Auth::user()->is($user))
         <personal-assignment-list></personal-assignment-list>
-        <hr />
-    @endif
-    <div id="feed">
-        <div id="feed-control">
-            <p class="h3">个人博客</p>
-        </div>
         <hr/>
-        <div id="feed-content">
-            @foreach($feeds as $feed)
-                @include('blog.includes.feed-info', ['feed' => $feed])
-            @endforeach
-        </div>
-    </div>
+    @endif
+    <blog-feed-list
+            :user_id="{{ json_encode($user->id) }}"
+    ></blog-feed-list>
 @endsection
