@@ -43,7 +43,7 @@
                             <div class="col-auto">
                                 <a v-bind:href="'/user/' + feed.user_id"
                                    class="avatar rounded-circle">
-                                    <img alt="Image placeholder" v-bind:src="feed.user_avatar" class="">
+                                    <img v-bind:alt="feed.user_name" v-bind:src="feed.user_avatar" class="">
                                 </a>
                             </div>
                             <div class="col ml-md-n2 text-center text-md-left">
@@ -99,6 +99,9 @@
                 }).then(res => {
                     console.debug(res);
                     this.feeds = res.data;
+                    for (let i = 0; i < this.feeds.length; ++i) {
+                        this.feeds[i].published_at = window.Dayjs(this.feeds[i].published_at).format('YYYY-MM-DD HH:mm');
+                    }
                 }).catch(err => {
                     console.error(err);
                 }).finally(() => {

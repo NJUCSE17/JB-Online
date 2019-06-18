@@ -18,6 +18,7 @@ class BlogFeedResource extends JsonResource
             'id'           => $this->id,
             'user_id'      => $this->user_id,
             'user_name'    => $this->user_name,
+            'user_avatar'  => $this->user_avatar,
             'title'        => $this->title,
             'permalink'    => $this->permalink,
             'content_html' => $this->content_html,
