@@ -52,7 +52,7 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text"><i class="fas fa-rss"></i></span>
                             </div>
-                            <input id="UserBlogFeedURL" type="email"
+                            <input id="UserBlogFeedURL" type="url"
                                    class="form-control"
                                    placeholder="https://your-site.com/rss"
                                    v-on:keyup.enter="submit"
@@ -119,9 +119,9 @@
                     return '未提供用户名';
                 } else if (!this.userEmail || !(/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(this.userEmail))) {
                     return '未提供邮箱或格式非法';
-                } else if (this.userBlogFeedURL && !(/http[s]?:\/\/[^\s]+\.[^\s]+\/[^\s]+/).test(this.userBlogFeedURL)) {
+                } else if (this.userBlogFeedURL && !(/http[s]?:\/\/[^\s]+\.[^\s]+\/[^\s]+$/).test(this.userBlogFeedURL)) {
                     return '博客RSS/Feed地址不正确';
-                } else if (!this.isSuperUser && this.isSelf && !this.userPassword) {
+                } else if (!this.isSuperUser && this.isSelf && this.userPassword.length < 8) {
                     return '未提供密码';
                 } else {
                     return null;

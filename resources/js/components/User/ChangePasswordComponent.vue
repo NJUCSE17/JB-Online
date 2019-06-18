@@ -98,7 +98,7 @@
                 return this.newPassword === this.newPasswordRepeat;
             },
             isReady() {
-                if (!this.isSuperUser && this.isSelf && !this.oldPassword) return false;
+                if (!this.isSuperUser && this.isSelf && this.oldPassword.length < 8) return false;
                 return this.newPasswordValid && this.newPasswordConfirmed;
             }
         },
