@@ -18,11 +18,6 @@ Route::group(
         'middleware' => ['auth', 'verified', 'activated', 'throttle:20'],
     ],
     function () {
-        /**
-         * Get Blog Feeds.
-         */
-        Route::get('/feeds', 'BlogFeedController@feed');
-
         Route::apiResources([
             'user'               => 'UserController',
             'course'             => 'CourseController',
@@ -86,5 +81,12 @@ Route::group(
                     ->name('reset');
             }
         );
+
+        /**
+         * Blog-feed-releated APIs
+         */
+        Route::apiResource('blogFeed', 'BlogFeedController')
+            ->only(['index', 'show']);
+        Route::get('/blogFeed/xml', 'BlogFeedController@xml')->name('blogFeed.xml');
     }
 );

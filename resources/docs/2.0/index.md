@@ -13,4 +13,4 @@
     - [个人作业](/{{route}}/{{version}}/api/personalAssignment)
     - [课程](/{{route}}/{{version}}/api/course)
     - [作业](/{{route}}/{{version}}/api/assignment)
-    - [博客](/{{route}}/{{version}}/api/feeds)
+    - [博客](/{{route}}/{{version}}/api/blogFeed)
