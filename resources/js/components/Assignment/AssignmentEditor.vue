@@ -151,6 +151,12 @@
                 }).then(res => {
                     console.debug(res);
                     console.log("Assignment updated.");
+                    window.$.alert({
+                        type: 'green',
+                        icon: 'fas fa-check',
+                        title: '成功',
+                        content: '成功更新作业' + this.assignmentName + '。',
+                    });
                     window.$('#' + this.id).modal('hide');
                     this.$emit('updateAssignment', res.data);
                 }).catch(err => {
@@ -192,6 +198,12 @@
                     // no data
                 }).then(res => {
                     console.debug(res);
+                    window.$.alert({
+                        type: 'green',
+                        icon: 'fas fa-check',
+                        title: '成功',
+                        content: '成功删除作业' + this.assignment.name + '。',
+                    });
                     window.$('#' + this.id).modal('hide');
                     this.$emit('deleteAssignment', this.assignment);
                 }).catch(err => {

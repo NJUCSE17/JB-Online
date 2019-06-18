@@ -77,9 +77,6 @@
             this.loadAssignments();
         },
         methods: {
-            close() {
-                this.$emit('close', null);
-            },
             compareByDDL(a, b) {
                 return window.Dayjs(a.due_time).isBefore(window.Dayjs(b.due_time)) ? -1 : 1;
             },

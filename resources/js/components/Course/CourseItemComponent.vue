@@ -47,7 +47,8 @@
                     </button>
 
                     <button v-if="this.course.is_course_admin"
-                            type="button" class="btn btn-sm btn-outline-info">
+                            type="button" class="btn btn-sm btn-outline-info"
+                            v-on:click="editCourse">
                         <i class="fas fa-edit mr-2"></i> 编辑
                     </button>
                 </div>
@@ -62,17 +63,25 @@
                 v-if="show_assignments"
                 :id="listID"
                 :course="course"
-                v-on:close="() => {show_assignments = false}"
         ></course-assignment-list-component>
+
+        <course-editor-component
+                :id="editorID"
+                :api="api"
+                :course="course"
+                v-on:updateCourse="updateCourse"
+                v-on:deleteCourse="deleteCourse"
+        ></course-editor-component>
     </div>
 </template>
 
 <script>
     import CourseAssignmentListComponent from "./CourseAssignmentListComponent";
+    import CourseEditorComponent from "./CourseEditorComponent";
 
     export default {
         name: "CourseItemComponent",
-        components: {CourseAssignmentListComponent},
+        components: {CourseEditorComponent, CourseAssignmentListComponent},
         props: ['id', 'api', 'course'],
         data: function () {
             return {
@@ -117,6 +126,9 @@
             triggerAssignmentListComponent() {
                 this.show_assignments = !this.show_assignments;
             },
+            editCourse() {
+                window.$('#' + this.editorID).modal('show');
+            },
             enrollCourse() {
                 this.submit(true);
             },
@@ -150,6 +162,15 @@
                         content: err,
                     });
                 });
+            },
+            updateCourse(newCourse) {
+                this.$emit('updateCourse', {
+                    oldCourse: this.course,
+                    newCourse: newCourse,
+                });
+            },
+            deleteCourse() {
+                this.$emit('deleteCourse', this.course);
             }
         },
     }
