@@ -40,7 +40,7 @@ Route::group(
             ['middleware' => ['auth', 'verified', 'activated']],
             function () {
                 Route::get('/home', 'HomeController@home')->name('home');
-                Route::get('/user/{student_id}', 'HomeController@user')->name('user');
+                Route::get('/user/{user}', 'HomeController@user')->name('user');
 
                 Route::get('/course', 'CourseController@index')->name('course');
 

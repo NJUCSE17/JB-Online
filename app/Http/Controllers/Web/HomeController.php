@@ -46,12 +46,8 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function user(Request $request, $student_id)
+    public function user(Request $request, User $user)
     {
-        $user = User::query()
-            ->where('student_id', '=', $student_id)
-            ->firstOrFail();
-
         return view('user.index')
             ->with('user', $user);
     }
