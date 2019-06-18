@@ -14,8 +14,12 @@ class BlogController extends Controller
      */
     public function index()
     {
+        $feeds = BlogFeed::query()
+            ->orderBy('published_at', 'desc')
+            ->paginate(15);
+
         return view('blog.index')
-            ->with('feeds', BlogFeed::query()->paginate(10));
+            ->with('feeds', $feeds);
     }
 
     /**
