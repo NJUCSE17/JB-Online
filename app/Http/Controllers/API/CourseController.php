@@ -7,10 +7,12 @@ use App\Http\Requests\Assignment\ViewAssignmentRequest;
 use App\Http\Requests\Course\DeleteCourseRequest;
 use App\Http\Requests\Course\EnrollCourseRequest;
 use App\Http\Requests\Course\QuitCourseRequest;
+use App\Http\Requests\Course\ShowCourseRequest;
 use App\Http\Requests\Course\StoreCourseRequest;
 use App\Http\Requests\Course\UpdateCourseRequest;
 use App\Http\Requests\Course\ViewCourseRequest;
 use App\Http\Resources\CourseEnrollRecordResource;
+use App\Http\Resources\CourseEnrollRecordResourceCollection;
 use App\Http\Resources\CourseResource;
 use App\Http\Resources\CourseResourceCollection;
 use App\Models\Course;
@@ -129,6 +131,19 @@ class CourseController extends APIController
         $course->delete();
 
         return $this->deleted();
+    }
+
+    /**
+     * Get enroll records of a course.
+     *
+     * @param  ShowCourseRequest  $request
+     * @param  Course             $course
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function records(ShowCourseRequest $request, Course $course) {
+        $records = $course->enrollRecords;
+        return $this->data(new CourseEnrollRecordResourceCollection($records));
     }
 
     /**

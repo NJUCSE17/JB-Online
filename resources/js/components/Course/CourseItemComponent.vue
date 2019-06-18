@@ -39,7 +39,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="ml-3 text-right">
+                <div class="ml-3 text-right btn-group btn-group-sm">
                     <button type="button" class="btn btn-sm"
                             v-bind:class="show_assignments ? 'btn-primary' : 'btn-outline-primary'"
                             v-on:click="triggerAssignmentListComponent">
@@ -50,6 +50,13 @@
                             type="button" class="btn btn-sm btn-outline-info"
                             v-on:click="editCourse">
                         <i class="fas fa-edit mr-2"></i> 编辑
+                    </button>
+
+                    <button v-if="this.course.is_course_admin"
+                            type="button" class="btn btn-sm"
+                            v-bind:class="show_enroll_records ? 'btn-warning' : 'btn-outline-warning'"
+                            v-on:click="triggerEnrollRecordsComponent">
+                        <i class="fas fa-users-cog mr-2"></i> 管理
                     </button>
                 </div>
             </div>
@@ -67,27 +74,38 @@
 
         <course-editor-component
                 :id="editorID"
-                :api="api"
+                :api="api_course"
                 :course="course"
                 v-on:updateCourse="updateCourse"
                 v-on:deleteCourse="deleteCourse"
         ></course-editor-component>
+
+        <course-enroll-records-component
+                v-if="show_enroll_records"
+                :id="recordsID"
+                :api_user="api_user"
+                :api_course="api_course"
+                :course="course"
+        ></course-enroll-records-component>
     </div>
 </template>
 
 <script>
     import CourseAssignmentListComponent from "./CourseAssignmentListComponent";
     import CourseEditorComponent from "./CourseEditorComponent";
+    import CourseEnrollRecordsComponent from "./CourseEnrollRecordsComponent";
 
     export default {
         name: "CourseItemComponent",
-        components: {CourseEditorComponent, CourseAssignmentListComponent},
-        props: ['id', 'api', 'course'],
+        components: {CourseEnrollRecordsComponent, CourseEditorComponent, CourseAssignmentListComponent},
+        props: ['id', 'api_user', 'api_course', 'course'],
         data: function () {
             return {
                 show_assignments: false,
+                show_enroll_records: false,
                 listID: 'CourseAssignmentListComponent' + this.course.id,
                 editorID: 'CourseEditorComponent' + this.course.id,
+                recordsID: 'CourseEnrollRecordsComponent' + this.course.id,
             }
         },
         computed: {
@@ -125,6 +143,11 @@
         methods: {
             triggerAssignmentListComponent() {
                 this.show_assignments = !this.show_assignments;
+                if (this.show_assignments) this.show_enroll_records = false;
+            },
+            triggerEnrollRecordsComponent() {
+                this.show_enroll_records = !this.show_enroll_records;
+                if (this.show_enroll_records) this.show_assignments = false;
             },
             editCourse() {
                 window.$('#' + this.editorID).modal('show');
@@ -136,7 +159,7 @@
                 this.submit(false);
             },
             submit(is_enroll) {
-                window.axios.post(this.api + (is_enroll ? '/enroll' : '/quit'), {
+                window.axios.post(this.api_course + (is_enroll ? '/enroll' : '/quit'), {
                     // no data
                 }).then(res => {
                     console.debug(res);

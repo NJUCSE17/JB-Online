@@ -11,12 +11,12 @@
 数据格式：
 ```json
 blog_feed: {
-    content_html: "<h2>Hello, world!</h2>..."
-    id: 1
-    permalink: "https://yout-site.com/blog/1/"
-    published_at: "2019-06-12 15:23:00"
-    title: "Hello, world!"
-    user_id: 5
+    content_html: "<h2>Hello, world!</h2>...",
+    id: 1,
+    permalink: "https://yout-site.com/blog/1/",
+    published_at: "2019-06-12 15:23:00",
+    title: "Hello, world!",
+    user_id: 5,
     user_name: "Alice"
 }
 ```

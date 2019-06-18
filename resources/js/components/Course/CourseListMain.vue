@@ -30,7 +30,8 @@
             <div v-for="course in courses_sorted" class="list-group">
                 <course-item-component
                         :id="itemID + course.id"
-                        :api="api_course + '/' + course.id"
+                        :api_user="api_user"
+                        :api_course="api_course + '/' + course.id"
                         :course="course"
                         v-on:updateCourse="updateCourse"
                         v-on:deleteCourse="deleteCourse"

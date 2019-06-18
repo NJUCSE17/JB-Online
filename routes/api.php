@@ -44,6 +44,8 @@ Route::group(
         Route::group(
             ['prefix' => '/course/{course}', 'as' => 'course.'],
             function () {
+                Route::get('/records', 'CourseController@records')
+                    ->name('records');
                 Route::post('/enroll', 'CourseController@enroll')
                     ->name('enroll');
                 Route::post('/quit', 'CourseController@quit')

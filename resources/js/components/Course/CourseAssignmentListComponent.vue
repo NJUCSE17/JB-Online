@@ -1,7 +1,7 @@
 <template>
     <div class="list-group-item pt-4 pb-0">
-        <div id="assignmentListMain">
-            <div id="assignmentListControl">
+        <div v-bind:id="id + 'AssignmentListMain'">
+            <div v-bind:id="id + 'AssignmentListControl'">
                 <p class="h3">
                     {{ course.name }}的作业
                     <span class="float-right" v-if="!initializing">
@@ -27,7 +27,7 @@
                     </div>
                 </div>
             </div>
-            <div v-else-if="assignments.length > 0" id="assignmentListContent">
+            <div v-else-if="assignments.length > 0" v-bind:id="id + 'AssignmentListContent'">
                 <div v-for="assignment in assignments_sorted">
                     <assignment-item-public
                             v-if="assignment.course_id"
