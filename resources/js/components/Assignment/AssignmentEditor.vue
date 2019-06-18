@@ -112,6 +112,13 @@
     export default {
         name: "AssignmentEditor",
         props: ['id', 'api', 'assignment'],
+        watch: {
+            assignment: function (newVal, oldVal) {
+                this.assignmentName = '';
+                this.assignmentContent = newVal.content;
+                this.assignmentDDL= newVal.due_time;
+            }
+        },
         data: function () {
             return {
                 datePipe: createAutoCorrectedDatePipe('yyyy-mm-dd HH:MM:SS'),
