@@ -2,13 +2,13 @@
     <div class="card-body py-3">
         <div class="row flex-column flex-md-row align-items-center">
             <div class="col-auto">
-                <a href="{{ route('user', $feed->user->student_id) }}"
+                <a href="{{ route('user', $feed->user) }}"
                    class="avatar rounded-circle">
                     <img alt="Image placeholder" src="{{ $feed->user->getAvatarURL() }}" class="">
                 </a>
             </div>
             <div class="col ml-md-n2 text-center text-md-left">
-                <a href="{{ route('user', $feed->user->student_id) }}"
+                <a href="{{ route('user', $feed->user) }}"
                    class="h6 text-sm mb-0">
                     {{ $feed->user->name }}
                     @ <span>{{ $feed->published_at }}</span>

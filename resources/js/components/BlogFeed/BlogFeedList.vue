@@ -105,7 +105,7 @@
                 }).catch(err => {
                     console.error(err);
                 }).finally(() => {
-                    console.log('Blog feeds loaded. (' + this.feeds.length + 'entries)');
+                    console.log('Blog feeds loaded. (' + this.feeds.length + ' entries)');
                     this.initializing = false;
                     this.init_status = '';
                 });

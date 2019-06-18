@@ -25,5 +25,6 @@
     @endif
     <blog-feed-list
             :user_id="{{ json_encode($user->id) }}"
+            :limit="{{ json_encode(10) }}"
     ></blog-feed-list>
 @endsection
