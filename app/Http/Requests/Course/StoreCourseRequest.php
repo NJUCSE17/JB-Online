@@ -32,14 +32,9 @@ class StoreCourseRequest extends FormRequest
             'end_time'   => [
                 'required',
                 'date_format:Y-m-d H:i:s',
-                'after_or_equal:start_before',
+                'after_or_equal:start_time',
             ],
-            'notice'     => [
-                'sometimes',
-                'required',
-                new Sanitize(),
-                'max:10000',
-            ],
+            'notice'     => ['nullable', new Sanitize(), 'max:10000'],
         ];
     }
 }

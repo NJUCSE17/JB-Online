@@ -5,8 +5,9 @@
                 课程列表
                 <span class="float-right" v-if="!initializing">
                     <course-creator-component
+                            v-if="self.privilege_level <= 2"
                             :id="creatorID"
-                            :api="api"
+                            :api="api_course"
                             v-on:addCourse="addCourse"
                     ></course-creator-component>
                 </span>
@@ -29,7 +30,7 @@
             <div v-for="course in courses_sorted" class="list-group">
                 <course-item-component
                         :id="itemID + course.id"
-                        :api="api + '/' + course.id"
+                        :api="api_course + '/' + course.id"
                         :course="course"
                         v-on:updateCourse="updateCourse"
                         v-on:deleteCourse="deleteCourse"
@@ -54,6 +55,7 @@
 <script>
     import CourseCreatorComponent from "./CourseCreatorComponent";
     import CourseItemComponent from "./CourseItemComponent";
+
     export default {
         name: "CourseListMain",
         components: {CourseItemComponent, CourseCreatorComponent},
@@ -61,7 +63,9 @@
             return {
                 initializing: true,
                 init_status: '',
-                api: '/api/course',
+                api_user: '/api/user',
+                api_course: '/api/course',
+                self: null,
                 courses: [],
                 creatorID: 'CourseCreatorComponent',
                 itemID: 'CourseItemComponent',
@@ -80,22 +84,35 @@
                 return a.semester < b.semester ? -1 : 1;
             },
             loadCourses() {
-                this.init_status = '正在获取课程列表...';
-                window.axios.get(this.api, {
-                    // no data
+                this.init_status = '正在检查你的信息...';
+                window.axios.get(this.api_user, {
+                    params: {
+                        self: 1,
+                    }
                 }).then(res => {
-                    console.log(res);
-                    this.courses = res.data;
+                    console.debug(res);
+                    this.self = res.data;
                 }).catch(err => {
                     console.error(err);
                 }).finally(() => {
-                    this.initializing = false;
-                    this.init_status = '';
+                    this.init_status = '正在获取课程列表...';
+                    window.axios.get(this.api_course, {
+                        // no data
+                    }).then(res => {
+                        console.log(res);
+                        this.courses = res.data;
+                    }).catch(err => {
+                        console.error(err);
+                    }).finally(() => {
+                        this.initializing = false;
+                        this.init_status = '';
+                    });
                 });
             },
             addCourse(course) {
                 this.courses = this.courses.concat([course]);
                 console.log("Course added to list.");
+                console.log(this.courses_sorted);
                 this.$forceUpdate();
             },
             updateCourse(data) {

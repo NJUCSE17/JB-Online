@@ -43,11 +43,11 @@ class UpdateCourseRequest extends FormRequest
                 'sometimes',
                 'required',
                 'date_format:Y-m-d H:i:s',
-                'after_or_equal:start_before',
+                'after_or_equal:start_time',
             ],
             'notice'     => [
                 'sometimes',
-                'required',
+                'nullable',
                 new Sanitize(),
                 'max:10000',
             ],

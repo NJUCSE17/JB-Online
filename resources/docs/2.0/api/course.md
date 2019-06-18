@@ -52,7 +52,7 @@ course: {
   'semester'   => ['required', 'integer', 'between:1,20'],
   'start_time' => ['required', 'date_format:Y-m-d H:i:s'],
   'end_time'   => ['required', 'date_format:Y-m-d H:i:s', 'after_or_equal:start_before'],
-  'notice'     => ['sometimes', 'required', new Sanitize(), 'max:10000'],
+  'notice'     => ['nullable', new Sanitize(), 'max:10000'],
   ```
 - 返回：`201 Created` 新建的课程
 
@@ -75,7 +75,7 @@ course: {
   'semester'   => ['sometimes', 'required', 'integer', 'between:1,20'],
   'start_time' => ['sometimes', 'required', 'date_format:Y-m-d H:i:s'],
   'end_time'   => ['sometimes', 'required', 'date_format:Y-m-d H:i:s', 'after_or_equal:start_before'],
-  'notice'     => ['sometimes', 'required', new Sanitize(), 'max:10000'],
+  'notice'     => ['sometimes', 'nullable', new Sanitize(), 'max:10000'],
   ```
 - 返回：`200 OK` 更新后的课程
 

@@ -3,7 +3,7 @@
         <div class="list-group-item">
             <div class="d-flex align-items-center justify-content-between">
                 <div class="mr-3 text-left">
-                    <button v-if="!is_in_course"
+                    <button v-if="!course.is_in_course"
                             v-on:click="enrollCourse"
                             type="button" class="btn btn-sm btn-outline-success">
                         <i class="fas fa-star mr-2"></i> 加入
@@ -20,8 +20,9 @@
                         第{{ course.semester }}学期 - {{ course.name }}
                     </h6>
                     <div class="progress progress-xs mb-0">
-                        <div class="progress-bar bg-warning" role="progressbar"
+                        <div class="progress-bar" role="progressbar"
                              aria-valuemin="0" aria-valuemax="100"
+                             v-bind:class="'bg-' + status.color"
                              v-bind:style="'width:' + status.value + '%'"
                              v-bind:aria-valuenow="status.value">
                         </div>
@@ -29,7 +30,7 @@
                     <div class="d-flex justify-content-between text-xs text-muted text-right mt-1">
                         <div>
                         <span class="font-weight-bold"
-                              v-bind:class="status.color">
+                              v-bind:class="'text-' + status.color">
                             {{ status.text }} ({{ status.value }}%)
                         </span>
                         </div>
@@ -76,14 +77,17 @@
         data: function () {
             return {
                 show_assignments: false,
-                is_in_course: this.course.is_in_course,
-                beg_date: window.Dayjs(this.course.start_time).format("YYYY-MM-DD"),
-                end_date: window.Dayjs(this.course.end_time).format("YYYY-MM-DD"),
                 listID: 'CourseAssignmentListComponent' + this.course.id,
                 editorID: 'CourseEditorComponent' + this.course.id,
             }
         },
         computed: {
+            beg_date() {
+                return window.Dayjs(this.course.start_time).format("YYYY-MM-DD");
+            },
+            end_date() {
+                return window.Dayjs(this.course.end_time).format("YYYY-MM-DD");
+            },
             status() {
                 let now = window.Dayjs();
                 let beg = window.Dayjs(this.course.start_time);
@@ -91,19 +95,19 @@
                 if (now.isBefore(beg)) {
                     return {
                         text: '未开始',
-                        color: 'text-info',
+                        color: 'info',
                         value: 100,
                     };
                 } else if (now.isAfter(end)) {
                     return {
                         text: '已结束',
-                        color: 'text-danger',
+                        color: 'danger',
                         value: 100,
                     };
                 } else {
                     return {
                         text: '进行中',
-                        color: 'text-warning',
+                        color: 'warning',
                         value: Math.ceil((now.diff(beg, 'day')) / (end.diff(beg, 'day')) * 100),
                     };
                 }
@@ -113,7 +117,6 @@
             triggerAssignmentListComponent() {
                 this.show_assignments = !this.show_assignments;
             },
-
             enrollCourse() {
                 this.submit(true);
             },
@@ -132,7 +135,12 @@
                         content: '成功' + (is_enroll ? '加入' : '退出')
                             + '课程' + this.course.name + '。',
                     });
-                    this.is_in_course = is_enroll;
+                    let course_upd = this.course;
+                    course_upd.is_in_course = is_enroll;
+                    this.$emit('updateCourse', {
+                        oldCourse: this.course,
+                        newCourse: course_upd,
+                    });
                 }).catch(res => {
                     console.err(res);
                     window.$.alert({
