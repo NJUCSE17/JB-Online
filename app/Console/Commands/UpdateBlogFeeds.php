@@ -78,6 +78,7 @@ class UpdateBlogFeeds extends Command
         }
 
         echo "Done caching blog feeds.\n";
+
         return 0;
     }
 }

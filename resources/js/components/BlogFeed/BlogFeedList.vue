@@ -17,7 +17,19 @@
             </div>
         </div>
         <div v-else id="LatestBlogFeedsContent">
-            <div v-if="simple" id="LatestBlogFeedsSimpleList">
+            <div v-if="!(feeds.length > 0)">
+                <div class="row">
+                    <div class="col text-center mb-3">
+                        <i class="fas fa-book-open" style="font-size:150%;"></i>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col text-center">
+                        <p>没有博客</p>
+                    </div>
+                </div>
+            </div>
+            <div v-else-if="simple" id="LatestBlogFeedsSimpleList">
                 <div v-for="feed in feeds" class="card card-stats mb-2">
                     <div class="card-body">
                         <div class="row flex-column flex-md-row align-items-center">

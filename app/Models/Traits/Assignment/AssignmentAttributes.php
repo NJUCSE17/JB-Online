@@ -17,11 +17,13 @@ trait AssignmentAttributes
      *
      * @return mixed
      */
-    public function finishedAt(User $user) {
+    public function finishedAt(User $user)
+    {
         $record = AssignmentFinishRecord::query()
             ->where('user_id', $user)
             ->where('assignment_id', $this->id)
             ->first();
+
         return $record ? $record->updated_at : null;
     }
 
@@ -30,7 +32,8 @@ trait AssignmentAttributes
      *
      * @return array
      */
-    public function ratedInfo() {
+    public function ratedInfo()
+    {
         return [
             'rated' => $this->rated(),
             'stats' => $this->stats(),
@@ -42,8 +45,10 @@ trait AssignmentAttributes
      *
      * @return string
      */
-    public function rated() {
+    public function rated()
+    {
         $user = Auth::user();
+
         return $this->isLikedBy($user) ? "like"
             : ($this->isDislikedBy($user) ? "dislike" : "null");
     }
@@ -53,7 +58,8 @@ trait AssignmentAttributes
      *
      * @return array
      */
-    public function stats() {
+    public function stats()
+    {
         return [
             'like'    => $this->likesCount,
             'dislike' => $this->dislikesCount,

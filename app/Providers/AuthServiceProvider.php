@@ -5,14 +5,13 @@ namespace App\Providers;
 use App\Models\Assignment;
 use App\Models\Course;
 use App\Models\PersonalAssignment;
-use App\Models\Problem;
 use App\Models\User;
 use App\Policies\AssignmentPolicy;
 use App\Policies\CoursePolicy;
 use App\Policies\PersonalAssignmentPolicy;
-use App\Policies\ProblemPolicy;
 use App\Policies\UserPolicy;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
+use Laravel\Passport\Passport;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -26,7 +25,6 @@ class AuthServiceProvider extends ServiceProvider
             Assignment::class         => AssignmentPolicy::class,
             Course::class             => CoursePolicy::class,
             PersonalAssignment::class => PersonalAssignmentPolicy::class,
-            Problem::class            => ProblemPolicy::class,
             User::class               => UserPolicy::class,
         ];
 
@@ -39,6 +37,6 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        //
+        Passport::routes();
     }
 }

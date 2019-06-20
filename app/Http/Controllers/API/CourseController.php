@@ -141,8 +141,10 @@ class CourseController extends APIController
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function records(ShowCourseRequest $request, Course $course) {
+    public function records(ShowCourseRequest $request, Course $course)
+    {
         $records = $course->enrollRecords;
+
         return $this->data(new CourseEnrollRecordResourceCollection($records));
     }
 

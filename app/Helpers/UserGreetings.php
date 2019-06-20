@@ -31,6 +31,7 @@ class UserGreetings
                 break;
             }
         }
+
         return $greetingPrefix."，".$user->name;
     }
 }

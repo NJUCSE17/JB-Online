@@ -37,6 +37,8 @@ class RouteServiceProvider extends ServiceProvider
     {
         $this->mapApiRoutes();
 
+        $this->mapSWRoutes();
+
         $this->mapWebRoutes();
 
         //
@@ -52,10 +54,25 @@ class RouteServiceProvider extends ServiceProvider
     protected function mapApiRoutes()
     {
         Route::prefix('api')
-            ->middleware('web')
-            //->middleware('api')
+            ->middleware('api')
             ->namespace($this->namespace)
             ->group(base_path('routes/api.php'));
+    }
+
+
+    /**
+     * Define the "sw" routes for service workers.
+     *
+     * These routes are typically stateless.
+     *
+     * @return void
+     */
+    protected function mapSWRoutes()
+    {
+        Route::prefix('sw')
+            ->middleware('api')
+            ->namespace($this->namespace)
+            ->group(base_path('/routes/sw.php'));
     }
 
     /**

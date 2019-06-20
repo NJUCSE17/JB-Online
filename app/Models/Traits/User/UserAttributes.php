@@ -11,11 +11,11 @@ use Illuminate\Database\Query\JoinClause;
 trait UserAttributes
 {
     /**
-     * Get ongoing assignments of the user.
+     * Get ongoing public assignments of the user.
      */
-    public function getOngoingAssignments()
+    public function getOngoingPublicAssignments()
     {
-        $a1 = Assignment::query()
+        return Assignment::query()
             ->whereIn('course_id', $this->courseIDs())
             ->leftJoin('assignment_finish_records',
                 function (JoinClause $join) {
@@ -34,11 +34,26 @@ trait UserAttributes
                 ]
             )
             ->get();
+    }
 
-        $a2 = PersonalAssignment::query()
+    /**
+     * Get ongoing personal assignments of the user.
+     */
+    public function getOngoingPersonalAssignments()
+    {
+        return PersonalAssignment::query()
             ->where('user_id', $this->id)
             ->where('due_time', '>=', now())
             ->get();
+    }
+
+    /**
+     * Get ongoing assignments of the user.
+     */
+    public function getOngoingAssignments()
+    {
+        $a1 = $this->getOngoingPublicAssignments();
+        $a2 = $this->getOngoingPersonalAssignments();
 
         return collect($a1)->merge(collect($a2))
             ->sortBy('due_time');
@@ -125,7 +140,10 @@ trait UserAttributes
      */
     public function isCourseAdmin(Course $course)
     {
-        if ($this->privilege_level <= 2) return true;
+        if ($this->privilege_level <= 2) {
+            return true;
+        }
+
         return CourseEnrollRecord::query()
             ->where('user_id', $this->id)
             ->where('course_id', $course->id)

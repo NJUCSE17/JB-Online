@@ -65,7 +65,8 @@ class UserController extends APIController
                 if (!\Auth::guard('web')->attempt([
                     'student_id' => $user->student_id,
                     'password'   => $request->get('password'),
-                ])) {
+                ])
+                ) {
                     return $this->error('Password check failed.', 403);
                 }
             }

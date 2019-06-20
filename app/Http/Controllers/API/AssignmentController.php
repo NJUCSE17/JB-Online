@@ -185,7 +185,7 @@ class AssignmentController extends APIController
      * Rate an assignment.
      *
      * @param  RateAssignmentRequest  $request
-     * @param  Assignment              $assignment
+     * @param  Assignment             $assignment
      *
      * @return \Illuminate\Http\JsonResponse
      */
