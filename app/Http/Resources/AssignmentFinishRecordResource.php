@@ -3,7 +3,6 @@
 namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
-use willvincent\Feeds\Facades\FeedsFacade;
 
 class AssignmentFinishRecordResource extends JsonResource
 {

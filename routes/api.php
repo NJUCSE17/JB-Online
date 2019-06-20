@@ -15,7 +15,7 @@ Route::group(
     [
         'as'         => 'api.',
         'namespace'  => 'API',
-        'middleware' => ['auth', 'verified', 'activated', 'throttle:60'],
+        'middleware' => ['auth:api', 'verified', 'activated'],
     ],
     function () {
         Route::apiResources([

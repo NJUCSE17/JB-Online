@@ -2,7 +2,6 @@
 
 namespace App\Http\Resources;
 
-use App\Models\AssignmentFinishRecord;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Facades\Auth;
 
@@ -19,6 +18,7 @@ class AssignmentResource extends JsonResource
     {
         $course = $this->course;
         $user = Auth::user();
+
         return [
             'id'              => $this->id,
             'course_id'       => $this->course_id,
