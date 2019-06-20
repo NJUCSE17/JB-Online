@@ -18,16 +18,11 @@ Route::group(
         'middleware' => ['auth:api', 'verified', 'activated'],
     ],
     function () {
-        Route::apiResources([
-            'user'               => 'UserController',
-            'course'             => 'CourseController',
-            'assignment'         => 'AssignmentController',
-            'personalAssignment' => 'PersonalAssignmentController',
-        ]);
-
         /**
          * User-related APIs.
          */
+        Route::apiResource('user', 'UserController')
+            ->only(['index', 'show', 'update']);
         Route::group(
             ['prefix' => '/user/{user}', 'as' => 'user.'],
             function () {
@@ -41,6 +36,7 @@ Route::group(
         /**
          * Course-related APIs.
          */
+        Route::apiResource('course', 'CourseController');
         Route::group(
             ['prefix' => '/course/{course}', 'as' => 'course.'],
             function () {
@@ -56,6 +52,7 @@ Route::group(
         /**
          * Assignment-related APIs
          */
+        Route::apiResource('assignment', 'AssignmentController');
         Route::group(
             ['prefix' => '/assignment/{assignment}', 'as' => 'assignment.'],
             function () {
@@ -71,6 +68,8 @@ Route::group(
         /**
          * Personal-assignment-related APIs
          */
+        Route::apiResource('personalAssignment',
+            'PersonalAssignmentController');
         Route::group(
             [
                 'prefix' => '/personalAssignment/{personalAssignment}',
@@ -89,6 +88,7 @@ Route::group(
          */
         Route::apiResource('blogFeed', 'BlogFeedController')
             ->only(['index', 'show']);
-        Route::get('/blogFeed/xml', 'BlogFeedController@xml')->name('blogFeed.xml');
+        Route::get('/blogFeed/xml', 'BlogFeedController@xml')
+            ->name('blogFeed.xml');
     }
 );

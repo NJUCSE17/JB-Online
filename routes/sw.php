@@ -13,9 +13,10 @@ Route::group(
     [
         'as'         => 'sw.',
         'namespace'  => 'SW',
-        'middleware' => ['auth', 'verified', 'activated', 'throttle:20,1'],
+        'middleware' => ['auth:api', 'verified', 'activated'],
     ],
     function () {
+        Route::get('/poll', 'SWController@poll')->name('poll');
         Route::post('/register', 'SWController@register')->name('register');
     }
 );

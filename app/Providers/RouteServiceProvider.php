@@ -70,7 +70,7 @@ class RouteServiceProvider extends ServiceProvider
     protected function mapSWRoutes()
     {
         Route::prefix('sw')
-            ->middleware('web')
+            ->middleware('api')
             ->namespace($this->namespace)
             ->group(base_path('/routes/sw.php'));
     }
