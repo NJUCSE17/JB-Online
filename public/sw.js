@@ -5847,6 +5847,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
  */
 
 var sw_url = "http://localhost:8000" + '/sw/poll';
+var hm_url = "http://localhost:8000" + '/home';
 /**
  * Sleep for a period of time.
  * @param ms
@@ -5870,7 +5871,7 @@ function () {
   var _ref = _asyncToGenerator(
   /*#__PURE__*/
   _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
-    var db, query, sw_token, fetch_options, response, data;
+    var db, query, sw_token, fetch_options, response, data, i;
     return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
@@ -5918,7 +5919,13 @@ function () {
 
           case 15:
             data = _context.sent;
-            console.log(data);
+
+            if (data.length > 0) {
+              for (i = 0; i < data.length; ++i) {
+                self.registration.showNotification(data[i].title, data[i].options);
+              }
+            }
+
             _context.next = 19;
             return sleep(60 * 1000);
 
@@ -5973,6 +5980,24 @@ self.addEventListener('install', function (event) {
 self.addEventListener('activate', function (event) {
   clients.claim();
 });
+/**
+ * SW notification click handler.
+ */
+
+self.onnotificationclick = function (event) {
+  event.notification.close();
+  event.waitUntil(clients.matchAll({
+    type: "window"
+  }).then(function (clientList) {
+    for (var i = 0; i < clientList.length; i++) {
+      var client = clientList[i];
+      if (client.url === hm_url && 'focus' in client) return client.focus();
+    }
+
+    if (clients.openWindow) return clients.openWindow(hm_url);
+  }));
+};
+
 sw_init();
 
 /***/ }),

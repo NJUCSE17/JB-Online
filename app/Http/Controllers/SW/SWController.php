@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\SW;
 
+use App\Helpers\AssignmentPushNotification;
 use App\Http\Controllers\APIController;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class SWController extends APIController
 {
@@ -16,9 +16,9 @@ class SWController extends APIController
     public function register(Request $request)
     {
         $user = $request->user();
-        if (!$user) return $this->error('Unauthorized', 401);
 
         $token = $user->createToken('service-worker');
+
         return $this->data($token);
     }
 
@@ -31,6 +31,27 @@ class SWController extends APIController
      */
     public function poll(Request $request)
     {
-        return $this->data("Hello, world!");
+        $user = $request->user();
+        if (!$user) {
+            return $this->error('Unauthorized', 401);
+        }
+
+        $notifications = collect([]);
+
+        $publicAssignments = $user->getOngoingPublicAssignments()
+            ->where('due_time', '>=', now()->addMinutes(29))
+            ->where('due_time', '<', now()->addMinutes(30));
+        $publicAssignmentsNotifications
+            = AssignmentPushNotification::pushNotificationPublicCollection($publicAssignments);
+        $notifications = $notifications->merge($publicAssignmentsNotifications);
+
+        $personalAssignments = $user->getOngoingPersonalAssignments()
+            ->where('due_time', '>=', now()->addMinutes(29))
+            ->where('due_time', '<', now()->addMinutes(30));
+        $personalAssignmentsNotifications
+            = AssignmentPushNotification::pushNotificationPersonalCollection($personalAssignments);
+        $notifications = $notifications->merge($personalAssignmentsNotifications);
+
+        return $this->data($notifications);
     }
 }

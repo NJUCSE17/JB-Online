@@ -15,6 +15,7 @@
 import Dexie from 'dexie';
 
 const sw_url = process.env.MIX_APP_URL + '/sw/poll';
+const hm_url = process.env.MIX_APP_URL + '/home';
 
 /**
  * Sleep for a period of time.
@@ -52,7 +53,11 @@ const sw_main = async () => {
         if (!(response && response.ok)) throw response.status;
 
         let data = await response.json();
-        console.log(data);
+        if (data.length > 0) {
+            for (let i = 0; i < data.length; ++i) {
+                self.registration.showNotification(data[i].title, data[i].options);
+            }
+        }
 
         await sleep(60 * 1000);
     }
@@ -90,5 +95,23 @@ self.addEventListener('install', event => {
 self.addEventListener('activate', event => {
     clients.claim();
 });
+
+/**
+ * SW notification click handler.
+ */
+self.onnotificationclick = event => {
+    event.notification.close();
+    event.waitUntil(clients.matchAll({
+        type: "window"
+    }).then(clientList => {
+        for (var i = 0; i < clientList.length; i++) {
+            var client = clientList[i];
+            if (client.url === hm_url && 'focus' in client)
+                return client.focus();
+        }
+        if (clients.openWindow)
+            return clients.openWindow(hm_url);
+    }));
+};
 
 sw_init();
