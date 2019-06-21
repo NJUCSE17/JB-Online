@@ -17,7 +17,7 @@ class AssignmentPushNotification
             'options' => [
                 'body'    => '课程“'.$assignment->course->name.'”的作业“'
                     .$assignment->name.'”将在30分钟内（'.
-                    $ddl->format('H:i').'）截止。',
+                    $ddl->toTimeString().'）截止。',
                 'badge'   => env('APP_URL').'/favicon.png',
                 'icon'    => env('APP_URL').'/favicon.png',
                 'lang'    => 'zh-CN',
@@ -45,7 +45,7 @@ class AssignmentPushNotification
             'title'   => '来自'.env('APP_NAME').'的作业提示',
             'options' => [
                 'body'    => '您的个人作业“'.$personalAssignment->name.'”将在30分钟内（'.
-                    $ddl->format('H:i').'）截止。',
+                    $ddl->toTimeString().'）截止。',
                 'badge'   => env('APP_URL').'/favicon.png',
                 'icon'    => env('APP_URL').'/favicon.png',
                 'lang'    => 'zh-CN',

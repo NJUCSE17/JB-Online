@@ -27,6 +27,7 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
+        $schedule->command('custom:send_assignment_mails')->dailyAt('22:30');
         $schedule->command('custom:update_blog_feeds')->everyFiveMinutes();
         $schedule->command('telescope:prune')->daily();
     }
