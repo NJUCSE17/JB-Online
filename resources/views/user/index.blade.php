@@ -23,11 +23,6 @@
     @if(\Auth::user()->is($user))
         <personal-assignment-list></personal-assignment-list>
         <hr/>
-    @elseif(\Auth::user()->privilege_level <= 2)
-        <personal-assignment-list
-                :user_id="{{ json_encode($user->id) }}"
-        ></personal-assignment-list>
-        <hr/>
     @endif
 
     <blog-feed-list
