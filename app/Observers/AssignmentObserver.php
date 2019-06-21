@@ -4,6 +4,9 @@ namespace App\Observers;
 
 use App\Models\Assignment;
 use App\Models\AssignmentFinishRecord;
+use App\Models\User;
+use App\Notifications\AssignmentModifiedEmail;
+use Illuminate\Support\Facades\Log;
 
 class AssignmentObserver
 {
@@ -30,9 +33,13 @@ class AssignmentObserver
     {
         $records = AssignmentFinishRecord::query()
             ->where('assignment_id', '=', $assignment->id);
-        $user_ids = $records->pluck('user_id')->toArray();
+        $userIDs = $records->pluck('user_id')->toArray();
         $records->delete();
-        // TODO: SEND NOTIFICATION TO USERS
+
+        $users = User::query()->whereIn('id', $userIDs)->get();
+        foreach ($users as $user) {
+            $user->notify(new AssignmentModifiedEmail($user, $assignment));
+        }
     }
 
     /**
