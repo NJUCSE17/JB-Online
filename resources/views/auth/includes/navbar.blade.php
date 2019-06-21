@@ -19,7 +19,7 @@
                     @if(!Route::is('welcome'))
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('welcome') }}">
-                                <i class="fas fa-angle-left mr-1"></i> 返回首页
+                                <i class="fas fa-angle-left mr-1"></i> 站点首页
                             </a>
                         </li>
                     @endif
@@ -39,6 +39,11 @@
                             </a>
                         </li>
                     @else
+                        <li class="nav-item">
+                            <a class="nav-link pr-lg-0" href="{{ route('home') }}">
+                                <i class="fas fa-home mr-1"></i> 主页
+                            </a>
+                        </li>
                         <li class="nav-item">
                             <a class="nav-link pr-lg-0" href="{{ route('logout') }}"
                                onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
