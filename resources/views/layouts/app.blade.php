@@ -8,7 +8,7 @@
 
     @include('includes.stylesheets')
 </head>
-<body>
+<body class="bg-section-secondary">
 @include('includes.navbar')
 <div id="app">
     <div class="main-content">
@@ -27,9 +27,8 @@
             </div>
         </section>
     </div>
-
-    @include('includes.footer')
 </div>
+@include('includes.footer')
 </body>
 @include('includes.scripts')
 </html>

@@ -3,6 +3,11 @@
         <div class="container px-lg-0">
             <span class="navbar-brand mr-lg-5">
                 {{ env('APP_NAME') }}
+                @if(env('APP_ISP_NO'))
+                    <span class="d-none d-md-inline text-sm">
+                        （{{ env('APP_ISP_NO') }}）
+                    </span>
+                @endif
             </span>
             <button class="navbar-toggler pr-0" type="button" data-toggle="collapse"
                     data-target="#navbar-main-collapse" aria-controls="navbar-main-collapse" aria-expanded="false"

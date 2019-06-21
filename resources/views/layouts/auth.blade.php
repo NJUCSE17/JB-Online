@@ -8,12 +8,12 @@
 
     @include('includes.stylesheets')
 </head>
-<body>
+<body class="bg-section-secondary">
 @include('auth.includes.navbar')
 <div id="app">
     <div class="main-content">
         <section class="slice slice-lg min-vh-100 d-flex align-items-center bg-section-secondary">
-            <div class="bg-absolute-cover bg-size--contain d-none d-lg-block">
+            <div class="bg-absolute-cover bg-size--contain">
                 <figure class="w-100">
                     <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 1506.3 578.7"
                          class="injected-svg svg-inject">
