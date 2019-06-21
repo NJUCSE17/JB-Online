@@ -12,8 +12,6 @@ const mix = require('laravel-mix');
  */
 
 mix.js('resources/js/app.js', 'public/js')
-    .js('resources/js/sw/sw.js', 'public') // put to root dir
-    .js('resources/js/sw/sw-register.js', 'public/js')
     .sass('resources/sass/app.scss', 'public/css');
 
 if (mix.inProduction() || process.env.npm_lifecycle_event !== 'hot') {
