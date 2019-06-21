@@ -9,6 +9,6 @@ class CourseController extends Controller
 {
     public function index(Request $request)
     {
-        return view('course.index');
+        return view('frontend.course.index');
     }
 }

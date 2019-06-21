@@ -36,7 +36,7 @@ class HomeController extends Controller
      */
     public function home()
     {
-        return view('home.home');
+        return view('frontend.home');
     }
 
     /**
@@ -46,7 +46,7 @@ class HomeController extends Controller
      */
     public function user(Request $request, User $user)
     {
-        return view('user.index')
+        return view('frontend.user.index')
             ->with('user', $user);
     }
 }

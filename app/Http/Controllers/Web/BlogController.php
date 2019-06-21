@@ -18,7 +18,7 @@ class BlogController extends Controller
             ->orderBy('published_at', 'desc')
             ->paginate(15);
 
-        return view('blog.index')
+        return view('frontend.blog.index')
             ->with('feeds', $feeds);
     }
 
@@ -32,7 +32,7 @@ class BlogController extends Controller
     public function show($feedID)
     {
         /* Blog is not a model, hence we need to find the model manually */
-        return view('blog.feed')
+        return view('frontend.blog.feed')
             ->with('feed', BlogFeed::query()->findOrFail($feedID));
     }
 }
