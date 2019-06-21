@@ -82,7 +82,7 @@
         },
         methods: {
             compareBySemester(a, b) {
-                return a.semester < b.semester ? -1 : 1;
+                return a.semester > b.semester ? -1 : 1;
             },
             loadCourses() {
                 this.init_status = '正在检查你的信息...';
