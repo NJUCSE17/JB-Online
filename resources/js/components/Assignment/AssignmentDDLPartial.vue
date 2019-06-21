@@ -1,20 +1,34 @@
 <template>
-    <a v-if="record" v-bind:class="'text-success'"
-       href="#" @click.prevent="reset">
-        <i class="fas fa-check mr-1"></i>
-        <span>
-            <s>
-                {{ this.label }}
-            </s>
+    <span>
+        <span class="float-md-right d-none d-md-flex py-1">
+            <a v-if="record" v-bind:class="'text-success'"
+               href="#" @click.prevent="reset">
+                <i class="fas fa-check mr-1"></i>
+                <span>
+                    <s>{{ this.dueTime }}，{{ this.label }}</s>
+                </span>
+            </a>
+            <a v-else v-bind:class="'text-' + this.color"
+               href="#" @click.prevent="finish">
+                <i class="fas fa-times mr-1"></i>
+                <span>{{ this.dueTime }}，{{ this.label }}</span>
+            </a>
         </span>
-    </a>
-    <a v-else v-bind:class="this.color"
-       href="#" @click.prevent="finish">
-        <i class="fas fa-times mr-1"></i>
-        <span>
-            {{ this.label }}
+        <span class="d-flex d-md-none">
+            <button v-if="record" class="btn btn-sm w-100"
+                    v-bind:class="'btn-success'"
+                    v-on:click="reset">
+                <i class="fas fa-check mr-1"></i> {{ this.dueTime }}
+                <small class="d-block">{{ this.label }}</small>
+            </button>
+            <button v-else class="btn btn-sm w-100"
+                    v-bind:class="'btn-' + this.color"
+                    v-on:click="finish">
+                <i class="fas fa-times mr-1"></i> {{ this.dueTime }}
+                <small class="d-block">{{ this.label }}</small>
+            </button>
         </span>
-    </a>
+    </span>
 </template>
 
 <script>
@@ -40,6 +54,11 @@
                 label: '',
             }
         },
+        computed: {
+            dueTime() {
+                return window.Dayjs(this.due_time).format('YYYY-MM-DD (ddd) HH:mm:ss');
+            },
+        },
         created: function () {
             this.color = this.getColor();
             this.label = this.getLabel();
@@ -54,25 +73,24 @@
                 let ddl = window.Dayjs(this.due_time);
                 let delta = ddl.diff(now, 'day');
                 if (now.isAfter(ddl)) {
-                    return 'text-dark';
+                    return 'dark';
                 } else if (delta <= 1) {
-                    return 'text-danger';
+                    return 'danger';
                 } else if (delta <= 2) {
-                    return 'text-warning';
+                    return 'warning';
                 } else if (delta <= 5) {
-                    return 'text-info';
+                    return 'info';
                 } else {
-                    return 'text-muted';
+                    return 'muted';
                 }
             },
             getLabel() {
                 let now = window.Dayjs();
                 let ddl = window.Dayjs(this.due_time);
-                let ret = ddl.format('YYYY-MM-DD (ddd) HH:mm:ss');
                 if (now.isAfter(ddl)) {
-                    return ret + '，已截止';
+                    return '已截止';
                 } else {
-                    ret += '，剩余';
+                    let ret = '剩余';
                     let left = 2;
                     for (let i = 0; i < this.nr_periods && left > 0; ++i) {
                         let diff = ddl.diff(now, this.periods[i][0]);

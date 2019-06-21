@@ -1,17 +1,17 @@
 <template>
-    <div class="d-inline-flex">
-        <span class="mr-3">
-            <a v-bind:class="info.rated === 'dislike' ? 'text-danger' : 'text-muted'"
-               href="#" @click.prevent="rate(false)">
+    <div class="d-flex d-md-inline-flex">
+        <div class="btn-group btn-group-sm w-100 mb-2 mb-md-0">
+            <button class="btn btn-sm"
+                    v-bind:class="info.rated === 'dislike' ? 'btn-danger' : 'btn-soft-danger'"
+                    v-on:click="rate(false)">
                 <i class="fas fa-heart-broken mr-1"></i> {{ info.stats.dislike }}
-            </a>
-        </span>
-        <span>
-            <a v-bind:class="info.rated === 'like' ? 'text-success' : 'text-muted'"
-               href="#" @click.prevent="rate(true)">
+            </button>
+            <button class="btn btn-sm"
+                    v-bind:class="info.rated === 'like' ? 'btn-success' : 'btn-soft-success'"
+                    v-on:click="rate(true)">
                 <i class="fas fa-heart mr-1"></i> {{ info.stats.like }}
-            </a>
-        </span>
+            </button>
+        </div>
     </div>
 </template>
 
