@@ -22,7 +22,7 @@ class CreateBlogFeedsTable extends Migration
             $table->string('user_avatar');
             $table->string('permalink');
             $table->string('title');
-            $table->text('content_html');
+            $table->longText('content_html');
             $table->dateTime('published_at');
             $table->timestamps();
         });

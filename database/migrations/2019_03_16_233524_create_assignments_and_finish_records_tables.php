@@ -20,8 +20,8 @@ class CreateAssignmentsAndFinishRecordsTables extends Migration
                 $table->unsignedBigInteger('course_id');
                 $table->foreign('course_id')->references('id')->on('courses');
                 $table->string('name');
-                $table->text('content');
-                $table->text('content_html');
+                $table->longText('content');
+                $table->longText('content_html');
                 $table->dateTime('due_time');
                 $table->timestamps();
                 $table->softDeletes();

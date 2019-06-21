@@ -21,8 +21,8 @@ class CreateCoursesAndEnrollRecordsTables extends Migration
                 $table->integer('semester');
                 $table->dateTime('start_time');
                 $table->dateTime('end_time');
-                $table->text('notice')->nullable();
-                $table->text('notice_html')->nullable();
+                $table->longText('notice')->nullable();
+                $table->longText('notice_html')->nullable();
                 $table->timestamps();
                 $table->softDeletes();
             }

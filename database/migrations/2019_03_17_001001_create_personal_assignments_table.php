@@ -20,8 +20,8 @@ class CreatePersonalAssignmentsTable extends Migration
                 $table->unsignedBigInteger('user_id');
                 $table->foreign('user_id')->references('id')->on('users');
                 $table->string('name');
-                $table->text('content');
-                $table->text('content_html');
+                $table->longText('content');
+                $table->longText('content_html');
                 $table->dateTime('due_time');
                 $table->timestamp('finished_at')->nullable()->default(null);
                 $table->timestamps();
