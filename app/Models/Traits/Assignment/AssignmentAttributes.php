@@ -20,7 +20,7 @@ trait AssignmentAttributes
     public function finishedAt(User $user)
     {
         $record = AssignmentFinishRecord::query()
-            ->where('user_id', $user)
+            ->where('user_id', $user->id)
             ->where('assignment_id', $this->id)
             ->first();
 
