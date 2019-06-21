@@ -10,7 +10,7 @@
 
 @section('header-right')
     <span class="text-white" style="font-size: 110%;">
-        {{ $user->student_id }} ({{ $user->id }}/{{ $user->privilege_level }})
+        {{ $user->student_id }} ({{ $user->id }})
     </span>
 @endsection
 
