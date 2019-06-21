@@ -18,7 +18,7 @@
 
 @section('content')
     @foreach($feeds as $feed)
-        @include('blog.includes.feed-info', ['feed' => $feed])
+        @include('frontend.blog.includes.feed-info', ['feed' => $feed])
     @endforeach
     <hr class="divider-fade"/>
     <div class="row mx-2 mb-3">
