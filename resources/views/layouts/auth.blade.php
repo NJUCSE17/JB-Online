@@ -9,9 +9,8 @@
     @include('includes.stylesheets')
 </head>
 <body>
+@include('auth.includes.navbar')
 <div id="app">
-    @include('auth.includes.navbar')
-
     <div class="main-content">
         <section class="slice slice-lg min-vh-100 d-flex align-items-center bg-section-secondary">
             <div class="bg-absolute-cover bg-size--contain d-none d-lg-block">

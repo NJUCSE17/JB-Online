@@ -1,5 +1,5 @@
 <header class="header header-transparent" id="header-main">
-    <nav class="navbar navbar-main navbar-expand-lg navbar-transparent navbar-light bg-light" id="navbar-main">
+    <nav class="navbar navbar-expand-lg navbar-transparent navbar-light bg-light" id="navbar-main">
         <div class="container px-lg-0">
             <span class="navbar-brand mr-lg-5">
                 {{ env('APP_NAME') }}

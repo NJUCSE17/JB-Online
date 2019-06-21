@@ -9,15 +9,13 @@
     @include('includes.stylesheets')
 </head>
 <body>
+@include('includes.navbar')
 <div id="app">
-    @include('includes.navbar')
-
     <div class="main-content">
-        <section class="header-account-page @yield('header-class') d-flex align-items-end"
-                 data-offset-top="#header-main" style="padding-top: 147.188px;">
-            <div class="container pt-4 pt-lg-0">
+        <section class="@yield('header-class') d-flex align-items-end pt-5 pt-lg-8">
+            <div class="container">
                 <div class="row">
-                    <div class=" col-lg-12">
+                    <div class="col-lg-12">
                         @include('includes.header')
                     </div>
                 </div>

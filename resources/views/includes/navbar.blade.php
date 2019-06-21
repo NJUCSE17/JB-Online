@@ -1,17 +1,15 @@
-<header class="header header-transparent" id="header-main">
-    <nav class="navbar navbar-main navbar-expand-lg navbar-transparent navbar-dark bg-dark" id="navbar-main">
+<header class="header @yield('header-class')" id="header-main">
+    <nav class="navbar navbar-expand-lg navbar-transparent navbar-dark @yield('header-class')">
         <div class="container">
             <a class="navbar-brand mr-lg-5" href="{{ route('home') }}">
                 {{ env('APP_NAME') }}
             </a>
-            <button class="navbar-toggler pr-0" type="button" data-toggle="collapse"
-                    data-target="#navbar-main-collapse" aria-controls="navbar-main-collapse" aria-expanded="false"
-                    aria-label="Toggle navigation">
+            <button class="navbar-toggler" type="button" data-toggle="collapse"
+                    data-target="#MainNavigationBar" aria-controls="MainNavigationBar" aria-expanded="false"
+                    aria-label="navigation toggle">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse" id="navbar-main-collapse">
-                <ul class="navbar-nav align-items-lg-center">
-                </ul>
+            <div class="navbar-collapse collapse" id="MainNavigationBar">
                 <ul class="navbar-nav align-items-lg-end ml-lg-auto">
                     <li class="nav-item">
                         <a class="nav-link pr-lg-0" href="{{ route('logout') }}"
