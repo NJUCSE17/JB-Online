@@ -15,7 +15,19 @@
             <assignment-list-main></assignment-list-main>
         </div>
         <div class="col col-md-4 col-12">
-            <hr class="d-block d-md-none"/>
+            @if(($notice = env('APP_NOTICE')))
+                <hr class="d-block d-md-none"/>
+                <div id="Notice">
+                    <div id="NoticeControl">
+                        <p class="h3">系统通知</p>
+                    </div>
+                    <hr/>
+                    {!! $notice !!}
+                </div>
+                <hr />
+            @else
+                <hr class="d-block d-md-none"/>
+            @endif
             <blog-feed-list
                     :simple="true"
                     :limit="5"
