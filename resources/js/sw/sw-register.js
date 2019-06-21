@@ -59,7 +59,7 @@ const sw_register_main = async () => {
         });
     }
 
-    await navigator.serviceWorker.register('sw.js');
+    await navigator.serviceWorker.register(process.env.MIX_APP_URL + '/sw.js');
 };
 
 /**
