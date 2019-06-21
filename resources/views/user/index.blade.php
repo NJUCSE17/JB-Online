@@ -19,10 +19,17 @@
             :user_id="{{ json_encode($user->id) }}"
     ></user-info-main>
     <hr/>
-    @if(\Auth::user()->privilege_level <= 2 or \Auth::user()->is($user))
+
+    @if(\Auth::user()->is($user))
         <personal-assignment-list></personal-assignment-list>
         <hr/>
+    @elseif(\Auth::user()->privilege_level <= 2)
+        <personal-assignment-list
+                :user_id="{{ json_encode($user->id) }}"
+        ></personal-assignment-list>
+        <hr/>
     @endif
+
     <blog-feed-list
             :user_id="{{ json_encode($user->id) }}"
             :limit="{{ json_encode(10) }}"

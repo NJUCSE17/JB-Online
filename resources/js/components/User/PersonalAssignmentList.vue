@@ -58,7 +58,7 @@
     export default {
         name: "PersonalAssignmentList",
         components: {AssignmentCreatorMain, AssignmentItemPersonal},
-        props: [],
+        props: ['user_id'],
         data: function () {
             return {
                 initializing: true,
@@ -69,13 +69,16 @@
             }
         },
         created: function () {
-            this.loadCoursesAndAssignments();
+            this.loadPersonalAssignments();
         },
         methods: {
-            loadCoursesAndAssignments() {
+            loadPersonalAssignments() {
+                let data = {};
+                if (this.user_id) data.user_id = this.user_id;
+
                 this.init_status = '正在加载个人作业...';
                 window.axios.get(this.api_personal, {
-                    due_after: '2000-01-01 00:00:00'
+                    params: data,
                 }).then(res => {
                     this.assignments = this.assignments.concat(res.data);
                     console.debug(this.assignments);
