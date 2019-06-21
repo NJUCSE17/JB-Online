@@ -1,8 +1,8 @@
 <template>
     <div class="mb-3">
         <div class="list-group-item">
-            <div class="d-flex align-items-center justify-content-between">
-                <div class="mr-3 text-left">
+            <div class="d-block d-md-flex align-items-center justify-content-between">
+                <div class="mx-3 text-left d-none d-md-inline-flex">
                     <button v-if="!course.is_in_course"
                             v-on:click="enrollCourse"
                             type="button" class="btn btn-sm btn-outline-success">
@@ -14,8 +14,7 @@
                         <i class="fas fa-door-open mr-2"></i> 退出
                     </button>
                 </div>
-
-                <div class="flex-fill text-limit">
+                <div class="flex-fill text-limit mb-2 mb-md-0">
                     <h6 class="progress-text mb-1 text-sm d-block text-limit">
                         第{{ course.semester }}学期 - {{ course.name }}
                     </h6>
@@ -39,7 +38,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="ml-3 text-right btn-group btn-group-sm">
+                <div class="ml-0 ml-md-3 d-flex text-right btn-group btn-group-sm">
                     <button type="button" class="btn btn-sm"
                             v-bind:class="show_assignments ? 'btn-primary' : 'btn-outline-primary'"
                             v-on:click="triggerAssignmentListComponent">
