@@ -10,6 +10,8 @@ try {
     window.Popper = require('popper.js').default;
     window.$ = window.jQuery = require('jquery');
 
+    require('bootstrap');
+
     window.Dayjs = require('dayjs');
     require('dayjs/locale/zh-cn');
     window.Dayjs.locale('zh-cn');
