@@ -126,7 +126,7 @@
             return {
                 userName: this.user.name,
                 userEmail: this.user.email,
-                userWantEmail: this.user.want_email,
+                userWantEmail: this.user.want_email ? 1 : 0,
                 userBlogFeedURL: this.user.blog_feed_url,
                 userPassword: '',
                 submitting: '',
