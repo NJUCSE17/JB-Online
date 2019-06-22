@@ -38,6 +38,7 @@ class UpdateUserRequest extends FormRequest
                 'max:255',
                 Rule::unique('users')->ignore($user->id),
             ],
+            'want_email'    => ['sometimes', 'required', 'boolean'],
             'blog_feed_url' => [
                 'sometimes',
                 'nullable',

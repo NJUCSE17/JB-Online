@@ -56,6 +56,7 @@ class UserTest extends TestCase
             'student_id'      => $user->student_id,
             'name'            => $user->name,
             'email'           => $user->email,
+            'want_email'      => $user->want_email,
             'blog_feed_url'   => $user->blog_feed_url,
             'is_verified'     => $user->isVerified(),
             'is_active'       => $user->isActive(),

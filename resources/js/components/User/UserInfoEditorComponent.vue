@@ -47,7 +47,25 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="form-control-label">博客RSS/Feed地址</label>
+                        <label class="form-control-label">
+                            接收邮件通知（包括且不限于每日提示和作业修改通知）
+                        </label>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fas fa-envelope-open-text"></i></span>
+                            </div>
+                            <select id="UserWantEmail"
+                                    class="form-control"
+                                    v-on:keyup.enter="submit"
+                                    v-model="userWantEmail"
+                                    v-bind:readonly="!canEdit">
+                                <option value="1">是</option>
+                                <option value="0">否</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-control-label">博客RSS/Feed地址（选填，支持RSS/Atom格式）</label>
                         <div class="input-group">
                             <div class="input-group-prepend">
                                 <span class="input-group-text"><i class="fas fa-rss"></i></span>
@@ -108,6 +126,7 @@
             return {
                 userName: this.user.name,
                 userEmail: this.user.email,
+                userWantEmail: this.user.want_email,
                 userBlogFeedURL: this.user.blog_feed_url,
                 userPassword: '',
                 submitting: '',
@@ -165,6 +184,7 @@
                         ? this.userPassword : 'AdminDoesNotNeedToGivePassword',
                     name: this.userName,
                     email: this.userEmail,
+                    want_email: this.userWantEmail,
                     blog_feed_url: this.userBlogFeedURL,
                 }).then(res => {
                     console.debug(res);

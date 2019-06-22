@@ -54,6 +54,7 @@ user: {
   ```php
   'name'          => ['sometimes', 'required', 'string', 'max:255'],
   'email'         => ['sometimes', 'required', 'string', 'email', 'max:255', Rule::unique('users')->ignore($user->id)],
+  'want_email'    => ['sometimes', 'required', 'boolean'],
   'blog_feed_url' => ['sometimes', 'nullable', 'string', 'url', 'max:255', Rule::unique('users')->ignore($user->id)],
   'password'      => ['sometimes', 'required', 'string', 'min:8'],
   'new_password'  => ['sometimes', 'required', 'string', 'min:8'],

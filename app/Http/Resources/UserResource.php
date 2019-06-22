@@ -20,6 +20,7 @@ class UserResource extends JsonResource
             'student_id'      => $this->student_id,
             'name'            => $this->name,
             'email'           => $this->email,
+            'want_email'      => $this->want_email,
             'blog_feed_url'   => $this->blog_feed_url,
             'is_verified'     => $this->isVerified(),
             'is_active'       => $this->isActive(),

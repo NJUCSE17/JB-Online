@@ -31,7 +31,7 @@
                     </thead>
                     <tbody>
                     <tr v-for="user in users_with_records">
-                        <td class="text-center">{{ user.student_id }} ({{ user.id }}/{{ user.privilege_level }})</td>
+                        <td class="text-center">{{ user.student_id }} ({{ user.id }})</td>
                         <td class="text-center">{{ user.name }}</td>
                         <td class="text-center">
                             <span v-if="user.is_in_course && user.is_course_admin" class="text-warning">

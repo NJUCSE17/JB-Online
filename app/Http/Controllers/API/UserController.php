@@ -74,6 +74,8 @@ class UserController extends APIController
 
         $name = $request->has('name') ? $request->get('name') : $user->name;
         $email = $request->has('email') ? $request->get('email') : $user->email;
+        $want_email = $request->has('want_email')
+            ? $request->get('want_email') : $user->want_email;
         $blog = $request->has('blog_feed_url')
             ? $request->get('blog_feed_url') : $user->blog_feed_url;
         $pass = $request->has('new_password')
@@ -86,6 +88,7 @@ class UserController extends APIController
             [
                 'name'          => $name,
                 'email'         => $email,
+                'want_email'    => $want_email,
                 'blog_feed_url' => $blog,
                 'password'      => $pass,
             ]
