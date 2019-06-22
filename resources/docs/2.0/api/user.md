@@ -21,7 +21,8 @@ user: {
     is_verified: true,
     name: "Alice",
     privilege_level: 3,
-    student_id: 170000001
+    student_id: 170000001,
+    want_email: true,
 }
 ```
 
