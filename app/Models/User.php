@@ -63,6 +63,7 @@ class User extends Authenticatable
      */
     protected $casts
         = [
+            'want_email'        => 'boolean',
             'email_verified_at' => 'datetime',
             'activated_at'      => 'datetime',
             'last_login_at'     => 'datetime',
