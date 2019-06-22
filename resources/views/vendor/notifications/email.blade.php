@@ -51,7 +51,8 @@
 @slot('subcopy')
 @lang(
     "如果您无法点击 \":actionText\" 按钮，可在浏览器中直接访问以下地址：\n".
-    ' [:actionURL](:actionURL)',
+    ' [:actionURL](:actionURL)\n'.
+    "如果您不想收到推送邮件，可登录网站并在账户设置中选择拒收邮件。",
     [
         'actionText' => $actionText,
         'actionURL' => $actionUrl,
