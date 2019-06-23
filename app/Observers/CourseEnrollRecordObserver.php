@@ -45,6 +45,7 @@ class CourseEnrollRecordObserver
             ->where('course_id', $courseEnrollRecord->course_id)
             ->pluck('id')->toArray();
         AssignmentFinishRecord::query()
+            ->where('user_id', $courseEnrollRecord->user_id)
             ->whereIn('assignment_id', $assignment_ids)
             ->delete();
     }
