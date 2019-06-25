@@ -7,7 +7,7 @@
                 <i class="fas fa-edit"></i>
             </button>
         </h3>
-        <div class="card-body" v-html="assignment.content_html"></div>
+        <div ref="content" class="card-body" v-html="assignment.content_html"></div>
         <div class="card-footer">
             <assignment-d-d-l-partial
                     :api="api + '/' + assignment.id"
@@ -29,6 +29,7 @@
 <script>
     import AssignmentDDLPartial from "./AssignmentDDLPartial";
     import AssignmentEditor from "./AssignmentEditor";
+    import renderMathInElement from "../../../../public/katex/contrib/auto-render";
 
     export default {
         name: "AssignmentItemPersonal",
@@ -52,7 +53,19 @@
             deleteAssignment() {
                 this.$emit('deleteAssignment', this.assignment);
             }
-        }
+        },
+        mounted() {
+            if (renderMathInElement) {
+                renderMathInElement(this.$refs.content, {
+                    delimiters: [
+                        {left: "$$", right: "$$", display: true},
+                        {left: "\\[", right: "\\]", display: true},
+                        {left: "$", right: "$", display: false},
+                        {left: "\\(", right: "\\)", display: false}
+                    ]
+                });
+            }
+        },
     }
 </script>
 

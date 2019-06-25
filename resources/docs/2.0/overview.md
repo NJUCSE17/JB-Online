@@ -26,7 +26,7 @@ JBOnline基于Laravel 5.8开发，所以Laravel相关的结构、函数的帮助
 ### PHP
 
 - binarytorch/larecipe
-- cybercog/laravel-love
+- cybercog/laravel-love (v5)
 - erusev/parsedown
 - mews/purifier
 - willvincent/feeds
@@ -39,6 +39,7 @@ JBOnline基于Laravel 5.8开发，所以Laravel相关的结构、函数的帮助
 - laravel-mix
 - lodash
 - popper
+- katex
 - craftpip/jquery-confirm
 - iamkun/dayjs
 - vuejs-tips/vue-the-mask
