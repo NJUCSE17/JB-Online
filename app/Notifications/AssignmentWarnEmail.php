@@ -58,7 +58,11 @@ class AssignmentWarnEmail extends Notification
             ->line('---');
 
         foreach ($this->assignments as $assignment) {
-            $message->line('## '.$assignment->name);
+            if (isset($assignment->course_id)) {
+                $message->line('## '.$assignment->course->name.' - '.$assignment->name);
+            } else {
+                $message->line('## 个人 - '.$assignment->name);
+            }
             $message->line($assignment->content);
             $message->line('');
         }
