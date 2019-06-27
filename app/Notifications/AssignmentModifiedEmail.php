@@ -54,10 +54,11 @@ class AssignmentModifiedEmail extends Notification
         $message = (new MailMessage)
             ->subject($subject)
             ->greeting(UserGreetings::greet($this->user))
-            ->line('因为作业'.$this->assignment->name.'的内容发生了变化，改作业已被重新标记为未完成。')
+            ->line('因为作业'.$this->assignment->name.'的内容发生了变化，该作业已被重新标记为未完成。')
             ->line('作业'.$this->assignment->name.'经过修改后的内容为：')
             ->line('---')
             ->line($this->assignment->content)
+            ->line('**截止时间：'.$this->assignment->due_time.'**')
             ->line('---')
             ->action('进入主页', url(route('home')))
             ->salutation('祝您学习快乐');
