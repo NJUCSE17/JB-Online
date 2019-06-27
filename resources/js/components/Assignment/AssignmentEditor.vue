@@ -150,6 +150,8 @@
         },
         methods: {
             submit() {
+                if (!this.isReady) return;
+
                 this.submitting = true;
                 window.axios.put(this.api, {
                     name: this.assignmentName,
