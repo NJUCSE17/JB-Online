@@ -46,7 +46,7 @@
                                    v-bind:readonly="!canEdit">
                         </div>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group" v-if="canEdit">
                         <label class="form-control-label">
                             接收邮件通知（包括且不限于每日提示和作业修改通知）
                         </label>
