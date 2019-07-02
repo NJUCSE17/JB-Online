@@ -29,7 +29,7 @@
 <script>
     import AssignmentDDLPartial from "./AssignmentDDLPartial";
     import AssignmentEditor from "./AssignmentEditor";
-    import renderMathInElement from "../../../../public/katex/contrib/auto-render";
+    import renderMathInElement from "katex/contrib/auto-render/auto-render";
 
     export default {
         name: "AssignmentItemPersonal",

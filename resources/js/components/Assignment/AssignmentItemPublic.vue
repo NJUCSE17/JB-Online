@@ -35,7 +35,7 @@
     import AssignmentDDLPartial from "./AssignmentDDLPartial";
     import AssignmentRatePartial from "./AssignmentRatePartial";
     import AssignmentEditor from "./AssignmentEditor";
-    import renderMathInElement from "../../../../public/katex/contrib/auto-render";
+    import renderMathInElement from "katex/contrib/auto-render/auto-render";
 
     export default {
         name: "AssignmentItemPublic",
