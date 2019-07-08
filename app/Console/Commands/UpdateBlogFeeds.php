@@ -61,7 +61,8 @@ class UpdateBlogFeeds extends Command
                         $query = BlogFeed::query()
                             ->where('permalink', '=', $feed['permalink']);
                         if ($query->exists()) {
-                            $query->first()->update($feed);
+                            $feed = $query->first();
+                            $feed->setUpdatedAt(now())->save();
                             echo ".";
                         } else {
                             BlogFeed::query()->create($feed)->save();
@@ -78,6 +79,12 @@ class UpdateBlogFeeds extends Command
         }
 
         echo "Done caching blog feeds.\n";
+
+        $oldQuery = BlogFeed::query()
+            ->where('updated_at', '<=', now()->subMinutes(30));
+        $oldCount = $oldQuery->count();
+        $oldQuery->delete();
+        echo "Removed ".$oldCount." old blog feeds.\n";
 
         return 0;
     }
