@@ -64,7 +64,7 @@ class AssignmentWarnEmail extends Notification
                 $message->line('## 个人 - '.$assignment->name);
             }
             $message->line($assignment->content)
-                ->line('**截止时间：'.$this->assignment->due_time.'**')
+                ->line('**截止时间：'.$assignment->due_time.'**')
                 ->line('');
         }
 
