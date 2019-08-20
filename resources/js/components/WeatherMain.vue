@@ -45,7 +45,7 @@
             this.instance.get('https://free-api.heweather.net/s6/weather/now', {
                 params: {
                     lang: 'zh',
-                    location: '45.77.19.2',
+                    location: this.ip,
                     key: this.api_key,
                 }
             }).then(res => {
