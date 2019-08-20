@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\Request;
 
 class LoginController extends Controller
 {
@@ -26,6 +28,27 @@ class LoginController extends Controller
      * @var string
      */
     protected $redirectTo = '/home';
+
+    /**
+     * Handle IP and other info when user logged in successfully.
+     *
+     * @param Request $request
+     * @param $user
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
+    protected function authenticated(Request $request, User $user)
+    {
+        $ip = geoip()->getClientIP();
+        if ($ip !== $user->last_login_ip) {
+            $request->session()->put('ip', $ip);
+        }
+
+        $user->last_login_at = now();
+        $user->last_login_ip = $ip;
+        $user->save();
+
+        return redirect($this->redirectTo);
+    }
 
     /**
      * Create a new controller instance.
