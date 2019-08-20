@@ -43,7 +43,7 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="form-control-label">起始时间 {{ begWeekday }}</label>
+                            <label class="form-control-label">起始时间 {{ begWeekday }} [{{ timezone }}]</label>
                             <div class="input-group">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text"><i class="fas fa-calendar"></i></span>
@@ -64,7 +64,7 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="form-control-label">结束时间 {{ endWeekday }}</label>
+                            <label class="form-control-label">结束时间 {{ endWeekday }} [{{ timezone }}]</label>
                             <div class="input-group">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text"><i class="fas fa-calendar"></i></span>
@@ -122,7 +122,7 @@
 
     export default {
         name: "CourseCreatorComponent",
-        props: ['id', 'api'],
+        props: ['id', 'api', 'timezone'],
         data: function () {
             return {
                 datePipe: createAutoCorrectedDatePipe('yyyy-mm-dd HH:MM:SS'),

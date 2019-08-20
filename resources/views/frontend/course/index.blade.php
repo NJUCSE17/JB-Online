@@ -11,5 +11,7 @@
 @endsection
 
 @section('content')
-    <course-list-main></course-list-main>
+    <course-list-main
+        :timezone="{{ json_encode(Auth::user()->timezone) }}"
+    ></course-list-main>
 @endsection

@@ -69,12 +69,14 @@
                 v-if="show_assignments"
                 :id="listID"
                 :course="course"
+                :timezone="timezone"
         ></course-assignment-list-component>
 
         <course-editor-component
                 :id="editorID"
                 :api="api_course"
                 :course="course"
+                :timezone="timezone"
                 v-on:updateCourse="updateCourse"
                 v-on:deleteCourse="deleteCourse"
         ></course-editor-component>
@@ -97,7 +99,7 @@
     export default {
         name: "CourseItemComponent",
         components: {CourseEnrollRecordsComponent, CourseEditorComponent, CourseAssignmentListComponent},
-        props: ['id', 'api_user', 'api_course', 'course'],
+        props: ['id', 'api_user', 'api_course', 'course', 'timezone'],
         data: function () {
             return {
                 show_assignments: false,

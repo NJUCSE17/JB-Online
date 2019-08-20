@@ -8,6 +8,7 @@
                             v-if="self.privilege_level <= 2"
                             :id="creatorID"
                             :api="api_course"
+                            :timezone="timezone"
                             v-on:addCourse="addCourse"
                     ></course-creator-component>
                 </span>
@@ -33,6 +34,7 @@
                         :api_user="api_user"
                         :api_course="api_course + '/' + course.id"
                         :course="course"
+                        :timezone="timezone"
                         v-on:updateCourse="updateCourse"
                         v-on:deleteCourse="deleteCourse"
                 ></course-item-component>
@@ -60,6 +62,7 @@
     export default {
         name: "CourseListMain",
         components: {CourseItemComponent, CourseCreatorComponent},
+        props: ['timezone'],
         data: function () {
             return {
                 initializing: true,
