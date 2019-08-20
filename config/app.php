@@ -167,6 +167,7 @@ return [
          */
         willvincent\Feeds\FeedsServiceProvider::class,
         Mews\Purifier\PurifierServiceProvider::class,
+        Torann\GeoIP\GeoIPServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -210,6 +211,7 @@ return [
         'Feeds'        => willvincent\Feeds\Facades\FeedsFacade::class,
         'File'         => Illuminate\Support\Facades\File::class,
         'Gate'         => Illuminate\Support\Facades\Gate::class,
+        'GeoIP'        => Torann\GeoIP\Facades\GeoIP::class,
         'Hash'         => Illuminate\Support\Facades\Hash::class,
         'Lang'         => Illuminate\Support\Facades\Lang::class,
         'Log'          => Illuminate\Support\Facades\Log::class,
