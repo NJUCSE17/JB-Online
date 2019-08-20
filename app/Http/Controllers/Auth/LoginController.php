@@ -39,10 +39,6 @@ class LoginController extends Controller
     protected function authenticated(Request $request, User $user)
     {
         $ip = geoip()->getClientIP();
-        if ($ip !== $user->last_login_ip) {
-            $request->session()->put('ip', $ip);
-        }
-
         $user->last_login_at = now();
         $user->last_login_ip = $ip;
         $user->save();

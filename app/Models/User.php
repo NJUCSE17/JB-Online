@@ -42,6 +42,7 @@ class User extends Authenticatable
             'blog_feed_url',
             'email_verified_at',
             'activated_at',
+            'timezone',
         ];
 
     /**

@@ -78,6 +78,22 @@
                                    v-bind:readonly="!canEdit">
                         </div>
                     </div>
+                    <div class="form-group">
+                        <label class="form-control-label">
+                            时区（<a href="https://www.php.net/manual/en/timezones.php" target="_blank">查看列表</a>）
+                        </label>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fas fa-globe-asia"></i></span>
+                            </div>
+                            <input id="UserTimezone"
+                                   class="form-control"
+                                   placeholder="Asia/Shanghai"
+                                   v-on:keyup.enter="submit"
+                                   v-model="userTimezone"
+                                   v-bind:readonly="!canEdit">
+                        </div>
+                    </div>
                     <div v-if="canEdit" v-bind:id="id + 'Control'">
                         <hr/>
                         <div class="form-group">
@@ -128,6 +144,7 @@
                 userEmail: this.user.email,
                 userWantEmail: this.user.want_email ? 1 : 0,
                 userBlogFeedURL: this.user.blog_feed_url,
+                userTimezone: this.user.timezone,
                 userPassword: '',
                 submitting: '',
             }
@@ -140,6 +157,8 @@
                     return '未提供邮箱或格式非法';
                 } else if (this.userBlogFeedURL && !(/http[s]?:\/\/[^\s]+\.[^\s]+\/[^\s]+$/).test(this.userBlogFeedURL)) {
                     return '博客RSS/Feed地址不正确';
+                } else if (!this.userTimezone || !(/[A-Z]\w+\/[A-Z]\w+/.test(this.userTimezone))) {
+                    return '未提供时区或格式非法';
                 } else if (!this.isSuperUser && this.isSelf && this.userPassword.length < 8) {
                     return '未提供密码';
                 } else {
@@ -186,6 +205,7 @@
                     email: this.userEmail,
                     want_email: this.userWantEmail,
                     blog_feed_url: this.userBlogFeedURL,
+                    timezone: this.userTimezone,
                 }).then(res => {
                     console.debug(res);
                     window.$.alert({

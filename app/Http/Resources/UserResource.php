@@ -25,6 +25,7 @@ class UserResource extends JsonResource
             'is_verified'     => $this->isVerified(),
             'is_active'       => $this->isActive(),
             'privilege_level' => $this->privilege_level,
+            'timezone'        => $this->timezone,
         ];
     }
 }

@@ -78,8 +78,10 @@ class UserController extends APIController
             ? $request->get('want_email') : $user->want_email;
         $blog = $request->has('blog_feed_url')
             ? $request->get('blog_feed_url') : $user->blog_feed_url;
-        $pass = $request->has('new_password')
+        $password = $request->has('new_password')
             ? Hash::make($request->get('new_password')) : $user->password;
+        $timezone = $request->has('timezone')
+            ? Hash::make($request->get('timezone')) : $user->timezone;
         if ($email !== $user->email) {
             $user->resetEmail();
             $user->deactivate();
@@ -90,7 +92,8 @@ class UserController extends APIController
                 'email'         => $email,
                 'want_email'    => $want_email,
                 'blog_feed_url' => $blog,
-                'password'      => $pass,
+                'password'      => $password,
+                'timezone'      => $timezone,
             ]
         );
 

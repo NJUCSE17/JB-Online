@@ -22,6 +22,7 @@ user: {
     name: "Alice",
     privilege_level: 3,
     student_id: 170000001,
+    timezone: "Asia/Shanghai",
     want_email: true,
 }
 ```
@@ -59,6 +60,7 @@ user: {
   'blog_feed_url' => ['sometimes', 'nullable', 'string', 'url', 'max:255', Rule::unique('users')->ignore($user->id)],
   'password'      => ['sometimes', 'required', 'string', 'min:8'],
   'new_password'  => ['sometimes', 'required', 'string', 'min:8'],
+  'timezone'      => ['sometimes', 'required', 'string', 'timezone'],
   ```
 - 说明：
   - 非超级管理员访问时，需要提供用户当前的`password`进行身份验证，若密码不正确返回`403 Forbidden`；

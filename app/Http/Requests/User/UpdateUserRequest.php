@@ -49,6 +49,7 @@ class UpdateUserRequest extends FormRequest
             ],
             'password'      => ['sometimes', 'required', 'string', 'min:8'],
             'new_password'  => ['sometimes', 'required', 'string', 'min:8'],
+            'timezone'      => ['sometimes', 'required', 'string', 'timezone'],
         ];
     }
 }
