@@ -11,7 +11,7 @@
                 <a href="{{ route('user', $feed->user) }}"
                    class="h6 text-sm mb-0">
                     {{ $feed->user->name }}
-                    @ <span>{{ $feed->published_at }}</span>
+                    @ <span>{{ $feed->published_at->setTimezone(Auth::user()->timezone) }}</span>
                 </a>
                 <p class="card-text text-muted mb-0">
                     {{ $feed->title }}

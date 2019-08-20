@@ -8,7 +8,7 @@
 - [返回状态](#return-value)
 - [使用示例](#example)
 
-> {primary} JBOnline的API世界第一！（误）
+> {warning} 注意：所有的时间参数和返回值都使用用户所在时区的本地时间。
 
 <a name="authentication"></a>
 ## 用户认证

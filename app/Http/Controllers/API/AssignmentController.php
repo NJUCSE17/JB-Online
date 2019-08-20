@@ -16,6 +16,7 @@ use App\Http\Resources\AssignmentResource;
 use App\Http\Resources\AssignmentResourceCollection;
 use App\Models\Assignment;
 use App\Models\AssignmentFinishRecord;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 
 class AssignmentController extends APIController
@@ -40,10 +41,12 @@ class AssignmentController extends APIController
         }
 
         if ($request->has('due_before')) {
-            $query->where('due_time', '<=', $request->get('due_before'));
+            $query->where('due_time', '<=',
+                Carbon::parse($request->get('due_before'), Auth::user()->timezone)->setTimezone(config('app.timezone')));
         }
         if ($request->has('due_after')) {
-            $query->where('due_time', '>=', $request->get('due_after'));
+            $query->where('due_time', '>=',
+                Carbon::parse($request->get('due_after'), Auth::user()->timezone)->setTimezone(config('app.timezone')));
         }
 
         if (!$request->has('show_all') && $request->has('unfinished_only')) {
@@ -74,7 +77,8 @@ class AssignmentController extends APIController
                 'name'         => $data['name'],
                 'content'      => $data['content'],
                 'content_html' => $this->parser->text($data['content']),
-                'due_time'     => $data['due_time'],
+                'due_time'     => Carbon::parse($data['due_time'], Auth::user()->timezone)
+                    ->setTimezone(config('app.timezone')),
             ]
         );
 
@@ -110,7 +114,9 @@ class AssignmentController extends APIController
             : $assignment->name;
         $content = $request->has('content') ? $request->get('content')
             : $assignment->content;
-        $due_time = $request->has('due_time') ? $request->get('due_time')
+        $due_time = $request->has('due_time')
+            ? Carbon::parse($request->get('due_time'), Auth::user()->timezone)
+                ->setTimezone(config('app.timezone'))
             : $assignment->due_time;
         $assignment->update(
             [

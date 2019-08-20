@@ -18,7 +18,7 @@ class AssignmentFinishRecordResource extends JsonResource
         return [
             'user_id'       => $this->user_id,
             'assignment_id' => $this->assignment_id,
-            'finished_at'   => $this->updated_at,
+            'finished_at'   => $this->updated_at->setTimezone(\Auth::user()->timezone),
         ];
     }
 }

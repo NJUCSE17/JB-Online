@@ -11,7 +11,7 @@
 @section('header-right')
     @if(count($feeds) > 0)
         <span class="text-white">
-            更新于：{{ $feeds->first()->created_at }}
+            更新于：{{ $feeds->first()->created_at->setTimezone(Auth::user()->timezone) }}
         </span>
     @endif
 @endsection

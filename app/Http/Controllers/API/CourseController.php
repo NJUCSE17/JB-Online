@@ -37,8 +37,10 @@ class CourseController extends APIController
         }
         if ($request->has('start_before')) {
             $query->Between(
-                Carbon::parse($request->get('start_before')),
-                Carbon::parse($request->get('end_after'))
+                Carbon::parse($request->get('start_before'), Auth::user()->timezone)
+                    ->setTimezone(config('app.timezone')),
+                Carbon::parse($request->get('end_after'), Auth::user()->timezone)
+                    ->setTimezone(config('app.timezone'))
             );
         }
 
@@ -61,8 +63,10 @@ class CourseController extends APIController
             [
                 'name'        => $data['name'],
                 'semester'    => $data['semester'],
-                'start_time'  => $data['start_time'],
-                'end_time'    => $data['end_time'],
+                'start_time'  => Carbon::parse($data['start_time'], Auth::user()->timezone)
+                    ->setTimezone(config('app.timezone')),
+                'end_time'    => Carbon::parse($data['end_time'], Auth::user()->timezone)
+                    ->setTimezone(config('app.timezone')),
                 'notice'      => $data['notice'],
                 'notice_html' => clean($this->parser->parse($data['notice'])),
             ]
@@ -97,9 +101,13 @@ class CourseController extends APIController
         $name = $request->has('name') ? $request->get('name') : $course->name;
         $semester = $request->has('semester') ? $request->get('semester')
             : $course->semester;
-        $start_time = $request->has('start_time') ? $request->get('start_time')
+        $start_time = $request->has('start_time')
+            ? Carbon::parse($request->get('start_time'), Auth::user()->timezone)
+                ->setTimezone(config('app.timezone'))
             : $course->start_time;
-        $end_time = $request->has('end_time') ? $request->get('end_time')
+        $end_time = $request->has('end_time')
+            ? Carbon::parse($request->get('end_time'), Auth::user()->timezone)
+                ->setTimezone(config('app.timezone'))
             : $course->end_time;
         $notice = $request->has('notice') ? $request->get('notice')
             : $course->notice;

@@ -24,7 +24,7 @@ trait AssignmentAttributes
             ->where('assignment_id', $this->id)
             ->first();
 
-        return $record ? $record->updated_at : null;
+        return $record ? $record->updated_at->setTimezone($user->timezone) : null;
     }
 
     /**

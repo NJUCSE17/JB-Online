@@ -7,7 +7,7 @@
 
 @section('header-right')
     <span class="text-white">
-        发布于：{{ $feed->published_at }}
+        发布于：{{ $feed->published_at->setTimezone(Auth::user()->timezone) }}
     </span>
 @endsection
 

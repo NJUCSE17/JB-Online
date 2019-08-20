@@ -23,7 +23,7 @@ class BlogFeedResource extends JsonResource
             'title'        => $this->title,
             'permalink'    => $this->permalink,
             'content_html' => $this->content_html,
-            'published_at' => $this->published_at,
+            'published_at' => $this->published_at->setTimezone(\Auth::user()->timezone),
         ];
     }
 }

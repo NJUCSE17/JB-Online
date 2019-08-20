@@ -13,6 +13,7 @@ use App\Http\Requests\PersonalAssignment\ViewPersonalAssignmentRequest;
 use App\Http\Resources\PersonalAssignmentResource;
 use App\Http\Resources\PersonalAssignmentResourceCollection;
 use App\Models\PersonalAssignment;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 
 class PersonalAssignmentController extends APIController
@@ -34,10 +35,12 @@ class PersonalAssignmentController extends APIController
         }
 
         if ($request->has('due_before')) {
-            $query->where('due_time', '<=', $request->get('due_before'));
+            $query->where('due_time', '<=',
+                Carbon::parse($request->get('due_before'), Auth::user()->timezone)->setTimezone(config('app.timezone')));
         }
         if ($request->has('due_after')) {
-            $query->where('due_time', '>=', $request->get('due_after'));
+            $query->where('due_time', '>=',
+                Carbon::parse($request->get('due_after'), Auth::user()->timezone)->setTimezone(config('app.timezone')));
         }
         if ($request->has('unfinished_only')
             && $request->get('unfinished_only')
@@ -67,7 +70,8 @@ class PersonalAssignmentController extends APIController
                 'name'         => $data['name'],
                 'content'      => $data['content'],
                 'content_html' => $this->parser->text($data['content']),
-                'due_time'     => $data['due_time'],
+                'due_time'     => Carbon::parse($data['due_time'], Auth::user()->timezone)
+                    ->setTimezone(config('app.timezone')),
                 'finished_at'  => null,
             ]
         );
@@ -110,7 +114,9 @@ class PersonalAssignmentController extends APIController
             : $personalAssignment->name;
         $content = $request->has('content') ? $request->get('content')
             : $personalAssignment->content;
-        $due_time = $request->has('due_time') ? $request->get('due_time')
+        $due_time = $request->has('due_time')
+            ? Carbon::parse($request->get('due_time'), Auth::user()->timezone)
+                ->setTimezone(config('app.timezone'))
             : $personalAssignment->due_time;
         $personalAssignment->update(
             [
