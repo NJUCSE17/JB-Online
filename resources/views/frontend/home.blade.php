@@ -55,9 +55,3 @@
         </div>
     </div>
 @endsection
-<script>
-    import WeatherMain
-    export default {
-        components: {WeatherMain}
-    }
-</script>
