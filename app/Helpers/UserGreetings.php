@@ -16,7 +16,7 @@ class UserGreetings
      */
     public static function greet(User $user)
     {
-        $nowHour = Carbon::now()->hour;
+        $nowHour = Carbon::now($user->timezone)->hour;
         $greetingTypes = [
             [6, '凌晨好'],
             [11, '早上好'],

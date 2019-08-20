@@ -81,7 +81,7 @@ class UserController extends APIController
         $password = $request->has('new_password')
             ? Hash::make($request->get('new_password')) : $user->password;
         $timezone = $request->has('timezone')
-            ? Hash::make($request->get('timezone')) : $user->timezone;
+            ? $request->get('timezone') : $user->timezone;
         if ($email !== $user->email) {
             $user->resetEmail();
             $user->deactivate();
