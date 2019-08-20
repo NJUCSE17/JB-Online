@@ -8,6 +8,7 @@
                             :courses="courses"
                             :api_public="api_public"
                             :api_personal="api_personal"
+                            :timezone="timezone"
                             v-on:addAssignment="addAssignment"
                     ></assignment-creator-main>
                 </span>
@@ -32,6 +33,7 @@
                         v-if="assignment.course_id"
                         :api="api_public"
                         :assignment="assignment"
+                        :timezone="timezone"
                         v-on:updateAssignment="updateAssignment"
                         v-on:deleteAssignment="deleteAssignment"
                 ></assignment-item-public>
@@ -39,6 +41,7 @@
                         v-else
                         :api="api_personal"
                         :assignment="assignment"
+                        :timezone="timezone"
                         v-on:updateAssignment="updateAssignment"
                         v-on:deleteAssignment="deleteAssignment"
                 ></assignment-item-personal>
@@ -67,7 +70,7 @@
     export default {
         name: "AssignmentListMain",
         components: {AssignmentCreatorMain, AssignmentItemPublic, AssignmentItemPersonal},
-        props: [],
+        props: ["timezone"],
         data: function () {
             return {
                 initializing: true,

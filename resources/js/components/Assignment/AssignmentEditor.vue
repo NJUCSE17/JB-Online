@@ -60,7 +60,7 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="form-control-label">截止时间 {{ weekday }}</label>
+                        <label class="form-control-label">截止时间 {{ weekday }} [{{ timezone }}]</label>
                         <div class="input-group">
                             <div class="input-group-prepend">
                                 <span class="input-group-text"><i class="fas fa-calendar"></i></span>
@@ -111,7 +111,7 @@
 
     export default {
         name: "AssignmentEditor",
-        props: ['id', 'api', 'assignment'],
+        props: ['id', 'api', 'assignment', 'timezone'],
         watch: {
             assignment: function (newVal, oldVal) {
                 this.assignmentName = '';

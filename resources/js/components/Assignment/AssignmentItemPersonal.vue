@@ -20,6 +20,7 @@
                 :id="editorID"
                 :api="api + '/' + assignment.id"
                 :assignment="assignment"
+                :timezone="timezone"
                 v-on:updateAssignment="updateAssignment"
                 v-on:deleteAssignment="deleteAssignment"
         ></assignment-editor>
@@ -34,7 +35,7 @@
     export default {
         name: "AssignmentItemPersonal",
         components: {AssignmentEditor, AssignmentDDLPartial},
-        props: ['api', 'assignment'],
+        props: ['api', 'assignment', 'timezone'],
         data: function () {
             return {
                 editorID: 'AssignmentEditorPersonal' + this.assignment.id,

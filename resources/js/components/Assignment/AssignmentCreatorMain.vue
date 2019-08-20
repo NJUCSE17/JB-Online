@@ -47,6 +47,7 @@
                 :type="'personal'"
                 :api="this.api_personal"
                 :course="null"
+                :timezone="timezone"
                 v-on:addAssignment="addAssignment"
         ></assignment-creator>
 
@@ -56,6 +57,7 @@
                 :type="'public'"
                 :api="this.api_public"
                 :course="this.courses[this.courseSelected]"
+                :timezone="timezone"
                 v-on:addAssignment="addAssignment"
         ></assignment-creator>
     </div>
@@ -67,7 +69,7 @@
     export default {
         name: "AssignmentCreatorMain",
         components: {AssignmentCreator},
-        props: ['courses', 'api_public', 'api_personal', 'auto_select'],
+        props: ['courses', 'api_public', 'api_personal', 'auto_select', 'timezone'],
         data: function () {
             return {
                 thisID: 'AssignmentCreatorMainModal',

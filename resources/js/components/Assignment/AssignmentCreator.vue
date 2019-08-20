@@ -43,7 +43,7 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="form-control-label">截止时间 {{ weekday }}</label>
+                        <label class="form-control-label">截止时间 {{ weekday }} [{{ timezone }}]</label>
                         <div class="input-group">
                             <div class="input-group-prepend">
                                 <span class="input-group-text"><i class="fas fa-calendar"></i></span>
@@ -92,7 +92,7 @@
     import createAutoCorrectedDatePipe from 'text-mask-addons/dist/createAutoCorrectedDatePipe';
     export default {
         name: "AssignmentCreator",
-        props: ['id', 'type', 'api', 'course'],
+        props: ['id', 'type', 'api', 'course', 'timezone'],
         data: function () {
             return {
                 datePipe: createAutoCorrectedDatePipe('yyyy-mm-dd HH:MM:SS'),

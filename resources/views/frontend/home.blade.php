@@ -12,7 +12,9 @@
 @section('content')
     <div class="row">
         <div class="col col-md-8 col-12">
-            <assignment-list-main></assignment-list-main>
+            <assignment-list-main
+                :timezone="{{ json_encode(Auth::user()->timezone) }}"
+            ></assignment-list-main>
         </div>
         <div class="col col-md-4 col-12">
             @if(($notice = env('APP_NOTICE')))
