@@ -21,15 +21,10 @@
                 <hr class="d-block d-md-none"/>
                 <div id="Weather">
                     <div id="WeatherControl">
-                        <p class="h3">天气预报（半成品）</p>
+                        <p class="h3">天气预报</p>
                     </div>
                     <hr/>
-                    <weather-main
-                        :api_username="{{ json_encode(env('HEWEATHER_API_USERNAME')) }}"
-                        :api_key="{{ json_encode(env('HEWEATHER_API_KEY')) }}"
-                        :ip="{{ json_encode(geoip()->getClientIP()) }}"
-                        :location="{{ json_encode(geoip()->getLocation()) }}"
-                    ></weather-main>
+                    <!-- TODO -->
                 </div>
                 <hr />
             @endif

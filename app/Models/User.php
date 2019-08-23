@@ -43,6 +43,7 @@ class User extends Authenticatable
             'email_verified_at',
             'activated_at',
             'timezone',
+            'weather',
         ];
 
     /**

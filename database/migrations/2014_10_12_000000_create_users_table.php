@@ -30,6 +30,7 @@ class CreateUsersTable extends Migration
                 $table->timestamp('activated_at')->nullable();
                 $table->smallInteger('privilege_level')->default(3);
                 $table->string('timezone')->default('Asia/Shanghai');
+                $table->string('weather')->default('{"status":"N/A"}');
                 $table->timestamp('last_login_at')->nullable();
                 $table->string('last_login_ip')->nullable();
                 $table->rememberToken();

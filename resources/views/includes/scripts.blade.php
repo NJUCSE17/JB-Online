@@ -6,6 +6,7 @@
         crossorigin="anonymous"></script>
 
 <script defer src="{{ mix('js/app.js') }}" type="text/javascript"></script>
+<script defer src="{{ asset('js/fontawesome.js') }}" type="text/javascript"></script>
 <script type="text/javascript">
     document.addEventListener("DOMContentLoaded", function () {
         renderMathInElement(document.body, {
