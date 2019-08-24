@@ -19,7 +19,7 @@
                 </div>
             </div>
             <div v-else>
-                天气暂时不可用：{{ weather_data.status }}
+                <p>天气暂时不可用：{{ weather_data.status }}</p>
             </div>
         </div>
     </div>
