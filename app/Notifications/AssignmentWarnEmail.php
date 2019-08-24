@@ -53,7 +53,8 @@ class AssignmentWarnEmail extends Notification
         $message = (new MailMessage)
             ->subject($subject)
             ->greeting(UserGreetings::greet($this->user))
-            ->line('现在是'.now()->toDateTimeString().'，现在至明晚前总共有'
+            ->line('现在是'.now($this->user->timezone)->toDateTimeString()
+                .'['.$this->user->timezone.']' .'，现在至明晚前总共有'
                 .count($this->assignments).'个作业将要截止。')
             ->line('---');
 
@@ -64,7 +65,7 @@ class AssignmentWarnEmail extends Notification
                 $message->line('## 个人 - '.$assignment->name);
             }
             $message->line($assignment->content)
-                ->line('**截止时间：'.$assignment->due_time.'**')
+                ->line('**截止时间：'.$assignment->due_time->setTimezone($this->user->timezone)->format('Y-m-d H:i:s').'**')
                 ->line('');
         }
 
