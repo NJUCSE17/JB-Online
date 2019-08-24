@@ -42,9 +42,9 @@ class UpdateWeathers extends Command
     {
         $users = User::all();
         foreach ($users as $user) {
-            $weather = $user->weather;
-            if (!isset($weather->update) || Carbon::parse($weather->update->loc)->isBefore(now()->subHours(3))) {
-                $weather = HeWeather::getWeather("forecast", $user->last_login_ip);
+            $weather = json_decode($user->weather);
+            if (!isset($weather->update) || Carbon::parse($weather->update->utc, 'UTC')->isBefore(now()->subHours(3))) {
+                $weather = HeWeather::getWeather("forecast", "Suzhou");
                 if ($weather->status === "ok") {
                     echo "[Success] ".$user->id." - ".$user->name." ".$weather->status."\n";
                 } else {
