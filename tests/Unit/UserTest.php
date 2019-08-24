@@ -61,6 +61,7 @@ class UserTest extends TestCase
             'is_verified'     => $user->isVerified(),
             'is_active'       => $user->isActive(),
             'privilege_level' => $user->privilege_level,
+            'timezone'        => $user->timezone,
         ];
     }
 
