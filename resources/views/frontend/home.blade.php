@@ -19,14 +19,9 @@
         <div class="col col-md-4 col-12">
             @if(env('HEWEATHER_API_KEY'))
                 <hr class="d-block d-md-none"/>
-                <div id="Weather">
-                    <div id="WeatherControl">
-                        <p class="h3">天气预报</p>
-                    </div>
-                    <hr/>
-                    <!-- TODO -->
-                </div>
-                <hr />
+                <weather-main
+                    :weather_data="{{ Auth::user()->weather }}"
+                ></weather-main>
             @endif
 
             @if(($notice = env('APP_NOTICE')))

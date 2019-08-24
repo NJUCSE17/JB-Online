@@ -42,7 +42,7 @@ class UpdateWeathers extends Command
         $users = User::all();
         foreach ($users as $user) {
             echo $user->id . " - " . $user->name . "... ";
-            $weather = HeWeather::getWeather("forecast", $user->last_login_ip);
+            $weather = HeWeather::getWeather("forecast", 'SuZhou');
             echo $weather->status . "\n";
             $user->weather = json_encode($weather);
             $user->save();
