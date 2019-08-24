@@ -33,9 +33,7 @@ class Kernel extends ConsoleKernel
     {
         $schedule->command('custom:send_assignment_mails')->dailyAt('22:30');
         $schedule->command('custom:update_blog_feeds')->everyFiveMinutes();
-        $schedule->command('custom:update_weathers')->twiceDaily(6, 9);
-        $schedule->command('custom:update_weathers')->twiceDaily(12, 15);
-        $schedule->command('custom:update_weathers')->twiceDaily(18, 21);
+        $schedule->command('custom:update_weathers')->everyFiveMinutes();
         $schedule->command('telescope:prune')->daily();
     }
 
