@@ -46,7 +46,7 @@ class SendAssignmentMails extends Command
                 echo "[Blocked] " . $user->id . " - " . $user->name . "\n";
             } else {
                 $local = now($user->timezone);
-                if ($local->hour == 22 and ($local->minute > 28 or $local->minute < 32)) {
+                if ($local->hour == 22 and ($local->minute > 28 and $local->minute < 32)) {
                     $assignments = $user->getOngoingAssignments()
                         ->where('due_time', '>=', now())
                         ->where('due_time', '<=', now()->addDay()->endOfDay());
