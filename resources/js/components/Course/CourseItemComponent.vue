@@ -38,7 +38,19 @@
                         </div>
                     </div>
                 </div>
-                <div class="ml-0 ml-md-3 d-flex text-right btn-group btn-group-sm">
+                <div class="ml-0 mb-2 d-flex d-md-none w-100 btn-group btn-group-sm">
+                    <button v-if="!course.is_in_course"
+                            v-on:click="enrollCourse"
+                            type="button" class="btn btn-sm btn-outline-success">
+                        <i class="fas fa-star mr-2"></i> 加入
+                    </button>
+                    <button v-else
+                            v-on:click="quitCourse"
+                            type="button" class="btn btn-sm btn-outline-danger">
+                        <i class="fas fa-door-open mr-2"></i> 退出
+                    </button>
+                </div>
+                <div class="ml-0 ml-md-3 d-flex text-center btn-group btn-group-sm">
                     <button type="button" class="btn btn-sm"
                             v-bind:class="show_assignments ? 'btn-primary' : 'btn-outline-primary'"
                             v-on:click="triggerAssignmentListComponent">
