@@ -31,7 +31,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" target="_blank" title="开发人员手册"
+                            <a class="nav-link" target="_blank" title="开发文档"
                                href="/docs">
                                 <i class="fas fa-book"></i>
                             </a>

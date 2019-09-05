@@ -21,7 +21,7 @@
             </a>
             <a class="text-dark text-underline--dashed mx-3"
                href="/docs">
-                <i class="fas fa-book mr-1"></i> 开发人员手册
+                <i class="fas fa-book mr-1"></i> 开发文档
             </a>
         </div>
         <div class="d-flex d-md-none justify-content-center">

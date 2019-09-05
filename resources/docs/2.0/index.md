@@ -1,6 +1,7 @@
 - ## 总览
     - [欢迎](/{{route}}/{{version}}/overview)
     - [安装](/{{route}}/{{version}}/install)
+    - [更新历史](/{{route}}/{{version}}/changelog)
 - ## API
     - [综述](/{{route}}/{{version}}/api/overview)
     - [用户](/{{route}}/{{version}}/api/user)

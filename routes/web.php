@@ -11,6 +11,8 @@
 |
 */
 
+use App\Http\Middleware\RedirectIfAuthenticated;
+
 Auth::routes(
     [
         'register' => env('APP_ALLOW_REGISTER'),
@@ -34,7 +36,8 @@ Route::group(
 Route::group(
     ['namespace' => 'Web'],
     function () {
-        Route::get('/', 'HomeController@welcome')->name('welcome');
+        Route::get('/', 'HomeController@welcome')
+            ->middleware(RedirectIfAuthenticated::class)->name('welcome');
 
         Route::group(
             ['middleware' => ['auth', 'verified', 'activated']],
