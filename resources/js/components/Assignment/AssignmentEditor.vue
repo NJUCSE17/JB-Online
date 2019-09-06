@@ -16,13 +16,10 @@
                 </div>
                 <div class="modal-body">
                     <div v-bind:id="id + 'DeleteButton'">
-                        <button v-if="!isNameCorrect" class="btn btn-danger w-100 disabled" disabled>
-                            <i class="fas fa-lock mr-2"></i> 输入作业名称来删除
-                        </button>
-                        <button v-else-if="!submitting" class="btn btn-danger w-100" v-on:click="destroy">
+                        <button v-if="!submitting" class="btn btn-danger w-100" v-on:click="destroy">
                             <i class="fas fa-trash mr-2"></i> 删除这个作业
                         </button>
-                        <button class="btn btn-danger disabled w-100" v-else disabled>
+                        <button v-else class="btn btn-danger disabled w-100" disabled>
                             <span class="spinner-border spinner-border-sm mr-2" role="status" aria-hidden="true"></span>
                             处理中
                         </button>
@@ -54,7 +51,6 @@
                         <div class="input-group">
                             <textarea class="form-control"
                                       v-bind:id="id + 'InputContent'"
-                                      v-bind:disabled="!isNameCorrect"
                                       v-model="assignmentContent">
                             </textarea>
                         </div>
@@ -69,7 +65,6 @@
                                     type="text" name="AssignmentDDLInput"
                                     class="form-control"
                                     v-on:keyup.enter="submit"
-                                    v-bind:disabled="!isNameCorrect"
                                     v-model="assignmentDDL"
                                     :pipe="datePipe"
                                     :mask="[
@@ -82,10 +77,9 @@
                     </div>
                     <hr/>
                     <div v-bind:id="id + 'SubmitButton'">
-                        <button v-if="!isNameCorrect"
-                                class="btn w-100 disabled" disabled
-                                v-bind:class="assignment.course_id ? 'btn-info' : 'btn-success'">
-                            <i class="fas fa-lock mr-2"></i> 输入作业名称来编辑
+                        <button v-if="!isReady"
+                                class="btn btn-success w-100 disabled" disabled>
+                            <i class="fas fa-lock mr-2"></i> 填写以上信息来修改作业
                         </button>
                         <button v-else-if="!submitting"
                                 class="btn btn-success w-100"
@@ -114,7 +108,7 @@
         props: ['id', 'api', 'assignment', 'timezone'],
         watch: {
             assignment: function (newVal, oldVal) {
-                this.assignmentName = '';
+                this.assignmentName = newVal.name;
                 this.assignmentContent = newVal.content;
                 this.assignmentDDL= newVal.due_time;
             }
@@ -122,7 +116,7 @@
         data: function () {
             return {
                 datePipe: createAutoCorrectedDatePipe('yyyy-mm-dd HH:MM:SS'),
-                assignmentName: '',
+                assignmentName: this.assignment.name,
                 assignmentContent: this.assignment.content,
                 assignmentDDL: this.assignment.due_time,
                 submitting: false,
@@ -138,11 +132,8 @@
                     return '（' + window.Dayjs(date).format('ddd') + '）';
                 }
             },
-            isNameCorrect() {
-                return this.assignmentName === this.assignment.name;
-            },
             isReady() {
-                if (!this.isNameCorrect) return false;
+                if (!this.assignmentName) return false;
                 if (!this.assignmentContent) return false;
                 if (!this.assignmentDDL) return false;
                 return !(this.assignmentDDL.indexOf('_') >= 0);

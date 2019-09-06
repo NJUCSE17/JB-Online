@@ -13,13 +13,10 @@
                 </div>
                 <div class="modal-body">
                     <div v-bind:id="id + 'DeleteButton'">
-                        <button v-if="!isNameCorrect" class="btn btn-danger w-100 disabled" disabled>
-                            <i class="fas fa-lock mr-2"></i> 输入课程名称来删除
-                        </button>
-                        <button v-else-if="!submitting" class="btn btn-danger w-100" v-on:click="destroy">
+                        <button v-if="!submitting" class="btn btn-danger w-100" v-on:click="destroy">
                             <i class="fas fa-trash mr-2"></i> 删除这个课程
                         </button>
-                        <button class="btn btn-danger disabled w-100" v-else disabled>
+                        <button v-else class="btn btn-danger disabled w-100" disabled>
                             <span class="spinner-border spinner-border-sm mr-2" role="status" aria-hidden="true"></span>
                             处理中
                         </button>
@@ -45,8 +42,7 @@
                                 <span class="input-group-text"><i class="fas fa-school"></i></span>
                             </div>
                             <select v-model="courseSemester" class="form-control"
-                                    v-bind:name="id + 'SemesterSelect'"
-                                    v-bind:disabled="!isNameCorrect">
+                                    v-bind:name="id + 'SemesterSelect'">
                                 <option disabled value="">请选择学期</option>
                                 <option v-for="s in [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]"
                                         v-bind:value="s"
@@ -66,7 +62,6 @@
                                     class="form-control"
                                     placeholder="YYYY-MM-DD HH:mm:ss"
                                     v-bind:name="id + 'BegDateInput'"
-                                    v-bind:disabled="!isNameCorrect"
                                     v-on:keyup.enter="submit"
                                     v-model="courseBegDate"
                                     v-bind:pipe="datePipe"
@@ -89,7 +84,6 @@
                                     class="form-control"
                                     placeholder="YYYY-MM-DD HH:mm:ss"
                                     v-bind:name="id + 'EndDateInput'"
-                                    v-bind:disabled="!isNameCorrect"
                                     v-on:keyup.enter="submit"
                                     v-model="courseEndDate"
                                     v-bind:pipe="datePipe"
@@ -106,18 +100,13 @@
                         <div class="input-group">
                                 <textarea id="CourseNoticeInput"
                                           class="form-control"
-                                          v-model="courseNotice"
-                                          v-bind:disabled="!isNameCorrect">
+                                          v-model="courseNotice">
                                 </textarea>
                         </div>
                     </div>
                     <hr/>
                     <div v-bind:id="id + 'SubmitButton'">
-                        <button v-if="!isNameCorrect"
-                                class="btn btn-info w-100 disabled" disabled>
-                            <i class="fas fa-lock mr-2"></i> 输入课程名称来编辑
-                        </button>
-                        <button v-else-if="!isReady"
+                        <button v-if="!isReady"
                                 class="btn btn-info w-100 disabled" disabled>
                             <i class="fas fa-lock mr-2"></i> {{ notReadyReason }}
                         </button>
@@ -126,7 +115,7 @@
                                 v-bind:disabled="!isReady">
                             <i class="fas fa-check mr-2"></i> 修改这个课程
                         </button>
-                        <button class="btn btn-info disabled w-100" v-else disabled>
+                        <button v-else class="btn btn-info disabled w-100" disabled>
                                 <span class="spinner-border spinner-border-sm mr-2" role="status"
                                       aria-hidden="true"></span>
                             处理中
@@ -146,7 +135,7 @@
         props: ['id', 'api', 'course', 'timezone'],
         watch: {
             course: function (newVal, oldVal) {
-                this.courseName = '';
+                this.courseName = newVal.name;
                 this.courseSemester = newVal.semester;
                 this.courseNotice = newVal.notice;
                 this.courseBegDate = newVal.start_time;
@@ -157,7 +146,7 @@
             return {
                 datePipe: createAutoCorrectedDatePipe('yyyy-mm-dd HH:MM:SS'),
                 submitting: false,
-                courseName: '',
+                courseName: this.course.name,
                 courseSemester: this.course.semester,
                 courseNotice: this.course.notice,
                 courseBegDate: this.course.start_time,
@@ -171,13 +160,9 @@
             endWeekday() {
                 return this.getWeekday(this.courseEndDate);
             },
-            isNameCorrect() {
-                return this.courseName === this.course.name;
-            },
             notReadyReason() {
-                if (!this.isNameCorrect) return '课程名不正确';
+                if (!this.courseName) return '请输入课程名称';
                 if (!this.courseSemester) return '请选择课程学期';
-
                 if (!this.courseBegDate || this.courseBegDate.indexOf('_') >= 0) return '请输入起始日期';
                 if (!this.courseEndDate || this.courseEndDate.indexOf('_') >= 0) return '请输入结束日期';
                 if (window.Dayjs(this.courseBegDate).isAfter(window.Dayjs(this.courseEndDate))) return '起始日期需要在结束日期前';
