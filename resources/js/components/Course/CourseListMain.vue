@@ -28,8 +28,10 @@
             </div>
         </div>
         <div v-else-if="courses.length > 0" id="CourseListContent">
-            <div v-for="course in courses_sorted" class="list-group">
-                <course-item-component
+            <div v-for="course_type in courses_classified" class="mb-4">
+                <p class="h5">{{ course_type.name }}</p>
+                <div v-for="course in course_type.courses" class="mb-4">
+                    <course-item-component
                         :id="itemID + course.id"
                         :api_user="api_user"
                         :api_course="api_course + '/' + course.id"
@@ -37,7 +39,8 @@
                         :timezone="timezone"
                         v-on:updateCourse="updateCourse"
                         v-on:deleteCourse="deleteCourse"
-                ></course-item-component>
+                    ></course-item-component>
+                </div>
             </div>
         </div>
         <div v-else>
@@ -76,16 +79,47 @@
             }
         },
         computed: {
-            courses_sorted() {
-                return this.courses.sort(this.compareBySemester);
+            courses_classified() {
+                let res = [
+                    {
+                        'name': "已加入的当前课程",
+                        'hide': false,
+                        'courses': [],
+                    },
+                    {
+                        'name': "其他进行中的课程",
+                        'hide': false,
+                        'courses': [],
+                    },
+                    {
+                        'name': "已结束/未开始的课程",
+                        'hide': true,
+                        'courses': [],
+                    },
+                ];
+                let now = window.Dayjs();
+                for (let i = 0; i < this.courses.length; ++i) {
+                    let course = this.courses[i];
+                    if (window.Dayjs(course.start_time).isBefore(now)
+                        && window.Dayjs(course.end_time).isAfter(now)) {
+                        if (course.is_in_course) {
+                            res[0].courses.push(course);
+                        } else {
+                            res[1].courses.push(course);
+                        }
+                    } else {
+                        res[2].courses.push(course);
+                    }
+                }
+                return res;
             }
         },
         created: function () {
             this.loadCourses();
         },
         methods: {
-            compareBySemester(a, b) {
-                return a.semester > b.semester ? -1 : 1;
+            cmp(a, b) {
+                return a.semester > b.semester ? -1 : (a.name > b.name ? -1 : 1);
             },
             loadCourses() {
                 this.init_status = '正在检查你的信息...';
@@ -105,6 +139,7 @@
                     }).then(res => {
                         console.debug(res);
                         this.courses = res.data;
+                        this.courses = this.courses.sort(this.cmp);
                     }).catch(err => {
                         console.error(err);
                     }).finally(() => {

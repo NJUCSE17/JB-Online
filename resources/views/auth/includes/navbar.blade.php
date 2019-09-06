@@ -35,7 +35,7 @@
                         @endif
                         <li class="nav-item">
                             <a class="nav-link pr-lg-0" href="{{ route('login') }}">
-                                <i class="fas fa-sign-in-alt mr-1"></i> 登陆
+                                <i class="fas fa-sign-in-alt mr-1"></i> 登录
                             </a>
                         </li>
                     @else

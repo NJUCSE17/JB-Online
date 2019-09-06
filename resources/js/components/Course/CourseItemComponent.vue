@@ -1,5 +1,5 @@
 <template>
-    <div class="mb-3">
+    <div class="mb-3 list-group">
         <div class="list-group-item">
             <div class="d-block d-md-flex align-items-center justify-content-between">
                 <div class="mx-3 text-left d-none d-md-inline-flex">
