@@ -97,7 +97,10 @@
             loadCoursesAndAssignments() {
                 this.init_status = '正在加载课程列表...';
                 window.axios.get(this.api_course, {
-                    // no data
+                    params: {
+                        'start_before': window.Dayjs().format('YYYY-MM-DD HH:mm:ss'),
+                        'end_after': window.Dayjs().format('YYYY-MM-DD HH:mm:ss'),
+                    }
                 }).then(res => {
                     console.debug(res);
                     this.courses = res.data;
