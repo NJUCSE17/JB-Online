@@ -19,7 +19,7 @@
                 </div>
             </div>
             <div v-else class="mb-5">
-                <p>天气暂时不可用：{{ weather_data.status }}</p>
+                <p>天气暂时不可用：{{ weather_data.status ? weather_data.status : "暂无数据" }}</p>
             </div>
         </div>
     </div>
@@ -34,7 +34,7 @@
         computed: {
             isOK() {
                 console.log(this.weather_data);
-                return this.weather_data.status === 'ok';
+                return this.weather_data && this.weather_data.status === 'ok';
             },
             basic() {
                 if (!this.isOK) {
