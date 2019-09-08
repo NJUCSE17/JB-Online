@@ -51,11 +51,8 @@
             editAssignment() {
                 window.$('#' + this.editorID).modal('show');
             },
-            updateAssignment(newAssignment) {
-                this.$emit('updateAssignment', {
-                    oldAssignment: this.assignment,
-                    newAssignment: newAssignment,
-                });
+            updateAssignment(assignment) {
+                this.$emit('updateAssignment', assignment);
             },
             deleteAssignment() {
                 this.$emit('deleteAssignment', this.assignment);

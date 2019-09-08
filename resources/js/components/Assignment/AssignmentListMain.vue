@@ -140,9 +140,13 @@
                 console.log("Assignment added to list.");
                 this.$forceUpdate();
             },
-            updateAssignment(data) {
-                let pos = this.assignments.indexOf(data.oldAssignment);
-                this.assignments[pos] = data.newAssignment;
+            updateAssignment(assignment) {
+                for (let pos = 0; pos < this.assignments.length; ++pos) {
+                    if (this.assignments[pos].id === assignment.id) {
+                        window.Vue.set(this.assignments, pos, assignment);
+                        break;
+                    }
+                }
                 this.$forceUpdate();
             },
             deleteAssignment(assignment) {
