@@ -1,84 +1,58 @@
 <template>
-    <div class="mb-3 list-group">
-        <div class="list-group-item">
-            <div class="d-block d-md-flex align-items-center justify-content-between">
-                <div class="mx-3 text-left d-none d-md-inline-flex">
-                    <button v-if="!course.is_in_course"
-                            v-on:click="enrollCourse"
-                            type="button" class="btn btn-sm btn-outline-success">
-                        <i class="fas fa-star mr-2"></i> 加入
-                    </button>
-                    <button v-else
-                            v-on:click="quitCourse"
-                            type="button" class="btn btn-sm btn-outline-danger">
-                        <i class="fas fa-door-open mr-2"></i> 退出
-                    </button>
+    <div class="col-lg-4 col-md-6">
+        <div class="card" v-bind:id="id + 'Card'">
+            <div class="card-body">
+                <div>
+                    <small class="d-inline-block text-sm mb-2">{{ beg_date }} 至 {{ end_date }}</small>
+                    <span class="d-inline-block float-right" v-if="status.color === 'warning'">
+                        <a v-if="!course.is_in_course"
+                           v-on:click="enrollCourse"
+                           v-bind:href="'#' + id + 'Card'" class="text-success"
+                           data-toggle="tooltip" data-placement="top" title="加入课程">
+                            <i class="fas fa-star"></i>
+                        </a>
+                        <a v-else v-on:click="quitCourse"
+                           v-bind:href="'#' + id + 'Card'" class="text-danger"
+                           data-toggle="tooltip" data-placement="top" title="退出课程">
+                            <i class="fas fa-door-open"></i>
+                        </a>
+                    </span>
                 </div>
-                <div class="flex-fill text-limit mb-2 mb-md-0">
-                    <h6 class="progress-text mb-1 text-sm d-block text-limit">
-                        {{ course.name }}
-                    </h6>
-                    <div class="progress progress-xs mb-0">
-                        <div class="progress-bar" role="progressbar"
-                             aria-valuemin="0" aria-valuemax="100"
-                             v-bind:class="'bg-' + status.color"
-                             v-bind:style="'width:' + status.value + '%'"
-                             v-bind:aria-valuenow="status.value">
-                        </div>
-                    </div>
-                    <div class="d-flex justify-content-between text-xs text-muted text-right mt-1">
-                        <div>
-                        <span class="font-weight-bold"
-                              v-bind:class="'text-' + status.color">
-                            {{ status.text }} ({{ status.value }}%)
-                        </span>
-                        </div>
-                        <div>
-                            {{ beg_date }} 至 {{ end_date }}
-                        </div>
+                <div class="progress progress-xs mb-4">
+                    <div class="progress-bar" role="progressbar"
+                         aria-valuemin="0" aria-valuemax="100"
+                         v-bind:class="'bg-' + status.color"
+                         v-bind:style="'width:' + status.value + '%'"
+                         v-bind:aria-valuenow="status.value">
                     </div>
                 </div>
-                <div class="ml-0 mb-2 d-flex d-md-none w-100 btn-group btn-group-sm">
-                    <button v-if="!course.is_in_course"
-                            v-on:click="enrollCourse"
-                            type="button" class="btn btn-sm btn-outline-success">
-                        <i class="fas fa-star mr-2"></i> 加入
-                    </button>
-                    <button v-else
-                            v-on:click="quitCourse"
-                            type="button" class="btn btn-sm btn-outline-danger">
-                        <i class="fas fa-door-open mr-2"></i> 退出
-                    </button>
-                </div>
-                <div class="ml-0 ml-md-3 d-flex text-center btn-group btn-group-sm">
-                    <button type="button" class="btn btn-sm"
-                            v-bind:class="show_assignments ? 'btn-primary' : 'btn-outline-primary'"
-                            v-on:click="triggerAssignmentListComponent">
-                        <i class="fas fa-pencil mr-2"></i> 作业
-                    </button>
-
-                    <button v-if="this.course.is_course_admin"
-                            type="button" class="btn btn-sm btn-outline-info"
-                            v-on:click="editCourse">
-                        <i class="fas fa-edit mr-2"></i> 编辑
-                    </button>
-
-                    <button v-if="this.course.is_course_admin"
-                            type="button" class="btn btn-sm"
-                            v-bind:class="show_enroll_records ? 'btn-warning' : 'btn-outline-warning'"
-                            v-on:click="triggerEnrollRecordsComponent">
-                        <i class="fas fa-users-cog mr-2"></i> 管理
-                    </button>
+                <h5>{{ course.name }}</h5>
+                <div v-html="course.notice_html"></div>
+            </div>
+            <div class="card-footer mx-3">
+                <div class="row">
+                    <div class="w-100 btn-group btn-group-sm">
+                        <button type="button" class="btn btn-sm btn-outline-primary"
+                                v-on:click="showAssignments">
+                            <i class="fas fa-folder mr-2"></i> 作业
+                        </button>
+                        <button v-if="this.course.is_course_admin"
+                                type="button" class="btn btn-sm btn-outline-info"
+                                v-on:click="editCourse">
+                            <i class="fas fa-edit mr-2"></i> 编辑
+                        </button>
+                        <button v-if="this.course.is_course_admin"
+                                type="button" class="btn btn-sm btn-outline-warning"
+                                v-on:click="showEnrollRecords">
+                            <i class="fas fa-users-cog mr-2"></i> 管理
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <div v-if="course.notice_html && !show_assignments && !show_enroll_records"
-             class="list-group-item pb-0"
-             v-html="course.notice_html"></div>
-
         <course-assignment-list-component
-                v-if="show_assignments"
+                ref="list"
                 :id="listID"
                 :course="course"
                 :timezone="timezone"
@@ -94,7 +68,7 @@
         ></course-editor-component>
 
         <course-enroll-records-component
-                v-if="show_enroll_records"
+                ref="records"
                 :id="recordsID"
                 :api_user="api_user"
                 :api_course="api_course"
@@ -114,8 +88,8 @@
         props: ['id', 'api_user', 'api_course', 'course', 'timezone'],
         data: function () {
             return {
-                show_assignments: false,
-                show_enroll_records: false,
+                assignments_loaded: false,
+                enroll_records_loaded: false,
                 listID: 'CourseAssignmentListComponent' + this.course.id,
                 editorID: 'CourseEditorComponent' + this.course.id,
                 recordsID: 'CourseEnrollRecordsComponent' + this.course.id,
@@ -154,16 +128,22 @@
             },
         },
         methods: {
-            triggerAssignmentListComponent() {
-                this.show_assignments = !this.show_assignments;
-                if (this.show_assignments) this.show_enroll_records = false;
-            },
-            triggerEnrollRecordsComponent() {
-                this.show_enroll_records = !this.show_enroll_records;
-                if (this.show_enroll_records) this.show_assignments = false;
-            },
             editCourse() {
                 window.$('#' + this.editorID).modal('show');
+            },
+            showAssignments() {
+                window.$('#' + this.listID).modal('show');
+                if (!this.assignments_loaded) {
+                    this.$refs.list.loadAssignments();
+                    this.assignments_loaded = true;
+                }
+            },
+            showEnrollRecords() {
+                window.$('#' + this.recordsID).modal('show');
+                if (!this.enroll_records_loaded) {
+                    this.$refs.records.loadUserAndRecords();
+                    this.enroll_records_loaded = true;
+                }
             },
             enrollCourse() {
                 this.submit(true);
@@ -183,12 +163,9 @@
                         content: '成功' + (is_enroll ? '加入' : '退出')
                             + '课程' + this.course.name + '。',
                     });
-                    let course_upd = this.course;
+                    let course_upd = Object.assign({}, this.course);
                     course_upd.is_in_course = is_enroll;
-                    this.$emit('updateCourse', {
-                        oldCourse: this.course,
-                        newCourse: course_upd,
-                    });
+                    this.$emit('updateCourse', course_upd);
                 }).catch(res => {
                     console.err(res);
                     window.$.alert({
@@ -199,11 +176,8 @@
                     });
                 });
             },
-            updateCourse(newCourse) {
-                this.$emit('updateCourse', {
-                    oldCourse: this.course,
-                    newCourse: newCourse,
-                });
+            updateCourse(course) {
+                this.$emit('updateCourse', course);
             },
             deleteCourse() {
                 this.$emit('deleteCourse', this.course);

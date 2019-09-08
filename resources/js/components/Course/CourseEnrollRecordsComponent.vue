@@ -1,68 +1,75 @@
 <template>
-    <div class="list-group-item pt-4 pb-0">
-        <div v-bind:id="id">
-            <div v-bind:id="id + 'Control'">
-                <p class="h3">
-                    {{ course.name }}的用户列表
-                </p>
-            </div>
-            <hr/>
-            <div v-if="initializing">
-                <div class="row">
-                    <div class="col text-center mb-3">
-                        <div class="spinner spinner-border" role="status"></div>
-                    </div>
+    <div class="modal fade" v-bind:id="id"
+         tabindex="-1" role="dialog" v-bind:aria-labelledby="id + 'Title'" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" v-bind:id="id + 'Title'">
+                        {{ course.name }}的用户列表
+                    </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true"><i class="fas fa-times"></i></span>
+                    </button>
                 </div>
-                <div class="row">
-                    <div class="col text-center">
-                        <p>{{ init_status }}</p>
+                <div class="modal-body">
+                    <div v-if="initializing">
+                        <div class="row">
+                            <div class="col text-center mb-3">
+                                <div class="spinner spinner-border" role="status"></div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col text-center">
+                                <p>{{ init_status }}</p>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </div>
-            <div v-else class="table-responsive">
-                <table class="table align-items-center">
-                    <thead>
-                    <tr>
-                        <td class="text-center">学号</td>
-                        <td class="text-center">姓名</td>
-                        <td class="text-center">状态</td>
-                        <td class="text-center">操作</td>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr v-for="user in users_with_records">
-                        <td class="text-center">{{ user.student_id }} ({{ user.id }})</td>
-                        <td class="text-center">{{ user.name }}</td>
-                        <td class="text-center">
+                    <div v-else class="table-responsive">
+                        <table class="table align-items-center">
+                            <thead>
+                            <tr>
+                                <td class="text-center">学号</td>
+                                <td class="text-center">姓名</td>
+                                <td class="text-center">状态</td>
+                                <td class="text-center">操作</td>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr v-for="user in users_with_records">
+                                <td class="text-center">{{ user.student_id }} ({{ user.id }})</td>
+                                <td class="text-center">{{ user.name }}</td>
+                                <td class="text-center">
                             <span v-if="user.is_in_course && user.is_course_admin" class="text-warning">
                                 <i class="fas fa-check-double mr-2"></i> 管理员
                             </span>
-                            <span v-else-if="user.is_in_course" class="text-success">
+                                    <span v-else-if="user.is_in_course" class="text-success">
                                 <i class="fas fa-check mr-2"></i> 已注册
                             </span>
-                            <span v-else class="text-danger">
+                                    <span v-else class="text-danger">
                                 <i class="fas fa-times mr-2"></i> 未注册
                             </span>
-                        </td>
-                        <td class="text-center">
-                            <div class="btn-group btn-group-sm">
-                                <button v-if="!user.is_in_course" class="btn btn-sm btn-soft-success"
-                                        v-on:click="enrollCourse($event, user.id, 0)">
-                                    用户
-                                </button>
-                                <button v-if="!user.is_in_course" class="btn btn-sm btn-soft-warning"
-                                        v-on:click="enrollCourse($event, user.id, 1)">
-                                    管理员
-                                </button>
-                                <button v-if="user.is_in_course" class="btn btn-sm btn-soft-danger"
-                                        v-on:click="quitCourse($event, user.id)">
-                                    移除注册
-                                </button>
-                            </div>
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
+                                </td>
+                                <td class="text-center">
+                                    <div class="btn-group btn-group-sm">
+                                        <button v-if="!user.is_in_course" class="btn btn-sm btn-soft-success"
+                                                v-on:click="enrollCourse($event, user.id, 0)">
+                                            用户
+                                        </button>
+                                        <button v-if="!user.is_in_course" class="btn btn-sm btn-soft-warning"
+                                                v-on:click="enrollCourse($event, user.id, 1)">
+                                            管理员
+                                        </button>
+                                        <button v-if="user.is_in_course" class="btn btn-sm btn-soft-danger"
+                                                v-on:click="quitCourse($event, user.id)">
+                                            移除注册
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -103,9 +110,6 @@
                 }
                 return ret;
             }
-        },
-        created: function () {
-            this.loadUserAndRecords();
         },
         methods: {
             loadUserAndRecords() {

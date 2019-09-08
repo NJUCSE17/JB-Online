@@ -30,8 +30,9 @@
         <div v-else-if="courses.length > 0" id="CourseListContent">
             <div v-for="course_type in courses_classified" class="mb-4">
                 <p class="h5">{{ course_type.name }}</p>
-                <div v-for="course in course_type.courses" class="mb-4">
+                <div class="row my-4">
                     <course-item-component
+                        v-for="course in course_type.courses"
                         :id="itemID + course.id"
                         :api_user="api_user"
                         :api_course="api_course + '/' + course.id"
@@ -153,9 +154,13 @@
                 console.log("Course added to list.");
                 this.$forceUpdate();
             },
-            updateCourse(data) {
-                let pos = this.courses.indexOf(data.oldCourse);
-                this.courses[pos] = data.newCourse;
+            updateCourse(course) {
+                for (let pos = 0; pos < this.courses.length; ++pos) {
+                    if (this.courses[pos].id === course.id) {
+                        window.Vue.set(this.courses, pos, course);
+                        break;
+                    }
+                }
                 this.$forceUpdate();
             },
             deleteCourse(course) {
