@@ -36,22 +36,6 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="form-control-label">课程学期</label>
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text"><i class="fas fa-school"></i></span>
-                            </div>
-                            <select v-model="courseSemester" class="form-control"
-                                    v-bind:name="id + 'SemesterSelect'">
-                                <option disabled value="">请选择学期</option>
-                                <option v-for="s in [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]"
-                                        v-bind:value="s"
-                                >第{{s}}学期
-                                </option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="form-group">
                         <label class="form-control-label">起始时间 {{ begWeekday }} [{{ timezone }}]</label>
                         <div class="input-group">
                             <div class="input-group-prepend">
@@ -136,7 +120,6 @@
         watch: {
             course: function (newVal, oldVal) {
                 this.courseName = newVal.name;
-                this.courseSemester = newVal.semester;
                 this.courseNotice = newVal.notice;
                 this.courseBegDate = newVal.start_time;
                 this.courseEndDate = newVal.end_time;
@@ -147,7 +130,6 @@
                 datePipe: createAutoCorrectedDatePipe('yyyy-mm-dd HH:MM:SS'),
                 submitting: false,
                 courseName: this.course.name,
-                courseSemester: this.course.semester,
                 courseNotice: this.course.notice,
                 courseBegDate: this.course.start_time,
                 courseEndDate: this.course.end_time,
@@ -162,7 +144,6 @@
             },
             notReadyReason() {
                 if (!this.courseName) return '请输入课程名称';
-                if (!this.courseSemester) return '请选择课程学期';
                 if (!this.courseBegDate || this.courseBegDate.indexOf('_') >= 0) return '请输入起始日期';
                 if (!this.courseEndDate || this.courseEndDate.indexOf('_') >= 0) return '请输入结束日期';
                 if (window.Dayjs(this.courseBegDate).isAfter(window.Dayjs(this.courseEndDate))) return '起始日期需要在结束日期前';
@@ -187,7 +168,6 @@
                 this.submitting = true;
                 window.axios.put(this.api, {
                     name: this.courseName,
-                    semester: this.courseSemester,
                     start_time: this.courseBegDate,
                     end_time: this.courseEndDate,
                     notice: this.courseNotice,

@@ -11,19 +11,6 @@ trait CourseScopes
      * Scope of selecting courses that is between a time period.
      *
      * @param  Builder  $builder
-     * @param           $semester
-     *
-     * @return Builder
-     */
-    public function scopeSemester(Builder $builder, $semester)
-    {
-        return $builder->where('semester', $semester);
-    }
-
-    /**
-     * Scope of selecting courses that is between a time period.
-     *
-     * @param  Builder  $builder
      * @param  Carbon   $st
      * @param  Carbon   $ed
      *

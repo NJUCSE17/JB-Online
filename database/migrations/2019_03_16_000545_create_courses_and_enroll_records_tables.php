@@ -18,7 +18,6 @@ class CreateCoursesAndEnrollRecordsTables extends Migration
             function (Blueprint $table) {
                 $table->bigIncrements('id');
                 $table->string('name');
-                $table->integer('semester');
                 $table->dateTime('start_time');
                 $table->dateTime('end_time');
                 $table->longText('notice')->nullable();

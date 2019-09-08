@@ -21,7 +21,6 @@ class DatabaseSeeder extends Seeder
         ]);
         $courseID = DB::table('courses')->insertGetId([
             'name'       => 'TestCourse',
-            'semester'   => '1',
             'start_time' => now()->addYears(-1),
             'end_time'   => now()->addYears(1),
         ]);

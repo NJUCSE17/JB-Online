@@ -23,7 +23,6 @@ course: {
     name: "ExampleCourse",
     notice: "Example",
     notice_html: "<p>Example</p>",
-    semester: 4,
     start_time: "2019-06-16 00:00:00"
 }
 ```
@@ -35,7 +34,6 @@ course: {
 - 权限：允许所有用户访问
 - 参数：
   ```php
-  'semester'     => ['sometimes', 'required', 'integer', 'between:1,20'],
   'start_before' => ['sometimes', 'required', 'date_format:Y-m-d H:i:s'],
   'end_after'    => ['required_with:start_before', 'date_format:Y-m-d H:i:s', 'after_or_equal:start_before'],
   ```
@@ -49,7 +47,6 @@ course: {
 - 参数：
   ```php
   'name'       => ['required', new Sanitize(), 'max:200'],
-  'semester'   => ['required', 'integer', 'between:1,20'],
   'start_time' => ['required', 'date_format:Y-m-d H:i:s'],
   'end_time'   => ['required', 'date_format:Y-m-d H:i:s', 'after_or_equal:start_before'],
   'notice'     => ['nullable', new Sanitize(), 'max:10000'],
@@ -72,7 +69,6 @@ course: {
 - 参数：
   ```php
   'name'       => ['sometimes', 'required', new Sanitize(), 'max:200'],
-  'semester'   => ['sometimes', 'required', 'integer', 'between:1,20'],
   'start_time' => ['sometimes', 'required', 'date_format:Y-m-d H:i:s'],
   'end_time'   => ['sometimes', 'required', 'date_format:Y-m-d H:i:s', 'after_or_equal:start_before'],
   'notice'     => ['sometimes', 'nullable', new Sanitize(), 'max:10000'],

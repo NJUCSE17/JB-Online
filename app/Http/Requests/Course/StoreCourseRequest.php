@@ -27,7 +27,6 @@ class StoreCourseRequest extends FormRequest
     {
         return [
             'name'       => ['required', new Sanitize(), 'max:200'],
-            'semester'   => ['required', 'integer', 'between:1,20'],
             'start_time' => ['required', 'date_format:Y-m-d H:i:s'],
             'end_time'   => [
                 'required',

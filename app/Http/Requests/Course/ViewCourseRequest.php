@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Course;
 
+use App\Models\Course;
 use Illuminate\Foundation\Http\FormRequest;
 
 class ViewCourseRequest extends FormRequest
@@ -13,9 +14,7 @@ class ViewCourseRequest extends FormRequest
      */
     public function authorize()
     {
-        $course = $this->route('course');
-
-        return $this->user()->can('show', $course);
+        return $this->user()->can('view', Course::class);
     }
 
     /**
@@ -26,12 +25,6 @@ class ViewCourseRequest extends FormRequest
     public function rules()
     {
         return [
-            'semester'     => [
-                'sometimes',
-                'required',
-                'integer',
-                'between:1,20',
-            ],
             'start_before' => [
                 'sometimes',
                 'required',

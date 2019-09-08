@@ -21,7 +21,6 @@ $factory->define(
 
         return [
             'name'        => $faker->realText(20),
-            'semester'    => $faker->numberBetween(1, 10),
             'start_time'  => $faker->dateTimeBetween('-1 year', 'now')
                 ->format('Y-m-d H:i:s'),
             'end_time'    => $faker->dateTimeBetween('now', '+1 year')

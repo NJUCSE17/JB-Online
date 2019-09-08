@@ -28,12 +28,6 @@ class UpdateCourseRequest extends FormRequest
     {
         return [
             'name'       => ['sometimes', 'required', 'max:200'],
-            'semester'   => [
-                'sometimes',
-                'required',
-                'integer',
-                'between:1,20',
-            ],
             'start_time' => [
                 'sometimes',
                 'required',

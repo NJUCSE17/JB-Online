@@ -16,7 +16,7 @@
                 </div>
                 <div class="flex-fill text-limit mb-2 mb-md-0">
                     <h6 class="progress-text mb-1 text-sm d-block text-limit">
-                        第{{ course.semester }}学期 - {{ course.name }}
+                        {{ course.name }}
                     </h6>
                     <div class="progress progress-xs mb-0">
                         <div class="progress-bar" role="progressbar"

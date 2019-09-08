@@ -21,7 +21,6 @@ class Course extends Model
     protected $fillable
         = [
             'name',
-            'semester',
             'start_time',
             'end_time',
             'notice',

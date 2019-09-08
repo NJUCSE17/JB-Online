@@ -119,7 +119,7 @@
         },
         methods: {
             cmp(a, b) {
-                return a.semester > b.semester ? -1 : (a.name > b.name ? -1 : 1);
+                return a.begin_time > b.begin_time ? -1 : (a.name > b.name ? -1 : 1);
             },
             loadCourses() {
                 this.init_status = '正在检查你的信息...';

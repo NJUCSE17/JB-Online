@@ -22,7 +22,6 @@ class CourseResource extends JsonResource
         return [
             'id'              => $this->id,
             'name'            => $this->name,
-            'semester'        => $this->semester,
             'start_time'      => $this->start_time->setTimezone($user->timezone)->format('Y-m-d H:i:s'),
             'end_time'        => $this->end_time->setTimezone($user->timezone)->format('Y-m-d H:i:s'),
             'notice'          => $this->notice,

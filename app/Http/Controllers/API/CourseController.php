@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\APIController;
-use App\Http\Requests\Assignment\ViewAssignmentRequest;
 use App\Http\Requests\Course\DeleteCourseRequest;
 use App\Http\Requests\Course\EnrollCourseRequest;
 use App\Http\Requests\Course\QuitCourseRequest;
@@ -25,16 +24,13 @@ class CourseController extends APIController
     /**
      * View specific courses.
      *
-     * @param  ViewAssignmentRequest  $request
+     * @param  ViewCourseRequest  $request
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function index(ViewAssignmentRequest $request)
+    public function index(ViewCourseRequest $request)
     {
         $query = Course::query();
-        if ($request->has('semester')) {
-            $query->Semester($request->get('semester'));
-        }
         if ($request->has('start_before')) {
             $query->Between(
                 Carbon::parse($request->get('start_before'), Auth::user()->timezone)
@@ -57,12 +53,11 @@ class CourseController extends APIController
     public function store(StoreCourseRequest $request)
     {
         $data = $request->only(
-            ['name', 'semester', 'start_time', 'end_time', 'notice']
+            ['name', 'start_time', 'end_time', 'notice']
         );
         $course = Course::query()->create(
             [
                 'name'        => $data['name'],
-                'semester'    => $data['semester'],
                 'start_time'  => Carbon::parse($data['start_time'], Auth::user()->timezone)
                     ->setTimezone(config('app.timezone')),
                 'end_time'    => Carbon::parse($data['end_time'], Auth::user()->timezone)
@@ -78,12 +73,12 @@ class CourseController extends APIController
     /**
      * Show a specific course.
      *
-     * @param  ViewCourseRequest  $request
+     * @param  ShowCourseRequest  $request
      * @param  Course             $course
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function show(ViewCourseRequest $request, Course $course)
+    public function show(ShowCourseRequest $request, Course $course)
     {
         return $this->data(new CourseResource($course));
     }
@@ -99,8 +94,6 @@ class CourseController extends APIController
     public function update(UpdateCourseRequest $request, Course $course)
     {
         $name = $request->has('name') ? $request->get('name') : $course->name;
-        $semester = $request->has('semester') ? $request->get('semester')
-            : $course->semester;
         $start_time = $request->has('start_time')
             ? Carbon::parse($request->get('start_time'), Auth::user()->timezone)
                 ->setTimezone(config('app.timezone'))
@@ -114,7 +107,6 @@ class CourseController extends APIController
         $course->update(
             [
                 'name'        => $name,
-                'semester'    => $semester,
                 'start_time'  => $start_time,
                 'end_time'    => $end_time,
                 'notice'      => $notice,

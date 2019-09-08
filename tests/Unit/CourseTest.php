@@ -66,7 +66,6 @@ class CourseTest extends TestCase
         $this->post('/api/course',
             [
                 'name'       => $this->course['name'],
-                'semester'   => $this->course['semester'],
                 'start_time' => $this->course['start_time'],
                 'end_time'   => $this->course['end_time'],
                 'notice'     => $this->course['notice'],
@@ -83,7 +82,6 @@ class CourseTest extends TestCase
         $this->post('/api/course',
             [
                 'name'       => $this->course['name'],
-                'semester'   => $this->course['semester'],
                 'start_time' => $this->course['start_time'],
                 'end_time'   => $this->course['end_time'],
                 'notice'     => $this->course['notice'],
@@ -109,10 +107,10 @@ class CourseTest extends TestCase
         $this->course['is_in_course'] = false;
         $this->course['is_course_admin'] = false;
 
-        $this->get('/api/course?semester='.$this->course['semester'])
+        $this->get('/api/course?start_before='.$this->course['start_time'].'&end_after='.$this->course['start_time'])
             ->assertStatus(200)
             ->assertExactJson([$this->course]);
-        $this->get('/api/course?semester='.($this->course['semester'] + 1))
+        $this->get('/api/course?start_before=2000-01-01 00:00:00&end_after=2000-01-01 00:00:00')
             ->assertStatus(200)
             ->assertExactJson([]);
     }
@@ -271,10 +269,10 @@ class CourseTest extends TestCase
         $this->course['is_in_course'] = true;
         $this->course['is_course_admin'] = true;
 
-        $this->course['semester'] = $this->faker->numberBetween(1, 10);
+        $this->course['name'] = $this->faker->realText(20);
         $this->put('/api/course/'.$this->course['id'],
             [
-                'semester' => $this->course['semester'],
+                'name' => $this->course['name'],
             ]
         )->assertStatus(200)
             ->assertExactJson($this->course);
@@ -330,7 +328,6 @@ class CourseTest extends TestCase
         $this->course = [
             'id'          => DB::select("SHOW TABLE STATUS LIKE 'courses'")[0]->Auto_increment,
             'name'        => $this->faker->realText(20),
-            'semester'    => $this->faker->numberBetween(1, 10),
             'start_time'  => $this->faker->dateTimeBetween('-1 year', 'now')
                 ->format(
                     'Y-m-d H:i:s'
