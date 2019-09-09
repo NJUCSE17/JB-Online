@@ -52,7 +52,7 @@ return [
     ],
 
     'discourse' => [
-        'middleware' => ['web', 'auth'],
+        'middleware' => ['web', 'auth', 'verified', 'activated'],
         'route'      => 'sso/discourse',
         'secret'     => env('DISCOURSE_SECRET'),
         'suppress_welcome_message' => 'true',
