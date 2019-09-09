@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "328879350a4cab736191fbe13e237fa7",
+    "content-hash": "5e3e68839186b6a076c34cc6d2ff261d",
     "packages": [
         {
             "name": "binarytorch/larecipe",
@@ -67,6 +67,51 @@
                 "markdown"
             ],
             "time": "2019-05-15T04:19:20+00:00"
+        },
+        {
+            "name": "cviebrock/discourse-php",
+            "version": "0.9.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/cviebrock/discourse-php.git",
+                "reference": "9a56e2afec067ee7441663eb82db3d4446c25bc2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/cviebrock/discourse-php/zipball/9a56e2afec067ee7441663eb82db3d4446c25bc2",
+                "reference": "9a56e2afec067ee7441663eb82db3d4446c25bc2",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Cviebrock\\DiscoursePHP\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Colin Viebrock",
+                    "email": "colin@viebrock.ca"
+                },
+                {
+                    "name": "Johan Jatko",
+                    "homepage": "https://xr.gs/"
+                }
+            ],
+            "description": "Helper class for building a single sign-on source for Discourse forums",
+            "homepage": "https://github.com/cviebrock/discourse-php",
+            "keywords": [
+                "discourse",
+                "forum"
+            ],
+            "time": "2017-07-07T16:02:16+00:00"
         },
         {
             "name": "cybercog/laravel-love",
@@ -2809,6 +2854,67 @@
                 "rss"
             ],
             "time": "2018-08-02T05:43:58+00:00"
+        },
+        {
+            "name": "spinen/laravel-discourse-sso",
+            "version": "2.2.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spinen/laravel-discourse-sso.git",
+                "reference": "1ff9ea0c12ca7cb5c0b3a517b195ee8a6af95e88"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spinen/laravel-discourse-sso/zipball/1ff9ea0c12ca7cb5c0b3a517b195ee8a6af95e88",
+                "reference": "1ff9ea0c12ca7cb5c0b3a517b195ee8a6af95e88",
+                "shasum": ""
+            },
+            "require": {
+                "cviebrock/discourse-php": "^0.9.3",
+                "illuminate/routing": "5.5.*|5.6.*|5.7.*|5.8.*|6.0.*",
+                "illuminate/support": "5.5.*|5.6.*|5.7.*|5.8.*|6.0.*",
+                "php": ">=7.2"
+            },
+            "require-dev": {
+                "mockery/mockery": "^1",
+                "phpunit/phpunit": "~7.0.1|~8.0",
+                "psy/psysh": "^0.9.9",
+                "symfony/thanks": "^1.1",
+                "symfony/var-dumper": "~3.0|^4.2"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Spinen\\Discourse\\SsoServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Spinen\\Discourse\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jimmy Puckett",
+                    "email": "jimmy.puckett@spinen.com"
+                }
+            ],
+            "description": "Integrate Discourse SSO into Laravel.",
+            "keywords": [
+                "SSO",
+                "discourse",
+                "laravel",
+                "library",
+                "single sign on",
+                "spinen"
+            ],
+            "time": "2019-09-06T14:40:31+00:00"
         },
         {
             "name": "swiftmailer/swiftmailer",

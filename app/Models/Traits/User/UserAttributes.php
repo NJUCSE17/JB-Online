@@ -150,4 +150,15 @@ trait UserAttributes
             ->where('type_is_admin', true)
             ->exists();
     }
+
+    /**
+     * Is the user a Discourse moderator?
+     *
+     * @param  string  $value
+     * @return boolean
+     */
+    public function getDiscourseModeratorAttribute($value)
+    {
+        return $this->privilege_level <= 2;
+    }
 }

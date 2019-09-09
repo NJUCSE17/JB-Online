@@ -51,4 +51,27 @@ return [
         ],
     ],
 
+    'discourse' => [
+        'middleware' => ['web', 'auth'],
+        'route'      => 'sso/discourse',
+        'secret'     => env('DISCOURSE_SECRET'),
+        'suppress_welcome_message' => 'true',
+        'url'  => env('DISCOURSE_URL'),
+        'user' => [
+            'access'      => null,
+            'add_groups'  => null,
+            'admin'       => null,
+            'avatar_url'  => null,
+            'avatar_force_update' => false,
+            'bio'         => null,
+            'email'       => 'email',
+            'external_id' => 'student_id',
+            'moderator'   => null,
+            'name'        => 'name',
+            'remove_groups' => null,
+            'require_activation' => false,
+            'username'    => 'email',
+        ],
+    ],
+
 ];
