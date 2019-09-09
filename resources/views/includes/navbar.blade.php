@@ -11,6 +11,13 @@
             </button>
             <div class="navbar-collapse collapse" id="MainNavigationBar">
                 <ul class="navbar-nav align-items-lg-end ml-lg-auto">
+                    @if(env('DISCOURSE_URL'))
+                        <li class="nav-item">
+                            <a class="nav-link pr-lg-0" href="{{ env('DISCOURSE_URL') }}" target="_blank">
+                                <i class="fab fa-discourse mr-1"></i> 讨论区
+                            </a>
+                        </li>
+                    @endif
                     <li class="nav-item">
                         <a class="nav-link pr-lg-0" href="{{ route('logout') }}"
                            onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
