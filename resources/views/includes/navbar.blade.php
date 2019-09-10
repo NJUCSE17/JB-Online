@@ -11,6 +11,13 @@
             </button>
             <div class="navbar-collapse collapse" id="MainNavigationBar">
                 <ul class="navbar-nav align-items-lg-end ml-lg-auto">
+                    @if(Auth::user()->privilege_level <= 1)
+                        <li class="nav-item">
+                            <a class="nav-link pr-lg-0" href="/telescope" target="_blank">
+                                <i class="fas fa-chart-pie mr-1"></i> 日志
+                            </a>
+                        </li>
+                    @endif
                     @if(env('DISCOURSE_URL'))
                         <li class="nav-item">
                             <a class="nav-link pr-lg-0" href="{{ env('DISCOURSE_URL') }}" target="_blank">
