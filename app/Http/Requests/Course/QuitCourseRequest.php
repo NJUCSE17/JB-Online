@@ -17,7 +17,7 @@ class QuitCourseRequest extends FormRequest
         $course = $this->route('course');
 
         if ($this->request->has('user_id')) {
-            $target = User::query()->findOrFail($this->query->get('user_id'))->get();
+            $target = User::query()->findOrFail($this->request->getInt('user_id'))->get();
             return $this->user()->can('quitOther', $course, $target);
         } else {
             return $this->user()->can('quitSelf', $course);
