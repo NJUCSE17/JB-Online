@@ -8,6 +8,7 @@
             <div v-if="isOK">
                 <weather-day
                     v-for="forecast in forecasts"
+                    :key="forecast.date"
                     :weather_data="forecast"
                 ></weather-day>
                 <div class="row mt-2">

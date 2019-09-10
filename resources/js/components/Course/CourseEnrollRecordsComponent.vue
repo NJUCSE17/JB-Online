@@ -59,7 +59,7 @@
                                                 v-on:click="enrollCourse($event, user.id, 1)">
                                             管理员
                                         </button>
-                                        <button v-if="user.is_in_course" class="btn btn-sm btn-soft-danger"
+                                        <button v-if="user.is_in_course && (!user.is_course_admin || self_is_admin)" class="btn btn-sm btn-soft-danger"
                                                 v-on:click="quitCourse($event, user.id)">
                                             移除注册
                                         </button>
@@ -78,7 +78,7 @@
 <script>
     export default {
         name: "CourseEnrollRecordsComponent",
-        props: ['id', 'api_user', 'api_course', 'course'],
+        props: ['id', 'self_is_admin', 'api_user', 'api_course', 'course'],
         data: function () {
             return {
                 initializing: true,

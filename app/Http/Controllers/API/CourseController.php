@@ -182,13 +182,17 @@ class CourseController extends APIController
      */
     public function quit(QuitCourseRequest $request, Course $course)
     {
-        CourseEnrollRecord::query()
+        $record = CourseEnrollRecord::query()
             ->where('user_id', $request->has('user_id')
                 ? $request->get('user_id') : Auth::id())
             ->where('course_id', $course->id)
-            ->firstOrFail()
-            ->delete();
+            ->firstOrFail();
 
-        return $this->deleted();
+        if ($record->type_is_admin and Auth::user()->privilege_level >= 3) {
+            return $this->error('Admin cannot quit course.', 403);
+        } else {
+            $record->delete();
+            return $this->deleted();
+        }
     }
 }

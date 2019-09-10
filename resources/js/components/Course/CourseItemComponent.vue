@@ -4,7 +4,7 @@
             <div class="card-body">
                 <div>
                     <small class="d-inline-block text-sm mb-2">{{ beg_date }} 至 {{ end_date }}</small>
-                    <span class="d-inline-block float-right" v-if="status.color === 'warning'">
+                    <span class="d-inline-block float-right" v-if="status.color === 'warning' && (self_is_admin || !course.is_course_admin)">
                         <a v-if="!course.is_in_course"
                            v-on:click="enrollCourse"
                            v-bind:href="'#' + id + 'Card'" class="text-success"
@@ -36,12 +36,12 @@
                                 v-on:click="showAssignments">
                             <i class="fas fa-folder mr-2"></i> 作业
                         </button>
-                        <button v-if="this.course.is_course_admin"
+                        <button v-if="course.is_course_admin"
                                 type="button" class="btn btn-sm btn-outline-info"
                                 v-on:click="editCourse">
                             <i class="fas fa-edit mr-2"></i> 编辑
                         </button>
-                        <button v-if="this.course.is_course_admin"
+                        <button v-if="course.is_course_admin"
                                 type="button" class="btn btn-sm btn-outline-warning"
                                 v-on:click="showEnrollRecords">
                             <i class="fas fa-users-cog mr-2"></i> 管理
@@ -70,6 +70,7 @@
         <course-enroll-records-component
                 ref="records"
                 :id="recordsID"
+                :self_is_admin="self_is_admin"
                 :api_user="api_user"
                 :api_course="api_course"
                 :course="course"
@@ -85,7 +86,7 @@
     export default {
         name: "CourseItemComponent",
         components: {CourseEnrollRecordsComponent, CourseEditorComponent, CourseAssignmentListComponent},
-        props: ['id', 'api_user', 'api_course', 'course', 'timezone'],
+        props: ['id', 'self_is_admin', 'api_user', 'api_course', 'course', 'timezone'],
         data: function () {
             return {
                 assignments_loaded: false,

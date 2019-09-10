@@ -33,7 +33,9 @@
                 <div class="row my-4">
                     <course-item-component
                         v-for="course in course_type.courses"
+                        :key="course.id"
                         :id="itemID + course.id"
+                        :self_is_admin="self.privilege_level < 3"
                         :api_user="api_user"
                         :api_course="api_course + '/' + course.id"
                         :course="course"
