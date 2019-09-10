@@ -15,12 +15,14 @@ class EnrollCourseRequest extends FormRequest
     {
         $course = $this->route('course');
 
-        if ($this->request->has('user_id')
-            || $this->request->has('type_is_admin')
-        ) {
-            return $this->user()->can('update', $course);
+        if ($this->request->has('type_is_admin')) {
+            return $this->user()->can('enrollAdmin', $course);
         } else {
-            return $this->user()->can('enroll', $course);
+            if ($this->request->has('user_id')) {
+                return $this->user()->can('enrollOther', $course);
+            } else {
+                return $this->user()->can('enrollSelf', $course);
+            }
         }
     }
 

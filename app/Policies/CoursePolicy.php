@@ -84,13 +84,33 @@ class CoursePolicy
     }
 
     /**
-     * Determine whether the user can enroll to a course.
+     * Determine whether the user can enroll itself to a course.
      *
      * @return bool
      */
-    public function enroll()
+    public function enrollSelf()
     {
         return true;
+    }
+
+    /**
+     * Determine whether the user can enroll other as a student to a course.
+     *
+     * @return bool
+     */
+    public function enrollOther(User $user, Course $course)
+    {
+        return $user->isCourseAdmin($course);
+    }
+
+    /**
+     * Determine whether the user can enroll other as an admin to a course.
+     *
+     * @return bool
+     */
+    public function enrollAdmin(User $user)
+    {
+        return false;
     }
 
     /**
@@ -98,8 +118,18 @@ class CoursePolicy
      *
      * @return bool
      */
-    public function quit()
+    public function quitSelf(User $user, Course $course)
     {
-        return true;
+        return !$user->isCourseAdmin($course);
+    }
+
+    /**
+     * Determine whether the user can remove others from a course.
+     *
+     * @return bool
+     */
+    public function quitOther(User $user, Course $course, User $target)
+    {
+        return $user->isCourseAdmin($course) and !$target->isCourseAdmin($course);
     }
 }

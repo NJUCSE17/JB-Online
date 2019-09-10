@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Course;
 
+use App\Models\User;
 use Illuminate\Foundation\Http\FormRequest;
 
 class QuitCourseRequest extends FormRequest
@@ -16,9 +17,10 @@ class QuitCourseRequest extends FormRequest
         $course = $this->route('course');
 
         if ($this->request->has('user_id')) {
-            return $this->user()->can('update', $course);
+            $target = User::query()->findOrFail($this->query->get('user_id'))->get();
+            return $this->user()->can('quitOther', $course, $target);
         } else {
-            return $this->user()->can('enroll', $course);
+            return $this->user()->can('quitSelf', $course);
         }
     }
 
