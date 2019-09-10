@@ -41,7 +41,7 @@
                                 v-on:click="editCourse">
                             <i class="fas fa-edit mr-2"></i> 编辑
                         </button>
-                        <button v-if="course.is_course_admin"
+                        <button v-if="course.is_course_admin && status.color === 'warning'"
                                 type="button" class="btn btn-sm btn-outline-warning"
                                 v-on:click="showEnrollRecords">
                             <i class="fas fa-users-cog mr-2"></i> 管理
@@ -52,28 +52,29 @@
         </div>
 
         <course-assignment-list-component
-                ref="list"
-                :id="listID"
-                :course="course"
-                :timezone="timezone"
+            ref="list"
+            :id="listID"
+            :course="course"
+            :timezone="timezone"
         ></course-assignment-list-component>
 
         <course-editor-component
-                :id="editorID"
-                :api="api_course"
-                :course="course"
-                :timezone="timezone"
-                v-on:updateCourse="updateCourse"
-                v-on:deleteCourse="deleteCourse"
+            :id="editorID"
+            :api="api_course"
+            :course="course"
+            :timezone="timezone"
+            v-on:updateCourse="updateCourse"
+            v-on:deleteCourse="deleteCourse"
         ></course-editor-component>
 
         <course-enroll-records-component
-                ref="records"
-                :id="recordsID"
-                :self_is_admin="self_is_admin"
-                :api_user="api_user"
-                :api_course="api_course"
-                :course="course"
+            v-if="status.color === 'warning'"
+            ref="records"
+            :id="recordsID"
+            :self_is_admin="self_is_admin"
+            :api_user="api_user"
+            :api_course="api_course"
+            :course="course"
         ></course-enroll-records-component>
     </div>
 </template>
