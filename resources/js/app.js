@@ -8,8 +8,23 @@ require('./bootstrap');
 
 window.Vue = require('vue');
 
-import MaskedInput from 'vue-text-mask';
-window.Vue.component('masked-input', MaskedInput);
+import flatPickr from 'vue-flatpickr-component';
+import 'flatpickr/dist/flatpickr.css';
+import 'flatpickr/dist/themes/light.css';
+import 'flatpickr/dist/l10n/zh.js';
+console.log(flatPickr.props.config);
+flatPickr.props.config.default = () => {
+    return {
+        enableTime: true,
+        enableSeconds: true,
+        time_24hr: true,
+        minuteIncrement: 5,
+        prevArrow: '<i class="fas fa-angle-left"></i>',
+        nextArrow: '<i class="fas fa-angle-right"></i>',
+        locale: 'zh',
+    };
+};
+window.Vue.component('flat-pickr', flatPickr);
 
 /**
  * The following block of code may be used to automatically register your

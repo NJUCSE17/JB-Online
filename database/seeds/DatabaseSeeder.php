@@ -18,6 +18,7 @@ class DatabaseSeeder extends Seeder
             'email_verified_at' => now(),
             'activated_at'      => now(),
             'password'          => Hash::make('secret'),
+            'privilege_level'   => 1,
         ]);
         $courseID = DB::table('courses')->insertGetId([
             'name'       => 'TestCourse',

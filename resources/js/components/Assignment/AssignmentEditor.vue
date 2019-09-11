@@ -61,18 +61,10 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text"><i class="fas fa-calendar"></i></span>
                             </div>
-                            <masked-input
-                                    type="text" name="AssignmentDDLInput"
-                                    class="form-control"
-                                    v-on:keyup.enter="submit"
-                                    v-model="assignmentDDL"
-                                    :pipe="datePipe"
-                                    :mask="[
-                                        /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, '-', /\d/, /\d/,
-                                        ' ', /\d/, /\d/, ':', /\d/, /\d/, ':', /\d/, /\d/
-                                    ]"
-                                    :guide="true" placeholderChar="_">
-                            </masked-input>
+                            <flat-pickr class="form-control"
+                                        v-model="assignmentDDL"
+                                        v-bind:id="id + 'InputDDL'">
+                            </flat-pickr>
                         </div>
                     </div>
                     <hr/>
@@ -101,8 +93,6 @@
 </template>
 
 <script>
-    import createAutoCorrectedDatePipe from 'text-mask-addons/dist/createAutoCorrectedDatePipe';
-
     export default {
         name: "AssignmentEditor",
         props: ['id', 'api', 'assignment', 'timezone'],
@@ -115,7 +105,6 @@
         },
         data: function () {
             return {
-                datePipe: createAutoCorrectedDatePipe('yyyy-mm-dd HH:MM:SS'),
                 assignmentName: this.assignment.name,
                 assignmentContent: this.assignment.content,
                 assignmentDDL: this.assignment.due_time,

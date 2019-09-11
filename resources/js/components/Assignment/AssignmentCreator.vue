@@ -48,19 +48,10 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text"><i class="fas fa-calendar"></i></span>
                             </div>
-                            <masked-input
-                                    type="text" name="AssignmentDDLInput"
-                                    class="form-control"
-                                    placeholder="YYYY-MM-DD HH:mm:ss"
-                                    v-on:keyup.enter="submit"
-                                    v-model="assignmentDDL"
-                                    v-bind:pipe="datePipe"
-                                    v-bind:mask="[
-                                        /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, '-', /\d/, /\d/,
-                                        ' ', /\d/, /\d/, ':', /\d/, /\d/, ':', /\d/, /\d/
-                                    ]"
-                                    v-bind:guide="true" placeholderChar="_">
-                            </masked-input>
+                            <flat-pickr id="assignmentDDL"
+                                        class="form-control"
+                                        v-model="assignmentDDL">
+                            </flat-pickr>
                         </div>
                     </div>
                     <hr />

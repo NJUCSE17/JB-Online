@@ -41,20 +41,9 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text"><i class="fas fa-calendar"></i></span>
                             </div>
-                            <masked-input
-                                    type="text"
-                                    class="form-control"
-                                    placeholder="YYYY-MM-DD HH:mm:ss"
-                                    v-bind:name="id + 'BegDateInput'"
-                                    v-on:keyup.enter="submit"
-                                    v-model="courseBegDate"
-                                    v-bind:pipe="datePipe"
-                                    v-bind:mask="[
-                                            /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, '-', /\d/, /\d/,
-                                            ' ', /\d/, /\d/, ':', /\d/, /\d/, ':', /\d/, /\d/
-                                        ]"
-                                    v-bind:guide="true" placeholderChar="_">
-                            </masked-input>
+                            <flat-pickr class="form-control"
+                                        v-model="courseBegDate">
+                            </flat-pickr>
                         </div>
                     </div>
                     <div class="form-group">
@@ -63,20 +52,9 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text"><i class="fas fa-calendar"></i></span>
                             </div>
-                            <masked-input
-                                    type="text"
-                                    class="form-control"
-                                    placeholder="YYYY-MM-DD HH:mm:ss"
-                                    v-bind:name="id + 'EndDateInput'"
-                                    v-on:keyup.enter="submit"
-                                    v-model="courseEndDate"
-                                    v-bind:pipe="datePipe"
-                                    v-bind:mask="[
-                                            /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, '-', /\d/, /\d/,
-                                            ' ', /\d/, /\d/, ':', /\d/, /\d/, ':', /\d/, /\d/
-                                        ]"
-                                    v-bind:guide="true" placeholderChar="_">
-                            </masked-input>
+                            <flat-pickr class="form-control"
+                                        v-model="courseEndDate">
+                            </flat-pickr>
                         </div>
                     </div>
                     <div class="form-group">
