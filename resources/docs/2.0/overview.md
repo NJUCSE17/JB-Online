@@ -42,7 +42,7 @@ JBOnline基于Laravel 5.8开发，所以Laravel相关的结构、函数的帮助
 - katex
 - craftpip/jquery-confirm
 - iamkun/dayjs
-- vuejs-tips/vue-the-mask
+- ankurk91/vue-flatpickr-component
 
 <a name="private-source"></a>
 ## 闭源组件
