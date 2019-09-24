@@ -6,7 +6,7 @@
                 <div class="modal-header">
                     <h5 class="modal-title" v-bind:id="id + 'Title'">
                         {{ course.name }}的作业
-                        <span class="d-inline-block" v-if="!initializing">
+                        <span class="d-inline-block" v-if="!initializing && course.is_course_admin">
                             <assignment-creator-main
                                 :courses="[course]"
                                 :api_public="api"
