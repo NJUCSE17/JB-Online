@@ -38,7 +38,6 @@ class CreateCoursesAndEnrollRecordsTables extends Migration
                     ->on('courses')->onDelete('cascade');
                 $table->boolean('type_is_admin')->default(false);
                 $table->timestamps();
-                $table->softDeletes();
             }
         );
     }

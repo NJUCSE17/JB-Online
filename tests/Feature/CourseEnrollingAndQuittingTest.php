@@ -30,7 +30,6 @@ class CourseEnrollingAndQuittingTest extends TestCase
             [
                 'user_id'    => $user->id,
                 'course_id'  => $course->id,
-                'deleted_at' => null,
             ]
         );
 
@@ -47,7 +46,6 @@ class CourseEnrollingAndQuittingTest extends TestCase
             [
                 'user_id'    => $user->id,
                 'course_id'  => $course->id,
-                'deleted_at' => null,
             ]
         );
     }

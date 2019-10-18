@@ -146,7 +146,6 @@ class CourseTest extends TestCase
                 'user_id'       => $this->user->id,
                 'course_id'     => $this->course['id'],
                 'type_is_admin' => false,
-                'deleted_at'    => null,
             ]
         );
         $this->course['is_in_course'] = true;
@@ -165,7 +164,6 @@ class CourseTest extends TestCase
             [
                 'user_id'    => $this->user->id,
                 'course_id'  => $this->course['id'],
-                'deleted_at' => null,
             ]
         );
     }
@@ -179,7 +177,6 @@ class CourseTest extends TestCase
             [
                 'user_id'    => $this->course_admin->id,
                 'course_id'  => $this->course['id'],
-                'deleted_at' => null,
             ]
         );
         $this->post('/api/course/'.$this->course['id'].'/enroll',
@@ -204,7 +201,6 @@ class CourseTest extends TestCase
             [
                 'user_id'    => $this->course_admin->id,
                 'course_id'  => $this->course['id'],
-                'deleted_at' => null,
             ]
         );
         $this->post('/api/course/'.$this->course['id'].'/enroll',
@@ -225,7 +221,6 @@ class CourseTest extends TestCase
                 'user_id'       => $this->course_admin->id,
                 'course_id'     => $this->course['id'],
                 'type_is_admin' => true,
-                'deleted_at'    => null,
             ]
         );
     }

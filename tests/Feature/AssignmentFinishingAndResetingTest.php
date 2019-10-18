@@ -30,7 +30,6 @@ class AssignmentFinishingAndResetingTest extends TestCase
             [
                 'user_id'    => $user->id,
                 'course_id'  => $assignment->course_id,
-                'deleted_at' => null,
             ]
         );
 
@@ -41,7 +40,6 @@ class AssignmentFinishingAndResetingTest extends TestCase
             [
                 'user_id'       => $user->id,
                 'assignment_id' => $assignment->id,
-                'deleted_at'    => null,
             ]
         );
 
@@ -58,7 +56,6 @@ class AssignmentFinishingAndResetingTest extends TestCase
             [
                 'user_id'       => $user->id,
                 'assignment_id' => $assignment->id,
-                'deleted_at'    => null,
             ]
         );
     }
@@ -77,7 +74,6 @@ class AssignmentFinishingAndResetingTest extends TestCase
             [
                 'user_id'    => $user->id,
                 'course_id'  => $assignment->course_id,
-                'deleted_at' => null,
             ]
         );
 
@@ -88,7 +84,6 @@ class AssignmentFinishingAndResetingTest extends TestCase
             [
                 'user_id'       => $user->id,
                 'assignment_id' => $assignment->id,
-                'deleted_at'    => null,
             ]
         );
 
@@ -99,7 +94,6 @@ class AssignmentFinishingAndResetingTest extends TestCase
             [
                 'user_id'    => $user->id,
                 'course_id'  => $assignment->course_id,
-                'deleted_at' => null,
             ]
         );
 
@@ -108,7 +102,6 @@ class AssignmentFinishingAndResetingTest extends TestCase
             [
                 'user_id'       => $user->id,
                 'assignment_id' => $assignment->id,
-                'deleted_at'    => null,
             ]
         );
     }
