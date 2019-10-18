@@ -38,7 +38,6 @@ class CreateAssignmentsAndFinishRecordsTables extends Migration
                 $table->foreign('assignment_id')->references('id')
                     ->on('assignments')->onDelete('cascade');
                 $table->timestamps();
-                $table->softDeletes();
             }
         );
     }
