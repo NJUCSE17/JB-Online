@@ -11,7 +11,7 @@ trait AssignmentFinishRecordRelationships
      */
     public function user()
     {
-        return $this->belongsTo('App\Model\User');
+        return $this->belongsTo('App\Models\User');
     }
 
     /**
@@ -21,6 +21,6 @@ trait AssignmentFinishRecordRelationships
      */
     public function assignment()
     {
-        return $this->belongsTo('App\Model\Assignment');
+        return $this->belongsTo('App\Models\Assignment');
     }
 }
