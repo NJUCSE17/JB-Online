@@ -28,12 +28,12 @@
             </div>
         </div>
         <div v-else-if="courses.length > 0" id="CourseListContent">
-            <div v-for="course_type in courses_classified" class="mb-4">
+            <div class="mb-4" v-for="course_type in courses_classified" v-bind:key="course_type.name">
                 <p class="h5">{{ course_type.name }}</p>
                 <div class="row my-4">
                     <course-item-component
                         v-for="course in course_type.courses"
-                        :key="course.id"
+                        v-bind:key="course.id"
                         :id="itemID + course.id"
                         :self_is_admin="self.privilege_level < 3"
                         :api_user="api_user"
@@ -152,9 +152,8 @@
                 });
             },
             addCourse(course) {
-                this.courses = this.courses.concat([course]);
+                window.Vue.set(this.courses, this.courses.length, course);
                 console.log("Course added to list.");
-                this.$forceUpdate();
             },
             updateCourse(course) {
                 for (let pos = 0; pos < this.courses.length; ++pos) {
@@ -163,12 +162,10 @@
                         break;
                     }
                 }
-                this.$forceUpdate();
             },
             deleteCourse(course) {
                 let pos = this.courses.indexOf(course);
-                this.courses.splice(pos, 1);
-                this.$forceUpdate();
+                window.Vue.delete(this.courses, pos);
             }
         }
     }

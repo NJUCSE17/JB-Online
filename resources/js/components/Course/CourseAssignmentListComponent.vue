@@ -35,7 +35,7 @@
                             </div>
                         </div>
                         <div v-else-if="assignments.length > 0" v-bind:id="id + 'AssignmentListContent'">
-                            <div v-for="assignment in assignments_sorted">
+                            <div v-for="assignment in assignments_sorted" v-bind:key="assignment.id">
                                 <assignment-item-public
                                     v-if="assignment.course_id"
                                     :api="api"
@@ -105,19 +105,16 @@
                 });
             },
             addAssignment(assignment) {
-                this.assignments = this.assignments.concat([assignment]);
+                window.Vue.set(this.assignments, this.assignments.length, assignment);
                 console.log("Assignment added to list.");
-                this.$forceUpdate();
             },
             updateAssignment(data) {
                 let pos = this.assignments.indexOf(data.oldAssignment);
-                this.assignments[pos] = data.newAssignment;
-                this.$forceUpdate();
+                window.Vue.set(this.assignments, pos, data.newAssignment);
             },
             deleteAssignment(assignment) {
                 let pos = this.assignments.indexOf(assignment);
-                this.assignments.splice(pos, 1);
-                this.$forceUpdate();
+                window.Vue.delete(this.assignments, pos);
             }
         }
     }

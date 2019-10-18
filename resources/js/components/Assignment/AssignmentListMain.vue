@@ -28,7 +28,7 @@
             </div>
         </div>
         <div v-else-if="assignments.length > 0" id="assignmentListContent">
-            <div v-for="assignment in assignments_sorted">
+            <div v-for="assignment in assignments_sorted" v-bind:key="assignment.uid">
                 <assignment-item-public
                         v-if="assignment.course_id"
                         :api="api_public"
@@ -84,7 +84,15 @@
         },
         computed: {
             assignments_sorted: function () {
-                return this.assignments.sort(this.sortByDDL)
+                for (let i = 0; i < this.assignments.length; ++i) {
+                    if (this.assignments[i].hasOwnProperty("uid")) continue;
+                    if (this.assignments[i].hasOwnProperty("course_id")) {
+                        this.assignments[i].uid = "public-" + this.assignments[i].id;
+                    } else {
+                        this.assignments[i].uid = "private-" + this.assignments[i].id;
+                    }
+                }
+                return this.assignments.sort(this.sortByDDL);
             }
         },
         created: function () {
@@ -136,9 +144,8 @@
                 });
             },
             addAssignment(assignment) {
-                this.assignments = this.assignments.concat([assignment]);
+                window.Vue.set(this.assignments, this.assignments.length, assignment);
                 console.log("Assignment added to list.");
-                this.$forceUpdate();
             },
             updateAssignment(assignment) {
                 for (let pos = 0; pos < this.assignments.length; ++pos) {
@@ -147,12 +154,10 @@
                         break;
                     }
                 }
-                this.$forceUpdate();
             },
             deleteAssignment(assignment) {
                 let pos = this.assignments.indexOf(assignment);
-                this.assignments.splice(pos, 1);
-                this.$forceUpdate();
+                window.Vue.delete(this.assignments, pos);
             }
         }
     }
