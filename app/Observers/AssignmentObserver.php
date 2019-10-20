@@ -31,14 +31,18 @@ class AssignmentObserver
      */
     public function updated(Assignment $assignment)
     {
-        $records = AssignmentFinishRecord::query()
-            ->where('assignment_id', '=', $assignment->id);
-        $userIDs = $records->pluck('user_id')->toArray();
-        $records->delete();
+        // only update user if assignment content is updated
+        // TODO: update user if DDL is updated.
+        if ($assignment->isDirty('content')) {
+            $records = AssignmentFinishRecord::query()
+                ->where('assignment_id', '=', $assignment->id);
+            $userIDs = $records->pluck('user_id')->toArray();
+            $records->delete();
 
-        $users = User::query()->whereIn('id', $userIDs)->get();
-        foreach ($users as $user) {
-            $user->notify(new AssignmentModifiedEmail($user, $assignment));
+            $users = User::query()->whereIn('id', $userIDs)->get();
+            foreach ($users as $user) {
+                $user->notify(new AssignmentModifiedEmail($user, $assignment));
+            }
         }
     }
 
