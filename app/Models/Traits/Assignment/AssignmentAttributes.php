@@ -11,6 +11,23 @@ use Illuminate\Support\Facades\Auth;
 trait AssignmentAttributes
 {
     /**
+     * Get whether the assignment is marked ongoing.
+     *
+     * @param  User  $user
+     *
+     * @return mixed
+     */
+    public function isOngoing(User $user)
+    {
+        $record = AssignmentFinishRecord::query()
+            ->where('user_id', $user->id)
+            ->where('assignment_id', $this->id)
+            ->first();
+
+        return $record ? $record->is_ongoing : null;
+    }
+
+    /**
      * Get the timestamp of finished info.
      *
      * @param  User  $user
@@ -24,7 +41,7 @@ trait AssignmentAttributes
             ->where('assignment_id', $this->id)
             ->first();
 
-        return $record ? $record->updated_at->setTimezone($user->timezone) : null;
+        return ($record && !$record->is_ongoing) ? $record->updated_at->setTimezone($user->timezone) : null;
     }
 
     /**

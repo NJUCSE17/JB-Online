@@ -28,6 +28,13 @@
             </div>
         </div>
         <div v-else-if="assignments.length > 0" id="assignmentListContent">
+            <kanban-main
+                :assignments="assignments_sorted"
+                :timezone="timezone"
+                v-on:updateAssignment="updateAssignment"
+                v-on:deleteAssignment="deleteAssignment"
+            ></kanban-main>
+            <!-- DEPRECATED RAW LIST
             <div v-for="assignment in assignments_sorted" v-bind:key="assignment.uid">
                 <assignment-item-public
                         v-if="assignment.course_id"
@@ -46,6 +53,7 @@
                         v-on:deleteAssignment="deleteAssignment"
                 ></assignment-item-personal>
             </div>
+            -->
         </div>
         <div v-else>
             <div class="row">
@@ -66,10 +74,11 @@
     import AssignmentItemPersonal from "./AssignmentItemPersonal";
     import AssignmentItemPublic from "./AssignmentItemPublic";
     import AssignmentCreatorMain from "./AssignmentCreatorMain";
+    import KanbanMain from "../Kanban/KanbanMain";
 
     export default {
         name: "AssignmentListMain",
-        components: {AssignmentCreatorMain, AssignmentItemPublic, AssignmentItemPersonal},
+        components: {KanbanMain, AssignmentCreatorMain, AssignmentItemPublic, AssignmentItemPersonal},
         props: ["timezone"],
         data: function () {
             return {
@@ -84,15 +93,21 @@
         },
         computed: {
             assignments_sorted: function () {
-                for (let i = 0; i < this.assignments.length; ++i) {
-                    if (this.assignments[i].hasOwnProperty("uid")) continue;
-                    if (this.assignments[i].hasOwnProperty("course_id")) {
-                        this.assignments[i].uid = "public-" + this.assignments[i].id;
+                let arr = [];
+                this.assignments.forEach(assignment => {
+                    // Raw-list uses uid, Kanban transforms uid into new id
+                    assignment = $.extend({}, assignment);
+                    let id = assignment.id;
+                    if (assignment.hasOwnProperty("course_id")) {
+                        assignment.uid = "public-" + id;
+                        assignment.api = this.api_public + '/' + id;
                     } else {
-                        this.assignments[i].uid = "private-" + this.assignments[i].id;
+                        assignment.uid = "personal-" + id;
+                        assignment.api = this.api_personal + '/' + id;
                     }
-                }
-                return this.assignments.sort(this.sortByDDL);
+                    arr.push(assignment);
+                });
+                return arr.sort(this.sortByDDL);
             }
         },
         created: function () {
@@ -116,9 +131,10 @@
                     console.error(err);
                 }).finally(() => {
                     this.init_status = '正在加载课程作业...';
+                    console.log(window.Dayjs().subtract(2, 'hour').format('YYYY-MM-DD HH:mm:ss'));
                     window.axios.get(this.api_public, {
                         params: {
-                            due_after: window.Dayjs().format('YYYY-MM-DD HH:mm:ss'),
+                            due_after: window.Dayjs().subtract(2, 'hour').format('YYYY-MM-DD HH:mm:ss'),
                         }
                     }).then(res => {
                         this.assignments = this.assignments.concat(res.data);

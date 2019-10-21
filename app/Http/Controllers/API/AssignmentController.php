@@ -157,14 +157,14 @@ class AssignmentController extends APIController
         FinishAssignmentRequest $request,
         Assignment $assignment
     ) {
-        $ongoing = $request->get('ongoing', false);
+        $is_ongoing = $request->get('is_ongoing', false);
         $record = AssignmentFinishRecord::query()->updateOrCreate(
             [
                 'user_id'       => Auth::id(),
                 'assignment_id' => $assignment->id,
             ],
             [
-                'ongoing'       => $ongoing,
+                'is_ongoing'    => $is_ongoing,
             ]
         );
 

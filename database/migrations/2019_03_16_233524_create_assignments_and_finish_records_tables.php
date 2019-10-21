@@ -37,7 +37,7 @@ class CreateAssignmentsAndFinishRecordsTables extends Migration
                 $table->unsignedBigInteger('assignment_id');
                 $table->foreign('assignment_id')->references('id')
                     ->on('assignments')->onDelete('cascade');
-                $table->boolean('ongoing')->default(false);
+                $table->boolean('is_ongoing')->default(false);
                 $table->timestamps();
             }
         );

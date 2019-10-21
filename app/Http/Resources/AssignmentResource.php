@@ -28,6 +28,7 @@ class AssignmentResource extends JsonResource
             'content'         => $this->content,
             'content_html'    => $this->content_html,
             'due_time'        => $this->due_time->setTimezone($user->timezone)->format('Y-m-d H:i:s'),
+            'is_ongoing'      => $this->isOngoing($user),
             'finished_at'     => $this->finishedAt($user),
             'rate_info'       => $this->ratedInfo(),
         ];
