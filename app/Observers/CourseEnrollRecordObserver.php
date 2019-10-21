@@ -47,7 +47,11 @@ class CourseEnrollRecordObserver
         AssignmentFinishRecord::query()
             ->where('user_id', $courseEnrollRecord->user_id)
             ->whereIn('assignment_id', $assignment_ids)
-            ->delete();
+            ->each(
+                function (AssignmentFinishRecord $record) {
+                    $record->delete();
+                }
+            );
     }
 
     /**

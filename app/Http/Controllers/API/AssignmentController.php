@@ -170,10 +170,11 @@ class AssignmentController extends APIController
     /**
      * Reset an assignment.
      *
-     * @param  ResetAssignmentRequest  $request
-     * @param  Assignment              $assignment
+     * @param ResetAssignmentRequest $request
+     * @param Assignment $assignment
      *
      * @return \Illuminate\Http\JsonResponse
+     * @throws \Exception
      */
     public function reset(
         ResetAssignmentRequest $request,
@@ -182,6 +183,7 @@ class AssignmentController extends APIController
         AssignmentFinishRecord::query()
             ->where('user_id', Auth::id())
             ->where('assignment_id', $assignment->id)
+            ->firstOrFail()
             ->delete();
 
         return $this->deleted();
