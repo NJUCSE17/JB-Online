@@ -19,6 +19,7 @@ class AssignmentFinishRecord extends Model
         = [
             'user_id',
             'assignment_id',
+            'is_ongoing',
         ];
 
     /**

@@ -99,14 +99,18 @@ assignment: {
 <a name="a-6"></a>
 ## `POST /api/assignment/{id}/finish`
 
-- 用途：标记一个作业为已完成
+- 用途：标记一个作业为已完成，如果`ongoing`设置为`true`，即表示作业进行中，则返回的`finished_at`为`null`。
 - 权限：只允许已加入对应课程的用户访问
-- 参数：无
+- 参数：
+  ```php
+  'ongoing' => ['boolean'],
+  ```
 - 返回：`200 OK` 作业完成记录
   ```json
   finish_record: {
-        assignment_id: 2
-        finished_at: "2019-06-16T09:16:46.000000Z"
+        assignment_id: 2,
+        finished_at: "2019-06-16T09:16:46.000000Z",
+        ongoing: false,
         user_id: 5
   }
   ```

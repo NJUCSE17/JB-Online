@@ -15,10 +15,20 @@ class AssignmentFinishRecordResource extends JsonResource
      */
     public function toArray($request)
     {
-        return [
-            'user_id'       => $this->user_id,
-            'assignment_id' => $this->assignment_id,
-            'finished_at'   => $this->updated_at->setTimezone(\Auth::user()->timezone),
-        ];
+        if ($this->is_ongoing) {
+            return [
+                'user_id'       => $this->user_id,
+                'assignment_id' => $this->assignment_id,
+                'is_ongoing'    => true,
+                'finished_at'   => null,
+            ];
+        } else {
+            return [
+                'user_id'       => $this->user_id,
+                'assignment_id' => $this->assignment_id,
+                'is_ongoing'    => false,
+                'finished_at'   => $this->updated_at->setTimezone(\Auth::user()->timezone),
+            ];
+        }
     }
 }

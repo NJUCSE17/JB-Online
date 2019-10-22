@@ -26,7 +26,7 @@ class FinishPersonalAssignmentRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'is_ongoing' => ['boolean'],
         ];
     }
 }

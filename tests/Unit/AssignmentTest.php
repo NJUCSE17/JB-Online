@@ -263,12 +263,25 @@ class AssignmentTest extends TestCase
         $this->actingAs($this->user, 'api');
         $this->enroll($this->user->id, $this->assignments[1]['course_id'],
             false);
+        $this->post('/api/assignment/'.$this->assignments[1]['id'].'/finish',
+            [
+                'is_ongoing' => true,
+            ]
+        )->assertStatus(200)
+            ->assertJson(
+                [ // not an exact check
+                    'user_id'       => $this->user->id,
+                    'assignment_id' => $this->assignments[1]['id'],
+                    'is_ongoing'    => true,
+                ]
+            );
         $this->post('/api/assignment/'.$this->assignments[1]['id'].'/finish')
             ->assertStatus(200)
             ->assertJson(
                 [ // not an exact check
                     'user_id'       => $this->user->id,
                     'assignment_id' => $this->assignments[1]['id'],
+                    'is_ongoing'    => false,
                 ]
             );
         $this->quit($this->user->id, $this->assignments[1]['course_id']);
@@ -328,6 +341,7 @@ class AssignmentTest extends TestCase
                 'content'         => $this->faker->paragraph,
                 'due_time'        => $this->faker->dateTimeBetween('now', '+5 days')
                     ->format('Y-m-d H:i:s'),
+                'is_ongoing'  => null,
                 'finished_at' => null,
                 'rate_info'   => [
                     'rated' => 'null',

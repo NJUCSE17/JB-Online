@@ -23,6 +23,7 @@ class PersonalAssignment extends Model
             'content',
             'content_html',
             'due_time',
+            'is_ongoing',
             'finished_at',
         ];
 

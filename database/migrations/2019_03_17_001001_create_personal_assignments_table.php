@@ -23,6 +23,7 @@ class CreatePersonalAssignmentsTable extends Migration
                 $table->longText('content');
                 $table->longText('content_html');
                 $table->dateTime('due_time');
+                $table->boolean('is_ongoing')->default(false);
                 $table->timestamp('finished_at')->nullable()->default(null);
                 $table->timestamps();
                 $table->softDeletes();
