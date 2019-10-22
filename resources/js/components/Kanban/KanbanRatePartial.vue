@@ -1,12 +1,14 @@
 <template>
-    <span>
-        <a class="badge"
-           v-bind:class="info.rated === 'dislike' ? 'btn-danger' : 'btn-soft-danger'"
+    <span class="text-sm">
+        <a class="badge mr-1"
+           v-bind:href="'#' + id"
+           v-bind:class="info.rated === 'dislike' ? 'badge-danger' : 'badge-soft-danger'"
            v-on:click.prevent="rate(false)">
             <i class="fas fa-heart-broken mr-1"></i> {{ info.stats.dislike }}
         </a>
-        <a class="badge"
-           v-bind:class="info.rated === 'like' ? 'btn-success' : 'btn-soft-success'"
+        <a class="badge mr-1"
+           v-bind:href="'#' + id"
+           v-bind:class="info.rated === 'like' ? 'badge-success' : 'badge-soft-success'"
            v-on:click.prevent="rate(true)">
             <i class="fas fa-heart mr-1"></i> {{ info.stats.like }}
         </a>

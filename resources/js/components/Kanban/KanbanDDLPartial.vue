@@ -68,7 +68,7 @@
                 if (now.isAfter(ddl)) {
                     return '已截止';
                 } else {
-                    let ret = '剩余';
+                    let ret = '';
                     let left = 2;
                     for (let i = 0; i < this.nr_periods && left > 0; ++i) {
                         let diff = ddl.diff(now, this.periods[i][0]);
