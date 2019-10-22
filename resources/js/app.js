@@ -26,6 +26,18 @@ flatPickr.props.config.default = () => {
 };
 window.Vue.component('flat-pickr', flatPickr);
 
+import vueKanban from 'vue-kanban';
+window.Vue.use(vueKanban);
+
+/**
+ * Disable vue logging and warnings if we are in production mode.
+ */
+if (process.env.MIX_ENV_MODE === 'production') {
+    Vue.config.devtools = false;
+    Vue.config.debug = false;
+    Vue.config.silent = true;
+}
+
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue

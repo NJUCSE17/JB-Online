@@ -1,7 +1,7 @@
 <template>
     <span class="text-sm">
-        {{ this.dueTime }}
-        <span v-bind:class="'badge badge-' + this.color">{{ this.label }}</span>
+        <span v-bind:class="'badge badge-' + this.color">{{ this.label }}</span><br/>
+        <span>{{ this.dueTime }}</span>
     </span>
 </template>
 
@@ -30,7 +30,7 @@
         },
         computed: {
             dueTime() {
-                return window.Dayjs(this.due_time).format('YYYY-MM-DD (ddd) HH:mm:ss');
+                return window.Dayjs(this.due_time).format('MM月DD日 (ddd) HH:mm');
             },
         },
         created: function () {
@@ -48,14 +48,18 @@
                 let delta = ddl.diff(now, 'day');
                 if (now.isAfter(ddl)) {
                     return 'dark';
-                } else if (delta <= 1) {
-                    return 'danger';
-                } else if (delta <= 2) {
-                    return 'warning';
-                } else if (delta <= 5) {
-                    return 'info';
+                } else if (this.finished_at) {
+                    return 'success';
                 } else {
-                    return 'secondary';
+                    if (delta <= 1) {
+                        return 'danger';
+                    } else if (delta <= 2) {
+                        return 'warning';
+                    } else if (delta <= 5) {
+                        return 'info';
+                    } else {
+                        return 'secondary';
+                    }
                 }
             },
             getLabel() {

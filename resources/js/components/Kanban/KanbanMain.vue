@@ -51,10 +51,8 @@
 </template>
 
 <script>
-    import vueKanban from 'vue-kanban';
     import KanbanDDLPartial from "./KanbanDDLPartial";
     import AssignmentEditor from "../Assignment/AssignmentEditor";
-    window.Vue.use(vueKanban);
     export default {
         name: 'KanbanMain',
         components: {AssignmentEditor, KanbanDDLPartial},
@@ -134,7 +132,6 @@
                         });
                         break;
                     case '1': // ongoing
-                        console.log("GOOD");
                         window.axios.post(assignment.api + '/finish', {
                             is_ongoing: true
                         }).then(res => {
