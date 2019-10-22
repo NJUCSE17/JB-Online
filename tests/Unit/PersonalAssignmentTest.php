@@ -284,6 +284,7 @@ class PersonalAssignmentTest extends TestCase
                 'content'     => $this->faker->paragraph,
                 'due_time'    => $this->faker->dateTimeBetween('now', '+5 days')
                     ->format('Y-m-d H:i:s'),
+                'is_ongoing'  => false,
                 'finished_at' => null,
             ];
             $this->personal_assignments[$i]['content_html']
