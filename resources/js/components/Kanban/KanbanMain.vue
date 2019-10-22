@@ -2,22 +2,32 @@
     <div id="AssignmentKanban">
         <div class="alert alert-outline-info py-2" role="alert">
             <i class="far fa-gift mr-1"></i>
-            新功能：点击并拖动作业来改变状态。之前2小时内截止的作业现在也会显示在主页上。
+            新功能：点击作业名称来查看详细信息，点击并拖动作业来改变状态。之前2小时内截止的作业现在也会显示在主页上。
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
             </button>
         </div>
         <kanban-board :stages="stages" :blocks="assignments_classified"
-                      v-on:update-block="updateAssignmentStatus"
-        >
+                      v-on:update-block="updateAssignmentStatus">
             <div v-for="stage in stages" :slot="stage" :key="stage">
                 <h5>{{ stages_str[stage] }}</h5>
             </div>
             <div v-for="assignment in assignments_classified" :slot="assignment.id" :key="assignment.id">
-                <div class="card shadow-none px-0">
+                <div class="card shadow-none px-0"
+                     v-bind:id="assignment.id">
                     <div class="card-body p-3">
-                        <strong class="card-title">
-                            {{ assignment.name }}
+                        <div class="card-title">
+                            <a class="text-muted" style="font-weight: bold;" tabindex="0"
+                               data-toggle="popover"
+                               data-html="true"
+                               data-trigger="focus"
+                               v-bind:data-title="assignment.name"
+                               v-bind:data-content="assignmentDetail(assignment)"
+                               v-bind:id="assignment.id + '-title'"
+                               v-bind:href="'#' + assignment.id"
+                               v-on:click.prevent="triggerAssignmentPopover(assignment.id)">
+                                {{ assignment.name }}
+                            </a>
                             <a v-if="!assignment.course_id" class="float-right text-muted"
                                v-bind:href="'#' + assignment.id"
                                v-on:click.prevent="editAssignment(assignment.id)">
@@ -28,13 +38,43 @@
                                v-on:click.prevent="editAssignment(assignment.id)">
                                 <i class="fas fa-edit"></i>
                             </a>
-                        </strong>
-                        <div v-html="assignment.content_html"></div>
+                        </div>
+                        <div class="d-block d-xl-none" v-html="assignment.content_html"></div>
+                        <kanban-rate-partial
+                            v-if="assignment.hasOwnProperty('course_id')"
+                            :id="assignment.id + '-rate'"
+                            :api="assignment.api + '/rate'"
+                            :rate_info="assignment.rate_info"
+                        ></kanban-rate-partial>
                         <kanban-d-d-l-partial
                             :api="null"
                             :due_time="assignment.due_time"
                             :finished_at="assignment.finished_at"
                         ></kanban-d-d-l-partial>
+                        <hr class="my-2 d-flex d-xl-none">
+                        <div class="row text-center d-flex d-xl-none">
+                            <div class="col" v-if="assignment.status !== 0">
+                                <a class="badge badge-secondary"
+                                   v-bind:href="'#' + assignment.id"
+                                   v-on:click.prevent="updateAssignmentStatus(assignment.id, 0)">
+                                    <i class="far fa-trash-alt"></i> 没有做
+                                </a>
+                            </div>
+                            <div class="col" v-if="assignment.status !== 1">
+                                <a class="badge badge-secondary"
+                                   v-bind:href="'#' + assignment.id"
+                                   v-on:click.prevent="updateAssignmentStatus(assignment.id, 1)">
+                                    <i class="far fa-pen-alt"></i> 在做了
+                                </a>
+                            </div>
+                            <div class="col" v-if="assignment.status !== 2">
+                                <a class="badge badge-secondary"
+                                   v-bind:href="'#' + assignment.id"
+                                   v-on:click.prevent="updateAssignmentStatus(assignment.id, 2)">
+                                    <i class="far fa-check-circle"></i> 做完了
+                                </a>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <assignment-editor
@@ -51,11 +91,12 @@
 </template>
 
 <script>
-    import KanbanDDLPartial from "./KanbanDDLPartial";
     import AssignmentEditor from "../Assignment/AssignmentEditor";
+    import KanbanDDLPartial from "./KanbanDDLPartial";
+    import KanbanRatePartial from "./KanbanRatePartial";
     export default {
         name: 'KanbanMain',
-        components: {AssignmentEditor, KanbanDDLPartial},
+        components: {KanbanRatePartial, AssignmentEditor, KanbanDDLPartial},
         props: ['assignments', 'timezone'],
         data: function () {
             return {
@@ -82,37 +123,41 @@
                 return arr;
             }
         },
+        mounted() {
+            $('[data-toggle="popover"]').popover({
+                trigger: 'focus'
+            });
+        },
+        updated() {
+            $('[data-toggle="popover"]').popover({
+                trigger: 'focus'
+            });
+        },
         methods: {
             assignmentDetail(assignment) {
-                return "<ul class='m-0 pl-3 text-left'>"
+                return assignment.content_html
+                    + "<ul class='m-0 pl-3 text-left'>"
                     + "<li>课程：" + assignment.course_name + "</li>"
                     + "<li>作业：" + assignment.name + "</li>"
                     + "<li>DDL：" + assignment.due_time + "</li>"
                     + "</ul>";
             },
-            reset() {
-                window.axios.post(this.api_reset, {
-                    // no data
-                }).then(res => {
-                    console.debug(res);
-                    this.record = null;
-                }).catch(err => {
-                    console.error(err);
-                    window.$.alert({
-                        type: 'red',
-                        title: '错误',
-                        content: err,
-                    });
-                })
+            triggerAssignmentPopover(assignmentID) {
+                $('#'+assignmentID+'-title').focus();
+            },
+            disposeAssignmentPopover(assignmentID) {
+                $('#'+assignmentID+'-title').popover('dispose');
             },
             editAssignment(assignmentID) {
                 window.$('#' + assignmentID + '-editor').modal('show');
             },
             updateAssignmentStatus(assignmentID, status) {
+                this.disposeAssignmentPopover(assignmentID);
+                if (typeof status === 'string') status = parseInt(status);
                 console.log('Status of ' + assignmentID + ' updated => ' + status);
                 let assignment = this.assignments_classified.find(a => a.id === assignmentID);
                 switch (status) {
-                    case '0': // reset
+                    case 0: // reset
                         window.axios.post(assignment.api + '/reset', {
                             // no data
                         }).then(res => {
@@ -131,7 +176,7 @@
                             });
                         });
                         break;
-                    case '1': // ongoing
+                    case 1: // ongoing
                         window.axios.post(assignment.api + '/finish', {
                             is_ongoing: true
                         }).then(res => {
@@ -147,7 +192,7 @@
                             });
                         });
                         break;
-                    case '2': // finished
+                    case 2: // finished
                         window.axios.post(assignment.api + '/finish', {
                             is_ongoing: false
                         }).then(res => {
@@ -177,6 +222,7 @@
 
 <style lang="scss">
     $ease-out: all .5s cubic-bezier(0.23, 1, 0.32, 1);
+    $xl: 1199px;
 
     ul.drag-list, ul.drag-inner-list {
         list-style-type: none;
@@ -193,7 +239,7 @@
         display: flex;
         align-items: flex-start;
 
-        @media (max-width: 690px) {
+        @media (max-width: $xl) {
             display: block;
         }
     }
@@ -204,7 +250,7 @@
         position: relative;
         overflow: hidden;
 
-        @media (max-width: 690px) {
+        @media (max-width: $xl) {
             margin-bottom: 30px;
         }
     }
@@ -217,10 +263,10 @@
     }
 
     .drag-inner-list {
-        @media (max-width: 690px) {
+        @media (max-width: $xl) {
             min-height: 100px;
         }
-        @media (min-width: 691px) {
+        @media (min-width: $xl) {
             min-height: 300px;
         }
     }
@@ -229,8 +275,10 @@
         margin: 10px;
         transition: $ease-out;
 
-        &.is-moving {
-            transform: scale(1.1);
+        @media (min-width: $xl) {
+            &.is-moving {
+                transform: scale(1.1);
+            }
         }
     }
 
@@ -272,27 +320,28 @@
     }
 
     /* Dragula CSS  */
+    @media (min-width: $xl) {
+        .gu-mirror {
+            position: fixed !important;
+            margin: 0 !important;
+            z-index: 9999 !important;
+            opacity: 0.8;
+            list-style-type: none;
+        }
 
-    .gu-mirror {
-        position: fixed !important;
-        margin: 0 !important;
-        z-index: 9999 !important;
-        opacity: 0.8;
-        list-style-type: none;
-    }
+        .gu-hide {
+            display: none !important;
+        }
 
-    .gu-hide {
-        display: none !important;
-    }
+        .gu-unselectable {
+            -webkit-user-select: none !important;
+            -moz-user-select: none !important;
+            -ms-user-select: none !important;
+            user-select: none !important;
+        }
 
-    .gu-unselectable {
-        -webkit-user-select: none !important;
-        -moz-user-select: none !important;
-        -ms-user-select: none !important;
-        user-select: none !important;
-    }
-
-    .gu-transit {
-        opacity: 0.2;
+        .gu-transit {
+            opacity: 0.2;
+        }
     }
 </style>

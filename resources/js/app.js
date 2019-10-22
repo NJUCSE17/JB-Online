@@ -33,9 +33,9 @@ window.Vue.use(vueKanban);
  * Disable vue logging and warnings if we are in production mode.
  */
 if (process.env.MIX_ENV_MODE === 'production') {
-    Vue.config.devtools = false;
-    Vue.config.debug = false;
-    Vue.config.silent = true;
+    window.Vue.config.devtools = false;
+    window.Vue.config.debug = false;
+    window.Vue.config.silent = true;
 }
 
 /**
