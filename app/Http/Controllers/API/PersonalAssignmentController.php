@@ -162,7 +162,13 @@ class PersonalAssignmentController extends APIController
         FinishPersonalAssignmentRequest $request,
         PersonalAssignment $personalAssignment
     ) {
-        $personalAssignment->finished_at = now();
+        if ($request->get('is_ongoing', false)) {
+            $personalAssignment->is_ongoing = true;
+            $personalAssignment->finished_at = null;
+        } else {
+            $personalAssignment->is_ongoing = false;
+            $personalAssignment->finished_at = now();
+        }
         $personalAssignment->save();
 
         return $this->data(

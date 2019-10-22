@@ -7,7 +7,9 @@
                 <span aria-hidden="true">&times;</span>
             </button>
         </div>
-        <kanban-board :stages="stages" :blocks="assignments_classified">
+        <kanban-board :stages="stages" :blocks="assignments_classified"
+                      v-on:update-block="updateAssignmentStatus"
+        >
             <div v-for="stage in stages" :slot="stage" :key="stage">
                 <h5>{{ stages_str[stage] }}</h5>
             </div>
@@ -90,8 +92,81 @@
                     + "<li>DDL：" + assignment.due_time + "</li>"
                     + "</ul>";
             },
+            reset() {
+                window.axios.post(this.api_reset, {
+                    // no data
+                }).then(res => {
+                    console.debug(res);
+                    this.record = null;
+                }).catch(err => {
+                    console.error(err);
+                    window.$.alert({
+                        type: 'red',
+                        title: '错误',
+                        content: err,
+                    });
+                })
+            },
             editAssignment(assignmentID) {
                 window.$('#' + assignmentID + '-editor').modal('show');
+            },
+            updateAssignmentStatus(assignmentID, status) {
+                console.log('Status of ' + assignmentID + ' updated => ' + status);
+                let assignment = this.assignments_classified.find(a => a.id === assignmentID);
+                switch (status) {
+                    case '0': // reset
+                        window.axios.post(assignment.api + '/reset', {
+                            // no data
+                        }).then(res => {
+                            console.debug(res);
+                            this.$emit('updateAssignmentStatus', assignmentID, {
+                                is_ongoing:  null,
+                                finished_at: null,
+                            });
+                        }).catch(err => {
+                            console.error(err);
+                            window.$.alert({
+                                type: 'red',
+                                icon: 'fas fa-times',
+                                title: '错误',
+                                content: err,
+                            });
+                        });
+                        break;
+                    case '1': // ongoing
+                        console.log("GOOD");
+                        window.axios.post(assignment.api + '/finish', {
+                            is_ongoing: true
+                        }).then(res => {
+                            console.debug(res);
+                            this.$emit('updateAssignmentStatus', assignmentID, res.data);
+                        }).catch(err => {
+                            console.error(err);
+                            window.$.alert({
+                                type: 'red',
+                                icon: 'fas fa-times',
+                                title: '错误',
+                                content: err,
+                            });
+                        });
+                        break;
+                    case '2': // finished
+                        window.axios.post(assignment.api + '/finish', {
+                            is_ongoing: false
+                        }).then(res => {
+                            console.debug(res);
+                            this.$emit('updateAssignmentStatus', assignmentID, res.data);
+                        }).catch(err => {
+                            console.error(err);
+                            window.$.alert({
+                                type: 'red',
+                                icon: 'fas fa-times',
+                                title: '错误',
+                                content: err,
+                            });
+                        });
+                        break;
+                }
             },
             updateAssignment(assignment) {
                 this.$emit('updateAssignment', assignment);

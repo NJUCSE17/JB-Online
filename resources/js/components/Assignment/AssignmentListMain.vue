@@ -31,6 +31,7 @@
             <kanban-main
                 :assignments="assignments_sorted"
                 :timezone="timezone"
+                v-on:updateAssignmentStatus="updateAssignmentStatus"
                 v-on:updateAssignment="updateAssignment"
                 v-on:deleteAssignment="deleteAssignment"
             ></kanban-main>
@@ -99,10 +100,10 @@
                     assignment = $.extend({}, assignment);
                     let id = assignment.id;
                     if (assignment.hasOwnProperty("course_id")) {
-                        assignment.uid = "public-" + id;
+                        assignment.uid = this.gen_uid(assignment);
                         assignment.api = this.api_public + '/' + id;
                     } else {
-                        assignment.uid = "personal-" + id;
+                        assignment.uid = this.gen_uid(assignment);
                         assignment.api = this.api_personal + '/' + id;
                     }
                     arr.push(assignment);
@@ -114,6 +115,9 @@
             this.loadCoursesAndAssignments();
         },
         methods: {
+            gen_uid(a) {
+                return (a.hasOwnProperty('course_id') ? 'public' : 'personal') + '-' + a.id;
+            },
             sortByDDL(a, b) {
                 return window.Dayjs(a.due_time).isBefore(window.Dayjs(b.due_time)) ? -1 : 1;
             },
@@ -131,7 +135,6 @@
                     console.error(err);
                 }).finally(() => {
                     this.init_status = '正在加载课程作业...';
-                    console.log(window.Dayjs().subtract(2, 'hour').format('YYYY-MM-DD HH:mm:ss'));
                     window.axios.get(this.api_public, {
                         params: {
                             due_after: window.Dayjs().subtract(2, 'hour').format('YYYY-MM-DD HH:mm:ss'),
@@ -144,7 +147,7 @@
                         this.init_status = '正在加载个人作业...';
                         window.axios.get(this.api_personal, {
                             params: {
-                                due_after: window.Dayjs().format('YYYY-MM-DD HH:mm:ss'),
+                                due_after: window.Dayjs().subtract(2, 'hour').format('YYYY-MM-DD HH:mm:ss'),
                             }
                         }).then(res => {
                             this.assignments = this.assignments.concat(res.data);
@@ -162,6 +165,16 @@
             addAssignment(assignment) {
                 window.Vue.set(this.assignments, this.assignments.length, assignment);
                 console.log("Assignment added to list.");
+            },
+            updateAssignmentStatus(assignmentID, data) {
+                let assignment = this.assignments.find(a => this.gen_uid(a) === assignmentID);
+                if (!assignment) {
+                    console.error("Assignment " + assignmentID + " not found in original list.");
+                } else {
+                    window.Vue.set(assignment, 'is_ongoing', data.is_ongoing);
+                    window.Vue.set(assignment, 'finished_at', data.finished_at);
+                    console.log("Assignment status of " + assignmentID + " updated.");
+                }
             },
             updateAssignment(assignment) {
                 for (let pos = 0; pos < this.assignments.length; ++pos) {
