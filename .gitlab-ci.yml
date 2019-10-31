@@ -4,33 +4,38 @@ variables:
   MYSQL_DATABASE: jbonline_test
   MYSQL_ROOT_PASSWORD: jbonline_test_password
 
-image: php:7.3-cli
+image: doowzs/laravel-ci:latest
 
 services:
   - mariadb:latest
 
-before_script:
-  - echo "Installing deps..."
-  - apt-get update -yqq
-  - apt-get install build-essential curl git icu-devtools libicu-dev unzip -yqq
-
-  - echo "Install PHP extensions..."
-  - docker-php-ext-install bcmath intl pdo pdo_mysql
-
-  - echo "Installing composer..."
-  - curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
-  - composer --version
-
-  - cp .env.gitlab .env
-  - chmod 777 -R storage
-  - composer install --no-interaction
-  - php artisan key:generate
-  - php artisan storage:link
-
 stages:
   - phpunit
+  - deploy
 
 phpunit_job:
   stage: phpunit
+  before_script:
+    - cp .env.gitlab .env
+    - chmod 777 -R storage
+    - composer install --no-interaction
+    - php artisan key:generate
+    - php artisan storage:link
   script:
     - vendor/bin/phpunit
+
+deploy_prod:
+  stage: deploy
+  environment:
+    name: production
+    url: https://njujb.com
+  when: manual
+  only:
+      - master
+  script:
+    - 'which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )'
+    - eval $(ssh-agent -s)
+    - ssh-add <(echo "$SSH_PRIVATE_KEY")
+    - mkdir -p ~/.ssh
+    - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
+    - ~/.composer/vendor/bin/envoy run deploy
