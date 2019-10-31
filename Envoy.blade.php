@@ -45,12 +45,13 @@
 @endtask
 
 @task('run_webpack_mix')
-    echo "Generating stylesheets and scripts for ({{ $release }})"
+    echo "Generating stylesheets and scripts ({{ $release }})"
     cd {{ $new_release_dir }}
+    yarn install
     yarn run prod
 @endtask
 
 @task('finish_up')
-    echo 'Linking current release'
+    echo 'Linking current release ({{ $release }})'
     ln -nfs {{ $new_release_dir }} {{ $app_dir }}/current
 @endtask
