@@ -17,15 +17,7 @@
                      v-bind:id="assignment.id">
                     <div class="card-body p-3">
                         <div class="card-title">
-                            <a class="text-muted" style="font-weight: bold;" tabindex="0"
-                               data-toggle="popover"
-                               data-html="true"
-                               data-trigger="focus"
-                               v-bind:data-title="assignment.name"
-                               v-bind:data-content="assignmentDetail(assignment)"
-                               v-bind:id="assignment.id + '-title'"
-                               v-bind:href="'#' + assignment.id"
-                               v-on:click.prevent="triggerAssignmentPopover(assignment.id)">
+                            <a class="text-muted" style="font-weight: bold;">
                                 {{ assignment.name }}
                             </a>
                             <a v-if="!assignment.course_id" class="float-right text-muted"
@@ -39,6 +31,7 @@
                                 <i class="fas fa-edit"></i>
                             </a>
                         </div>
+                        <div class="text-sm d-none d-xl-block" v-html="assignment.content_html"></div>
                         <div class="d-block d-xl-none" v-html="assignment.content_html"></div>
                         <kanban-rate-partial
                             v-if="assignment.hasOwnProperty('course_id')"
@@ -124,14 +117,10 @@
             }
         },
         mounted() {
-            $('[data-toggle="popover"]').popover({
-                trigger: 'focus'
-            });
+            $('[data-toggle="popover"]').popover();
         },
         updated() {
-            $('[data-toggle="popover"]').popover({
-                trigger: 'focus'
-            });
+            $('[data-toggle="popover"]').popover();
         },
         methods: {
             assignmentDetail(assignment) {
@@ -142,8 +131,11 @@
                     + "<li>DDL：" + assignment.due_time + "</li>"
                     + "</ul>";
             },
-            triggerAssignmentPopover(assignmentID) {
-                $('#'+assignmentID+'-title').focus();
+            showAssignmentPopover(assignmentID) {
+                $('#'+assignmentID+'-title').popover('show');
+            },
+            hideAssignmentPopover(assignmentID) {
+                $('#'+assignmentID+'-title').popover('hide');
             },
             disposeAssignmentPopover(assignmentID) {
                 $('#'+assignmentID+'-title').popover('dispose');

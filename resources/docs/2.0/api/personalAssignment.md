@@ -23,6 +23,7 @@ personalAssignment: {
     due_time: "2019-09-01 11:45:14",
     finished_at: "2019-06-16T09:16:46.000000Z",
     id: 1,
+    is_ongoing: false,
     name: "Test Example",
     user_id: 1
 }
@@ -91,9 +92,12 @@ personalAssignment: {
 
 > {warning} 注意：这个API无法绕过权限检查。
 
-- 用途：完成一个个人作业
+- 用途：标记一个个人作业为已完成/进行中，若`ongoing`为`true`，则表示正在进行中，`finished_at`为`NULL`。
 - 权限：只允许用户访问自己的作业
-- 参数：无
+- 参数：
+  ```php
+  'ongoing' => ['boolean'],
+  ```
 - 返回：`200 OK` 更新后的作业
 
 <a name="pa-7"></a>

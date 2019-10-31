@@ -25,6 +25,7 @@ assignment: {
     finished_at: "2019-06-16T09:16:46.000000Z",
     id: 2,
     is_course_admin: false,
+    is_ongoing: false,
     name: "testAssignment",
     rate_info: {
         rated: "null",
@@ -99,7 +100,7 @@ assignment: {
 <a name="a-6"></a>
 ## `POST /api/assignment/{id}/finish`
 
-- 用途：标记一个作业为已完成，如果`ongoing`设置为`true`，即表示作业进行中，则返回的`finished_at`为`null`。
+- 用途：标记一个作业为进行中/已完成，如果`ongoing`设置为`true`，即表示作业进行中，则返回的`finished_at`为`null`。
 - 权限：只允许已加入对应课程的用户访问
 - 参数：
   ```php
