@@ -3,6 +3,7 @@
 namespace App\Observers;
 
 use App\Models\User;
+use App\Notifications\UserRegisteredEmail;
 
 class UserObserver
 {
@@ -15,7 +16,12 @@ class UserObserver
      */
     public function created(User $user)
     {
-        //
+        $admins = User::query()
+            ->where('privilege_level', '<=', 1)
+            ->get();
+        foreach ($admins as $admin) {
+            $admin->notify(new UserRegisteredEmail($admin, $user));
+        }
     }
 
     /**
