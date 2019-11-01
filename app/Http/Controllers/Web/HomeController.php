@@ -40,11 +40,25 @@ class HomeController extends Controller
     }
 
     /**
+     * Show the user list page.
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function listUser(Request $request, User $user)
+    {
+        $users = User::query()
+            ->orderBy('id', 'DESC')
+            ->paginate(25);
+        return view('frontend.user.list')
+            ->with('users', $users);
+    }
+
+    /**
      * Show the user info page.
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function user(Request $request, User $user)
+    public function showUser(Request $request, User $user)
     {
         return view('frontend.user.index')
             ->with('user', $user);

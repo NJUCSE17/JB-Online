@@ -13,7 +13,7 @@
 
 <div class="d-flex" style="position:relative;z-index:1;transform:translateY(50%);">
     @if(Route::is('home'))
-        <a href="{{ route('user', Auth::user()) }}"
+        <a href="{{ route('user.show', Auth::user()) }}"
            class="btn btn-icon btn-group-nav shadow btn-neutral">
             <span class="btn-inner--icon"><i class="fas fa-user"></i></span>
             <span class="btn-inner--text d-none d-md-inline-block">我的账户</span>
