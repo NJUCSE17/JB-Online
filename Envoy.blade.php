@@ -41,7 +41,7 @@
 @task('run_composer')
     echo "Starting deployment ({{ $release }})"
     cd {{ $new_release_dir }}
-    composer install --prefer-dist --no-scripts -q -o
+    composer install --no-interaction --prefer-dist --no-progress -o
 @endtask
 
 @task('run_webpack_mix')

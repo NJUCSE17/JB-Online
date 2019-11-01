@@ -18,7 +18,7 @@ phpunit_job:
   before_script:
     - cp .env.gitlab .env
     - chmod 777 -R storage
-    - composer install --no-interaction
+    - composer install --no-interaction --prefer-dist --no-progress -o
     - php artisan key:generate
     - php artisan storage:link
   script:
