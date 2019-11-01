@@ -84,8 +84,6 @@
 </template>
 
 <script>
-    import createAutoCorrectedDatePipe from 'text-mask-addons/dist/createAutoCorrectedDatePipe';
-
     export default {
         name: "CourseCreatorComponent",
         props: ['id', 'api', 'timezone'],

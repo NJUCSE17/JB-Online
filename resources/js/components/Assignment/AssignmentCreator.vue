@@ -80,7 +80,6 @@
 </template>
 
 <script>
-    import createAutoCorrectedDatePipe from 'text-mask-addons/dist/createAutoCorrectedDatePipe';
     export default {
         name: "AssignmentCreator",
         props: ['id', 'type', 'api', 'course', 'timezone'],

@@ -29,6 +29,7 @@ JBOnline基于Laravel 5.8开发，所以Laravel相关的结构、函数的帮助
 - cybercog/laravel-love (v5)
 - erusev/parsedown
 - mews/purifier
+- spinen/laravel-discourse-sso
 - willvincent/feeds
 
 ### JavaScript
@@ -43,6 +44,7 @@ JBOnline基于Laravel 5.8开发，所以Laravel相关的结构、函数的帮助
 - craftpip/jquery-confirm
 - iamkun/dayjs
 - ankurk91/vue-flatpickr-component
+- BrockReece/vue-kanban
 
 <a name="private-source"></a>
 ## 闭源组件
