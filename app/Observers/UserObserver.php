@@ -16,6 +16,10 @@ class UserObserver
      */
     public function created(User $user)
     {
+        if (preg_match('/\w+\d+@s?(mail.)?nju\.edu\.cn$/', $this->email)) {
+            $user->activate();
+        }
+
         $admins = User::query()
             ->where('privilege_level', '<=', 1)
             ->get();
