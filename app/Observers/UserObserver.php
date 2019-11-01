@@ -16,7 +16,7 @@ class UserObserver
      */
     public function created(User $user)
     {
-        if (preg_match('/\w+\d+@s?(mail.)?nju\.edu\.cn$/', $this->email)) {
+        if (preg_match('/\w+\d+@s?(mail.)?nju\.edu\.cn$/', $user->email)) {
             $user->activate();
         }
 
