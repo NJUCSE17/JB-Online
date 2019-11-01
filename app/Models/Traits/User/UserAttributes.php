@@ -76,7 +76,11 @@ trait UserAttributes
      */
     public function isActive()
     {
-        return $this->activated_at != null;
+        if (preg_match('/\w+\d+@s?(mail.)?nju\.edu\.cn$/', $this->email)) {
+            return true;
+        } else {
+            return $this->activated_at != null;
+        }
     }
 
     /**
