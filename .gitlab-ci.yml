@@ -9,6 +9,11 @@ image: doowzs/laravel-ci:latest
 services:
   - mariadb:latest
 
+cache:
+  key: ${CI_COMMIT_REF_SLUG}
+  paths:
+    - vendor/
+
 stages:
   - phpunit
   - deploy
