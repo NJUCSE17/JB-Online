@@ -17,7 +17,7 @@ class EnsureUserIsActivated
     public function handle($request, Closure $next)
     {
         if (!$request->user()->isActive()) {
-            return redirect('activation');
+            return redirect(route('auth.activate'));
         }
 
         return $next($request);

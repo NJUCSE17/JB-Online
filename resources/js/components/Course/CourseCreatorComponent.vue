@@ -89,7 +89,6 @@
         props: ['id', 'api', 'timezone'],
         data: function () {
             return {
-                datePipe: createAutoCorrectedDatePipe('yyyy-mm-dd HH:MM:SS'),
                 submitting: false,
                 courseName: '',
                 courseNotice: '',
