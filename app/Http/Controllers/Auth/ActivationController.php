@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class ActivationController extends Controller
@@ -12,10 +13,10 @@ class ActivationController extends Controller
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function notice()
+    public function notice(Request $request)
     {
-        if (Auth::user()->isActive()) {
-            return response()->redirectTo('/home');
+        if ($request->user()->isActive()) {
+            return response()->redirectTo(route('home'));
         }
 
         return view('auth.activate');

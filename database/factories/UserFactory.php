@@ -32,7 +32,7 @@ $factory->define(
             'email_verified_at' => now(),
             'activated_at'      => now(),
             'privilege_level'   => 3,
-            'password'          => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi',
+            'password'          => Hash::make('secret'),
             'timezone'          => config('app.timezone'),
             'remember_token'    => Str::random(10),
         ];

@@ -19,8 +19,9 @@ Auth::routes(
         'verify'   => true,
     ]
 );
-Route::get('/activation', 'Auth\ActivationController@notice')
-    ->name('activate.notice');
+Route::get('/activate', 'Auth\ActivationController@notice')->name('auth.activate');
+
+/** GitHub OAuth not enabled yet
 Route::group(
     ['namespace' => 'Auth', 'as' => 'auth'],
     function () {
@@ -32,6 +33,7 @@ Route::group(
         )->name('login.github.callback');
     }
 );
+*/
 
 Route::group(
     ['namespace' => 'Web'],
