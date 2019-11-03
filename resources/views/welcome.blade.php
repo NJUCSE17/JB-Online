@@ -3,7 +3,7 @@
 @section('content')
     <div class="card zindex-100 p-5 shadow hover-shadow-lg text-center">
         <h3 class="display-3">{{ env('APP_NAME') }}</h3>
-        <p>南京大学计算机科学与技术系2017级拔尖班作业管理系统</p>
+        <p>南京大学计算机科学与技术系拔尖班作业管理系统</p>
         <div>
             <a href="{{ route('login') }}" class="btn btn-neutral">
                 <i class="fas fa-sign-in-alt mr-1"></i> 进入系统
