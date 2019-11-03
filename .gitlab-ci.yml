@@ -13,6 +13,8 @@ cache:
   key: ${CI_COMMIT_REF_SLUG}
   paths:
     - vendor/
+    - node_modules/
+    - .yarn
 
 stages:
   - phpunit
