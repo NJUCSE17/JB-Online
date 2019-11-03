@@ -24,6 +24,8 @@ phpunit_job:
     - cp .env.gitlab .env
     - chmod 777 -R storage
     - composer install --no-interaction --prefer-dist --no-progress -o
+    - yarn install --production=false
+    - yarn run prod
     - php artisan key:generate
     - php artisan storage:link
   script:
