@@ -103,7 +103,6 @@
         },
         data: function () {
             return {
-                datePipe: createAutoCorrectedDatePipe('yyyy-mm-dd HH:MM:SS'),
                 submitting: false,
                 courseName: this.course.name,
                 courseNotice: this.course.notice,
