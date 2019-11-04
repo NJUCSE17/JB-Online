@@ -16,20 +16,29 @@
                 <div class="card shadow-none px-0"
                      v-bind:id="assignment.id">
                     <div class="card-body p-3">
-                        <div class="card-title">
-                            <a class="text-muted" style="font-weight: bold;">
-                                {{ assignment.name }}
-                            </a>
-                            <a v-if="!assignment.course_id" class="float-right text-muted"
-                               v-bind:href="'#' + assignment.id"
-                               v-on:click.prevent="editAssignment(assignment.id)">
-                                <i class="fas fa-user-edit"></i>
-                            </a>
-                            <a v-else-if="assignment.is_course_admin" class="float-right text-muted"
-                               v-bind:href="'#' + assignment.id"
-                               v-on:click.prevent="editAssignment(assignment.id)">
-                                <i class="fas fa-edit"></i>
-                            </a>
+                        <div class="card-title mb-1">
+                            <div class="row text-muted text-sm">
+                                <div class="col col-10">
+                                    <p class="mb-0" style="white-space: nowrap; text-overflow: ellipsis; overflow: hidden;">
+                                        {{ assignment.hasOwnProperty('course_name') ? assignment.course_name : "个人作业" }}
+                                    </p>
+                                </div>
+                                <div class="col col-2 pl-0 text-right">
+                                    <a v-if="!assignment.course_id" class="text-muted"
+                                       v-bind:href="'#' + assignment.id"
+                                       v-on:click.prevent="editAssignment(assignment.id)">
+                                        <i class="fas fa-user-edit"></i>
+                                    </a>
+                                    <a v-else-if="assignment.is_course_admin" class="text-muted"
+                                       v-bind:href="'#' + assignment.id"
+                                       v-on:click.prevent="editAssignment(assignment.id)">
+                                        <i class="fas fa-edit m-0"></i>
+                                    </a>
+                                </div>
+                            </div>
+                            <p class="text-muted mb-0">
+                                <strong>{{ assignment.name }}</strong>
+                            </p>
                         </div>
                         <div class="text-sm d-none d-xl-block" v-html="assignment.content_html"></div>
                         <div class="d-block d-xl-none" v-html="assignment.content_html"></div>
