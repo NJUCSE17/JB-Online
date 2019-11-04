@@ -42,17 +42,13 @@
                         </div>
                         <div class="text-sm d-none d-xl-block" v-html="assignment.content_html"></div>
                         <div class="d-block d-xl-none" v-html="assignment.content_html"></div>
-                        <kanban-rate-partial
-                            v-if="assignment.hasOwnProperty('course_id')"
-                            :id="assignment.id + '-rate'"
-                            :api="assignment.api + '/rate'"
-                            :rate_info="assignment.rate_info"
-                        ></kanban-rate-partial>
-                        <kanban-d-d-l-partial
-                            :api="null"
-                            :due_time="assignment.due_time"
-                            :finished_at="assignment.finished_at"
-                        ></kanban-d-d-l-partial>
+                        <kanban-rate-d-d-l-partial
+                                :id="assignment.id + '-rate-ddl'"
+                                :api="assignment.api"
+                                :rate_info="assignment.hasOwnProperty('course_id') ? assignment.rate_info : null"
+                                :due_time="assignment.due_time"
+                                :finished_at="assignment.finished_at"
+                        ></kanban-rate-d-d-l-partial>
                         <hr class="my-2 d-flex d-xl-none">
                         <div class="row text-center d-flex d-xl-none">
                             <div class="col" v-if="assignment.status !== 0">
@@ -94,11 +90,10 @@
 
 <script>
     import AssignmentEditor from "../Assignment/AssignmentEditor";
-    import KanbanDDLPartial from "./KanbanDDLPartial";
-    import KanbanRatePartial from "./KanbanRatePartial";
+    import KanbanRateDDLPartial from "./KanbanRateDDLPartial";
     export default {
         name: 'KanbanMain',
-        components: {KanbanRatePartial, AssignmentEditor, KanbanDDLPartial},
+        components: {AssignmentEditor, KanbanRateDDLPartial},
         props: ['assignments', 'timezone'],
         data: function () {
             return {

@@ -1,5 +1,17 @@
 <template>
-    <span class="text-sm">
+    <span class="text-sm" style="white-space: nowrap;">
+        <a v-if="info" class="badge mr-1"
+           v-bind:href="'#' + id"
+           v-bind:class="info.rated === 'dislike' ? 'badge-danger' : 'badge-soft-danger'"
+           v-on:click.prevent="rate(false)">
+            <i class="fas fa-heart-broken mr-1"></i> {{ info.stats.dislike }}
+        </a>
+        <a v-if="info" class="badge mr-1"
+           v-bind:href="'#' + id"
+           v-bind:class="info.rated === 'like' ? 'badge-success' : 'badge-soft-success'"
+           v-on:click.prevent="rate(true)">
+            <i class="fas fa-heart mr-1"></i> {{ info.stats.like }}
+        </a>
         <span v-bind:class="'badge badge-' + this.color">{{ this.label }}</span><br/>
         <span>{{ this.dueTime }}</span>
     </span>
@@ -7,8 +19,8 @@
 
 <script>
     export default {
-        name: "KanbanDDLPartial",
-        props: ['api', 'due_time', 'finished_at'],
+        name: "KanbanRateDDLPartial",
+        props: ['id', 'api', 'rate_info', 'due_time', 'finished_at'],
         data: function () {
             return {
                 nr_periods: 7,
@@ -21,8 +33,10 @@
                     ['minute', '分钟'],
                     ['second', '秒']
                 ],
+                api_rate: this.api + '/rate',
                 api_finish: this.api + '/finish',
                 api_reset: this.api + '/reset',
+                info: this.rate_info,
                 record: this.finished_at,
                 color: '',
                 label: '',
@@ -81,6 +95,22 @@
                     if (left === 2) ret += '0秒';
                     return ret;
                 }
+            },
+            rate(like) {
+                window.axios.post(this.api_rate, {
+                    'like': like
+                }).then(res => {
+                    console.debug(res);
+                    this.info = res.data;
+                }).catch(err => {
+                    console.error(err);
+                    window.$.alert({
+                        type: 'red',
+                        icon: 'fas fa-times',
+                        title: '错误',
+                        content: err,
+                    });
+                });
             },
             finish() {
                 window.axios.post(this.api_finish, {
