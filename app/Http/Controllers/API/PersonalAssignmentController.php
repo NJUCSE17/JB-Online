@@ -188,6 +188,7 @@ class PersonalAssignmentController extends APIController
         ResetPersonalAssignmentRequest $request,
         PersonalAssignment $personalAssignment
     ) {
+        $personalAssignment->is_ongoing = false;
         $personalAssignment->finished_at = null;
         $personalAssignment->save();
 
