@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.no-vue')
 @section('header-class', 'bg-info-dark')
 
 @section('header-left')
