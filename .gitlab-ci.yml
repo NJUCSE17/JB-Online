@@ -37,7 +37,7 @@ deploy_prod:
   stage: deploy
   environment:
     name: production
-    url: https://njujb.com
+    url: https://app.njujb.com
   when: manual
   only:
       - master

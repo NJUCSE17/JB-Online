@@ -1,4 +1,4 @@
-@servers(['web' => 'deployer@njujb.com'])
+@servers(['web' => 'deployer@app.njujb.com'])
 
 @setup
     $repository = 'git@git.doowzs.com:doowzs/jb-online.git';
