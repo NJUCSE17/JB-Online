@@ -4,7 +4,7 @@ This is the public code repository for JB Online website, based on Laravel 5.8 a
 
 ## Documentation
 
-For installation and development manual, please visit [https://app.njujb.com/docs](https://njujb.com/docs).
+For installation and development manual, please visit [https://app.njujb.com/docs](https://app.njujb.com/docs).
 
 ## License
 
